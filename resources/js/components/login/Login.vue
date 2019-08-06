@@ -31,6 +31,14 @@
             }
         },
 
+        created() {
+            if(User.loggedIn()){
+                this.$router.push({
+                    name: 'index'
+                })
+            }
+        },
+
         methods: {
             login() {
                 User.login(this.form);

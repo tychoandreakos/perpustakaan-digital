@@ -16,7 +16,7 @@
                     v-for="item in items" 
                     :key="item.title" 
                     :to="item.to"
-                    ><button v-if="item.show" class="nav-link">{{ item.title }}</button>
+                    ><a v-if="item.show" class="nav-link">{{ item.title }}</a>
                     </router-link>
                 </li>
 
@@ -34,14 +34,20 @@
                         to: {name: 'login'},
                         show: !User.loggedIn()
                     },
-                    
+
                     {
                         title: 'Logout',
-                        to: '/logout',
+                        to: {name: 'logout'},
                         show: User.loggedIn()
                     },
                 ]
             }
+        },
+
+        created() {
+            EventBus.$on('logout', () => {
+                User.logout();
+            })
         }
     }
 

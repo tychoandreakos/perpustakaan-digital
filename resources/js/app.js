@@ -11,8 +11,9 @@ import router from './router';
 
 
 window.User = User;
-
 window.Vue = require('vue');
+
+window.EventBus = new Vue();
 
 /**
  * The following block of code may be used to automatically register your

@@ -35,6 +35,7 @@ class User {
     logout()
     {
         AppStorage.clear();
+        window.location = '/';
     }
 
 

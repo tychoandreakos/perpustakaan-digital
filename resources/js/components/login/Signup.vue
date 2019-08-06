@@ -55,6 +55,13 @@
             }
         },
 
+         created() {
+            if(User.loggedIn()){
+                this.$router.push({
+                    name: 'index'
+                })
+            }
+        },
 
         methods: {
             daftar() {
