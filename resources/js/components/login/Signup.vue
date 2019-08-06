@@ -6,23 +6,23 @@
                     <label for="email">Email</label>
                     <input type="email" class="form-control" v-model="form.email" id="email">
                     <template v-if="err.email">
-                       <span class="text-danger">{{ err.email[0] }}</span>
+                        <span class="text-danger">{{ err.email[0] }}</span>
                     </template>
                 </div>
 
                 <div class="form-group">
                     <label for="text">Name</label>
                     <input type="text" class="form-control" v-model="form.name" id="text">
-                     <template v-if="err.name">
-                       <span class="text-danger">{{ err.name[0] }}</span>
+                    <template v-if="err.name">
+                        <span class="text-danger">{{ err.name[0] }}</span>
                     </template>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" v-model="form.password" id="password">
-                     <template v-if="err.password">
-                       <span class="text-danger">{{ err.password[0] }}</span>
+                    <template v-if="err.password">
+                        <span class="text-danger">{{ err.password[0] }}</span>
                     </template>
                 </div>
 
@@ -59,7 +59,12 @@
         methods: {
             daftar() {
                 axios.post('/api/auth/daftar', this.form)
-                    .then(res => User.responseAfterLogin(res))
+                    .then(res => {
+                        User.responseAfterLogin(res)
+                        this.$router.push({
+                            name: 'index'
+                        })
+                    })
                     .catch(err => this.err = err.response.data.errors)
             }
         }

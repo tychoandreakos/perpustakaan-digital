@@ -14,9 +14,7 @@
 
                 <button type="submit" class="btn btn-success">Login</button>
 
-                <router-link 
-                :to="{name: 'daftar'}"
-                class="btn btn-primary">Daftar</router-link>
+                <router-link :to="{name: 'daftar'}" class="btn btn-primary">Daftar</router-link>
             </form>
         </div>
     </div>
@@ -35,7 +33,10 @@
 
         methods: {
             login() {
-               User.login(this.form);
+                User.login(this.form);
+                this.$router.push({
+                    name: 'index'
+                })
             }
         }
     }

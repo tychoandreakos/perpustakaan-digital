@@ -7,10 +7,12 @@ Vue.use(VueRouter);
 
 import Login from './components/login/Login';
 import Daftar from './components/login/Signup';
+import Index from './components/Index';
 
 const routes = [
-    { path: '/', component: Login },
+    { path: '/', component: Login, name: "login" },
     { path: '/daftar', component: Daftar, name: "daftar" },
+    { path: '/perpustakaan', component: Index, name: "index" },
 ]
 
 
