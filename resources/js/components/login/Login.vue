@@ -14,7 +14,9 @@
 
                 <button type="submit" class="btn btn-success">Login</button>
 
-
+                <router-link 
+                :to="{name: 'daftar'}"
+                class="btn btn-primary">Daftar</router-link>
             </form>
         </div>
     </div>

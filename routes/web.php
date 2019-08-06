@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('user');
-});
+// Route::get('/', function () {
+//     return view('user');
+// });
 
-// Route::view('/', 'user');
-// Route::view('/{any}', 'user');
+Route::view('/', 'user');
+Route::view('/{any}', 'user');

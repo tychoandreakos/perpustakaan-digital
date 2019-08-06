@@ -6,9 +6,11 @@ Vue.use(VueRouter);
 // component
 
 import Login from './components/login/Login';
+import Daftar from './components/login/Signup';
 
 const routes = [
     { path: '/', component: Login },
+    { path: '/daftar', component: Daftar, name: "daftar" },
 ]
 
 
