@@ -11,6 +11,7 @@ import router from './router';
 
 
 window.User = User;
+User.logout();
 
 window.Vue = require('vue');
 
