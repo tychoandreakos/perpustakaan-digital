@@ -4,6 +4,11 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
+use Illuminate\Http\Response;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use PhpParser\Lexer\TokenEmulator\TokenEmulatorInterface;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +51,26 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceOf TokenBlacklistedException)
+        {
+            return response(['error' => 'Otentikasi token tidak dapat digunakan!'], Response::HTTP_BAD_REQUEST);
+        } 
+        
+        else if($exception instanceOf TokenInvalidException)
+        {
+            return response(['error' => 'Username Atau Password Salah'], Response::HTTP_BAD_REQUEST);
+        }
+
+        else if($exception instanceOf TokenEmulatorInterface)
+        {
+            return response(['error' => 'waktu login telah habis, silahkan login kembali :)'], Response::HTTP_BAD_REQUEST);
+        }
+        
+        else if($exception instanceOf JWTException)
+        {
+            return response(['error' => 'Token tidak diizinkan!'], Response::HTTP_BAD_REQUEST);
+        }
+
         return parent::render($request, $exception);
     }
 }
