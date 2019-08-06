@@ -5,7 +5,7 @@ class User {
     login(data) {
         axios.post('api/auth/login', data)
         .then(res => this.responseAfterLogin(res))
-        .catch(err => console.log(err.response.data))
+        .catch(error => console.log(error.response.data))
     }
 
     responseAfterLogin(res)
@@ -15,19 +15,16 @@ class User {
 
         if(Token.isValid(access_token))
         {
-            AppStorage.store(username, access_token);
+            AppStorage.store(username, access_token)
         }
     }
 
-    hasToken()
-    {
+    hasToken() {
         const storedToken = AppStorage.getToken();
-
-        if(storedToken) {
-            Token.isValid(storedToken) ? true : false
+        if (storedToken) {
+            return Token.isValid(storedToken) ? true : this.logout()
         }
-
-        return false;
+        return false
     }
 
     loggedIn()
@@ -41,10 +38,9 @@ class User {
     }
 
 
-    name()
-    {
-        if(this.loggedIn()) {
-            return AppStorage.getUser();
+    name() {
+        if (this.loggedIn()) {
+            return AppStorage.getUser()
         }
     }
 

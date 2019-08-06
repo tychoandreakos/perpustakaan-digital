@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" v-model="form.passwordConfirmation" id="password">
+                    <input type="password" class="form-control" v-model="form.password_confirmation" id="password">
                 </div>
 
                 <button type="submit" class="btn btn-success">Daftar</button>
@@ -48,7 +48,7 @@
                     name: '',
                     email: '',
                     password: '',
-                    passwordConfirmation: ''
+                    password_confirmation: ''
                 },
 
                 err: {}
