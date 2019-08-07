@@ -68,9 +68,6 @@
                 axios.post('/api/auth/daftar', this.form)
                     .then(res => {
                         User.responseAfterLogin(res)
-                        this.$router.push({
-                            name: 'index'
-                        })
                     })
                     .catch(err => this.err = err.response.data.errors)
             }

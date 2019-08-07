@@ -1967,9 +1967,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     login: function login() {
       User.login(this.form);
-      this.$router.push({
-        name: 'index'
-      });
     }
   }
 });
@@ -2073,10 +2070,6 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/auth/daftar', this.form).then(function (res) {
         User.responseAfterLogin(res);
-
-        _this.$router.push({
-          name: 'index'
-        });
       })["catch"](function (err) {
         return _this.err = err.response.data.errors;
       });
@@ -53514,6 +53507,7 @@ function () {
 
       if (_Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(access_token)) {
         _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].store(username, access_token);
+        window.location = '/perpustakaan';
       }
     }
   }, {
