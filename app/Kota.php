@@ -10,4 +10,9 @@ class Kota extends Model
     protected $fillable = [
         'nama_kota'
     ];
+
+    public function buku_transaksi()
+    {
+        return $this->hasMany(BukuTransaksi::class);
+    }
 }

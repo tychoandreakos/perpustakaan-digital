@@ -17,4 +17,9 @@ class Buku extends Model
         'slug',
         'gambar_sampul'
     ];
+
+    public function buku_transaksi()
+    {
+        return $this->hasMany(BukuTransaksi::class);
+    }
 }

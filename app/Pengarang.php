@@ -11,4 +11,9 @@ class Pengarang extends Model
         'nama_pengarang',
         'tahun_lahir'
     ];
+
+    public function buku_transaksi()
+    {
+        return $this->hasMany(BukuTransaksi::class);
+    }
 }

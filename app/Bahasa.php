@@ -10,4 +10,9 @@ class Bahasa extends Model
     protected $fillable = [
         'jenis_bahasa'
     ];
+    
+    public function buku_transaksi()
+    {
+        return $this->hasMany(BukuTransaksi::class);
+    }
 }
