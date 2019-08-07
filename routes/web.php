@@ -24,3 +24,5 @@ Route::resource('bahasa', 'BahasaController');
 Route::resource('gmd', 'GmdController');
 Route::resource('penerbit', 'PenerbitController');
 Route::resource('pengarang', 'PengarangController');
+Route::resource('subyek', 'SubyekController');
+Route::resource('lokasi', 'LokasiController');
