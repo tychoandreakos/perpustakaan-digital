@@ -37,6 +37,8 @@ class LokasiRakController extends Controller
     public function store(Request $request)
     {
         LokasiRak::create($request->all());
+
+        return response('data berhasil disimpan', 200);
     }
 
     /**
