@@ -13,8 +13,9 @@ class CreatePenerbitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('penerbits', function (Blueprint $table) {
+        Schema::create('penerbit', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama_penerbit', 100);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreatePenerbitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penerbits');
+        Schema::dropIfExists('penerbit');
     }
 }

@@ -35,7 +35,9 @@ class PenerbitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Penerbit::create($request->all());
+
+        return response('data berhasil disimpan', 200);
     }
 
     /**
@@ -69,7 +71,9 @@ class PenerbitController extends Controller
      */
     public function update(Request $request, Penerbit $penerbit)
     {
-        //
+        $penerbit->update($request->all());
+
+        return response('data berhasil diubah', 200);
     }
 
     /**
@@ -80,6 +84,6 @@ class PenerbitController extends Controller
      */
     public function destroy(Penerbit $penerbit)
     {
-        //
+        $penerbit->delete();
     }
 }
