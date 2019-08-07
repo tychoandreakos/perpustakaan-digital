@@ -65,8 +65,13 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['password'] = bcrypt($val);
     }
 
-public function pinjam_transaksi()
-{
-    return $this->hasMany(PinjamTransaksi::class);
-}
+    public function pinjam_transaksi()
+    {
+        return $this->hasMany(PinjamTransaksi::class);
+    }
+
+    public function anggota()
+    {
+        return $this->hasOne(Anggota::class);
+    }
 }
