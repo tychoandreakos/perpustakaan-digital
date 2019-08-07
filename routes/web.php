@@ -18,5 +18,6 @@
 Route::view('/', 'user');
 Route::view('/{any}', 'user');
 
-// kota
+// master file
 Route::resource('kota', 'KotaController');
+Route::resource('bahasa', 'BahasaController');
