@@ -74,4 +74,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Anggota::class);
     }
+
+    public function anggota_transaksi()
+    {
+        return $this->hasMany(AnggotaTransaksi::class);
+    }
 }
