@@ -11,4 +11,9 @@ class Gmd extends Model
         'kode_gmd',
         'nama_gmd'
     ];
+
+    public function biblio()
+    {
+        return $this->hasMany(Bibliobigrafi::class);
+    }
 }

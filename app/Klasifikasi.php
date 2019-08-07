@@ -10,4 +10,9 @@ class Klasifikasi extends Model
     protected $fillable = [
         'tipe_klasifikasi'
     ];
+
+    public function biblio()
+    {
+        return $this->hasMany(Bibliobigrafi::class);
+    }
 }

@@ -22,4 +22,9 @@ class Buku extends Model
     {
         return $this->hasMany(BukuTransaksi::class);
     }
+
+    public function biblio()
+    {
+        return $this->hasMany(Bibliobigrafi::class);
+    }
 }
