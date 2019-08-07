@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGmdsTable extends Migration
+class CreatePenerbitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateGmdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gmd', function (Blueprint $table) {
+        Schema::create('penerbits', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kode_gmd', 10);
-            $table->string('nama_gmd', 100);
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateGmdsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gmd');
+        Schema::dropIfExists('penerbits');
     }
 }

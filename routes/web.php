@@ -21,3 +21,4 @@ Route::view('/{any}', 'user');
 // master file
 Route::resource('kota', 'KotaController');
 Route::resource('bahasa', 'BahasaController');
+Route::resource('gmd', 'GmdController');

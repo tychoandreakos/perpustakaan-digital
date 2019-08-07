@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Gmd;
+use App\Penerbit;
 use Illuminate\Http\Request;
 
-class GmdController extends Controller
+class PenerbitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,18 +35,16 @@ class GmdController extends Controller
      */
     public function store(Request $request)
     {
-        Gmd::create($request->all());
-
-        return response('data berhasil ditambah', 200);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Gmd  $gmd
+     * @param  \App\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function show(Gmd $gmd)
+    public function show(Penerbit $penerbit)
     {
         //
     }
@@ -54,36 +52,34 @@ class GmdController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Gmd  $gmd
+     * @param  \App\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gmd $gmd)
+    public function edit(Penerbit $penerbit)
     {
-        
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Gmd  $gmd
+     * @param  \App\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gmd $gmd)
+    public function update(Request $request, Penerbit $penerbit)
     {
-       $gmd->update($request->all());
-        
-        return response('data berhasil diupdate', 200);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Gmd  $gmd
+     * @param  \App\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gmd $gmd)
+    public function destroy(Penerbit $penerbit)
     {
-        $gmd->delete();
+        //
     }
 }
