@@ -26,3 +26,4 @@ Route::resource('penerbit', 'PenerbitController');
 Route::resource('pengarang', 'PengarangController');
 Route::resource('subyek', 'SubyekController');
 Route::resource('lokasi', 'LokasiRakController');
+Route::resource('koleksi', 'KoleksiController');
