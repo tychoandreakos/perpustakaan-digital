@@ -35,7 +35,9 @@ class KotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Kota::create($request->all());
+        return response('Data Berhasil Disimpan', 200)
+        ->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -44,9 +46,9 @@ class KotaController extends Controller
      * @param  \App\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function show(Kota $kota)
+    public function show(Kota $kotum)
     {
-        //
+        return $kotum;
     }
 
     /**
@@ -55,7 +57,7 @@ class KotaController extends Controller
      * @param  \App\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kota $kota)
+    public function edit(Kota $kotum)
     {
         //
     }
@@ -67,9 +69,14 @@ class KotaController extends Controller
      * @param  \App\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kota $kota)
+    public function update(Request $request, Kota $kotum)
     {
-        //
+        // return response($request->all());
+    
+        $kotum->update($request->all());
+
+        return response('Data Berhasil Diubah', 200)
+        ->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -78,8 +85,11 @@ class KotaController extends Controller
      * @param  \App\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kota $kota)
+    public function destroy(Kota $kotum)
     {
-        //
+        $kotum->delete();
+
+        return response('Data Berhasil Dihapus', 200)
+        ->header('Content-Type', 'text/plain');
     }
 }

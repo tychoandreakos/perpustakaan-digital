@@ -13,8 +13,9 @@ class CreateKotasTable extends Migration
      */
     public function up()
     {
-        Schema::create('kotas', function (Blueprint $table) {
+        Schema::create('kota', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama_kota', 50);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateKotasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kotas');
+        Schema::dropIfExists('kota');
     }
 }

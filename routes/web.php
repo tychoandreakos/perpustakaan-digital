@@ -17,3 +17,6 @@
 
 Route::view('/', 'user');
 Route::view('/{any}', 'user');
+
+// kota
+Route::resource('kota', 'KotaController');
