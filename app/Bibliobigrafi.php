@@ -28,4 +28,9 @@ class Bibliobigrafi extends Model
     {
         return $this->belongsTo(EksemplarTransaksi::class);
     }
+
+    public function pinjam_transaksi()
+    {
+        return $this->hasOne(PinjamTransaksi::class);
+    }
 }
