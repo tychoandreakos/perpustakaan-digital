@@ -28,6 +28,7 @@ Route::resource('subyek', 'SubyekController');
 Route::resource('lokasi', 'LokasiRakController');
 Route::resource('koleksi', 'KoleksiController');
 Route::resource('buku', 'BukuController');
+Route::resource('klasifikasi', 'KlasifikasiController');
 
 
 // transaksi file
