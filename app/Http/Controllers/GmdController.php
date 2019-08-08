@@ -14,7 +14,12 @@ class GmdController extends Controller
      */
     public function index()
     {
-        return view('admin.master.gmd.home');
+        return view('admin.master.gmd.home', compact('gmd'));
+    }
+
+    public function fetch()
+    {
+        return Gmd::latest()->paginate(5);
     }
 
     /**
@@ -42,8 +47,8 @@ class GmdController extends Controller
 
         Gmd::create($request->all());
 
-        return response()->json([
-            'message' => 'success']);
+        // return response()->json([
+        //     'message' => 'data berhasil disimpan']);
     }
 
     /**

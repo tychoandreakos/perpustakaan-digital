@@ -42,4 +42,7 @@ Route::resource('tipe-anggota', 'TipeAnggotaController');
 // transaksi file
 Route::resource('bibliobigrafi', 'BibliobigrafiController');
 
+// fetch
+Route::get('gmd-fetch', 'GmdController@fetch')->name('gmd.fetch');
+
 });

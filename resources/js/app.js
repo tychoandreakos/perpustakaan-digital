@@ -8,12 +8,17 @@ require('./bootstrap');
 
 import User from './helpers/User';
 import router from './router';
-
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 window.User = User;
 window.Vue = require('vue');
 
 window.EventBus = new Vue();
+
+
+// vue use
+Vue.use(VueSweetalert2);
 
 /**
  * The following block of code may be used to automatically register your
@@ -44,5 +49,5 @@ Vue.component('form-gmd-component', require('./components/admin/gmd/FormGmd.vue'
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
 });

@@ -41,19 +41,10 @@
                 <div class="float-right">
 
                     <template v-if="loading">
-                        <div class="lds-roller">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                        <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <button class="btn btn-success">
+                        <button :disabled="isDisabled" class="btn btn-success">
                             Simpan</button>
                     </template>
                 </div>
@@ -63,14 +54,23 @@
 </template>
 
 <script>
-    import {
-        setTimeout
-    } from 'timers';
+    import Spinner from '../tools/Spanner';
     export default {
+
+        components: {
+            SpinnerComponent: Spinner,
+        },
+
         props: [
             'index',
             'store'
         ],
+
+        computed: {
+            isDisabled() {
+                return (this.form.kode_gmd.length == '' && this.form.nama_gmd == '' ? true : false)
+            }
+        },
 
         data() {
             return {
@@ -79,26 +79,34 @@
                     nama_gmd: '',
                 },
 
+                // isDisabled: true,
+
                 loading: false,
 
                 err: {},
-                msg: null,
             }
         },
 
         methods: {
             simpan() {
                 this.loading = true;
-
-                setTimeout(() => {
-                    this.form.kode_gmd = '';
-                    this.form.nama_gmd = '';
-                    this.loading = false;
-                }, 3000)
-
                 axios.post(this.store, this.form)
-                    .then(res => this.msg = res.data.message)
-                    .catch(err => this.err = err)
+                    .then(res => {
+                        this.form.kode_gmd = '';
+                        this.form.nama_gmd = '';
+                        this.loading = false;
+                        this.$swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: res.data.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+                    .catch(err => {
+                        this.err = err.response.data.errors;
+                        this.loading = false;
+                    })
 
 
 
@@ -107,112 +115,3 @@
     }
 
 </script>
-
-<style>
-    /* spinner */
-    .lds-roller {
-        display: inline-block;
-        position: relative;
-        width: 64px;
-        height: 64px;
-    }
-
-    .lds-roller div {
-        animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        transform-origin: 32px 32px;
-    }
-
-    .lds-roller div:after {
-        content: " ";
-        display: block;
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #2dce89;
-        margin: -3px 0 0 -3px;
-    }
-
-    .lds-roller div:nth-child(1) {
-        animation-delay: -0.036s;
-    }
-
-    .lds-roller div:nth-child(1):after {
-        top: 50px;
-        left: 50px;
-    }
-
-    .lds-roller div:nth-child(2) {
-        animation-delay: -0.072s;
-    }
-
-    .lds-roller div:nth-child(2):after {
-        top: 54px;
-        left: 45px;
-    }
-
-    .lds-roller div:nth-child(3) {
-        animation-delay: -0.108s;
-    }
-
-    .lds-roller div:nth-child(3):after {
-        top: 57px;
-        left: 39px;
-    }
-
-    .lds-roller div:nth-child(4) {
-        animation-delay: -0.144s;
-    }
-
-    .lds-roller div:nth-child(4):after {
-        top: 58px;
-        left: 32px;
-    }
-
-    .lds-roller div:nth-child(5) {
-        animation-delay: -0.18s;
-    }
-
-    .lds-roller div:nth-child(5):after {
-        top: 57px;
-        left: 25px;
-    }
-
-    .lds-roller div:nth-child(6) {
-        animation-delay: -0.216s;
-    }
-
-    .lds-roller div:nth-child(6):after {
-        top: 54px;
-        left: 19px;
-    }
-
-    .lds-roller div:nth-child(7) {
-        animation-delay: -s0.252s;
-    }
-
-    .lds-roller div:nth-child(7):after {
-        top: 50px;
-        left: 14px;
-    }
-
-    .lds-roller div:nth-child(8) {
-        animation-delay: -0.288s;
-    }
-
-    .lds-roller div:nth-child(8):after {
-        top: 45px;
-        left: 10px;
-    }
-
-    @keyframes lds-roller {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-</style>

@@ -6,8 +6,8 @@
     <div class="header-body">
         <!-- Card stats -->
         @include('admin.component.card-home')
-
+        {{-- {{ $gmd }} --}}
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-                <table-gmd-component route="{{ route('gmd.create') }}"></table-gmd-component>
+        <table-gmd-component fetch="{{ route('gmd.fetch') }}" route="{{ route('gmd.create') }}"></table-gmd-component>
             @endsection

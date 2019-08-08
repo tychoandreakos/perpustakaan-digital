@@ -24,19 +24,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="n in 5" :key="n">
+                            <tr v-for="gmd in data" :key="gmd.id">
                                 <th scope="row" style="width: 19%">
                                     <button class="btn btn-primary btn-sm">Edit</button>
                                     <button class="btn btn-danger btn-sm">Hapus</button>
                                 </th>
                                 <td>
-                                   001
+                                   {{ gmd.kode_gmd }}
                                 </td>
                                 <td>
-                                  Lukisan
+                                 {{ gmd.nama_gmd }}
                                 </td>
                                 <td>
-                                    3 hari yang lalu
+                                    {{ gmd.updated_at }}
                                 </td>
                             </tr>
                         </tbody>
@@ -44,13 +44,23 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
     export default {
-        props: ['route'],
+        props: ['route', 'fetch'],
+        data(){
+            return {
+                data: {},
+            }
+        },
+
+        created() {
+          axios.get(this.fetch)
+          .then(res => this.data = res.data.data)
+          .catch(err => console.log(err));
+        }
     }
 
 </script>
