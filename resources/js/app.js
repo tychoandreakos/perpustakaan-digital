@@ -41,6 +41,10 @@ Vue.component('table-bilio-component', require('./components/admin/bibliobigrafi
 Vue.component('table-gmd-component', require('./components/admin/gmd/TableGmd.vue').default);
 Vue.component('form-gmd-component', require('./components/admin/gmd/FormGmd.vue').default);
 
+// penerbit
+Vue.component('table-penerbit-component', require('./components/admin/penerbit/Table.vue').default);
+Vue.component('form-penerbit-component', require('./components/admin/penerbit/Form.vue').default);
+
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
 
@@ -49,6 +53,13 @@ Vue.component('pagination', require('laravel-vue-pagination'));
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+//  filter
+Vue.filter('capitalize', function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  })
 
 const app = new Vue({
     el: '#app',

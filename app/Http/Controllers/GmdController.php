@@ -10,7 +10,7 @@ class GmdController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responses
      */
     public function index()
     {
@@ -86,10 +86,8 @@ class GmdController extends Controller
             $search = $request->q;
 
             return Gmd::where('kode_gmd','LIKE',"%$search%")->
-            orWhere('nama_gmd', "LIKE", "%$search%")->get();
+            orWhere('nama_gmd', "LIKE", "%$search%")->orderBy('updated_at', 'DESC')->paginate(5);
 
-        } else {
-            return Gmd::latest()->paginate(5);
         }
 
 

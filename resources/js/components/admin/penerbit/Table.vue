@@ -5,11 +5,10 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="mb-0">Daftar GMD</h3>
+                            <h3 class="mb-0">Daftar Penerbit</h3>
                         </div>
                         <div class="col text-right">
-                            <a :href="this.route" class="btn btn-sm btn-primary"><i
-                                    class="ni ni-fat-add text-white"></i> Tambah GMD</a>
+                            <a :href="this.route" class="btn btn-sm btn-primary"><i class="ni ni-fat-add text-white"></i> Tambah GMD</a>
                         </div>
                     </div>
                 </div>
@@ -19,27 +18,21 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Aksi</th>
-                                <th scope="col">Kode GMD</th>
-                                <th scope="col">Nama GMD</th>
+                                <th scope="col">Nama Penerbit</th>
                                 <th scope="col">Perubahan Terakhir</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="gmd in datas.data" :key="gmd.id">
+                            <tr v-for="item in datas.data" :key="item.id">
                                 <th scope="row" style="width: 19%">
-                                    <a :href="edit(gmd.id)" class="btn btn-primary btn-sm"><i
-                                            class="ni ni-check-bold text-white"></i> Edit</a>
-                                    <button @click="deleted(gmd.id)" class="btn btn-danger btn-sm"><i
-                                            class="ni ni-fat-remove text-white"></i> Hapus</button>
+                                    <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i class="ni ni-check-bold text-white"></i> Edit</a>
+                                    <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i class="ni ni-fat-remove text-white"></i> Hapus</button>
                                 </th>
                                 <td>
-                                    {{ gmd.kode_gmd }}
+                                    {{ item.nama_penerbit | capitalize}}
                                 </td>
                                 <td>
-                                    {{ gmd.nama_gmd | capitalize }}
-                                </td>
-                                <td>
-                                    {{ gmd.updated_at }}
+                                    {{ item.updated_at }}
                                 </td>
                             </tr>
                         </tbody>
@@ -65,9 +58,9 @@
 
         methods: {
             edit(val) {
-                return `gmd/${val}/edit`;
+                return `penerbit/${val}/edit`;
             },
-
+            
             deleted(val) {
                 this.$swal({
                     title: 'Hapus Data?',
@@ -79,7 +72,7 @@
                     confirmButtonText: 'Yes, hapus!'
                 }).then((result) => {
                     if (result.value) {
-                        axios.post('/pustakawan/gmd/' + val, {
+                        axios.post('/pustakawan/penerbit/' + val, {
                                 _method: 'DELETE'
                             })
                             .then(res => {
@@ -111,17 +104,15 @@
 
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
-                axios.get('/pustakawan/gmd-search?q=' + query)
+                axios.get('/pustakawan/penerbit-search?q=' + query)
                     .then(res => {
                         // console.log(res)
                         this.datas = res.data
                     })
                     .catch(err => console.log(err))
             })
-         
-                this.getResults();
 
-
+            this.getResults();
         },
     }
 

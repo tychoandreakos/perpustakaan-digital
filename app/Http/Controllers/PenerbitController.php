@@ -14,7 +14,13 @@ class PenerbitController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Daftar Penerbit';
+        return view('admin.master.penerbit.home', compact('title'));
+    }
+
+    public function fetch()
+    {
+        return Penerbit::latest()->paginate(5);
     }
 
     /**
@@ -24,7 +30,8 @@ class PenerbitController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Penerbit';
+        return view('admin.master.penerbit.add', compact('title'));
     }
 
     /**
@@ -35,9 +42,14 @@ class PenerbitController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'nama_penerbit' => 'required',
+        ]);
+
         Penerbit::create($request->all());
 
-        return response('data berhasil disimpan', 200);
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**
@@ -59,7 +71,27 @@ class PenerbitController extends Controller
      */
     public function edit(Penerbit $penerbit)
     {
-        //
+        $title = 'Update Penerbit';
+        return view('admin.master.penerbit.edit' ,compact('penerbit', 'title'));
+    }
+    
+    public function search(Request $request)
+    {
+        // $data = [];
+
+
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Penerbit::where('nama_penerbit','LIKE',"%$search%")
+            ->orderBy('updated_at', 'DESC')
+            ->paginate(5);
+
+        }
+
+
+        // return response()->json($data);
     }
 
     /**
@@ -73,7 +105,8 @@ class PenerbitController extends Controller
     {
         $penerbit->update($request->all());
 
-        return response('data berhasil diubah', 200);
+        return response()->json([
+            'message' => 'data berhasil diubah']);
     }
 
     /**
@@ -85,5 +118,8 @@ class PenerbitController extends Controller
     public function destroy(Penerbit $penerbit)
     {
         $penerbit->delete();
+
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }
