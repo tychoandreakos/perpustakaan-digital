@@ -26,7 +26,7 @@
                         <tbody>
                             <tr v-for="gmd in data" :key="gmd.id">
                                 <th scope="row" style="width: 19%">
-                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <a :href="edit(gmd.id)" class="btn btn-primary btn-sm">Edit</a>
                                     <button class="btn btn-danger btn-sm">Hapus</button>
                                 </th>
                                 <td>
@@ -53,6 +53,12 @@
         data(){
             return {
                 data: {},
+            }
+        },
+
+        methods: {
+            edit(val) {
+                return `gmd/${val}/edit`;
             }
         },
 

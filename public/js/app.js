@@ -1987,12 +1987,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['index', 'store'],
+  props: ['index', 'fetch'],
   computed: {
     isDisabled: function isDisabled() {
       return this.form.kode_gmd.length == '' && this.form.nama_gmd == '' ? true : false;
@@ -2001,8 +2010,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        kode_gmd: '',
-        nama_gmd: ''
+        kode_gmd: this.fetch.kode_gmd || '',
+        nama_gmd: this.fetch.nama_gmd || ''
       },
       // isDisabled: true,
       loading: false,
@@ -2100,6 +2109,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       data: {}
     };
+  },
+  methods: {
+    edit: function edit(val) {
+      return "gmd/".concat(val, "/edit");
+    }
   },
   created: function created() {
     var _this = this;
@@ -41439,7 +41453,11 @@ var render = function() {
   return _c("div", { staticClass: "card bg-secondary shadow" }, [
     _c("div", { staticClass: "card-header bg-white border-0" }, [
       _c("div", { staticClass: "row align-items-center" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "col-8" }, [
+          this.fetch.kode_gmd
+            ? _c("h3", { staticClass: "mb-0" }, [_vm._v("Update Data GMD")])
+            : _c("h3", { staticClass: "mb-0" }, [_vm._v("Tambah Data GMD")])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-4 text-right" }, [
           _c(
@@ -41585,14 +41603,27 @@ var render = function() {
               _vm.loading
                 ? [_c("spinner-component")]
                 : [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { disabled: _vm.isDisabled }
-                      },
-                      [_vm._v("\n                        Simpan")]
-                    )
+                    this.fetch.kode_gmd
+                      ? [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              attrs: { disabled: _vm.isDisabled }
+                            },
+                            [_vm._v("\n                        Perbarui")]
+                          )
+                        ]
+                      : [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              attrs: { disabled: _vm.isDisabled }
+                            },
+                            [_vm._v("\n                        Tambah")]
+                          )
+                        ]
                   ]
             ],
             2
@@ -41602,16 +41633,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("h3", { staticClass: "mb-0" }, [_vm._v("Tambah Data GMD")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41661,7 +41683,24 @@ var render = function() {
               "tbody",
               _vm._l(_vm.data, function(gmd) {
                 return _c("tr", { key: gmd.id }, [
-                  _vm._m(2, true),
+                  _c(
+                    "th",
+                    { staticStyle: { width: "19%" }, attrs: { scope: "row" } },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          attrs: { href: _vm.edit(gmd.id) }
+                        },
+                        [_vm._v("Edit")]
+                      ),
+                      _vm._v(" "),
+                      _c("button", { staticClass: "btn btn-danger btn-sm" }, [
+                        _vm._v("Hapus")
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
@@ -41720,24 +41759,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Perubahan Terakhir")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "th",
-      { staticStyle: { width: "19%" }, attrs: { scope: "row" } },
-      [
-        _c("button", { staticClass: "btn btn-primary btn-sm" }, [
-          _vm._v("Edit")
-        ]),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn btn-danger btn-sm" }, [
-          _vm._v("Hapus")
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true

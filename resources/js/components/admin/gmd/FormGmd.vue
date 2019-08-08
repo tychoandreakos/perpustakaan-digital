@@ -3,7 +3,8 @@
         <div class="card-header bg-white border-0">
             <div class="row align-items-center">
                 <div class="col-8">
-                    <h3 class="mb-0">Tambah Data GMD</h3>
+                    <h3 class="mb-0" v-if="this.fetch.kode_gmd">Update Data GMD</h3>
+                    <h3 class="mb-0" v-else>Tambah Data GMD</h3>
                 </div>
                 <div class="col-4 text-right">
                     <a :href="this.index" class="btn btn-sm btn-primary">Kembali</a>
@@ -18,7 +19,9 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kode_gmd">Kode GMD</label>
-                                <input type="text" v-model="form.kode_gmd" id="kode_gmd"
+                                <input type="text" 
+                                    v-model="form.kode_gmd" 
+                                id="kode_gmd"
                                     class="form-control form-control-alternative" placeholder="KODE GMD">
                                 <template v-if="err.kode_gmd">
                                     <span class="text-danger">{{ err.kode_gmd[0] }}</span>
@@ -44,8 +47,14 @@
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <button :disabled="isDisabled" class="btn btn-success">
-                            Simpan</button>
+                        <template v-if="this.fetch.kode_gmd">
+                            <button :disabled="isDisabled" class="btn btn-success">
+                            Perbarui</button>
+                        </template>
+                          <template v-else>
+                            <button :disabled="isDisabled" class="btn btn-success">
+                            Tambah</button>
+                        </template>
                     </template>
                 </div>
             </form>
@@ -63,7 +72,7 @@
 
         props: [
             'index',
-            'store'
+            'fetch'
         ],
 
         computed: {
@@ -75,8 +84,8 @@
         data() {
             return {
                 form: {
-                    kode_gmd: '',
-                    nama_gmd: '',
+                    kode_gmd: this.fetch.kode_gmd || '',
+                    nama_gmd: this.fetch.nama_gmd || '',
                 },
 
                 // isDisabled: true,

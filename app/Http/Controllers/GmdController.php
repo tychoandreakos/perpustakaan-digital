@@ -70,7 +70,7 @@ class GmdController extends Controller
      */
     public function edit(Gmd $gmd)
     {
-        
+        return view('admin.master.gmd.edit' ,compact('gmd'));
     }
 
     /**
