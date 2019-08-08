@@ -11,12 +11,19 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('user');
-// });
+Route::get('/', function () {
+    return view('user');
+});
 
-Route::view('/', 'user');
-Route::view('/{any}', 'user');
+// Route::view('/', 'user');
+// Route::view('/{any}', 'user');
+
+// admin prefix
+
+Route::name('pustakawan.')->group(function() {
+
+    Route::view('admin', 'admin.home');
+
 
 // master file
 Route::resource('kota', 'KotaController');
@@ -33,3 +40,6 @@ Route::resource('tipe-anggota', 'TipeAnggotaController');
 
 
 // transaksi file
+
+
+});
