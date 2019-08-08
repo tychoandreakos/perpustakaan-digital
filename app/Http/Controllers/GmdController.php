@@ -42,7 +42,8 @@ class GmdController extends Controller
 
         Gmd::create($request->all());
 
-        return redirect()->route('gmd.index');
+        return response()->json([
+            'message' => 'success']);
     }
 
     /**
