@@ -29,7 +29,9 @@
                                     <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
                                             class="ni ni-fat-remove text-white"></i> Hapus</button>
                                 </th>
-                                <td>{{ item.judul }}</td>
+                                <td>
+                                    <div @click="show(item.id)" class="buku">{{ item.judul }}</div>
+                                </td>
                                 <td>{{ item.buku_transaksi.pengarang.nama_pengarang || capitalize }}</td>
                                 <!-- <td v-for="pengarang in item.buku_transaksi.pengarang" :key="pengarang.id">
                                     {{ pengarang.nama_pengarang | capitalize}}
@@ -43,7 +45,12 @@
                     </table>
                 </div>
 
-                <div class="mx-auto mt-3">
+                <modal name="buku">
+                    <modal-component></modal-component>
+                </modal>
+
+                <div class="mx-auto mt-3
+                ">
                     <pagination :data="datas" @pagination-change-page="getResults"></pagination>
                 </div>
             </div>
@@ -52,7 +59,13 @@
 </template>
 
 <script>
+    import Modal from './Modal';
+
     export default {
+        components: {
+            ModalComponent: Modal,
+        },
+
         props: ['route', 'fetch', 'index'],
         data() {
             return {
@@ -63,6 +76,13 @@
         methods: {
             edit(val) {
                 return `buku/${val}/edit`;
+            },
+
+            show() {
+                this.$modal.show('buku');
+            },
+            hide() {
+                this.$modal.hide('buku');
             },
 
             deleted(val) {
@@ -127,6 +147,15 @@
     .table th {
         font-size: 0.8125rem;
         white-space: normal !important;
+    }
+
+    .buku {
+        color: #5e72e4;
+        cursor: pointer;
+    }
+
+    .buku:hover {
+        color: #233dd2;
     }
 
 </style>
