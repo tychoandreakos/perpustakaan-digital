@@ -14,7 +14,13 @@ class BahasaController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Daftar Bahasa';
+        return view('admin.master.bahasa.home', compact('title'));
+    }
+
+    public function fetch()
+    {
+        return Bahasa::latest()->paginate(5);
     }
 
     /**
@@ -24,7 +30,8 @@ class BahasaController extends Controller
      */
     public function create()
     {
-       
+        $title = 'Tambah Bahasa';
+        return view('admin.master.bahasa.add', compact('title'));
     }
 
     /**
@@ -35,9 +42,14 @@ class BahasaController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'jenis_bahasa' => 'required',
+        ]);
+
         Bahasa::create($request->all());
-        return response('Data Berhasil Disimpan', 200)
-        ->header('Content-Type', 'text/plain');
+       
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**
@@ -59,7 +71,20 @@ class BahasaController extends Controller
      */
     public function edit(Bahasa $bahasa)
     {
-     
+        $title = 'Update Bahasa';
+        return view('admin.master.bahasa.edit' ,compact('bahasa', 'title'));
+    }
+
+    public function search(Request $request)
+    {
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Bahasa::where('jenis_bahasa','LIKE',"%$search%")
+            ->latest()->paginate(5);
+        }
+
     }
 
     /**
@@ -73,8 +98,8 @@ class BahasaController extends Controller
     {
         $bahasa->update($request->all());
 
-        return response('Data Berhasil Diubah', 200)
-         ->header('Content-Type', 'text/plain');
+        return response()->json([
+            'message' => 'data berhasil diubah']);
     }
 
     /**
@@ -87,7 +112,7 @@ class BahasaController extends Controller
     {
         $bahasa->delete();
 
-        return response('Data Berhasil dihapus', 200)
-         ->header('Content-Type', 'text/plain');
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }

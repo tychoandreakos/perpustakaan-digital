@@ -63,6 +63,11 @@ Vue.component('form-kota-component', require('./components/admin/kota/Form.vue')
 Vue.component('table-klasifikasi-component', require('./components/admin/klasifikasi/Table.vue').default);
 Vue.component('form-klasifikasi-component', require('./components/admin/klasifikasi/Form.vue').default);
 
+// bahasa
+Vue.component('table-bahasa-component', require('./components/admin/bahasa/Table.vue').default);
+Vue.component('form-bahasa-component', require('./components/admin/bahasa/Form.vue').default);
+
+
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
 

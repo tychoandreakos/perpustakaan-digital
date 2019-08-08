@@ -60,7 +60,7 @@
                 <a href="{{ route('pengarang.index') }}" class="dropdown-item">Pengarang</a>
                 <a href="{{ route('kota.index') }}" class="dropdown-item">Kota</a>
                 <a href="{{ route('klasifikasi.index') }}" class="dropdown-item">Klasifikasi</a>
-                <a href="#" class="dropdown-item">Bahasa</a>
+                <a href="{{ route('bahasa.index') }}" class="dropdown-item">Bahasa</a>
             </div>
         </div>
     </li>
