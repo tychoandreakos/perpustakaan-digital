@@ -40,6 +40,8 @@ Vue.component('table-bilio-component', require('./components/admin/bibliobigrafi
 Vue.component('table-gmd-component', require('./components/admin/gmd/TableGmd.vue').default);
 Vue.component('form-gmd-component', require('./components/admin/gmd/FormGmd.vue').default);
 
+// package
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

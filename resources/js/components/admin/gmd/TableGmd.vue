@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="gmd in data" :key="gmd.id">
+                            <tr v-for="gmd in data.data" :key="gmd.id">
                                 <th scope="row" style="width: 19%">
                                     <a :href="edit(gmd.id)" class="btn btn-primary btn-sm">Edit</a>
                                     <button @click="deleted(gmd.id)" class="btn btn-danger btn-sm">Hapus</button>
@@ -41,6 +41,10 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="mx-auto mt-3">
+                    <pagination :data="data" @pagination-change-page="getResults"></pagination>
                 </div>
             </div>
         </div>
@@ -91,13 +95,17 @@
                             .catch(err => console.log(err))
                     }
                 });
+            },
+
+            getResults(page = 1) {
+                return axios.get(this.fetch + '?page='+page)
+                    .then(res => this.data = res.data)
+                    .catch(err => console.log(err));
             }
         },
 
-        created() {
-            axios.get(this.fetch)
-                .then(res => this.data = res.data.data)
-                .catch(err => console.log(err));
+        mounted() {
+            this.getResults();
         }
     }
 
