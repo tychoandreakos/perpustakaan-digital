@@ -14,7 +14,8 @@ class GmdController extends Controller
      */
     public function index()
     {
-        return view('admin.master.gmd.home', compact('gmd'));
+        $title = 'Daftar GMD';
+        return view('admin.master.gmd.home', compact('title'));
     }
 
     public function fetch()
@@ -29,7 +30,8 @@ class GmdController extends Controller
      */
     public function create()
     {
-        return view('admin.master.gmd.add');
+        $title = 'Tambah GMD';
+        return view('admin.master.gmd.add', compact('title'));
     }
 
     /**
@@ -70,7 +72,8 @@ class GmdController extends Controller
      */
     public function edit(Gmd $gmd)
     {
-        return view('admin.master.gmd.edit' ,compact('gmd'));
+        $title = 'Update GMD';
+        return view('admin.master.gmd.edit' ,compact('gmd', 'title'));
     }
 
     /**
