@@ -8,7 +8,8 @@
                             <h3 class="mb-0">Daftar GMD</h3>
                         </div>
                         <div class="col text-right">
-                            <a :href="this.route" class="btn btn-sm btn-primary">Tambah GMD</a>
+                            <a @click="refresh" class="btn btn-sm btn-success text-white">Refresh Tabel</a>
+                            <a :href="this.route" class="btn btn-sm btn-primary"><i class="ni ni-fat-add text-white"></i> Tambah GMD</a>
                         </div>
                     </div>
                 </div>
@@ -26,8 +27,8 @@
                         <tbody>
                             <tr v-for="gmd in datas.data" :key="gmd.id">
                                 <th scope="row" style="width: 19%">
-                                    <a :href="edit(gmd.id)" class="btn btn-primary btn-sm">Edit</a>
-                                    <button @click="deleted(gmd.id)" class="btn btn-danger btn-sm">Hapus</button>
+                                    <a :href="edit(gmd.id)" class="btn btn-primary btn-sm"><i class="ni ni-check-bold text-white"></i> Edit</a>
+                                    <button @click="deleted(gmd.id)" class="btn btn-danger btn-sm"><i class="ni ni-fat-remove text-white"></i> Hapus</button>
                                 </th>
                                 <td>
                                     {{ gmd.kode_gmd }}
@@ -65,6 +66,11 @@
                 return `gmd/${val}/edit`;
             },
 
+            refresh() {
+                this.$parent.search = '';
+                this.getResults();
+            },
+
             deleted(val) {
                 this.$swal({
                     title: 'Hapus Data?',
@@ -98,26 +104,25 @@
             },
 
             getResults(page = 1) {
-                return axios.get(this.fetch + '?page='+page)
+                return axios.get(this.fetch + '?page=' + page)
                     .then(res => this.datas = res.data)
                     .catch(err => console.log(err));
             }
         },
 
         created() {
+
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
                 axios.get('/pustakawan/gmd-search?q=' + query)
-                .then(res=> {
-                    // console.log(res)
-                    this.datas = res
-                })
-                .catch(err => console.log(err))
+                    .then(res => {
+                        // console.log(res)
+                        this.datas = res
+                    })
+                    .catch(err => console.log(err))
             })
 
-            if(this.$parent.search.length < 1){
-                 this.getResults();
-            }
+            this.getResults();
         },
     }
 

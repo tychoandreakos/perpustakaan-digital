@@ -2129,6 +2129,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
   data: function data() {
@@ -2139,6 +2140,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     edit: function edit(val) {
       return "gmd/".concat(val, "/edit");
+    },
+    refresh: function refresh() {
+      this.$parent.search = '';
+      this.getResults();
     },
     deleted: function deleted(val) {
       var _this = this;
@@ -2196,10 +2201,7 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     });
-
-    if (this.$parent.search.length < 1) {
-      this.getResults();
-    }
+    this.getResults();
   }
 });
 
@@ -43119,10 +43121,22 @@ var render = function() {
               _c(
                 "a",
                 {
+                  staticClass: "btn btn-sm btn-success text-white",
+                  on: { click: _vm.refresh }
+                },
+                [_vm._v("Refresh Tabel")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
                   staticClass: "btn btn-sm btn-primary",
                   attrs: { href: this.route }
                 },
-                [_vm._v("Tambah GMD")]
+                [
+                  _c("i", { staticClass: "ni ni-fat-add text-white" }),
+                  _vm._v(" Tambah GMD")
+                ]
               )
             ])
           ])
@@ -43146,7 +43160,12 @@ var render = function() {
                           staticClass: "btn btn-primary btn-sm",
                           attrs: { href: _vm.edit(gmd.id) }
                         },
-                        [_vm._v("Edit")]
+                        [
+                          _c("i", {
+                            staticClass: "ni ni-check-bold text-white"
+                          }),
+                          _vm._v(" Edit")
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
@@ -43159,7 +43178,12 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Hapus")]
+                        [
+                          _c("i", {
+                            staticClass: "ni ni-fat-remove text-white"
+                          }),
+                          _vm._v(" Hapus")
+                        ]
                       )
                     ]
                   ),
