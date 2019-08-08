@@ -14,7 +14,8 @@ class PengarangController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Daftar Pengarang';
+        return view('admin.master.pengarang.home', compact('title'));
     }
 
     /**
@@ -22,9 +23,15 @@ class PengarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function fetch()
+    {
+        return Pengarang::latest()->paginate(5);
+    }
+
     public function create()
     {
-        //
+        $title = 'Tambah Pengarang';
+        return view('admin.master.pengarang.add', compact('title'));
     }
 
     /**
@@ -35,6 +42,11 @@ class PengarangController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'pengarang' => 'required',
+            'tahun_lahir' => 'nullable',
+        ]);
+
         Pengarang::create($request->all());
 
         return response('data berhasil disimpan', 200);
@@ -59,7 +71,8 @@ class PengarangController extends Controller
      */
     public function edit(Pengarang $pengarang)
     {
-        //
+        $title = 'Update Pengarang';
+        return view('admin.master.pengarang.edit' ,compact('pengarang', 'title'));
     }
 
     /**
@@ -73,7 +86,27 @@ class PengarangController extends Controller
     {
         $pengarang->update($request->all());
 
-        return response('data berhasil diubah', 200);
+        return response()->json([
+            'message' => 'data berhasil diubah']);
+    }
+
+    public function search(Request $request)
+    {
+        // $data = [];
+
+
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Pengarang::where('nama_pengarang','LIKE',"%$search%")
+            ->latest()
+            ->paginate(5);
+
+        }
+
+
+        // return response()->json($data);
     }
 
     /**
@@ -84,6 +117,7 @@ class PengarangController extends Controller
      */
     public function destroy(Pengarang $pengarang)
     {
-        $pengarang->delete();
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }
