@@ -19,6 +19,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
         Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
     </title>
@@ -31,27 +32,31 @@
     <link href="{{ asset('js/plugins/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" />
+    <style>
+        * {
+            outline: none;
+        }
+    </style>
 </head>
 
-<body class="">
+<body>
 
     @include('admin.partials.sidebar')
 
-    <div class="main-content">
+    <div id="app" class="main-content">
         @include('admin.partials.navbar')
 
         <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 
         @yield('content')
+        
         @include('admin.partials.footer')
         
         </div>
     </div>
 
     <!--   Core   -->
-    <script src="{{ asset('js/plugins/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <!--   Optional JS   -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('js/plugins/chart.js/dist/Chart.extension.js') }}"></script>
     <!--   Argon JS   -->

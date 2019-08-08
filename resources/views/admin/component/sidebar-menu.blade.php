@@ -1,15 +1,16 @@
 <!-- Navigation -->
 <ul class="navbar-nav">
-    <li class="nav-item  class=" active" ">
-        <a class=" nav-link active " href=" ./index.html"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
+    <li class="nav-item active">
+        <a class=" nav-link active " href="{{ route('home') }}"> <i class="ni ni-tv-2 text-primary"></i> Beranda
         </a>
     </li>
     <li class="nav-item">
         <div class="dropdown" style="width:100%">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="ni ni-book-bookmark text-blue"></i>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i
+                    class="ni ni-book-bookmark text-blue"></i>
                 Bibliobigrafi</a>
             <div class="dropdown-menu" style="left: 15px;">
-                <a href="#" class="dropdown-item">Daftar Bibliobigrafi</a>
+                <a href="{{ route('bibliobigrafi.index') }}" class="dropdown-item">Daftar Bibliobigrafi</a>
                 <a href="#" class="dropdown-item">Tambah Bibliobigrafi</a>
                 <a href="#" class="dropdown-item">Daftar Eksemplar</a>
                 <a href="#" class="dropdown-item">Eksemplar Keluar</a>
@@ -18,7 +19,6 @@
                 <a href="#" class="dropdown-item">Import Data</a>
             </div>
         </div>
-        </a>
     </li>
     <li class="nav-item">
         <div class="dropdown" style="width:100%">
@@ -31,6 +31,7 @@
                 <a href="#" class="dropdown-item">Histori Peminjaman</a>
                 <a href="#" class="dropdown-item">Daftar Keterlambatan</a>
             </div>
+        </div>
     </li>
     <li class="nav-item">
         <div class="dropdown" style="width:100%">
@@ -45,6 +46,7 @@
                 <a href="#" class="dropdown-item">Eksport Data</a>
                 <a href="#" class="dropdown-item">Import Data</a>
             </div>
+        </div>
     </li>
     <li class="nav-item">
         <div class="dropdown" style="width:100%">
@@ -77,16 +79,11 @@
             </div>
         </div>
     </li>
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="./examples/register.html">
-            <i class="ni ni-circle-08 text-pink"></i> Register
-        </a>
-    </li> --}}
 </ul>
 <!-- Divider -->
 <hr class="my-3">
 <!-- Heading -->
-<h6 class="navbar-heading text-muted">Lainnya   </h6>
+<h6 class="navbar-heading text-muted">Lainnya </h6>
 <!-- Navigation -->
 <ul class="navbar-nav mb-md-3">
     <li class="nav-item">
@@ -99,9 +96,4 @@
             <i class="ni ni-collection"></i> Laporan Denda
         </a>
     </li>
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-            <i class="ni ni-ui-04"></i> Components
-        </a>
-    </li> --}}
 </ul>

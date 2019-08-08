@@ -2,6 +2,9 @@
 
 @section('content')
 
+<div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
  
    @include('admin.component.card-home')
     

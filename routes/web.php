@@ -20,9 +20,9 @@ Route::get('/', function () {
 
 // admin prefix
 
-Route::name('pustakawan.')->group(function() {
+Route::prefix('pustakawan')->group( function() {
 
-    Route::view('admin', 'admin.home');
+    Route::view('/', 'admin.home')->name('home');
 
 
 // master file
@@ -40,6 +40,6 @@ Route::resource('tipe-anggota', 'TipeAnggotaController');
 
 
 // transaksi file
-
+Route::resource('bibliobigrafi', 'BibliobigrafiController');
 
 });
