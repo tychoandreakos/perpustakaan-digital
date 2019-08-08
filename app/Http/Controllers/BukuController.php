@@ -14,7 +14,13 @@ class BukuController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Daftar Buku';
+        return view('admin.master.buku.home', compact('title'));
+    }
+
+    public function fetch()
+    {
+        return Buku::with('buku_transaksi.pengarang', 'buku_transaksi.penerbit')->latest()->paginate(5);
     }
 
     /**
@@ -24,7 +30,8 @@ class BukuController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Buku';
+        return view('admin.master.buku.add', compact('title'));
     }
 
     /**
@@ -35,9 +42,18 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        Buku::create($request->all());
+        $validatedData = $request->validate([
+            'judul' => 'required',
+            'edisi' => 'nullable',
+            'isbn_isnn' => 'required',
+            'deksripsi_fisik' => 'required',
+            'judul_seri' => 'nullable',
+            'catatan' => 'nullable',
+            'slug' => 'required',
+            'gambar_sampul' => 'nullable'
+        ]);
 
-        return response('data berhasil disimpan', 200);
+        Buku::create($request->all());
     }
 
     /**
@@ -59,8 +75,29 @@ class BukuController extends Controller
      */
     public function edit(Buku $buku)
     {
-       
+        $title = 'Update Buku';
+        return view('admin.master.buku.edit' ,compact('buku', 'title'));
     }
+
+    public function search(Request $request)
+    {
+        // $data = [];
+
+
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Buku::with('buku_transaksi.pengarang', 'buku_transaksi.penerbit')->where('judul','LIKE',"%$search%")
+            // ->orWhere('isbn_isnn','LIKE',"%$search%")
+            ->latest()
+            ->paginate(5);
+        }
+
+
+        // return response()->json($data);
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -72,6 +109,9 @@ class BukuController extends Controller
     public function update(Request $request, Buku $buku)
     {
         $buku->update($request->all());
+
+        return response()->json([
+            'message' => 'data berhasil diubah']);
     }
 
     /**
@@ -82,6 +122,7 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {
-        //
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }

@@ -45,8 +45,10 @@ Route::resource('bibliobigrafi', 'BibliobigrafiController');
 // fetch
 Route::get('gmd-fetch', 'GmdController@fetch')->name('gmd.fetch');
 Route::get('penerbit-fetch', 'PenerbitController@fetch')->name('penerbit.fetch');
+Route::get('buku-fetch', 'BukuController@fetch')->name('buku.fetch');
 
 // search
 Route::get('gmd-search', 'GmdController@search');
 Route::get('penerbit-search', 'PenerbitController@search');
+Route::get('buku-search', 'BukuController@search');
 });

@@ -45,6 +45,10 @@ Vue.component('form-gmd-component', require('./components/admin/gmd/FormGmd.vue'
 Vue.component('table-penerbit-component', require('./components/admin/penerbit/Table.vue').default);
 Vue.component('form-penerbit-component', require('./components/admin/penerbit/Form.vue').default);
 
+// penerbit
+Vue.component('table-buku-component', require('./components/admin/buku/Table.vue').default);
+Vue.component('form-buku-component', require('./components/admin/buku/Form.vue').default);
+
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
 

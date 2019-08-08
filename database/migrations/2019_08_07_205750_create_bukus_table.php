@@ -18,8 +18,8 @@ class CreateBukusTable extends Migration
             $table->string('judul', 100);
             $table->string('edisi', 100)->nullable();
             $table->string('isbn_isnn', 40);
-            $table->string('deskripsi_fisik', 50);
-            $table->string('judul_seri', 50)->nullable();
+            $table->string('deskripsi_fisik', 100);
+            $table->string('judul_seri', 100)->nullable();
             $table->text('catatan')->nullable();
             $table->string('slug', 100);
             $table->string('gambar_sampul', 50)->nullable();

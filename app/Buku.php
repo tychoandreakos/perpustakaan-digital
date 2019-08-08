@@ -20,7 +20,7 @@ class Buku extends Model
 
     public function buku_transaksi()
     {
-        return $this->hasMany(BukuTransaksi::class);
+        return $this->hasOne(BukuTransaksi::class);
     }
 
     public function biblio()

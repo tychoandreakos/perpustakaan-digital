@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Bahasa::class, function (Faker $faker) {
     return [
-        //
+        'jenis_bahasa' => $faker->country,
     ];
 });
