@@ -47,6 +47,7 @@ Route::get('gmd-fetch', 'GmdController@fetch')->name('gmd.fetch');
 Route::get('penerbit-fetch', 'PenerbitController@fetch')->name('penerbit.fetch');
 Route::get('buku-fetch', 'BukuController@fetch')->name('buku.fetch');
 Route::get('pengarang-fetch', 'PengarangController@fetch')->name('pengarang.fetch');
+Route::get('kota-fetch', 'KotaController@fetch')->name('kota.fetch');
 
 
 // search
@@ -54,4 +55,5 @@ Route::get('gmd-search', 'GmdController@search');
 Route::get('penerbit-search', 'PenerbitController@search');
 Route::get('buku-search', 'BukuController@search');
 Route::get('pengarang-search', 'PengarangController@search');
+Route::get('kota-search', 'KotaController@search');
 });

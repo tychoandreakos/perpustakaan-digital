@@ -14,7 +14,13 @@ class KotaController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Daftar KOta';
+        return view('admin.master.kota.home', compact('title'));
+    }
+
+    public function fetch()
+    {
+        return Kota::latest()->paginate(5);
     }
 
     /**
@@ -24,7 +30,8 @@ class KotaController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Kota';
+        return view('admin.master.kota.add', compact('title'));
     }
 
     /**
@@ -35,9 +42,14 @@ class KotaController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'nama_kota' => 'required',
+        ]);
+
         Kota::create($request->all());
-        return response('Data Berhasil Disimpan', 200)
-        ->header('Content-Type', 'text/plain');
+
+          return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**
@@ -59,8 +71,22 @@ class KotaController extends Controller
      */
     public function edit(Kota $kotum)
     {
-        //
+        $title = 'Update Kota';
+        return view('admin.master.kota.edit' ,compact('kotum', 'title'));
     }
+
+    public function search(Request $request)
+    {
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Kota::where('nama_kota','LIKE',"%$search%")
+            ->latest()->paginate(5);
+        }
+
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -75,8 +101,8 @@ class KotaController extends Controller
     
         $kotum->update($request->all());
 
-        return response('Data Berhasil Diubah', 200)
-        ->header('Content-Type', 'text/plain');
+        return response()->json([
+            'message' => 'data berhasil diubah']);
     }
 
     /**
@@ -89,7 +115,7 @@ class KotaController extends Controller
     {
         $kotum->delete();
 
-        return response('Data Berhasil Dihapus', 200)
-        ->header('Content-Type', 'text/plain');
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }

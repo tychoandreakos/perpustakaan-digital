@@ -58,7 +58,7 @@
                 <a href="{{ route('penerbit.index') }}" class="dropdown-item">Penerbit</a>
                 <a href="{{ route('buku.index') }}" class="dropdown-item">Buku</a>
                 <a href="{{ route('pengarang.index') }}" class="dropdown-item">Pengarang</a>
-                <a href="#" class="dropdown-item">Kota</a>
+                <a href="{{ route('kota.index') }}" class="dropdown-item">Kota</a>
                 <a href="#" class="dropdown-item">Klasifikasi</a>
                 <a href="#" class="dropdown-item">Bahasa</a>
             </div>

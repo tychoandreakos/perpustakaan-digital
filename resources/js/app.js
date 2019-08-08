@@ -55,6 +55,10 @@ Vue.component('form-buku-component', require('./components/admin/buku/Form.vue')
 Vue.component('table-pengarang-component', require('./components/admin/pengarang/Table.vue').default);
 Vue.component('form-pengarang-component', require('./components/admin/pengarang/Form.vue').default);
 
+// pengarang
+Vue.component('table-kota-component', require('./components/admin/kota/Table.vue').default);
+Vue.component('form-kota-component', require('./components/admin/kota/Form.vue').default);
+
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
 

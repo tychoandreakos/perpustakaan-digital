@@ -49,7 +49,7 @@ class PengarangController extends Controller
 
         Pengarang::create($request->all());
 
-        return response('data berhasil disimpan', 200);
+
     }
 
     /**
