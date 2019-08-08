@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="gmd in data.data" :key="gmd.id">
+                            <tr v-for="gmd in datas.data" :key="gmd.id">
                                 <th scope="row" style="width: 19%">
                                     <a :href="edit(gmd.id)" class="btn btn-primary btn-sm">Edit</a>
                                     <button @click="deleted(gmd.id)" class="btn btn-danger btn-sm">Hapus</button>
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="mx-auto mt-3">
-                    <pagination :data="data" @pagination-change-page="getResults"></pagination>
+                    <pagination :data="datas" @pagination-change-page="getResults"></pagination>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
         props: ['route', 'fetch', 'index'],
         data() {
             return {
-                data: {},
+                datas: {},
             }
         },
 
@@ -99,14 +99,26 @@
 
             getResults(page = 1) {
                 return axios.get(this.fetch + '?page='+page)
-                    .then(res => this.data = res.data)
+                    .then(res => this.datas = res.data)
                     .catch(err => console.log(err));
             }
         },
 
-        mounted() {
-            this.getResults();
-        }
+        created() {
+            Fire.$on('searching', () => {
+                let query = this.$parent.search;
+                axios.get('/pustakawan/gmd-search?q=' + query)
+                .then(res=> {
+                    // console.log(res)
+                    this.datas = res
+                })
+                .catch(err => console.log(err))
+            })
+
+            if(this.$parent.search.length < 1){
+                 this.getResults();
+            }
+        },
     }
 
 </script>

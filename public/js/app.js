@@ -2133,7 +2133,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['route', 'fetch', 'index'],
   data: function data() {
     return {
-      data: {}
+      datas: {}
     };
   },
   methods: {
@@ -2178,14 +2178,28 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       return axios.get(this.fetch + '?page=' + page).then(function (res) {
-        return _this2.data = res.data;
+        return _this2.datas = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     }
   },
-  mounted: function mounted() {
-    this.getResults();
+  created: function created() {
+    var _this3 = this;
+
+    Fire.$on('searching', function () {
+      var query = _this3.$parent.search;
+      axios.get('/pustakawan/gmd-search?q=' + query).then(function (res) {
+        // console.log(res)
+        _this3.datas = res;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    });
+
+    if (this.$parent.search.length < 1) {
+      this.getResults();
+    }
   }
 });
 
@@ -43120,7 +43134,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.data.data, function(gmd) {
+              _vm._l(_vm.datas.data, function(gmd) {
                 return _c("tr", { key: gmd.id }, [
                   _c(
                     "th",
@@ -43185,7 +43199,7 @@ var render = function() {
           { staticClass: "mx-auto mt-3" },
           [
             _c("pagination", {
-              attrs: { data: _vm.data },
+              attrs: { data: _vm.datas },
               on: { "pagination-change-page": _vm.getResults }
             })
           ],
@@ -58777,7 +58791,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.User = _helpers_User__WEBPACK_IMPORTED_MODULE_0__["default"];
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-window.EventBus = new Vue(); // vue use
+window.EventBus = new Vue();
+window.Fire = new Vue(); // vue use
 
 Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2__["default"]);
 /**
@@ -58806,7 +58821,15 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
 
 var app = new Vue({
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_1__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_1__["default"],
+  data: {
+    search: ''
+  },
+  methods: {
+    searchHit: _.debounce(function () {
+      Fire.$emit('searching');
+    }, 200)
+  }
 });
 
 /***/ }),

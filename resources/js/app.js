@@ -15,6 +15,7 @@ window.User = User;
 window.Vue = require('vue');
 
 window.EventBus = new Vue();
+window.Fire = new Vue();
 
 
 // vue use
@@ -52,4 +53,13 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 const app = new Vue({
     el: '#app',
     router,
+    data: {
+        search: ''
+    },
+
+    methods: {
+        searchHit: _.debounce(() => {
+            Fire.$emit('searching')
+        }, 200)
+    }
 });

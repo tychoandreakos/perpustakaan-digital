@@ -76,6 +76,26 @@ class GmdController extends Controller
         return view('admin.master.gmd.edit' ,compact('gmd', 'title'));
     }
 
+    public function search(Request $request)
+    {
+        // $data = [];
+
+
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Gmd::where('kode_gmd','LIKE',"%$search%")->
+            orWhere('nama_gmd', "LIKE", "%$search%")->get();
+
+        } else {
+            return Gmd::latest()->paginate(5);
+        }
+
+
+        // return response()->json($data);
+    }
+
     /**
      * Update the specified resource in storage.
      *

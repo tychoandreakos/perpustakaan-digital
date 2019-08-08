@@ -45,4 +45,6 @@ Route::resource('bibliobigrafi', 'BibliobigrafiController');
 // fetch
 Route::get('gmd-fetch', 'GmdController@fetch')->name('gmd.fetch');
 
+// search
+Route::get('gmd-search', 'GmdController@search');
 });
