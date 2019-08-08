@@ -31,6 +31,11 @@ Vue.component('user-component', require('./components/Home.vue').default);
 // admin
 Vue.component('table-bilio-component', require('./components/admin/bibliobigrafi/Table.vue').default);
 
+// gmd
+Vue.component('table-gmd-component', require('./components/admin/gmd/TableGmd.vue').default);
+Vue.component('form-gmd-component', require('./components/admin/gmd/FormGmd.vue').default);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

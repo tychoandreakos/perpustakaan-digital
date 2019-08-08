@@ -14,7 +14,7 @@ class GmdController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.master.gmd.home');
     }
 
     /**
@@ -24,7 +24,7 @@ class GmdController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.master.gmd.add');
     }
 
     /**
@@ -35,9 +35,14 @@ class GmdController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'kode_gmd' => 'required|unique:gmd',
+            'nama_gmd' => 'required',
+        ]);
+
         Gmd::create($request->all());
 
-        return response('data berhasil ditambah', 200);
+        return redirect()->route('gmd.index');
     }
 
     /**

@@ -54,7 +54,7 @@
                 <i class="ni ni-archive-2 text-pink"></i> Master File
             </a>
             <div class="dropdown-menu" style="left: 15px;">
-                <a href="#" class="dropdown-item">GMD</a>
+                <a href="{{ route('gmd.index') }}" class="dropdown-item">GMD</a>
                 <a href="#" class="dropdown-item">Penerbit</a>
                 <a href="#" class="dropdown-item">Buku</a>
                 <a href="#" class="dropdown-item">Pengarang</a>
