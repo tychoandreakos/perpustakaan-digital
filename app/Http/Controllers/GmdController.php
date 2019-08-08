@@ -47,8 +47,8 @@ class GmdController extends Controller
 
         Gmd::create($request->all());
 
-        // return response()->json([
-        //     'message' => 'data berhasil disimpan']);
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**
@@ -82,9 +82,10 @@ class GmdController extends Controller
      */
     public function update(Request $request, Gmd $gmd)
     {
-       $gmd->update($request->all());
+       $gmd->update($request->input());
         
-        return response('data berhasil diupdate', 200);
+       return response()->json([
+        'message' => 'data berhasil diubah']);
     }
 
     /**

@@ -19,10 +19,9 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kode_gmd">Kode GMD</label>
-                                <input type="text" 
-                                    v-model="form.kode_gmd" 
-                                id="kode_gmd"
-                                    class="form-control form-control-alternative" placeholder="KODE GMD">
+                                <input type="text" v-model="form.kode_gmd" id="kode_gmd"
+                                    class="form-control form-control-alternative" name="kode_gmd"
+                                    placeholder="KODE GMD">
                                 <template v-if="err.kode_gmd">
                                     <span class="text-danger">{{ err.kode_gmd[0] }}</span>
                                 </template>
@@ -32,7 +31,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="nama_gmd">Nama GMD</label>
                                 <input type="text" v-model="form.nama_gmd" id="nama_gmd"
-                                    class="form-control form-control-alternative" placeholder="NAMA GMD">
+                                    class="form-control form-control-alternative" name="nama_gmd"
+                                    placeholder="NAMA GMD">
                                 <template v-if="err.nama_gmd">
                                     <span class="text-danger">{{ err.nama_gmd[0] }}</span>
                                 </template>
@@ -49,11 +49,11 @@
                     <template v-else>
                         <template v-if="this.fetch.kode_gmd">
                             <button :disabled="isDisabled" class="btn btn-success">
-                            Perbarui</button>
+                                Perbarui</button>
                         </template>
-                          <template v-else>
+                        <template v-else>
                             <button :disabled="isDisabled" class="btn btn-success">
-                            Tambah</button>
+                                Tambah</button>
                         </template>
                     </template>
                 </div>
@@ -86,9 +86,8 @@
                 form: {
                     kode_gmd: this.fetch.kode_gmd || '',
                     nama_gmd: this.fetch.nama_gmd || '',
+                    _method: (this.fetch.kode_gmd ? 'PUT' : 'POST')
                 },
-
-                // isDisabled: true,
 
                 loading: false,
 
@@ -99,27 +98,49 @@
         methods: {
             simpan() {
                 this.loading = true;
-                axios.post(this.store, this.form)
-                    .then(res => {
-                        this.form.kode_gmd = '';
-                        this.form.nama_gmd = '';
-                        this.loading = false;
-                        this.$swal({
-                            position: 'top-end',
-                            type: 'success',
-                            title: res.data.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    })
-                    .catch(err => {
-                        this.err = err.response.data.errors;
-                        this.loading = false;
-                    })
 
+                if (!this.fetch.kode_gmd) {
+                    // create
+                    axios.post(this.fetch, this.form)
+                        .then(res => {
+                            this.$swal({
+                                position: 'top-end',
+                                type: 'success',
+                                title: res.data.message.toUpperCase(),
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
 
+                             setTimeout(() => {
+                                window.location = this.index;
+                            }, 3200)
+                        })
+                        .catch(err => {
+                            this.err = err.response.data.errors;
+                            this.loading = false;
+                        })
+                } else {
+                    // update
+                    axios.post('/pustakawan/gmd/' + this.fetch.id, this.form)
+                        .then(res => {
+                            this.$swal({
+                                position: 'top-end',
+                                type: 'success',
+                                title: res.data.message.toUpperCase(),
+                                showConfirmButton: false,
+                                timer: 2500
 
-            }
+                            });
+                            setTimeout(() => {
+                                window.location = this.index;
+                            }, 2800);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            this.loading = false;
+                        })
+                }
+            },
         }
     }
 

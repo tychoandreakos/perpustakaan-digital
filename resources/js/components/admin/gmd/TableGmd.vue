@@ -18,7 +18,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Aksi</th>
-                                 <th scope="col">Kode GMD</th>
+                                <th scope="col">Kode GMD</th>
                                 <th scope="col">Nama GMD</th>
                                 <th scope="col">Perubahan Terakhir</th>
                             </tr>
@@ -27,13 +27,13 @@
                             <tr v-for="gmd in data" :key="gmd.id">
                                 <th scope="row" style="width: 19%">
                                     <a :href="edit(gmd.id)" class="btn btn-primary btn-sm">Edit</a>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                    <button @click="deleted" class="btn btn-danger btn-sm">Hapus</button>
                                 </th>
                                 <td>
-                                   {{ gmd.kode_gmd }}
+                                    {{ gmd.kode_gmd }}
                                 </td>
                                 <td>
-                                 {{ gmd.nama_gmd }}
+                                    {{ gmd.nama_gmd }}
                                 </td>
                                 <td>
                                     {{ gmd.updated_at }}
@@ -50,7 +50,7 @@
 <script>
     export default {
         props: ['route', 'fetch'],
-        data(){
+        data() {
             return {
                 data: {},
             }
@@ -59,13 +59,34 @@
         methods: {
             edit(val) {
                 return `gmd/${val}/edit`;
+            },
+
+            deleted() {
+                this.$swal({
+                    title: 'Hapus Data?',
+                    text: "Data yang sudah dihapus tidak dapat dikembalikan",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, hapus!'
+                }).then((result) => {
+                    if (result.value) {
+                        // axios.
+                        this.$swal(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
+                });
             }
         },
 
         created() {
-          axios.get(this.fetch)
-          .then(res => this.data = res.data.data)
-          .catch(err => console.log(err));
+            axios.get(this.fetch)
+                .then(res => this.data = res.data.data)
+                .catch(err => console.log(err));
         }
     }
 

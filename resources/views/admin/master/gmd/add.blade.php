@@ -9,5 +9,5 @@
 
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <form-gmd-component store="{{ route('gmd.store') }}" fetch="" index="{{ route('gmd.index') }}"></form-gmd-component>
+        <form-gmd-component fetch="{{ route('gmd.store') }}" index="{{ route('gmd.index') }}"></form-gmd-component>
             @endsection

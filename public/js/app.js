@@ -2011,9 +2011,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         kode_gmd: this.fetch.kode_gmd || '',
-        nama_gmd: this.fetch.nama_gmd || ''
+        nama_gmd: this.fetch.nama_gmd || '',
+        _method: this.fetch.kode_gmd ? 'PUT' : 'POST'
       },
-      // isDisabled: true,
       loading: false,
       err: {}
     };
@@ -2023,22 +2023,44 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loading = true;
-      axios.post(this.store, this.form).then(function (res) {
-        _this.form.kode_gmd = '';
-        _this.form.nama_gmd = '';
-        _this.loading = false;
 
-        _this.$swal({
-          position: 'top-end',
-          type: 'success',
-          title: res.data.message,
-          showConfirmButton: false,
-          timer: 1500
+      if (!this.fetch.kode_gmd) {
+        // create
+        axios.post(this.fetch, this.form).then(function (res) {
+          _this.$swal({
+            position: 'top-end',
+            type: 'success',
+            title: res.data.message.toUpperCase(),
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          setTimeout(function () {
+            window.location = _this.index;
+          }, 3200);
+        })["catch"](function (err) {
+          _this.err = err.response.data.errors;
+          _this.loading = false;
         });
-      })["catch"](function (err) {
-        _this.err = err.response.data.errors;
-        _this.loading = false;
-      });
+      } else {
+        // update
+        axios.post('/pustakawan/gmd/' + this.fetch.id, this.form).then(function (res) {
+          _this.$swal({
+            position: 'top-end',
+            type: 'success',
+            title: res.data.message.toUpperCase(),
+            showConfirmButton: false,
+            timer: 2500
+          });
+
+          setTimeout(function () {
+            window.location = _this.index;
+          }, 2800);
+        })["catch"](function (err) {
+          console.log(err);
+          _this.loading = false;
+        });
+      }
     }
   }
 });
@@ -2113,13 +2135,31 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     edit: function edit(val) {
       return "gmd/".concat(val, "/edit");
+    },
+    deleted: function deleted() {
+      var _this = this;
+
+      this.$swal({
+        title: 'Hapus Data?',
+        text: "Data yang sudah dihapus tidak dapat dikembalikan",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, hapus!'
+      }).then(function (result) {
+        if (result.value) {
+          // axios.
+          _this.$swal('Deleted!', 'Your file has been deleted.', 'success');
+        }
+      });
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get(this.fetch).then(function (res) {
-      return _this.data = res.data.data;
+      return _this2.data = res.data.data;
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -41517,6 +41557,7 @@ var render = function() {
                       attrs: {
                         type: "text",
                         id: "kode_gmd",
+                        name: "kode_gmd",
                         placeholder: "KODE GMD"
                       },
                       domProps: { value: _vm.form.kode_gmd },
@@ -41569,6 +41610,7 @@ var render = function() {
                       attrs: {
                         type: "text",
                         id: "nama_gmd",
+                        name: "nama_gmd",
                         placeholder: "NAMA GMD"
                       },
                       domProps: { value: _vm.form.nama_gmd },
@@ -41611,7 +41653,7 @@ var render = function() {
                               staticClass: "btn btn-success",
                               attrs: { disabled: _vm.isDisabled }
                             },
-                            [_vm._v("\n                        Perbarui")]
+                            [_vm._v("\n                            Perbarui")]
                           )
                         ]
                       : [
@@ -41621,7 +41663,7 @@ var render = function() {
                               staticClass: "btn btn-success",
                               attrs: { disabled: _vm.isDisabled }
                             },
-                            [_vm._v("\n                        Tambah")]
+                            [_vm._v("\n                            Tambah")]
                           )
                         ]
                   ]
@@ -41696,15 +41738,20 @@ var render = function() {
                         [_vm._v("Edit")]
                       ),
                       _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-danger btn-sm" }, [
-                        _vm._v("Hapus")
-                      ])
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-sm",
+                          on: { click: _vm.deleted }
+                        },
+                        [_vm._v("Hapus")]
+                      )
                     ]
                   ),
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      "\n                               " +
+                      "\n                                " +
                         _vm._s(gmd.kode_gmd) +
                         "\n                            "
                     )
@@ -41712,7 +41759,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      "\n                             " +
+                      "\n                                " +
                         _vm._s(gmd.nama_gmd) +
                         "\n                            "
                     )
