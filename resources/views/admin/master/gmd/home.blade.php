@@ -9,5 +9,5 @@
         {{-- {{ $gmd }} --}}
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <table-gmd-component fetch="{{ route('gmd.fetch') }}" route="{{ route('gmd.create') }}"></table-gmd-component>
+        <table-gmd-component fetch="{{ route('gmd.fetch') }}" index="{{ route('gmd.index') }}" route="{{ route('gmd.create') }}"></table-gmd-component>
             @endsection

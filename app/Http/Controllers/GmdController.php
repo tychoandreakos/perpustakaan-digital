@@ -97,5 +97,7 @@ class GmdController extends Controller
     public function destroy(Gmd $gmd)
     {
         $gmd->delete();
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }

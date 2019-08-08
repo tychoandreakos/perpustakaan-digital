@@ -2126,7 +2126,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['route', 'fetch'],
+  props: ['route', 'fetch', 'index'],
   data: function data() {
     return {
       data: {}
@@ -2136,7 +2136,7 @@ __webpack_require__.r(__webpack_exports__);
     edit: function edit(val) {
       return "gmd/".concat(val, "/edit");
     },
-    deleted: function deleted() {
+    deleted: function deleted(val) {
       var _this = this;
 
       this.$swal({
@@ -2149,8 +2149,23 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, hapus!'
       }).then(function (result) {
         if (result.value) {
-          // axios.
-          _this.$swal('Deleted!', 'Your file has been deleted.', 'success');
+          axios.post('/pustakawan/gmd/' + val, {
+            _method: 'DELETE'
+          }).then(function (res) {
+            _this.$swal({
+              position: 'top-end',
+              type: 'success',
+              title: res.data.message.toUpperCase(),
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            setTimeout(function () {
+              window.location = _this.index;
+            }, 1800);
+          })["catch"](function (err) {
+            return console.log(err);
+          });
         }
       });
     }
@@ -41742,7 +41757,11 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-danger btn-sm",
-                          on: { click: _vm.deleted }
+                          on: {
+                            click: function($event) {
+                              return _vm.deleted(gmd.id)
+                            }
+                          }
                         },
                         [_vm._v("Hapus")]
                       )
@@ -41788,7 +41807,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col" }, [
-      _c("h3", { staticClass: "mb-0" }, [_vm._v("GMD")])
+      _c("h3", { staticClass: "mb-0" }, [_vm._v("Daftar GMD")])
     ])
   },
   function() {

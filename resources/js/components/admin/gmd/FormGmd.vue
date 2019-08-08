@@ -72,7 +72,7 @@
 
         props: [
             'index',
-            'fetch'
+            'fetch',
         ],
 
         computed: {

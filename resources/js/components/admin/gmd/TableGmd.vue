@@ -5,7 +5,7 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="mb-0">GMD</h3>
+                            <h3 class="mb-0">Daftar GMD</h3>
                         </div>
                         <div class="col text-right">
                             <a :href="this.route" class="btn btn-sm btn-primary">Tambah GMD</a>
@@ -27,7 +27,7 @@
                             <tr v-for="gmd in data" :key="gmd.id">
                                 <th scope="row" style="width: 19%">
                                     <a :href="edit(gmd.id)" class="btn btn-primary btn-sm">Edit</a>
-                                    <button @click="deleted" class="btn btn-danger btn-sm">Hapus</button>
+                                    <button @click="deleted(gmd.id)" class="btn btn-danger btn-sm">Hapus</button>
                                 </th>
                                 <td>
                                     {{ gmd.kode_gmd }}
@@ -49,7 +49,7 @@
 
 <script>
     export default {
-        props: ['route', 'fetch'],
+        props: ['route', 'fetch', 'index'],
         data() {
             return {
                 data: {},
@@ -61,7 +61,7 @@
                 return `gmd/${val}/edit`;
             },
 
-            deleted() {
+            deleted(val) {
                 this.$swal({
                     title: 'Hapus Data?',
                     text: "Data yang sudah dihapus tidak dapat dikembalikan",
@@ -72,12 +72,23 @@
                     confirmButtonText: 'Yes, hapus!'
                 }).then((result) => {
                     if (result.value) {
-                        // axios.
-                        this.$swal(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
+                        axios.post('/pustakawan/gmd/' + val, {
+                                _method: 'DELETE'
+                            })
+                            .then(res => {
+                                this.$swal({
+                                    position: 'top-end',
+                                    type: 'success',
+                                    title: res.data.message.toUpperCase(),
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+
+                                setTimeout(() => {
+                                    window.location = this.index;
+                                }, 1800);
+                            })
+                            .catch(err => console.log(err))
                     }
                 });
             }
