@@ -31,23 +31,26 @@
                                     <button class="btn btn-danger btn-sm">Hapus</button>
                                 </th>
                                 <td>
-                                   <div class="row">
-                                       <div class="col col-lg-12">
-                                           {{ data.judul }}
-                                       </div>
-                                       <div class="mt-2" v-for="buku_transaksi in data.buku_transaksi" :key="buku_transaksi.id">
-                                           <span class="ml-2 badge badge-pill badge-success">{{ buku_transaksi.pengarang.nama_pengarang }} </span>
-                                       </div>
-                                   </div>
+                                    <div class="row">
+                                        <div class="col col-lg-12">
+                                            {{ data.judul }}
+                                        </div>
+                                        <div class="mt-2" v-for="buku_transaksi in data.buku_transaksi"
+                                            :key="buku_transaksi.id">
+                                            <span
+                                                class="ml-2 badge badge-pill badge-success">{{ buku_transaksi.pengarang.nama_pengarang }}
+                                            </span>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
-                                   {{ data.biblio_count }}
+                                    {{ data.biblio_count }}
                                 </td>
                                 <td>
-                                  {{ data.isbn_isnn }}
+                                    {{ data.isbn_isnn }}
                                 </td>
                                 <td>
-                                  {{ data.updated_at }}
+                                    {{ data.updated_at }}
                                 </td>
                             </tr>
                         </tbody>
@@ -72,7 +75,7 @@
             edit(val) {
                 return `bibliobigrafi/${val}/edit`;
             },
-            
+
             deleted(val) {
                 this.$swal({
                     title: 'Hapus Data?',

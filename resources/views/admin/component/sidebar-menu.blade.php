@@ -12,7 +12,7 @@
             <div class="dropdown-menu" style="left: 15px;">
                 <a href="{{ route('bibliobigrafi.index') }}" class="dropdown-item">Daftar Bibliobigrafi</a>
                 <a href="{{ route('bibliobigrafi.create') }}" class="dropdown-item">Tambah Bibliobigrafi</a>
-                <a href="#" class="dropdown-item">Daftar Eksemplar</a>
+                <a href="{{ route('transaksi-eksemplar.index') }}" class="dropdown-item">Daftar Eksemplar</a>
                 <a href="#" class="dropdown-item">Eksemplar Keluar</a>
                 <a href="#" class="dropdown-item">Cetak Label</a>
                 <a href="#" class="dropdown-item">Eksport Data</a>

@@ -75,6 +75,10 @@ Vue.component('form-bibliobigrafi-component', require('./components/admin/biblio
 Vue.component('table-tipe-anggota-component', require('./components/admin/tipe-anggota/Table.vue').default);
 Vue.component('form-tipe-anggota-component', require('./components/admin/tipe-anggota/Form.vue').default);
 
+// eksemplar
+Vue.component('table-transaksi-eksemplar-component', require('./components/admin/eksemplar/Table.vue').default);
+Vue.component('form-transaksi-eksemplar-component', require('./components/admin/eksemplar/Form.vue').default);
+
 
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));

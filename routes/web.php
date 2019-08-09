@@ -42,6 +42,7 @@ Route::resource('eksemplar', 'EksemplarPolaController');
 
 // transaksi file
 Route::resource('bibliobigrafi', 'BibliobigrafiController');
+Route::resource('transaksi-eksemplar', 'EksemplarTransaksiController');
 
 // fetch
 Route::get('gmd-fetch', 'GmdController@fetch')->name('gmd.fetch');
@@ -53,6 +54,11 @@ Route::get('klasifikasi-fetch', 'KlasifikasiController@fetch')->name('klasifikas
 Route::get('bahasa-fetch', 'BahasaController@fetch')->name('bahasa.fetch');
 Route::get('tipe-anggota-fetch', 'TipeAnggotaController@fetch')->name('tipe-anggota.fetch');
 Route::get('bibliobigrafi-fetch', 'BibliobigrafiController@fetch')->name('bibliobigrafi.fetch');
+Route::get('eksemplar-fetch', 'EksemplarTransaksiController@fetch')->name('transaksi-eksemplar.fetch');
+
+
+
+// Bibliobigrafi
 Route::get('bibliobigrafi-fetch-pengarang', 'BibliobigrafiController@pengarang')->name('bibliobigrafi.pengarang');
 Route::get('bibliobigrafi-fetch-penerbit', 'BibliobigrafiController@penerbit')->name('bibliobigrafi.penerbit');
 Route::get('bibliobigrafi-fetch-kota', 'BibliobigrafiController@kota')->name('bibliobigrafi.kota');
@@ -72,6 +78,7 @@ Route::get('klasifikasi-search', 'KlasifikasiController@search');
 Route::get('bahasa-search', 'BahasaController@search');
 Route::get('tipe-anggota-search', 'TipeAnggotaController@search');
 Route::get('bibliobigrafi-search', 'BibliobigrafiController@search');
+Route::get('eksemplar-search', 'EksemplarTransaksiController@search');
 
 
 });
