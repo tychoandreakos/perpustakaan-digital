@@ -50,6 +50,7 @@ Route::get('pengarang-fetch', 'PengarangController@fetch')->name('pengarang.fetc
 Route::get('kota-fetch', 'KotaController@fetch')->name('kota.fetch');
 Route::get('klasifikasi-fetch', 'KlasifikasiController@fetch')->name('klasifikasi.fetch');
 Route::get('bahasa-fetch', 'BahasaController@fetch')->name('bahasa.fetch');
+Route::get('tipe-anggota-fetch', 'TipeAnggotaController@fetch')->name('tipe-anggota.fetch');
 
 
 // search
@@ -60,6 +61,7 @@ Route::get('pengarang-search', 'PengarangController@search');
 Route::get('kota-search', 'KotaController@search');
 Route::get('klasifikasi-search', 'KlasifikasiController@search');
 Route::get('bahasa-search', 'BahasaController@search');
+Route::get('tipe-anggota-search', 'TipeAnggotaController@search');
 
 
 });

@@ -5,10 +5,11 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="mb-0">Daftar Klasifikasi</h3>
+                            <h3 class="mb-0">Daftar Tipe Anggota</h3>
                         </div>
                         <div class="col text-right">
-                            <a :href="this.route" class="btn btn-sm btn-primary"><i class="ni ni-fat-add text-white"></i> Tambah Klasifikasi</a>
+                            <a :href="this.route" class="btn btn-sm btn-primary"><i
+                                    class="ni ni-fat-add text-white"></i> Tambah Tipe Anggota</a>
                         </div>
                     </div>
                 </div>
@@ -18,18 +19,36 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Aksi</th>
-                                <th scope="col">Tipe Klasifikasi</th>
+                                <th scope="col">Tipe Anggota</th>
+                                <th scope="col">Jumlah Pinjaman</th>
+                                <th scope="col">Masa Berlaku</th>
+                                <th scope="col">Batas Perpanjangan</th>
+                                <th scope="col">Denda</th>
                                 <th scope="col">Perubahan Terakhir</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="item in datas.data" :key="item.id">
                                 <th scope="row" style="width: 19%">
-                                    <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i class="ni ni-check-bold text-white"></i> Edit</a>
-                                    <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i class="ni ni-fat-remove text-white"></i> Hapus</button>
+                                    <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
+                                            class="ni ni-check-bold text-white"></i> Edit</a>
+                                    <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
+                                            class="ni ni-fat-remove text-white"></i> Hapus</button>
                                 </th>
                                 <td>
-                                    {{ item.tipe_klasifikasi | capitalize}}
+                                    {{ item.tipe_anggota | capitalize }}
+                                </td>
+                                <td>
+                                    {{ item.jumlah_pinjaman }} Buku
+                                </td>
+                                <td>
+                                    {{ item.masa_berlaku_anggota }} Tahun
+                                </td>
+                                <td>
+                                    {{ item.batas_perpanjangan_anggota }} Kali
+                                </td>
+                                <td>
+                                    RP. {{ item.denda }}
                                 </td>
                                 <td>
                                     {{ item.updated_at }}
@@ -58,9 +77,9 @@
 
         methods: {
             edit(val) {
-                return `klasifikasi/${val}/edit`;
+                return `tipe-anggota/${val}/edit`;
             },
-            
+
             deleted(val) {
                 this.$swal({
                     title: 'Hapus Data?',
@@ -72,7 +91,7 @@
                     confirmButtonText: 'Yes, hapus!'
                 }).then((result) => {
                     if (result.value) {
-                        axios.post('/pustakawan/klasifikasi/' + val, {
+                        axios.post('/pustakawan/tipe-anggota/' + val, {
                                 _method: 'DELETE'
                             })
                             .then(res => {
@@ -104,7 +123,7 @@
 
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
-                axios.get('/pustakawan/klasifikasi-search?q=' + query)
+                axios.get('/pustakawan/tipe-anggota-search?q=' + query)
                     .then(res => {
                         // console.log(res)
                         this.datas = res.data
@@ -113,6 +132,8 @@
             })
 
             this.getResults();
+
+
         },
     }
 

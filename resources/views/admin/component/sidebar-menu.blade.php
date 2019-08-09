@@ -41,7 +41,7 @@
             <div class="dropdown-menu" style="left: 15px;">
                 <a href="#" class="dropdown-item">Lihat Daftar Anggota</a>
                 <a href="#" class="dropdown-item">Tambah Anggota</a>
-                <a href="#" class="dropdown-item">Tipe Keanggotaan</a>
+                <a href="{{ route('tipe-anggota.index') }}" class="dropdown-item">Tipe Keanggotaan</a>
                 <a href="#" class="dropdown-item">Cetak Kartu Anggota</a>
                 <a href="#" class="dropdown-item">Eksport Data</a>
                 <a href="#" class="dropdown-item">Import Data</a>

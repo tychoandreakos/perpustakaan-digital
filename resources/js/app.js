@@ -67,6 +67,10 @@ Vue.component('form-klasifikasi-component', require('./components/admin/klasifik
 Vue.component('table-bahasa-component', require('./components/admin/bahasa/Table.vue').default);
 Vue.component('form-bahasa-component', require('./components/admin/bahasa/Form.vue').default);
 
+// tipe-anggota
+Vue.component('table-tipe-anggota-component', require('./components/admin/tipe-anggota/Table.vue').default);
+Vue.component('form-tipe-anggota-component', require('./components/admin/tipe-anggota/Form.vue').default);
+
 
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
