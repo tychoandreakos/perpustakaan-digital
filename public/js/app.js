@@ -2448,6 +2448,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_components$props$com = {
@@ -2463,29 +2473,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      form: {
-        judul: this.fetch.judul || '',
-        _method: this.fetch.judul ? 'PUT' : 'POST'
-      },
       loading: false,
       err: {},
       isDisabled: false,
       isTouched: false,
-      value: [],
       options: [],
-      valuePenerbit: [],
       penerbitData: [],
-      valueKota: [],
       kotaData: [],
-      valueGmd: [],
       gmdData: [],
-      valueKlasifikasi: [],
       klasifikasiData: [],
-      valueLokasi: [],
       lokasiData: [],
-      valueBahasa: [],
-      bahasaData: [] // options: []
-
+      bahasaData: [],
+      klasifikasi_id: [],
+      pengarang_id: [],
+      penerbit_id: [],
+      kota_id: [],
+      gmd_id: [],
+      bahasa_id: [],
+      lokasi_id: [],
+      form: {
+        judul: this.fetch.judul || '',
+        edisi: this.fetch.edisi || '',
+        tahun_terbit: this.fetch.tahun_terbit || '',
+        isbn_isnn: this.fetch.isbn_isnn || '',
+        deskripsi_fisik: this.fetch.deskripsi_fisik || '',
+        judul_seri: this.fetch.judul_seri || '',
+        catatan: this.fetch.catatan || '',
+        slug: this.fetch.slug || '',
+        pdf: this.fetch.pdf || '',
+        gambar_sampul: this.fetch.gambar_sampul || '',
+        klasifikasi_id: this.klasifikasi2,
+        pengarang_id: this.pengarang2,
+        penerbit_id: this.penerbit2,
+        kota_id: this.kota2,
+        lokasi_id: this.lokasi2,
+        bahasa_id: this.bahasa2,
+        gmd_id: this.gmd2,
+        _method: this.fetch.judul ? 'PUT' : 'POST'
+      }
     };
   },
   created: function created() {
@@ -2500,6 +2525,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }, _defineProperty(_components$props$com, "computed", {
   isInvalid: function isInvalid() {
     return this.isTouched && this.value.length === 0;
+  },
+  bahasa2: function bahasa2() {
+    return this.form.bahasa_id = this.bahasa_id.id;
+  },
+  pengarang2: function pengarang2() {
+    return this.form.pengarang_id = this.pengarang_id.map(function (pengarang) {
+      return pengarang.id;
+    });
+  },
+  gmd2: function gmd2() {
+    return this.form.gmd_id = this.gmd_id.id;
+  },
+  kota2: function kota2() {
+    return this.form.kota_id = this.kota_id.id;
+  },
+  klasifikasi2: function klasifikasi2() {
+    return this.form.klasifikasi_id = this.klasifikasi_id.id;
+  },
+  penerbit2: function penerbit2() {
+    return this.form.penerbit_id = this.penerbit_id.id;
+  },
+  lokasi2: function lokasi2() {
+    return this.form.lokasi_id = this.lokasi_id.id;
   }
 }), _defineProperty(_components$props$com, "methods", {
   onChange: function onChange(value) {
@@ -45899,11 +45947,11 @@ var render = function() {
                             label: "nama_pengarang"
                           },
                           model: {
-                            value: _vm.value,
+                            value: _vm.pengarang_id,
                             callback: function($$v) {
-                              _vm.value = $$v
+                              _vm.pengarang_id = $$v
                             },
-                            expression: "value"
+                            expression: "pengarang_id"
                           }
                         },
                         [
@@ -45920,7 +45968,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.value))])
+                        _c("code", [_vm._v(_vm._s(_vm.pengarang_id))])
                       ]),
                       _vm._v(" "),
                       _c(
@@ -46135,7 +46183,6 @@ var render = function() {
                         {
                           attrs: {
                             options: _vm.penerbitData,
-                            multiple: true,
                             "group-label": "language",
                             "group-select": true,
                             placeholder: "Type to search",
@@ -46143,11 +46190,11 @@ var render = function() {
                             label: "nama_penerbit"
                           },
                           model: {
-                            value: _vm.valuePenerbit,
+                            value: _vm.penerbit_id,
                             callback: function($$v) {
-                              _vm.valuePenerbit = $$v
+                              _vm.penerbit_id = $$v
                             },
-                            expression: "valuePenerbit"
+                            expression: "penerbit_id"
                           }
                         },
                         [
@@ -46164,7 +46211,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.valuePenerbit))])
+                        _c("code", [_vm._v(_vm._s(_vm.penerbit_id))])
                       ]),
                       _vm._v(" "),
                       _c(
@@ -46271,7 +46318,6 @@ var render = function() {
                         {
                           attrs: {
                             options: _vm.kotaData,
-                            multiple: true,
                             "group-label": "language",
                             "group-select": true,
                             placeholder: "Type to search",
@@ -46279,11 +46325,11 @@ var render = function() {
                             label: "nama_kota"
                           },
                           model: {
-                            value: _vm.valueKota,
+                            value: _vm.kota_id,
                             callback: function($$v) {
-                              _vm.valueKota = $$v
+                              _vm.kota_id = $$v
                             },
-                            expression: "valueKota"
+                            expression: "kota_id"
                           }
                         },
                         [
@@ -46300,7 +46346,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.valueKota))])
+                        _c("code", [_vm._v(_vm._s(_vm.kota_id))])
                       ]),
                       _vm._v(" "),
                       _c(
@@ -46352,7 +46398,6 @@ var render = function() {
                         {
                           attrs: {
                             options: _vm.gmdData,
-                            multiple: true,
                             "group-label": "language",
                             "group-select": true,
                             placeholder: "Type to search",
@@ -46360,11 +46405,11 @@ var render = function() {
                             label: "nama_gmd"
                           },
                           model: {
-                            value: _vm.valueGmd,
+                            value: _vm.gmd_id,
                             callback: function($$v) {
-                              _vm.valueGmd = $$v
+                              _vm.gmd_id = $$v
                             },
-                            expression: "valueGmd"
+                            expression: "gmd_id"
                           }
                         },
                         [
@@ -46381,7 +46426,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.valueGmd))])
+                        _c("code", [_vm._v(_vm._s(_vm.gmd_id))])
                       ]),
                       _vm._v(" "),
                       _c(
@@ -46484,7 +46529,6 @@ var render = function() {
                         {
                           attrs: {
                             options: _vm.klasifikasiData,
-                            multiple: true,
                             "group-label": "language",
                             "group-select": true,
                             placeholder: "Type to search",
@@ -46492,11 +46536,11 @@ var render = function() {
                             label: "tipe_klasifikasi"
                           },
                           model: {
-                            value: _vm.valueKlasifikasi,
+                            value: _vm.klasifikasi_id,
                             callback: function($$v) {
-                              _vm.valueKlasifikasi = $$v
+                              _vm.klasifikasi_id = $$v
                             },
-                            expression: "valueKlasifikasi"
+                            expression: "klasifikasi_id"
                           }
                         },
                         [
@@ -46513,7 +46557,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.valueKlasifikasi))])
+                        _c("code", [_vm._v(_vm._s(_vm.klasifikasi_id))])
                       ]),
                       _vm._v(" "),
                       _c(
@@ -46563,7 +46607,6 @@ var render = function() {
                         {
                           attrs: {
                             options: _vm.lokasiData,
-                            multiple: true,
                             "group-label": "language",
                             "group-select": true,
                             placeholder: "Type to search",
@@ -46571,11 +46614,11 @@ var render = function() {
                             label: "nama_lokasi"
                           },
                           model: {
-                            value: _vm.valueLokasi,
+                            value: _vm.lokasi,
                             callback: function($$v) {
-                              _vm.valueLokasi = $$v
+                              _vm.lokasi = $$v
                             },
-                            expression: "valueLokasi"
+                            expression: "lokasi"
                           }
                         },
                         [
@@ -46592,7 +46635,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.valueLokasi))])
+                        _c("code", [_vm._v(_vm._s(_vm.lokasi))])
                       ]),
                       _vm._v(" "),
                       _c(
@@ -46640,7 +46683,6 @@ var render = function() {
                         {
                           attrs: {
                             options: _vm.bahasaData,
-                            multiple: true,
                             "group-label": "language",
                             "group-select": true,
                             placeholder: "Type to search",
@@ -46648,11 +46690,11 @@ var render = function() {
                             label: "jenis_bahasa"
                           },
                           model: {
-                            value: _vm.valueBahasa,
+                            value: _vm.bahasa_id,
                             callback: function($$v) {
-                              _vm.valueBahasa = $$v
+                              _vm.bahasa_id = $$v
                             },
-                            expression: "valueBahasa"
+                            expression: "bahasa_id"
                           }
                         },
                         [
@@ -46669,7 +46711,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.valueBahasa))])
+                        _c("code", [_vm._v(_vm._s(_vm.bahasa_id))])
                       ]),
                       _vm._v(" "),
                       _c(
@@ -46753,6 +46795,153 @@ var render = function() {
                 )
               ])
             ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.bahasa2,
+                  expression: "bahasa2"
+                }
+              ],
+              attrs: { type: "text", hidden: "" },
+              domProps: { value: _vm.bahasa2 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.bahasa2 = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.penerbit2,
+                  expression: "penerbit2"
+                }
+              ],
+              attrs: { type: "text", hidden: "" },
+              domProps: { value: _vm.penerbit2 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.penerbit2 = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.pengarang2,
+                  expression: "pengarang2"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.pengarang2 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.pengarang2 = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.kota2,
+                  expression: "kota2"
+                }
+              ],
+              attrs: { type: "text", hidden: "" },
+              domProps: { value: _vm.kota2 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.kota2 = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.klasifikasi2,
+                  expression: "klasifikasi2"
+                }
+              ],
+              attrs: { type: "text", hidden: "" },
+              domProps: { value: _vm.klasifikasi2 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.klasifikasi2 = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.lokasi2,
+                  expression: "lokasi2"
+                }
+              ],
+              attrs: { type: "text", hidden: "" },
+              domProps: { value: _vm.lokasi2 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.lokasi2 = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.gmd2,
+                  expression: "gmd2"
+                }
+              ],
+              attrs: { type: "text", hidden: "" },
+              domProps: { value: _vm.gmd2 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.gmd2 = $event.target.value
+                }
+              }
+            }),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-lg-12" }, [
@@ -46879,7 +47068,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "custom-file" }, [
       _c("input", {
         staticClass: "custom-file-input",
-        attrs: { type: "file", id: "validatedCustomFile", required: "" }
+        attrs: { type: "file", id: "validatedCustomFile" }
       }),
       _vm._v(" "),
       _c(
@@ -46903,7 +47092,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "custom-file" }, [
       _c("input", {
         staticClass: "custom-file-input",
-        attrs: { type: "file", id: "validatedCustomFile", required: "" }
+        attrs: { type: "file", id: "validatedCustomFile" }
       }),
       _vm._v(" "),
       _c(

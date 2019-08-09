@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Bibliobigrafi extends Model
 {
     protected $table = 'bibliobigrafi';
-    protected $guarded = [];
+    protected $fillable = [
+        'buku_id',
+        'klasifikasi_id',
+        'gmd_id',
+        'pola_eksemplar'
+    ];
 
     public function buku()
     {

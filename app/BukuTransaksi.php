@@ -7,7 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class BukuTransaksi extends Model
 {
     protected $table = 'buku_transaksi';
-    protected $guarded = [];
+    protected $fillable = [
+        'buku_id',
+        'pengarang_id',
+        'kota_id',
+        'bahasa_id',
+        'penerbit_id',
+        // 'lokasi_id'
+    ];
 
     public function buku()
     {

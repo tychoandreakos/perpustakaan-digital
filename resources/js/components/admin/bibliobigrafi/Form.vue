@@ -34,12 +34,12 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="judul">Pengarang</label>
-                                    <multiselect v-model="value" :options="options" :multiple="true"
+                                    <multiselect v-model="pengarang_id" :options="options" :multiple="true"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="nama_pengarang" label="nama_pengarang"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ value  }}</code></pre>
+                                    <pre class="language-json"><code>{{ pengarang_id  }}</code></pre>
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         pengarang</label>
                                 </div>
@@ -92,12 +92,12 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="penerbit">Penerbit</label>
-                                    <multiselect v-model="valuePenerbit" :options="penerbitData" :multiple="true"
+                                    <multiselect v-model="penerbit_id" :options="penerbitData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="nama_penerbit" label="nama_penerbit"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ valuePenerbit  }}</code></pre>
+                                    <pre class="language-json"><code>{{ penerbit_id  }}</code></pre>
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         penerbit</label>
                                 </div>
@@ -122,12 +122,12 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="tempat">Tempat Terbit</label>
-                                    <multiselect v-model="valueKota" :options="kotaData" :multiple="true"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
-                                        track-by="nama_kota" label="nama_kota"><span slot="noResult">Oops! No
+                                    <multiselect v-model="kota_id" :options="kotaData" group-label="language"
+                                        :group-select="true" placeholder="Type to search" track-by="nama_kota"
+                                        label="nama_kota"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ valueKota  }}</code></pre>
+                                    <pre class="language-json"><code>{{ kota_id  }}</code></pre>
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         kota</label>
                                 </div>
@@ -153,12 +153,12 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="gmd">GMD</label>
-                                    <multiselect v-model="valueGmd" :options="gmdData" :multiple="true"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
-                                        track-by="nama_gmd" label="nama_gmd"><span slot="noResult">Oops! No
+                                    <multiselect v-model="gmd_id" :options="gmdData" group-label="language"
+                                        :group-select="true" placeholder="Type to search" track-by="nama_gmd"
+                                        label="nama_gmd"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ valueGmd  }}</code></pre>
+                                    <pre class="language-json"><code>{{ gmd_id  }}</code></pre>
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         gmd</label>
                                 </div>
@@ -182,13 +182,13 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="klasifikasi">Klasifikasi</label>
-                                    <multiselect v-model="valueKlasifikasi" :options="klasifikasiData" :multiple="true"
+                                    <multiselect v-model="klasifikasi_id" :options="klasifikasiData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="tipe_klasifikasi" label="tipe_klasifikasi"><span slot="noResult">Oops!
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ valueKlasifikasi  }}</code></pre>
+                                    <pre class="language-json"><code>{{ klasifikasi_id  }}</code></pre>
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         klasfikasi</label>
                                 </div>
@@ -201,13 +201,13 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="lokasi">Lokasi Rak</label>
-                                    <multiselect v-model="valueLokasi" :options="lokasiData" :multiple="true"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
-                                        track-by="kode_lokasi" label="nama_lokasi"><span slot="noResult">Oops!
+                                    <multiselect v-model="lokasi" :options="lokasiData" group-label="language"
+                                        :group-select="true" placeholder="Type to search" track-by="kode_lokasi"
+                                        label="nama_lokasi"><span slot="noResult">Oops!
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ valueLokasi  }}</code></pre>
+                                    <pre class="language-json"><code>{{ lokasi  }}</code></pre>
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         lokasi</label>
                                 </div>
@@ -218,13 +218,13 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="bahasa">Bahasa</label>
-                                    <multiselect v-model="valueBahasa" :options="bahasaData" :multiple="true"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
-                                        track-by="jenis_bahasa" label="jenis_bahasa"><span slot="noResult">Oops!
+                                    <multiselect v-model="bahasa_id" :options="bahasaData" group-label="language"
+                                        :group-select="true" placeholder="Type to search" track-by="jenis_bahasa"
+                                        label="jenis_bahasa"><span slot="noResult">Oops!
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ valueBahasa  }}</code></pre>
+                                    <pre class="language-json"><code>{{ bahasa_id  }}</code></pre>
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         bahasa</label>
                                 </div>
@@ -246,12 +246,20 @@
                         </div>
                     </div>
 
+                      <input type="text" hidden v-model="bahasa2">
+                      <input type="text" hidden v-model="penerbit2">
+                      <input type="text" v-model="pengarang2">
+                      <input type="text" hidden v-model="kota2">
+                      <input type="text" hidden v-model="klasifikasi2">
+                      <input type="text" hidden v-model="lokasi2">
+                      <input type="text" hidden v-model="gmd2">
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload Cover</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                    <input type="file" class="custom-file-input" id="validatedCustomFile">
                                     <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                                 </div>
@@ -266,8 +274,8 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload PDF</label>
-                               <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="validatedCustomFile">
                                     <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                                 </div>
@@ -279,6 +287,8 @@
                     </div>
 
                 </div>
+
+              
 
                 <div class="float-right">
 
@@ -332,32 +342,47 @@
 
         data() {
             return {
-                form: {
-                    judul: this.fetch.judul || '',
-                    _method: (this.fetch.judul ? 'PUT' : 'POST')
-                },
-
                 loading: false,
 
                 err: {},
                 isDisabled: false,
                 isTouched: false,
-                value: [],
                 options: [],
-                valuePenerbit: [],
                 penerbitData: [],
-                valueKota: [],
                 kotaData: [],
-                valueGmd: [],
                 gmdData: [],
-                valueKlasifikasi: [],
                 klasifikasiData: [],
-                valueLokasi: [],
                 lokasiData: [],
-                valueBahasa: [],
                 bahasaData: [],
+                klasifikasi_id: [],
+                pengarang_id: [],
+                penerbit_id: [],
+                kota_id: [],
+                gmd_id: [],
+                bahasa_id: [],
+                lokasi_id: [],
 
-                // options: []
+                form: {
+                    judul: this.fetch.judul || '',
+                    edisi: this.fetch.edisi || '',
+                    tahun_terbit: this.fetch.tahun_terbit || '',
+                    isbn_isnn: this.fetch.isbn_isnn || '',
+                    deskripsi_fisik: this.fetch.deskripsi_fisik || '',
+                    judul_seri: this.fetch.judul_seri || '',
+                    catatan: this.fetch.catatan || '',
+                    slug: this.fetch.slug || '',
+                    pdf: this.fetch.pdf || '',
+                    gambar_sampul: this.fetch.gambar_sampul || '',
+                    klasifikasi_id: this.klasifikasi2,
+                    pengarang_id: this.pengarang2,
+                    penerbit_id: this.penerbit2,
+                    kota_id: this.kota2,
+                    lokasi_id: this.lokasi2,
+                    bahasa_id: this.bahasa2,
+                    gmd_id: this.gmd2,
+                    _method: (this.fetch.judul ? 'PUT' : 'POST')
+                },
+
             }
         },
 
@@ -374,6 +399,34 @@
         computed: {
             isInvalid() {
                 return this.isTouched && this.value.length === 0
+            },
+
+            bahasa2() {
+                return this.form.bahasa_id = this.bahasa_id.id
+            },
+
+            pengarang2() {
+              return this.form.pengarang_id = this.pengarang_id.map(pengarang => pengarang.id);
+            },
+
+            gmd2() {
+                return this.form.gmd_id = this.gmd_id.id
+            },
+
+            kota2() {
+                return this.form.kota_id = this.kota_id.id
+            },
+
+            klasifikasi2() {
+                return this.form.klasifikasi_id = this.klasifikasi_id.id
+            },
+
+            penerbit2() {
+                return this.form.penerbit_id = this.penerbit_id.id
+            },
+
+            lokasi2() {
+                return this.form.lokasi_id = this.lokasi_id.id
             }
         },
 

@@ -42,20 +42,25 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
+    //    $request->slug = str_slug($request->judul);
         $validatedData = $request->validate([
             'judul' => 'required',
             'edisi' => 'nullable',
             'isbn_isnn' => 'required',
-            'deksripsi_fisik' => 'required',
+            'deskripsi_fisik' => 'required',
             'tahun_terbit' => 'required',
             'judul_seri' => 'nullable',
             'catatan' => 'nullable',
-            'slug' => 'required',
+            'slug' => 'nullable',
             'pdf' => 'nullable',
             'gambar_sampul' => 'nullable'
         ]);
 
-        Buku::create($request->all());
+        $requestData = $request->all();
+        $requestData['slug'] = str_slug($request->judul);
+
+
+        Buku::create($requestData);
     }
 
     /**

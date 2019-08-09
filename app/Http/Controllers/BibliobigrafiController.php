@@ -11,6 +11,10 @@ use App\Gmd;
 use App\Klasifikasi;
 use App\LokasiRak;
 use App\Bahasa;
+use App\Buku;
+use Illuminate\Support\Facades\Response;
+use App\BukuTransaksi;
+use Illuminate\Support\Facades\Input;
 
 class BibliobigrafiController extends Controller
 {
@@ -78,7 +82,41 @@ class BibliobigrafiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $validatedData = $request->validate([
+            'judul' => 'required',
+            'edisi' => 'nullable',
+            'isbn_isnn' => 'required',
+            'deskripsi_fisik' => 'required',
+            'tahun_terbit' => 'required',
+            'judul_seri' => 'nullable',
+            'catatan' => 'nullable',
+            'slug' => 'nullable',
+            'pdf' => 'nullable',
+            'gambar_sampul' => 'nullable'
+        ]);
+
+        
+        $requestData = $request->all();
+        $requestData['slug'] = str_slug($request->judul);
+        $buku = Buku::create($requestData);
+
+       foreach ($request->pengarang_id as $pengarang) {
+            $requestTrans = $request->all();
+            $requestTrans['buku_id'] = $buku->id;
+            $requestTrans['pengarang_id'] = $pengarang;   
+            BukuTransaksi::create($requestTrans);
+       }
+        
+        
+        $requestBilio = $request->all();
+        $requestBilio['buku_id'] = $buku->id;
+        $requestBilio['klasifikasi_id'] = $request->klasifikasi_id;
+        $requestBilio['gmd_id'] = $request->gmd_id;
+        $requestBilio['pola_eksemplar'] = 'B000';
+        Bibliobigrafi::create($requestBilio);
+
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**
