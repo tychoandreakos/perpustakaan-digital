@@ -9,5 +9,5 @@
 
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <form-anggota-component fetch="{{ route('anggota.store') }}" index="{{ route('anggota.index') }}"></form-anggota-component>
+        <form-anggota-component fetch="{{ route('anggota.store') }}" tipe="{{ route('tipe-anggota.fetch') }}" index="{{ route('anggota.index') }}"></form-anggota-component>
             @endsection

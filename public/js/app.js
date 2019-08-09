@@ -2051,6 +2051,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2058,10 +2064,10 @@ __webpack_require__.r(__webpack_exports__);
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"],
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
-  props: ['index', 'fetch'],
+  props: ['index', 'fetch', 'tipe'],
   computed: {
     isDisabled: function isDisabled() {
-      return this.form.jenis_bahasa.length == '' ? true : false;
+      return this.form.id.length == '' ? true : false;
     }
   },
   data: function data() {
@@ -2069,25 +2075,49 @@ __webpack_require__.r(__webpack_exports__);
       value: '',
       jk: '',
       jkelamin: ['Pria', 'Wanita'],
-      options: ['Select option', 'options', 'selected', 'mulitple', 'label', 'searchable', 'clearOnSelect', 'hideSelected', 'maxHeight', 'allowEmpty', 'showLabels', 'onChange', 'touched'],
+      options: [],
       form: {
-        jenis_bahasa: this.fetch.jenis_bahasa || '',
-        _method: this.fetch.jenis_bahasa ? 'PUT' : 'POST'
+        id: this.fetch.id || '',
+        name: this.fetch.name || '',
+        email: this.fetch.email || '',
+        password: this.fetch.password || '',
+        password_confirmation: this.fetch.password_confirmation || '',
+        tgl_lahir: this.fetch.tgl_lahir || '',
+        tgl_registrasi: this.fetch.tgl_registrasi || '',
+        tgl_ekspired: this.fetch.tgl_ekspired || '',
+        alamat: this.fetch.alamat || '',
+        jk: this.fetch.jk || '',
+        no_telp: this.fetch.no_telp || '',
+        foto: this.fetch.foto || '',
+        tipe_anggota_id: this.fetch.tipe_anggota_id || '',
+        _method: this.fetch.name ? 'PUT' : 'POST'
       },
       loading: false,
       err: {}
     };
   },
+  created: function created() {
+    this.getTipe();
+  },
   methods: {
-    simpan: function simpan() {
+    getTipe: function getTipe() {
       var _this = this;
+
+      return axios.get(this.tipe).then(function (res) {
+        return _this.options = res.data.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    simpan: function simpan() {
+      var _this2 = this;
 
       this.loading = true;
 
-      if (!this.fetch.jenis_bahasa) {
+      if (!this.fetch.id) {
         // create
         axios.post(this.fetch, this.form).then(function (res) {
-          _this.$swal({
+          _this2.$swal({
             position: 'top-end',
             type: 'success',
             title: res.data.message.toUpperCase(),
@@ -2096,16 +2126,16 @@ __webpack_require__.r(__webpack_exports__);
           });
 
           setTimeout(function () {
-            window.location = _this.index;
+            window.location = _this2.index;
           }, 3200);
         })["catch"](function (err) {
-          _this.err = err.response.data.errors;
-          _this.loading = false;
+          _this2.err = err.response.data.errors;
+          _this2.loading = false;
         });
       } else {
         // update
         axios.post('/pustakawan/bahasa/' + this.fetch.id, this.form).then(function (res) {
-          _this.$swal({
+          _this2.$swal({
             position: 'top-end',
             type: 'success',
             title: res.data.message.toUpperCase(),
@@ -2114,11 +2144,11 @@ __webpack_require__.r(__webpack_exports__);
           });
 
           setTimeout(function () {
-            window.location = _this.index;
+            window.location = _this2.index;
           }, 2800);
         })["catch"](function (err) {
           console.log(err);
-          _this.loading = false;
+          _this2.loading = false;
         });
       }
     }
@@ -46520,7 +46550,7 @@ var render = function() {
     _c("div", { staticClass: "card-header bg-white border-0" }, [
       _c("div", { staticClass: "row align-items-center" }, [
         _c("div", { staticClass: "col-8" }, [
-          this.fetch.jenis_bahasa
+          this.fetch.id
             ? _c("h3", { staticClass: "mb-0" }, [_vm._v("Update Data Anggota")])
             : _c("h3", { staticClass: "mb-0" }, [_vm._v("Tambah Data Anggota")])
         ]),
@@ -46680,11 +46710,11 @@ var render = function() {
                     _vm._v(" "),
                     _c("multiselect", {
                       attrs: {
-                        options: _vm.options,
-                        searchable: false,
-                        "close-on-select": false,
-                        "show-labels": false,
-                        placeholder: "Pilih tipe anggota"
+                        "tag-placeholder": "Add this as new tag",
+                        placeholder: "Search or add a tag",
+                        label: "tipe_anggota",
+                        "track-by": "tipe_anggota",
+                        options: _vm.options
                       },
                       model: {
                         value: _vm.value,
@@ -47037,7 +47067,11 @@ var render = function() {
                         staticClass: "form-control-label",
                         attrs: { for: "password_confirmation" }
                       },
-                      [_vm._v("Password Confirmation")]
+                      [
+                        _vm._v(
+                          "Password\n                                Confirmation"
+                        )
+                      ]
                     ),
                     _vm._v(" "),
                     _c("input", {
@@ -47094,7 +47128,7 @@ var render = function() {
               _vm.loading
                 ? [_c("spinner-component")]
                 : [
-                    this.fetch.jenis_bahasa
+                    this.fetch.id
                       ? [
                           _c(
                             "button",

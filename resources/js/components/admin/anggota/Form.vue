@@ -3,7 +3,7 @@
         <div class="card-header bg-white border-0">
             <div class="row align-items-center">
                 <div class="col-8">
-                    <h3 class="mb-0" v-if="this.fetch.jenis_bahasa">Update Data Anggota</h3>
+                    <h3 class="mb-0" v-if="this.fetch.id">Update Data Anggota</h3>
                     <h3 class="mb-0" v-else>Tambah Data Anggota</h3>
                 </div>
                 <div class="col-4 text-right">
@@ -30,7 +30,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="name">Nama Anggota</label>
                                 <input type="text" v-model="form.name" id="name"
-                                    class="form-control form-control-alternative" name="name" placeholder="Nama Anggota">
+                                    class="form-control form-control-alternative" name="name"
+                                    placeholder="Nama Anggota">
                                 <template v-if="err.name">
                                     <span class="text-danger">{{ err.name[0] }}</span>
                                 </template>
@@ -42,9 +43,9 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="id">Tipe Anggota</label>
-                                <multiselect v-model="value" :options="options" :searchable="false"
-                                    :close-on-select="false" :show-labels="false" placeholder="Pilih tipe anggota">
-                                </multiselect>
+                                <multiselect v-model="value" tag-placeholder="Add this as new tag"
+                                    placeholder="Search or add a tag" label="tipe_anggota" track-by="tipe_anggota"
+                                    :options="options"></multiselect>
                                 <template v-if="err.id">
                                     <span class="text-danger">{{ err.id[0] }}</span>
                                 </template>
@@ -104,7 +105,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="no_telp">No Telp</label>
                                 <input type="text" v-model="form.no_telp" id="no_telp"
-                                    class="form-control form-control-alternative" name="no_telp" placeholder="Number Telp">
+                                    class="form-control form-control-alternative" name="no_telp"
+                                    placeholder="Number Telp">
                                 <template v-if="err.no_telp">
                                     <span class="text-danger">{{ err.no_telp[0] }}</span>
                                 </template>
@@ -117,7 +119,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="alamat">Alamat</label>
                                 <textarea rows="5" type="text" v-model="form.alamat" id="alamat"
-                                    class="form-control form-control-alternative" name="alamat" placeholder="Alamat"></textarea>
+                                    class="form-control form-control-alternative" name="alamat"
+                                    placeholder="Alamat"></textarea>
                                 <template v-if="err.alamat">
                                     <span class="text-danger">{{ err.alamat[0] }}</span>
                                 </template>
@@ -130,7 +133,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="password">Password</label>
                                 <input type="password" v-model="form.password" id="password"
-                                    class="form-control form-control-alternative" name="password" placeholder="***********">
+                                    class="form-control form-control-alternative" name="password"
+                                    placeholder="***********">
                                 <template v-if="err.password">
                                     <span class="text-danger">{{ err.password[0] }}</span>
                                 </template>
@@ -138,9 +142,11 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="password_confirmation">Password Confirmation</label>
+                                <label class="form-control-label" for="password_confirmation">Password
+                                    Confirmation</label>
                                 <input type="password" v-model="form.password_confirmation" id="password_confirmation"
-                                    class="form-control form-control-alternative" password_confirmation="password_confirmation" placeholder="***********">
+                                    class="form-control form-control-alternative"
+                                    password_confirmation="password_confirmation" placeholder="***********">
                                 <template v-if="err.password_confirmation">
                                     <span class="text-danger">{{ err.password_confirmation[0] }}</span>
                                 </template>
@@ -168,7 +174,7 @@
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <template v-if="this.fetch.jenis_bahasa">
+                        <template v-if="this.fetch.id">
                             <button :disabled="isDisabled" class="btn btn-success">
                                 Perbarui</button>
                         </template>
@@ -196,11 +202,12 @@
         props: [
             'index',
             'fetch',
+            'tipe'
         ],
 
         computed: {
             isDisabled() {
-                return (this.form.jenis_bahasa.length == '' ? true : false)
+                return (this.form.id.length == '' ? true : false)
             }
         },
 
@@ -210,14 +217,24 @@
                 value: '',
                 jk: '',
                 jkelamin: ['Pria', 'Wanita'],
-                options: ['Select option', 'options', 'selected', 'mulitple', 'label', 'searchable', 'clearOnSelect',
-                    'hideSelected', 'maxHeight', 'allowEmpty', 'showLabels', 'onChange', 'touched'
-                ],
+                options: [],
 
 
                 form: {
-                    jenis_bahasa: this.fetch.jenis_bahasa || '',
-                    _method: (this.fetch.jenis_bahasa ? 'PUT' : 'POST')
+                    id: this.fetch.id || '',
+                    name: this.fetch.name || '',
+                    email: this.fetch.email || '',
+                    password: this.fetch.password || '',
+                    password_confirmation: this.fetch.password_confirmation || '',
+                    tgl_lahir: this.fetch.tgl_lahir || '',
+                    tgl_registrasi: this.fetch.tgl_registrasi || '',
+                    tgl_ekspired: this.fetch.tgl_ekspired || '',
+                    alamat: this.fetch.alamat || '',
+                    jk: this.fetch.jk || '',
+                    no_telp: this.fetch.no_telp || '',
+                    foto: this.fetch.foto || '',
+                    tipe_anggota_id: this.fetch.tipe_anggota_id || '',
+                    _method: (this.fetch.name ? 'PUT' : 'POST')
                 },
 
                 loading: false,
@@ -226,11 +243,21 @@
             }
         },
 
+        created() {
+            this.getTipe();
+        },
+
         methods: {
+            getTipe() {
+                return axios.get(this.tipe)
+                    .then(res => this.options = res.data.data)
+                    .catch(err => console.log(err));
+            },
+
             simpan() {
                 this.loading = true;
 
-                if (!this.fetch.jenis_bahasa) {
+                if (!this.fetch.id) {
                     // create
                     axios.post(this.fetch, this.form)
                         .then(res => {
