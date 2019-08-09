@@ -2813,8 +2813,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['route', 'fetch', 'index']
+  props: ['route', 'fetch', 'index'],
+  data: function data() {
+    return {
+      datas: {}
+    };
+  },
+  methods: {
+    edit: function edit(val) {
+      return "bibliobigrafi/".concat(val, "/edit");
+    },
+    deleted: function deleted(val) {
+      var _this = this;
+
+      this.$swal({
+        title: 'Hapus Data?',
+        text: "Jika anda menghapus data ini, data lain kemungkinan besar akan ikut terhapus",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, hapus!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('/pustakawan/bibliobigrafi/' + val, {
+            _method: 'DELETE'
+          }).then(function (res) {
+            _this.$swal({
+              position: 'top-end',
+              type: 'success',
+              title: res.data.message.toUpperCase(),
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            setTimeout(function () {
+              window.location = _this.index;
+            }, 1800);
+          })["catch"](function (err) {
+            return console.log(err);
+          });
+        }
+      });
+    },
+    getResults: function getResults() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      return axios.get(this.fetch + '?page=' + page).then(function (res) {
+        return _this2.datas = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    Fire.$on('searching', function () {
+      var query = _this3.$parent.search;
+      axios.get('/pustakawan/bibliobigrafi-search?q=' + query).then(function (res) {
+        // console.log(res)
+        _this3.datas = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    });
+    this.getResults();
+  }
 });
 
 /***/ }),
@@ -46179,10 +46252,6 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.pengarang_id))])
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "label",
                           {
@@ -46421,10 +46490,6 @@ var render = function() {
                             )
                           ]
                         ),
-                        _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.penerbit_id))])
-                        ]),
                         _vm._v(" "),
                         _c(
                           "label",
@@ -46787,10 +46852,6 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.kota_id))])
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "label",
                           {
@@ -46866,10 +46927,6 @@ var render = function() {
                             )
                           ]
                         ),
-                        _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.gmd_id))])
-                        ]),
                         _vm._v(" "),
                         _c(
                           "label",
@@ -47002,10 +47059,6 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.klasifikasi_id))])
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "label",
                           {
@@ -47080,10 +47133,6 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.lokasi))])
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "label",
                           {
@@ -47155,10 +47204,6 @@ var render = function() {
                             )
                           ]
                         ),
-                        _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.bahasa_id))])
-                        ]),
                         _vm._v(" "),
                         _c(
                           "label",
@@ -47641,31 +47686,71 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(5, function(n) {
-                return _c("tr", { key: n }, [
+              _vm._l(_vm.datas.data, function(data) {
+                return _c("tr", { key: data.id }, [
                   _vm._m(2, true),
                   _vm._v(" "),
                   _c("td", [
-                    _vm._v(
-                      "\n                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum atque, et maxime\n                                accusantium doloremque alias! In laborum ducimus dicta fugiat.\n                            "
+                    _c(
+                      "div",
+                      { staticClass: "row" },
+                      [
+                        _c("div", { staticClass: "col col-lg-12" }, [
+                          _vm._v(
+                            "\n                                       " +
+                              _vm._s(data.judul) +
+                              "\n                                   "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(data.buku_transaksi, function(buku_transaksi) {
+                          return _c(
+                            "div",
+                            { key: buku_transaksi.id, staticClass: "mt-2" },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "ml-2 badge badge-pill badge-success"
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      buku_transaksi.pengarang.nama_pengarang
+                                    ) + " "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
                     )
                   ]),
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      "\n                                50\n                            "
+                      "\n                               " +
+                        _vm._s(data.biblio_count) +
+                        "\n                            "
                     )
                   ]),
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      "\n                                878-948-3-94049\n                            "
+                      "\n                              " +
+                        _vm._s(data.isbn_isnn) +
+                        "\n                            "
                     )
                   ]),
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      "\n                                3 hari yang lalu\n                            "
+                      "\n                              " +
+                        _vm._s(data.updated_at) +
+                        "\n                            "
                     )
                   ])
                 ])

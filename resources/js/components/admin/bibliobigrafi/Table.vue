@@ -25,23 +25,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="n in 5" :key="n">
+                            <tr v-for="data in datas.data" :key="data.id">
                                 <th scope="row" style="width: 19%">
                                     <button class="btn btn-primary btn-sm">Edit</button>
                                     <button class="btn btn-danger btn-sm">Hapus</button>
                                 </th>
                                 <td>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum atque, et maxime
-                                    accusantium doloremque alias! In laborum ducimus dicta fugiat.
+                                   <div class="row">
+                                       <div class="col col-lg-12">
+                                           {{ data.judul }}
+                                       </div>
+                                       <div class="mt-2" v-for="buku_transaksi in data.buku_transaksi" :key="buku_transaksi.id">
+                                           <span class="ml-2 badge badge-pill badge-success">{{ buku_transaksi.pengarang.nama_pengarang }} </span>
+                                       </div>
+                                   </div>
                                 </td>
                                 <td>
-                                    50
+                                   {{ data.biblio_count }}
                                 </td>
                                 <td>
-                                    878-948-3-94049
+                                  {{ data.isbn_isnn }}
                                 </td>
                                 <td>
-                                    3 hari yang lalu
+                                  {{ data.updated_at }}
                                 </td>
                             </tr>
                         </tbody>
@@ -55,10 +61,75 @@
 
 <script>
     export default {
-         props: ['route', 'fetch', 'index'],
+        props: ['route', 'fetch', 'index'],
+        data() {
+            return {
+                datas: {},
+            }
+        },
+
+        methods: {
+            edit(val) {
+                return `bibliobigrafi/${val}/edit`;
+            },
+            
+            deleted(val) {
+                this.$swal({
+                    title: 'Hapus Data?',
+                    text: "Jika anda menghapus data ini, data lain kemungkinan besar akan ikut terhapus",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, hapus!'
+                }).then((result) => {
+                    if (result.value) {
+                        axios.post('/pustakawan/bibliobigrafi/' + val, {
+                                _method: 'DELETE'
+                            })
+                            .then(res => {
+                                this.$swal({
+                                    position: 'top-end',
+                                    type: 'success',
+                                    title: res.data.message.toUpperCase(),
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+
+                                setTimeout(() => {
+                                    window.location = this.index;
+                                }, 1800);
+                            })
+                            .catch(err => console.log(err))
+                    }
+                });
+            },
+
+            getResults(page = 1) {
+                return axios.get(this.fetch + '?page=' + page)
+                    .then(res => this.datas = res.data)
+                    .catch(err => console.log(err));
+            }
+        },
+
+        created() {
+
+            Fire.$on('searching', () => {
+                let query = this.$parent.search;
+                axios.get('/pustakawan/bibliobigrafi-search?q=' + query)
+                    .then(res => {
+                        // console.log(res)
+                        this.datas = res.data
+                    })
+                    .catch(err => console.log(err))
+            })
+
+            this.getResults();
+        },
     }
 
 </script>
+
 
 <style scoped>
     .table td,

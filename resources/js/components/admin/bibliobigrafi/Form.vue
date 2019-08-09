@@ -39,7 +39,7 @@
                                         track-by="nama_pengarang" label="nama_pengarang"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ pengarang_id  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ pengarang_id  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         pengarang</label>
                                 </div>
@@ -97,7 +97,7 @@
                                         label="nama_penerbit"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ penerbit_id  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ penerbit_id  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         penerbit</label>
                                 </div>
@@ -178,7 +178,7 @@
                                         label="nama_kota"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ kota_id  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ kota_id  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         kota</label>
                                 </div>
@@ -209,7 +209,7 @@
                                         label="nama_gmd"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ gmd_id  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ gmd_id  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         gmd</label>
                                 </div>
@@ -239,7 +239,7 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ klasifikasi_id  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ klasifikasi_id  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         klasfikasi</label>
                                 </div>
@@ -258,7 +258,7 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ lokasi  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ lokasi  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         lokasi</label>
                                 </div>
@@ -275,7 +275,7 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ bahasa_id  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ bahasa_id  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         bahasa</label>
                                 </div>

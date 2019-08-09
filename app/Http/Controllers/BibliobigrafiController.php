@@ -28,6 +28,24 @@ class BibliobigrafiController extends Controller
         return view('admin.bibliobigrafi.home');
     }
 
+    public function fetch()
+    {
+        return Buku::with('buku_transaksi.pengarang')->withCount('biblio')->latest()->paginate(5);
+    }
+
+    public function search(Request $request)
+    {
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Buku::with('buku_transaksi.pengarang')->withCount('biblio')
+            ->where('judul', 'LIKE', "$search%")
+            ->latest()->paginate(5);
+        }
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
