@@ -59,6 +59,7 @@ Route::get('bibliobigrafi-fetch-gmd', 'BibliobigrafiController@gmd')->name('bibl
 Route::get('bibliobigrafi-fetch-klasifikasi', 'BibliobigrafiController@klasifikasi')->name('bibliobigrafi.klasifikasi');
 Route::get('bibliobigrafi-fetch-lokasi', 'BibliobigrafiController@lokasi')->name('bibliobigrafi.lokasi');
 Route::get('bibliobigrafi-fetch-bahasa', 'BibliobigrafiController@bahasa')->name('bibliobigrafi.bahasa');
+Route::get('bibliobigrafi-fetch-pola', 'BibliobigrafiController@pola')->name('bibliobigrafi.pola');
 
 // search
 Route::get('gmd-search', 'GmdController@search');

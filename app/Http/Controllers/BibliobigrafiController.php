@@ -12,9 +12,8 @@ use App\Klasifikasi;
 use App\LokasiRak;
 use App\Bahasa;
 use App\Buku;
-use Illuminate\Support\Facades\Response;
 use App\BukuTransaksi;
-use Illuminate\Support\Facades\Input;
+use App\EksemplarPola;
 
 class BibliobigrafiController extends Controller
 {
@@ -57,6 +56,11 @@ class BibliobigrafiController extends Controller
     public function gmd()
     {
         return Gmd::all();
+    }
+
+    public function pola()
+    {
+        return EksemplarPola::all();
     }
 
     public function bahasa()

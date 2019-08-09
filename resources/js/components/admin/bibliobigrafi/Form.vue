@@ -92,14 +92,61 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="penerbit">Penerbit</label>
-                                    <multiselect v-model="penerbit_id" :options="penerbitData"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
-                                        track-by="nama_penerbit" label="nama_penerbit"><span slot="noResult">Oops! No
+                                    <multiselect v-model="penerbit_id" :options="penerbitData" group-label="language"
+                                        :group-select="true" placeholder="Type to search" track-by="nama_penerbit"
+                                        label="nama_penerbit"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
                                     <pre class="language-json"><code>{{ penerbit_id  }}</code></pre>
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         penerbit</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div :class="{ 'invalid': isInvalid }">
+                                    <label class="form-control-label" for="klasifikasi">Pola Eksemplar Tersedia</label>
+                                    <multiselect v-model="pola_eksemplar" :options="eksemplarData"
+                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        track-by="kode_eksemplar" label="kode_eksemplar"><span slot="noResult">Oops!
+                                            No
+                                            elements found.
+                                            Consider changing the search query.</span></multiselect>
+                                    <pre class="language-json"><code>{{ pola_eksemplar  }}</code></pre>
+                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
+                                        eksemplar</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="judul_seri">Total Eksemplar</label>
+                                <input type="text" v-model="form.judul_seri" id="judul_seri"
+                                    class="form-control form-control-alternative" name="judul_seri" placeholder="Edisi">
+                                <template v-if="err.judul_seri">
+                                    <span class="text-danger">{{ err.judul_seri[0] }}</span>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div :class="{ 'invalid': isInvalid }">
+                                    <label class="form-control-label" for="klasifikasi">Reference</label>
+                                    <multiselect v-model="klasifikasi_id" :options="klasifikasiData"
+                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        track-by="tipe_klasifikasi" label="tipe_klasifikasi"><span slot="noResult">Oops!
+                                            No
+                                            elements found.
+                                            Consider changing the search query.</span></multiselect>
+                                    <pre class="language-json"><code>{{ klasifikasi_id  }}</code></pre>
+                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
+                                        klasfikasi</label>
                                 </div>
                             </div>
                         </div>
@@ -246,13 +293,17 @@
                         </div>
                     </div>
 
-                      <input type="text" hidden v-model="bahasa2">
-                      <input type="text" hidden v-model="penerbit2">
-                      <input type="text" v-model="pengarang2">
-                      <input type="text" hidden v-model="kota2">
-                      <input type="text" hidden v-model="klasifikasi2">
-                      <input type="text" hidden v-model="lokasi2">
-                      <input type="text" hidden v-model="gmd2">
+                    <input type="text" hidden v-model="bahasa2">
+                    <input type="text" hidden v-model="penerbit2">
+                    <input type="text" hidden v-model="pengarang2">
+                    <input type="text" hidden v-model="kota2">
+                    <input type="text" hidden v-model="klasifikasi2">
+                    <input type="text" hidden v-model="lokasi2">
+                    <input type="text" hidden v-model="gmd2">
+
+                    <modal name="eksemplar">
+                        hello, world!
+                    </modal>
 
                     <div class="row">
                         <div class="col-lg-12">
@@ -288,7 +339,7 @@
 
                 </div>
 
-              
+
 
                 <div class="float-right">
 
@@ -331,7 +382,8 @@
             'gmd',
             'klasifikasi',
             'lokasi',
-            'bahasa'
+            'bahasa',
+            'pola'
         ],
 
         computed: {
@@ -361,6 +413,8 @@
                 gmd_id: [],
                 bahasa_id: [],
                 lokasi_id: [],
+                eksemplarData: [],
+                pola_eksemplar: [],
 
                 form: {
                     judul: this.fetch.judul || '',
@@ -380,6 +434,7 @@
                     lokasi_id: this.lokasi2,
                     bahasa_id: this.bahasa2,
                     gmd_id: this.gmd2,
+                    pola_eksemplar: this.pola_eksemplar2,
                     _method: (this.fetch.judul ? 'PUT' : 'POST')
                 },
 
@@ -394,6 +449,7 @@
             this.getKlasifikasi();
             this.getLokasi();
             this.getBahasa();
+            this.getPola();
         },
 
         computed: {
@@ -405,8 +461,12 @@
                 return this.form.bahasa_id = this.bahasa_id.id
             },
 
+            pola_eksemplar2() {
+                return this.form.pola_eksemplar = this.pola_eksemplar.pola_eksemplar
+            },
+
             pengarang2() {
-              return this.form.pengarang_id = this.pengarang_id.map(pengarang => pengarang.id);
+                return this.form.pengarang_id = this.pengarang_id.map(pengarang => pengarang.id);
             },
 
             gmd2() {
@@ -435,12 +495,20 @@
                 this.value = value
                 if (value.indexOf('Reset me!') !== -1) this.value = []
             },
+            showEksemplar() {
+                this.$modal.show('eksemplar');
+            },
             onSelect(option) {
                 if (option === 'Disable me!') this.isDisabled = true
             },
             getData() {
                 return axios.get(this.pengarang)
                     .then(res => this.options = res.data)
+                    .catch(err => console.log(err));
+            },
+            getPola() {
+                return axios.get(this.pola)
+                    .then(res => this.eksemplarData = res.data)
                     .catch(err => console.log(err));
             },
             getBahasa() {

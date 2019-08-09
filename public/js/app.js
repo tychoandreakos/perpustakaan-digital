@@ -2458,6 +2458,57 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_components$props$com = {
@@ -2465,7 +2516,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"],
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
-  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa'],
+  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola'],
   computed: {
     isDisabled: function isDisabled() {
       return this.form.judul.length == '' ? true : false;
@@ -2491,6 +2542,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       gmd_id: [],
       bahasa_id: [],
       lokasi_id: [],
+      eksemplarData: [],
+      pola_eksemplar: [],
       form: {
         judul: this.fetch.judul || '',
         edisi: this.fetch.edisi || '',
@@ -2509,6 +2562,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         lokasi_id: this.lokasi2,
         bahasa_id: this.bahasa2,
         gmd_id: this.gmd2,
+        pola_eksemplar: this.pola_eksemplar2,
         _method: this.fetch.judul ? 'PUT' : 'POST'
       }
     };
@@ -2521,6 +2575,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getKlasifikasi();
     this.getLokasi();
     this.getBahasa();
+    this.getPola();
   }
 }, _defineProperty(_components$props$com, "computed", {
   isInvalid: function isInvalid() {
@@ -2528,6 +2583,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   bahasa2: function bahasa2() {
     return this.form.bahasa_id = this.bahasa_id.id;
+  },
+  pola_eksemplar2: function pola_eksemplar2() {
+    return this.form.pola_eksemplar = this.pola_eksemplar.pola_eksemplar;
   },
   pengarang2: function pengarang2() {
     return this.form.pengarang_id = this.pengarang_id.map(function (pengarang) {
@@ -2554,6 +2612,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.value = value;
     if (value.indexOf('Reset me!') !== -1) this.value = [];
   },
+  showEksemplar: function showEksemplar() {
+    this.$modal.show('eksemplar');
+  },
   onSelect: function onSelect(option) {
     if (option === 'Disable me!') this.isDisabled = true;
   },
@@ -2566,56 +2627,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return console.log(err);
     });
   },
-  getBahasa: function getBahasa() {
+  getPola: function getPola() {
     var _this2 = this;
 
+    return axios.get(this.pola).then(function (res) {
+      return _this2.eksemplarData = res.data;
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  },
+  getBahasa: function getBahasa() {
+    var _this3 = this;
+
     return axios.get(this.bahasa).then(function (res) {
-      return _this2.bahasaData = res.data;
+      return _this3.bahasaData = res.data;
     })["catch"](function (err) {
       return console.log(err);
     });
   },
   getPenerbit: function getPenerbit() {
-    var _this3 = this;
+    var _this4 = this;
 
     return axios.get(this.penerbit).then(function (res) {
-      return _this3.penerbitData = res.data;
+      return _this4.penerbitData = res.data;
     })["catch"](function (err) {
       return console.log(err);
     });
   },
   getKota: function getKota() {
-    var _this4 = this;
+    var _this5 = this;
 
     return axios.get(this.kota).then(function (res) {
-      return _this4.kotaData = res.data;
+      return _this5.kotaData = res.data;
     })["catch"](function (err) {
       return console.log(err);
     });
   },
   getKlasifikasi: function getKlasifikasi() {
-    var _this5 = this;
+    var _this6 = this;
 
     return axios.get(this.klasifikasi).then(function (res) {
-      return _this5.klasifikasiData = res.data;
+      return _this6.klasifikasiData = res.data;
     })["catch"](function (err) {
       return console.log(err);
     });
   },
   getLokasi: function getLokasi() {
-    var _this6 = this;
+    var _this7 = this;
 
     return axios.get(this.lokasi).then(function (res) {
-      return _this6.lokasiData = res.data;
+      return _this7.lokasiData = res.data;
     })["catch"](function (err) {
       return console.log(err);
     });
   },
   getGmd: function getGmd() {
-    var _this7 = this;
+    var _this8 = this;
 
     return axios.get(this.gmd).then(function (res) {
-      return _this7.gmdData = res.data;
+      return _this8.gmdData = res.data;
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -2624,14 +2694,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.isTouched = true;
   },
   simpan: function simpan() {
-    var _this8 = this;
+    var _this9 = this;
 
     this.loading = true;
 
     if (!this.fetch.judul) {
       // create
       axios.post(this.fetch, this.form).then(function (res) {
-        _this8.$swal({
+        _this9.$swal({
           position: 'top-end',
           type: 'success',
           title: res.data.message.toUpperCase(),
@@ -2640,16 +2710,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
 
         setTimeout(function () {
-          window.location = _this8.index;
+          window.location = _this9.index;
         }, 3200);
       })["catch"](function (err) {
-        _this8.err = err.response.data.errors;
-        _this8.loading = false;
+        _this9.err = err.response.data.errors;
+        _this9.loading = false;
       });
     } else {
       // update
       axios.post('/pustakawan/klasifikasi/' + this.fetch.id, this.form).then(function (res) {
-        _this8.$swal({
+        _this9.$swal({
           position: 'top-end',
           type: 'success',
           title: res.data.message.toUpperCase(),
@@ -2658,11 +2728,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
 
         setTimeout(function () {
-          window.location = _this8.index;
+          window.location = _this9.index;
         }, 2800);
       })["catch"](function (err) {
         console.log(err);
-        _this8.loading = false;
+        _this9.loading = false;
       });
     }
   }
@@ -45862,68 +45932,15 @@ var render = function() {
             _vm._v("Bibliobigrafi information")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "pl-lg-4" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "judul" }
-                      },
-                      [_vm._v("Judul")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.judul,
-                          expression: "form.judul"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        type: "text",
-                        id: "judul",
-                        name: "judul",
-                        placeholder: "Nama Penerbit"
-                      },
-                      domProps: { value: _vm.form.judul },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "judul", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.judul
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.judul[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c("div", { staticClass: "form-group" }, [
+          _c(
+            "div",
+            { staticClass: "pl-lg-4" },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-12" }, [
                   _c(
                     "div",
-                    { class: { invalid: _vm.isInvalid } },
+                    { staticClass: "form-group" },
                     [
                       _c(
                         "label",
@@ -45931,1078 +45948,1355 @@ var render = function() {
                           staticClass: "form-control-label",
                           attrs: { for: "judul" }
                         },
-                        [_vm._v("Pengarang")]
+                        [_vm._v("Judul")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "multiselect",
-                        {
-                          attrs: {
-                            options: _vm.options,
-                            multiple: true,
-                            "group-label": "language",
-                            "group-select": true,
-                            placeholder: "Type to search",
-                            "track-by": "nama_pengarang",
-                            label: "nama_pengarang"
-                          },
-                          model: {
-                            value: _vm.pengarang_id,
-                            callback: function($$v) {
-                              _vm.pengarang_id = $$v
-                            },
-                            expression: "pengarang_id"
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.judul,
+                            expression: "form.judul"
                           }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: {
+                          type: "text",
+                          id: "judul",
+                          name: "judul",
+                          placeholder: "Nama Penerbit"
                         },
-                        [
-                          _c(
-                            "span",
-                            { attrs: { slot: "noResult" }, slot: "noResult" },
-                            [
-                              _vm._v(
-                                "Oops! No\n                                        elements found.\n                                        Consider changing the search query."
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.pengarang_id))])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isInvalid,
-                              expression: "isInvalid"
+                        domProps: { value: _vm.form.judul },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
                             }
-                          ],
-                          staticClass: "typo__label form__label"
-                        },
-                        [
-                          _vm._v(
-                            "Minimal harus ada 1\n                                    pengarang"
-                          )
-                        ]
-                      )
+                            _vm.$set(_vm.form, "judul", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.judul
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.judul[0]))
+                            ])
+                          ]
+                        : _vm._e()
                     ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "edisi" }
-                      },
-                      [_vm._v("Edisi")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.edisi,
-                          expression: "form.edisi"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        type: "text",
-                        id: "edisi",
-                        name: "edisi",
-                        placeholder: "Edisi"
-                      },
-                      domProps: { value: _vm.form.edisi },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "edisi", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.edisi
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.edisi[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "deskripsi_fisik" }
-                      },
-                      [_vm._v("Deksripsi Fisik")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.deskripsi_fisik,
-                          expression: "form.deskripsi_fisik"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        type: "text",
-                        id: "deskripsi_fisik",
-                        name: "deskripsi_fisik",
-                        placeholder: "Deksripsi Fisik"
-                      },
-                      domProps: { value: _vm.form.deskripsi_fisik },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.form,
-                            "deskripsi_fisik",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.deskripsi_fisik
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.deskripsi_fisik[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "isbn_isnn" }
-                      },
-                      [_vm._v("ISBN ISNN")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.isbn_isnn,
-                          expression: "form.isbn_isnn"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        type: "text",
-                        id: "isbn_isnn",
-                        name: "isbn_isnn",
-                        placeholder: "Edisi"
-                      },
-                      domProps: { value: _vm.form.isbn_isnn },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "isbn_isnn", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.isbn_isnn
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.isbn_isnn[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "div",
-                    { class: { invalid: _vm.isInvalid } },
-                    [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-control-label",
-                          attrs: { for: "penerbit" }
-                        },
-                        [_vm._v("Penerbit")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "multiselect",
-                        {
-                          attrs: {
-                            options: _vm.penerbitData,
-                            "group-label": "language",
-                            "group-select": true,
-                            placeholder: "Type to search",
-                            "track-by": "nama_penerbit",
-                            label: "nama_penerbit"
-                          },
-                          model: {
-                            value: _vm.penerbit_id,
-                            callback: function($$v) {
-                              _vm.penerbit_id = $$v
-                            },
-                            expression: "penerbit_id"
-                          }
-                        },
-                        [
-                          _c(
-                            "span",
-                            { attrs: { slot: "noResult" }, slot: "noResult" },
-                            [
-                              _vm._v(
-                                "Oops! No\n                                        elements found.\n                                        Consider changing the search query."
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.penerbit_id))])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isInvalid,
-                              expression: "isInvalid"
-                            }
-                          ],
-                          staticClass: "typo__label form__label"
-                        },
-                        [
-                          _vm._v(
-                            "Minimal harus ada 1\n                                    penerbit"
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "tahun_terbit" }
-                      },
-                      [_vm._v("Tahun Terbit")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.tahun_terbit,
-                          expression: "form.tahun_terbit"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        type: "text",
-                        id: "tahun_terbit",
-                        name: "tahun_terbit",
-                        placeholder: "Edisi"
-                      },
-                      domProps: { value: _vm.form.tahun_terbit },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.form,
-                            "tahun_terbit",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.tahun_terbit
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.tahun_terbit[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "div",
-                    { class: { invalid: _vm.isInvalid } },
-                    [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-control-label",
-                          attrs: { for: "tempat" }
-                        },
-                        [_vm._v("Tempat Terbit")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "multiselect",
-                        {
-                          attrs: {
-                            options: _vm.kotaData,
-                            "group-label": "language",
-                            "group-select": true,
-                            placeholder: "Type to search",
-                            "track-by": "nama_kota",
-                            label: "nama_kota"
-                          },
-                          model: {
-                            value: _vm.kota_id,
-                            callback: function($$v) {
-                              _vm.kota_id = $$v
-                            },
-                            expression: "kota_id"
-                          }
-                        },
-                        [
-                          _c(
-                            "span",
-                            { attrs: { slot: "noResult" }, slot: "noResult" },
-                            [
-                              _vm._v(
-                                "Oops! No\n                                        elements found.\n                                        Consider changing the search query."
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.kota_id))])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isInvalid,
-                              expression: "isInvalid"
-                            }
-                          ],
-                          staticClass: "typo__label form__label"
-                        },
-                        [
-                          _vm._v(
-                            "Minimal harus ada 1\n                                    kota"
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "div",
-                    { class: { invalid: _vm.isInvalid } },
-                    [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-control-label",
-                          attrs: { for: "gmd" }
-                        },
-                        [_vm._v("GMD")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "multiselect",
-                        {
-                          attrs: {
-                            options: _vm.gmdData,
-                            "group-label": "language",
-                            "group-select": true,
-                            placeholder: "Type to search",
-                            "track-by": "nama_gmd",
-                            label: "nama_gmd"
-                          },
-                          model: {
-                            value: _vm.gmd_id,
-                            callback: function($$v) {
-                              _vm.gmd_id = $$v
-                            },
-                            expression: "gmd_id"
-                          }
-                        },
-                        [
-                          _c(
-                            "span",
-                            { attrs: { slot: "noResult" }, slot: "noResult" },
-                            [
-                              _vm._v(
-                                "Oops! No\n                                        elements found.\n                                        Consider changing the search query."
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.gmd_id))])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isInvalid,
-                              expression: "isInvalid"
-                            }
-                          ],
-                          staticClass: "typo__label form__label"
-                        },
-                        [
-                          _vm._v(
-                            "Minimal harus ada 1\n                                    gmd"
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "judul_seri" }
-                      },
-                      [_vm._v("Judul Seri")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.judul_seri,
-                          expression: "form.judul_seri"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        type: "text",
-                        id: "judul_seri",
-                        name: "judul_seri",
-                        placeholder: "Edisi"
-                      },
-                      domProps: { value: _vm.form.judul_seri },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "judul_seri", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.judul_seri
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.judul_seri[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "div",
-                    { class: { invalid: _vm.isInvalid } },
-                    [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-control-label",
-                          attrs: { for: "klasifikasi" }
-                        },
-                        [_vm._v("Klasifikasi")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "multiselect",
-                        {
-                          attrs: {
-                            options: _vm.klasifikasiData,
-                            "group-label": "language",
-                            "group-select": true,
-                            placeholder: "Type to search",
-                            "track-by": "tipe_klasifikasi",
-                            label: "tipe_klasifikasi"
-                          },
-                          model: {
-                            value: _vm.klasifikasi_id,
-                            callback: function($$v) {
-                              _vm.klasifikasi_id = $$v
-                            },
-                            expression: "klasifikasi_id"
-                          }
-                        },
-                        [
-                          _c(
-                            "span",
-                            { attrs: { slot: "noResult" }, slot: "noResult" },
-                            [
-                              _vm._v(
-                                "Oops!\n                                        No\n                                        elements found.\n                                        Consider changing the search query."
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.klasifikasi_id))])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isInvalid,
-                              expression: "isInvalid"
-                            }
-                          ],
-                          staticClass: "typo__label form__label"
-                        },
-                        [
-                          _vm._v(
-                            "Minimal harus ada 1\n                                    klasfikasi"
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "div",
-                    { class: { invalid: _vm.isInvalid } },
-                    [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-control-label",
-                          attrs: { for: "lokasi" }
-                        },
-                        [_vm._v("Lokasi Rak")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "multiselect",
-                        {
-                          attrs: {
-                            options: _vm.lokasiData,
-                            "group-label": "language",
-                            "group-select": true,
-                            placeholder: "Type to search",
-                            "track-by": "kode_lokasi",
-                            label: "nama_lokasi"
-                          },
-                          model: {
-                            value: _vm.lokasi,
-                            callback: function($$v) {
-                              _vm.lokasi = $$v
-                            },
-                            expression: "lokasi"
-                          }
-                        },
-                        [
-                          _c(
-                            "span",
-                            { attrs: { slot: "noResult" }, slot: "noResult" },
-                            [
-                              _vm._v(
-                                "Oops!\n                                        No\n                                        elements found.\n                                        Consider changing the search query."
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.lokasi))])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isInvalid,
-                              expression: "isInvalid"
-                            }
-                          ],
-                          staticClass: "typo__label form__label"
-                        },
-                        [
-                          _vm._v(
-                            "Minimal harus ada 1\n                                    lokasi"
-                          )
-                        ]
-                      )
-                    ],
-                    1
+                    2
                   )
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "judul" }
+                          },
+                          [_vm._v("Pengarang")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.options,
+                              multiple: true,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "nama_pengarang",
+                              label: "nama_pengarang"
+                            },
+                            model: {
+                              value: _vm.pengarang_id,
+                              callback: function($$v) {
+                                _vm.pengarang_id = $$v
+                              },
+                              expression: "pengarang_id"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops! No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.pengarang_id))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    pengarang"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
                   _c(
                     "div",
-                    { class: { invalid: _vm.isInvalid } },
+                    { staticClass: "form-group" },
                     [
                       _c(
                         "label",
                         {
                           staticClass: "form-control-label",
-                          attrs: { for: "bahasa" }
+                          attrs: { for: "edisi" }
                         },
-                        [_vm._v("Bahasa")]
+                        [_vm._v("Edisi")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "multiselect",
-                        {
-                          attrs: {
-                            options: _vm.bahasaData,
-                            "group-label": "language",
-                            "group-select": true,
-                            placeholder: "Type to search",
-                            "track-by": "jenis_bahasa",
-                            label: "jenis_bahasa"
-                          },
-                          model: {
-                            value: _vm.bahasa_id,
-                            callback: function($$v) {
-                              _vm.bahasa_id = $$v
-                            },
-                            expression: "bahasa_id"
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.edisi,
+                            expression: "form.edisi"
                           }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: {
+                          type: "text",
+                          id: "edisi",
+                          name: "edisi",
+                          placeholder: "Edisi"
                         },
-                        [
-                          _c(
-                            "span",
-                            { attrs: { slot: "noResult" }, slot: "noResult" },
-                            [
-                              _vm._v(
-                                "Oops!\n                                        No\n                                        elements found.\n                                        Consider changing the search query."
-                              )
-                            ]
-                          )
-                        ]
-                      ),
+                        domProps: { value: _vm.form.edisi },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "edisi", $event.target.value)
+                          }
+                        }
+                      }),
                       _vm._v(" "),
-                      _c("pre", { staticClass: "language-json" }, [
-                        _c("code", [_vm._v(_vm._s(_vm.bahasa_id))])
-                      ]),
-                      _vm._v(" "),
+                      _vm.err.edisi
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.edisi[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
                       _c(
                         "label",
                         {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isInvalid,
-                              expression: "isInvalid"
-                            }
-                          ],
-                          staticClass: "typo__label form__label"
+                          staticClass: "form-control-label",
+                          attrs: { for: "deskripsi_fisik" }
                         },
-                        [
-                          _vm._v(
-                            "Minimal harus ada 1\n                                    bahasa"
-                          )
-                        ]
-                      )
+                        [_vm._v("Deksripsi Fisik")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.deskripsi_fisik,
+                            expression: "form.deskripsi_fisik"
+                          }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: {
+                          type: "text",
+                          id: "deskripsi_fisik",
+                          name: "deskripsi_fisik",
+                          placeholder: "Deksripsi Fisik"
+                        },
+                        domProps: { value: _vm.form.deskripsi_fisik },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "deskripsi_fisik",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.deskripsi_fisik
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.deskripsi_fisik[0]))
+                            ])
+                          ]
+                        : _vm._e()
                     ],
-                    1
+                    2
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label",
+                          attrs: { for: "isbn_isnn" }
+                        },
+                        [_vm._v("ISBN ISNN")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.isbn_isnn,
+                            expression: "form.isbn_isnn"
+                          }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: {
+                          type: "text",
+                          id: "isbn_isnn",
+                          name: "isbn_isnn",
+                          placeholder: "Edisi"
+                        },
+                        domProps: { value: _vm.form.isbn_isnn },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "isbn_isnn", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.isbn_isnn
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.isbn_isnn[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "penerbit" }
+                          },
+                          [_vm._v("Penerbit")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.penerbitData,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "nama_penerbit",
+                              label: "nama_penerbit"
+                            },
+                            model: {
+                              value: _vm.penerbit_id,
+                              callback: function($$v) {
+                                _vm.penerbit_id = $$v
+                              },
+                              expression: "penerbit_id"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops! No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.penerbit_id))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    penerbit"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "klasifikasi" }
+                          },
+                          [_vm._v("Pola Eksemplar Tersedia")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.eksemplarData,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "kode_eksemplar",
+                              label: "kode_eksemplar"
+                            },
+                            model: {
+                              value: _vm.pola_eksemplar,
+                              callback: function($$v) {
+                                _vm.pola_eksemplar = $$v
+                              },
+                              expression: "pola_eksemplar"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops!\n                                        No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.pola_eksemplar))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    eksemplar"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-4" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label",
+                          attrs: { for: "judul_seri" }
+                        },
+                        [_vm._v("Total Eksemplar")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.judul_seri,
+                            expression: "form.judul_seri"
+                          }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: {
+                          type: "text",
+                          id: "judul_seri",
+                          name: "judul_seri",
+                          placeholder: "Edisi"
+                        },
+                        domProps: { value: _vm.form.judul_seri },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "judul_seri",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.judul_seri
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.judul_seri[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "klasifikasi" }
+                          },
+                          [_vm._v("Reference")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.klasifikasiData,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "tipe_klasifikasi",
+                              label: "tipe_klasifikasi"
+                            },
+                            model: {
+                              value: _vm.klasifikasi_id,
+                              callback: function($$v) {
+                                _vm.klasifikasi_id = $$v
+                              },
+                              expression: "klasifikasi_id"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops!\n                                        No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.klasifikasi_id))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    klasfikasi"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label",
+                          attrs: { for: "tahun_terbit" }
+                        },
+                        [_vm._v("Tahun Terbit")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.tahun_terbit,
+                            expression: "form.tahun_terbit"
+                          }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: {
+                          type: "text",
+                          id: "tahun_terbit",
+                          name: "tahun_terbit",
+                          placeholder: "Edisi"
+                        },
+                        domProps: { value: _vm.form.tahun_terbit },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "tahun_terbit",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.tahun_terbit
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.tahun_terbit[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "tempat" }
+                          },
+                          [_vm._v("Tempat Terbit")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.kotaData,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "nama_kota",
+                              label: "nama_kota"
+                            },
+                            model: {
+                              value: _vm.kota_id,
+                              callback: function($$v) {
+                                _vm.kota_id = $$v
+                              },
+                              expression: "kota_id"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops! No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.kota_id))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    kota"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "gmd" }
+                          },
+                          [_vm._v("GMD")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.gmdData,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "nama_gmd",
+                              label: "nama_gmd"
+                            },
+                            model: {
+                              value: _vm.gmd_id,
+                              callback: function($$v) {
+                                _vm.gmd_id = $$v
+                              },
+                              expression: "gmd_id"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops! No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.gmd_id))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    gmd"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label",
+                          attrs: { for: "judul_seri" }
+                        },
+                        [_vm._v("Judul Seri")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.judul_seri,
+                            expression: "form.judul_seri"
+                          }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: {
+                          type: "text",
+                          id: "judul_seri",
+                          name: "judul_seri",
+                          placeholder: "Edisi"
+                        },
+                        domProps: { value: _vm.form.judul_seri },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "judul_seri",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.judul_seri
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.judul_seri[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "klasifikasi" }
+                          },
+                          [_vm._v("Klasifikasi")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.klasifikasiData,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "tipe_klasifikasi",
+                              label: "tipe_klasifikasi"
+                            },
+                            model: {
+                              value: _vm.klasifikasi_id,
+                              callback: function($$v) {
+                                _vm.klasifikasi_id = $$v
+                              },
+                              expression: "klasifikasi_id"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops!\n                                        No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.klasifikasi_id))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    klasfikasi"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "lokasi" }
+                          },
+                          [_vm._v("Lokasi Rak")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.lokasiData,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "kode_lokasi",
+                              label: "nama_lokasi"
+                            },
+                            model: {
+                              value: _vm.lokasi,
+                              callback: function($$v) {
+                                _vm.lokasi = $$v
+                              },
+                              expression: "lokasi"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops!\n                                        No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.lokasi))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    lokasi"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "div",
+                      { class: { invalid: _vm.isInvalid } },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-control-label",
+                            attrs: { for: "bahasa" }
+                          },
+                          [_vm._v("Bahasa")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "multiselect",
+                          {
+                            attrs: {
+                              options: _vm.bahasaData,
+                              "group-label": "language",
+                              "group-select": true,
+                              placeholder: "Type to search",
+                              "track-by": "jenis_bahasa",
+                              label: "jenis_bahasa"
+                            },
+                            model: {
+                              value: _vm.bahasa_id,
+                              callback: function($$v) {
+                                _vm.bahasa_id = $$v
+                              },
+                              expression: "bahasa_id"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { attrs: { slot: "noResult" }, slot: "noResult" },
+                              [
+                                _vm._v(
+                                  "Oops!\n                                        No\n                                        elements found.\n                                        Consider changing the search query."
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pre", { staticClass: "language-json" }, [
+                          _c("code", [_vm._v(_vm._s(_vm.bahasa_id))])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isInvalid,
+                                expression: "isInvalid"
+                              }
+                            ],
+                            staticClass: "typo__label form__label"
+                          },
+                          [
+                            _vm._v(
+                              "Minimal harus ada 1\n                                    bahasa"
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-12" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label",
+                          attrs: { for: "catatan" }
+                        },
+                        [_vm._v("Catatan")]
+                      ),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.catatan,
+                            expression: "form.catatan"
+                          }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: {
+                          name: "",
+                          id: "",
+                          cols: "30",
+                          placeholder: "Edisi",
+                          rows: "10"
+                        },
+                        domProps: { value: _vm.form.catatan },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "catatan", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.catatan
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.catatan[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.bahasa2,
+                    expression: "bahasa2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.bahasa2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.bahasa2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.penerbit2,
+                    expression: "penerbit2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.penerbit2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.penerbit2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.pengarang2,
+                    expression: "pengarang2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.pengarang2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.pengarang2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.kota2,
+                    expression: "kota2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.kota2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.kota2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.klasifikasi2,
+                    expression: "klasifikasi2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.klasifikasi2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.klasifikasi2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.lokasi2,
+                    expression: "lokasi2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.lokasi2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.lokasi2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.gmd2,
+                    expression: "gmd2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.gmd2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.gmd2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("modal", { attrs: { name: "eksemplar" } }, [
+                _vm._v("\n                    hello, world!\n                ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-12" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label",
+                          attrs: { for: "catatan" }
+                        },
+                        [_vm._v("Upload Cover")]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm.err.catatan
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.catatan[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-12" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label",
+                          attrs: { for: "catatan" }
+                        },
+                        [_vm._v("Upload PDF")]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _vm.err.catatan
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.catatan[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
                   )
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "catatan" }
-                      },
-                      [_vm._v("Catatan")]
-                    ),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.catatan,
-                          expression: "form.catatan"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        name: "",
-                        id: "",
-                        cols: "30",
-                        placeholder: "Edisi",
-                        rows: "10"
-                      },
-                      domProps: { value: _vm.form.catatan },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "catatan", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.catatan
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.catatan[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.bahasa2,
-                  expression: "bahasa2"
-                }
-              ],
-              attrs: { type: "text", hidden: "" },
-              domProps: { value: _vm.bahasa2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.bahasa2 = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.penerbit2,
-                  expression: "penerbit2"
-                }
-              ],
-              attrs: { type: "text", hidden: "" },
-              domProps: { value: _vm.penerbit2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.penerbit2 = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.pengarang2,
-                  expression: "pengarang2"
-                }
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.pengarang2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.pengarang2 = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.kota2,
-                  expression: "kota2"
-                }
-              ],
-              attrs: { type: "text", hidden: "" },
-              domProps: { value: _vm.kota2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.kota2 = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.klasifikasi2,
-                  expression: "klasifikasi2"
-                }
-              ],
-              attrs: { type: "text", hidden: "" },
-              domProps: { value: _vm.klasifikasi2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.klasifikasi2 = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.lokasi2,
-                  expression: "lokasi2"
-                }
-              ],
-              attrs: { type: "text", hidden: "" },
-              domProps: { value: _vm.lokasi2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.lokasi2 = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.gmd2,
-                  expression: "gmd2"
-                }
-              ],
-              attrs: { type: "text", hidden: "" },
-              domProps: { value: _vm.gmd2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.gmd2 = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "catatan" }
-                      },
-                      [_vm._v("Upload Cover")]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _vm.err.catatan
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.catatan[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "catatan" }
-                      },
-                      [_vm._v("Upload PDF")]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _vm.err.catatan
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.catatan[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ])
-            ])
-          ]),
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "div",
