@@ -8,7 +8,7 @@
                             <h3 class="mb-0">Biliobigraphy</h3>
                         </div>
                         <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-primary">Tambah Biliobigraphy</a>
+                            <a :href="this.route" class="btn btn-sm btn-primary">Tambah Biliobigraphy</a>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
 
 <script>
     export default {
-
+         props: ['route', 'fetch', 'index'],
     }
 
 </script>

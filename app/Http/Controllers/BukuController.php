@@ -47,9 +47,11 @@ class BukuController extends Controller
             'edisi' => 'nullable',
             'isbn_isnn' => 'required',
             'deksripsi_fisik' => 'required',
+            'tahun_terbit' => 'required',
             'judul_seri' => 'nullable',
             'catatan' => 'nullable',
             'slug' => 'required',
+            'pdf' => 'nullable',
             'gambar_sampul' => 'nullable'
         ]);
 

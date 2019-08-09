@@ -9,5 +9,5 @@
 
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <form-bibliobigrafi-component fetch="{{ route('bibliobigrafi.store') }}" index="{{ route('bibliobigrafi.index') }}"></form-bibliobigrafi-component>
+        <form-bibliobigrafi-component fetch="{{ route('bibliobigrafi.store') }}" penerbit="{{ route('bibliobigrafi.penerbit') }}" kota="{{ route('bibliobigrafi.kota') }}" gmd="{{ route('bibliobigrafi.gmd') }}" pengarang="{{ route('bibliobigrafi.pengarang') }}" lokasi="{{ route('bibliobigrafi.lokasi') }}" bahasa="{{ route('bibliobigrafi.bahasa') }}" klasifikasi="{{ route('bibliobigrafi.klasifikasi') }}"  index="{{ route('bibliobigrafi.index') }}"></form-bibliobigrafi-component>
             @endsection

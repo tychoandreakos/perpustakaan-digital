@@ -52,8 +52,13 @@ Route::get('klasifikasi-fetch', 'KlasifikasiController@fetch')->name('klasifikas
 Route::get('bahasa-fetch', 'BahasaController@fetch')->name('bahasa.fetch');
 Route::get('tipe-anggota-fetch', 'TipeAnggotaController@fetch')->name('tipe-anggota.fetch');
 Route::get('bibliobigrafi-fetch', 'BibliobigrafiController@fetch')->name('bibliobigrafi.fetch');
-
-
+Route::get('bibliobigrafi-fetch-pengarang', 'BibliobigrafiController@pengarang')->name('bibliobigrafi.pengarang');
+Route::get('bibliobigrafi-fetch-penerbit', 'BibliobigrafiController@penerbit')->name('bibliobigrafi.penerbit');
+Route::get('bibliobigrafi-fetch-kota', 'BibliobigrafiController@kota')->name('bibliobigrafi.kota');
+Route::get('bibliobigrafi-fetch-gmd', 'BibliobigrafiController@gmd')->name('bibliobigrafi.gmd');
+Route::get('bibliobigrafi-fetch-klasifikasi', 'BibliobigrafiController@klasifikasi')->name('bibliobigrafi.klasifikasi');
+Route::get('bibliobigrafi-fetch-lokasi', 'BibliobigrafiController@lokasi')->name('bibliobigrafi.lokasi');
+Route::get('bibliobigrafi-fetch-bahasa', 'BibliobigrafiController@bahasa')->name('bibliobigrafi.bahasa');
 
 // search
 Route::get('gmd-search', 'GmdController@search');

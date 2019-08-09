@@ -10,6 +10,7 @@ $factory->define(Buku::class, function (Faker $faker) {
     return [
         'judul' => $judul,
         'edisi' => $faker->sentence(),
+        'tahun_terbit' => $faker->year(),
         'isbn_isnn' => $faker->randomNumber(),
         'deskripsi_fisik' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'judul_seri' => $faker->sentence($nbWords = 6, $variableNbWords = true),

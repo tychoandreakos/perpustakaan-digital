@@ -10,12 +10,14 @@ class Buku extends Model
     protected $fillable = [
         'judul',
         'edisi',
+        'tahun_terbit',
         'isbn_isnn',
         'deskripsi_fisik',
         'judul_seri',
         'catatan',
         'slug',
-        'gambar_sampul'
+        'pdf',
+        'gambar_sampul',
     ];
 
     public function buku_transaksi()

@@ -9,5 +9,5 @@
 
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-                <table-bilio-component></table-bilio-component>
+                <table-bilio-component fetch="{{ route('bibliobigrafi.fetch') }}" index="{{ route('bibliobigrafi.index') }}" route="{{ route('bibliobigrafi.create') }}"></table-bilio-component>
             @endsection
