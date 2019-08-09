@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class EksemplarTransaksi extends Model
 {
     protected $table = 'eksemplar_transaksi';
-    protected $guarded = [];
+    protected $fillable = [
+        'pola_eksemplar',
+        'kode_eksemplar',
+        'status_pinjam'
+    ];
+    public $incrementing = false;
 
     public function eksemplar_pola()
     {

@@ -2513,6 +2513,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2569,6 +2571,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         bahasa_id: this.bahasa2,
         gmd_id: this.gmd2,
         pola_eksemplar: this.pola_eksemplar2,
+        total: '',
         _method: this.fetch.judul ? 'PUT' : 'POST'
       }
     };
@@ -2591,7 +2594,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return this.form.bahasa_id = this.bahasa_id.id;
   },
   pola_eksemplar2: function pola_eksemplar2() {
-    return this.form.pola_eksemplar = this.pola_eksemplar.pola_eksemplar;
+    return this.form.pola_eksemplar = this.pola_eksemplar.kode_eksemplar;
   },
   pengarang2: function pengarang2() {
     return this.form.pengarang_id = this.pengarang_id.map(function (pengarang) {
@@ -46465,6 +46468,21 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default btn-sm mb-3",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.getPola($event)
+                    }
+                  }
+                },
+                [_vm._v("Refresh Data Pola Eksemplar")]
+              ),
+              _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-lg-4" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -46547,7 +46565,7 @@ var render = function() {
                         "label",
                         {
                           staticClass: "form-control-label",
-                          attrs: { for: "judul_seri" }
+                          attrs: { for: "total" }
                         },
                         [_vm._v("Total Eksemplar")]
                       ),
@@ -46557,36 +46575,32 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.judul_seri,
-                            expression: "form.judul_seri"
+                            value: _vm.form.total,
+                            expression: "form.total"
                           }
                         ],
                         staticClass: "form-control form-control-alternative",
                         attrs: {
                           type: "text",
-                          id: "judul_seri",
-                          name: "judul_seri",
+                          id: "total",
+                          name: "total",
                           placeholder: "Edisi"
                         },
-                        domProps: { value: _vm.form.judul_seri },
+                        domProps: { value: _vm.form.total },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(
-                              _vm.form,
-                              "judul_seri",
-                              $event.target.value
-                            )
+                            _vm.$set(_vm.form, "total", $event.target.value)
                           }
                         }
                       }),
                       _vm._v(" "),
-                      _vm.err.judul_seri
+                      _vm.err.total
                         ? [
                             _c("span", { staticClass: "text-danger" }, [
-                              _vm._v(_vm._s(_vm.err.judul_seri[0]))
+                              _vm._v(_vm._s(_vm.err.total[0]))
                             ])
                           ]
                         : _vm._e()
@@ -47371,6 +47385,27 @@ var render = function() {
                       return
                     }
                     _vm.gmd2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.pola_eksemplar2,
+                    expression: "pola_eksemplar2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.pola_eksemplar2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.pola_eksemplar2 = $event.target.value
                   }
                 }
               }),

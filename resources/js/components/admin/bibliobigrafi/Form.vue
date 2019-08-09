@@ -108,6 +108,7 @@
                         <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                         <span class="btn-inner--text">Tambah Pola Eksemplar</span>
                     </button>
+                    <button @click.prevent="getPola" type="button" class="btn btn-default btn-sm mb-3">Refresh Data Pola Eksemplar</button>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -129,11 +130,11 @@
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label" for="judul_seri">Total Eksemplar</label>
-                                <input type="text" v-model="form.judul_seri" id="judul_seri"
-                                    class="form-control form-control-alternative" name="judul_seri" placeholder="Edisi">
-                                <template v-if="err.judul_seri">
-                                    <span class="text-danger">{{ err.judul_seri[0] }}</span>
+                                <label class="form-control-label" for="total">Total Eksemplar</label>
+                                <input type="text" v-model="form.total" id="total"
+                                    class="form-control form-control-alternative" name="total" placeholder="Edisi">
+                                <template v-if="err.total">
+                                    <span class="text-danger">{{ err.total[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -303,6 +304,7 @@
                     <input type="text" hidden v-model="klasifikasi2">
                     <input type="text" hidden v-model="lokasi2">
                     <input type="text" hidden v-model="gmd2">
+                    <input type="text" hidden v-model="pola_eksemplar2">
 
                     <modal height="auto" name="eksemplar">
                       <pola-component :pola="this.pol"></pola-component>
@@ -441,6 +443,7 @@
                     bahasa_id: this.bahasa2,
                     gmd_id: this.gmd2,
                     pola_eksemplar: this.pola_eksemplar2,
+                    total: '',
                     _method: (this.fetch.judul ? 'PUT' : 'POST')
                 },
 
@@ -468,7 +471,7 @@
             },
 
             pola_eksemplar2() {
-                return this.form.pola_eksemplar = this.pola_eksemplar.pola_eksemplar
+                return this.form.pola_eksemplar = this.pola_eksemplar.kode_eksemplar
             },
 
             pengarang2() {

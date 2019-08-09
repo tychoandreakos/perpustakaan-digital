@@ -14,6 +14,7 @@ use App\Bahasa;
 use App\Buku;
 use App\BukuTransaksi;
 use App\EksemplarPola;
+use App\EksemplarTransaksi;
 
 class BibliobigrafiController extends Controller
 {
@@ -112,12 +113,27 @@ class BibliobigrafiController extends Controller
        }
         
         
+       for ($i=0; $i < $request->total; $i++) {
+
+        $eksemplar = EksemplarTransaksi::orderBy('pola_eksemplar', 'DESC')->first();
+
+        if($eksemplar) {
+            $requestTransaksi = $request->all();
+            $requestTransaksi['pola_eksemplar'] = ++$eksemplar->pola_eksemplar;
+            $requestTransaksi['kode_eksemplar'] = $request->pola_eksemplar;
+            $eks = EksemplarTransaksi::create($requestTransaksi);
+        }
+
+       
+
         $requestBilio = $request->all();
         $requestBilio['buku_id'] = $buku->id;
         $requestBilio['klasifikasi_id'] = $request->klasifikasi_id;
         $requestBilio['gmd_id'] = $request->gmd_id;
-        $requestBilio['pola_eksemplar'] = 'B000';
+        $requestBilio['pola_eksemplar'] = $eks->id;
         Bibliobigrafi::create($requestBilio);
+
+       }
 
         return response()->json([
             'message' => 'data berhasil disimpan']);
