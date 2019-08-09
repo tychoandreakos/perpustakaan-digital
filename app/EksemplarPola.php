@@ -8,7 +8,12 @@ class EksemplarPola extends Model
 {
     protected $table = 'eksemplar_pola';
     public $incrementing = false;
-    protected $guarded = [];
+    protected $fillable = [
+        'kode_eksemplar',
+        'prefix',
+        'serial',
+        'suffix'
+    ];
 
     public function eksemplar_transaksi()
     {

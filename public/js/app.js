@@ -2141,6 +2141,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _pola_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pola/Form */ "./resources/js/components/admin/pola/Form.vue");
 var _components$props$com;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2509,14 +2510,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_components$props$com = {
   components: {
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a,
+    PolaComponent: _pola_Form__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola'],
+  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol'],
   computed: {
     isDisabled: function isDisabled() {
       return this.form.judul.length == '' ? true : false;
@@ -4559,6 +4565,136 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
     this.getResults();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/pola/Form.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/pola/Form.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['pola'],
+  components: {
+    SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      var22: '',
+      form: {
+        kode_eksemplar: this.pratinjau2,
+        prefix: '',
+        suffix: '',
+        serial: 0
+      },
+      loading: false
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      console.log(this.form);
+      this.loading = true, axios.post(this.pola, this.form).then(function (res) {
+        _this.$swal({
+          position: 'top-end',
+          type: 'success',
+          title: res.data.message.toUpperCase(),
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        setTimeout(function () {
+          _this.loading = false;
+        }, 2200);
+        _this.form.kode_eksemplar = '', _this.form.prefix = '', _this.form.suffix = '', _this.form.serial = 0, _this.var22 = '';
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  },
+  computed: {
+    check: function check() {
+      return this.form.prefix == '' ? true : false;
+    },
+    pratinjau2: function pratinjau2() {
+      return this.form.kode_eksemplar = this.var22;
+    },
+    pratinjau: function pratinjau() {
+      if (this.form.serial > 20) {
+        return false;
+      }
+
+      return this.var22 = "".concat(this.form.prefix).concat(_.padStart(0, this.form.serial, '0')).concat(this.form.suffix);
+    }
   }
 });
 
@@ -46313,6 +46449,22 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-icon btn-primary btn-sm mb-3",
+                  attrs: { type: "button" },
+                  on: { click: _vm.showEksemplar }
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "btn-inner--text" }, [
+                    _vm._v("Tambah Pola Eksemplar")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-lg-4" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -46360,10 +46512,6 @@ var render = function() {
                             )
                           ]
                         ),
-                        _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.pola_eksemplar))])
-                        ]),
                         _vm._v(" "),
                         _c(
                           "label",
@@ -46493,10 +46641,6 @@ var render = function() {
                             )
                           ]
                         ),
-                        _vm._v(" "),
-                        _c("pre", { staticClass: "language-json" }, [
-                          _c("code", [_vm._v(_vm._s(_vm.klasifikasi_id))])
-                        ]),
                         _vm._v(" "),
                         _c(
                           "label",
@@ -46660,7 +46804,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _vm._m(0),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-6" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -47231,9 +47375,12 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("modal", { attrs: { name: "eksemplar" } }, [
-                _vm._v("\n                    hello, world!\n                ")
-              ]),
+              _c(
+                "modal",
+                { attrs: { height: "auto", name: "eksemplar" } },
+                [_c("pola-component", { attrs: { pola: this.pol } })],
+                1
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-lg-12" }, [
@@ -47250,7 +47397,7 @@ var render = function() {
                         [_vm._v("Upload Cover")]
                       ),
                       _vm._v(" "),
-                      _vm._m(1),
+                      _vm._m(2),
                       _vm._v(" "),
                       _vm.err.catatan
                         ? [
@@ -47280,7 +47427,7 @@ var render = function() {
                         [_vm._v("Upload PDF")]
                       ),
                       _vm._v(" "),
-                      _vm._m(2),
+                      _vm._m(3),
                       _vm._v(" "),
                       _vm.err.catatan
                         ? [
@@ -47336,6 +47483,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "btn-inner--icon" }, [
+      _c("i", { staticClass: "ni ni-bag-17" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -49787,6 +49942,216 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/pola/Form.vue?vue&type=template&id=74c278a4&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/pola/Form.vue?vue&type=template&id=74c278a4& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container p-4" }, [
+    _c("h3", [_vm._v("Tambah Pola Eksemplar")]),
+    _vm._v(" "),
+    _c("form", [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "prefix" } }, [_vm._v("Prefix")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.prefix,
+                  expression: "form.prefix"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                autocomplete: "off",
+                type: "text",
+                id: "prefix",
+                placeholder: "prefix"
+              },
+              domProps: { value: _vm.form.prefix },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "prefix", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "suffix" } }, [_vm._v("Suffix")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.suffix,
+                  expression: "form.suffix"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                autocomplete: "off",
+                type: "text",
+                id: "suffix",
+                placeholder: "suffix"
+              },
+              domProps: { value: _vm.form.suffix },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "suffix", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "serial" } }, [
+              _vm._v("Panjang Serial Number")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.serial,
+                  expression: "form.serial"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                autocomplete: "off",
+                type: "number",
+                id: "serial",
+                placeholder: "serial"
+              },
+              domProps: { value: _vm.form.serial },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "serial", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col col-md-2" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col col-md-4" }, [
+          _c("div", { staticClass: "form-group mt-4" }, [
+            _c("label", { attrs: { for: "hasil" } }, [
+              _vm._v("Hasil Pratinjau")
+            ]),
+            _vm._v(" "),
+            _vm.var22 != 0
+              ? _c("h2", [_vm._v(_vm._s(_vm._f("capitalize")(_vm.var22)))])
+              : _c("h2", [_vm._v("Belum Ada.")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.pratinjau2,
+              expression: "pratinjau2"
+            }
+          ],
+          attrs: { type: "text", hidden: "" },
+          domProps: { value: _vm.pratinjau2 },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.pratinjau2 = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.pratinjau,
+              expression: "pratinjau"
+            }
+          ],
+          attrs: { type: "text", hidden: "" },
+          domProps: { value: _vm.pratinjau },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.pratinjau = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col col-md-12" },
+          [
+            _vm.loading
+              ? [_c("spinner-component")]
+              : [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-5 btn-success",
+                      attrs: { type: "button", disabled: _vm.check },
+                      on: { click: _vm.submit }
+                    },
+                    [_vm._v("Simpan")]
+                  )
+                ]
+          ],
+          2
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -67420,6 +67785,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_6418a9ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_6418a9ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/pola/Form.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/admin/pola/Form.vue ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Form_vue_vue_type_template_id_74c278a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form.vue?vue&type=template&id=74c278a4& */ "./resources/js/components/admin/pola/Form.vue?vue&type=template&id=74c278a4&");
+/* harmony import */ var _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/pola/Form.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Form_vue_vue_type_template_id_74c278a4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Form_vue_vue_type_template_id_74c278a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/pola/Form.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/pola/Form.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/admin/pola/Form.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Form.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/pola/Form.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/pola/Form.vue?vue&type=template&id=74c278a4&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/admin/pola/Form.vue?vue&type=template&id=74c278a4& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_74c278a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Form.vue?vue&type=template&id=74c278a4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/pola/Form.vue?vue&type=template&id=74c278a4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_74c278a4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_74c278a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

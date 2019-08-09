@@ -104,7 +104,10 @@
                             </div>
                         </div>
                     </div>
-
+                    <button @click="showEksemplar" class="btn btn-icon btn-primary btn-sm mb-3" type="button">
+                        <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                        <span class="btn-inner--text">Tambah Pola Eksemplar</span>
+                    </button>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -116,7 +119,7 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ pola_eksemplar  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ pola_eksemplar  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         eksemplar</label>
                                 </div>
@@ -144,7 +147,7 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <pre class="language-json"><code>{{ klasifikasi_id  }}</code></pre>
+                                    <!-- <pre class="language-json"><code>{{ klasifikasi_id  }}</code></pre> -->
                                     <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
                                         klasfikasi</label>
                                 </div>
@@ -301,8 +304,8 @@
                     <input type="text" hidden v-model="lokasi2">
                     <input type="text" hidden v-model="gmd2">
 
-                    <modal name="eksemplar">
-                        hello, world!
+                    <modal height="auto" name="eksemplar">
+                      <pola-component :pola="this.pol"></pola-component>
                     </modal>
 
                     <div class="row">
@@ -365,12 +368,14 @@
 <script>
     import Spinner from '../tools/Spanner';
     import Multiselect from 'vue-multiselect'
+    import Pola from '../pola/Form';
 
     export default {
 
         components: {
             SpinnerComponent: Spinner,
-            Multiselect
+            Multiselect,
+            PolaComponent: Pola,
         },
 
         props: [
@@ -383,7 +388,8 @@
             'klasifikasi',
             'lokasi',
             'bahasa',
-            'pola'
+            'pola',
+            'pol'
         ],
 
         computed: {
