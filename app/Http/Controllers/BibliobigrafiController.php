@@ -24,7 +24,8 @@ class BibliobigrafiController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Bibiliobigrafi';
+        return view('admin.bibliobigrafi.add', compact('title'));
     }
 
     /**
