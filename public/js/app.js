@@ -1864,6 +1864,129 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1929,9 +2052,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"]
+    SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   props: ['index', 'fetch'],
   computed: {
@@ -1941,6 +2066,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      value: '',
+      jk: '',
+      jkelamin: ['Pria', 'Wanita'],
+      options: ['Select option', 'options', 'selected', 'mulitple', 'label', 'searchable', 'clearOnSelect', 'hideSelected', 'maxHeight', 'allowEmpty', 'showLabels', 'onChange', 'touched'],
       form: {
         jenis_bahasa: this.fetch.jenis_bahasa || '',
         _method: this.fetch.jenis_bahasa ? 'PUT' : 'POST'
@@ -46392,8 +46521,8 @@ var render = function() {
       _c("div", { staticClass: "row align-items-center" }, [
         _c("div", { staticClass: "col-8" }, [
           this.fetch.jenis_bahasa
-            ? _c("h3", { staticClass: "mb-0" }, [_vm._v("Update Data Bahasa")])
-            : _c("h3", { staticClass: "mb-0" }, [_vm._v("Tambah Data Bahasa")])
+            ? _c("h3", { staticClass: "mb-0" }, [_vm._v("Update Data Anggota")])
+            : _c("h3", { staticClass: "mb-0" }, [_vm._v("Tambah Data Anggota")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-4 text-right" }, [
@@ -46422,10 +46551,371 @@ var render = function() {
         },
         [
           _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
-            _vm._v("Bahasa information")
+            _vm._v("Anggota information")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "pl-lg-4" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "id" }
+                      },
+                      [_vm._v("ID Anggota")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.id,
+                          expression: "form.id"
+                        }
+                      ],
+                      staticClass: "form-control form-control-alternative",
+                      attrs: {
+                        type: "text",
+                        id: "id",
+                        name: "id",
+                        placeholder: "ID Anggota"
+                      },
+                      domProps: { value: _vm.form.id },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "id", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.id
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.id[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "name" }
+                      },
+                      [_vm._v("Nama Anggota")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.name,
+                          expression: "form.name"
+                        }
+                      ],
+                      staticClass: "form-control form-control-alternative",
+                      attrs: {
+                        type: "text",
+                        id: "name",
+                        name: "name",
+                        placeholder: "Nama Anggota"
+                      },
+                      domProps: { value: _vm.form.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.name
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.name[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "id" }
+                      },
+                      [_vm._v("Tipe Anggota")]
+                    ),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      attrs: {
+                        options: _vm.options,
+                        searchable: false,
+                        "close-on-select": false,
+                        "show-labels": false,
+                        placeholder: "Pilih tipe anggota"
+                      },
+                      model: {
+                        value: _vm.value,
+                        callback: function($$v) {
+                          _vm.value = $$v
+                        },
+                        expression: "value"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.id
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.id[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "id" }
+                      },
+                      [_vm._v("Jenis Kelamin")]
+                    ),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      attrs: {
+                        options: _vm.jkelamin,
+                        searchable: false,
+                        "close-on-select": false,
+                        "show-labels": false,
+                        placeholder: "Pilih jenis kelamin"
+                      },
+                      model: {
+                        value: _vm.jk,
+                        callback: function($$v) {
+                          _vm.jk = $$v
+                        },
+                        expression: "jk"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.id
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.id[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "alamat" }
+                      },
+                      [_vm._v("Alamat")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.alamat,
+                          expression: "form.alamat"
+                        }
+                      ],
+                      staticClass: "form-control form-control-alternative",
+                      attrs: {
+                        type: "text",
+                        id: "alamat",
+                        name: "alamat",
+                        placeholder: "Alamat"
+                      },
+                      domProps: { value: _vm.form.alamat },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "alamat", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.alamat
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.alamat[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "email" }
+                      },
+                      [_vm._v("Email")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.email,
+                          expression: "form.email"
+                        }
+                      ],
+                      staticClass: "form-control form-control-alternative",
+                      attrs: {
+                        type: "email",
+                        id: "email",
+                        name: "email",
+                        placeholder: "Email"
+                      },
+                      domProps: { value: _vm.form.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "email", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.email
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.email[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "no_telp" }
+                      },
+                      [_vm._v("No Telp")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.no_telp,
+                          expression: "form.no_telp"
+                        }
+                      ],
+                      staticClass: "form-control form-control-alternative",
+                      attrs: {
+                        type: "text",
+                        id: "no_telp",
+                        name: "no_telp",
+                        placeholder: "Number Telp"
+                      },
+                      domProps: { value: _vm.form.no_telp },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "no_telp", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.no_telp
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.no_telp[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-lg-12" }, [
                 _c(
@@ -46436,46 +46926,43 @@ var render = function() {
                       "label",
                       {
                         staticClass: "form-control-label",
-                        attrs: { for: "jenis_bahasa" }
+                        attrs: { for: "alamat" }
                       },
-                      [_vm._v("Jenis Bahasa")]
+                      [_vm._v("Alamat")]
                     ),
                     _vm._v(" "),
-                    _c("input", {
+                    _c("textarea", {
                       directives: [
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.jenis_bahasa,
-                          expression: "form.jenis_bahasa"
+                          value: _vm.form.alamat,
+                          expression: "form.alamat"
                         }
                       ],
                       staticClass: "form-control form-control-alternative",
                       attrs: {
+                        rows: "5",
                         type: "text",
-                        id: "jenis_bahasa",
-                        name: "jenis_bahasa",
-                        placeholder: "Nama Penerbit"
+                        id: "alamat",
+                        name: "alamat",
+                        placeholder: "Alamat"
                       },
-                      domProps: { value: _vm.form.jenis_bahasa },
+                      domProps: { value: _vm.form.alamat },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(
-                            _vm.form,
-                            "jenis_bahasa",
-                            $event.target.value
-                          )
+                          _vm.$set(_vm.form, "alamat", $event.target.value)
                         }
                       }
                     }),
                     _vm._v(" "),
-                    _vm.err.jenis_bahasa
+                    _vm.err.alamat
                       ? [
                           _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.jenis_bahasa[0]))
+                            _vm._v(_vm._s(_vm.err.alamat[0]))
                           ])
                         ]
                       : _vm._e()
@@ -46483,7 +46970,121 @@ var render = function() {
                   2
                 )
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "password" }
+                      },
+                      [_vm._v("Password")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.password,
+                          expression: "form.password"
+                        }
+                      ],
+                      staticClass: "form-control form-control-alternative",
+                      attrs: {
+                        type: "password",
+                        id: "password",
+                        name: "password",
+                        placeholder: "***********"
+                      },
+                      domProps: { value: _vm.form.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "password", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.password
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.password[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "password_confirmation" }
+                      },
+                      [_vm._v("Password Confirmation")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.password_confirmation,
+                          expression: "form.password_confirmation"
+                        }
+                      ],
+                      staticClass: "form-control form-control-alternative",
+                      attrs: {
+                        type: "password",
+                        id: "password_confirmation",
+                        password_confirmation: "password_confirmation",
+                        placeholder: "***********"
+                      },
+                      domProps: { value: _vm.form.password_confirmation },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.form,
+                            "password_confirmation",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.password_confirmation
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.password_confirmation[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
           ]),
           _vm._v(" "),
           _c(
@@ -46523,7 +47124,71 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          { staticClass: "form-control-label", attrs: { for: "id" } },
+          [_vm._v("Tanggal Lahir")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group input-group-alternative" }, [
+          _c("div", { staticClass: "input-group-prepend" }, [
+            _c("span", { staticClass: "input-group-text" }, [
+              _c("i", { staticClass: "ni ni-calendar-grid-58" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control datepicker",
+            attrs: {
+              placeholder: "Pilih tanggal lahir",
+              type: "text",
+              value: "06/20/2019"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "form-control-label", attrs: { for: "id" } },
+            [_vm._v("Upload Foto Anggota")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "custom-file" }, [
+            _c("input", {
+              staticClass: "custom-file-input",
+              attrs: { type: "file", id: "customFile" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-file-label",
+                attrs: { for: "customFile" }
+              },
+              [_vm._v("Choose file")]
+            )
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -46561,7 +47226,7 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "ni ni-fat-add text-white" }),
-                  _vm._v(" Tambah Bahasa")
+                  _vm._v(" Tambah Anggota")
                 ]
               )
             ])

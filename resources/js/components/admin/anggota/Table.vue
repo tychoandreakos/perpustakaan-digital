@@ -9,7 +9,7 @@
                         </div>
                         <div class="col text-right">
                             <a :href="this.route" class="btn btn-sm btn-primary"><i
-                                    class="ni ni-fat-add text-white"></i> Tambah Bahasa</a>
+                                    class="ni ni-fat-add text-white"></i> Tambah Anggota</a>
                         </div>
                     </div>
                 </div>
