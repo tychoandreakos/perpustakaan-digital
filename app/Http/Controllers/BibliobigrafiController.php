@@ -122,6 +122,11 @@ class BibliobigrafiController extends Controller
             $requestTransaksi['pola_eksemplar'] = ++$eksemplar->pola_eksemplar;
             $requestTransaksi['kode_eksemplar'] = $request->pola_eksemplar;
             $eks = EksemplarTransaksi::create($requestTransaksi);
+        } else {
+            $requestTransaksi = $request->all();
+            $requestTransaksi['pola_eksemplar'] = $request->pola_eksemplar;
+            $requestTransaksi['kode_eksemplar'] = $request->pola_eksemplar;
+            $eks = EksemplarTransaksi::create($requestTransaksi);
         }
 
        
@@ -130,7 +135,7 @@ class BibliobigrafiController extends Controller
         $requestBilio['buku_id'] = $buku->id;
         $requestBilio['klasifikasi_id'] = $request->klasifikasi_id;
         $requestBilio['gmd_id'] = $request->gmd_id;
-        $requestBilio['pola_eksemplar'] = $eks->id;
+        $requestBilio['pola_eksemplar'] = $eks->pola_eksemplar;
         Bibliobigrafi::create($requestBilio);
 
        }
