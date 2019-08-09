@@ -13,4 +13,9 @@ class Anggota extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function anggota_transaksi()
+    {
+        return $this->hasOne(AnggotaTransaksi::class);
+    }
 }

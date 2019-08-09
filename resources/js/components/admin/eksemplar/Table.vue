@@ -26,8 +26,7 @@
                         <tbody>
                             <tr v-for="item in datas.data" :key="item.id">
                                 <th scope="row" style="width: 10%">
-                                    <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
-                                            class="ni ni-check-bold text-white"></i> Edit</a>
+                                    <a :href="edit(item.id)" class="btn btn-danger btn-sm"><i class="ni ni-fat-remove text-white"></i></i> Hapus</a>
                                 </th>
                                 <td class="text-center">
                                     {{ item.pola_eksemplar | capitalize}}

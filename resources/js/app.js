@@ -79,6 +79,10 @@ Vue.component('form-tipe-anggota-component', require('./components/admin/tipe-an
 Vue.component('table-transaksi-eksemplar-component', require('./components/admin/eksemplar/Table.vue').default);
 Vue.component('form-transaksi-eksemplar-component', require('./components/admin/eksemplar/Form.vue').default);
 
+// bahasa
+Vue.component('table-anggota-component', require('./components/admin/anggota/Table.vue').default);
+Vue.component('form-anggota-component', require('./components/admin/anggota/Form.vue').default);
+
 
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));

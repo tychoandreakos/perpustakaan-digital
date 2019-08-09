@@ -38,6 +38,7 @@ Route::resource('buku', 'BukuController');
 Route::resource('klasifikasi', 'KlasifikasiController');
 Route::resource('tipe-anggota', 'TipeAnggotaController');
 Route::resource('eksemplar', 'EksemplarPolaController');
+Route::resource('anggota', 'AnggotaController');
 
 
 // transaksi file
@@ -55,6 +56,7 @@ Route::get('bahasa-fetch', 'BahasaController@fetch')->name('bahasa.fetch');
 Route::get('tipe-anggota-fetch', 'TipeAnggotaController@fetch')->name('tipe-anggota.fetch');
 Route::get('bibliobigrafi-fetch', 'BibliobigrafiController@fetch')->name('bibliobigrafi.fetch');
 Route::get('eksemplar-fetch', 'EksemplarTransaksiController@fetch')->name('transaksi-eksemplar.fetch');
+Route::get('anggota-fetch', 'AnggotaController@fetch')->name('anggota.fetch');
 
 
 
@@ -79,6 +81,7 @@ Route::get('bahasa-search', 'BahasaController@search');
 Route::get('tipe-anggota-search', 'TipeAnggotaController@search');
 Route::get('bibliobigrafi-search', 'BibliobigrafiController@search');
 Route::get('eksemplar-search', 'EksemplarTransaksiController@search');
+Route::get('anggota-search', 'AnggotaController@search');
 
 
 });
