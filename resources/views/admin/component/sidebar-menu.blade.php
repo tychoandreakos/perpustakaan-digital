@@ -26,7 +26,7 @@
                 <i class="ni ni-compass-04 text-orange"></i> Sirkulasi
             </a>
             <div class="dropdown-menu" style="left: 15px;">
-                <a href="#" class="dropdown-item">Mulai Transaksi</a>
+                <a href="{{ route('sirkulasi.index') }}" class="dropdown-item">Mulai Transaksi</a>
                 <a href="#" class="dropdown-item">Pengembalian Buku</a>
                 <a href="#" class="dropdown-item">Histori Peminjaman</a>
                 <a href="#" class="dropdown-item">Daftar Keterlambatan</a>

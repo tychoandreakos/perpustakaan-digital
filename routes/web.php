@@ -83,5 +83,15 @@ Route::get('bibliobigrafi-search', 'BibliobigrafiController@search');
 Route::get('eksemplar-search', 'EksemplarTransaksiController@search');
 Route::get('anggota-search', 'AnggotaController@search');
 
+// tool
+Route::get('sirkulasi', function() {
+    $title = 'Sirkulasi';
+    return view('admin.sirkulasi.sirkulasi', compact('title'));
+})->name('sirkulasi.index');
+Route::get('sirkulasi/{$id}', function() {
+    $title = 'Sirkulasi';
+    return view('admin.sirkulasi.table', compact('title'));
+})->name('sirkulasi.pinjam');
+
 
 });
