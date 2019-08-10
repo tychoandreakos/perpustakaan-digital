@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Bahasa extends Model
 {
@@ -10,6 +11,16 @@ class Bahasa extends Model
     protected $fillable = [
         'jenis_bahasa'
     ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
+    }
     
     public function buku_transaksi()
     {

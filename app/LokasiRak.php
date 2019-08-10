@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class LokasiRak extends Model
 {
@@ -11,4 +12,14 @@ class LokasiRak extends Model
         'kode_lokasi',
         'nama_lokasi'
     ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
+    }
 }

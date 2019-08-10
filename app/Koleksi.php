@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Koleksi extends Model
 {
@@ -10,4 +11,14 @@ class Koleksi extends Model
     protected $fillable = [
         'tipe_koleksi'
     ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
+    }
 }

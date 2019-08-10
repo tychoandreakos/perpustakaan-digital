@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Buku extends Model
 {
@@ -19,6 +20,16 @@ class Buku extends Model
         'pdf',
         'gambar_sampul',
     ];
+    
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
+    }
 
     public function buku_transaksi()
     {
