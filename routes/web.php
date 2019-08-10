@@ -58,6 +58,7 @@ Route::get('bibliobigrafi-fetch', 'BibliobigrafiController@fetch')->name('biblio
 Route::get('bibliobigrafi-sirkulasi', 'BibliobigrafiController@sirkulasi')->name('bibliobigrafi.sirkulasi');
 Route::get('eksemplar-fetch', 'EksemplarTransaksiController@fetch')->name('transaksi-eksemplar.fetch');
 Route::get('anggota-fetch', 'AnggotaController@fetch')->name('anggota.fetch');
+Route::get('eksemplar-keluar-fetch', 'PinjamController@eksemplar')->name('eksemplar-keluar.fetch');
 
 
 
@@ -83,6 +84,7 @@ Route::get('tipe-anggota-search', 'TipeAnggotaController@search');
 Route::get('bibliobigrafi-search', 'BibliobigrafiController@search');
 Route::get('eksemplar-search', 'EksemplarTransaksiController@search');
 Route::get('anggota-search', 'AnggotaController@search');
+Route::get('eksemplar-keluar-search', 'PinjamController@search');
 
 // tool
 Route::get('sirkulasi', function() {
@@ -94,6 +96,12 @@ Route::get('sirkulasi/{$id}', function() {
     return view('admin.sirkulasi.table', compact('title'));
 })->name('sirkulasi.pinjam');
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
+
+// eksemplar keluar
+Route::get('eksemplar-keluar', function() {
+    $title = 'Daftar Eksemplar Keluar';
+    return view('admin.eksemplar.home', compact('title'));    
+})->name('eksemplar.keluar');
 
 
 });

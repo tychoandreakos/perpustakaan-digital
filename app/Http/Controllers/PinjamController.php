@@ -25,4 +25,27 @@ class PinjamController extends Controller
         return response()->json([
             'message' => 'data berhasil disimpan']);
     }
+
+
+    public function search(Request $request)
+    {
+
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Pengarang::where('nama_pengarang','LIKE',"%$search%")
+            ->latest()
+            ->paginate(5);
+
+        }
+
+    }
+
+    public function eksemplar()
+    {
+        return Bibliobigrafi::with(['buku' => function($q){
+            $q->select('id', 'judul');
+        }, 'pinjam_transaksi'])->where('status_pinjam', 1)->paginate(5);
+    }
 }
