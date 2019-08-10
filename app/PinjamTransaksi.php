@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class PinjamTransaksi extends Model
 {
@@ -16,6 +17,17 @@ class PinjamTransaksi extends Model
         'status_pinjam'
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'tanggal_habis_pinjam'
+    ];
+
+    public function getTanggalHabisPinjamAttribute($value)
+    {
+        return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
+    }
+    
     public function users()
     {
         return $this->belongsTo(User::class);
