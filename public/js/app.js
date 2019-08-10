@@ -2057,6 +2057,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2067,13 +2069,18 @@ __webpack_require__.r(__webpack_exports__);
   props: ['index', 'fetch', 'tipe'],
   computed: {
     isDisabled: function isDisabled() {
-      return this.form.id.length == '' ? true : false;
+      return this.form.name.length == '' ? true : false;
+    },
+    tipe_anggota: function tipe_anggota() {
+      return this.form.tipe_anggota_id = this.value.id;
+    },
+    tipe_ang: function tipe_ang() {
+      return this.form.tipe = this.value.masa_berlaku_anggota;
     }
   },
   data: function data() {
     return {
       value: '',
-      jk: '',
       jkelamin: ['Pria', 'Wanita'],
       options: [],
       form: {
@@ -2082,14 +2089,15 @@ __webpack_require__.r(__webpack_exports__);
         email: this.fetch.email || '',
         password: this.fetch.password || '',
         password_confirmation: this.fetch.password_confirmation || '',
-        tgl_lahir: this.fetch.tgl_lahir || '',
+        tgl_lahir: this.fetch.tgl_lahir || '06/20/2019',
         tgl_registrasi: this.fetch.tgl_registrasi || '',
         tgl_ekspired: this.fetch.tgl_ekspired || '',
         alamat: this.fetch.alamat || '',
         jk: this.fetch.jk || '',
         no_telp: this.fetch.no_telp || '',
         foto: this.fetch.foto || '',
-        tipe_anggota_id: this.fetch.tipe_anggota_id || '',
+        tipe: this.tipe_ang,
+        tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
         _method: this.fetch.name ? 'PUT' : 'POST'
       },
       loading: false,
@@ -46711,7 +46719,7 @@ var render = function() {
                     _c("multiselect", {
                       attrs: {
                         "tag-placeholder": "Add this as new tag",
-                        placeholder: "Search or add a tag",
+                        placeholder: "Pilih tipe anggota",
                         label: "tipe_anggota",
                         "track-by": "tipe_anggota",
                         options: _vm.options
@@ -46737,7 +46745,48 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "form-control-label", attrs: { for: "id" } },
+                    [_vm._v("Tanggal Lahir")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "input-group input-group-alternative" },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.tgl_lahir,
+                            expression: "form.tgl_lahir"
+                          }
+                        ],
+                        staticClass: "form-control datepicker",
+                        attrs: {
+                          placeholder: "Pilih tanggal lahir",
+                          type: "text"
+                        },
+                        domProps: { value: _vm.form.tgl_lahir },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "tgl_lahir", $event.target.value)
+                          }
+                        }
+                      })
+                    ]
+                  )
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
@@ -46764,11 +46813,11 @@ var render = function() {
                         placeholder: "Pilih jenis kelamin"
                       },
                       model: {
-                        value: _vm.jk,
+                        value: _vm.form.jk,
                         callback: function($$v) {
-                          _vm.jk = $$v
+                          _vm.$set(_vm.form, "jk", $$v)
                         },
-                        expression: "jk"
+                        expression: "form.jk"
                       }
                     }),
                     _vm._v(" "),
@@ -47118,6 +47167,48 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.tipe_anggota,
+                  expression: "tipe_anggota"
+                }
+              ],
+              attrs: { type: "hidden" },
+              domProps: { value: _vm.tipe_anggota },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.tipe_anggota = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.tipe_ang,
+                  expression: "tipe_ang"
+                }
+              ],
+              attrs: { type: "hidden" },
+              domProps: { value: _vm.tipe_ang },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.tipe_ang = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
             _vm._m(1)
           ]),
           _vm._v(" "),
@@ -47163,30 +47254,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c(
-          "label",
-          { staticClass: "form-control-label", attrs: { for: "id" } },
-          [_vm._v("Tanggal Lahir")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group input-group-alternative" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c("span", { staticClass: "input-group-text" }, [
-              _c("i", { staticClass: "ni ni-calendar-grid-58" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control datepicker",
-            attrs: {
-              placeholder: "Pilih tanggal lahir",
-              type: "text",
-              value: "06/20/2019"
-            }
-          })
-        ])
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "ni ni-calendar-grid-58" })
       ])
     ])
   },

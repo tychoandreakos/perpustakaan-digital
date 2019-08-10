@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Anggota;
 use Illuminate\Http\Request;
 use App\AnggotaTransaksi;
+use App\User;
+use Carbon\Carbon;
 
 class AnggotaController extends Controller
 {
@@ -44,10 +46,32 @@ class AnggotaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'jenis_anggota' => 'required',
+            // 'id' => 'required|unique:users|integer',
+            'name' => 'required|min:3',
+            'password' => 'required|confirmed|min:6',
+            'email' => 'required|min:6',
+            'tgl_lahir' => 'required',
+            'alamat' => 'nullable|min:6',
+            'jk' => 'nullable',
+            'no_telp' => 'nullable|min:6',
+            'foto' => 'nullable',
         ]);
 
-        Anggota::create($request->all());
+        $dt = Carbon::now();
+
+        $user = User::create($request->all());
+
+        $requestTrans = $request->all();
+        $requestTrans['user_id'] = $user->id;
+        AnggotaTransaksi::create($requestTrans);
+
+        $requestData = $request->all();
+        $requestData['user_id'] = $user->id;
+        $requestData['tgl_registrasi'] = $dt->toDateString();
+        $requestData['tgl_expired'] = $dt->addYears($request->tipe);
+        $requestData['tgl_lahir'] = date('Y-m-d', strtotime($request->tgl_lahir));
+        $requestData['jk'] = ($request->jk == 'pria' || $request->jk == 'Pria') ? 0 : 1;
+        Anggota::create($requestData);
        
         return response()->json([
             'message' => 'data berhasil disimpan']);

@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class AnggotaTransaksi extends Model
 {
     protected $table = 'anggota_transaksi';
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'tipe_anggota_id'
+    ];
 
     public function user()
     {

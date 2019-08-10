@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="id">Tipe Anggota</label>
                                 <multiselect v-model="value" tag-placeholder="Add this as new tag"
-                                    placeholder="Search or add a tag" label="tipe_anggota" track-by="tipe_anggota"
+                                    placeholder="Pilih tipe anggota" label="tipe_anggota" track-by="tipe_anggota"
                                     :options="options"></multiselect>
                                 <template v-if="err.id">
                                     <span class="text-danger">{{ err.id[0] }}</span>
@@ -58,8 +58,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input class="form-control datepicker" placeholder="Pilih tanggal lahir" type="text"
-                                        value="06/20/2019">
+                                    <input class="form-control datepicker" v-model="form.tgl_lahir" placeholder="Pilih tanggal lahir" type="text">
                                 </div>
                             </div>
                         </div>
@@ -69,7 +68,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="id">Jenis Kelamin</label>
-                                <multiselect v-model="jk" :options="jkelamin" :searchable="false"
+                                <multiselect v-model="form.jk" :options="jkelamin" :searchable="false"
                                     :close-on-select="false" :show-labels="false" placeholder="Pilih jenis kelamin">
                                 </multiselect>
                                 <template v-if="err.id">
@@ -154,6 +153,9 @@
                         </div>
                     </div>
 
+                    <input type="hidden" v-model="tipe_anggota">
+                     <input type="hidden" v-model="tipe_ang">
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -207,7 +209,15 @@
 
         computed: {
             isDisabled() {
-                return (this.form.id.length == '' ? true : false)
+                return (this.form.name.length == '' ? true : false)
+            },
+
+            tipe_anggota() {
+                return this.form.tipe_anggota_id = this.value.id
+            },
+
+             tipe_ang() {
+                return this.form.tipe = this.value.masa_berlaku_anggota
             }
         },
 
@@ -215,7 +225,6 @@
             return {
 
                 value: '',
-                jk: '',
                 jkelamin: ['Pria', 'Wanita'],
                 options: [],
 
@@ -226,14 +235,15 @@
                     email: this.fetch.email || '',
                     password: this.fetch.password || '',
                     password_confirmation: this.fetch.password_confirmation || '',
-                    tgl_lahir: this.fetch.tgl_lahir || '',
+                    tgl_lahir: this.fetch.tgl_lahir || '06/20/2019',
                     tgl_registrasi: this.fetch.tgl_registrasi || '',
                     tgl_ekspired: this.fetch.tgl_ekspired || '',
                     alamat: this.fetch.alamat || '',
                     jk: this.fetch.jk || '',
                     no_telp: this.fetch.no_telp || '',
                     foto: this.fetch.foto || '',
-                    tipe_anggota_id: this.fetch.tipe_anggota_id || '',
+                    tipe: this.tipe_ang,
+                    tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
                     _method: (this.fetch.name ? 'PUT' : 'POST')
                 },
 
