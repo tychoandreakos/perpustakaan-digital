@@ -16,7 +16,6 @@ class CreateEksemplarTransaksisTable extends Migration
         Schema::create('eksemplar_transaksi', function (Blueprint $table) {
             $table->string('pola_eksemplar')->primary();
             $table->string('kode_eksemplar');
-            $table->boolean('status_pinjam')->default('0');
             $table->timestamps();
 
             $table->foreign('kode_eksemplar')->references('kode_eksemplar')->on('eksemplar_pola');

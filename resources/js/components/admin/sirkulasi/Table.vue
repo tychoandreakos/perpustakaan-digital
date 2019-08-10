@@ -92,6 +92,63 @@
                                 <button type="button" class="btn btn-primary mt-3 btn-lg btn-block">Selesai
                                     Transaksi</button>
                             </div>
+
+                            <vue-tabs>
+                                <v-tab title="Peminjaman Buku">
+                                    <div>
+                                        <div class="card card-stats mb-4 mb-lg-0">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="label">Cari Eksemplar Buku</label>
+                                                            <multiselect v-model="value" :options="option"
+                                                                :multiple="true" :close-on-select="false"
+                                                                :clear-on-select="false" :preserve-search="true"
+                                                                placeholder="Pick some" label="pola_eksemplar"
+                                                                track-by="pola_eksemplar" :preselect-first="true">
+                                                                <template slot="singleLabel"
+                                                                    slot-scope="{ value }"><strong>{{ value.pola_eksemplar }}</strong>
+                                                                    -
+                                                                    <strong>
+                                                                        {{ value.pola_eksemplar }}</strong></template>
+                                                            </multiselect>
+                                                            <pre class="language-json"><code>{{ value  }}</code></pre>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div
+                                                            class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                                            <i class="fas fa-chart-bar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="mt-3 mb-0 text-muted text-sm">
+                                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
+                                                        3.48%</span>
+                                                    <span class="text-nowrap">Since last month</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </v-tab>
+
+                                <v-tab title="Pinjaman Saat Ini">
+                                    Second tab content
+                                </v-tab>
+
+                                <v-tab title="Denda">
+                                    Third tab content
+                                </v-tab>
+
+                                <v-tab title="Histori Peminjaman">
+                                    Third tab content
+                                </v-tab>
+                            </vue-tabs>
                         </template>
 
                     </div>
@@ -105,19 +162,28 @@
 <script>
     import Multiselect from 'vue-multiselect'
     import Spinner from '../tools/Spanner';
+    import {
+        VueTabs,
+        VTab
+    } from 'vue-nav-tabs';
+    import 'vue-nav-tabs/themes/vue-tabs.css';
 
     export default {
         components: {
             Multiselect,
+            VueTabs,
+            VTab,
             SpinnerComponent: Spinner,
         },
-        props: ['route', 'fetch', 'index'],
+        props: ['fetch', 'index', 'eksemplar'],
         data() {
             return {
                 loading: false,
                 datas: [],
                 options: [],
                 form: '',
+                value: [],
+                option: []
             }
         },
 
@@ -134,6 +200,12 @@
                     .catch(err => console.log(err));
             },
 
+            getEksemplar() {
+                return axios.get(this.eksemplar)
+                    .then(res => this.option = res.data.data)
+                    .catch(err => console.log(err));
+            },
+
             go() {
                 this.loading = true;
                 setTimeout(() => {
@@ -146,6 +218,7 @@
 
         created() {
             this.getAnggota();
+            this.getEksemplar();
         },
     }
 

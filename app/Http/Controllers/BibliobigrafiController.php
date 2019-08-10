@@ -33,6 +33,15 @@ class BibliobigrafiController extends Controller
         return Buku::with('buku_transaksi.pengarang')->withCount('biblio')->latest()->paginate(5);
     }
 
+    public function sirkulasi()
+    {
+        return Bibliobigrafi::with(['buku' => function($q) {
+            $q->select('id', 'judul');
+        }, 'buku.buku_transaksi.pengarang' => function($q) {
+            $q->select('id', 'nama_pengarang');
+        }])->latest()->paginate(5);
+    }
+
     public function search(Request $request)
     {
         if($request->has('q')){

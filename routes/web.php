@@ -55,6 +55,7 @@ Route::get('klasifikasi-fetch', 'KlasifikasiController@fetch')->name('klasifikas
 Route::get('bahasa-fetch', 'BahasaController@fetch')->name('bahasa.fetch');
 Route::get('tipe-anggota-fetch', 'TipeAnggotaController@fetch')->name('tipe-anggota.fetch');
 Route::get('bibliobigrafi-fetch', 'BibliobigrafiController@fetch')->name('bibliobigrafi.fetch');
+Route::get('bibliobigrafi-sirkulasi', 'BibliobigrafiController@sirkulasi')->name('bibliobigrafi.sirkulasi');
 Route::get('eksemplar-fetch', 'EksemplarTransaksiController@fetch')->name('transaksi-eksemplar.fetch');
 Route::get('anggota-fetch', 'AnggotaController@fetch')->name('anggota.fetch');
 

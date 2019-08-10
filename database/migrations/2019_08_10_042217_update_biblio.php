@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateBuku1 extends Migration
+class UpdateBiblio extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class UpdateBuku1 extends Migration
      */
     public function up()
     {
-        Schema::table('buku', function (Blueprint $table) {
-            $table->integer('tahun_terbit')->after('edisi');
-            $table->string('pdf', 100)->after('slug')->nullable();
+        Schema::table('bibliobigrafi', function (Blueprint $table) {
+            $table->boolean('status_pinjam')->default('0')->after('pola_eksemplar');
         });
     }
 
@@ -26,7 +25,7 @@ class UpdateBuku1 extends Migration
      */
     public function down()
     {
-        Schema::table('buku', function (Blueprint $table) {
+        Schema::table('bibliobigrafi', function (Blueprint $table) {
             //
         });
     }
