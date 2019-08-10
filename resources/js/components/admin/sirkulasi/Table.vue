@@ -89,7 +89,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary mt-3 btn-lg btn-block">Selesai
+                                <button @click.prevent="simpan" type="button" class="btn btn-primary mt-3 btn-lg btn-block">Selesai
                                     Transaksi</button>
                             </div>
 
@@ -113,7 +113,46 @@
                                                                     <strong>
                                                                         {{ value.pola_eksemplar }}</strong></template>
                                                             </multiselect>
-                                                            <pre class="language-json"><code>{{ value  }}</code></pre>
+
+                                                            <template>
+                                                                <div class="table-responsive">
+                                                                    <div>
+                                                                        <table class="table align-items-center">
+                                                                            <thead class="thead-light">
+                                                                                <tr>
+                                                                                    <th scope="col">
+                                                                                        Pola Eksemplar
+                                                                                    </th>
+                                                                                    <th scope="col">
+                                                                                        Judul Buku
+                                                                                    </th>
+                                                                                    <th scope="col">
+                                                                                        Tanggal Pinjam
+                                                                                    </th>
+                                                                                    <th scope="col">
+                                                                                        Tanggal Harus Kembali
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody class="list">
+                                                                                <tr v-for="item in value"
+                                                                                    :key="item.id">
+                                                                                    <td>{{ item.pola_eksemplar | capitalize }}
+                                                                                    </td>
+                                                                                    <td>{{ item.buku.judul | capitalize }}
+                                                                                    </td>
+                                                                                    <td>{{ dates }}</td>
+                                                                                    <td>{{ kembali(form.tipe_anggota.masa_pinjaman_buku) }}
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                            </template>
                                                         </div>
                                                     </div>
                                                     <div class="col-auto">
@@ -151,6 +190,8 @@
                             </vue-tabs>
                         </template>
 
+                        <input type="text" hidden v-model="forms">
+
                     </div>
 
                 </div>
@@ -175,7 +216,7 @@
             VTab,
             SpinnerComponent: Spinner,
         },
-        props: ['fetch', 'index', 'eksemplar'],
+        props: ['fetch', 'index', 'eksemplar', 'store'],
         data() {
             return {
                 loading: false,
@@ -183,14 +224,34 @@
                 options: [],
                 form: '',
                 value: [],
-                option: []
+                option: [],
+                date2: ''
             }
         },
 
         computed: {
             ds() {
                 return (this.form != '' ? false : true)
-            }
+            },
+
+            forms() {
+                return {
+                    user_id: this.form.user_id,
+                    bibliobigrafi: this.value.map(r => r.id),
+                    tanggal_habis_pinjam: this.date2,
+                }
+            },
+            dates() {
+                var d = new Date(),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+
+                return [year, month, day].join('-');
+            },
         },
 
         methods: {
@@ -198,6 +259,40 @@
                 return axios.get(this.fetch)
                     .then(res => this.options = res.data.data)
                     .catch(err => console.log(err));
+            },
+
+            simpan() {
+                this.loading = true;
+                axios.post(this.store, this.forms)
+                    .then(res => {
+                        this.$swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: res.data.message.toUpperCase(),
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+
+                        setTimeout(() => {
+                            window.location = this.index;
+                        }, 3200)
+                    })
+                    .catch(err => {
+                        this.err = err.response.data.errors;
+                        this.loading = false;
+                    })
+            },
+            kembali(val) {
+                var d = new Date(),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + (d.getDate() + val),
+                    year = d.getFullYear();
+
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+
+                this.date2 = [year, month, day].join('-');
+                return [year, month, day].join('-');
             },
 
             getEksemplar() {
@@ -216,6 +311,7 @@
             },
         },
 
+
         created() {
             this.getAnggota();
             this.getEksemplar();
@@ -225,5 +321,19 @@
 </script>
 
 <style scoped>
+    .table td,
+    .table th {
+        font-size: 0.8125rem;
+        white-space: normal !important;
+    }
+
+    .buku {
+        color: #5e72e4;
+        cursor: pointer;
+    }
+
+    .buku:hover {
+        color: #233dd2;
+    }
 
 </style>

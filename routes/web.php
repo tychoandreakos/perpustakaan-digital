@@ -93,6 +93,7 @@ Route::get('sirkulasi/{$id}', function() {
     $title = 'Sirkulasi';
     return view('admin.sirkulasi.table', compact('title'));
 })->name('sirkulasi.pinjam');
+Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
 
 
 });

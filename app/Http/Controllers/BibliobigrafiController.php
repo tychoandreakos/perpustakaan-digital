@@ -39,7 +39,7 @@ class BibliobigrafiController extends Controller
             $q->select('id', 'judul');
         }, 'buku.buku_transaksi.pengarang' => function($q) {
             $q->select('id', 'nama_pengarang');
-        }])->latest()->paginate(5);
+        }])->where('status_pinjam', 0)->latest()->paginate(5);
     }
 
     public function search(Request $request)
