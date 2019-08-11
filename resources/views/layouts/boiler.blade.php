@@ -36,9 +36,6 @@
 </head>
 
 <body>
-    <header class="header-global">
-        @include('component.navbar')
-    </header>
     <main id="app">
         <!--
 
@@ -55,11 +52,7 @@
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
-<div class="position-relative">
-    <!-- Hero for FREE version -->
-    @include('component.hero')
-
-</div>
+            @yield('main')
     </main>
     
     @include('layouts.footer')

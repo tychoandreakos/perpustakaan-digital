@@ -19,6 +19,10 @@ Route::get('/', function () {
         return view('layouts.app');
     });
 
+Route::get('/daftar-tamu', function() {
+    return view('tamu');
+})->name('user.tamu');
+
 // Route::view('/', 'user');
 // Route::view('/{any}', 'user');
 

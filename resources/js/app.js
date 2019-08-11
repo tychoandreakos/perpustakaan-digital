@@ -89,9 +89,12 @@ Vue.component('form-anggota-component', require('./components/admin/anggota/Form
 Vue.component('table-sirkulasi-component', require('./components/admin/sirkulasi/Table.vue').default);
 Vue.component('form-sirkulasi-component', require('./components/admin/sirkulasi/Form.vue').default);
 
-// bahasa
+// eksemplar keluar
 Vue.component('table-eksemplar-keluar-component', require('./components/admin/eksemplar-keluar/Table.vue').default);
 Vue.component('form-eksemplar-keluar-component', require('./components/admin/eksemplar-keluar/Form.vue').default);
+
+// tamu
+Vue.component('app-tamu', require('./components/Tamu.vue').default);
 
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
