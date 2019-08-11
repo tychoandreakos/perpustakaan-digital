@@ -96,6 +96,9 @@ Vue.component('form-eksemplar-keluar-component', require('./components/admin/eks
 // tamu
 Vue.component('app-tamu', require('./components/Tamu.vue').default);
 
+// user
+Vue.component('app-home', require('./components/HomeLogin.vue').default);
+
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('search-component', require('./components/user/Search').default);

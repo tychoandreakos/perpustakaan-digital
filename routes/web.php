@@ -23,6 +23,9 @@ Route::get('/daftar-tamu', function() {
     return view('tamu');
 })->name('user.tamu');
 
+Route::get('users', function(){
+    return view('homes');
+});
 
 // fetch
 Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');
