@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
-use App\EksemplarPola;
+use App\Subyek;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
-class EksemplarPolaController extends Controller
+class SubyekController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,23 +36,18 @@ class EksemplarPolaController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->all();
-        $requestData['prefix'] = (int)strlen($request->prefix);
-        $requestData['serial'] = (int)$request->serial;
-        $requestData['suffix'] = (int)strlen($request->suffix) || 0;
-       EksemplarPola::create($requestData);
+        Subyek::create($request->all());
 
-       return response()->json([
-        'message' => 'data berhasil disimpan']);
+        return response('data berhasil disimpan', 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\EksemplarPola  $eksemplarPola
+     * @param  \App\Subyek  $subyek
      * @return \Illuminate\Http\Response
      */
-    public function show(EksemplarPola $eksemplarPola)
+    public function show(Subyek $subyek)
     {
         //
     }
@@ -60,34 +55,37 @@ class EksemplarPolaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\EksemplarPola  $eksemplarPola
+     * @param  \App\Subyek  $subyek
      * @return \Illuminate\Http\Response
      */
-    public function edit(EksemplarPola $eksemplarPola)
+    public function edit(Subyek $subyek)
     {
-        //
+       
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EksemplarPola  $eksemplarPola
+     * @param  \App\Subyek  $subyek
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EksemplarPola $eksemplarPola)
+    public function update(Request $request, Subyek $subyek)
     {
-        //
+        $subyek->update($request->all());
+
+        return response('data berhasil diubah', 200);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EksemplarPola  $eksemplarPola
+     * @param  \App\Subyek  $subyek
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EksemplarPola $eksemplarPola)
+    public function destroy(Subyek $subyek)
     {
-        //
+        $subyek->delete();
     }
 }

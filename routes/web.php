@@ -19,8 +19,7 @@ Route::get('/', function () {
 // Route::view('/{any}', 'user');
 
 // admin prefix
-
-Route::prefix('pustakawan')->group( function() {
+Route::prefix('pustakawan')->namespace('Admin')->group(function() {
 
     Route::view('/', 'admin.home')->name('home');
 

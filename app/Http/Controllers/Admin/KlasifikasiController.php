@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
-use App\Gmd;
+use App\Klasifikasi;
 use Illuminate\Http\Request;
 
-class GmdController extends Controller
+class KlasifikasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Responses
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $title = 'Daftar GMD';
-        return view('admin.master.gmd.home', compact('title'));
+        $title = 'Daftar Klasifikasi';
+        return view('admin.master.klasifikasi.home', compact('title'));
     }
 
     public function fetch()
     {
-        return Gmd::latest()->paginate(5);
+        return Klasifikasi::latest()->paginate(5);
     }
 
     /**
@@ -30,8 +31,8 @@ class GmdController extends Controller
      */
     public function create()
     {
-        $title = 'Tambah GMD';
-        return view('admin.master.gmd.add', compact('title'));
+        $title = 'Tambah Klasifikasi';
+        return view('admin.master.klasifikasi.add', compact('title'));
     }
 
     /**
@@ -43,11 +44,10 @@ class GmdController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kode_gmd' => 'required|unique:gmd',
-            'nama_gmd' => 'required',
+            'tipe_klasifikasi' => 'required',
         ]);
-
-        Gmd::create($request->all());
+        
+        Klasifikasi::create($request->all());
 
         return response()->json([
             'message' => 'data berhasil disimpan']);
@@ -56,10 +56,10 @@ class GmdController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Gmd  $gmd
+     * @param  \App\Klasifikasi  $klasifikasi
      * @return \Illuminate\Http\Response
      */
-    public function show(Gmd $gmd)
+    public function show(Klasifikasi $klasifikasi)
     {
         //
     }
@@ -67,57 +67,52 @@ class GmdController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Gmd  $gmd
+     * @param  \App\Klasifikasi  $klasifikasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gmd $gmd)
+    public function edit(Klasifikasi $klasifikasi)
     {
-        $title = 'Update GMD';
-        return view('admin.master.gmd.edit' ,compact('gmd', 'title'));
+        $title = 'Update Klasifikasi';
+        return view('admin.master.klasifikasi.edit' ,compact('klasifikasi', 'title'));
     }
 
     public function search(Request $request)
     {
-        // $data = [];
-
-
         if($request->has('q')){
 
             $search = $request->q;
 
-            return Gmd::where('kode_gmd','LIKE',"%$search%")->
-            orWhere('nama_gmd', "LIKE", "%$search%")->orderBy('updated_at', 'DESC')->paginate(5);
-
+            return Klasifikasi::where('tipe_klasifikasi','LIKE',"%$search%")
+            ->latest()->paginate(5);
         }
 
-
-        // return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Gmd  $gmd
+     * @param  \App\Klasifikasi  $klasifikasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gmd $gmd)
+    public function update(Request $request, Klasifikasi $klasifikasi)
     {
-       $gmd->update($request->input());
-        
-       return response()->json([
-        'message' => 'data berhasil diubah']);
+        $klasifikasi->update($request->all());
+
+        return response()->json([
+            'message' => 'data berhasil diubah']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Gmd  $gmd
+     * @param  \App\Klasifikasi  $klasifikasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gmd $gmd)
+    public function destroy(Klasifikasi $klasifikasi)
     {
-        $gmd->delete();
+        $klasifikasi->delete();
+
         return response()->json([
             'message' => 'data berhasil dihapus']);
     }

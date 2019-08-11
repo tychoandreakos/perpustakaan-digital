@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
-use App\Subyek;
+use App\lokasi_rak;
 use Illuminate\Http\Request;
+use App\LokasiRak;
 
-class SubyekController extends Controller
+class LokasiRakController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +37,7 @@ class SubyekController extends Controller
      */
     public function store(Request $request)
     {
-        Subyek::create($request->all());
+        LokasiRak::create($request->all());
 
         return response('data berhasil disimpan', 200);
     }
@@ -43,10 +45,10 @@ class SubyekController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Subyek  $subyek
+     * @param  \App\lokasi_rak  $lokasi_rak
      * @return \Illuminate\Http\Response
      */
-    public function show(Subyek $subyek)
+    public function show(lokasi_rak $lokasi_rak)
     {
         //
     }
@@ -54,37 +56,34 @@ class SubyekController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Subyek  $subyek
+     * @param  \App\lokasi_rak  $lokasi_rak
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subyek $subyek)
+    public function edit(lokasi_rak $lokasi_rak)
     {
-       
+        
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subyek  $subyek
+     * @param  \App\lokasi_rak  $lokasi_rak
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subyek $subyek)
+    public function update(Request $request, lokasi_rak $lokasi_rak)
     {
-        $subyek->update($request->all());
-
-        return response('data berhasil diubah', 200);
-
+        $lokasi_rak->update($request->all);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Subyek  $subyek
+     * @param  \App\lokasi_rak  $lokasi_rak
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subyek $subyek)
+    public function destroy(lokasi_rak $lokasi_rak)
     {
-        $subyek->delete();
+        $lokasi_rak->delete();
     }
 }

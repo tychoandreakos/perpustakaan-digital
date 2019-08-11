@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
-use App\lokasi_rak;
+use App\EksemplarPola;
 use Illuminate\Http\Request;
-use App\LokasiRak;
+use Illuminate\Support\Facades\Response;
 
-class LokasiRakController extends Controller
+class EksemplarPolaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,18 +37,23 @@ class LokasiRakController extends Controller
      */
     public function store(Request $request)
     {
-        LokasiRak::create($request->all());
+        $requestData = $request->all();
+        $requestData['prefix'] = (int)strlen($request->prefix);
+        $requestData['serial'] = (int)$request->serial;
+        $requestData['suffix'] = (int)strlen($request->suffix) || 0;
+       EksemplarPola::create($requestData);
 
-        return response('data berhasil disimpan', 200);
+       return response()->json([
+        'message' => 'data berhasil disimpan']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\lokasi_rak  $lokasi_rak
+     * @param  \App\EksemplarPola  $eksemplarPola
      * @return \Illuminate\Http\Response
      */
-    public function show(lokasi_rak $lokasi_rak)
+    public function show(EksemplarPola $eksemplarPola)
     {
         //
     }
@@ -55,34 +61,34 @@ class LokasiRakController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\lokasi_rak  $lokasi_rak
+     * @param  \App\EksemplarPola  $eksemplarPola
      * @return \Illuminate\Http\Response
      */
-    public function edit(lokasi_rak $lokasi_rak)
+    public function edit(EksemplarPola $eksemplarPola)
     {
-        
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\lokasi_rak  $lokasi_rak
+     * @param  \App\EksemplarPola  $eksemplarPola
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, lokasi_rak $lokasi_rak)
+    public function update(Request $request, EksemplarPola $eksemplarPola)
     {
-        $lokasi_rak->update($request->all);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\lokasi_rak  $lokasi_rak
+     * @param  \App\EksemplarPola  $eksemplarPola
      * @return \Illuminate\Http\Response
      */
-    public function destroy(lokasi_rak $lokasi_rak)
+    public function destroy(EksemplarPola $eksemplarPola)
     {
-        $lokasi_rak->delete();
+        //
     }
 }

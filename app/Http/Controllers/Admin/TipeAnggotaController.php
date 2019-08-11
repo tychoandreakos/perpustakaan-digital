@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
-use App\Penerbit;
+use App\TipeAnggota;
 use Illuminate\Http\Request;
 
-class PenerbitController extends Controller
+class TipeAnggotaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +15,13 @@ class PenerbitController extends Controller
      */
     public function index()
     {
-        $title = 'Daftar Penerbit';
-        return view('admin.master.penerbit.home', compact('title'));
+        $title = 'Daftar Tipe Anggota';
+        return view('admin.keanggotaan.tipe.home', compact('title'));
     }
 
     public function fetch()
     {
-        return Penerbit::latest()->paginate(5);
+        return TipeAnggota::latest()->paginate(5);
     }
 
     /**
@@ -30,8 +31,8 @@ class PenerbitController extends Controller
      */
     public function create()
     {
-        $title = 'Tambah Penerbit';
-        return view('admin.master.penerbit.add', compact('title'));
+        $title = 'Tambah Tipe Anggota';
+        return view('admin.keanggotaan.tipe.add', compact('title'));
     }
 
     /**
@@ -43,11 +44,15 @@ class PenerbitController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_penerbit' => 'required',
+            'tipe_anggota' => 'required|unique:tipe_anggota',
+            'jumlah_pinjaman' => 'required',
+            'masa_berlaku_anggota' => 'required',
+            'batas_perpanjangan_anggota' => 'required',
+            'denda' => 'required',    
         ]);
 
-        Penerbit::create($request->all());
-
+        TipeAnggota::create($request->all());
+       
         return response()->json([
             'message' => 'data berhasil disimpan']);
     }
@@ -55,10 +60,10 @@ class PenerbitController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Penerbit  $penerbit
+     * @param  \App\TipeAnggota  $tipeAnggotum
      * @return \Illuminate\Http\Response
      */
-    public function show(Penerbit $penerbit)
+    public function show(TipeAnggota $tipeAnggotum)
     {
         //
     }
@@ -66,44 +71,37 @@ class PenerbitController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Penerbit  $penerbit
+     * @param  \App\TipeAnggota  $tipeAnggotum
      * @return \Illuminate\Http\Response
      */
-    public function edit(Penerbit $penerbit)
+    public function edit(TipeAnggota $tipeAnggotum)
     {
-        $title = 'Update Penerbit';
-        return view('admin.master.penerbit.edit' ,compact('penerbit', 'title'));
+        $title = 'Update Tipe Anggota';
+        return view('admin.keanggotaan.tipe.edit' ,compact('tipeAnggotum', 'title'));
     }
-    
+
     public function search(Request $request)
     {
-        // $data = [];
-
-
         if($request->has('q')){
 
             $search = $request->q;
 
-            return Penerbit::where('nama_penerbit','LIKE',"%$search%")
-            ->orderBy('updated_at', 'DESC')
-            ->paginate(5);
-
+            return TipeAnggota::where('tipe_anggota','LIKE',"%$search%")
+            ->latest()->paginate(5);
         }
 
-
-        // return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Penerbit  $penerbit
+     * @param  \App\TipeAnggota  $tipeAnggotum
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Penerbit $penerbit)
+    public function update(Request $request, TipeAnggota $tipeAnggotum)
     {
-        $penerbit->update($request->all());
+        $tipeAnggotum->update($request->all());
 
         return response()->json([
             'message' => 'data berhasil diubah']);
@@ -112,12 +110,12 @@ class PenerbitController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Penerbit  $penerbit
+     * @param  \App\TipeAnggota  $tipeAnggotum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Penerbit $penerbit)
+    public function destroy(TipeAnggota $tipeAnggotum)
     {
-        $penerbit->delete();
+        $tipeAnggotum->delete();
 
         return response()->json([
             'message' => 'data berhasil dihapus']);

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
-use App\TipeAnggota;
+use App\Kota;
 use Illuminate\Http\Request;
 
-class TipeAnggotaController extends Controller
+class KotaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +15,13 @@ class TipeAnggotaController extends Controller
      */
     public function index()
     {
-        $title = 'Daftar Tipe Anggota';
-        return view('admin.keanggotaan.tipe.home', compact('title'));
+        $title = 'Daftar Kota';
+        return view('admin.master.kota.home', compact('title'));
     }
 
     public function fetch()
     {
-        return TipeAnggota::latest()->paginate(5);
+        return Kota::latest()->paginate(5);
     }
 
     /**
@@ -30,8 +31,8 @@ class TipeAnggotaController extends Controller
      */
     public function create()
     {
-        $title = 'Tambah Tipe Anggota';
-        return view('admin.keanggotaan.tipe.add', compact('title'));
+        $title = 'Tambah Kota';
+        return view('admin.master.kota.add', compact('title'));
     }
 
     /**
@@ -43,40 +44,36 @@ class TipeAnggotaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'tipe_anggota' => 'required|unique:tipe_anggota',
-            'jumlah_pinjaman' => 'required',
-            'masa_berlaku_anggota' => 'required',
-            'batas_perpanjangan_anggota' => 'required',
-            'denda' => 'required',    
+            'nama_kota' => 'required',
         ]);
 
-        TipeAnggota::create($request->all());
-       
-        return response()->json([
+        Kota::create($request->all());
+
+          return response()->json([
             'message' => 'data berhasil disimpan']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\TipeAnggota  $tipeAnggotum
+     * @param  \App\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function show(TipeAnggota $tipeAnggotum)
+    public function show(Kota $kotum)
     {
-        //
+        return $kotum;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TipeAnggota  $tipeAnggotum
+     * @param  \App\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function edit(TipeAnggota $tipeAnggotum)
+    public function edit(Kota $kotum)
     {
-        $title = 'Update Tipe Anggota';
-        return view('admin.keanggotaan.tipe.edit' ,compact('tipeAnggotum', 'title'));
+        $title = 'Update Kota';
+        return view('admin.master.kota.edit' ,compact('kotum', 'title'));
     }
 
     public function search(Request $request)
@@ -85,22 +82,25 @@ class TipeAnggotaController extends Controller
 
             $search = $request->q;
 
-            return TipeAnggota::where('tipe_anggota','LIKE',"%$search%")
+            return Kota::where('nama_kota','LIKE',"%$search%")
             ->latest()->paginate(5);
         }
 
     }
 
+
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TipeAnggota  $tipeAnggotum
+     * @param  \App\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipeAnggota $tipeAnggotum)
+    public function update(Request $request, Kota $kotum)
     {
-        $tipeAnggotum->update($request->all());
+        // return response($request->all());
+    
+        $kotum->update($request->all());
 
         return response()->json([
             'message' => 'data berhasil diubah']);
@@ -109,12 +109,12 @@ class TipeAnggotaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TipeAnggota  $tipeAnggotum
+     * @param  \App\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipeAnggota $tipeAnggotum)
+    public function destroy(Kota $kotum)
     {
-        $tipeAnggotum->delete();
+        $kotum->delete();
 
         return response()->json([
             'message' => 'data berhasil dihapus']);

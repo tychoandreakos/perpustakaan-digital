@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
-use App\Klasifikasi;
+use App\Penerbit;
 use Illuminate\Http\Request;
 
-class KlasifikasiController extends Controller
+class PenerbitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +15,13 @@ class KlasifikasiController extends Controller
      */
     public function index()
     {
-        $title = 'Daftar Klasifikasi';
-        return view('admin.master.klasifikasi.home', compact('title'));
+        $title = 'Daftar Penerbit';
+        return view('admin.master.penerbit.home', compact('title'));
     }
 
     public function fetch()
     {
-        return Klasifikasi::latest()->paginate(5);
+        return Penerbit::latest()->paginate(5);
     }
 
     /**
@@ -30,8 +31,8 @@ class KlasifikasiController extends Controller
      */
     public function create()
     {
-        $title = 'Tambah Klasifikasi';
-        return view('admin.master.klasifikasi.add', compact('title'));
+        $title = 'Tambah Penerbit';
+        return view('admin.master.penerbit.add', compact('title'));
     }
 
     /**
@@ -43,10 +44,10 @@ class KlasifikasiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'tipe_klasifikasi' => 'required',
+            'nama_penerbit' => 'required',
         ]);
-        
-        Klasifikasi::create($request->all());
+
+        Penerbit::create($request->all());
 
         return response()->json([
             'message' => 'data berhasil disimpan']);
@@ -55,10 +56,10 @@ class KlasifikasiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Klasifikasi  $klasifikasi
+     * @param  \App\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function show(Klasifikasi $klasifikasi)
+    public function show(Penerbit $penerbit)
     {
         //
     }
@@ -66,37 +67,44 @@ class KlasifikasiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Klasifikasi  $klasifikasi
+     * @param  \App\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Klasifikasi $klasifikasi)
+    public function edit(Penerbit $penerbit)
     {
-        $title = 'Update Klasifikasi';
-        return view('admin.master.klasifikasi.edit' ,compact('klasifikasi', 'title'));
+        $title = 'Update Penerbit';
+        return view('admin.master.penerbit.edit' ,compact('penerbit', 'title'));
     }
-
+    
     public function search(Request $request)
     {
+        // $data = [];
+
+
         if($request->has('q')){
 
             $search = $request->q;
 
-            return Klasifikasi::where('tipe_klasifikasi','LIKE',"%$search%")
-            ->latest()->paginate(5);
+            return Penerbit::where('nama_penerbit','LIKE',"%$search%")
+            ->orderBy('updated_at', 'DESC')
+            ->paginate(5);
+
         }
 
+
+        // return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Klasifikasi  $klasifikasi
+     * @param  \App\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Klasifikasi $klasifikasi)
+    public function update(Request $request, Penerbit $penerbit)
     {
-        $klasifikasi->update($request->all());
+        $penerbit->update($request->all());
 
         return response()->json([
             'message' => 'data berhasil diubah']);
@@ -105,12 +113,12 @@ class KlasifikasiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Klasifikasi  $klasifikasi
+     * @param  \App\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Klasifikasi $klasifikasi)
+    public function destroy(Penerbit $penerbit)
     {
-        $klasifikasi->delete();
+        $penerbit->delete();
 
         return response()->json([
             'message' => 'data berhasil dihapus']);

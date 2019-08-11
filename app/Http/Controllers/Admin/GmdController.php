@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
-use App\Kota;
+use App\Gmd;
 use Illuminate\Http\Request;
 
-class KotaController extends Controller
+class GmdController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responses
      */
     public function index()
     {
-        $title = 'Daftar KOta';
-        return view('admin.master.kota.home', compact('title'));
+        $title = 'Daftar GMD';
+        return view('admin.master.gmd.home', compact('title'));
     }
 
     public function fetch()
     {
-        return Kota::latest()->paginate(5);
+        return Gmd::latest()->paginate(5);
     }
 
     /**
@@ -30,8 +31,8 @@ class KotaController extends Controller
      */
     public function create()
     {
-        $title = 'Tambah Kota';
-        return view('admin.master.kota.add', compact('title'));
+        $title = 'Tambah GMD';
+        return view('admin.master.gmd.add', compact('title'));
     }
 
     /**
@@ -43,78 +44,81 @@ class KotaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_kota' => 'required',
+            'kode_gmd' => 'required|unique:gmd',
+            'nama_gmd' => 'required',
         ]);
 
-        Kota::create($request->all());
+        Gmd::create($request->all());
 
-          return response()->json([
+        return response()->json([
             'message' => 'data berhasil disimpan']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Kota  $kota
+     * @param  \App\Gmd  $gmd
      * @return \Illuminate\Http\Response
      */
-    public function show(Kota $kotum)
+    public function show(Gmd $gmd)
     {
-        return $kotum;
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Kota  $kota
+     * @param  \App\Gmd  $gmd
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kota $kotum)
+    public function edit(Gmd $gmd)
     {
-        $title = 'Update Kota';
-        return view('admin.master.kota.edit' ,compact('kotum', 'title'));
+        $title = 'Update GMD';
+        return view('admin.master.gmd.edit' ,compact('gmd', 'title'));
     }
 
     public function search(Request $request)
     {
+        // $data = [];
+
+
         if($request->has('q')){
 
             $search = $request->q;
 
-            return Kota::where('nama_kota','LIKE',"%$search%")
-            ->latest()->paginate(5);
+            return Gmd::where('kode_gmd','LIKE',"%$search%")->
+            orWhere('nama_gmd', "LIKE", "%$search%")->orderBy('updated_at', 'DESC')->paginate(5);
+
         }
 
-    }
 
+        // return response()->json($data);
+    }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Kota  $kota
+     * @param  \App\Gmd  $gmd
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kota $kotum)
+    public function update(Request $request, Gmd $gmd)
     {
-        // return response($request->all());
-    
-        $kotum->update($request->all());
-
-        return response()->json([
-            'message' => 'data berhasil diubah']);
+       $gmd->update($request->input());
+        
+       return response()->json([
+        'message' => 'data berhasil diubah']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Kota  $kota
+     * @param  \App\Gmd  $gmd
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kota $kotum)
+    public function destroy(Gmd $gmd)
     {
-        $kotum->delete();
-
+        $gmd->delete();
         return response()->json([
             'message' => 'data berhasil dihapus']);
     }
