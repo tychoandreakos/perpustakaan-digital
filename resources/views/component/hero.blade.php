@@ -22,13 +22,13 @@
                     <div class="form-group">
                         <search-component></search-component>
                     </div>
-                    <div class="btn-wrapper mt-5">
+                    {{-- <div class="btn-wrapper mt-5">
                         <a href="https://github.com/creativetimofficial/argon-design-system"
                             class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
                             <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
                             <span class="btn-inner--text"><span class="text-success">Cari</span> Koleksi Buku</span>
                         </a>
-                    </div>
+                    </div> --}}
                     <div class="mt-5">
                         <small class="text-white font-weight-bold mb-0 mr-2">*proudly coded by</small>
                         <img alt="image" src="{{ asset('img/brand/creativetim-white-slim.png') }}"

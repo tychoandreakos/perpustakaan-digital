@@ -10,7 +10,8 @@ import User from './helpers/User';
 import router from './router';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VModal from 'vue-js-modal'
-import Autocomplete from 'v-autocomplete'
+import 'vue-instant/dist/vue-instant.css'
+import VueInstant from 'vue-instant'
 
 window.User = User;
 window.Vue = require('vue');
@@ -22,6 +23,7 @@ window.Fire = new Vue();
 // vue use
 Vue.use(VueSweetalert2);
 Vue.use(VModal);
+Vue.use(VueInstant)
 
 /**
  * The following block of code may be used to automatically register your
