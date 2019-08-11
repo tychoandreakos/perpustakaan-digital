@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e55427d8810d58a5f7cfd38fff15f64",
+    "content-hash": "286c06a3209fb8e0bb312d9259b326ed",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -5090,6 +5090,63 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2016-10-03T07:35:21+00:00"
+        },
+        {
+            "name": "sven/artisan-view",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/svenluijten/artisan-view.git",
+                "reference": "701aaa0d1a14a0c5ef673b310ce37340f3f10d2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/svenluijten/artisan-view/zipball/701aaa0d1a14a0c5ef673b310ce37340f3f10d2b",
+                "reference": "701aaa0d1a14a0c5ef673b310ce37340f3f10d2b",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^5.0",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Sven\\ArtisanView\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sven\\ArtisanView\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Luijten",
+                    "email": "svenluijten1995@gmail.com",
+                    "homepage": "https://svenluijten.com"
+                }
+            ],
+            "description": "Manage your views in Laravel projects through artisan",
+            "keywords": [
+                "artisan",
+                "blade",
+                "laravel",
+                "templates",
+                "views"
+            ],
+            "time": "2019-02-27T08:21:48+00:00"
         },
         {
             "name": "theseer/tokenizer",

@@ -9,8 +9,8 @@ require('./bootstrap');
 import User from './helpers/User';
 import router from './router';
 import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
 import VModal from 'vue-js-modal'
+import Autocomplete from 'v-autocomplete'
 
 window.User = User;
 window.Vue = require('vue');
@@ -21,7 +21,7 @@ window.Fire = new Vue();
 
 // vue use
 Vue.use(VueSweetalert2);
-Vue.use(VModal)
+Vue.use(VModal);
 
 /**
  * The following block of code may be used to automatically register your
@@ -93,6 +93,7 @@ Vue.component('form-eksemplar-keluar-component', require('./components/admin/eks
 
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('search-component', require('./components/user/Search').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

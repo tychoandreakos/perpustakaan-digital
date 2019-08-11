@@ -11,9 +11,13 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('user');
+// });
+
 Route::get('/', function () {
-    return view('user');
-});
+        return view('layouts.app');
+    });
 
 // Route::view('/', 'user');
 // Route::view('/{any}', 'user');
