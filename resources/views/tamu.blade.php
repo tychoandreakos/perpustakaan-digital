@@ -7,7 +7,7 @@
     </div>
   <div class="row justify-content-center">
     <div class="col col-lg-12">
-        <app-tamu></app-tamu>
+    <app-tamu store="{{ route('tool.tamu') }}"></app-tamu>
     </div>
   </div>
 </div>

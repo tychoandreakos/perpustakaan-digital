@@ -23,6 +23,10 @@ Route::get('/daftar-tamu', function() {
     return view('tamu');
 })->name('user.tamu');
 
+
+// fetch
+Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');
+
 // Route::view('/', 'user');
 // Route::view('/{any}', 'user');
 

@@ -1980,6 +1980,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal */ "./resources/js/components/Modal.vue");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _admin_tools_Spanner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_3__);
 //
 //
 //
@@ -2041,19 +2044,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     appModal: _Modal__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a,
+    SpinnerComponent: _admin_tools_Spanner__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  computed: {
+    form: function form() {
+      return {
+        nama: '',
+        jurusan: this.jurusan.name,
+        keperluan: this.keperluan.name,
+        alamat: ''
+      };
+    }
+  },
+  props: ['store'],
   data: function data() {
     return {
-      value: {
+      jurusan: {
         name: 'Vue.js',
         language: 'JavaScript'
       },
+      keperluan: {
+        name: 'Vue.js',
+        language: 'JavaScript'
+      },
+      loading: false,
+      err: {},
       options: [{
         name: 'Vue.js',
         language: 'JavaScript'
@@ -2077,6 +2134,32 @@ __webpack_require__.r(__webpack_exports__);
       var name = _ref.name,
           language = _ref.language;
       return "".concat(name, " \u2014 [").concat(language, "]");
+    },
+    simpan: function simpan() {
+      var _this = this;
+
+      this.loading = true;
+      axios.post(this.store, this.form).then(function (res) {
+        _this.$swal({
+          position: 'top-end',
+          type: 'success',
+          title: res.data.message.toUpperCase(),
+          showConfirmButton: false,
+          timer: 3000
+        });
+
+        _this.nama = '';
+        _this.jurusan = '';
+        _this.keperluan = '';
+        _this.alamat = '';
+        Object(timers__WEBPACK_IMPORTED_MODULE_3__["setTimeout"])(function () {
+          _this.loading = false;
+          _this.err = {};
+        }, 3200);
+      })["catch"](function (err) {
+        _this.err = err.response.data.errors;
+        _this.loading = false;
+      });
     }
   }
 });
@@ -47869,67 +47952,227 @@ var render = function() {
       _vm._v("\n        Daftar Tamu\n    ")
     ]),
     _vm._v(" "),
-    _c("form", [
-      _c("div", { staticClass: "row" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _c("label", { attrs: { for: "nama" } }, [_vm._v("Jurusan")]),
+    _c("h6", { staticClass: "text-center" }, [
+      _vm._v("Harap isi identitas diri anda dibawah ini.")
+    ]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.simpan($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "nama" } }, [_vm._v("Nama")]),
               _vm._v(" "),
-              _c("multiselect", {
-                attrs: {
-                  options: _vm.options,
-                  "custom-label": _vm.nameWithLang,
-                  placeholder: "Select one",
-                  label: "name",
-                  "track-by": "name"
-                },
-                model: {
-                  value: _vm.value,
-                  callback: function($$v) {
-                    _vm.value = $$v
+              _c("div", { staticClass: "input-group mb-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.lazy",
+                      value: _vm.form.nama,
+                      expression: "form.nama",
+                      modifiers: { lazy: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { placeholder: "Masukkan Nama", type: "text" },
+                  domProps: { value: _vm.form.nama },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "nama", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "nama" } }, [_vm._v("Jurusan")]),
+                _vm._v(" "),
+                _c("multiselect", {
+                  attrs: {
+                    options: _vm.options,
+                    "custom-label": _vm.nameWithLang,
+                    placeholder: "Select one",
+                    label: "name",
+                    "track-by": "name"
                   },
-                  expression: "value"
-                }
-              })
-            ],
-            1
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _vm._m(2),
+                  model: {
+                    value: _vm.jurusan,
+                    callback: function($$v) {
+                      _vm.jurusan = $$v
+                    },
+                    expression: "jurusan"
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "nama" } }, [_vm._v("Keperluan")]),
+                _vm._v(" "),
+                _c("multiselect", {
+                  attrs: {
+                    options: _vm.options,
+                    "custom-label": _vm.nameWithLang,
+                    placeholder: "Select one",
+                    label: "name",
+                    "track-by": "name"
+                  },
+                  model: {
+                    value: _vm.keperluan,
+                    callback: function($$v) {
+                      _vm.keperluan = $$v
+                    },
+                    expression: "keperluan"
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "nama" } }, [_vm._v("Alamat")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group mb-4" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.lazy",
+                      value: _vm.form.alamat,
+                      expression: "form.alamat",
+                      modifiers: { lazy: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    refs: "h",
+                    id: "exampleFormControlTextarea1",
+                    rows: "3",
+                    placeholder: "Write a large text here ..."
+                  },
+                  domProps: { value: _vm.form.alamat },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "alamat", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.err.nama
+          ? [
+              _c("li", [
+                _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(_vm._s(_vm.err.nama[0]))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("br")
+            ]
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.err.alamat
+          ? [
+              _c("li", [
+                _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(_vm._s(_vm.err.alamat[0]))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("br")
+            ]
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.err.jurusan
+          ? [
+              _c("li", [
+                _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(_vm._s(_vm.err.jurusan[0]))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("br")
+            ]
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.err.keperluan
+          ? [
+              _c("li", [
+                _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(_vm._s(_vm.err.keperluan[0]))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("br")
+            ]
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col col-md-9" },
+          { staticClass: "row" },
           [
-            _c("app-modal", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-block btn-outline-warning mb-3",
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "modal",
-                    "data-target": "#modal-notification"
-                  }
-                },
-                [_vm._v("Cari Koleksi Buku")]
-              )
-            ])
+            _vm.loading ? [_c("spinner-component")] : [_vm._m(1)],
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col col-md-9" },
+              [
+                _c("app-modal", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-outline-warning mb-3",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#modal-notification"
+                      }
+                    },
+                    [_vm._v("Cari Koleksi Buku")]
+                  )
+                ])
+              ],
+              1
+            )
           ],
-          1
+          2
         )
-      ])
-    ])
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
@@ -47937,45 +48180,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "nama" } }, [_vm._v("Nama")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group mb-4" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { placeholder: "Masukkan Nama", type: "text" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c("span", { staticClass: "input-group-text" }, [
-              _c("i", { staticClass: "ni ni-circle-08" })
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "nama" } }, [_vm._v("Alamat")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group mb-4" }, [
-            _c("textarea", {
-              staticClass: "form-control",
-              attrs: {
-                id: "exampleFormControlTextarea1",
-                rows: "3",
-                placeholder: "Write a large text here ..."
-              }
-            })
-          ])
-        ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "ni ni-circle-08" })
       ])
     ])
   },
@@ -47984,7 +48191,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col col-md-3" }, [
-      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Simpan")])
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Simpan")]
+      )
     ])
   }
 ]
