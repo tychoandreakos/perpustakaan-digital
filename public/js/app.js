@@ -6562,6 +6562,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6632,13 +6640,17 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
-    perpanjang: function perpanjang(id, tgl) {
+    perpanjang: function perpanjang(id, user_id, bibliobigrafi_id, tgl_pinjam, status_pinjam) {
       var _this3 = this;
 
       axios.post(this.perpanjangs, {
         params: {
           id: id,
-          user: this.form.tipe_anggota.masa_pinjaman_buku
+          user: this.form.tipe_anggota.masa_pinjaman_buku,
+          user_id: user_id,
+          bibliobigrafi_id: bibliobigrafi_id,
+          tgl_pinjam: tgl_pinjam,
+          status_pinjam: status_pinjam
         }
       }).then(function (res) {
         axios.get('/pustakawan/pinjaman', {
@@ -55387,7 +55399,11 @@ var render = function() {
                                                   click: function($event) {
                                                     return _vm.perpanjang(
                                                       item.bibliobigrafi
-                                                        .pola_eksemplar
+                                                        .pola_eksemplar,
+                                                      item.user_id,
+                                                      item.bibliobigrafi_id,
+                                                      item.tgl_pinjam,
+                                                      item.status_pinjam
                                                     )
                                                   }
                                                 }

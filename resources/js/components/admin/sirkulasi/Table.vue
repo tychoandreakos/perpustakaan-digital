@@ -208,7 +208,15 @@
                                                                 title="Kembalikan Eksemplar Ini">
                                                                 <i class="ni ni-curved-next text-white"></i>
                                                             </button>
-                                                            <button @click="perpanjang(item.bibliobigrafi.pola_eksemplar)" type="button" class="btn btn-sm btn-primary"
+                                                            <button @click="perpanjang(
+
+                                                                item.bibliobigrafi.pola_eksemplar,
+                                                                item.user_id,
+                                                                item.bibliobigrafi_id,
+                                                                item.tgl_pinjam,
+                                                                item.status_pinjam
+                                                                
+                                                                )" type="button" class="btn btn-sm btn-primary"
                                                                 data-toggle="tooltip" data-placement="bottom"
                                                                 title="Perpanjang Buku">
                                                                 <i class="ni ni-fat-add text-white"></i>
@@ -335,23 +343,27 @@
                     .catch(err => console.log(err))
             },
 
-            perpanjang(id, tgl) {
+            perpanjang(id, user_id, bibliobigrafi_id, tgl_pinjam, status_pinjam) {
                 axios.post(this.perpanjangs, {
-                        params: {
-                            id,
-                            user: this.form.tipe_anggota.masa_pinjaman_buku
-                        }
-                    }).
+                    params: {
+                        id,
+                        user: this.form.tipe_anggota.masa_pinjaman_buku,
+                        user_id,
+                        bibliobigrafi_id,
+                        tgl_pinjam,
+                        status_pinjam
+                    }
+                }).
                 then(res => {
-                    axios.get('/pustakawan/pinjaman', {
-                            params: {
-                                id: this.form.user.id
-                            }
-                        })
-                        .then(res => this.pinjam = res.data.data)
-                        .catch(err => console.log(err))
-                })
-                .catch(err => console.log(err))
+                        axios.get('/pustakawan/pinjaman', {
+                                params: {
+                                    id: this.form.user.id
+                                }
+                            })
+                            .then(res => this.pinjam = res.data.data)
+                            .catch(err => console.log(err))
+                    })
+                    .catch(err => console.log(err))
             },
 
             simpan() {

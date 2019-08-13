@@ -40,10 +40,16 @@ class PinjamController extends Controller
 
     public function perpanjang(Request $request)
     {
-        // return
         $pinjam = PinjamTransaksi::where('bibliobigrafi_id', $request->id)->get();
-        $pinjam->tanggal_habis_pinjam = Carbon::now();
-        $pinjam->save();
+        // $pinjam->delete();
+        return $request->has('tgl_pinjam');
+        // $requestData = $request->para;
+        $requestData['user_id'] = $request->has('user_id');
+        $requestData['bibliobigrafi_id'] = $request->has('bibliobigrafi_id');
+        $requestData['tgl_pinjam'] = $request->has('tgl_pinjam');
+        $requestData['status_pinjam'] = $request->has('status_pinjam');
+        $requestData['tanggal_habis_pinjam'] = Carbon::now()->addDays($request->user);
+        PinjamTransaksi::create($requestData);
     }
 
 
