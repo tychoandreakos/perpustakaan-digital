@@ -208,7 +208,7 @@
                                                                 title="Kembalikan Eksemplar Ini">
                                                                 <i class="ni ni-curved-next text-white"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-sm btn-primary"
+                                                            <button @click="perpanjang(item.bibliobigrafi.pola_eksemplar)" type="button" class="btn btn-sm btn-primary"
                                                                 data-toggle="tooltip" data-placement="bottom"
                                                                 title="Perpanjang Buku">
                                                                 <i class="ni ni-fat-add text-white"></i>
@@ -218,11 +218,11 @@
                                                             {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
                                                         </td>
                                                         <td>
-                                                        {{ item.bibliobigrafi.buku.judul | capitalize }}
+                                                            {{ item.bibliobigrafi.buku.judul | capitalize }}
                                                         </td>
 
                                                         <td>
-                                                             {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
+                                                            {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
                                                         </td>
                                                         <td>
                                                             {{ item.tgl_pinjam }}
@@ -278,7 +278,7 @@
             VTab,
             SpinnerComponent: Spinner,
         },
-        props: ['fetch', 'index', 'eksemplar', 'store'],
+        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs'],
         data() {
             return {
                 loading: false,
@@ -333,6 +333,25 @@
                     })
                     .then(res => this.pinjam = res.data.data)
                     .catch(err => console.log(err))
+            },
+
+            perpanjang(id, tgl) {
+                axios.post(this.perpanjangs, {
+                        params: {
+                            id,
+                            user: this.form.tipe_anggota.masa_pinjaman_buku
+                        }
+                    }).
+                then(res => {
+                    axios.get('/pustakawan/pinjaman', {
+                            params: {
+                                id: this.form.user.id
+                            }
+                        })
+                        .then(res => this.pinjam = res.data.data)
+                        .catch(err => console.log(err))
+                })
+                .catch(err => console.log(err))
             },
 
             simpan() {

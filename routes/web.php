@@ -111,6 +111,7 @@ Route::get('sirkulasi/{$id}', function() {
 })->name('sirkulasi.pinjam');
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
 Route::get('pinjaman', 'PinjamController@pinjaman')->name('pinjam.pinjaman');
+Route::post('perpanjang', 'PinjamController@perpanjang')->name('pinjam.perpanjang');
 
 // eksemplar keluar
 Route::get('eksemplar-keluar', function() {

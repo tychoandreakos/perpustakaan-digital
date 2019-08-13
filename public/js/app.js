@@ -6573,7 +6573,7 @@ __webpack_require__.r(__webpack_exports__);
     VTab: vue_nav_tabs__WEBPACK_IMPORTED_MODULE_2__["VTab"],
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['fetch', 'index', 'eksemplar', 'store'],
+  props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs'],
   data: function data() {
     return {
       loading: false,
@@ -6632,12 +6632,34 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
-    simpan: function simpan() {
+    perpanjang: function perpanjang(id, tgl) {
       var _this3 = this;
+
+      axios.post(this.perpanjangs, {
+        params: {
+          id: id,
+          user: this.form.tipe_anggota.masa_pinjaman_buku
+        }
+      }).then(function (res) {
+        axios.get('/pustakawan/pinjaman', {
+          params: {
+            id: _this3.form.user.id
+          }
+        }).then(function (res) {
+          return _this3.pinjam = res.data.data;
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    simpan: function simpan() {
+      var _this4 = this;
 
       this.loading = true;
       axios.post(this.store, this.forms).then(function (res) {
-        _this3.$swal({
+        _this4.$swal({
           position: 'top-end',
           type: 'success',
           title: res.data.message.toUpperCase(),
@@ -6646,11 +6668,11 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         setTimeout(function () {
-          window.location = _this3.index;
+          window.location = _this4.index;
         }, 3200);
       })["catch"](function (err) {
-        _this3.err = err.response.data.errors;
-        _this3.loading = false;
+        _this4.err = err.response.data.errors;
+        _this4.loading = false;
       });
     },
     kembali: function kembali(val) {
@@ -6664,16 +6686,16 @@ __webpack_require__.r(__webpack_exports__);
       return [year, month, day].join('-');
     },
     getEksemplar: function getEksemplar() {
-      var _this4 = this;
+      var _this5 = this;
 
       return axios.get(this.eksemplar).then(function (res) {
-        return _this4.option = res.data.data;
+        return _this5.option = res.data.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     go: function go() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.loading = true;
       axios.get('/pustakawan/pinjaman', {
@@ -6681,13 +6703,13 @@ __webpack_require__.r(__webpack_exports__);
           id: this.form.user.id
         }
       }).then(function (res) {
-        return _this5.pinjam = res.data.data;
+        return _this6.pinjam = res.data.data;
       })["catch"](function (err) {
         return console.log(err);
       });
       setTimeout(function () {
-        _this5.datas = false;
-        _this5.loading = false;
+        _this6.datas = false;
+        _this6.loading = false;
       }, 2000);
     }
   },
@@ -55360,6 +55382,14 @@ var render = function() {
                                                   "data-toggle": "tooltip",
                                                   "data-placement": "bottom",
                                                   title: "Perpanjang Buku"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.perpanjang(
+                                                      item.bibliobigrafi
+                                                        .pola_eksemplar
+                                                    )
+                                                  }
                                                 }
                                               },
                                               [
@@ -55387,7 +55417,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("td", [
                                           _vm._v(
-                                            "\n                                                    " +
+                                            "\n                                                        " +
                                               _vm._s(
                                                 _vm._f("capitalize")(
                                                   item.bibliobigrafi.buku.judul
@@ -55399,7 +55429,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("td", [
                                           _vm._v(
-                                            "\n                                                         " +
+                                            "\n                                                        " +
                                               _vm._s(
                                                 _vm._f("capitalize")(
                                                   item.bibliobigrafi.klasifikasi
