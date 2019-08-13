@@ -6346,7 +6346,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6354,55 +6353,66 @@ __webpack_require__.r(__webpack_exports__);
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a,
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['fetch', 'back'],
+  props: ['fetch', 'kembali', 'index'],
   data: function data() {
     return {
       loading: false,
       datas: [],
-      options: [],
+      option: [],
       form: {}
     };
   },
   computed: {
     ds: function ds() {
-      return this.form != '' ? false : true;
+      if (this.form.id > 1) {
+        return false;
+      } else {
+        return true;
+      }
     }
   },
   methods: {
-    getPinjaman: function getPinjaman() {
+    getData: function getData() {
       var _this = this;
 
-      axios.post('/pustakawan/pinjaman', {
-        params: {
-          id: this.form.user.id
-        }
-      }).then(function (res) {
-        return _this.pinjam = res.data.data;
+      axios.get(this.fetch).then(function (res) {
+        return _this.option = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
+    // nameWithLang({
+    //     pola_eksemplar,
+    // }) {
+    //     return pola_eksemplar
+    // },
     go: function go() {
       var _this2 = this;
 
       this.loading = true;
-      axios.get('/pustakawan/pinjaman', {
+      axios.get(this.kembali, {
         params: {
-          id: this.form.user.id
+          id: this.form.id
         }
       }).then(function (res) {
-        return _this2.pinjam = res.data.data;
+        _this2.$swal({
+          position: 'top-end',
+          type: 'success',
+          title: res.data.message.toUpperCase(),
+          showConfirmButton: false,
+          timer: 2500
+        });
+
+        setTimeout(function () {
+          window.location = _this2.index;
+        }, 2800);
       })["catch"](function (err) {
         return console.log(err);
       });
-      setTimeout(function () {
-        _this2.datas = false;
-        _this2.loading = false;
-      }, 2000);
     }
   },
   created: function created() {
-    this.getAnggota();
+    this.getData();
   }
 });
 
@@ -54922,11 +54932,10 @@ var render = function() {
                           _vm._v(" "),
                           _c("multiselect", {
                             attrs: {
-                              options: _vm.options,
-                              "custom-label": _vm.nameWithLang,
+                              options: _vm.option,
                               placeholder: "Select one",
-                              label: "id",
-                              "track-by": "id"
+                              label: "pola_eksemplar",
+                              "track-by": "pola_eksemplar"
                             },
                             scopedSlots: _vm._u([
                               {
@@ -54935,15 +54944,12 @@ var render = function() {
                                   var option = ref.option
                                   return [
                                     _c("strong", [
-                                      _vm._v(_vm._s(option.user.id))
-                                    ]),
-                                    _vm._v(
-                                      " -\n                                                "
-                                    ),
-                                    _c("strong", [
                                       _vm._v(
-                                        "\n                                                    " +
-                                          _vm._s(option.user.name)
+                                        _vm._s(
+                                          _vm._f("capitalize")(
+                                            option.pola_eksemplar
+                                          )
+                                        )
                                       )
                                     ])
                                   ]

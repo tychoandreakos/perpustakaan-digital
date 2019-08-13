@@ -52,9 +52,24 @@ class PinjamController extends Controller
         PinjamTransaksi::create($requestData);
     }
 
-    public function kembali()
+    public function kembali(Request $request)
     {
-        
+        $bilio = Bibliobigrafi::where('id', $request->id)->first();
+        $bilio->status_pinjam = 0;
+        $bilio->save();
+
+        $transaksi = PinjamTransaksi::where('bibliobigrafi_id', $request->id)->first();
+        $transaksi->status_pinjam = 0;
+        $transaksi->tgl_kembali = Carbon::now();
+        $transaksi->save();
+
+        return response()->json([
+            'message' => 'pengembalian buku berhasil']);
+    }
+
+    public function pengembalian()
+    {
+        return Bibliobigrafi::where('status_pinjam', 1)->get();
     }
 
 

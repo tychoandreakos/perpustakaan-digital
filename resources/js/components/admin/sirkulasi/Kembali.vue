@@ -11,37 +11,36 @@
                 </div>
                 <div class="table-responsive">
                     <div class="card-body">
-                            <form @submit.prevent="go">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group mt-4">
-                                            <label for="">Cari Eksemplar Yang Sedang Dipinjam</label>
-                                            <multiselect v-model="form" :options="options" :custom-label="nameWithLang"
-                                                placeholder="Select one" label="id" track-by="id">
-                                                <template slot="singleLabel"
-                                                    slot-scope="{ option }"><strong>{{ option.user.id }}</strong> -
-                                                    <strong>
-                                                        {{ option.user.name }}</strong></template>
-                                            </multiselect>
-                                        </div>
-
-                                        <template v-if="loading">
-                                            <div class="pull-right">
-                                                <spinner-component></spinner-component>
-                                            </div>
-                                        </template>
-                                        <template v-else>
-                                            <button :disabled="ds" class="btn btn-icon btn-3 btn-primary" type="submit">
-                                                <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
-
-                                                <span class="btn-inner--text">Lanjut</span>
-
-                                            </button>
-                                        </template>
+                        <form @submit.prevent="go">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group mt-4">
+                                        <label for="">Cari Eksemplar Yang Sedang Dipinjam</label>
+                                        <multiselect v-model="form" :options="option" placeholder="Select one"
+                                            label="pola_eksemplar" track-by="pola_eksemplar">
+                                            <template slot="singleLabel"
+                                                slot-scope="{ option }"><strong>{{ option.pola_eksemplar | capitalize}}</strong>
+                                            </template>
+                                        </multiselect>
                                     </div>
-                                </div>
 
-                            </form>
+                                    <template v-if="loading">
+                                        <div class="pull-right">
+                                            <spinner-component></spinner-component>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <button :disabled="ds" class="btn btn-icon btn-3 btn-primary" type="submit">
+                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+
+                                            <span class="btn-inner--text">Lanjut</span>
+
+                                        </button>
+                                    </template>
+                                </div>
+                            </div>
+
+                        </form>
 
                     </div>
 
@@ -59,56 +58,69 @@
             Multiselect,
             SpinnerComponent: Spinner,
         },
-        props: ['fetch', 'back'],
+        props: ['fetch', 'kembali', 'index'],
         data() {
             return {
                 loading: false,
                 datas: [],
-                options: [],
+                option: [],
                 form: {}
             }
         },
 
         computed: {
             ds() {
-                return (this.form != '' ? false : true)
+                if (this.form.id > 1) {
+                    return false
+                } else {
+                    return true
+                }
             },
-            
+
         },
 
         methods: {
-            getPinjaman() {
-                axios.post('/pustakawan/pinjaman', {
-                        params: {
-                            id: this.form.user.id
-                        }
-                    })
-                    .then(res => this.pinjam = res.data.data)
+            getData() {
+                axios.get(this.fetch)
+                    .then(res => this.option = res.data)
                     .catch(err => console.log(err))
             },
 
+            // nameWithLang({
+            //     pola_eksemplar,
+            // }) {
+            //     return pola_eksemplar
+            // },
+
             go() {
                 this.loading = true;
-                axios.get('/pustakawan/pinjaman', {
-                        params: {
-                            id: this.form.user.id
-                        }
+                axios.get(this.kembali, {
+                    params: {
+                        id: this.form.id
+                    }
+                })
+                    .then(res => {
+                        this.$swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: res.data.message.toUpperCase(),
+                            showConfirmButton: false,
+                            timer: 2500
+
+                        });
+                        setTimeout(() => {
+                            window.location = this.index;
+                        }, 2800);
                     })
-                    .then(res => this.pinjam = res.data.data)
                     .catch(err => console.log(err))
-                setTimeout(() => {
-                    this.datas = false;
-                    this.loading = false
-                }, 2000);
 
             },
         },
 
 
         created() {
-            this.getAnggota();
+            this.getData();
         },
     }
 
 </script>
-

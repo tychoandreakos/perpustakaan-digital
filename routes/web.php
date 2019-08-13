@@ -73,6 +73,7 @@ Route::get('bibliobigrafi-sirkulasi', 'BibliobigrafiController@sirkulasi')->name
 Route::get('eksemplar-fetch', 'EksemplarTransaksiController@fetch')->name('transaksi-eksemplar.fetch');
 Route::get('anggota-fetch', 'AnggotaController@fetch')->name('anggota.fetch');
 Route::get('eksemplar-keluar-fetch', 'PinjamController@eksemplar')->name('eksemplar-keluar.fetch');
+Route::get('pengembalian-fetch', 'PinjamController@pengembalian')->name('pengembalian.fetch');
 
 
 
