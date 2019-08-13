@@ -109,9 +109,14 @@ Route::get('sirkulasi/{$id}', function() {
     $title = 'Sirkulasi';
     return view('admin.sirkulasi.table', compact('title'));
 })->name('sirkulasi.pinjam');
+Route::get('pengembalian', function() {
+    $title = 'Pengembalian Buku';
+    return view('admin.sirkulasi.kembali', compact('title'));
+})->name('sirkulasi.pengembalian');
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
 Route::get('pinjaman', 'PinjamController@pinjaman')->name('pinjam.pinjaman');
 Route::post('perpanjang', 'PinjamController@perpanjang')->name('pinjam.perpanjang');
+Route::get('kembali', 'PinjamController@kembali')->name('sirkulasi.kembali');
 
 // eksemplar keluar
 Route::get('eksemplar-keluar', function() {

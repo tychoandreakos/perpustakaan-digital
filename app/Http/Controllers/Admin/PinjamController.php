@@ -52,6 +52,11 @@ class PinjamController extends Controller
         PinjamTransaksi::create($requestData);
     }
 
+    public function kembali()
+    {
+        
+    }
+
 
     public function search(Request $request)
     {
