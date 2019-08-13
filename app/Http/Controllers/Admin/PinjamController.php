@@ -27,6 +27,17 @@ class PinjamController extends Controller
             'message' => 'data berhasil disimpan']);
     }
 
+    public function pinjaman(Request $request)
+    {
+        return PinjamTransaksi::with(['bibliobigrafi' => function($q){
+            $q->select("id", 'buku_id', 'pola_eksemplar', 'klasifikasi_id');
+        }, 'bibliobigrafi.buku' => function($q){
+            $q->select('id', 'judul');
+        }, 'bibliobigrafi.klasifikasi' => function($q){
+            $q->select('id', 'tipe_klasifikasi');
+        }])->where('user_id', $request->id)->paginate(10);
+    }
+
 
     public function search(Request $request)
     {

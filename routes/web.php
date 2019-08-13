@@ -110,6 +110,7 @@ Route::get('sirkulasi/{$id}', function() {
     return view('admin.sirkulasi.table', compact('title'));
 })->name('sirkulasi.pinjam');
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
+Route::get('pinjaman', 'PinjamController@pinjaman')->name('pinjam.pinjaman');
 
 // eksemplar keluar
 Route::get('eksemplar-keluar', function() {

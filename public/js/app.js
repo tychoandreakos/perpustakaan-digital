@@ -6500,6 +6500,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6520,7 +6582,8 @@ __webpack_require__.r(__webpack_exports__);
       form: '',
       value: [],
       option: [],
-      date2: ''
+      date2: '',
+      pinjam: {}
     };
   },
   computed: {
@@ -6556,12 +6619,25 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
-    simpan: function simpan() {
+    getPinjaman: function getPinjaman() {
       var _this2 = this;
+
+      axios.post('/pustakawan/pinjaman', {
+        params: {
+          id: this.form.user.id
+        }
+      }).then(function (res) {
+        return _this2.pinjam = res.data.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    simpan: function simpan() {
+      var _this3 = this;
 
       this.loading = true;
       axios.post(this.store, this.forms).then(function (res) {
-        _this2.$swal({
+        _this3.$swal({
           position: 'top-end',
           type: 'success',
           title: res.data.message.toUpperCase(),
@@ -6570,11 +6646,11 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         setTimeout(function () {
-          window.location = _this2.index;
+          window.location = _this3.index;
         }, 3200);
       })["catch"](function (err) {
-        _this2.err = err.response.data.errors;
-        _this2.loading = false;
+        _this3.err = err.response.data.errors;
+        _this3.loading = false;
       });
     },
     kembali: function kembali(val) {
@@ -6588,21 +6664,30 @@ __webpack_require__.r(__webpack_exports__);
       return [year, month, day].join('-');
     },
     getEksemplar: function getEksemplar() {
-      var _this3 = this;
+      var _this4 = this;
 
       return axios.get(this.eksemplar).then(function (res) {
-        return _this3.option = res.data.data;
+        return _this4.option = res.data.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     go: function go() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.loading = true;
+      axios.get('/pustakawan/pinjaman', {
+        params: {
+          id: this.form.user.id
+        }
+      }).then(function (res) {
+        return _this5.pinjam = res.data.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
       setTimeout(function () {
-        _this4.datas = false;
-        _this4.loading = false;
+        _this5.datas = false;
+        _this5.loading = false;
       }, 2000);
     }
   },
@@ -55183,9 +55268,173 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("v-tab", { attrs: { title: "Pinjaman Saat Ini" } }, [
-                          _vm._v(
-                            "\n                                Second tab content\n                            "
-                          )
+                          _c("div", { staticClass: "table-responsive" }, [
+                            _c("div", [
+                              _c(
+                                "table",
+                                { staticClass: "table align-items-center" },
+                                [
+                                  _c("thead", { staticClass: "thead-light" }, [
+                                    _c("tr", [
+                                      _c(
+                                        "th",
+                                        {
+                                          staticStyle: { width: "120px" },
+                                          attrs: { scope: "col" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                        Aksi\n                                                    "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("th", { attrs: { scope: "col" } }, [
+                                        _vm._v(
+                                          "\n                                                        Kode Eksemplar\n                                                    "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("th", { attrs: { scope: "col" } }, [
+                                        _vm._v(
+                                          "\n                                                        Judul\n                                                    "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("th", { attrs: { scope: "col" } }, [
+                                        _vm._v("Tipe Koleksi")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("th", { attrs: { scope: "col" } }, [
+                                        _vm._v(
+                                          "\n                                                        Tanggal Pinjam\n                                                    "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("th", { attrs: { scope: "col" } }, [
+                                        _vm._v("Tanggal Kembali")
+                                      ])
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "tbody",
+                                    { staticClass: "list" },
+                                    _vm._l(_vm.pinjam, function(item) {
+                                      return _c("tr", { key: item.id }, [
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass: "name",
+                                            attrs: { scope: "row" }
+                                          },
+                                          [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-success",
+                                                attrs: {
+                                                  type: "button",
+                                                  "data-toggle": "tooltip",
+                                                  "data-placement": "bottom",
+                                                  title:
+                                                    "Kembalikan Eksemplar Ini"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "ni ni-curved-next text-white"
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-primary",
+                                                attrs: {
+                                                  type: "button",
+                                                  "data-toggle": "tooltip",
+                                                  "data-placement": "bottom",
+                                                  title: "Perpanjang Buku"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "ni ni-fat-add text-white"
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            "\n                                                        " +
+                                              _vm._s(
+                                                _vm._f("capitalize")(
+                                                  item.bibliobigrafi
+                                                    .pola_eksemplar
+                                                )
+                                              ) +
+                                              "\n                                                    "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            "\n                                                    " +
+                                              _vm._s(
+                                                _vm._f("capitalize")(
+                                                  item.bibliobigrafi.buku.judul
+                                                )
+                                              ) +
+                                              "\n                                                    "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            "\n                                                         " +
+                                              _vm._s(
+                                                _vm._f("capitalize")(
+                                                  item.bibliobigrafi.klasifikasi
+                                                    .tipe_klasifikasi
+                                                )
+                                              ) +
+                                              "\n                                                    "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            "\n                                                        " +
+                                              _vm._s(item.tgl_pinjam) +
+                                              "\n                                                    "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            "\n                                                        " +
+                                              _vm._s(
+                                                item.tanggal_habis_pinjam
+                                              ) +
+                                              "\n                                                    "
+                                          )
+                                        ])
+                                      ])
+                                    }),
+                                    0
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("v-tab", { attrs: { title: "Denda" } }, [
