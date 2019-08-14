@@ -50913,7 +50913,7 @@ var render = function() {
                           staticClass: "form-control-label",
                           attrs: { for: "judul" }
                         },
-                        [_vm._v("Judul")]
+                        [_vm._v("Judul*")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -50988,7 +50988,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "judul" }
                           },
-                          [_vm._v("Pengarang")]
+                          [_vm._v("Pengarang*")]
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "clearfix" }),
@@ -51117,7 +51117,7 @@ var render = function() {
                           staticClass: "form-control-label",
                           attrs: { for: "deskripsi_fisik" }
                         },
-                        [_vm._v("Deksripsi Fisik")]
+                        [_vm._v("Deksripsi Fisik*")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -51176,7 +51176,7 @@ var render = function() {
                           staticClass: "form-control-label",
                           attrs: { for: "isbn_isnn" }
                         },
-                        [_vm._v("ISBN ISNN")]
+                        [_vm._v("ISBN ISNN*")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -51249,7 +51249,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "penerbit" }
                           },
-                          [_vm._v("Penerbit")]
+                          [_vm._v("Penerbit*")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -51339,7 +51339,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "klasifikasi" }
                           },
-                          [_vm._v("Pola Eksemplar Tersedia")]
+                          [_vm._v("Pola Eksemplar Tersedia*")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -51410,7 +51410,7 @@ var render = function() {
                           staticClass: "form-control-label",
                           attrs: { for: "total" }
                         },
-                        [_vm._v("Total Eksemplar")]
+                        [_vm._v("Total Eksemplar*")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -51464,7 +51464,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "klasifikasi" }
                           },
-                          [_vm._v("Reference")]
+                          [_vm._v("Reference*")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -51537,7 +51537,7 @@ var render = function() {
                           staticClass: "form-control-label",
                           attrs: { for: "tahun_terbit" }
                         },
-                        [_vm._v("Tahun Terbit")]
+                        [_vm._v("Tahun Terbit*")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -51615,7 +51615,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "tempat" }
                           },
-                          [_vm._v("Tempat Terbit")]
+                          [_vm._v("Tempat Terbit*")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -51711,7 +51711,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "gmd" }
                           },
-                          [_vm._v("GMD")]
+                          [_vm._v("GMD*")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -51863,7 +51863,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "klasifikasi" }
                           },
-                          [_vm._v("Klasifikasi")]
+                          [_vm._v("Klasifikasi*")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -51957,7 +51957,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "lokasi" }
                           },
-                          [_vm._v("Lokasi Rak")]
+                          [_vm._v("Lokasi Rak*")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -52030,7 +52030,7 @@ var render = function() {
                             staticClass: "form-control-label",
                             attrs: { for: "bahasa" }
                           },
-                          [_vm._v("Bahasa")]
+                          [_vm._v("Bahasa*")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -52559,7 +52559,7 @@ var staticRenderFns = [
             staticClass: "form-control-label mt-1",
             attrs: { for: "tahun_terbit" }
           },
-          [_vm._v("No Panggil")]
+          [_vm._v("No Panggil*")]
         ),
         _vm._v(" "),
         _c("input", {

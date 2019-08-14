@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label class="form-control-label" for="judul">Judul</label>
+                                <label class="form-control-label" for="judul">Judul*</label>
                                 <input type="text" v-model="form.judul" id="judul"
                                     class="form-control form-control-alternative" name="judul"
                                     placeholder="Nama Penerbit">
@@ -40,7 +40,7 @@
                                             <span class="btn-inner--text">Tambah Pengarang</span>
                                         </button>
                                     </div>
-                                    <label class="form-control-label" for="judul">Pengarang</label>
+                                    <label class="form-control-label" for="judul">Pengarang*</label>
                                     <div class="clearfix"></div>
                                     <multiselect v-model="pengarang_id" :options="options" :multiple="true"
                                         group-label="language" :group-select="true" placeholder="Type to search"
@@ -73,7 +73,7 @@
 
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="deskripsi_fisik">Deksripsi Fisik</label>
+                                <label class="form-control-label" for="deskripsi_fisik">Deksripsi Fisik*</label>
                                 <input type="text" v-model="form.deskripsi_fisik" id="deskripsi_fisik"
                                     class="form-control form-control-alternative" name="deskripsi_fisik"
                                     placeholder="Deksripsi Fisik">
@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="isbn_isnn">ISBN ISNN</label>
+                                <label class="form-control-label" for="isbn_isnn">ISBN ISNN*</label>
                                 <input type="text" v-model="form.isbn_isnn" id="isbn_isnn"
                                     class="form-control form-control-alternative" name="isbn_isnn" placeholder="Edisi">
                                 <template v-if="err.isbn_isnn">
@@ -106,7 +106,7 @@
                                             <span class="btn-inner--text">Tambah Penerbit</span>
                                         </button>
                                     </div>
-                                    <label class="form-control-label" for="penerbit">Penerbit</label>
+                                    <label class="form-control-label" for="penerbit">Penerbit*</label>
                                     <multiselect v-model="penerbit_id" :options="penerbitData" group-label="language"
                                         :group-select="true" placeholder="Type to search" track-by="nama_penerbit"
                                         label="nama_penerbit"><span slot="noResult">Oops! No
@@ -127,7 +127,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
-                                    <label class="form-control-label" for="klasifikasi">Pola Eksemplar Tersedia</label>
+                                    <label class="form-control-label" for="klasifikasi">Pola Eksemplar Tersedia*</label>
                                     <multiselect v-model="pola_eksemplar" :options="eksemplarData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="kode_eksemplar" label="kode_eksemplar"><span slot="noResult">Oops!
@@ -144,7 +144,7 @@
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label" for="total">Total Eksemplar</label>
+                                <label class="form-control-label" for="total">Total Eksemplar*</label>
                                 <input type="text" v-model="form.total" id="total"
                                     class="form-control form-control-alternative" name="total" placeholder="Edisi">
                                 <template v-if="err.total">
@@ -155,7 +155,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
-                                    <label class="form-control-label" for="klasifikasi">Reference</label>
+                                    <label class="form-control-label" for="klasifikasi">Reference*</label>
                                     <multiselect v-model="klasifikasi_id" :options="klasifikasiData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="tipe_klasifikasi" label="tipe_klasifikasi"><span slot="noResult">Oops!
@@ -173,7 +173,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="tahun_terbit">Tahun Terbit</label>
+                                <label class="form-control-label" for="tahun_terbit">Tahun Terbit*</label>
                                 <input type="text" v-model="form.tahun_terbit" id="tahun_terbit"
                                     class="form-control form-control-alternative mt-1" name="tahun_terbit"
                                     placeholder="Edisi">
@@ -193,7 +193,7 @@
                                             <span class="btn-inner--text">Tambah Tempat Terbit</span>
                                         </button>
                                     </div>
-                                    <label class="form-control-label" for="tempat">Tempat Terbit</label>
+                                    <label class="form-control-label" for="tempat">Tempat Terbit*</label>
                                     <multiselect class="mt-1" v-model="kota_id" :options="kotaData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="nama_kota" label="nama_kota"><span slot="noResult">Oops! No
@@ -210,7 +210,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label mt-1" for="tahun_terbit">No Panggil</label>
+                                <label class="form-control-label mt-1" for="tahun_terbit">No Panggil*</label>
                                 <input type="text" class="form-control form-control-alternative">
                                 <!-- <input type="text" v-model="form.tahun_terbit" id="tahun_terbit"
                                     class="form-control form-control-alternative" name="tahun_terbit"
@@ -231,7 +231,7 @@
                                             <span class="btn-inner--text">Tambah GMD</span>
                                         </button>
                                     </div>
-                                    <label class="form-control-label" for="gmd">GMD</label>
+                                    <label class="form-control-label" for="gmd">GMD*</label>
                                     <multiselect class="mt-1" v-model="gmd_id" :options="gmdData" group-label="language"
                                         :group-select="true" placeholder="Type to search" track-by="nama_gmd"
                                         label="nama_gmd"><span slot="noResult">Oops! No
@@ -268,7 +268,7 @@
                                             <span class="btn-inner--text">Tambah Klasifiikasi</span>
                                         </button>
                                     </div>
-                                    <label class="form-control-label" for="klasifikasi">Klasifikasi</label>
+                                    <label class="form-control-label" for="klasifikasi">Klasifikasi*</label>
                                     <multiselect class="mt-1" v-model="klasifikasi_id" :options="klasifikasiData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="tipe_klasifikasi" label="tipe_klasifikasi"><span slot="noResult">Oops!
@@ -293,7 +293,7 @@
                                             <span class="btn-inner--text">Tambah Lokasi Rak</span>
                                         </button>
                                     </div>
-                                    <label class="form-control-label" for="lokasi">Lokasi Rak</label>
+                                    <label class="form-control-label" for="lokasi">Lokasi Rak*</label>
                                     <multiselect class="mt-1" v-model="lokasi_id" :options="lokasiData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="kode_lokasi" label="nama_lokasi"><span slot="noResult">Oops!
@@ -310,7 +310,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
-                                    <label class="form-control-label" for="bahasa">Bahasa</label>
+                                    <label class="form-control-label" for="bahasa">Bahasa*</label>
                                     <multiselect v-model="bahasa_id" :options="bahasaData" group-label="language"
                                         :group-select="true" placeholder="Type to search" track-by="jenis_bahasa"
                                         label="jenis_bahasa"><span slot="noResult">Oops!
