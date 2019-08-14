@@ -44,11 +44,14 @@ class PengarangController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'pengarang' => 'required',
+            'nama_pengarang' => 'required',
             'tahun_lahir' => 'nullable',
         ]);
 
         Pengarang::create($request->all());
+
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
 
 
     }
