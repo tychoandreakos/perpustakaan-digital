@@ -9,8 +9,9 @@ require('./bootstrap');
 import User from './helpers/User';
 import router from './router';
 import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
 import VModal from 'vue-js-modal'
+import 'vue-instant/dist/vue-instant.css'
+import VueInstant from 'vue-instant'
 
 window.User = User;
 window.Vue = require('vue');
@@ -21,7 +22,8 @@ window.Fire = new Vue();
 
 // vue use
 Vue.use(VueSweetalert2);
-Vue.use(VModal)
+Vue.use(VModal);
+Vue.use(VueInstant)
 
 /**
  * The following block of code may be used to automatically register your
@@ -83,16 +85,27 @@ Vue.component('form-transaksi-eksemplar-component', require('./components/admin/
 Vue.component('table-anggota-component', require('./components/admin/anggota/Table.vue').default);
 Vue.component('form-anggota-component', require('./components/admin/anggota/Form.vue').default);
 
-// bahasa
+// sirkulasi
 Vue.component('table-sirkulasi-component', require('./components/admin/sirkulasi/Table.vue').default);
 Vue.component('form-sirkulasi-component', require('./components/admin/sirkulasi/Form.vue').default);
+Vue.component('kembali-component', require('./components/admin/sirkulasi/Kembali.vue').default);
+Vue.component('histori-component', require('./components/admin/sirkulasi/Histori.vue').default);
 
-// bahasa
+
+// eksemplar keluar
 Vue.component('table-eksemplar-keluar-component', require('./components/admin/eksemplar-keluar/Table.vue').default);
 Vue.component('form-eksemplar-keluar-component', require('./components/admin/eksemplar-keluar/Form.vue').default);
 
+
+// tamu
+Vue.component('app-tamu', require('./components/Tamu.vue').default);
+
+// user
+Vue.component('app-home', require('./components/HomeLogin.vue').default);
+
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('search-component', require('./components/user/Search').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

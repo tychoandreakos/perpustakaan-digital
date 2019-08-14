@@ -33,7 +33,15 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
+                                    <div class="float-right mb-2">
+                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" @click="showPengarang"
+                                            type="button">
+                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--text">Tambah Pengarang</span>
+                                        </button>
+                                    </div>
                                     <label class="form-control-label" for="judul">Pengarang</label>
+                                    <div class="clearfix"></div>
                                     <multiselect v-model="pengarang_id" :options="options" :multiple="true"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="nama_pengarang" label="nama_pengarang"><span slot="noResult">Oops! No
@@ -91,6 +99,12 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
+                                    <div class="float-right mb-2">
+                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--text">Tambah Penerbit</span>
+                                        </button>
+                                    </div>
                                     <label class="form-control-label" for="penerbit">Penerbit</label>
                                     <multiselect v-model="penerbit_id" :options="penerbitData" group-label="language"
                                         :group-select="true" placeholder="Type to search" track-by="nama_penerbit"
@@ -108,7 +122,8 @@
                         <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                         <span class="btn-inner--text">Tambah Pola Eksemplar</span>
                     </button>
-                    <button @click.prevent="getPola" type="button" class="btn btn-default btn-sm mb-3">Refresh Data Pola Eksemplar</button>
+                    <button @click.prevent="getPola" type="button" class="btn btn-default btn-sm mb-3">Refresh Data Pola
+                        Eksemplar</button>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -161,7 +176,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="tahun_terbit">Tahun Terbit</label>
                                 <input type="text" v-model="form.tahun_terbit" id="tahun_terbit"
-                                    class="form-control form-control-alternative" name="tahun_terbit"
+                                    class="form-control form-control-alternative mt-1" name="tahun_terbit"
                                     placeholder="Edisi">
                                 <template v-if="err.tahun_terbit">
                                     <span class="text-danger">{{ err.tahun_terbit[0] }}</span>
@@ -172,10 +187,16 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
+                                    <div class="float-right mb-2">
+                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--text">Tambah Tempat Terbit</span>
+                                        </button>
+                                    </div>
                                     <label class="form-control-label" for="tempat">Tempat Terbit</label>
-                                    <multiselect v-model="kota_id" :options="kotaData" group-label="language"
-                                        :group-select="true" placeholder="Type to search" track-by="nama_kota"
-                                        label="nama_kota"><span slot="noResult">Oops! No
+                                    <multiselect class="mt-1" v-model="kota_id" :options="kotaData"
+                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        track-by="nama_kota" label="nama_kota"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
                                     <!-- <pre class="language-json"><code>{{ kota_id  }}</code></pre> -->
@@ -189,7 +210,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="tahun_terbit">No Panggil</label>
+                                <label class="form-control-label mt-1" for="tahun_terbit">No Panggil</label>
                                 <input type="text" class="form-control form-control-alternative">
                                 <!-- <input type="text" v-model="form.tahun_terbit" id="tahun_terbit"
                                     class="form-control form-control-alternative" name="tahun_terbit"
@@ -203,8 +224,14 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
+                                    <div class="float-right mb-2">
+                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--text">Tambah GMD</span>
+                                        </button>
+                                    </div>
                                     <label class="form-control-label" for="gmd">GMD</label>
-                                    <multiselect v-model="gmd_id" :options="gmdData" group-label="language"
+                                    <multiselect class="mt-1" v-model="gmd_id" :options="gmdData" group-label="language"
                                         :group-select="true" placeholder="Type to search" track-by="nama_gmd"
                                         label="nama_gmd"><span slot="noResult">Oops! No
                                             elements found.
@@ -222,7 +249,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="judul_seri">Judul Seri</label>
                                 <input type="text" v-model="form.judul_seri" id="judul_seri"
-                                    class="form-control form-control-alternative" name="judul_seri" placeholder="Edisi">
+                                    class="form-control mt-1 form-control-alternative" name="judul_seri"
+                                    placeholder="Edisi">
                                 <template v-if="err.judul_seri">
                                     <span class="text-danger">{{ err.judul_seri[0] }}</span>
                                 </template>
@@ -232,8 +260,14 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
+                                    <div class="float-right mb-2">
+                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--text">Tambah GMD</span>
+                                        </button>
+                                    </div>
                                     <label class="form-control-label" for="klasifikasi">Klasifikasi</label>
-                                    <multiselect v-model="klasifikasi_id" :options="klasifikasiData"
+                                    <multiselect class="mt-1" v-model="klasifikasi_id" :options="klasifikasiData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="tipe_klasifikasi" label="tipe_klasifikasi"><span slot="noResult">Oops!
                                             No
@@ -251,10 +285,16 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
+                                    <div class="float-right mb-2">
+                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--text">Tambah GMD</span>
+                                        </button>
+                                    </div>
                                     <label class="form-control-label" for="lokasi">Lokasi Rak</label>
-                                    <multiselect v-model="lokasi" :options="lokasiData" group-label="language"
-                                        :group-select="true" placeholder="Type to search" track-by="kode_lokasi"
-                                        label="nama_lokasi"><span slot="noResult">Oops!
+                                    <multiselect class="mt-1" v-model="lokasi_id" :options="lokasiData"
+                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        track-by="kode_lokasi" label="nama_lokasi"><span slot="noResult">Oops!
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
@@ -307,7 +347,12 @@
                     <input type="text" hidden v-model="pola_eksemplar2">
 
                     <modal height="auto" name="eksemplar">
-                      <pola-component :pola="this.pol"></pola-component>
+                        <pola-component :pola="this.pol"></pola-component>
+                    </modal>
+
+                    <modal height="auto" name="pengarang">
+                        <pengarang-component @closePengarang="hidePengarang" @updatePengarang="getData"
+                            :peng="this.peng"></pengarang-component>
                     </modal>
 
                     <div class="row">
@@ -371,6 +416,7 @@
     import Spinner from '../tools/Spanner';
     import Multiselect from 'vue-multiselect'
     import Pola from '../pola/Form';
+    import Pengarang from './add/Pengarang';
 
     export default {
 
@@ -378,6 +424,7 @@
             SpinnerComponent: Spinner,
             Multiselect,
             PolaComponent: Pola,
+            PengarangComponent: Pengarang,
         },
 
         props: [
@@ -391,14 +438,9 @@
             'lokasi',
             'bahasa',
             'pola',
-            'pol'
+            'pol',
+            'peng'
         ],
-
-        computed: {
-            isDisabled() {
-                return (this.form.judul.length == '' ? true : false)
-            }
-        },
 
         data() {
             return {
@@ -506,6 +548,12 @@
             },
             showEksemplar() {
                 this.$modal.show('eksemplar');
+            },
+            hidePengarang() {
+                this.$modal.hide('pengarang');
+            },
+            showPengarang() {
+                this.$modal.show('pengarang');
             },
             onSelect(option) {
                 if (option === 'Disable me!') this.isDisabled = true

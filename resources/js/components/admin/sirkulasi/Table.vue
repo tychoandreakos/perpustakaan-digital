@@ -89,7 +89,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button @click.prevent="simpan" type="button" class="btn btn-primary mt-3 btn-lg btn-block">Selesai
+                                <button @click.prevent="simpan" type="button"
+                                    class="btn btn-primary mt-3 btn-lg btn-block">Selesai
                                     Transaksi</button>
                             </div>
 
@@ -177,7 +178,76 @@
                                 </v-tab>
 
                                 <v-tab title="Pinjaman Saat Ini">
-                                    Second tab content
+                                    <div class="table-responsive">
+                                        <div>
+                                            <table class="table align-items-center">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col" style="width: 120px;">
+                                                            Aksi
+                                                        </th>
+                                                        <th scope="col">
+                                                            Kode Eksemplar
+                                                        </th>
+                                                        <th scope="col">
+                                                            Judul
+                                                        </th>
+                                                        <th scope="col">Tipe Koleksi</th>
+                                                        <th scope="col">
+                                                            Tanggal Pinjam
+                                                        </th>
+                                                        <th scope="col">Tanggal Kembali</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="list">
+
+                                                    <tr v-for="item in pinjam" :key="item.id">
+                                                        <th scope="row" class="name">
+                                                            <button type="button" class="btn btn-sm btn-success"
+                                                                data-toggle="tooltip" data-placement="bottom"
+                                                                title="Kembalikan Eksemplar Ini">
+                                                                <i class="ni ni-curved-next text-white"></i>
+                                                            </button>
+                                                            <button @click="perpanjang(
+
+                                                                item.bibliobigrafi.pola_eksemplar,
+                                                                item.user_id,
+                                                                item.bibliobigrafi_id,
+                                                                item.tgl_pinjam,
+                                                                item.status_pinjam
+                                                                
+                                                                )" type="button" class="btn btn-sm btn-primary"
+                                                                data-toggle="tooltip" data-placement="bottom"
+                                                                title="Perpanjang Buku">
+                                                                <i class="ni ni-fat-add text-white"></i>
+                                                            </button>
+                                                        </th>
+                                                        <td>
+                                                            {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
+                                                        </td>
+                                                        <td>
+                                                            {{ item.bibliobigrafi.buku.judul | capitalize }}
+                                                        </td>
+
+                                                        <td>
+                                                            {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
+                                                        </td>
+                                                        <td>
+                                                            {{ item.tgl_pinjam }}
+                                                        </td>
+                                                        <td>
+                                                            {{ item.tanggal_habis_pinjam }}
+                                                        </td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+
                                 </v-tab>
 
                                 <v-tab title="Denda">
@@ -216,7 +286,7 @@
             VTab,
             SpinnerComponent: Spinner,
         },
-        props: ['fetch', 'index', 'eksemplar', 'store'],
+        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs'],
         data() {
             return {
                 loading: false,
@@ -225,7 +295,8 @@
                 form: '',
                 value: [],
                 option: [],
-                date2: ''
+                date2: '',
+                pinjam: {}
             }
         },
 
@@ -259,6 +330,40 @@
                 return axios.get(this.fetch)
                     .then(res => this.options = res.data.data)
                     .catch(err => console.log(err));
+            },
+
+
+            getPinjaman() {
+                axios.post('/pustakawan/pinjaman', {
+                        params: {
+                            id: this.form.user.id
+                        }
+                    })
+                    .then(res => this.pinjam = res.data.data)
+                    .catch(err => console.log(err))
+            },
+
+            perpanjang(id, user_id, bibliobigrafi_id, tgl_pinjam, status_pinjam) {
+                axios.post(this.perpanjangs, {
+                    params: {
+                        id,
+                        user: this.form.tipe_anggota.masa_pinjaman_buku,
+                        user_id,
+                        bibliobigrafi_id,
+                        tgl_pinjam,
+                        status_pinjam
+                    }
+                }).
+                then(res => {
+                        axios.get('/pustakawan/pinjaman', {
+                                params: {
+                                    id: this.form.user.id
+                                }
+                            })
+                            .then(res => this.pinjam = res.data.data)
+                            .catch(err => console.log(err))
+                    })
+                    .catch(err => console.log(err))
             },
 
             simpan() {
@@ -301,8 +406,17 @@
                     .catch(err => console.log(err));
             },
 
+
+
             go() {
                 this.loading = true;
+                axios.get('/pustakawan/pinjaman', {
+                        params: {
+                            id: this.form.user.id
+                        }
+                    })
+                    .then(res => this.pinjam = res.data.data)
+                    .catch(err => console.log(err))
                 setTimeout(() => {
                     this.datas = false;
                     this.loading = false

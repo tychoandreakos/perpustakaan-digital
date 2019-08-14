@@ -11,16 +11,30 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('user');
+// });
+
 Route::get('/', function () {
-    return view('user');
+        return view('layouts.app');
+    });
+
+Route::get('/daftar-tamu', function() {
+    return view('tamu');
+})->name('user.tamu');
+
+Route::get('users', function(){
+    return view('homes');
 });
+
+// fetch
+Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');
 
 // Route::view('/', 'user');
 // Route::view('/{any}', 'user');
 
 // admin prefix
-
-Route::prefix('pustakawan')->group( function() {
+Route::prefix('pustakawan')->namespace('Admin')->group(function() {
 
     Route::view('/', 'admin.home')->name('home');
 
@@ -59,6 +73,7 @@ Route::get('bibliobigrafi-sirkulasi', 'BibliobigrafiController@sirkulasi')->name
 Route::get('eksemplar-fetch', 'EksemplarTransaksiController@fetch')->name('transaksi-eksemplar.fetch');
 Route::get('anggota-fetch', 'AnggotaController@fetch')->name('anggota.fetch');
 Route::get('eksemplar-keluar-fetch', 'PinjamController@eksemplar')->name('eksemplar-keluar.fetch');
+Route::get('pengembalian-fetch', 'PinjamController@pengembalian')->name('pengembalian.fetch');
 
 
 
@@ -71,6 +86,7 @@ Route::get('bibliobigrafi-fetch-klasifikasi', 'BibliobigrafiController@klasifika
 Route::get('bibliobigrafi-fetch-lokasi', 'BibliobigrafiController@lokasi')->name('bibliobigrafi.lokasi');
 Route::get('bibliobigrafi-fetch-bahasa', 'BibliobigrafiController@bahasa')->name('bibliobigrafi.bahasa');
 Route::get('bibliobigrafi-fetch-pola', 'BibliobigrafiController@pola')->name('bibliobigrafi.pola');
+Route::get('histori-fecth', 'PinjamController@histori')->name('histori.fetch');
 
 // search
 Route::get('gmd-search', 'GmdController@search');
@@ -95,7 +111,20 @@ Route::get('sirkulasi/{$id}', function() {
     $title = 'Sirkulasi';
     return view('admin.sirkulasi.table', compact('title'));
 })->name('sirkulasi.pinjam');
+Route::get('pengembalian', function() {
+    $title = 'Pengembalian Buku';
+    return view('admin.sirkulasi.kembali', compact('title'));
+})->name('sirkulasi.pengembalian');
+Route::get('histori', function(){
+    $title = 'Histori Peminjaman';
+    return view('admin.sirkulasi.histori', compact('title'));
+})->name('sirkulasi.histori');
+
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
+Route::get('pinjaman', 'PinjamController@pinjaman')->name('pinjam.pinjaman');
+Route::post('perpanjang', 'PinjamController@perpanjang')->name('pinjam.perpanjang');
+Route::get('kembali', 'PinjamController@kembali')->name('sirkulasi.kembali');
+
 
 // eksemplar keluar
 Route::get('eksemplar-keluar', function() {
