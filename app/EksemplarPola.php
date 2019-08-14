@@ -19,4 +19,9 @@ class EksemplarPola extends Model
     {
         return $this->hasMany(EksemplarTransaksi::class);
     }
+
+    public function setKodeEksemplarAttribute($value)
+    {
+        $this->attributes['kode_eksemplar'] = strtoupper($value);
+    }
 }

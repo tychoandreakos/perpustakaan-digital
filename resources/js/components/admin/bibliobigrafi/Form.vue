@@ -122,8 +122,6 @@
                         <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                         <span class="btn-inner--text">Tambah Pola Eksemplar</span>
                     </button>
-                    <button @click.prevent="getPola" type="button" class="btn btn-default btn-sm mb-3">Refresh Data Pola
-                        Eksemplar</button>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -347,7 +345,8 @@
                     <input type="text" hidden v-model="pola_eksemplar2">
 
                     <modal height="auto" name="eksemplar">
-                        <pola-component :pola="this.pol"></pola-component>
+                        <pola-component @closeEksemplar="hideEksemplar" @updateEksemplar="getPola"
+                            :pola="this.pol"></pola-component>
                     </modal>
 
                     <modal height="auto" name="pengarang">
@@ -548,6 +547,9 @@
             },
             showEksemplar() {
                 this.$modal.show('eksemplar');
+            },
+            hideEksemplar() {
+                this.$modal.hide('eksemplar');
             },
             hidePengarang() {
                 this.$modal.hide('pengarang');

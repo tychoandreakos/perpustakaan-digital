@@ -3414,7 +3414,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3521,6 +3520,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     showEksemplar: function showEksemplar() {
       this.$modal.show('eksemplar');
+    },
+    hideEksemplar: function hideEksemplar() {
+      this.$modal.hide('eksemplar');
     },
     hidePengarang: function hidePengarang() {
       this.$modal.hide('pengarang');
@@ -6217,7 +6219,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['pola'],
@@ -6252,6 +6253,10 @@ __webpack_require__.r(__webpack_exports__);
 
         setTimeout(function () {
           _this.loading = false;
+
+          _this.$emit('closeEksemplar');
+
+          _this.$emit('updateEksemplar');
         }, 2200);
         _this.form.kode_eksemplar = '', _this.form.prefix = '', _this.form.suffix = '', _this.form.serial = 0, _this.var22 = '';
       })["catch"](function (err) {
@@ -50753,21 +50758,6 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-default btn-sm mb-3",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.getPola($event)
-                    }
-                  }
-                },
-                [_vm._v("Refresh Data Pola\n                    Eksemplar")]
-              ),
-              _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-lg-4" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -51692,7 +51682,15 @@ var render = function() {
               _c(
                 "modal",
                 { attrs: { height: "auto", name: "eksemplar" } },
-                [_c("pola-component", { attrs: { pola: this.pol } })],
+                [
+                  _c("pola-component", {
+                    attrs: { pola: this.pol },
+                    on: {
+                      closeEksemplar: _vm.hideEksemplar,
+                      updateEksemplar: _vm.getPola
+                    }
+                  })
+                ],
                 1
               ),
               _vm._v(" "),
@@ -55139,189 +55137,199 @@ var render = function() {
   return _c("div", { staticClass: "container p-4" }, [
     _c("h3", [_vm._v("Tambah Pola Eksemplar")]),
     _vm._v(" "),
-    _c("form", [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "prefix" } }, [_vm._v("Prefix")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.prefix,
-                  expression: "form.prefix"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                autocomplete: "off",
-                type: "text",
-                id: "prefix",
-                placeholder: "prefix"
-              },
-              domProps: { value: _vm.form.prefix },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "prefix", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "suffix" } }, [_vm._v("Suffix")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.suffix,
-                  expression: "form.suffix"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                autocomplete: "off",
-                type: "text",
-                id: "suffix",
-                placeholder: "suffix"
-              },
-              domProps: { value: _vm.form.suffix },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "suffix", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "serial" } }, [
-              _vm._v("Panjang Serial Number")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.serial,
-                  expression: "form.serial"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                autocomplete: "off",
-                type: "number",
-                id: "serial",
-                placeholder: "serial"
-              },
-              domProps: { value: _vm.form.serial },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "serial", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col col-md-2" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col col-md-4" }, [
-          _c("div", { staticClass: "form-group mt-4" }, [
-            _c("label", { attrs: { for: "hasil" } }, [
-              _vm._v("Hasil Pratinjau")
-            ]),
-            _vm._v(" "),
-            _vm.var22 != 0
-              ? _c("h2", [_vm._v(_vm._s(_vm._f("capitalize")(_vm.var22)))])
-              : _c("h2", [_vm._v("Belum Ada.")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.pratinjau2,
-              expression: "pratinjau2"
-            }
-          ],
-          attrs: { type: "text", hidden: "" },
-          domProps: { value: _vm.pratinjau2 },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.pratinjau2 = $event.target.value
-            }
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
           }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.pratinjau,
-              expression: "pratinjau"
-            }
-          ],
-          attrs: { type: "text", hidden: "" },
-          domProps: { value: _vm.pratinjau },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "prefix" } }, [_vm._v("Prefix")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.prefix,
+                    expression: "form.prefix"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  type: "text",
+                  id: "prefix",
+                  placeholder: "prefix"
+                },
+                domProps: { value: _vm.form.prefix },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "prefix", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "suffix" } }, [_vm._v("Suffix")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.suffix,
+                    expression: "form.suffix"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  type: "text",
+                  id: "suffix",
+                  placeholder: "suffix"
+                },
+                domProps: { value: _vm.form.suffix },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "suffix", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "serial" } }, [
+                _vm._v("Panjang Serial Number")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.serial,
+                    expression: "form.serial"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  type: "number",
+                  id: "serial",
+                  placeholder: "serial"
+                },
+                domProps: { value: _vm.form.serial },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "serial", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col col-md-2" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col col-md-4" }, [
+            _c("div", { staticClass: "form-group mt-4" }, [
+              _c("label", { attrs: { for: "hasil" } }, [
+                _vm._v("Hasil Pratinjau")
+              ]),
+              _vm._v(" "),
+              _vm.var22 != 0
+                ? _c("h2", [_vm._v(_vm._s(_vm._f("capitalize")(_vm.var22)))])
+                : _c("h2", [_vm._v("Belum Ada.")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.pratinjau2,
+                expression: "pratinjau2"
               }
-              _vm.pratinjau = $event.target.value
+            ],
+            attrs: { type: "text", hidden: "" },
+            domProps: { value: _vm.pratinjau2 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.pratinjau2 = $event.target.value
+              }
             }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col col-md-12" },
-          [
-            _vm.loading
-              ? [_c("spinner-component")]
-              : [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-5 btn-success",
-                      attrs: { type: "button", disabled: _vm.check },
-                      on: { click: _vm.submit }
-                    },
-                    [_vm._v("Simpan")]
-                  )
-                ]
-          ],
-          2
-        )
-      ])
-    ])
+          }),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.pratinjau,
+                expression: "pratinjau"
+              }
+            ],
+            attrs: { type: "text", hidden: "" },
+            domProps: { value: _vm.pratinjau },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.pratinjau = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col col-md-12" },
+            [
+              _vm.loading
+                ? [_c("spinner-component")]
+                : [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-5 btn-success",
+                        attrs: { type: "submit", disabled: _vm.check }
+                      },
+                      [_vm._v("Simpan")]
+                    )
+                  ]
+            ],
+            2
+          )
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []

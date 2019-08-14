@@ -1,7 +1,7 @@
 <template>
     <div class="container p-4">
         <h3>Tambah Pola Eksemplar</h3>
-        <form>
+        <form @submit.prevent="submit">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -45,8 +45,7 @@
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <button type="button" @click="submit" :disabled="check"
-                            class="btn btn-5 btn-success">Simpan</button>
+                        <button type="submit" :disabled="check" class="btn btn-5 btn-success">Simpan</button>
                     </template>
 
                 </div>
@@ -97,10 +96,12 @@
                             timer: 2000
                         });
                         setTimeout(() => {
-                            this.loading = false
+                            this.loading = false;
+                            this.$emit('closeEksemplar');
+                            this.$emit('updateEksemplar');
                         }, 2200)
 
-                            this.form.kode_eksemplar = '',
+                        this.form.kode_eksemplar = '',
                             this.form.prefix = '',
                             this.form.suffix = '',
                             this.form.serial = 0,
