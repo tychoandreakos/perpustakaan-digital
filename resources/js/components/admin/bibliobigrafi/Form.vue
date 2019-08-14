@@ -187,7 +187,7 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                        <button @click="showKota" class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                                             <span class="btn-inner--text">Tambah Tempat Terbit</span>
                                         </button>
@@ -355,6 +355,11 @@
                             :peng="this.peng"></pengarang-component>
                     </modal>
 
+                      <modal height="auto" name="kota">
+                        <kota-component @closeKota="hideKota" @updateKota="getKota"
+                            :kota="this.kota3"></kota-component>
+                    </modal>
+
                     <modal height="auto" name="penerbit">
                         <penerbit-component @closePenerbit="hidePenerbit" @updatePenerbit="getPenerbit"
                             :pengo="this.pener"></penerbit-component>
@@ -423,6 +428,7 @@
     import Pola from '../pola/Form';
     import Pengarang from './add/Pengarang';
     import Penerbit from './add/Penerbit';
+    import Kota from './add/Kota';
 
     export default {
 
@@ -432,6 +438,7 @@
             PolaComponent: Pola,
             PengarangComponent: Pengarang,
             PenerbitComponent: Penerbit,
+            KotaComponent: Kota,
         },
 
         props: [
@@ -447,7 +454,8 @@
             'pola',
             'pol',
             'peng',
-            'pener'
+            'pener',
+            'kota3'
         ],
 
         data() {
@@ -559,6 +567,12 @@
             },
             hideEksemplar() {
                 this.$modal.hide('eksemplar');
+            },
+            showKota() {
+                this.$modal.show('kota');
+            },
+            hideKota() {
+                this.$modal.hide('kota');
             },
             hidePengarang() {
                 this.$modal.hide('pengarang');

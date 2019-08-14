@@ -22,6 +22,12 @@ class Kota extends Model
         'updated_at',
     ];
 
+    public function setNamaKotaAttribute($value)
+    {
+        $this->attributes['nama_kota'] = ucwords($value);
+    }
+
+
     public function getUpdatedAtAttribute($value)
     {
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
