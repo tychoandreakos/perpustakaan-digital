@@ -21,7 +21,11 @@ class BukuController extends Controller
 
     public function fetch()
     {
-        return Buku::with('buku_transaksi.pengarang', 'buku_transaksi.penerbit')->latest()->paginate(5);
+        return Buku::with(['buku_transaksi.pengarang' => function($q) {
+            $q->select('id', 'nama_pengarang');
+        }, 'buku_transaksi.penerbit' => function($q) {
+            $q->select('id', 'nama_penerbit');
+        }])->latest()->paginate(5);
     }
 
     /**
@@ -96,7 +100,11 @@ class BukuController extends Controller
 
             $search = $request->q;
 
-            return Buku::with('buku_transaksi.pengarang', 'buku_transaksi.penerbit')->where('judul','LIKE',"%$search%")
+            return Buku::with(['buku_transaksi.pengarang' => function($q) {
+                $q->select('id', 'nama_pengarang');
+            }, 'buku_transaksi.penerbit' => function($q) {
+                $q->select('id', 'nama_penerbit');
+            }])->where('judul','LIKE',"%$search%")
             // ->orWhere('isbn_isnn','LIKE',"%$search%")
             ->latest()
             ->paginate(5);

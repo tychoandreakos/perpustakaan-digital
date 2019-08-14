@@ -4746,6 +4746,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -54027,27 +54028,48 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v(_vm._s(item.judul))]
+                          [_vm._v(_vm._s(_vm._f("capitalize")(item.judul)))]
                         )
                       ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        _vm._l(item.buku_transaksi, function(pengarang) {
+                          return _c(
+                            "span",
+                            {
+                              key: pengarang.item,
+                              staticClass:
+                                " mt-2 badge badge-pill badge-success",
+                              staticStyle: { "font-size": "11px" }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm._f("capitalize")(
+                                    pengarang.pengarang.nama_pengarang
+                                  )
+                                )
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      ),
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(
                           _vm._s(
-                            item.buku_transaksi.pengarang.nama_pengarang ||
-                              _vm.capitalize
+                            _vm._f("capitalize")(
+                              item.buku_transaksi.map(function(data) {
+                                return data.penerbit.nama_penerbit
+                              })[0]
+                            )
                           )
                         )
                       ]),
                       _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            item.buku_transaksi.penerbit.nama_penerbit ||
-                              _vm.capitalize
-                          )
-                        )
-                      ]),
+                      _c("td", [_vm._v(_vm._s(item.isbn_isnn))]),
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(
@@ -54110,7 +54132,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Penerbit")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("ISBN ISNN")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ISBN ISNN")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Terakhir Diubah")])
       ])
     ])
   }
