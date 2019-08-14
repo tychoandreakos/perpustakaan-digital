@@ -34,8 +34,8 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                         <button @click.prevent="getData" type="button" class="btn btn-default btn-sm">Refresh Data Pengarang</button>
-                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" @click="showPengarang" type="button">
+                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" @click="showPengarang"
+                                            type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                                             <span class="btn-inner--text">Tambah Pengarang</span>
                                         </button>
@@ -351,7 +351,8 @@
                     </modal>
 
                     <modal height="auto" name="pengarang">
-                        <pengarang-component :my-event="getData" :peng="this.peng"></pengarang-component>
+                        <pengarang-component @closePengarang="hidePengarang" @updatePengarang="getData"
+                            :peng="this.peng"></pengarang-component>
                     </modal>
 
                     <div class="row">
@@ -440,12 +441,6 @@
             'pol',
             'peng'
         ],
-
-        computed: {
-            isDisabled() {
-                return (this.form.judul.length == '' ? true : false)
-            }
-        },
 
         data() {
             return {
@@ -553,6 +548,9 @@
             },
             showEksemplar() {
                 this.$modal.show('eksemplar');
+            },
+            hidePengarang() {
+                this.$modal.hide('pengarang');
             },
             showPengarang() {
                 this.$modal.show('pengarang');

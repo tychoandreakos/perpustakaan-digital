@@ -31,7 +31,9 @@ class BibliobigrafiController extends Controller
 
     public function fetch()
     {
-        return Buku::with('buku_transaksi.pengarang')->withCount('biblio')->latest()->paginate(5);
+        return Buku::with(['buku_transaksi.pengarang' => function($q) {
+            $q->select('id', 'nama_pengarang');
+        }])->withCount('biblio')->latest()->paginate(5);
     }
 
     public function sirkulasi()

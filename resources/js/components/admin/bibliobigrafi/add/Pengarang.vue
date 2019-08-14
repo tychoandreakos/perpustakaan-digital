@@ -1,7 +1,7 @@
 <template>
     <div class="container p-4">
         <h3>Tambah Data Pengarang</h3>
-        <form>
+        <form @submit.prevent="submit">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -18,8 +18,7 @@
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <button type="button" @click.prevent="submit" :disabled="check"
-                            class="btn btn-5 btn-success">Simpan</button>
+                        <button type="button" :disabled="check" class="btn btn-5 btn-success">Simpan</button>
                     </template>
 
                 </div>
@@ -65,9 +64,11 @@
                         });
                         setTimeout(() => {
                             this.loading = false
+                            this.$emit('closePengarang');
+                            this.$emit('updatePengarang');
+                            this.form.nama_pengarang = ''
                         }, 2200)
 
-                           this.form.nama_pengarang = ''
                     })
                     .catch(err => console.log(err))
             }

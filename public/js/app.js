@@ -3001,10 +3001,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _pola_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pola/Form */ "./resources/js/components/admin/pola/Form.vue");
 /* harmony import */ var _add_Pengarang__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./add/Pengarang */ "./resources/js/components/admin/bibliobigrafi/add/Pengarang.vue");
-var _components$props$com;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
 //
 //
 //
@@ -3422,7 +3419,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_components$props$com = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"],
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a,
@@ -3430,11 +3427,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     PengarangComponent: _add_Pengarang__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng'],
-  computed: {
-    isDisabled: function isDisabled() {
-      return this.form.judul.length == '' ? true : false;
-    }
-  },
   data: function data() {
     return {
       loading: false,
@@ -3490,170 +3482,175 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getLokasi();
     this.getBahasa();
     this.getPola();
-  }
-}, _defineProperty(_components$props$com, "computed", {
-  isInvalid: function isInvalid() {
-    return this.isTouched && this.value.length === 0;
   },
-  bahasa2: function bahasa2() {
-    return this.form.bahasa_id = this.bahasa_id.id;
-  },
-  pola_eksemplar2: function pola_eksemplar2() {
-    return this.form.pola_eksemplar = this.pola_eksemplar.kode_eksemplar;
-  },
-  pengarang2: function pengarang2() {
-    return this.form.pengarang_id = this.pengarang_id.map(function (pengarang) {
-      return pengarang.id;
-    });
-  },
-  gmd2: function gmd2() {
-    return this.form.gmd_id = this.gmd_id.id;
-  },
-  kota2: function kota2() {
-    return this.form.kota_id = this.kota_id.id;
-  },
-  klasifikasi2: function klasifikasi2() {
-    return this.form.klasifikasi_id = this.klasifikasi_id.id;
-  },
-  penerbit2: function penerbit2() {
-    return this.form.penerbit_id = this.penerbit_id.id;
-  },
-  lokasi2: function lokasi2() {
-    return this.form.lokasi_id = this.lokasi_id.id;
-  }
-}), _defineProperty(_components$props$com, "methods", {
-  onChange: function onChange(value) {
-    this.value = value;
-    if (value.indexOf('Reset me!') !== -1) this.value = [];
-  },
-  showEksemplar: function showEksemplar() {
-    this.$modal.show('eksemplar');
-  },
-  showPengarang: function showPengarang() {
-    this.$modal.show('pengarang');
-  },
-  onSelect: function onSelect(option) {
-    if (option === 'Disable me!') this.isDisabled = true;
-  },
-  getData: function getData() {
-    var _this = this;
-
-    return axios.get(this.pengarang).then(function (res) {
-      return _this.options = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getPola: function getPola() {
-    var _this2 = this;
-
-    return axios.get(this.pola).then(function (res) {
-      return _this2.eksemplarData = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getBahasa: function getBahasa() {
-    var _this3 = this;
-
-    return axios.get(this.bahasa).then(function (res) {
-      return _this3.bahasaData = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getPenerbit: function getPenerbit() {
-    var _this4 = this;
-
-    return axios.get(this.penerbit).then(function (res) {
-      return _this4.penerbitData = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getKota: function getKota() {
-    var _this5 = this;
-
-    return axios.get(this.kota).then(function (res) {
-      return _this5.kotaData = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getKlasifikasi: function getKlasifikasi() {
-    var _this6 = this;
-
-    return axios.get(this.klasifikasi).then(function (res) {
-      return _this6.klasifikasiData = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getLokasi: function getLokasi() {
-    var _this7 = this;
-
-    return axios.get(this.lokasi).then(function (res) {
-      return _this7.lokasiData = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getGmd: function getGmd() {
-    var _this8 = this;
-
-    return axios.get(this.gmd).then(function (res) {
-      return _this8.gmdData = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  onTouch: function onTouch() {
-    this.isTouched = true;
-  },
-  simpan: function simpan() {
-    var _this9 = this;
-
-    this.loading = true;
-
-    if (!this.fetch.judul) {
-      // create
-      axios.post(this.fetch, this.form).then(function (res) {
-        _this9.$swal({
-          position: 'top-end',
-          type: 'success',
-          title: res.data.message.toUpperCase(),
-          showConfirmButton: false,
-          timer: 3000
-        });
-
-        setTimeout(function () {
-          window.location = _this9.index;
-        }, 3200);
-      })["catch"](function (err) {
-        _this9.err = err.response.data.errors;
-        _this9.loading = false;
+  computed: {
+    isInvalid: function isInvalid() {
+      return this.isTouched && this.value.length === 0;
+    },
+    bahasa2: function bahasa2() {
+      return this.form.bahasa_id = this.bahasa_id.id;
+    },
+    pola_eksemplar2: function pola_eksemplar2() {
+      return this.form.pola_eksemplar = this.pola_eksemplar.kode_eksemplar;
+    },
+    pengarang2: function pengarang2() {
+      return this.form.pengarang_id = this.pengarang_id.map(function (pengarang) {
+        return pengarang.id;
       });
-    } else {
-      // update
-      axios.post('/pustakawan/klasifikasi/' + this.fetch.id, this.form).then(function (res) {
-        _this9.$swal({
-          position: 'top-end',
-          type: 'success',
-          title: res.data.message.toUpperCase(),
-          showConfirmButton: false,
-          timer: 2500
-        });
+    },
+    gmd2: function gmd2() {
+      return this.form.gmd_id = this.gmd_id.id;
+    },
+    kota2: function kota2() {
+      return this.form.kota_id = this.kota_id.id;
+    },
+    klasifikasi2: function klasifikasi2() {
+      return this.form.klasifikasi_id = this.klasifikasi_id.id;
+    },
+    penerbit2: function penerbit2() {
+      return this.form.penerbit_id = this.penerbit_id.id;
+    },
+    lokasi2: function lokasi2() {
+      return this.form.lokasi_id = this.lokasi_id.id;
+    }
+  },
+  methods: {
+    onChange: function onChange(value) {
+      this.value = value;
+      if (value.indexOf('Reset me!') !== -1) this.value = [];
+    },
+    showEksemplar: function showEksemplar() {
+      this.$modal.show('eksemplar');
+    },
+    hidePengarang: function hidePengarang() {
+      this.$modal.hide('pengarang');
+    },
+    showPengarang: function showPengarang() {
+      this.$modal.show('pengarang');
+    },
+    onSelect: function onSelect(option) {
+      if (option === 'Disable me!') this.isDisabled = true;
+    },
+    getData: function getData() {
+      var _this = this;
 
-        setTimeout(function () {
-          window.location = _this9.index;
-        }, 2800);
+      return axios.get(this.pengarang).then(function (res) {
+        return _this.options = res.data;
       })["catch"](function (err) {
-        console.log(err);
-        _this9.loading = false;
+        return console.log(err);
       });
+    },
+    getPola: function getPola() {
+      var _this2 = this;
+
+      return axios.get(this.pola).then(function (res) {
+        return _this2.eksemplarData = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getBahasa: function getBahasa() {
+      var _this3 = this;
+
+      return axios.get(this.bahasa).then(function (res) {
+        return _this3.bahasaData = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getPenerbit: function getPenerbit() {
+      var _this4 = this;
+
+      return axios.get(this.penerbit).then(function (res) {
+        return _this4.penerbitData = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getKota: function getKota() {
+      var _this5 = this;
+
+      return axios.get(this.kota).then(function (res) {
+        return _this5.kotaData = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getKlasifikasi: function getKlasifikasi() {
+      var _this6 = this;
+
+      return axios.get(this.klasifikasi).then(function (res) {
+        return _this6.klasifikasiData = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getLokasi: function getLokasi() {
+      var _this7 = this;
+
+      return axios.get(this.lokasi).then(function (res) {
+        return _this7.lokasiData = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getGmd: function getGmd() {
+      var _this8 = this;
+
+      return axios.get(this.gmd).then(function (res) {
+        return _this8.gmdData = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    onTouch: function onTouch() {
+      this.isTouched = true;
+    },
+    simpan: function simpan() {
+      var _this9 = this;
+
+      this.loading = true;
+
+      if (!this.fetch.judul) {
+        // create
+        axios.post(this.fetch, this.form).then(function (res) {
+          _this9.$swal({
+            position: 'top-end',
+            type: 'success',
+            title: res.data.message.toUpperCase(),
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          setTimeout(function () {
+            window.location = _this9.index;
+          }, 3200);
+        })["catch"](function (err) {
+          _this9.err = err.response.data.errors;
+          _this9.loading = false;
+        });
+      } else {
+        // update
+        axios.post('/pustakawan/klasifikasi/' + this.fetch.id, this.form).then(function (res) {
+          _this9.$swal({
+            position: 'top-end',
+            type: 'success',
+            title: res.data.message.toUpperCase(),
+            showConfirmButton: false,
+            timer: 2500
+          });
+
+          setTimeout(function () {
+            window.location = _this9.index;
+          }, 2800);
+        })["catch"](function (err) {
+          console.log(err);
+          _this9.loading = false;
+        });
+      }
     }
   }
-}), _components$props$com);
+});
 
 /***/ }),
 
@@ -3845,7 +3842,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['peng'],
@@ -3876,8 +3872,13 @@ __webpack_require__.r(__webpack_exports__);
 
         setTimeout(function () {
           _this.loading = false;
+
+          _this.$emit('closePengarang');
+
+          _this.$emit('updatePengarang');
+
+          _this.form.nama_pengarang = '';
         }, 2200);
-        _this.form.nama_pengarang = '';
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -50410,21 +50411,6 @@ var render = function() {
                           _c(
                             "button",
                             {
-                              staticClass: "btn btn-default btn-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.getData($event)
-                                }
-                              }
-                            },
-                            [_vm._v("Refresh Data Pengarang")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
                               staticClass:
                                 "btn btn-icon btn-3 btn-primary btn-sm",
                               attrs: { type: "button" },
@@ -51715,7 +51701,11 @@ var render = function() {
                 { attrs: { height: "auto", name: "pengarang" } },
                 [
                   _c("pengarang-component", {
-                    attrs: { "my-event": _vm.getData, peng: this.peng }
+                    attrs: { peng: this.peng },
+                    on: {
+                      closePengarang: _vm.hidePengarang,
+                      updatePengarang: _vm.getData
+                    }
                   })
                 ],
                 1
@@ -52213,71 +52203,76 @@ var render = function() {
   return _c("div", { staticClass: "container p-4" }, [
     _c("h3", [_vm._v("Tambah Data Pengarang")]),
     _vm._v(" "),
-    _c("form", [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "prefix" } }, [
-              _vm._v("Nama Pengarang")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.nama_pengarang,
-                  expression: "form.nama_pengarang"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                autocomplete: "off",
-                type: "text",
-                placeholder: "Nama Pengarang"
-              },
-              domProps: { value: _vm.form.nama_pengarang },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "prefix" } }, [
+                _vm._v("Nama Pengarang")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.nama_pengarang,
+                    expression: "form.nama_pengarang"
                   }
-                  _vm.$set(_vm.form, "nama_pengarang", $event.target.value)
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  type: "text",
+                  placeholder: "Nama Pengarang"
+                },
+                domProps: { value: _vm.form.nama_pengarang },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "nama_pengarang", $event.target.value)
+                  }
                 }
-              }
-            })
+              })
+            ])
           ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col col-md-12" },
+            [
+              _vm.loading
+                ? [_c("spinner-component")]
+                : [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-5 btn-success",
+                        attrs: { type: "button", disabled: _vm.check }
+                      },
+                      [_vm._v("Simpan")]
+                    )
+                  ]
+            ],
+            2
+          )
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col col-md-12" },
-          [
-            _vm.loading
-              ? [_c("spinner-component")]
-              : [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-5 btn-success",
-                      attrs: { type: "button", disabled: _vm.check },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.submit($event)
-                        }
-                      }
-                    },
-                    [_vm._v("Simpan")]
-                  )
-                ]
-          ],
-          2
-        )
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []
