@@ -15,4 +15,10 @@ class Penerbit extends Model
     {
         return $this->hasMany(BukuTransaksi::class);
     }
+
+    public function setNamaPenerbitAttribute($value)
+    {
+        $this->attributes['nama_penerbit'] = ucwords($value);
+    }
+
 }

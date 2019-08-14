@@ -100,7 +100,8 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                        <button @click="showPenerbit" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                            type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                                             <span class="btn-inner--text">Tambah Penerbit</span>
                                         </button>
@@ -345,13 +346,18 @@
                     <input type="text" hidden v-model="pola_eksemplar2">
 
                     <modal height="auto" name="eksemplar">
-                        <pola-component @closeEksemplar="hideEksemplar" @updateEksemplar="getPola"
-                            :pola="this.pol"></pola-component>
+                        <pola-component @closeEksemplar="hideEksemplar" @updateEksemplar="getPola" :pola="this.pol">
+                        </pola-component>
                     </modal>
 
                     <modal height="auto" name="pengarang">
                         <pengarang-component @closePengarang="hidePengarang" @updatePengarang="getData"
                             :peng="this.peng"></pengarang-component>
+                    </modal>
+
+                    <modal height="auto" name="penerbit">
+                        <penerbit-component @closePenerbit="hidePenerbit" @updatePenerbit="getPenerbit"
+                            :pengo="this.pener"></penerbit-component>
                     </modal>
 
                     <div class="row">
@@ -416,6 +422,7 @@
     import Multiselect from 'vue-multiselect'
     import Pola from '../pola/Form';
     import Pengarang from './add/Pengarang';
+    import Penerbit from './add/Penerbit';
 
     export default {
 
@@ -424,6 +431,7 @@
             Multiselect,
             PolaComponent: Pola,
             PengarangComponent: Pengarang,
+            PenerbitComponent: Penerbit,
         },
 
         props: [
@@ -438,7 +446,8 @@
             'bahasa',
             'pola',
             'pol',
-            'peng'
+            'peng',
+            'pener'
         ],
 
         data() {
@@ -556,6 +565,12 @@
             },
             showPengarang() {
                 this.$modal.show('pengarang');
+            },
+            hidePenerbit() {
+                this.$modal.hide('penerbit');
+            },
+            showPenerbit() {
+                this.$modal.show('penerbit');
             },
             onSelect(option) {
                 if (option === 'Disable me!') this.isDisabled = true
