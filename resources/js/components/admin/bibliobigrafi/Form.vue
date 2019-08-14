@@ -187,7 +187,8 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button @click="showKota" class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                        <button @click="showKota" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                            type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                                             <span class="btn-inner--text">Tambah Tempat Terbit</span>
                                         </button>
@@ -224,7 +225,7 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                        <button @click="showGmd" class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                                             <span class="btn-inner--text">Tambah GMD</span>
                                         </button>
@@ -355,10 +356,14 @@
                             :peng="this.peng"></pengarang-component>
                     </modal>
 
-                      <modal height="auto" name="kota">
-                        <kota-component @closeKota="hideKota" @updateKota="getKota"
-                            :kota="this.kota3"></kota-component>
+                    <modal height="auto" name="kota">
+                        <kota-component @closeKota="hideKota" @updateKota="getKota" :kota="this.kota3"></kota-component>
                     </modal>
+
+                    <modal height="auto" name="gmd">
+                        <gmd-component @closeGmd="hideGmd" @updateGmd="getGmd" :gmd="this.gmd3"></gmd-component>
+                    </modal>
+
 
                     <modal height="auto" name="penerbit">
                         <penerbit-component @closePenerbit="hidePenerbit" @updatePenerbit="getPenerbit"
@@ -429,6 +434,7 @@
     import Pengarang from './add/Pengarang';
     import Penerbit from './add/Penerbit';
     import Kota from './add/Kota';
+    import Gmd from './add/Gmd';
 
     export default {
 
@@ -439,6 +445,7 @@
             PengarangComponent: Pengarang,
             PenerbitComponent: Penerbit,
             KotaComponent: Kota,
+            GmdComponent: Gmd,
         },
 
         props: [
@@ -455,7 +462,8 @@
             'pol',
             'peng',
             'pener',
-            'kota3'
+            'kota3',
+            'gmd3'
         ],
 
         data() {
@@ -573,6 +581,12 @@
             },
             hideKota() {
                 this.$modal.hide('kota');
+            },
+            showGmd() {
+                this.$modal.show('gmd');
+            },
+            hideGmd() {
+                this.$modal.hide('gmd');
             },
             hidePengarang() {
                 this.$modal.hide('pengarang');

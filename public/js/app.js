@@ -3003,6 +3003,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_Pengarang__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./add/Pengarang */ "./resources/js/components/admin/bibliobigrafi/add/Pengarang.vue");
 /* harmony import */ var _add_Penerbit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add/Penerbit */ "./resources/js/components/admin/bibliobigrafi/add/Penerbit.vue");
 /* harmony import */ var _add_Kota__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./add/Kota */ "./resources/js/components/admin/bibliobigrafi/add/Kota.vue");
+/* harmony import */ var _add_Gmd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./add/Gmd */ "./resources/js/components/admin/bibliobigrafi/add/Gmd.vue");
 //
 //
 //
@@ -3427,6 +3428,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
@@ -3440,9 +3447,10 @@ __webpack_require__.r(__webpack_exports__);
     PolaComponent: _pola_Form__WEBPACK_IMPORTED_MODULE_2__["default"],
     PengarangComponent: _add_Pengarang__WEBPACK_IMPORTED_MODULE_3__["default"],
     PenerbitComponent: _add_Penerbit__WEBPACK_IMPORTED_MODULE_4__["default"],
-    KotaComponent: _add_Kota__WEBPACK_IMPORTED_MODULE_5__["default"]
+    KotaComponent: _add_Kota__WEBPACK_IMPORTED_MODULE_5__["default"],
+    GmdComponent: _add_Gmd__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
-  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3'],
+  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3'],
   data: function data() {
     return {
       loading: false,
@@ -3546,6 +3554,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     hideKota: function hideKota() {
       this.$modal.hide('kota');
+    },
+    showGmd: function showGmd() {
+      this.$modal.show('gmd');
+    },
+    hideGmd: function hideGmd() {
+      this.$modal.hide('gmd');
     },
     hidePengarang: function hidePengarang() {
       this.$modal.hide('pengarang');
@@ -3826,6 +3840,106 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
     this.getResults();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['gmd'],
+  components: {
+    SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      form: {
+        kode_gmd: '',
+        nama_gmd: ''
+      },
+      loading: false
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      this.loading = true, axios.post(this.gmd, this.form).then(function (res) {
+        _this.$swal({
+          position: 'top-end',
+          type: 'success',
+          title: res.data.message.toUpperCase(),
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        setTimeout(function () {
+          _this.loading = false;
+
+          _this.$emit('closeGmd');
+
+          _this.$emit('updateGmd');
+
+          _this.form.nama_gmd = '';
+          _this.form.kode_gmd = '';
+        }, 2200);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  },
+  computed: {
+    check: function check() {
+      return this.form.nama_gmd == '' ? true : false;
+    }
   }
 });
 
@@ -51350,7 +51464,24 @@ var render = function() {
                       "div",
                       { class: { invalid: _vm.isInvalid } },
                       [
-                        _vm._m(5),
+                        _c("div", { staticClass: "float-right mb-2" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-icon btn-3 btn-primary btn-sm",
+                              attrs: { type: "button" },
+                              on: { click: _vm.showGmd }
+                            },
+                            [
+                              _vm._m(5),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "btn-inner--text" }, [
+                                _vm._v("Tambah GMD")
+                              ])
+                            ]
+                          )
+                        ]),
                         _vm._v(" "),
                         _c(
                           "label",
@@ -51972,6 +52103,18 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "modal",
+                { attrs: { height: "auto", name: "gmd" } },
+                [
+                  _c("gmd-component", {
+                    attrs: { gmd: this.gmd3 },
+                    on: { closeGmd: _vm.hideGmd, updateGmd: _vm.getGmd }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "modal",
                 { attrs: { height: "auto", name: "penerbit" } },
                 [
                   _c("penerbit-component", {
@@ -52144,21 +52287,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "float-right mb-2" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-icon btn-3 btn-primary btn-sm",
-          attrs: { type: "button" }
-        },
-        [
-          _c("span", { staticClass: "btn-inner--icon" }, [
-            _c("i", { staticClass: "ni ni-bag-17" })
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "btn-inner--text" }, [_vm._v("Tambah GMD")])
-        ]
-      )
+    return _c("span", { staticClass: "btn-inner--icon" }, [
+      _c("i", { staticClass: "ni ni-bag-17" })
     ])
   },
   function() {
@@ -52423,6 +52553,131 @@ var staticRenderFns = [
     )
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=template&id=80123efe&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=template&id=80123efe& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container p-4" }, [
+    _c("h3", [_vm._v("Tambah Data GMD")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "prefix" } }, [_vm._v("Kode GMD")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.kode_gmd,
+                    expression: "form.kode_gmd"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  type: "text",
+                  placeholder: "Kode Gmd"
+                },
+                domProps: { value: _vm.form.kode_gmd },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "kode_gmd", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group mt-2" }, [
+                _c("label", { attrs: { for: "prefix" } }, [_vm._v("Nama GMD")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.nama_gmd,
+                      expression: "form.nama_gmd"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    autocomplete: "off",
+                    type: "text",
+                    placeholder: "Nama Gmd"
+                  },
+                  domProps: { value: _vm.form.nama_gmd },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "nama_gmd", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col col-md-12" },
+            [
+              _vm.loading
+                ? [_c("spinner-component")]
+                : [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-5 btn-success",
+                        attrs: { type: "submit", disabled: _vm.check }
+                      },
+                      [_vm._v("Simpan")]
+                    )
+                  ]
+            ],
+            2
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -74622,6 +74877,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_4925fc82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_4925fc82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Gmd.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Gmd.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Gmd_vue_vue_type_template_id_80123efe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Gmd.vue?vue&type=template&id=80123efe& */ "./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=template&id=80123efe&");
+/* harmony import */ var _Gmd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Gmd.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Gmd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Gmd_vue_vue_type_template_id_80123efe___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Gmd_vue_vue_type_template_id_80123efe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/bibliobigrafi/add/Gmd.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Gmd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Gmd.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Gmd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=template&id=80123efe&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=template&id=80123efe& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Gmd_vue_vue_type_template_id_80123efe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Gmd.vue?vue&type=template&id=80123efe& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Gmd.vue?vue&type=template&id=80123efe&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Gmd_vue_vue_type_template_id_80123efe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Gmd_vue_vue_type_template_id_80123efe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
