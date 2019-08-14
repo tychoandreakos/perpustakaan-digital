@@ -3417,6 +3417,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -3872,8 +3873,6 @@ __webpack_require__.r(__webpack_exports__);
           showConfirmButton: false,
           timer: 2000
         });
-
-        _this.$emit('myEvent');
 
         setTimeout(function () {
           _this.loading = false;
@@ -50408,6 +50407,21 @@ var render = function() {
                       { class: { invalid: _vm.isInvalid } },
                       [
                         _c("div", { staticClass: "float-right mb-2" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-default btn-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.getData($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Refresh Data Pengarang")]
+                          ),
+                          _vm._v(" "),
                           _c(
                             "button",
                             {

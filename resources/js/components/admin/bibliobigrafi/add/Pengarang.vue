@@ -63,7 +63,6 @@
                             showConfirmButton: false,
                             timer: 2000
                         });
-                        this.$emit('myEvent')
                         setTimeout(() => {
                             this.loading = false
                         }, 2200)
