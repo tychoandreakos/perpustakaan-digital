@@ -52,6 +52,13 @@ class PinjamController extends Controller
         PinjamTransaksi::create($requestData);
     }
 
+    public function histori()
+    {
+        return PinjamTransaksi::with(['bibliobigrafi.buku' => function($q) {
+            $q->select('id', 'judul');
+        },  'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 0)->latest()->paginate(5);
+    }
+
     public function kembali(Request $request)
     {
         $bilio = Bibliobigrafi::where('id', $request->id)->first();

@@ -86,6 +86,7 @@ Route::get('bibliobigrafi-fetch-klasifikasi', 'BibliobigrafiController@klasifika
 Route::get('bibliobigrafi-fetch-lokasi', 'BibliobigrafiController@lokasi')->name('bibliobigrafi.lokasi');
 Route::get('bibliobigrafi-fetch-bahasa', 'BibliobigrafiController@bahasa')->name('bibliobigrafi.bahasa');
 Route::get('bibliobigrafi-fetch-pola', 'BibliobigrafiController@pola')->name('bibliobigrafi.pola');
+Route::get('histori-fecth', 'PinjamController@histori')->name('histori.fetch');
 
 // search
 Route::get('gmd-search', 'GmdController@search');
@@ -114,10 +115,16 @@ Route::get('pengembalian', function() {
     $title = 'Pengembalian Buku';
     return view('admin.sirkulasi.kembali', compact('title'));
 })->name('sirkulasi.pengembalian');
+Route::get('histori', function(){
+    $title = 'Histori Peminjaman';
+    return view('admin.sirkulasi.histori', compact('title'));
+})->name('sirkulasi.histori');
+
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
 Route::get('pinjaman', 'PinjamController@pinjaman')->name('pinjam.pinjaman');
 Route::post('perpanjang', 'PinjamController@perpanjang')->name('pinjam.perpanjang');
 Route::get('kembali', 'PinjamController@kembali')->name('sirkulasi.kembali');
+
 
 // eksemplar keluar
 Route::get('eksemplar-keluar', function() {

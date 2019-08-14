@@ -28,7 +28,7 @@ class PinjamTransaksi extends Model
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
     }
     
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

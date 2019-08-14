@@ -89,6 +89,8 @@ Vue.component('form-anggota-component', require('./components/admin/anggota/Form
 Vue.component('table-sirkulasi-component', require('./components/admin/sirkulasi/Table.vue').default);
 Vue.component('form-sirkulasi-component', require('./components/admin/sirkulasi/Form.vue').default);
 Vue.component('kembali-component', require('./components/admin/sirkulasi/Kembali.vue').default);
+Vue.component('histori-component', require('./components/admin/sirkulasi/Histori.vue').default);
+
 
 // eksemplar keluar
 Vue.component('table-eksemplar-keluar-component', require('./components/admin/eksemplar-keluar/Table.vue').default);
