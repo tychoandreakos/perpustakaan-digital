@@ -39,7 +39,8 @@ class LokasiRakController extends Controller
     {
         LokasiRak::create($request->all());
 
-        return response('data berhasil disimpan', 200);
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**

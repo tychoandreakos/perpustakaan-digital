@@ -225,7 +225,8 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button @click="showGmd" class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                        <button @click="showGmd" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                            type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                                             <span class="btn-inner--text">Tambah GMD</span>
                                         </button>
@@ -261,9 +262,10 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                        <button @click="showKlasifikasi" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                            type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
-                                            <span class="btn-inner--text">Tambah GMD</span>
+                                            <span class="btn-inner--text">Tambah Klasifiikasi</span>
                                         </button>
                                     </div>
                                     <label class="form-control-label" for="klasifikasi">Klasifikasi</label>
@@ -286,9 +288,9 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                        <button @click="showLokasi" class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
-                                            <span class="btn-inner--text">Tambah GMD</span>
+                                            <span class="btn-inner--text">Tambah Lokasi Rak</span>
                                         </button>
                                     </div>
                                     <label class="form-control-label" for="lokasi">Lokasi Rak</label>
@@ -370,6 +372,16 @@
                             :pengo="this.pener"></penerbit-component>
                     </modal>
 
+                    <modal height="auto" name="klasifikasi">
+                        <klasifikasi-component @closeKlasifikasi="hideKlasifikasi" @updateKlasifikasi="getKlasifikasi"
+                            :tipeklasifikasi="this.tipeklasifikasi"></klasifikasi-component>
+                    </modal>
+
+                    <modal height="auto" name="lokasi">
+                        <lokasi-component @closeLokasi="hideLokasi" @updateLokasi="getLokasi"
+                            :lokasi3="this.lokasi3"></lokasi-component>
+                    </modal>
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -435,6 +447,8 @@
     import Penerbit from './add/Penerbit';
     import Kota from './add/Kota';
     import Gmd from './add/Gmd';
+    import Klasifikasi from './add/Klasifikasi';
+    import Lokasi from './add/Lokasi';
 
     export default {
 
@@ -446,6 +460,8 @@
             PenerbitComponent: Penerbit,
             KotaComponent: Kota,
             GmdComponent: Gmd,
+            KlasifikasiComponent: Klasifikasi,
+            LokasiComponent: Lokasi,
         },
 
         props: [
@@ -463,7 +479,9 @@
             'peng',
             'pener',
             'kota3',
-            'gmd3'
+            'gmd3',
+            'tipeklasifikasi',
+            'lokasi3'
         ],
 
         data() {
@@ -576,11 +594,23 @@
             hideEksemplar() {
                 this.$modal.hide('eksemplar');
             },
+            showLokasi() {
+                this.$modal.show('lokasi');
+            },
+            hideLokasi() {
+                this.$modal.hide('lokasi');
+            },
             showKota() {
                 this.$modal.show('kota');
             },
             hideKota() {
                 this.$modal.hide('kota');
+            },
+            showKlasifikasi() {
+                this.$modal.show('klasifikasi');
+            },
+            hideKlasifikasi() {
+                this.$modal.hide('klasifikasi');
             },
             showGmd() {
                 this.$modal.show('gmd');

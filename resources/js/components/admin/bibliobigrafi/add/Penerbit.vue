@@ -6,7 +6,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="prefix">Nama Penerbit</label>
-                        <input autocomplete="off" type="text" class="form-control" v-model="form.nama_penerbit"
+                        <input v-focus autocomplete="off" type="text" class="form-control" v-model="form.nama_penerbit"
                             placeholder="Nama Penerbit">
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <button type="button" :disabled="check" class="btn btn-5 btn-success">Simpan</button>
+                        <button type="submit" :disabled="check" class="btn btn-5 btn-success">Simpan</button>
                     </template>
 
                 </div>

@@ -22,6 +22,12 @@ class Klasifikasi extends Model
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
     }
 
+    public function setTipeKlasifikasiAttribute($value)
+    {
+        $this->attributes['tipe_klasifikasi'] = ucwords($value);
+    }
+
+
     public function biblio()
     {
         return $this->hasMany(Bibliobigrafi::class);

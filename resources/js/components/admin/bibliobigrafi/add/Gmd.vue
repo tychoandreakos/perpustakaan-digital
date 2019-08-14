@@ -6,7 +6,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="prefix">Kode GMD</label>
-                        <input autocomplete="off" type="text" class="form-control" v-model="form.kode_gmd"
+                        <input autocomplete="off" type="text" class="form-control" v-model="form.kode_gmd" v-focus
                             placeholder="Kode Gmd">
 
                                <div class="form-group mt-2">

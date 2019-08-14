@@ -18,6 +18,11 @@ class LokasiRak extends Model
         'updated_at',
     ];
 
+    public function setNamaLokasiAttribute($value)
+    {
+        $this->attributes['nama_lokasi'] = ucwords($value);
+    }
+
     public function getUpdatedAtAttribute($value)
     {
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();

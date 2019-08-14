@@ -6,7 +6,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="prefix">Nama Kota</label>
-                        <input autocomplete="off" type="text" class="form-control" v-model="form.nama_kota"
+                        <input v-focus autocomplete="off" type="text" class="form-control" v-model="form.nama_kota"
                             placeholder="Nama Kota">
                     </div>
                 </div>

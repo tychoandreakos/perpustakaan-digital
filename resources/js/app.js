@@ -113,6 +113,15 @@ Vue.component('search-component', require('./components/user/Search').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+ // Register a global custom directive called `v-focus`
+Vue.directive('focus', {
+    // When the bound element is inserted into the DOM...
+    inserted: function (el) {
+      // Focus the element
+      el.focus()
+    }
+  })
+
 //  filter
 Vue.filter('capitalize', function (value) {
     if (!value) return ''
