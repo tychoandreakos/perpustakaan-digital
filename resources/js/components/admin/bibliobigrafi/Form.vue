@@ -292,7 +292,7 @@
                                         </button>
                                     </div>
                                     <label class="form-control-label" for="lokasi">Lokasi Rak</label>
-                                    <multiselect class="mt-1" v-model="lokasi" :options="lokasiData"
+                                    <multiselect class="mt-1" v-model="lokasi_id" :options="lokasiData"
                                         group-label="language" :group-select="true" placeholder="Type to search"
                                         track-by="kode_lokasi" label="nama_lokasi"><span slot="noResult">Oops!
                                             No

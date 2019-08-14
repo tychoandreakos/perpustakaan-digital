@@ -51361,11 +51361,11 @@ var render = function() {
                               label: "nama_lokasi"
                             },
                             model: {
-                              value: _vm.lokasi,
+                              value: _vm.lokasi_id,
                               callback: function($$v) {
-                                _vm.lokasi = $$v
+                                _vm.lokasi_id = $$v
                               },
-                              expression: "lokasi"
+                              expression: "lokasi_id"
                             }
                           },
                           [
