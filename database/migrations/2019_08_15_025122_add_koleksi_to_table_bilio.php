@@ -15,8 +15,8 @@ class AddKoleksiToTableBilio extends Migration
     {
         Schema::table('bibliobigrafi', function (Blueprint $table) {
             $table->unsignedBigInteger('koleksi_id')->after('pola_eksemplar');
-            
             $table->foreign('koleksi_id')->references('id')->on('koleksi');
+            $table->string('no_panggil', 100)->after('koleksi_id');
         });
     }
 

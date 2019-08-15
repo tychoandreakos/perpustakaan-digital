@@ -13,7 +13,9 @@ class Bibliobigrafi extends Model
         'buku_id',
         'klasifikasi_id',
         'gmd_id',
-        'pola_eksemplar'
+        'pola_eksemplar',
+        'koleksi_id',
+        'no_panggil'
     ];
 
     protected $dates = [

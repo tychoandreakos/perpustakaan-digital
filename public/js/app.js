@@ -3457,6 +3457,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -3519,13 +3523,14 @@ __webpack_require__.r(__webpack_exports__);
         image: this.fetch.gambar_sampul || '',
         klasifikasi_id: this.klasifikasi2,
         pengarang_id: this.pengarang2,
-        koleksi_id: this.koleksi2,
         penerbit_id: this.penerbit2,
         kota_id: this.kota2,
         lokasi_id: this.lokasi2,
+        koleksi_id: this.koleksi2,
         bahasa_id: this.bahasa2,
         gmd_id: this.gmd2,
         pola_eksemplar: this.pola_eksemplar2,
+        no_panggil: '',
         total: '',
         _method: this.fetch.judul ? 'PUT' : 'POST'
       }
@@ -3736,6 +3741,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this10 = this;
 
       this.loading = true;
+      console.log(this.form);
 
       if (!this.fetch.judul) {
         // create
@@ -51627,27 +51633,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    klasfikasi"
-                            )
-                          ]
-                        )
+                        _vm.err.koleksi_id
+                          ? [
+                              _c("span", { staticClass: "text-danger mt-1" }, [
+                                _vm._v(_vm._s(_vm.err.koleksi_id[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ])
@@ -51795,7 +51789,57 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _vm._m(5),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label mt-1",
+                          attrs: { for: "tahun_terbit" }
+                        },
+                        [_vm._v("No Panggil*")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.no_panggil,
+                            expression: "form.no_panggil"
+                          }
+                        ],
+                        staticClass: "form-control form-control-alternative",
+                        attrs: { type: "text", placeholder: "Tipe Koleksi" },
+                        domProps: { value: _vm.form.no_panggil },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "no_panggil",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.no_panggil
+                        ? [
+                            _c("span", { staticClass: "text-danger mt-1" }, [
+                              _vm._v(_vm._s(_vm.err.no_panggil[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-6" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -51813,7 +51857,7 @@ var render = function() {
                               on: { click: _vm.showGmd }
                             },
                             [
-                              _vm._m(6),
+                              _vm._m(5),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
                                 _vm._v("Tambah GMD")
@@ -51954,7 +51998,7 @@ var render = function() {
                               on: { click: _vm.showKlasifikasi }
                             },
                             [
-                              _vm._m(7),
+                              _vm._m(6),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
                                 _vm._v("Tambah Klasifikasi")
@@ -52036,7 +52080,7 @@ var render = function() {
                               on: { click: _vm.showLokasi }
                             },
                             [
-                              _vm._m(8),
+                              _vm._m(7),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
                                 _vm._v("Tambah Lokasi Rak")
@@ -52384,6 +52428,27 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.koleksi2,
+                    expression: "koleksi2"
+                  }
+                ],
+                attrs: { type: "text", hidden: "" },
+                domProps: { value: _vm.koleksi2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.koleksi2 = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
               _c(
                 "modal",
                 { attrs: { height: "auto", name: "eksemplar" } },
@@ -52562,7 +52627,7 @@ var render = function() {
                         [_vm._v("Upload PDF")]
                       ),
                       _vm._v(" "),
-                      _vm._m(9),
+                      _vm._m(8),
                       _vm._v(" "),
                       _vm.err.catatan
                         ? [
@@ -52656,28 +52721,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
       _c("i", { staticClass: "ni ni-bag-17" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c(
-          "label",
-          {
-            staticClass: "form-control-label mt-1",
-            attrs: { for: "tahun_terbit" }
-          },
-          [_vm._v("No Panggil*")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control form-control-alternative",
-          attrs: { type: "text" }
-        })
-      ])
     ])
   },
   function() {

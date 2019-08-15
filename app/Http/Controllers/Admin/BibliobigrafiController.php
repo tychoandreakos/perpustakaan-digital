@@ -130,12 +130,14 @@ class BibliobigrafiController extends Controller
             'deskripsi_fisik' => 'required',
             'tahun_terbit' => 'required|numeric',
             'klasifikasi_id' => 'required',
+            'koleksi_id' => 'required',
             'pengarang_id' => 'required',
             'penerbit_id' => 'required',
             'kota_id' => 'required',
             'gmd_id' => 'required',
             'bahasa_id' => 'required',
             'lokasi_id' => 'required',
+            'no_panggil' => 'required',
             'total' => 'required',
             'pola_eksemplar' => 'required',
             'judul_seri' => 'nullable',
@@ -145,11 +147,13 @@ class BibliobigrafiController extends Controller
             'gambar_sampul' => 'nullable'
         ]);
 
-        if($request->get('image'))
+        if(!$request->image == '')
        {
           $image = $request->get('image');
           $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
           \Image::make($request->get('image'))->save(public_path('storage/cover/').$name);
+        } else {
+            $name = 'img.jpg';
         }
 
        $requestData = $request->all();
@@ -188,6 +192,8 @@ class BibliobigrafiController extends Controller
         $requestBilio['klasifikasi_id'] = $request->klasifikasi_id;
         $requestBilio['gmd_id'] = $request->gmd_id;
         $requestBilio['pola_eksemplar'] = $eks->pola_eksemplar;
+        $requestBilio['koleksi_id'] = $request->koleksi_id;
+        $requestBilio['no_panggil'] = $request->no_panggil;
         Bibliobigrafi::create($requestBilio);
 
        }

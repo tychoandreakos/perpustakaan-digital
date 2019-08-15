@@ -168,9 +168,9 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ klasifikasi_id  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        klasfikasi</label>
+                                    <template v-if="err.koleksi_id">
+                                        <span class="text-danger mt-1">{{ err.koleksi_id[0] }}</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -217,8 +217,11 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label mt-1" for="tahun_terbit">No Panggil*</label>
-                                <input type="text" class="form-control form-control-alternative">
-
+                                <input type="text" placeholder="Tipe Koleksi" v-model="form.no_panggil"
+                                    class="form-control form-control-alternative">
+                                <template v-if="err.no_panggil">
+                                    <span class="text-danger mt-1">{{ err.no_panggil[0] }}</span>
+                                </template>
                             </div>
                         </div>
 
@@ -349,6 +352,7 @@
                     <input type="text" hidden v-model="lokasi2">
                     <input type="text" hidden v-model="gmd2">
                     <input type="text" hidden v-model="pola_eksemplar2">
+                    <input type="text" hidden v-model="koleksi2">
 
                     <modal height="auto" name="eksemplar">
                         <pola-component @closeEksemplar="hideEksemplar" @updateEksemplar="getPola" :pola="this.pol">
@@ -537,13 +541,14 @@
                     image: this.fetch.gambar_sampul || '',
                     klasifikasi_id: this.klasifikasi2,
                     pengarang_id: this.pengarang2,
-                    koleksi_id: this.koleksi2,
                     penerbit_id: this.penerbit2,
                     kota_id: this.kota2,
                     lokasi_id: this.lokasi2,
+                    koleksi_id: this.koleksi2,
                     bahasa_id: this.bahasa2,
                     gmd_id: this.gmd2,
                     pola_eksemplar: this.pola_eksemplar2,
+                    no_panggil: '',
                     total: '',
                     _method: (this.fetch.judul ? 'PUT' : 'POST')
                 },
@@ -727,6 +732,7 @@
             },
             simpan() {
                 this.loading = true;
+                console.log(this.form);
 
                 if (!this.fetch.judul) {
                     // create
