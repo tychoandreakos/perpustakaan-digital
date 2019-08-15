@@ -67,7 +67,7 @@
         <div class="text-center mt-5"><a style="font-size: 15.5px;" href="#">Topik Lainnya</a></div>
 
         {{-- berita --}}
-        <app-berita></app-berita>
+        <app-berita :berita="{{ $berita }}"></app-berita>
 
         {{-- info --}}
         <div id="info" class="mt-5">
@@ -98,7 +98,8 @@
 
                             <div class="mb-3">
                                 <span>Alamat</span>
-                                <p style="width: 90%">Jl. Jakarta No.28, Kebonwaru, Kec. Batununggal, Kota Bandung, Jawa Barat 40272</p>
+                                <p style="width: 90%">Jl. Jakarta No.28, Kebonwaru, Kec. Batununggal, Kota Bandung, Jawa
+                                    Barat 40272</p>
                             </div>
 
                             <div class="mb-3">

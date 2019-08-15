@@ -4,7 +4,7 @@
             <div class="mt-5">
                 <h5 class="mb-3">Berita Perpustakaan</h5>
                 <div class="row">
-                    <template v-for="news in computedNews">
+                    <template v-for="news in halo">
                         <div class="col col-lg-4 d-flex align-items-stretch" :key="news.id">
                             <div class="card">
                                 <img src="https://cdn.dribbble.com/users/772985/screenshots/6313407/3_2.jpg"
@@ -13,7 +13,7 @@
                                     <!-- <router-link tag="a" :to="{ name: 'news', params: {slug: news.slug} }"> -->
                                    <a class="link" href="#"><h5>{{ news.judul }}</h5></a>
                                     <!-- </router-link> -->
-                                    <p class="card-text">{{ news.berita}}</p>
+                                    <p class="card-text">{{ news.isi | news }}</p>
                                 </div>
                             </div>
                         </div>
@@ -26,28 +26,43 @@
 
 <script>
     export default {
-        computed: {
-            computedNews() {
-                return [{
-                        id: 1,
-                        judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
-                        berita: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
-                    },
+        // computed: {
+            props: ['berita'],
 
-                    {
-                        id: 2,
-                        judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
-                        berita: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
-                    },
-
-                    {
-                        id: 3,
-                        judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
-                        berita: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
-                    },
-                ];
+             filters: {
+            news(value) {
+                return value.substring(0, 150) + ' .....';
             }
-        }
+        },
+
+            data(){
+                return {
+                    halo: this.berita.splice(0, 3),
+                }
+            }
+
+            // computedNews() {
+            //     // return [{
+            //     //         id: 1,
+            //     //         judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
+            //     //         isi: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
+            //     //     },
+
+            //     //     {
+            //     //         id: 2,
+            //     //         judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
+            //     //         isi: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
+            //     //     },
+
+            //     //     {
+            //     //         id: 3,
+            //     //         judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
+            //     //         isi: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
+            //     //     },
+            //     // ];
+            //     // return this.berita;
+            // }
+        // }
     }
 
 </script>

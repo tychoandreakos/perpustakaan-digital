@@ -15,9 +15,7 @@
 //     return view('user');
 // });
 
-Route::get('/', function () {
-        return view('layouts.app');
-    });
+Route::get('/', 'LandingController@index');
 
 Route::get('/daftar-tamu', function() {
     return view('tamu');

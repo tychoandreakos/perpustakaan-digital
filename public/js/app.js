@@ -1926,23 +1926,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: {
-    computedNews: function computedNews() {
-      return [{
-        id: 1,
-        judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
-        berita: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
-      }, {
-        id: 2,
-        judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
-        berita: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
-      }, {
-        id: 3,
-        judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
-        berita: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
-      }];
+  // computed: {
+  props: ['berita'],
+  filters: {
+    news: function news(value) {
+      return value.substring(0, 150) + ' .....';
     }
-  }
+  },
+  data: function data() {
+    return {
+      halo: this.berita.splice(0, 3)
+    };
+  } // computedNews() {
+  //     // return [{
+  //     //         id: 1,
+  //     //         judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
+  //     //         isi: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
+  //     //     },
+  //     //     {
+  //     //         id: 2,
+  //     //         judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
+  //     //         isi: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
+  //     //     },
+  //     //     {
+  //     //         id: 3,
+  //     //         judul: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod, dignissimos!',
+  //     //         isi: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel excepturi deserunt nihil cumque necessitatibus voluptatum cupiditate, quaerat ipsa libero nostrum.'
+  //     //     },
+  //     // ];
+  //     // return this.berita;
+  // }
+  // }
+
 });
 
 /***/ }),
@@ -49288,7 +49303,7 @@ var render = function() {
           "div",
           { staticClass: "row" },
           [
-            _vm._l(_vm.computedNews, function(news) {
+            _vm._l(_vm.halo, function(news) {
               return [
                 _c(
                   "div",
@@ -49313,7 +49328,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("p", { staticClass: "card-text" }, [
-                          _vm._v(_vm._s(news.berita))
+                          _vm._v(_vm._s(_vm._f("news")(news.isi)))
                         ])
                       ])
                     ])

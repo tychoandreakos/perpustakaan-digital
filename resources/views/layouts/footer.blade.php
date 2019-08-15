@@ -5,9 +5,14 @@
             <div class="row row-grid align-items-center my-md">
                 <div class="col-lg-6">
                     <h3 class="text-white font-weight-light mt-5 mb-1">Ingin Mengirim Kritik & Saran ?</h3>
-                    <h4 class="mb-0 text-white font-weight-light">Let's get in touch on any of these platforms.</h4>
+                    <div class="cards">
+                            <span style="color: rgba(0, 0, 0, 0.72);">Kirim Pesan Melalui Email</span>
+                            <p style="font-size: 16px;color: 
+                            #222">info@stmik-amikbandung.ac.id</p>
+                        </div>
                 </div>
                 <div class="col-lg-6 text-lg-center btn-wrapper">
+                        <h6 class="text-white text-left offset-4">Ikuti Kami</h6>
                     <a target="_blank" href="https://twitter.com/creativetim"
                         class="btn btn-neutral btn-icon-only btn-twitter btn-round btn-lg" data-toggle="tooltip"
                         data-original-title="Follow us">

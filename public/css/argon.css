@@ -16810,10 +16810,8 @@ a.btn-icon-only
     height: 2000px;
 
     content: '';
-    /* transform: skew(0, -9deg);
-
-    background: linear-gradient(180deg, #179BFC 0%, rgba(6, 83, 244, 0.78) 100%); */
-    background: url('../img//user//footer.svg')
+    /* transform: skew(0, -9deg); */
+    background: url('../img//user//footer.svg') no-repeat;
 }
 .footer.has-cards .container
 {
