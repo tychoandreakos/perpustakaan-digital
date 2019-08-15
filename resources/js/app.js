@@ -102,6 +102,7 @@ Vue.component('app-tamu', require('./components/Tamu.vue').default);
 
 // user
 Vue.component('app-home', require('./components/HomeLogin.vue').default);
+Vue.component('app-berita', require('./components/Berita.vue').default);
 
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));

@@ -1,70 +1,65 @@
 <template>
+    <div>
+        <div class="searchIndex mt-3">
+            <div class="search">
+                <input type="text" v-model="search" placeholder="Masukkan satu atau lebih kata kunci dari judul pengarang, atau subyek" @keyup.enter="searchHit">
+               <router-link :to="{name: 'result'}" tag="a" class="cari btn btn-success" @click="searchHit">Cari</router-link>
 
-    <vue-instant :suggestOnAllWords="true" :suggestion-attribute="suggestionAttribute" v-model="value" :disabled="false"
-        @input="changed" @click-input="clickInput" @click-button="clickButton" @selected="selected" @enter="enter"
-        @key-up="keyUp" @key-down="keyDown" @key-right="keyRight" @clear="clear" @escape="escape"
-        :show-autocomplete="true" :autofocus="false" :suggestions="suggestions" name="customName"
-        placeholder="Masukkan satu atau lebih kata kunci dari judul, pengarang, atau subyek " type="google">
-    </vue-instant>
+                <a class="lanjutan" href="#">Pencarian Lanjutan</a>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-    export default {
-        data() {
-
-            return {
-                value: '',
-                suggestionAttribute: 'original_title',
-                suggestions: [],
-                selectedEvent: ""
-            }
-
-        },
-        methods: {
-            clickInput: function () {
-                this.selectedEvent = 'click input'
-            },
-            clickButton: function () {
-                this.selectedEvent = 'click button'
-            },
-            selected: function () {
-                this.selectedEvent = 'selection changed'
-            },
-            enter: function () {
-                this.selectedEvent = 'enter'
-            },
-            keyUp: function () {
-                this.selectedEvent = 'keyup pressed'
-            },
-            keyDown: function () {
-                this.selectedEvent = 'keyDown pressed'
-            },
-            keyRight: function () {
-                this.selectedEvent = 'keyRight pressed'
-            },
-            clear: function () {
-                this.selectedEvent = 'clear input'
-            },
-            escape: function () {
-                this.selectedEvent = 'escape'
-            },
-            changed: function () {
-                var that = this
-                this.suggestions = []
-                axios.get(
-                        'https://api.themoviedb.org/3/search/movie?api_key=342d3061b70d2747a1e159ae9a7e9a36&query=' +
-                        this.value)
-                    .then(function (response) {
-                        response.data.results.forEach(function (a) {
-                            that.suggestions.push(a)
-                        })
-                    })
-            }
-        },
-    }
-
+export default {
+    
+}
 </script>
 
-<style>
+
+<style lang="scss" scoped>
+    .searchIndex {
+
+        text-align: left;
+
+        .search {
+            width: 85%;
+            height: 50px;
+            position: absolute;
+            margin: 10px 0;
+            // left: -30px;
+            // border: 1px solid #ccc;
+            background: #fff;
+            color: #fff;
+
+            input {
+                position: absolute;
+                left: 30px;
+                right: 0;
+                width: 90%;
+                top: 12px;
+                border: none;
+            }
+
+            .cari {
+                position: absolute;
+                right: -95px;
+                padding: 13.5px 30px;
+                border-radius: 0 7px 7px 0;
+              
+            }
+
+
+            .lanjutan {
+                // display: block;
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                bottom: -40px;
+                font-size: 1.05em;
+            }
+        }
+    }
 
 </style>

@@ -33,6 +33,7 @@
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('css/argon.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -58,8 +59,9 @@
 <div class="position-relative">
     <!-- Hero for FREE version -->
     @include('component.hero')
-
+    @include('component.main')
 </div>
+
     </main>
     
     @include('layouts.footer')
