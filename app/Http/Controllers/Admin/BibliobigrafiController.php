@@ -130,9 +130,16 @@ class BibliobigrafiController extends Controller
             'gambar_sampul' => 'nullable'
         ]);
 
-        
-        $requestData = $request->all();
-        $requestData['slug'] = str_slug($request->judul);
+        if($request->get('image'))
+       {
+          $image = $request->get('image');
+          $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+          \Image::make($request->get('image'))->save(public_path('storage/cover/').$name);
+        }
+
+       $requestData = $request->all();
+       $requestData['slug'] = str_slug($request->judul);
+       $requestData['gambar_sampul'] = $name;
         $buku = Buku::create($requestData);
 
        foreach ($request->pengarang_id as $pengarang) {

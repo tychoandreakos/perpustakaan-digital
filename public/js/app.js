@@ -3447,6 +3447,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3491,6 +3492,7 @@ __webpack_require__.r(__webpack_exports__);
       lokasi_id: [],
       eksemplarData: [],
       pola_eksemplar: [],
+      img: 'Pilih Gambar Sampul',
       form: {
         judul: this.fetch.judul || '',
         edisi: this.fetch.edisi || '',
@@ -3501,7 +3503,7 @@ __webpack_require__.r(__webpack_exports__);
         catatan: this.fetch.catatan || '',
         slug: this.fetch.slug || '',
         pdf: this.fetch.pdf || '',
-        gambar_sampul: this.fetch.gambar_sampul || '',
+        image: this.fetch.gambar_sampul || '',
         klasifikasi_id: this.klasifikasi2,
         pengarang_id: this.pengarang2,
         penerbit_id: this.penerbit2,
@@ -3560,6 +3562,22 @@ __webpack_require__.r(__webpack_exports__);
     onChange: function onChange(value) {
       this.value = value;
       if (value.indexOf('Reset me!') !== -1) this.value = [];
+    },
+    onImageChange: function onImageChange(e) {
+      this.img = e.target.files[0].name;
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = function (e) {
+        vm.form.image = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
     },
     showEksemplar: function showEksemplar() {
       this.$modal.show('eksemplar');
@@ -52430,7 +52448,26 @@ var render = function() {
                         [_vm._v("Upload Cover")]
                       ),
                       _vm._v(" "),
-                      _vm._m(8),
+                      _c("div", { staticClass: "custom-file" }, [
+                        _c("input", {
+                          staticClass: "custom-file-input",
+                          attrs: { type: "file", id: "validatedCustomFile" },
+                          on: { change: _vm.onImageChange }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "custom-file-label",
+                            attrs: { for: "validatedCustomFile" }
+                          },
+                          [_vm._v(_vm._s(_vm.img))]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v("Example invalid custom file feedback")
+                        ])
+                      ]),
                       _vm._v(" "),
                       _vm.err.catatan
                         ? [
@@ -52442,8 +52479,7 @@ var render = function() {
                     ],
                     2
                   )
-                ]),
-                _vm._v("z\n                ")
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
@@ -52461,7 +52497,7 @@ var render = function() {
                         [_vm._v("Upload PDF")]
                       ),
                       _vm._v(" "),
-                      _vm._m(9),
+                      _vm._m(8),
                       _vm._v(" "),
                       _vm.err.catatan
                         ? [
@@ -52593,30 +52629,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
       _c("i", { staticClass: "ni ni-bag-17" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-file" }, [
-      _c("input", {
-        staticClass: "custom-file-input",
-        attrs: { type: "file", id: "validatedCustomFile" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-file-label",
-          attrs: { for: "validatedCustomFile" }
-        },
-        [_vm._v("Choose file...")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "invalid-feedback" }, [
-        _vm._v("Example invalid custom file feedback")
-      ])
     ])
   },
   function() {

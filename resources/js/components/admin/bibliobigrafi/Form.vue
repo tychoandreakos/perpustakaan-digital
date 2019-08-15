@@ -387,15 +387,16 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload Cover</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="validatedCustomFile">
-                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <input type="file" v-on:change="onImageChange" class="custom-file-input" id="validatedCustomFile">
+                                    <label class="custom-file-label" for="validatedCustomFile">{{ img }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                    <!-- <span class="text-danger mt-2">{{ img }}</span> -->
                                 </div>
                                 <template v-if="err.catatan">
                                     <span class="text-danger">{{ err.catatan[0] }}</span>
                                 </template>
                             </div>
-                        </div>z
+                        </div>
                     </div>
 
                     <div class="row">
@@ -507,6 +508,7 @@
                 lokasi_id: [],
                 eksemplarData: [],
                 pola_eksemplar: [],
+                img: 'Pilih Gambar Sampul',
 
                 form: {
                     judul: this.fetch.judul || '',
@@ -518,7 +520,7 @@
                     catatan: this.fetch.catatan || '',
                     slug: this.fetch.slug || '',
                     pdf: this.fetch.pdf || '',
-                    gambar_sampul: this.fetch.gambar_sampul || '',
+                    image: this.fetch.gambar_sampul || '',
                     klasifikasi_id: this.klasifikasi2,
                     pengarang_id: this.pengarang2,
                     penerbit_id: this.penerbit2,
@@ -587,6 +589,21 @@
             onChange(value) {
                 this.value = value
                 if (value.indexOf('Reset me!') !== -1) this.value = []
+            },
+             onImageChange(e) {
+                 this.img = e.target.files[0].name;
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.form.image = e.target.result;
+                };
+                reader.readAsDataURL(file);
             },
             showEksemplar() {
                 this.$modal.show('eksemplar');
