@@ -19,6 +19,7 @@
                                 <th scope="col">Pengarang</th>
                                 <th scope="col">Penerbit</th>
                                 <th scope="col">ISBN ISNN</th>
+                                <th scope="col">Terakhir Diubah</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,13 +31,13 @@
                                             class="ni ni-fat-remove text-white"></i> Hapus</button>
                                 </th>
                                 <td>
-                                    <div @click="show(item.id)" class="buku">{{ item.judul }}</div>
+                                    <div @click="show(item.id)" class="buku">{{ item.judul | capitalize }}</div>
                                 </td>
-                                <td>{{ item.buku_transaksi.pengarang.nama_pengarang || capitalize }}</td>
-                                <!-- <td v-for="pengarang in item.buku_transaksi.pengarang" :key="pengarang.id">
-                                    {{ pengarang.nama_pengarang | capitalize}}
-                                </td> -->
-                                <td>{{ item.buku_transaksi.penerbit.nama_penerbit || capitalize }}</td>
+                                <td>
+                                <span style="font-size: 11px" class=" mt-2 badge badge-pill badge-success" v-for="pengarang in item.buku_transaksi" :key="pengarang.item">{{ pengarang.pengarang.nama_pengarang | capitalize }}</span>
+                                </td>
+                                <td>{{ item.buku_transaksi.map(data => data.penerbit.nama_penerbit)[0] | capitalize }}</td>
+                                <td >{{ item.isbn_isnn }}</td>
                                 <td>
                                     {{ item.updated_at }}
                                 </td>

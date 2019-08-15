@@ -21,7 +21,13 @@ class EksemplarTransaksiController extends Controller
 
     public function fetch()
     {
-        return Bibliobigrafi::with('buku', 'buku.buku_transaksi.pengarang', 'klasifikasi')->latest()->paginate(5);
+        return Bibliobigrafi::with(['buku' => function($q) {
+            $q->select('id', 'judul');
+        }, 'buku.buku_transaksi.pengarang' => function($q) {
+            $q->select('id');
+        }, 'klasifikasi' => function($q) {
+            $q->select('id', 'tipe_klasifikasi');
+        }])->latest()->paginate(20);
     }
 
     public function search(Request $request)

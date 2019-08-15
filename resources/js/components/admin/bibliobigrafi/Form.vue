@@ -395,7 +395,7 @@
                                     <span class="text-danger">{{ err.catatan[0] }}</span>
                                 </template>
                             </div>
-                        </div>
+                        </div>z
                     </div>
 
                     <div class="row">

@@ -20,7 +20,7 @@
                                 <th scope="col">Aksi</th>
                                 <th scope="col">Judul Buku</th>
                                 <th scope="col">Salinan</th>
-                                <th scope="col">ISBN</th>
+                                <th scope="col">ISBN ISNN</th>
                                 <th scope="col">Perubahan Terakhir</th>
                             </tr>
                         </thead>
