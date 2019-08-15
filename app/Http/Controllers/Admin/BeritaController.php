@@ -58,10 +58,10 @@ class BeritaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Berita  $berita
+     * @param  \App\Berita  $beritum
      * @return \Illuminate\Http\Response
      */
-    public function show(Berita $berita)
+    public function show(Berita $beritum)
     {
         //
     }
@@ -69,10 +69,10 @@ class BeritaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Berita  $berita
+     * @param  \App\Berita  $beritum
      * @return \Illuminate\Http\Response
      */
-    public function edit(Berita $berita)
+    public function edit(Berita $beritum)
     {
         $title = 'Update Berita';
         return view('admin.berita.edit' ,compact('bahasa', 'title'));
@@ -94,10 +94,10 @@ class BeritaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Berita  $berita
+     * @param  \App\Berita  $beritum
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Berita $berita)
+    public function update(Request $request, Berita $beritum)
     {
         $validatedData = $request->validate([
             'judul' => 'required',
@@ -105,7 +105,7 @@ class BeritaController extends Controller
             'slug' => 'nullable'
         ]);
 
-        $berita->update($request->all());
+        $beritum->update($request->all());
 
         return response()->json([
             'message' => 'data berhasil diubah']);
@@ -114,12 +114,12 @@ class BeritaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Berita  $berita
+     * @param  \App\Berita  $beritum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Berita $berita)
+    public function destroy(Berita $beritum)
     {
-        $berita->delete();
+        $beritum->delete();
 
         return response()->json([
             'message' => 'data berhasil dihapus']);

@@ -9,5 +9,5 @@
 
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <form-bahasa-component fetch="{{ route('bahasa.store') }}" index="{{ route('bahasa.index') }}"></form-bahasa-component>
+        <form-berita-component fetch="{{ route('berita.store') }}" index="{{ route('berita.index') }}"></form-berita-component>
             @endsection
