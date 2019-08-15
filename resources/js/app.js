@@ -16,6 +16,10 @@ import VueInstant from 'vue-instant'
 window.User = User;
 window.Vue = require('vue');
 
+// vuescrollto
+var Vue = require('vue');
+var VueScrollTo = require('vue-scrollto');
+
 window.EventBus = new Vue();
 window.Fire = new Vue();
 

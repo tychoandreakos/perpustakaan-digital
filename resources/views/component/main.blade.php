@@ -4,7 +4,7 @@
             <div class="box">
                 <div class="row justify-content-center pt-3 pb-3 text-center">
                     <div class="col col-md-3">
-                        <h5>200</h5>
+                        <h5>{{ $buku }}</h5>
                         <span>Koleksi Buku</span>
                     </div>
                     <div class="col col-md-3">
@@ -12,7 +12,7 @@
                         <span>Koleksi PDF</span>
                     </div>
                     <div class="col col-md-3">
-                        <h5>300</h5>
+                        <h5>{{ $user }}</h5>
                         <span>Anggota Aktif</span>
                     </div>
                     <div class="col col-md-3">
@@ -67,7 +67,9 @@
         <div class="text-center mt-5"><a style="font-size: 15.5px;" href="#">Topik Lainnya</a></div>
 
         {{-- berita --}}
-        <app-berita :berita="{{ $berita }}"></app-berita>
+       <div id="berita">
+            <app-berita :berita="{{ $berita }}"></app-berita>
+       </div>
 
         {{-- info --}}
         <div id="info" class="mt-5">
