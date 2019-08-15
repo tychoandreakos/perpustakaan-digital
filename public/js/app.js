@@ -3445,9 +3445,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -3469,7 +3466,7 @@ __webpack_require__.r(__webpack_exports__);
     KlasifikasiComponent: _add_Klasifikasi__WEBPACK_IMPORTED_MODULE_7__["default"],
     LokasiComponent: _add_Lokasi__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
-  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3'],
+  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi'],
   data: function data() {
     return {
       loading: false,
@@ -3480,6 +3477,7 @@ __webpack_require__.r(__webpack_exports__);
       penerbitData: [],
       kotaData: [],
       gmdData: [],
+      koleksiData: [],
       klasifikasiData: [],
       lokasiData: [],
       bahasaData: [],
@@ -3488,6 +3486,7 @@ __webpack_require__.r(__webpack_exports__);
       penerbit_id: [],
       kota_id: [],
       gmd_id: [],
+      koleksi_id: [],
       bahasa_id: [],
       lokasi_id: [],
       eksemplarData: [],
@@ -3506,6 +3505,7 @@ __webpack_require__.r(__webpack_exports__);
         image: this.fetch.gambar_sampul || '',
         klasifikasi_id: this.klasifikasi2,
         pengarang_id: this.pengarang2,
+        koleksi_id: this.koleksi2,
         penerbit_id: this.penerbit2,
         kota_id: this.kota2,
         lokasi_id: this.lokasi2,
@@ -3526,6 +3526,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getLokasi();
     this.getBahasa();
     this.getPola();
+    this.getKoleksi();
   },
   computed: {
     isInvalid: function isInvalid() {
@@ -3533,6 +3534,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     bahasa2: function bahasa2() {
       return this.form.bahasa_id = this.bahasa_id.id;
+    },
+    koleksi2: function koleksi2() {
+      return this.form.koleksi_id = this.koleksi_id.id;
     },
     pola_eksemplar2: function pola_eksemplar2() {
       return this.form.pola_eksemplar = this.pola_eksemplar.kode_eksemplar;
@@ -3642,56 +3646,65 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
-    getBahasa: function getBahasa() {
+    getKoleksi: function getKoleksi() {
       var _this3 = this;
 
+      return axios.get(this.koleksi).then(function (res) {
+        return _this3.koleksiData = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getBahasa: function getBahasa() {
+      var _this4 = this;
+
       return axios.get(this.bahasa).then(function (res) {
-        return _this3.bahasaData = res.data;
+        return _this4.bahasaData = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     getPenerbit: function getPenerbit() {
-      var _this4 = this;
+      var _this5 = this;
 
       return axios.get(this.penerbit).then(function (res) {
-        return _this4.penerbitData = res.data;
+        return _this5.penerbitData = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     getKota: function getKota() {
-      var _this5 = this;
+      var _this6 = this;
 
       return axios.get(this.kota).then(function (res) {
-        return _this5.kotaData = res.data;
+        return _this6.kotaData = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     getKlasifikasi: function getKlasifikasi() {
-      var _this6 = this;
+      var _this7 = this;
 
       return axios.get(this.klasifikasi).then(function (res) {
-        return _this6.klasifikasiData = res.data;
+        return _this7.klasifikasiData = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     getLokasi: function getLokasi() {
-      var _this7 = this;
+      var _this8 = this;
 
       return axios.get(this.lokasi).then(function (res) {
-        return _this7.lokasiData = res.data;
+        return _this8.lokasiData = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     getGmd: function getGmd() {
-      var _this8 = this;
+      var _this9 = this;
 
       return axios.get(this.gmd).then(function (res) {
-        return _this8.gmdData = res.data;
+        return _this9.gmdData = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3700,14 +3713,14 @@ __webpack_require__.r(__webpack_exports__);
       this.isTouched = true;
     },
     simpan: function simpan() {
-      var _this9 = this;
+      var _this10 = this;
 
       this.loading = true;
 
       if (!this.fetch.judul) {
         // create
         axios.post(this.fetch, this.form).then(function (res) {
-          _this9.$swal({
+          _this10.$swal({
             position: 'top-end',
             type: 'success',
             title: res.data.message.toUpperCase(),
@@ -3716,16 +3729,16 @@ __webpack_require__.r(__webpack_exports__);
           });
 
           setTimeout(function () {
-            window.location = _this9.index;
+            window.location = _this10.index;
           }, 3200);
         })["catch"](function (err) {
-          _this9.err = err.response.data.errors;
-          _this9.loading = false;
+          _this10.err = err.response.data.errors;
+          _this10.loading = false;
         });
       } else {
         // update
         axios.post('/pustakawan/klasifikasi/' + this.fetch.id, this.form).then(function (res) {
-          _this9.$swal({
+          _this10.$swal({
             position: 'top-end',
             type: 'success',
             title: res.data.message.toUpperCase(),
@@ -3734,11 +3747,11 @@ __webpack_require__.r(__webpack_exports__);
           });
 
           setTimeout(function () {
-            window.location = _this9.index;
+            window.location = _this10.index;
           }, 2800);
         })["catch"](function (err) {
           console.log(err);
-          _this9.loading = false;
+          _this10.loading = false;
         });
       }
     }
@@ -50964,7 +50977,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.err.judul
                         ? [
-                            _c("span", { staticClass: "text-danger" }, [
+                            _c("span", { staticClass: "text-danger mt-1" }, [
                               _vm._v(_vm._s(_vm.err.judul[0]))
                             ])
                           ]
@@ -51045,27 +51058,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    pengarang"
-                            )
-                          ]
-                        )
+                        _vm.err.pengarang_id
+                          ? [
+                              _c("span", { staticClass: "text-danger mt-1" }, [
+                                _vm._v(_vm._s(_vm.err.pengarang_id[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ])
@@ -51115,7 +51116,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.err.edisi
                         ? [
-                            _c("span", { staticClass: "text-danger" }, [
+                            _c("span", { staticClass: "text-danger mt-1" }, [
                               _vm._v(_vm._s(_vm.err.edisi[0]))
                             ])
                           ]
@@ -51172,7 +51173,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.err.deskripsi_fisik
                         ? [
-                            _c("span", { staticClass: "text-danger" }, [
+                            _c("span", { staticClass: "text-danger mt-1" }, [
                               _vm._v(_vm._s(_vm.err.deskripsi_fisik[0]))
                             ])
                           ]
@@ -51227,7 +51228,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.err.isbn_isnn
                         ? [
-                            _c("span", { staticClass: "text-danger" }, [
+                            _c("span", { staticClass: "text-danger mt-1" }, [
                               _vm._v(_vm._s(_vm.err.isbn_isnn[0]))
                             ])
                           ]
@@ -51303,27 +51304,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    penerbit"
-                            )
-                          ]
-                        )
+                        _vm.err.penerbit_id
+                          ? [
+                              _c("span", { staticClass: "text-danger mt-1" }, [
+                                _vm._v(_vm._s(_vm.err.penerbit_id[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ])
@@ -51393,27 +51382,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    eksemplar"
-                            )
-                          ]
-                        )
+                        _vm.err.pola_eksemplar
+                          ? [
+                              _c("span", { staticClass: "text-danger mt-1" }, [
+                                _vm._v(_vm._s(_vm.err.pola_eksemplar[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ]),
@@ -51481,28 +51458,28 @@ var render = function() {
                           "label",
                           {
                             staticClass: "form-control-label",
-                            attrs: { for: "klasifikasi" }
+                            attrs: { for: "koleksi" }
                           },
-                          [_vm._v("Reference*")]
+                          [_vm._v("Tipe Koleksi*")]
                         ),
                         _vm._v(" "),
                         _c(
                           "multiselect",
                           {
                             attrs: {
-                              options: _vm.klasifikasiData,
+                              options: _vm.koleksiData,
                               "group-label": "language",
                               "group-select": true,
                               placeholder: "Type to search",
-                              "track-by": "tipe_klasifikasi",
-                              label: "tipe_klasifikasi"
+                              "track-by": "tipe_koleksi",
+                              label: "tipe_koleksi"
                             },
                             model: {
-                              value: _vm.klasifikasi_id,
+                              value: _vm.koleksi_id,
                               callback: function($$v) {
-                                _vm.klasifikasi_id = $$v
+                                _vm.koleksi_id = $$v
                               },
-                              expression: "klasifikasi_id"
+                              expression: "koleksi_id"
                             }
                           },
                           [
@@ -51593,7 +51570,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.err.tahun_terbit
                         ? [
-                            _c("span", { staticClass: "text-danger" }, [
+                            _c("span", { staticClass: "text-danger mt-1" }, [
                               _vm._v(_vm._s(_vm.err.tahun_terbit[0]))
                             ])
                           ]
@@ -51670,27 +51647,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    kota"
-                            )
-                          ]
-                        )
+                        _vm.err.kota_id
+                          ? [
+                              _c("span", { staticClass: "text-danger mt-1" }, [
+                                _vm._v(_vm._s(_vm.err.kota_id[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ])
@@ -51766,27 +51731,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    gmd"
-                            )
-                          ]
-                        )
+                        _vm.err.gmd_id
+                          ? [
+                              _c("span", { staticClass: "text-danger mt-1" }, [
+                                _vm._v(_vm._s(_vm.err.gmd_id[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ])
@@ -51841,7 +51794,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.err.judul_seri
                         ? [
-                            _c("span", { staticClass: "text-danger" }, [
+                            _c("span", { staticClass: "text-danger mt-1" }, [
                               _vm._v(_vm._s(_vm.err.judul_seri[0]))
                             ])
                           ]
@@ -51870,7 +51823,7 @@ var render = function() {
                               _vm._m(6),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
-                                _vm._v("Tambah Klasifiikasi")
+                                _vm._v("Tambah Klasifikasi")
                               ])
                             ]
                           )
@@ -51918,27 +51871,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    klasfikasi"
-                            )
-                          ]
-                        )
+                        _vm.err.klasifikasi_id
+                          ? [
+                              _c("span", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.err.klasifikasi_id[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ])
@@ -52012,27 +51953,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    lokasi"
-                            )
-                          ]
-                        )
+                        _vm.err.lokasi_id
+                          ? [
+                              _c("span", { staticClass: "text-danger mt-1" }, [
+                                _vm._v(_vm._s(_vm.err.lokasi_id[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ]),
@@ -52084,27 +52013,15 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isInvalid,
-                                expression: "isInvalid"
-                              }
-                            ],
-                            staticClass: "typo__label form__label"
-                          },
-                          [
-                            _vm._v(
-                              "Minimal harus ada 1\n                                    bahasa"
-                            )
-                          ]
-                        )
+                        _vm.err.lokasi_id
+                          ? [
+                              _c("span", { staticClass: "text-danger mt-1" }, [
+                                _vm._v(_vm._s(_vm.err.lokasi_id[0]))
+                              ])
+                            ]
+                          : _vm._e()
                       ],
-                      1
+                      2
                     )
                   ])
                 ])
@@ -52155,7 +52072,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.err.catatan
                         ? [
-                            _c("span", { staticClass: "text-danger" }, [
+                            _c("span", { staticClass: "text-danger mt-1" }, [
                               _vm._v(_vm._s(_vm.err.catatan[0]))
                             ])
                           ]

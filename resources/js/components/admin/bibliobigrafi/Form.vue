@@ -23,7 +23,7 @@
                                     class="form-control form-control-alternative" name="judul"
                                     placeholder="Nama Penerbit">
                                 <template v-if="err.judul">
-                                    <span class="text-danger">{{ err.judul[0] }}</span>
+                                    <span class="text-danger mt-1">{{ err.judul[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -47,9 +47,9 @@
                                         track-by="nama_pengarang" label="nama_pengarang"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ pengarang_id  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        pengarang</label>
+                                    <template v-if="err.pengarang_id">
+                                        <span class="text-danger mt-1">{{ err.pengarang_id[0] }}</span>
+                                    </template>
                                 </div>
 
                                 <!-- <input type="text" v-model="form.judul" id="judul"
@@ -66,7 +66,7 @@
                                 <input type="text" v-model="form.edisi" id="edisi"
                                     class="form-control form-control-alternative" name="edisi" placeholder="Edisi">
                                 <template v-if="err.edisi">
-                                    <span class="text-danger">{{ err.edisi[0] }}</span>
+                                    <span class="text-danger mt-1">{{ err.edisi[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                     class="form-control form-control-alternative" name="deskripsi_fisik"
                                     placeholder="Deksripsi Fisik">
                                 <template v-if="err.deskripsi_fisik">
-                                    <span class="text-danger">{{ err.deskripsi_fisik[0] }}</span>
+                                    <span class="text-danger mt-1">{{ err.deskripsi_fisik[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                 <input type="text" v-model="form.isbn_isnn" id="isbn_isnn"
                                     class="form-control form-control-alternative" name="isbn_isnn" placeholder="Edisi">
                                 <template v-if="err.isbn_isnn">
-                                    <span class="text-danger">{{ err.isbn_isnn[0] }}</span>
+                                    <span class="text-danger mt-1">{{ err.isbn_isnn[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -112,9 +112,9 @@
                                         label="nama_penerbit"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ penerbit_id  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        penerbit</label>
+                                    <template v-if="err.penerbit_id">
+                                        <span class="text-danger mt-1">{{ err.penerbit_id[0] }}</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -134,9 +134,9 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ pola_eksemplar  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        eksemplar</label>
+                                    <template v-if="err.pola_eksemplar">
+                                        <span class="text-danger mt-1">{{ err.pola_eksemplar[0] }}</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -155,10 +155,10 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
-                                    <label class="form-control-label" for="klasifikasi">Reference*</label>
-                                    <multiselect v-model="klasifikasi_id" :options="klasifikasiData"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
-                                        track-by="tipe_klasifikasi" label="tipe_klasifikasi"><span slot="noResult">Oops!
+                                    <label class="form-control-label" for="koleksi">Tipe Koleksi*</label>
+                                    <multiselect v-model="koleksi_id" :options="koleksiData" group-label="language"
+                                        :group-select="true" placeholder="Type to search" track-by="tipe_koleksi"
+                                        label="tipe_koleksi"><span slot="noResult">Oops!
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
@@ -178,7 +178,7 @@
                                     class="form-control form-control-alternative mt-1" name="tahun_terbit"
                                     placeholder="Edisi">
                                 <template v-if="err.tahun_terbit">
-                                    <span class="text-danger">{{ err.tahun_terbit[0] }}</span>
+                                    <span class="text-danger mt-1">{{ err.tahun_terbit[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -199,9 +199,9 @@
                                         track-by="nama_kota" label="nama_kota"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ kota_id  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        kota</label>
+                                    <template v-if="err.kota_id">
+                                        <span class="text-danger mt-1">{{ err.kota_id[0] }}</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -212,12 +212,7 @@
                             <div class="form-group">
                                 <label class="form-control-label mt-1" for="tahun_terbit">No Panggil*</label>
                                 <input type="text" class="form-control form-control-alternative">
-                                <!-- <input type="text" v-model="form.tahun_terbit" id="tahun_terbit"
-                                    class="form-control form-control-alternative" name="tahun_terbit"
-                                    placeholder="Edisi">
-                                <template v-if="err.tahun_terbit">
-                                    <span class="text-danger">{{ err.tahun_terbit[0] }}</span>
-                                </template> -->
+
                             </div>
                         </div>
 
@@ -237,9 +232,9 @@
                                         label="nama_gmd"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ gmd_id  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        gmd</label>
+                                    <template v-if="err.gmd_id">
+                                        <span class="text-danger mt-1">{{ err.gmd_id[0] }}</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -253,7 +248,7 @@
                                     class="form-control mt-1 form-control-alternative" name="judul_seri"
                                     placeholder="Edisi">
                                 <template v-if="err.judul_seri">
-                                    <span class="text-danger">{{ err.judul_seri[0] }}</span>
+                                    <span class="text-danger mt-1">{{ err.judul_seri[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -265,7 +260,7 @@
                                         <button @click="showKlasifikasi" class="btn btn-icon btn-3 btn-primary btn-sm"
                                             type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
-                                            <span class="btn-inner--text">Tambah Klasifiikasi</span>
+                                            <span class="btn-inner--text">Tambah Klasifikasi</span>
                                         </button>
                                     </div>
                                     <label class="form-control-label" for="klasifikasi">Klasifikasi*</label>
@@ -275,9 +270,9 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ klasifikasi_id  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        klasfikasi</label>
+                                    <template v-if="err.klasifikasi_id">
+                                        <span class="text-danger">{{ err.klasifikasi_id[0] }}</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -288,7 +283,8 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button @click="showLokasi" class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                                        <button @click="showLokasi" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                            type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                                             <span class="btn-inner--text">Tambah Lokasi Rak</span>
                                         </button>
@@ -300,9 +296,9 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ lokasi  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        lokasi</label>
+                                    <template v-if="err.lokasi_id">
+                                        <span class="text-danger mt-1">{{ err.lokasi_id[0] }}</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -317,9 +313,9 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <!-- <pre class="language-json"><code>{{ bahasa_id  }}</code></pre> -->
-                                    <label class="typo__label form__label" v-show="isInvalid">Minimal harus ada 1
-                                        bahasa</label>
+                                    <template v-if="err.lokasi_id">
+                                        <span class="text-danger mt-1">{{ err.lokasi_id[0] }}</span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -333,7 +329,7 @@
                                     class="form-control form-control-alternative" cols="30" placeholder="Edisi"
                                     rows="10"></textarea>
                                 <template v-if="err.catatan">
-                                    <span class="text-danger">{{ err.catatan[0] }}</span>
+                                    <span class="text-danger mt-1">{{ err.catatan[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -378,8 +374,8 @@
                     </modal>
 
                     <modal height="auto" name="lokasi">
-                        <lokasi-component @closeLokasi="hideLokasi" @updateLokasi="getLokasi"
-                            :lokasi3="this.lokasi3"></lokasi-component>
+                        <lokasi-component @closeLokasi="hideLokasi" @updateLokasi="getLokasi" :lokasi3="this.lokasi3">
+                        </lokasi-component>
                     </modal>
 
                     <div class="row">
@@ -387,7 +383,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload Cover</label>
                                 <div class="custom-file">
-                                    <input type="file" v-on:change="onImageChange" class="custom-file-input" id="validatedCustomFile">
+                                    <input type="file" v-on:change="onImageChange" class="custom-file-input"
+                                        id="validatedCustomFile">
                                     <label class="custom-file-label" for="validatedCustomFile">{{ img }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                                     <!-- <span class="text-danger mt-2">{{ img }}</span> -->
@@ -482,7 +479,8 @@
             'kota3',
             'gmd3',
             'tipeklasifikasi',
-            'lokasi3'
+            'lokasi3',
+            'koleksi'
         ],
 
         data() {
@@ -496,6 +494,7 @@
                 penerbitData: [],
                 kotaData: [],
                 gmdData: [],
+                koleksiData: [],
                 klasifikasiData: [],
                 lokasiData: [],
                 bahasaData: [],
@@ -504,6 +503,7 @@
                 penerbit_id: [],
                 kota_id: [],
                 gmd_id: [],
+                koleksi_id: [],
                 bahasa_id: [],
                 lokasi_id: [],
                 eksemplarData: [],
@@ -523,6 +523,7 @@
                     image: this.fetch.gambar_sampul || '',
                     klasifikasi_id: this.klasifikasi2,
                     pengarang_id: this.pengarang2,
+                    koleksi_id: this.koleksi2,
                     penerbit_id: this.penerbit2,
                     kota_id: this.kota2,
                     lokasi_id: this.lokasi2,
@@ -545,6 +546,7 @@
             this.getLokasi();
             this.getBahasa();
             this.getPola();
+            this.getKoleksi();
         },
 
         computed: {
@@ -554,6 +556,10 @@
 
             bahasa2() {
                 return this.form.bahasa_id = this.bahasa_id.id
+            },
+
+            koleksi2() {
+                return this.form.koleksi_id = this.koleksi_id.id
             },
 
             pola_eksemplar2() {
@@ -590,8 +596,8 @@
                 this.value = value
                 if (value.indexOf('Reset me!') !== -1) this.value = []
             },
-             onImageChange(e) {
-                 this.img = e.target.files[0].name;
+            onImageChange(e) {
+                this.img = e.target.files[0].name;
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
@@ -658,6 +664,11 @@
             getPola() {
                 return axios.get(this.pola)
                     .then(res => this.eksemplarData = res.data)
+                    .catch(err => console.log(err));
+            },
+            getKoleksi() {
+                return axios.get(this.koleksi)
+                    .then(res => this.koleksiData = res.data)
                     .catch(err => console.log(err));
             },
             getBahasa() {

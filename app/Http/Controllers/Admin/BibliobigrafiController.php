@@ -16,6 +16,7 @@ use App\Buku;
 use App\BukuTransaksi;
 use App\EksemplarPola;
 use App\EksemplarTransaksi;
+use App\Koleksi;
 
 class BibliobigrafiController extends Controller
 {
@@ -84,6 +85,11 @@ class BibliobigrafiController extends Controller
         return Kota::all();
     }
 
+    public function koleksi()
+    {
+        return Koleksi::all();
+    }
+
     public function gmd()
     {
         return Gmd::all();
@@ -117,12 +123,21 @@ class BibliobigrafiController extends Controller
      */
     public function store(Request $request)
     {
-         $validatedData = $request->validate([
+         $request->validate([
             'judul' => 'required',
             'edisi' => 'nullable',
             'isbn_isnn' => 'required',
             'deskripsi_fisik' => 'required',
             'tahun_terbit' => 'required',
+            'klasifikasi_id' => 'required',
+            'pengarang_id' => 'required',
+            'penerbit_id' => 'required',
+            'kota_id' => 'required',
+            'gmd_id' => 'required',
+            'bahasa_id' => 'required',
+            'lokasi_id' => 'required',
+            'total' => 'required',
+            'pola_eksemplar' => 'required',
             'judul_seri' => 'nullable',
             'catatan' => 'nullable',
             'slug' => 'nullable',
