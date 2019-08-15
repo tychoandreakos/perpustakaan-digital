@@ -9,7 +9,7 @@ $factory->define(Berita::class, function (Faker $faker) {
     $judul = $faker->sentence;
     return [
         'judul' => $judul,
-        'isi' => $faker->sentence(100),
+        'isi' => $faker->sentence(1000),
         'slug' => str_slug($judul),
     ];
 });

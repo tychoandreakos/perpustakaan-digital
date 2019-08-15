@@ -9,7 +9,13 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $berita =  Berita::all();
+        $berita =  Berita::latest()->get();
         return view('layouts.app', compact('berita'));
+    }
+
+    public function berita($slug)
+    {
+        $result = Berita::where('slug', $slug)->firstOrFail();
+        return view('berita', compact('result')); 
     }
 }

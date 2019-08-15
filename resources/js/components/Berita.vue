@@ -7,11 +7,11 @@
                     <template v-for="news in halo">
                         <div class="col col-lg-4 d-flex align-items-stretch" :key="news.id">
                             <div class="card">
-                                <img src="https://cdn.dribbble.com/users/772985/screenshots/6313407/3_2.jpg"
-                                    class="card-img-top" alt="">
+                              <a :href="/berita/+news.slug"> <img src="https://cdn.dribbble.com/users/772985/screenshots/6313407/3_2.jpg"
+                                    class="card-img-top" alt=""></a>
                                 <div class="card-body">
                                     <!-- <router-link tag="a" :to="{ name: 'news', params: {slug: news.slug} }"> -->
-                                   <a class="link" href="#"><h5>{{ news.judul }}</h5></a>
+                                   <a class="link" :href="/berita/+news.slug"><h5>{{ news.judul }}</h5></a>
                                     <!-- </router-link> -->
                                     <p class="card-text">{{ news.isi | news }}</p>
                                 </div>

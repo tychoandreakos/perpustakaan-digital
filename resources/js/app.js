@@ -103,6 +103,7 @@ Vue.component('app-tamu', require('./components/Tamu.vue').default);
 // user
 Vue.component('app-home', require('./components/HomeLogin.vue').default);
 Vue.component('app-berita', require('./components/Berita.vue').default);
+Vue.component('app-article', require('./components/user/Article.vue').default);
 
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
@@ -133,6 +134,11 @@ Vue.filter('capitalize', function (value) {
 const app = new Vue({
     el: '#app',
     router,
+    scrollBehavior (to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    },
+    
+    
     data: {
         search: ''
     },

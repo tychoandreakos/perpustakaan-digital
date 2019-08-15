@@ -16,6 +16,7 @@
 // });
 
 Route::get('/', 'LandingController@index');
+Route::get('berita/{slug}', 'LandingController@berita');
 
 Route::get('/daftar-tamu', function() {
     return view('tamu');
