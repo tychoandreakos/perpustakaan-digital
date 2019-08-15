@@ -36,9 +36,14 @@ class KoleksiController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'tipe_koleksi' => 'required',
+        ]);
+        
         Koleksi::create($request->all());
 
-        return response('data berhasil disimpan', 200);
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**

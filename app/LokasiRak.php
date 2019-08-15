@@ -18,9 +18,9 @@ class LokasiRak extends Model
         'updated_at',
     ];
 
-    public function setNamaLokasiAttribute($value)
+    public function getNamaLokasiAttribute($value)
     {
-        $this->attributes['nama_lokasi'] = ucwords($value);
+        return $this->attributes['nama_lokasi'] = ucwords($value);
     }
 
     public function getUpdatedAtAttribute($value)

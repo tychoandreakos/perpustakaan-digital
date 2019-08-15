@@ -23,9 +23,9 @@ class Gmd extends Model
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
     }
 
-    public function setNamaGmdAttribute($value)
+    public function getNamaGmdAttribute($value)
     {
-        $this->attributes['nama_gmd'] = ucwords($value);
+        return $this->attributes['nama_gmd'] = ucwords($value);
     }
 
     public function biblio()

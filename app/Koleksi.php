@@ -22,8 +22,8 @@ class Koleksi extends Model
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
     }
 
-    public function setTipeKoleksiAttribute($value)
+    public function getTipeKoleksiAttribute($value)
     {
-        $this->attributes['tipe_koleksi'] = ucwords($value);
+        return $this->attributes['tipe_koleksi'] = ucwords($value);
     }
 }

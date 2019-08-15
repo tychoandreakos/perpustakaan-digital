@@ -3006,6 +3006,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_Gmd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./add/Gmd */ "./resources/js/components/admin/bibliobigrafi/add/Gmd.vue");
 /* harmony import */ var _add_Klasifikasi__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./add/Klasifikasi */ "./resources/js/components/admin/bibliobigrafi/add/Klasifikasi.vue");
 /* harmony import */ var _add_Lokasi__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./add/Lokasi */ "./resources/js/components/admin/bibliobigrafi/add/Lokasi.vue");
+/* harmony import */ var _add_Koleksi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./add/Koleksi */ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue");
 //
 //
 //
@@ -3445,6 +3446,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3464,9 +3477,10 @@ __webpack_require__.r(__webpack_exports__);
     KotaComponent: _add_Kota__WEBPACK_IMPORTED_MODULE_5__["default"],
     GmdComponent: _add_Gmd__WEBPACK_IMPORTED_MODULE_6__["default"],
     KlasifikasiComponent: _add_Klasifikasi__WEBPACK_IMPORTED_MODULE_7__["default"],
-    LokasiComponent: _add_Lokasi__WEBPACK_IMPORTED_MODULE_8__["default"]
+    LokasiComponent: _add_Lokasi__WEBPACK_IMPORTED_MODULE_8__["default"],
+    KoleksiComponent: _add_Koleksi__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
-  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi'],
+  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi', 'koleksi3'],
   data: function data() {
     return {
       loading: false,
@@ -3588,6 +3602,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     hideEksemplar: function hideEksemplar() {
       this.$modal.hide('eksemplar');
+    },
+    showKoleksi: function showKoleksi() {
+      this.$modal.show('koleksi');
+    },
+    hideKoleksi: function hideKoleksi() {
+      this.$modal.hide('koleksi');
     },
     showLokasi: function showLokasi() {
       this.$modal.show('lokasi');
@@ -4093,6 +4113,99 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     check: function check() {
       return this.form.tipe_klasifikasi == '' ? true : false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['koleksi'],
+  components: {
+    SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      form: {
+        tipe_koleksi: ''
+      },
+      loading: false
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      console.log(this.form);
+      this.loading = true, axios.post(this.koleksi, this.form).then(function (res) {
+        _this.$swal({
+          position: 'top-end',
+          type: 'success',
+          title: res.data.message.toUpperCase(),
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        setTimeout(function () {
+          _this.loading = false;
+
+          _this.$emit('closeKoleksi');
+
+          _this.$emit('updateKoleksi');
+
+          _this.form.tipe_koleksi = '';
+        }, 2200);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  },
+  computed: {
+    check: function check() {
+      return this.form.tipe_koleksi == '' ? true : false;
     }
   }
 });
@@ -51033,7 +51146,7 @@ var render = function() {
                               multiple: true,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Cari Pengarang ...",
                               "track-by": "nama_pengarang",
                               label: "nama_pengarang"
                             },
@@ -51151,6 +51264,7 @@ var render = function() {
                         ],
                         staticClass: "form-control form-control-alternative",
                         attrs: {
+                          autocomplete: "off",
                           type: "text",
                           id: "deskripsi_fisik",
                           name: "deskripsi_fisik",
@@ -51213,7 +51327,8 @@ var render = function() {
                           type: "text",
                           id: "isbn_isnn",
                           name: "isbn_isnn",
-                          placeholder: "Edisi"
+                          placeholder: "SIBN ISNN",
+                          autocomplete: "off"
                         },
                         domProps: { value: _vm.form.isbn_isnn },
                         on: {
@@ -51275,11 +51390,12 @@ var render = function() {
                         _c(
                           "multiselect",
                           {
+                            staticClass: "mt-2",
                             attrs: {
                               options: _vm.penerbitData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Pilih Penerbit ....",
                               "track-by": "nama_penerbit",
                               label: "nama_penerbit"
                             },
@@ -51334,6 +51450,22 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-icon btn-primary btn-sm mb-3",
+                  attrs: { type: "button" },
+                  on: { click: _vm.showKoleksi }
+                },
+                [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "btn-inner--text" }, [
+                    _vm._v("Tambah Tipe Koleksi")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-lg-4" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -51357,7 +51489,7 @@ var render = function() {
                               options: _vm.eksemplarData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Pilih pola eksemplar",
                               "track-by": "kode_eksemplar",
                               label: "kode_eksemplar"
                             },
@@ -51423,7 +51555,7 @@ var render = function() {
                           type: "text",
                           id: "total",
                           name: "total",
-                          placeholder: "Edisi"
+                          placeholder: "Total Eksemplar"
                         },
                         domProps: { value: _vm.form.total },
                         on: {
@@ -51470,7 +51602,7 @@ var render = function() {
                               options: _vm.koleksiData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Pilih tipe koleksi",
                               "track-by": "tipe_koleksi",
                               label: "tipe_koleksi"
                             },
@@ -51549,9 +51681,10 @@ var render = function() {
                           "form-control form-control-alternative mt-1",
                         attrs: {
                           type: "text",
+                          autocomplete: "off",
                           id: "tahun_terbit",
                           name: "tahun_terbit",
-                          placeholder: "Edisi"
+                          placeholder: "Tahun Terbit"
                         },
                         domProps: { value: _vm.form.tahun_terbit },
                         on: {
@@ -51596,7 +51729,7 @@ var render = function() {
                               on: { click: _vm.showKota }
                             },
                             [
-                              _vm._m(3),
+                              _vm._m(4),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
                                 _vm._v("Tambah Tempat Terbit")
@@ -51622,7 +51755,7 @@ var render = function() {
                               options: _vm.kotaData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Pilij tempat terbit",
                               "track-by": "nama_kota",
                               label: "nama_kota"
                             },
@@ -51662,7 +51795,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-6" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -51680,7 +51813,7 @@ var render = function() {
                               on: { click: _vm.showGmd }
                             },
                             [
-                              _vm._m(5),
+                              _vm._m(6),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
                                 _vm._v("Tambah GMD")
@@ -51706,7 +51839,7 @@ var render = function() {
                               options: _vm.gmdData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Pilih gmd ...",
                               "track-by": "nama_gmd",
                               label: "nama_gmd"
                             },
@@ -51773,9 +51906,10 @@ var render = function() {
                           "form-control mt-1 form-control-alternative",
                         attrs: {
                           type: "text",
+                          autocomplete: "off",
                           id: "judul_seri",
                           name: "judul_seri",
-                          placeholder: "Edisi"
+                          placeholder: "Judul Seri"
                         },
                         domProps: { value: _vm.form.judul_seri },
                         on: {
@@ -51820,7 +51954,7 @@ var render = function() {
                               on: { click: _vm.showKlasifikasi }
                             },
                             [
-                              _vm._m(6),
+                              _vm._m(7),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
                                 _vm._v("Tambah Klasifikasi")
@@ -51846,7 +51980,7 @@ var render = function() {
                               options: _vm.klasifikasiData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Pilih klasifikasi ....",
                               "track-by": "tipe_klasifikasi",
                               label: "tipe_klasifikasi"
                             },
@@ -51902,7 +52036,7 @@ var render = function() {
                               on: { click: _vm.showLokasi }
                             },
                             [
-                              _vm._m(7),
+                              _vm._m(8),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
                                 _vm._v("Tambah Lokasi Rak")
@@ -51928,7 +52062,7 @@ var render = function() {
                               options: _vm.lokasiData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Pilih lokasi rak ....",
                               "track-by": "kode_lokasi",
                               label: "nama_lokasi"
                             },
@@ -51988,7 +52122,7 @@ var render = function() {
                               options: _vm.bahasaData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Type to search",
+                              placeholder: "Pilih bahasa ....",
                               "track-by": "jenis_bahasa",
                               label: "jenis_bahasa"
                             },
@@ -52053,10 +52187,9 @@ var render = function() {
                         ],
                         staticClass: "form-control form-control-alternative",
                         attrs: {
-                          name: "",
-                          id: "",
+                          autocomplete: "off",
                           cols: "30",
-                          placeholder: "Edisi",
+                          placeholder: "Catatan",
                           rows: "10"
                         },
                         domProps: { value: _vm.form.catatan },
@@ -52337,6 +52470,21 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "modal",
+                { attrs: { height: "auto", name: "koleksi" } },
+                [
+                  _c("koleksi-component", {
+                    attrs: { koleksi: this.koleksi3 },
+                    on: {
+                      closeKoleksi: _vm.hideKoleksi,
+                      updateKoleksi: _vm.getKoleksi
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "modal",
                 { attrs: { height: "auto", name: "lokasi" } },
                 [
                   _c("lokasi-component", {
@@ -52414,7 +52562,7 @@ var render = function() {
                         [_vm._v("Upload PDF")]
                       ),
                       _vm._v(" "),
-                      _vm._m(8),
+                      _vm._m(9),
                       _vm._v(" "),
                       _vm.err.catatan
                         ? [
@@ -52470,6 +52618,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "btn-inner--icon" }, [
+      _c("i", { staticClass: "ni ni-bag-17" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -52935,6 +53091,104 @@ var render = function() {
                       return
                     }
                     _vm.$set(_vm.form, "tipe_klasifikasi", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col col-md-12" },
+            [
+              _vm.loading
+                ? [_c("spinner-component")]
+                : [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-5 btn-success",
+                        attrs: { type: "submit", disabled: _vm.check }
+                      },
+                      [_vm._v("Simpan")]
+                    )
+                  ]
+            ],
+            2
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=template&id=174b54c7&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=template&id=174b54c7& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container p-4" }, [
+    _c("h3", [_vm._v("Tambah Data Koleksi")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "prefix" } }, [
+                _vm._v("Tipe Koleksi")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  { name: "focus", rawName: "v-focus" },
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.tipe_koleksi,
+                    expression: "form.tipe_koleksi"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  type: "text",
+                  placeholder: "Tipe Koleksi"
+                },
+                domProps: { value: _vm.form.tipe_koleksi },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "tipe_koleksi", $event.target.value)
                   }
                 }
               })
@@ -75470,6 +75724,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Klasifikasi_vue_vue_type_template_id_ffcfdfb0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Klasifikasi_vue_vue_type_template_id_ffcfdfb0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Koleksi_vue_vue_type_template_id_174b54c7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Koleksi.vue?vue&type=template&id=174b54c7& */ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=template&id=174b54c7&");
+/* harmony import */ var _Koleksi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Koleksi.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Koleksi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Koleksi_vue_vue_type_template_id_174b54c7___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Koleksi_vue_vue_type_template_id_174b54c7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/bibliobigrafi/add/Koleksi.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Koleksi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Koleksi.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Koleksi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=template&id=174b54c7&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=template&id=174b54c7& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Koleksi_vue_vue_type_template_id_174b54c7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Koleksi.vue?vue&type=template&id=174b54c7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue?vue&type=template&id=174b54c7&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Koleksi_vue_vue_type_template_id_174b54c7___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Koleksi_vue_vue_type_template_id_174b54c7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

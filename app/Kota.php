@@ -22,11 +22,10 @@ class Kota extends Model
         'updated_at',
     ];
 
-    public function setNamaKotaAttribute($value)
+    public function getNamaKotaAttribute($value)
     {
-        $this->attributes['nama_kota'] = ucwords($value);
+        return $this->attributes['nama_kota'] = ucwords($value);
     }
-
 
     public function getUpdatedAtAttribute($value)
     {

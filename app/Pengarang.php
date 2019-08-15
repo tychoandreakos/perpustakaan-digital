@@ -23,9 +23,9 @@ class Pengarang extends Model
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
     }
 
-    public function setNamaPengarangAttribute($value)
+    public function getNamaPengarangAttribute($value)
     {
-        $this->attributes['nama_pengarang'] = ucwords($value);
+        return $this->attributes['nama_pengarang'] = ucwords($value);
     }
 
     public function buku_transaksi()

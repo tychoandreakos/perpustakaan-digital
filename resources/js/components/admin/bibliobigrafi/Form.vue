@@ -43,7 +43,7 @@
                                     <label class="form-control-label" for="judul">Pengarang*</label>
                                     <div class="clearfix"></div>
                                     <multiselect v-model="pengarang_id" :options="options" :multiple="true"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        group-label="language" :group-select="true" placeholder="Cari Pengarang ..."
                                         track-by="nama_pengarang" label="nama_pengarang"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
@@ -74,9 +74,9 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="deskripsi_fisik">Deksripsi Fisik*</label>
-                                <input type="text" v-model="form.deskripsi_fisik" id="deskripsi_fisik"
-                                    class="form-control form-control-alternative" name="deskripsi_fisik"
-                                    placeholder="Deksripsi Fisik">
+                                <input autocomplete="off" type="text" v-model="form.deskripsi_fisik"
+                                    id="deskripsi_fisik" class="form-control form-control-alternative"
+                                    name="deskripsi_fisik" placeholder="Deksripsi Fisik">
                                 <template v-if="err.deskripsi_fisik">
                                     <span class="text-danger mt-1">{{ err.deskripsi_fisik[0] }}</span>
                                 </template>
@@ -89,7 +89,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="isbn_isnn">ISBN ISNN*</label>
                                 <input type="text" v-model="form.isbn_isnn" id="isbn_isnn"
-                                    class="form-control form-control-alternative" name="isbn_isnn" placeholder="Edisi">
+                                    class="form-control form-control-alternative" name="isbn_isnn"
+                                    placeholder="SIBN ISNN" autocomplete="off">
                                 <template v-if="err.isbn_isnn">
                                     <span class="text-danger mt-1">{{ err.isbn_isnn[0] }}</span>
                                 </template>
@@ -107,9 +108,9 @@
                                         </button>
                                     </div>
                                     <label class="form-control-label" for="penerbit">Penerbit*</label>
-                                    <multiselect v-model="penerbit_id" :options="penerbitData" group-label="language"
-                                        :group-select="true" placeholder="Type to search" track-by="nama_penerbit"
-                                        label="nama_penerbit"><span slot="noResult">Oops! No
+                                    <multiselect class="mt-2" v-model="penerbit_id" :options="penerbitData"
+                                        group-label="language" :group-select="true" placeholder="Pilih Penerbit ...."
+                                        track-by="nama_penerbit" label="nama_penerbit"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
                                     <template v-if="err.penerbit_id">
@@ -123,13 +124,17 @@
                         <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                         <span class="btn-inner--text">Tambah Pola Eksemplar</span>
                     </button>
+                    <button @click="showKoleksi" class="btn btn-icon btn-primary btn-sm mb-3" type="button">
+                        <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                        <span class="btn-inner--text">Tambah Tipe Koleksi</span>
+                    </button>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="klasifikasi">Pola Eksemplar Tersedia*</label>
                                     <multiselect v-model="pola_eksemplar" :options="eksemplarData"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        group-label="language" :group-select="true" placeholder="Pilih pola eksemplar"
                                         track-by="kode_eksemplar" label="kode_eksemplar"><span slot="noResult">Oops!
                                             No
                                             elements found.
@@ -146,7 +151,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="total">Total Eksemplar*</label>
                                 <input type="text" v-model="form.total" id="total"
-                                    class="form-control form-control-alternative" name="total" placeholder="Edisi">
+                                    class="form-control form-control-alternative" name="total"
+                                    placeholder="Total Eksemplar">
                                 <template v-if="err.total">
                                     <span class="text-danger">{{ err.total[0] }}</span>
                                 </template>
@@ -157,7 +163,7 @@
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="koleksi">Tipe Koleksi*</label>
                                     <multiselect v-model="koleksi_id" :options="koleksiData" group-label="language"
-                                        :group-select="true" placeholder="Type to search" track-by="tipe_koleksi"
+                                        :group-select="true" placeholder="Pilih tipe koleksi" track-by="tipe_koleksi"
                                         label="tipe_koleksi"><span slot="noResult">Oops!
                                             No
                                             elements found.
@@ -174,9 +180,9 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="tahun_terbit">Tahun Terbit*</label>
-                                <input type="text" v-model="form.tahun_terbit" id="tahun_terbit"
+                                <input type="text" autocomplete="off" v-model="form.tahun_terbit" id="tahun_terbit"
                                     class="form-control form-control-alternative mt-1" name="tahun_terbit"
-                                    placeholder="Edisi">
+                                    placeholder="Tahun Terbit">
                                 <template v-if="err.tahun_terbit">
                                     <span class="text-danger mt-1">{{ err.tahun_terbit[0] }}</span>
                                 </template>
@@ -195,7 +201,7 @@
                                     </div>
                                     <label class="form-control-label" for="tempat">Tempat Terbit*</label>
                                     <multiselect class="mt-1" v-model="kota_id" :options="kotaData"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        group-label="language" :group-select="true" placeholder="Pilij tempat terbit"
                                         track-by="nama_kota" label="nama_kota"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
@@ -228,7 +234,7 @@
                                     </div>
                                     <label class="form-control-label" for="gmd">GMD*</label>
                                     <multiselect class="mt-1" v-model="gmd_id" :options="gmdData" group-label="language"
-                                        :group-select="true" placeholder="Type to search" track-by="nama_gmd"
+                                        :group-select="true" placeholder="Pilih gmd ..." track-by="nama_gmd"
                                         label="nama_gmd"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
@@ -244,9 +250,9 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="judul_seri">Judul Seri</label>
-                                <input type="text" v-model="form.judul_seri" id="judul_seri"
+                                <input type="text" autocomplete="off" v-model="form.judul_seri" id="judul_seri"
                                     class="form-control mt-1 form-control-alternative" name="judul_seri"
-                                    placeholder="Edisi">
+                                    placeholder="Judul Seri">
                                 <template v-if="err.judul_seri">
                                     <span class="text-danger mt-1">{{ err.judul_seri[0] }}</span>
                                 </template>
@@ -265,7 +271,7 @@
                                     </div>
                                     <label class="form-control-label" for="klasifikasi">Klasifikasi*</label>
                                     <multiselect class="mt-1" v-model="klasifikasi_id" :options="klasifikasiData"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        group-label="language" :group-select="true" placeholder="Pilih klasifikasi ...."
                                         track-by="tipe_klasifikasi" label="tipe_klasifikasi"><span slot="noResult">Oops!
                                             No
                                             elements found.
@@ -291,7 +297,7 @@
                                     </div>
                                     <label class="form-control-label" for="lokasi">Lokasi Rak*</label>
                                     <multiselect class="mt-1" v-model="lokasi_id" :options="lokasiData"
-                                        group-label="language" :group-select="true" placeholder="Type to search"
+                                        group-label="language" :group-select="true" placeholder="Pilih lokasi rak ...."
                                         track-by="kode_lokasi" label="nama_lokasi"><span slot="noResult">Oops!
                                             No
                                             elements found.
@@ -308,7 +314,7 @@
                                 <div :class="{ 'invalid': isInvalid }">
                                     <label class="form-control-label" for="bahasa">Bahasa*</label>
                                     <multiselect v-model="bahasa_id" :options="bahasaData" group-label="language"
-                                        :group-select="true" placeholder="Type to search" track-by="jenis_bahasa"
+                                        :group-select="true" placeholder="Pilih bahasa ...." track-by="jenis_bahasa"
                                         label="jenis_bahasa"><span slot="noResult">Oops!
                                             No
                                             elements found.
@@ -325,8 +331,8 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Catatan</label>
-                                <textarea name="" id="" v-model="form.catatan"
-                                    class="form-control form-control-alternative" cols="30" placeholder="Edisi"
+                                <textarea autocomplete="off" v-model="form.catatan"
+                                    class="form-control form-control-alternative" cols="30" placeholder="Catatan"
                                     rows="10"></textarea>
                                 <template v-if="err.catatan">
                                     <span class="text-danger mt-1">{{ err.catatan[0] }}</span>
@@ -371,6 +377,11 @@
                     <modal height="auto" name="klasifikasi">
                         <klasifikasi-component @closeKlasifikasi="hideKlasifikasi" @updateKlasifikasi="getKlasifikasi"
                             :tipeklasifikasi="this.tipeklasifikasi"></klasifikasi-component>
+                    </modal>
+
+                    <modal height="auto" name="koleksi">
+                        <koleksi-component @closeKoleksi="hideKoleksi" @updateKoleksi="getKoleksi"
+                            :koleksi="this.koleksi3"></koleksi-component>
                     </modal>
 
                     <modal height="auto" name="lokasi">
@@ -447,6 +458,7 @@
     import Gmd from './add/Gmd';
     import Klasifikasi from './add/Klasifikasi';
     import Lokasi from './add/Lokasi';
+    import Koleksi from './add/Koleksi';
 
     export default {
 
@@ -460,6 +472,7 @@
             GmdComponent: Gmd,
             KlasifikasiComponent: Klasifikasi,
             LokasiComponent: Lokasi,
+            KoleksiComponent: Koleksi,
         },
 
         props: [
@@ -480,7 +493,8 @@
             'gmd3',
             'tipeklasifikasi',
             'lokasi3',
-            'koleksi'
+            'koleksi',
+            'koleksi3'
         ],
 
         data() {
@@ -616,6 +630,12 @@
             },
             hideEksemplar() {
                 this.$modal.hide('eksemplar');
+            },
+            showKoleksi() {
+                this.$modal.show('koleksi');
+            },
+            hideKoleksi() {
+                this.$modal.hide('koleksi');
             },
             showLokasi() {
                 this.$modal.show('lokasi');

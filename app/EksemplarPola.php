@@ -20,8 +20,8 @@ class EksemplarPola extends Model
         return $this->hasMany(EksemplarTransaksi::class);
     }
 
-    public function setKodeEksemplarAttribute($value)
+    public function getKodeEksemplarAttribute($value)
     {
-        $this->attributes['kode_eksemplar'] = strtoupper($value);
+        return $this->attributes['kode_eksemplar'] = strtoupper($value);
     }
 }

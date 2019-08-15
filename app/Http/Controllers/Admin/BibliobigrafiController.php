@@ -128,7 +128,7 @@ class BibliobigrafiController extends Controller
             'edisi' => 'nullable',
             'isbn_isnn' => 'required',
             'deskripsi_fisik' => 'required',
-            'tahun_terbit' => 'required',
+            'tahun_terbit' => 'required|numeric',
             'klasifikasi_id' => 'required',
             'pengarang_id' => 'required',
             'penerbit_id' => 'required',
