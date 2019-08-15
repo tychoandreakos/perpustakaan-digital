@@ -18,7 +18,6 @@ window.Vue = require('vue');
 
 // vuescrollto
 var Vue = require('vue');
-var VueScrollTo = require('vue-scrollto');
 
 window.EventBus = new Vue();
 window.Fire = new Vue();
@@ -60,6 +59,10 @@ Vue.component('form-buku-component', require('./components/admin/buku/Form.vue')
 // pengarang
 Vue.component('table-pengarang-component', require('./components/admin/pengarang/Table.vue').default);
 Vue.component('form-pengarang-component', require('./components/admin/pengarang/Form.vue').default);
+
+// kota
+Vue.component('table-berita-component', require('./components/admin/berita/Table.vue').default);
+Vue.component('form-berita-component', require('./components/admin/berita/Form.vue').default);
 
 // kota
 Vue.component('table-kota-component', require('./components/admin/kota/Table.vue').default);

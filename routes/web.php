@@ -52,6 +52,7 @@ Route::resource('klasifikasi', 'KlasifikasiController');
 Route::resource('tipe-anggota', 'TipeAnggotaController');
 Route::resource('eksemplar', 'EksemplarPolaController');
 Route::resource('anggota', 'AnggotaController');
+Route::resource('berita', 'BeritaController');
 
 
 // transaksi file
@@ -73,7 +74,7 @@ Route::get('eksemplar-fetch', 'EksemplarTransaksiController@fetch')->name('trans
 Route::get('anggota-fetch', 'AnggotaController@fetch')->name('anggota.fetch');
 Route::get('eksemplar-keluar-fetch', 'PinjamController@eksemplar')->name('eksemplar-keluar.fetch');
 Route::get('pengembalian-fetch', 'PinjamController@pengembalian')->name('pengembalian.fetch');
-
+Route::get('berita-fetch', 'BeritaController@fetch')->name('berita.fetch');
 
 
 // Bibliobigrafi
@@ -101,6 +102,7 @@ Route::get('bibliobigrafi-search', 'BibliobigrafiController@search');
 Route::get('eksemplar-search', 'EksemplarTransaksiController@search');
 Route::get('anggota-search', 'AnggotaController@search');
 Route::get('eksemplar-keluar-search', 'PinjamController@search');
+Route::get('berita-search', 'BeritaController@search');
 
 // tool
 Route::get('sirkulasi', function() {

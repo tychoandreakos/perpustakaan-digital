@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
 use App\Berita;
 use Illuminate\Http\Request;
@@ -14,7 +15,13 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Daftar Berita';
+        return view('admin.berita.home', compact('title'));
+    }
+
+    public function fetch()
+    {
+        return Berita::latest()->paginate(5);
     }
 
     /**
@@ -24,7 +31,8 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Berita';
+        return view('admin.berita.add', compact('title'));//
     }
 
     /**
@@ -35,7 +43,16 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'judul' => 'required',
+            'isi' =>  'required',
+            'slug' => 'nullable'
+        ]);
+
+        Berita::create($validatedData);
+       
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**
@@ -57,7 +74,20 @@ class BeritaController extends Controller
      */
     public function edit(Berita $berita)
     {
-        //
+        $title = 'Update Berita';
+        return view('admin.berita.edit' ,compact('bahasa', 'title'));
+    }
+
+    public function search(Request $request)
+    {
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Berita::where('judul','LIKE',"%$search%")
+            ->latest()->paginate(5);
+        }
+
     }
 
     /**
@@ -69,7 +99,16 @@ class BeritaController extends Controller
      */
     public function update(Request $request, Berita $berita)
     {
-        //
+        $validatedData = $request->validate([
+            'judul' => 'required',
+            'isi' =>  'required',
+            'slug' => 'nullable'
+        ]);
+
+        $berita->update($request->all());
+
+        return response()->json([
+            'message' => 'data berhasil diubah']);
     }
 
     /**
@@ -80,6 +119,9 @@ class BeritaController extends Controller
      */
     public function destroy(Berita $berita)
     {
-        //
+        $berita->delete();
+
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }

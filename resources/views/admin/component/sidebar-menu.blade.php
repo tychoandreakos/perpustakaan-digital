@@ -48,6 +48,7 @@
             </div>
         </div>
     </li>
+
     <li class="nav-item">
         <div class="dropdown" style="width:100%">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -61,6 +62,21 @@
                 <a href="{{ route('kota.index') }}" class="dropdown-item">Kota</a>
                 <a href="{{ route('klasifikasi.index') }}" class="dropdown-item">Klasifikasi</a>
                 <a href="{{ route('bahasa.index') }}" class="dropdown-item">Bahasa</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <div class="dropdown" style="width:100%">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <i class="ni ni-tablet-button text-success"></i> Digital Library
+            </a>
+            <div class="dropdown-menu" style="left: 15px;">
+                <a href="{{ route('berita.index') }}" class="dropdown-item">Berita</a>
+                <a href="{{ route('anggota.create') }}" class="dropdown-item">Tambah Anggota</a>
+                <a href="{{ route('tipe-anggota.index') }}" class="dropdown-item">Tipe Keanggotaan</a>
+                <a href="#" class="dropdown-item">Cetak Kartu Anggota</a>
+                <a href="#" class="dropdown-item">Eksport Data</a>
+                <a href="#" class="dropdown-item">Import Data</a>
             </div>
         </div>
     </li>
