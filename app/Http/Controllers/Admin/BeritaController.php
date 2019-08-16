@@ -46,11 +46,22 @@ class BeritaController extends Controller
         $validatedData = $request->validate([
             'judul' => 'required',
             'isi' =>  'required',
-            'slug' => 'nullable'
+            'slug' => 'nullable',
+            'img' => 'nullable'
         ]);
 
+        if(!$request->image == '')
+        {
+           $image = $request->get('image');
+           $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+           \Image::make($request->get('image'))->save(public_path('storage/berita/').$name);
+         } else {
+             $name = 'img.jpg';
+         }
+ 
         $requestData = $request->all();
         $requestData['slug'] = str_slug($request->judul);
+        $requestData['img'] = $name;
         Berita::create($requestData);
        
         return response()->json([

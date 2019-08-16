@@ -22,8 +22,7 @@
                     </div>
                     <div class="col col-lg-10 col-md-10">
 
-                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/66461c82-1723-4c50-94f0-46aa15867139/d7oe2v3-68af647d-09bc-42f0-afbe-01746997914a.jpg/v1/fill/w_1024,h_576,q_75,strp/coldplay___magic__alternate_album_cover__by_ruffsnap_d7oe2v3-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc2IiwicGF0aCI6IlwvZlwvNjY0NjFjODItMTcyMy00YzUwLTk0ZjAtNDZhYTE1ODY3MTM5XC9kN29lMnYzLTY4YWY2NDdkLTA5YmMtNDJmMC1hZmJlLTAxNzQ2OTk3OTE0YS5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.MHRhGwCJrxzGBL8bb3f4wn73ZVxDuPOGFvQR6zydfM4"
-                            alt="">
+                        <img :src="'../storage/berita/'+ berita.img" alt="gambar">
 
                         <p v-html="berita.isi"></p>
                     </div>

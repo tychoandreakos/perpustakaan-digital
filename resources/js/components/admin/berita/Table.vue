@@ -9,7 +9,7 @@
                         </div>
                         <div class="col text-right">
                             <a :href="this.route" class="btn btn-sm btn-primary"><i
-                                    class="ni ni-fat-add text-white"></i> Tambah Berita</a>
+                                    class="ni ni-fat-add text-white"></i> Posting Berita</a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                                     {{ item.judul | capitalize}}
                                 </td>
                                 <td>
-                                    {{ item.isi | news }}
+                                   <p v-html="item.isi.substring(0, 100) + ' .....'"></p>
                                 </td>
                                 <td>
                                     {{ item.updated_at }}

@@ -27,15 +27,31 @@
                                 </template>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label class="form-control-label" for="judul">Judul Berita</label>
-                                <ckeditor :editor="editor" v-model.lazy="form.isi" :config="editorConfig"></ckeditor>
-                                <template v-if="err.judul">
-                                    <span class="text-danger">{{ err.judul[0] }}</span>
+                                <label class="form-control-label" for="catatan">Upload Gambar</label>
+                                <div class="custom-file">
+                                    <input type="file" v-on:change="onImageChange" class="custom-file-input"
+                                        id="validatedCustomFile">
+                                    <label class="custom-file-label" for="validatedCustomFile">{{ img }}</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                    <!-- <span class="text-danger mt-2">{{ img }}</span> -->
+                                </div>
+                                <template v-if="err.catatan">
+                                    <span class="text-danger">{{ err.catatan[0] }}</span>
                                 </template>
                             </div>
                         </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="isi">Isi Berita</label>
+                                <ckeditor :editor="editor" v-model.lazy="form.isi" :config="editorConfig"></ckeditor>
+                                <template v-if="err.isi">
+                                    <span class="text-danger">{{ err.isi[0] }}</span>
+                                </template>
+                            </div>
+                        </div>
+                       
                         <!-- <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="judul">Nama GMD</label>
@@ -96,6 +112,7 @@
                 form: {
                     judul: this.fetch.judul || '',
                     isi: this.fetch.judul || '',
+                    image: this.fetch.gambar_sampul || '',
                     _method: (this.fetch.judul ? 'PUT' : 'POST')
                 },
 
@@ -105,12 +122,28 @@
                 },
 
                 loading: false,
+                img: 'Pilih Gambar Cover Berita',
 
                 err: {},
             }
         },
 
         methods: {
+            onImageChange(e) {
+                this.img = e.target.files[0].name;
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.form.image = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
             simpan() {
                 this.loading = true;
 

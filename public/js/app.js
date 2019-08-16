@@ -3176,6 +3176,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3193,16 +3209,34 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         judul: this.fetch.judul || '',
         isi: this.fetch.judul || '',
+        image: this.fetch.gambar_sampul || '',
         _method: this.fetch.judul ? 'PUT' : 'POST'
       },
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default.a,
       editorConfig: {// The configuration of the editor.
       },
       loading: false,
+      img: 'Pilih Gambar Cover Berita',
       err: {}
     };
   },
   methods: {
+    onImageChange: function onImageChange(e) {
+      this.img = e.target.files[0].name;
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = function (e) {
+        vm.form.image = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    },
     simpan: function simpan() {
       var _this = this;
 
@@ -8878,7 +8912,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['berita']
 });
@@ -13368,7 +13401,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#news[data-v-3dc22052] {\n  width: 100%;\n}\n#news .card[data-v-3dc22052] {\n  overflow: hidden;\n  position: relative;\n  cursor: pointer;\n  border-radius: 5px;\n}\n#news .card img[data-v-3dc22052] {\n  transition: transform 0.25s;\n  width: 100%;\n  cursor: pointer;\n}\n#news .card-body[data-v-3dc22052] {\n  z-index: 4;\n}\n#news .card:hover img[data-v-3dc22052] {\n  transform: scale(1.1);\n}\n#news link[data-v-3dc22052]:hover {\n  color: blue !important;\n}\n#news .card[data-v-3dc22052]:hover:after {\n  opacity: 1;\n}", ""]);
+exports.push([module.i, "#news[data-v-3dc22052] {\n  width: 100%;\n}\n#news .card[data-v-3dc22052] {\n  overflow: hidden;\n  position: relative;\n  cursor: pointer;\n  border-radius: 5px;\n}\n#news .card img[data-v-3dc22052] {\n  transition: transform 0.25s;\n  width: 100%;\n  cursor: pointer;\n}\n#news .card-body[data-v-3dc22052] {\n  z-index: 4;\n}\n#news .card:hover img[data-v-3dc22052] {\n  transform: scale(1.1);\n}\n#news link[data-v-3dc22052]:hover {\n  color: blue !important;\n}\n#news .card[data-v-3dc22052]:hover:after {\n  opacity: 1;\n}\n.card-img-top[data-v-3dc22052] {\n  width: 100%;\n  height: 15vw;\n  -o-object-fit: cover;\n     object-fit: cover;\n}", ""]);
 
 // exports
 
@@ -49801,8 +49834,7 @@ var render = function() {
                         _c("img", {
                           staticClass: "card-img-top",
                           attrs: {
-                            src:
-                              "https://cdn.dribbble.com/users/772985/screenshots/6313407/3_2.jpg",
+                            src: "../storage/berita/" + news.img,
                             alt: ""
                           }
                         })
@@ -51806,9 +51838,56 @@ var render = function() {
                       "label",
                       {
                         staticClass: "form-control-label",
-                        attrs: { for: "judul" }
+                        attrs: { for: "catatan" }
                       },
-                      [_vm._v("Judul Berita")]
+                      [_vm._v("Upload Gambar")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "custom-file" }, [
+                      _c("input", {
+                        staticClass: "custom-file-input",
+                        attrs: { type: "file", id: "validatedCustomFile" },
+                        on: { change: _vm.onImageChange }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-file-label",
+                          attrs: { for: "validatedCustomFile" }
+                        },
+                        [_vm._v(_vm._s(_vm.img))]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v("Example invalid custom file feedback")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.err.catatan
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.catatan[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-12" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "isi" }
+                      },
+                      [_vm._v("Isi Berita")]
                     ),
                     _vm._v(" "),
                     _c("ckeditor", {
@@ -51822,10 +51901,10 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm.err.judul
+                    _vm.err.isi
                       ? [
                           _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.judul[0]))
+                            _vm._v(_vm._s(_vm.err.isi[0]))
                           ])
                         ]
                       : _vm._e()
@@ -51911,7 +51990,7 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "ni ni-fat-add text-white" }),
-                  _vm._v(" Tambah Berita")
+                  _vm._v(" Posting Berita")
                 ]
               )
             ])
@@ -51973,11 +52052,11 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(_vm._f("news")(item.isi)) +
-                        "\n                            "
-                    )
+                    _c("p", {
+                      domProps: {
+                        innerHTML: _vm._s(item.isi.substring(0, 100) + " .....")
+                      }
+                    })
                   ]),
                   _vm._v(" "),
                   _c("td", [
@@ -60218,9 +60297,8 @@ var render = function() {
             _c("div", { staticClass: "col col-lg-10 col-md-10" }, [
               _c("img", {
                 attrs: {
-                  src:
-                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/66461c82-1723-4c50-94f0-46aa15867139/d7oe2v3-68af647d-09bc-42f0-afbe-01746997914a.jpg/v1/fill/w_1024,h_576,q_75,strp/coldplay___magic__alternate_album_cover__by_ruffsnap_d7oe2v3-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc2IiwicGF0aCI6IlwvZlwvNjY0NjFjODItMTcyMy00YzUwLTk0ZjAtNDZhYTE1ODY3MTM5XC9kN29lMnYzLTY4YWY2NDdkLTA5YmMtNDJmMC1hZmJlLTAxNzQ2OTk3OTE0YS5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.MHRhGwCJrxzGBL8bb3f4wn73ZVxDuPOGFvQR6zydfM4",
-                  alt: ""
+                  src: "../storage/berita/" + _vm.berita.img,
+                  alt: "gambar"
                 }
               }),
               _vm._v(" "),

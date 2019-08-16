@@ -7,7 +7,7 @@
                     <template v-for="news in halo">
                         <div class="col col-lg-4 d-flex align-items-stretch" :key="news.id">
                             <div class="card">
-                              <a :href="/berita/+news.slug"> <img src="https://cdn.dribbble.com/users/772985/screenshots/6313407/3_2.jpg"
+                              <a :href="/berita/+news.slug"> <img :src="'../storage/berita/'+ news.img"
                                     class="card-img-top" alt=""></a>
                                 <div class="card-body">
                                     <!-- <router-link tag="a" :to="{ name: 'news', params: {slug: news.slug} }"> -->
@@ -100,5 +100,11 @@
             opacity: 1;
         }
     }
+
+    .card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
 
 </style>
