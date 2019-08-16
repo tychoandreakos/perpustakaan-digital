@@ -361,14 +361,8 @@
                                         <spinner-component></spinner-component>
                                     </template>
                                     <template v-else>
-                                        <template v-if="this.fetch.kode_gmd">
-                                            <button :disabled="isDisabled" class="btn btn-success">
-                                                Perbarui</button>
-                                        </template>
-                                        <template v-else>
-                                            <button :disabled="isDisabled" class="btn btn-success">
-                                                Perbaharui</button>
-                                        </template>
+                                        <button class="btn btn-success">
+                                            Perbaharui</button>
                                     </template>
                                 </div>
                             </form>
@@ -444,11 +438,11 @@
 
                         });
                         setTimeout(() => {
-                            window.location = this.index;
+                            this.loading = false;
                         }, 2800);
                     })
                     .catch(err => {
-                        console.log(err);
+                        this.err = err;
                         this.loading = false;
                     })
             },
@@ -461,17 +455,6 @@
         },
 
         created() {
-
-            Fire.$on('searching', () => {
-                let query = this.$parent.search;
-                axios.get('/pustakawan/gmd-search?q=' + query)
-                    .then(res => {
-                        // console.log(res)
-                        this.datas = res.data
-                    })
-                    .catch(err => console.log(err))
-            })
-
             this.getResults();
 
 

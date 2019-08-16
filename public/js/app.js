@@ -6762,12 +6762,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
@@ -6818,10 +6812,10 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         setTimeout(function () {
-          window.location = _this.index;
+          _this.loading = false;
         }, 2800);
       })["catch"](function (err) {
-        console.log(err);
+        _this.err = err;
         _this.loading = false;
       });
     },
@@ -6837,17 +6831,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this3 = this;
-
-    Fire.$on('searching', function () {
-      var query = _this3.$parent.search;
-      axios.get('/pustakawan/gmd-search?q=' + query).then(function (res) {
-        // console.log(res)
-        _this3.datas = res.data;
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    });
     this.getResults();
   }
 });
@@ -57531,35 +57514,11 @@ var render = function() {
                       _vm.loading
                         ? [_c("spinner-component")]
                         : [
-                            this.fetch.kode_gmd
-                              ? [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-success",
-                                      attrs: { disabled: _vm.isDisabled }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            Perbarui"
-                                      )
-                                    ]
-                                  )
-                                ]
-                              : [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-success",
-                                      attrs: { disabled: _vm.isDisabled }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            Perbaharui"
-                                      )
-                                    ]
-                                  )
-                                ]
+                            _c("button", { staticClass: "btn btn-success" }, [
+                              _vm._v(
+                                "\n                                        Perbaharui"
+                              )
+                            ])
                           ]
                     ],
                     2

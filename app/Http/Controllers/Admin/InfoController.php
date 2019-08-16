@@ -76,6 +76,13 @@ class InfoController extends Controller
      */
     public function update(Request $request, Info $info)
     {
+        $validatedData = $request->validate([
+            'alamat' => 'required',
+            'no_telp' => 'required',
+            'pustakawan' => 'required',
+            'email' => 'required',
+        ]);
+
         $info->update($request->all());
 
         return response()->json([
