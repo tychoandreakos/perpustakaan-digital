@@ -6,9 +6,16 @@
                 <div class="col-lg-6">
                     <h3 class="text-white font-weight-light mt-5 mb-1">Ingin Mengirim Kritik & Saran ?</h3>
                     <div class="cards">
-                            <span style="color: rgba(0, 0, 0, 0.72);">Kirim Pesan Melalui Email</span>
+                            {{-- <span style="color: rgba(0, 0, 0, 0.72);">Kirim Pesan Melalui Email</span>
+                            @if($info->email)
                             <p style="font-size: 16px;color: 
                             #222">{{ $info->email }}</p>
+                            @endif
+                            @if(!$info->email) --}}
+                            <p style="font-size: 16px;color: 
+                            #222">info@stmik-amikbandung.ac.id</p>
+                            {{-- @endif --}}
+                         
                         </div>
                 </div>
                 <div class="col-lg-6 text-lg-center btn-wrapper">

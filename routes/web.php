@@ -54,6 +54,7 @@ Route::resource('eksemplar', 'EksemplarPolaController');
 Route::resource('anggota', 'AnggotaController');
 Route::resource('berita', 'BeritaController');
 Route::resource('info', 'InfoController');
+Route::resource('topik', 'TopikController');
 
 
 // transaksi file
