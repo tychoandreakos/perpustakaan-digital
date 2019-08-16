@@ -49,7 +49,9 @@ class BeritaController extends Controller
             'slug' => 'nullable'
         ]);
 
-        Berita::create($validatedData);
+        $requestData = $request->all();
+        $requestData['slug'] = str_slug($request->judul);
+        Berita::create($requestData);
        
         return response()->json([
             'message' => 'data berhasil disimpan']);

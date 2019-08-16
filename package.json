@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^12.3.1",
+        "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "laravel-vue-pagination": "^2.3.0",
         "vue-instant": "^1.0.4",

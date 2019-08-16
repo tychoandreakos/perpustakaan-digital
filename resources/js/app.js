@@ -12,6 +12,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import VModal from 'vue-js-modal'
 import 'vue-instant/dist/vue-instant.css'
 import VueInstant from 'vue-instant'
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
 window.User = User;
 window.Vue = require('vue');
@@ -27,6 +28,7 @@ window.Fire = new Vue();
 Vue.use(VueSweetalert2);
 Vue.use(VModal);
 Vue.use(VueInstant)
+Vue.use(CKEditor);
 
 /**
  * The following block of code may be used to automatically register your

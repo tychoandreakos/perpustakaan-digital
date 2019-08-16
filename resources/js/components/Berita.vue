@@ -11,9 +11,9 @@
                                     class="card-img-top" alt=""></a>
                                 <div class="card-body">
                                     <!-- <router-link tag="a" :to="{ name: 'news', params: {slug: news.slug} }"> -->
-                                   <a class="link" :href="/berita/+news.slug"><h5>{{ news.judul }}</h5></a>
+                                   <a class="link" :href="/berita/+news.slug"><h5>{{ news.judul | news }}</h5></a>
                                     <!-- </router-link> -->
-                                    <p class="card-text">{{ news.isi | news }}</p>
+                                    <p class="card-text" v-html="news.isi.substring(0, 150) + ' .....'"></p>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
 
              filters: {
             news(value) {
-                return value.substring(0, 150) + ' .....';
+                return (value.length > 70 ? value.substring(0, 70) + ' .....' : value);
             }
         },
 

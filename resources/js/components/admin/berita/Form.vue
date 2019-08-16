@@ -19,9 +19,18 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="judul">Judul Berita</label>
-                                <input type="text" v-model="form.judul" id="judul"
+                                <input type="text" autocomplete="off" v-model="form.judul" id="judul"
                                     class="form-control form-control-alternative" name="judul"
                                     placeholder="Judul Berita">
+                                <template v-if="err.judul">
+                                    <span class="text-danger">{{ err.judul[0] }}</span>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="judul">Judul Berita</label>
+                                <ckeditor :editor="editor" v-model.lazy="form.isi" :config="editorConfig"></ckeditor>
                                 <template v-if="err.judul">
                                     <span class="text-danger">{{ err.judul[0] }}</span>
                                 </template>
@@ -64,6 +73,7 @@
 
 <script>
     import Spinner from '../tools/Spanner';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     export default {
 
         components: {
@@ -85,7 +95,13 @@
             return {
                 form: {
                     judul: this.fetch.judul || '',
+                    isi: this.fetch.judul || '',
                     _method: (this.fetch.judul ? 'PUT' : 'POST')
+                },
+
+                editor: ClassicEditor,
+                editorConfig: {
+                    // The configuration of the editor.
                 },
 
                 loading: false,
