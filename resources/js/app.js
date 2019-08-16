@@ -78,6 +78,11 @@ Vue.component('form-klasifikasi-component', require('./components/admin/klasifik
 Vue.component('table-bahasa-component', require('./components/admin/bahasa/Table.vue').default);
 Vue.component('form-bahasa-component', require('./components/admin/bahasa/Form.vue').default);
 
+// topik
+Vue.component('table-topik-component', require('./components/admin/topik/Table.vue').default);
+Vue.component('form-topik-component', require('./components/admin/topik/Form.vue').default);
+
+
 // bibliobigrafi
 Vue.component('table-bibliobigrafi-component', require('./components/admin/bibliobigrafi/Table.vue').default);
 Vue.component('form-bibliobigrafi-component', require('./components/admin/bibliobigrafi/Form.vue').default);

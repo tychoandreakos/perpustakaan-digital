@@ -78,6 +78,7 @@ Route::get('eksemplar-keluar-fetch', 'PinjamController@eksemplar')->name('eksemp
 Route::get('pengembalian-fetch', 'PinjamController@pengembalian')->name('pengembalian.fetch');
 Route::get('berita-fetch', 'BeritaController@fetch')->name('berita.fetch');
 Route::get('info-fetch', 'InfoController@fetch')->name('info.fetch');
+Route::get('topik-fetch', 'TopikController@fetch')->name('topik.fetch');
 
 
 // Bibliobigrafi
@@ -106,6 +107,7 @@ Route::get('eksemplar-search', 'EksemplarTransaksiController@search');
 Route::get('anggota-search', 'AnggotaController@search');
 Route::get('eksemplar-keluar-search', 'PinjamController@search');
 Route::get('berita-search', 'BeritaController@search');
+Route::get('topik-search', 'TopikController@search');
 
 // tool
 Route::get('sirkulasi', function() {

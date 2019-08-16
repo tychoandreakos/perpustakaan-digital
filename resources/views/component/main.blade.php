@@ -27,41 +27,22 @@
         {{-- topik --}}
         <h5 class="mb-3 mt-4">Pilih Topik</h5>
         <div class="row">
+            @if(isset($topik))
+            @foreach ($topik as $item)
             <a href="#">
                 <div class="col col-lg-3 col-md-6 mb-2 ">
-                    <div style="background: url('https://cdn.dribbble.com/users/772985/screenshots/5794645/chip_2x.jpg') no-repeat center;background-size: cover"
+                    <div style="background: url('{{ asset("storage/topik/$item->img") }}') no-repeat center;background-size: cover"
                         class="card-topik">
-                        <h6>Pemrograman</h6>
+                        <h6>{{ ucwords($item->jenis_topik) }}</h6>
                     </div>
                 </div>
             </a>
+            @endforeach
+            @else
+            
+                {{-- jika belum ada data error --}}
 
-            <a href="#">
-                <div class="col col-lg-3 col-md-6 mb-2">
-                    <div style="background: url('https://cdn.dribbble.com/users/772985/screenshots/4851748/1.jpg') no-repeat center;background-size: cover"
-                        class="card-topik">
-                        <h6>Jurnal</h6>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="col col-lg-3 col-md-6 mb-2">
-                    <div style="background: url('https://cdn.dribbble.com/users/772985/screenshots/5299827/branding_2_2x.jpg') no-repeat center;background-size: cover"
-                        class="card-topik">
-                        <h6>Manajemen</h6>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="col col-lg-3 col-md-6 mb-2">
-                    <div style="background: url('https://cdn.dribbble.com/users/772985/screenshots/6313407/3_2.jpg') no-repeat center;background-size: cover"
-                        class="card-topik">
-                        <h6>Arsitektur</h6>
-                    </div>
-                </div>
-            </a>
+            @endif
         </div>
 
         <div class="text-center mt-5"><a style="font-size: 15.5px;" href="#">Topik Lainnya</a></div>
