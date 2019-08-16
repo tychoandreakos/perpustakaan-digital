@@ -1957,6 +1957,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   // computed: {
   props: ['berita'],
@@ -3208,15 +3222,16 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         judul: this.fetch.judul || '',
-        isi: this.fetch.judul || '',
-        image: this.fetch.gambar_sampul || '',
+        isi: this.fetch.isi || '',
+        image: this.fetch.img || '',
+        old: this.fetch.img || '',
         _method: this.fetch.judul ? 'PUT' : 'POST'
       },
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_1___default.a,
       editorConfig: {// The configuration of the editor.
       },
       loading: false,
-      img: 'Pilih Gambar Cover Berita',
+      img: this.fetch.img || 'Pilih Gambar Cover Berita',
       err: {}
     };
   },
@@ -3262,7 +3277,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         // update
-        axios.post('/pustakawan/kota/' + this.fetch.id, this.form).then(function (res) {
+        axios.post('/pustakawan/berita/' + this.fetch.id, this.form).then(function (res) {
           _this.$swal({
             position: 'top-end',
             type: 'success',
@@ -49813,65 +49828,88 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "news" } }, [
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "mt-5" }, [
-        _c("h5", { staticClass: "mb-3" }, [_vm._v("Berita Perpustakaan")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _vm._l(_vm.halo, function(news) {
-              return [
+      _c(
+        "div",
+        { staticClass: "mt-5" },
+        [
+          _c("h5", { staticClass: "mb-3" }, [_vm._v("Berita Perpustakaan")]),
+          _vm._v(" "),
+          _vm.halo
+            ? [
                 _c(
                   "div",
-                  {
-                    key: news.id,
-                    staticClass: "col col-lg-4 d-flex align-items-stretch"
-                  },
+                  { staticClass: "row" },
                   [
-                    _c("div", { staticClass: "card" }, [
-                      _c("a", { attrs: { href: /berita/ + news.slug } }, [
-                        _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: {
-                            src: "../storage/berita/" + news.img,
-                            alt: ""
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
+                    _vm._l(_vm.halo, function(news) {
+                      return [
                         _c(
-                          "a",
+                          "div",
                           {
-                            staticClass: "link",
-                            attrs: { href: /berita/ + news.slug }
+                            key: news.id,
+                            staticClass:
+                              "col col-lg-4 d-flex align-items-stretch"
                           },
                           [
-                            _c("h5", [
-                              _vm._v(_vm._s(_vm._f("news")(news.judul)))
+                            _c("div", { staticClass: "card" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: /berita/ + news.slug } },
+                                [
+                                  _c("img", {
+                                    staticClass: "card-img-top",
+                                    attrs: {
+                                      src: "../storage/berita/" + news.img,
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "card-body" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "link",
+                                    attrs: { href: /berita/ + news.slug }
+                                  },
+                                  [
+                                    _c("h5", [
+                                      _vm._v(_vm._s(_vm._f("news")(news.judul)))
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("p", {
+                                  staticClass: "card-text",
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      news.isi.substring(0, 150) + " ....."
+                                    )
+                                  }
+                                })
+                              ])
                             ])
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("p", {
-                          staticClass: "card-text",
-                          domProps: {
-                            innerHTML: _vm._s(
-                              news.isi.substring(0, 150) + " ....."
-                            )
-                          }
-                        })
-                      ])
-                    ])
-                  ]
+                        )
+                      ]
+                    })
+                  ],
+                  2
                 )
               ]
-            })
-          ],
-          2
-        )
-      ])
+            : [
+                _c("div", { staticClass: "text-center" }, [
+                  _c("h3", [_vm._v("Oppps!, Belum ada berita.")]),
+                  _vm._v(" "),
+                  _c("img", {
+                    staticStyle: { width: "550px" },
+                    attrs: { src: "../img/user/___.jpg", alt: "" }
+                  })
+                ])
+              ]
+        ],
+        2
+      )
     ])
   ])
 }

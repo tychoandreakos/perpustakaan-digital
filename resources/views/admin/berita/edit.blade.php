@@ -9,5 +9,5 @@
 
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <form-berita-component :fetch="{{ $berita }}" index="{{ route('berita.index') }}"></form-berita-component>
+        <form-berita-component :fetch="{{ $beritum }}" index="{{ route('berita.index') }}"></form-berita-component>
             @endsection

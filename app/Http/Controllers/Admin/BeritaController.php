@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
@@ -88,7 +89,7 @@ class BeritaController extends Controller
     public function edit(Berita $beritum)
     {
         $title = 'Update Berita';
-        return view('admin.berita.edit' ,compact('bahasa', 'title'));
+        return view('admin.berita.edit' ,compact('beritum', 'title'));
     }
 
     public function search(Request $request)
@@ -115,10 +116,21 @@ class BeritaController extends Controller
         $validatedData = $request->validate([
             'judul' => 'required',
             'isi' =>  'required',
-            'slug' => 'nullable'
+            'slug' => 'nullable',
+            'img' => 'nullable',
+            'old' => 'required'
         ]);
 
-        $beritum->update($request->all());
+        if($request->image != $request->old){
+            $image = $request->get('image');
+            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            \Image::make($request->get('image'))->save(public_path('storage/berita/').$name);
+            unlink(public_path('storage/berita/'. $request->old));
+        }
+
+        $requestData = $request->all();
+        $requestData['img'] = $name;
+        $beritum->update($requestData);
 
         return response()->json([
             'message' => 'data berhasil diubah']);

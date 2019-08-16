@@ -111,8 +111,9 @@
             return {
                 form: {
                     judul: this.fetch.judul || '',
-                    isi: this.fetch.judul || '',
-                    image: this.fetch.gambar_sampul || '',
+                    isi: this.fetch.isi || '',
+                    image: this.fetch.img || '',
+                    old: this.fetch.img || '',
                     _method: (this.fetch.judul ? 'PUT' : 'POST')
                 },
 
@@ -122,7 +123,7 @@
                 },
 
                 loading: false,
-                img: 'Pilih Gambar Cover Berita',
+                img: this.fetch.img || 'Pilih Gambar Cover Berita',
 
                 err: {},
             }
@@ -169,7 +170,7 @@
                         })
                 } else {
                     // update
-                    axios.post('/pustakawan/kota/' + this.fetch.id, this.form)
+                    axios.post('/pustakawan/berita/' + this.fetch.id, this.form)
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',
