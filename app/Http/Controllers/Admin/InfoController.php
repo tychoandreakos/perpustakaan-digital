@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 
 use App\Info;
 use Illuminate\Http\Request;
@@ -14,7 +15,13 @@ class InfoController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Info Pepustakaan';
+        return view('admin.info.home', compact('title'));
+    }
+
+    public function fetch()
+    {
+        return Info::all()->first();
     }
 
     /**
@@ -69,7 +76,10 @@ class InfoController extends Controller
      */
     public function update(Request $request, Info $info)
     {
-        //
+        $info->update($request->all());
+
+        return response()->json([
+            'message' => 'data berhasil diubah']);
     }
 
     /**

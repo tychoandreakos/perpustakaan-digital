@@ -8,7 +8,7 @@
                     <div class="cards">
                             <span style="color: rgba(0, 0, 0, 0.72);">Kirim Pesan Melalui Email</span>
                             <p style="font-size: 16px;color: 
-                            #222">info@stmik-amikbandung.ac.id</p>
+                            #222">{{ $info->email }}</p>
                         </div>
                 </div>
                 <div class="col-lg-6 text-lg-center btn-wrapper">

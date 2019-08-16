@@ -1,0 +1,485 @@
+<template>
+    <div class="row">
+        <div class="col-xl-12 mb-12 mb-xl-0">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Info Perpustakaan</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card card-stats mb-4 mb-lg-0">
+                        <div class="card-body">
+                            <form @submit.prevent="simpan">
+                                <!-- <div class="form-group">
+                                    <label for="">Jadwal Perpustakaan</label>
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <select class="form-control">
+                                                    <option value="senin">Senin</option>
+                                                    <option value="selasa">Selasa</option>
+                                                    <option value="rabu">Rabu</option>
+                                                    <option value="kamis">Kamis</option>
+                                                    <option value="jumat">Jumat</option>
+                                                    <option value="sabtu">Sabtu</option>
+                                                    <option value="minggu">Minggu</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <select class="form-control">
+                                                    <option value="senin">Senin</option>
+                                                    <option value="selasa">Selasa</option>
+                                                    <option value="rabu">Rabu</option>
+                                                    <option value="kamis">Kamis</option>
+                                                    <option value="jumat">Jumat</option>
+                                                    <option value="sabtu">Sabtu</option>
+                                                    <option value="minggu">Minggu</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <select class="form-control">
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="06:30">06:30</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="07:30">07:30</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="08:30">08:30</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="09:30">09:30</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="10:30">10:30</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="11:30">11:30</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="12:30">12:30</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="13:30">13:30</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="14:30">14:30</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="15:30">15:30</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="16:30">16:30</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="17:30">17:30</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="18:30">18:30</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="19:30">19:30</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="20:30">20:30</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="21:30">21:30</option>
+                                                    <option value="22:00">22:00</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <select class="form-control">
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="06:30">06:30</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="07:30">07:30</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="08:30">08:30</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="09:30">09:30</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="10:30">10:30</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="11:30">11:30</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="12:30">12:30</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="13:30">13:30</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="14:30">14:30</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="15:30">15:30</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="16:30">16:30</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="17:30">17:30</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="18:30">18:30</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="19:30">19:30</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="20:30">20:30</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="21:30">21:30</option>
+                                                    <option value="22:00">22:00</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                                 <div class="form-group">
+                                    <label for="">Jadwal Hari Weekend</label>
+                                    <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <select class="form-control">
+                                                    <option value="jumat">Jumat</option>
+                                                    <option value="sabtu">Sabtu</option>
+                                                    <option value="minggu">Minggu</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <select class="form-control">
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="06:30">06:30</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="07:30">07:30</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="08:30">08:30</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="09:30">09:30</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="10:30">10:30</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="11:30">11:30</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="12:30">12:30</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="13:30">13:30</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="14:30">14:30</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="15:30">15:30</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="16:30">16:30</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="17:30">17:30</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="18:30">18:30</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="19:30">19:30</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="20:30">20:30</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="21:30">21:30</option>
+                                                    <option value="22:00">22:00</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <select class="form-control">
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="06:30">06:30</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="07:30">07:30</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="08:30">08:30</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="09:30">09:30</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="10:30">10:30</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="11:30">11:30</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="12:30">12:30</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="13:30">13:30</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="14:30">14:30</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="15:30">15:30</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="16:30">16:30</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="17:30">17:30</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="18:30">18:30</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="19:30">19:30</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="20:30">20:30</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="21:30">21:30</option>
+                                                    <option value="22:00">22:00</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                                 <div class="form-group">
+                                    <label for="">Jam Istirahat</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group mb-4">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <select class="form-control">
+                                                    <option value="06:00">06:00</option>
+                                                    <option value="06:30">06:30</option>
+                                                    <option value="07:00">07:00</option>
+                                                    <option value="07:30">07:30</option>
+                                                    <option value="08:00">08:00</option>
+                                                    <option value="08:30">08:30</option>
+                                                    <option value="09:00">09:00</option>
+                                                    <option value="09:30">09:30</option>
+                                                    <option value="10:00">10:00</option>
+                                                    <option value="10:30">10:30</option>
+                                                    <option value="11:00">11:00</option>
+                                                    <option value="11:30">11:30</option>
+                                                    <option value="12:00">12:00</option>
+                                                    <option value="12:30">12:30</option>
+                                                    <option value="13:00">13:00</option>
+                                                    <option value="13:30">13:30</option>
+                                                    <option value="14:00">14:00</option>
+                                                    <option value="14:30">14:30</option>
+                                                    <option value="15:00">15:00</option>
+                                                    <option value="15:30">15:30</option>
+                                                    <option value="16:00">16:00</option>
+                                                    <option value="16:30">16:30</option>
+                                                    <option value="17:00">17:00</option>
+                                                    <option value="17:30">17:30</option>
+                                                    <option value="18:00">18:00</option>
+                                                    <option value="18:30">18:30</option>
+                                                    <option value="19:00">19:00</option>
+                                                    <option value="19:30">19:30</option>
+                                                    <option value="20:00">20:00</option>
+                                                    <option value="20:30">20:30</option>
+                                                    <option value="21:00">21:00</option>
+                                                    <option value="21:30">21:30</option>
+                                                    <option value="22:00">22:00</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div> -->
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="alamat">Alamat</label>
+                                    <textarea id="alamat" class="form-control" v-model="form.alamat"
+                                        placeholder="Alamat"></textarea>
+                                    <template v-if="err.alamat">
+                                        <span class="text-danger">{{ err.alamat[0] }}</span>
+                                    </template>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="no_telp">No Telepon</label>
+                                    <input type="text" v-model="form.no_telp" id="no_telp"
+                                        class="form-control form-control-alternative" name="no_telp"
+                                        placeholder="KODE GMD">
+                                    <template v-if="err.no_telp">
+                                        <span class="text-danger">{{ err.no_telp[0] }}</span>
+                                    </template>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="pustakawan">Pustakawan</label>
+                                    <input type="text" v-model="form.pustakawan" id="pustakawan"
+                                        class="form-control form-control-alternative" name="pustakawan"
+                                        placeholder="KODE GMD">
+                                    <template v-if="err.pustakawan">
+                                        <span class="text-danger">{{ err.pustakawan[0] }}</span>
+                                    </template>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="email">Email</label>
+                                    <input type="text" v-model="form.email" id="email"
+                                        class="form-control form-control-alternative" name="email"
+                                        placeholder="KODE GMD">
+                                    <template v-if="err.email">
+                                        <span class="text-danger">{{ err.email[0] }}</span>
+                                    </template>
+                                </div>
+
+                                <div class="float-right">
+
+                                    <template v-if="loading">
+                                        <spinner-component></spinner-component>
+                                    </template>
+                                    <template v-else>
+                                        <template v-if="this.fetch.kode_gmd">
+                                            <button :disabled="isDisabled" class="btn btn-success">
+                                                Perbarui</button>
+                                        </template>
+                                        <template v-else>
+                                            <button :disabled="isDisabled" class="btn btn-success">
+                                                Perbaharui</button>
+                                        </template>
+                                    </template>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <input type="hidden" :value="alamat">
+        <input type="hidden" :value="no_telp">
+        <input type="hidden" :value="pustakawan">
+        <input type="hidden" :value="email">
+
+    </div>
+</template>
+
+<script>
+    import Spinner from '../tools/Spanner';
+    export default {
+        props: ['route', 'fetch', 'index'],
+        components: {
+            SpinnerComponent: Spinner,
+        },
+        computed: {
+            alamat() {
+                return this.form.alamat = this.datas.alamat;
+            },
+            no_telp() {
+                return this.form.no_telp = this.datas.no_telp;
+            },
+            pustakawan() {
+                return this.form.pustakawan = this.datas.pustakawan;
+            },
+            email() {
+                return this.form.email = this.datas.email;
+            }
+        },
+
+        data() {
+            return {
+                datas: {},
+                form: {
+                    alamat: '',
+                    no_telp: '',
+                    pustakawan: '',
+                    email: '',
+                    _method: 'PUT'
+                },
+                err: {},
+                loading: false,
+            }
+        },
+
+        methods: {
+            simpan() {
+                this.loading = true;
+                // update
+                axios.post('/pustakawan/info/' + this.datas.id, this.form)
+                    .then(res => {
+                        this.$swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: res.data.message.toUpperCase(),
+                            showConfirmButton: false,
+                            timer: 2500
+
+                        });
+                        setTimeout(() => {
+                            window.location = this.index;
+                        }, 2800);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        this.loading = false;
+                    })
+            },
+
+            getResults(page = 1) {
+                return axios.get(this.fetch + '?page=' + page)
+                    .then(res => this.datas = res.data)
+                    .catch(err => console.log(err));
+            }
+        },
+
+        created() {
+
+            Fire.$on('searching', () => {
+                let query = this.$parent.search;
+                axios.get('/pustakawan/gmd-search?q=' + query)
+                    .then(res => {
+                        // console.log(res)
+                        this.datas = res.data
+                    })
+                    .catch(err => console.log(err))
+            })
+
+            this.getResults();
+
+
+        },
+    }
+
+</script>
+
+<style scoped>
+
+</style>

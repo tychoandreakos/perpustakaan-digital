@@ -90,9 +90,13 @@ Vue.component('form-tipe-anggota-component', require('./components/admin/tipe-an
 Vue.component('table-transaksi-eksemplar-component', require('./components/admin/eksemplar/Table.vue').default);
 Vue.component('form-transaksi-eksemplar-component', require('./components/admin/eksemplar/Form.vue').default);
 
-// bahasa
+// anggota
 Vue.component('table-anggota-component', require('./components/admin/anggota/Table.vue').default);
 Vue.component('form-anggota-component', require('./components/admin/anggota/Form.vue').default);
+
+// info
+Vue.component('table-info-component', require('./components/admin/info/Table.vue').default);
+Vue.component('form-info-component', require('./components/admin/info/Form.vue').default);
 
 // sirkulasi
 Vue.component('table-sirkulasi-component', require('./components/admin/sirkulasi/Table.vue').default);

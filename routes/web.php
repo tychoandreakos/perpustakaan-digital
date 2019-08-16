@@ -53,6 +53,7 @@ Route::resource('tipe-anggota', 'TipeAnggotaController');
 Route::resource('eksemplar', 'EksemplarPolaController');
 Route::resource('anggota', 'AnggotaController');
 Route::resource('berita', 'BeritaController');
+Route::resource('info', 'InfoController');
 
 
 // transaksi file
@@ -75,6 +76,7 @@ Route::get('anggota-fetch', 'AnggotaController@fetch')->name('anggota.fetch');
 Route::get('eksemplar-keluar-fetch', 'PinjamController@eksemplar')->name('eksemplar-keluar.fetch');
 Route::get('pengembalian-fetch', 'PinjamController@pengembalian')->name('pengembalian.fetch');
 Route::get('berita-fetch', 'BeritaController@fetch')->name('berita.fetch');
+Route::get('info-fetch', 'InfoController@fetch')->name('info.fetch');
 
 
 // Bibliobigrafi

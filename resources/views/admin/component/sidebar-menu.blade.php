@@ -73,7 +73,7 @@
             <div class="dropdown-menu" style="left: 15px;">
                 <a href="{{ route('landing') }}" class="dropdown-item">Halaman Digital Library</a>
                 <a href="{{ route('berita.index') }}" class="dropdown-item">Berita</a>
-                <a href="{{ route('anggota.create') }}" class="dropdown-item">Atur Info Perpustakaan</a>
+                <a href="{{ route('info.index') }}" class="dropdown-item">Atur Info Perpustakaan</a>
                 <a href="{{ route('tipe-anggota.index') }}" class="dropdown-item">Tipe Keanggotaan</a>
                 <a href="#" class="dropdown-item">Cetak Kartu Anggota</a>
                 <a href="#" class="dropdown-item">Eksport Data</a>

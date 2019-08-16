@@ -23,6 +23,7 @@ class CreateInfosTable extends Migration
             $table->string('alamat', 100);
             $table->string('no_telp', 50);
             $table->string('pustakawan', 50);
+            $table->string('email', 50);
             $table->timestamps();
         });
     }

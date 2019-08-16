@@ -14,6 +14,7 @@ $factory->define(Info::class, function (Faker $faker) {
         'waktu_istirahat' => '08:00 - 20:00',
         'alamat' => 'Jl. Jakarta No.28, Kebonwaru, Kec. Batununggal, Kota Bandung, Jawa Barat 40272',
         'no_telp' => '(021) 5711144 ',
-        'pustakawan' => 'suhendry'
+        'pustakawan' => 'suhendry',
+        'email' => 'info@stmik-amikbandung.ac.id'
     ];
 });
