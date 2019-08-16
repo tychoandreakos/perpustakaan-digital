@@ -60,7 +60,7 @@
                     <p class="description d-none d-md-inline-block mb-0">Learn more about colors, typography, icons and the grid system we used for Argon.</p>
                   </div>
                 </a>
-                <a href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html" class="media d-flex align-items-center">
+                <a href="{{ route('home') }}" class="media d-flex align-items-center">
                   <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
                     <i class="ni ni-ui-04"></i>
                   </div>

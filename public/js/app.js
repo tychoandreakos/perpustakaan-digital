@@ -3141,14 +3141,14 @@ __webpack_require__.r(__webpack_exports__);
   props: ['index', 'fetch'],
   computed: {
     isDisabled: function isDisabled() {
-      return this.form.nama_kota.length == '' ? true : false;
+      return this.form.judul.length == '' ? true : false;
     }
   },
   data: function data() {
     return {
       form: {
-        nama_kota: this.fetch.nama_kota || '',
-        _method: this.fetch.nama_kota ? 'PUT' : 'POST'
+        judul: this.fetch.judul || '',
+        _method: this.fetch.judul ? 'PUT' : 'POST'
       },
       loading: false,
       err: {}
@@ -3160,7 +3160,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
 
-      if (!this.fetch.nama_kota) {
+      if (!this.fetch.judul) {
         // create
         axios.post(this.fetch, this.form).then(function (res) {
           _this.$swal({
@@ -51650,9 +51650,9 @@ var render = function() {
     _c("div", { staticClass: "card-header bg-white border-0" }, [
       _c("div", { staticClass: "row align-items-center" }, [
         _c("div", { staticClass: "col-8" }, [
-          this.fetch.nama_kota
-            ? _c("h3", { staticClass: "mb-0" }, [_vm._v("Update Data Kota")])
-            : _c("h3", { staticClass: "mb-0" }, [_vm._v("Tambah Data Kota")])
+          this.fetch.judul
+            ? _c("h3", { staticClass: "mb-0" }, [_vm._v("Update Data Berita")])
+            : _c("h3", { staticClass: "mb-0" }, [_vm._v("Tambah Data Berita")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-4 text-right" }, [
@@ -51681,7 +51681,7 @@ var render = function() {
         },
         [
           _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
-            _vm._v("Kota information")
+            _vm._v("Berita information")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "pl-lg-4" }, [
@@ -51695,9 +51695,9 @@ var render = function() {
                       "label",
                       {
                         staticClass: "form-control-label",
-                        attrs: { for: "nama_kota" }
+                        attrs: { for: "judul" }
                       },
-                      [_vm._v("Nama Kota")]
+                      [_vm._v("Judul Berita")]
                     ),
                     _vm._v(" "),
                     _c("input", {
@@ -51705,32 +51705,32 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.nama_kota,
-                          expression: "form.nama_kota"
+                          value: _vm.form.judul,
+                          expression: "form.judul"
                         }
                       ],
                       staticClass: "form-control form-control-alternative",
                       attrs: {
                         type: "text",
-                        id: "nama_kota",
-                        name: "nama_kota",
-                        placeholder: "Nama Penerbit"
+                        id: "judul",
+                        name: "judul",
+                        placeholder: "Judul Berita"
                       },
-                      domProps: { value: _vm.form.nama_kota },
+                      domProps: { value: _vm.form.judul },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "nama_kota", $event.target.value)
+                          _vm.$set(_vm.form, "judul", $event.target.value)
                         }
                       }
                     }),
                     _vm._v(" "),
-                    _vm.err.nama_kota
+                    _vm.err.judul
                       ? [
                           _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.nama_kota[0]))
+                            _vm._v(_vm._s(_vm.err.judul[0]))
                           ])
                         ]
                       : _vm._e()
@@ -51748,7 +51748,7 @@ var render = function() {
               _vm.loading
                 ? [_c("spinner-component")]
                 : [
-                    this.fetch.nama_kota
+                    this.fetch.judul
                       ? [
                           _c(
                             "button",
@@ -75969,15 +75969,14 @@ if (token) {
 /*!********************************************!*\
   !*** ./resources/js/components/Berita.vue ***!
   \********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Berita_vue_vue_type_template_id_3dc22052_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Berita.vue?vue&type=template&id=3dc22052&scoped=true& */ "./resources/js/components/Berita.vue?vue&type=template&id=3dc22052&scoped=true&");
 /* harmony import */ var _Berita_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Berita.vue?vue&type=script&lang=js& */ "./resources/js/components/Berita.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Berita_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Berita_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _Berita_vue_vue_type_style_index_0_id_3dc22052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Berita.vue?vue&type=style&index=0&id=3dc22052&lang=scss&scoped=true& */ "./resources/js/components/Berita.vue?vue&type=style&index=0&id=3dc22052&lang=scss&scoped=true&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Berita_vue_vue_type_style_index_0_id_3dc22052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Berita.vue?vue&type=style&index=0&id=3dc22052&lang=scss&scoped=true& */ "./resources/js/components/Berita.vue?vue&type=style&index=0&id=3dc22052&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -76009,7 +76008,7 @@ component.options.__file = "resources/js/components/Berita.vue"
 /*!*********************************************************************!*\
   !*** ./resources/js/components/Berita.vue?vue&type=script&lang=js& ***!
   \*********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

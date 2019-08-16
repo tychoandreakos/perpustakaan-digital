@@ -71,6 +71,7 @@
                 <i class="ni ni-tablet-button text-success"></i> Digital Library
             </a>
             <div class="dropdown-menu" style="left: 15px;">
+                <a href="{{ route('landing') }}" class="dropdown-item">Halaman Digital Library</a>
                 <a href="{{ route('berita.index') }}" class="dropdown-item">Berita</a>
                 <a href="{{ route('anggota.create') }}" class="dropdown-item">Tambah Anggota</a>
                 <a href="{{ route('tipe-anggota.index') }}" class="dropdown-item">Tipe Keanggotaan</a>

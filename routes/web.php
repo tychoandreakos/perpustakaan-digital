@@ -15,7 +15,7 @@
 //     return view('user');
 // });
 
-Route::get('/', 'LandingController@index');
+Route::get('/', 'LandingController@index')->name('landing');
 Route::get('berita/{slug}', 'LandingController@berita');
 
 Route::get('/daftar-tamu', function() {
