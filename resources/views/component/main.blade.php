@@ -67,9 +67,9 @@
         <div class="text-center mt-5"><a style="font-size: 15.5px;" href="#">Topik Lainnya</a></div>
 
         {{-- berita --}}
-       <div id="berita">
+        <div id="berita">
             <app-berita :berita="{{ $berita }}"></app-berita>
-       </div>
+        </div>
 
         {{-- info --}}
         <div id="info" class="mt-5">
@@ -81,18 +81,20 @@
                             <h6>Jadwal Perpustakan</h6>
 
                             <div class="mt-3 mb-3">
-                                <span>Senin - Jumat</span>
-                                <p>08:00 - 20.00 WIB</p>
+                                <span>{{ ucwords($info->regular) }}</span>
+                                <p>{{ $info->waktu_regular }}</p>
                             </div>
 
+                            @isset($info->weekend)
                             <div class="mb-3">
-                                <span>Sabtu</span>
-                                <p>12:00 - 13:00 WIB</p>
+                                <span>{{ ucwords($info->weekend) }}</span>
+                                <p>{{ $info->waktu_weekend }}</p>
                             </div>
+                            @endisset
 
                             <div class="mb-3">
                                 <span>Jam Istirahat</span>
-                                <p>08:00 - 20.00 WIB</p>
+                                <p>{{ $info->waktu_istirahat }}</p>
                             </div>
                         </div>
                         <div class="col col-lg-5">
@@ -100,18 +102,17 @@
 
                             <div class="mb-3">
                                 <span>Alamat</span>
-                                <p style="width: 90%">Jl. Jakarta No.28, Kebonwaru, Kec. Batununggal, Kota Bandung, Jawa
-                                    Barat 40272</p>
+                                <p style="width: 90%">{{ ucfirst($info->alamat) }}</p>
                             </div>
 
                             <div class="mb-3">
                                 <span>Phone Number</span>
-                                <p>(021) 5711144 </p>
+                                <p>{{ $info->no_telp }} </p>
                             </div>
 
                             <div class="mb-3">
                                 <span>Pustakawan</span>
-                                <p>Suhendry</p>
+                                <p>{{ ucwords($info->pustakawan) }}</p>
                             </div>
                         </div>
                     </div>
