@@ -9535,6 +9535,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
   data: function data() {
@@ -61593,7 +61595,7 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "ni ni-fat-add text-white" }),
-                  _vm._v(" Posting Berita")
+                  _vm._v(" Tambah Topik")
                 ]
               )
             ])
@@ -61601,79 +61603,88 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "table-responsive" }, [
-          _c("table", { staticClass: "table align-items-center table-flush" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.datas.data, function(item) {
-                return _c("tr", { key: item.id }, [
-                  _c(
-                    "th",
-                    { staticStyle: { width: "19%" }, attrs: { scope: "row" } },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary btn-sm",
-                          attrs: { href: _vm.edit(item.id) }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "ni ni-check-bold text-white"
-                          }),
-                          _vm._v(" Edit")
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleted(item.id)
+          _c(
+            "table",
+            { staticClass: "table align-items-center table-flush text-center" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.datas.data, function(item) {
+                  return _c("tr", { key: item.id }, [
+                    _c(
+                      "th",
+                      {
+                        staticStyle: { width: "19%" },
+                        attrs: { scope: "row" }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary btn-sm",
+                            attrs: { href: _vm.edit(item.id) }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "ni ni-check-bold text-white"
+                            }),
+                            _vm._v(" Edit")
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleted(item.id)
+                              }
                             }
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "ni ni-fat-remove text-white"
-                          }),
-                          _vm._v(" Hapus")
-                        ]
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "ni ni-fat-remove text-white"
+                            }),
+                            _vm._v(" Hapus")
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm._f("capitalize")(item.order)) +
+                          "\n                            "
                       )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(_vm._f("capitalize")(item.judul)) +
-                        "\n                            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("p", {
-                      domProps: {
-                        innerHTML: _vm._s(item.isi.substring(0, 100) + " .....")
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(item.updated_at) +
-                        "\n                            "
-                    )
+                    ]),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                               " +
+                          _vm._s(_vm._f("capitalize")(item.jenis_topik)) +
+                          "\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(item.updated_at) +
+                          "\n                            "
+                      )
+                    ])
                   ])
-                ])
-              }),
-              0
-            )
-          ])
+                }),
+                0
+              )
+            ]
+          )
         ]),
         _vm._v(" "),
         _c(
@@ -61710,9 +61721,11 @@ var staticRenderFns = [
           _vm._v("Aksi")
         ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Judul")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Order")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Isi")]),
+        _c("th", { attrs: { scope: "col" } }),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jenis Topik")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Terakhir Diperbaharui")])
       ])

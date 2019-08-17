@@ -9,18 +9,19 @@
                         </div>
                         <div class="col text-right">
                             <a :href="this.route" class="btn btn-sm btn-primary"><i
-                                    class="ni ni-fat-add text-white"></i> Posting Berita</a>
+                                    class="ni ni-fat-add text-white"></i> Tambah Topik</a>
                         </div>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
+                    <table class="table align-items-center table-flush text-center">
                         <thead class="thead-light">
                             <tr class="text-center">
                                 <th scope="col" style="width: 21%;">Aksi</th>
-                                <th scope="col">Judul</th>
-                                <th scope="col">Isi</th>
+                                <th scope="col">Order</th>
+                                <th scope="col"></th>
+                                <th scope="col">Jenis Topik</th>
                                 <th scope="col">Terakhir Diperbaharui</th>
                             </tr>
                         </thead>
@@ -33,10 +34,11 @@
                                             class="ni ni-fat-remove text-white"></i> Hapus</button>
                                 </th>
                                 <td>
-                                    {{ item.judul | capitalize}}
+                                    {{ item.order | capitalize}}
                                 </td>
+                                <td></td>
                                 <td>
-                                   <p v-html="item.isi.substring(0, 100) + ' .....'"></p>
+                                   {{ item.jenis_topik | capitalize }}
                                 </td>
                                 <td>
                                     {{ item.updated_at }}

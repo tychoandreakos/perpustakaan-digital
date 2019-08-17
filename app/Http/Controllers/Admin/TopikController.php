@@ -22,7 +22,7 @@ class TopikController extends Controller
 
     public function fetch()
     {
-        return Berita::latest()->paginate(5);
+        return Topik::orderBy('order', 'ASC')->paginate(5);
     }
 
     /**
