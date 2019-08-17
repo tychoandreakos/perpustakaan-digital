@@ -8,7 +8,12 @@ use Illuminate\Support\Carbon;
 class Topik extends Model
 {
     protected $table = 'topik';
-    protected $guarded = [];
+    protected $fillable = [
+        'jenis_topik',
+        'slug',
+        'order',
+        'img'
+    ];
 
     public function getUpdatedAtAttribute($value)
     {

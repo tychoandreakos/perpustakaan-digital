@@ -25,6 +25,11 @@ class TopikController extends Controller
         return Topik::orderBy('order', 'ASC')->paginate(5);
     }
 
+    public function last()
+    {
+        return Topik::orderBy('order', 'DESC')->first();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,8 +51,9 @@ class TopikController extends Controller
     {
         $validatedData = $request->validate([
             'jenis_topik' => 'required',
-            'img' => 'required',
-            'slug' => 'nullable'
+            'image' => 'required',
+            'slug' => 'nullable',
+            'order' => 'required|unique:topik,order'
         ]);
 
         if(!$request->image == '')
@@ -114,9 +120,10 @@ class TopikController extends Controller
     {
         $validatedData = $request->validate([
             'jenis_topik' => 'required',
-            'img' =>  'required',
+            'image' =>  'required',
             'slug' => 'nullable',
-            'old' => 'required'
+            'old' => 'required',
+            'order' => 'required|unique:topik,order,'. $topik->order
         ]);
 
         if($request->image != $request->old){
@@ -127,7 +134,9 @@ class TopikController extends Controller
         }
 
         $requestData = $request->all();
-        $requestData['img'] = $name;
+        if(isset($name)){
+            $requestData['img'] = $name;
+        }
         $topik->update($requestData);
 
         return response()->json([
@@ -142,6 +151,7 @@ class TopikController extends Controller
      */
     public function destroy(Topik $topik)
     {
+        unlink(public_path('storage/topik/'. $topik->img));
         $topik->delete();
 
         return response()->json([

@@ -9,5 +9,5 @@
 
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <form-topik-component :fetch="{{ $beritum }}" index="{{ route('topik.index') }}"></form-topik-component>
+        <form-topik-component :fetch="{{ $topik }}" index="{{ route('topik.index') }}"></form-topik-component>
             @endsection

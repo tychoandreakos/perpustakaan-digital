@@ -131,6 +131,7 @@ Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
 Route::get('pinjaman', 'PinjamController@pinjaman')->name('pinjam.pinjaman');
 Route::post('perpanjang', 'PinjamController@perpanjang')->name('pinjam.perpanjang');
 Route::get('kembali', 'PinjamController@kembali')->name('sirkulasi.kembali');
+Route::get('last', 'TopikController@last')->name('topik.last');
 
 
 // eksemplar keluar

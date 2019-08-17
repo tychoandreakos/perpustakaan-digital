@@ -129,7 +129,9 @@ class BeritaController extends Controller
         }
 
         $requestData = $request->all();
-        $requestData['img'] = $name;
+        if(isset($name)){
+            $requestData['img'] = $name;
+        }
         $beritum->update($requestData);
 
         return response()->json([

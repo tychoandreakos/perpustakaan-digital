@@ -3,8 +3,8 @@
         <div class="card-header bg-white border-0">
             <div class="row align-items-center">
                 <div class="col-8">
-                    <h3 class="mb-0" v-if="this.fetch.judul">Update Data Berita</h3>
-                    <h3 class="mb-0" v-else>Tambah Data Berita</h3>
+                    <h3 class="mb-0" v-if="this.fetch.jenis_topik">Update Data Topik</h3>
+                    <h3 class="mb-0" v-else>Tambah Data Topik</h3>
                 </div>
                 <div class="col-4 text-right">
                     <a :href="this.index" class="btn btn-sm btn-primary">Kembali</a>
@@ -13,21 +13,33 @@
         </div>
         <div class="card-body">
             <form @submit.prevent="simpan">
-                <h6 class="heading-small text-muted mb-4">Berita information</h6>
+                <h6 class="heading-small text-muted mb-4">Topik information</h6>
                 <div class="pl-lg-4">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="judul">Judul Berita</label>
-                                <input type="text" autocomplete="off" v-model="form.judul" id="judul"
-                                    class="form-control form-control-alternative" name="judul"
-                                    placeholder="Judul Berita">
-                                <template v-if="err.judul">
-                                    <span class="text-danger">{{ err.judul[0] }}</span>
+                                <label class="form-control-label" for="order">Order Topik</label>
+                                <input type="number" autocomplete="off" v-model="form.order" id="order"
+                                    class="form-control form-control-alternative" name="order"
+                                    placeholder="Order Topik">
+                                <template v-if="err.order">
+                                    <span class="text-danger">{{ err.order[0] }}</span>
                                 </template>
                             </div>
                         </div>
-                         <div class="col-lg-12">
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="jenis_topik">Jenis Topik</label>
+                                <input type="text" autocomplete="off" v-model="form.jenis_topik" id="jenis_topik"
+                                    class="form-control form-control-alternative" name="jenis_topik"
+                                    placeholder="Judul Topik">
+                                <template v-if="err.jenis_topik">
+                                    <span class="text-danger">{{ err.jenis_topik[0] }}</span>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload Gambar</label>
                                 <div class="custom-file">
@@ -42,29 +54,22 @@
                                 </template>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="isi">Isi Berita</label>
-                                <ckeditor :editor="editor" v-model.lazy="form.isi" :config="editorConfig"></ckeditor>
-                                <template v-if="err.isi">
-                                    <span class="text-danger">{{ err.isi[0] }}</span>
-                                </template>
-                            </div>
-                        </div>
-                       
+
                         <!-- <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="judul">Nama GMD</label>
-                                <input type="text" v-model="form.judul" id="judul"
-                                    class="form-control form-control-alternative" name="judul"
+                                <label class="form-control-label" for="jenis_topik">Nama GMD</label>
+                                <input type="text" v-model="form.jenis_topik" id="jenis_topik"
+                                    class="form-control form-control-alternative" name="jenis_topik"
                                     placeholder="NAMA GMD">
-                                <template v-if="err.judul">
-                                    <span class="text-danger">{{ err.judul[0] }}</span>
+                                <template v-if="err.jenis_topik">
+                                    <span class="text-danger">{{ err.jenis_topik[0] }}</span>
                                 </template>
                             </div>
                         </div> -->
                     </div>
                 </div>
+
+                <input type="hidden" name="" v-model="som">
 
                 <div class="float-right">
 
@@ -72,7 +77,7 @@
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <template v-if="this.fetch.judul">
+                        <template v-if="this.fetch.jenis_topik">
                             <button :disabled="isDisabled" class="btn btn-success">
                                 Perbarui</button>
                         </template>
@@ -89,7 +94,6 @@
 
 <script>
     import Spinner from '../tools/Spanner';
-    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     export default {
 
         components: {
@@ -99,31 +103,42 @@
         props: [
             'index',
             'fetch',
+            'datas'
         ],
 
         computed: {
             isDisabled() {
-                return (this.form.judul.length == '' ? true : false)
+                return (this.form.jenis_topik.length == '' ? true : false)
+            },
+
+            som() {
+                if (!this.fetch.jenis_topik) {
+                    return this.form.order = this.order.order + 1;
+                }
+            }
+
+        },
+
+        created() {
+            if (!this.fetch.jenis_topik) {
+                this.getOrder();
             }
         },
 
         data() {
             return {
                 form: {
-                    judul: this.fetch.judul || '',
-                    isi: this.fetch.isi || '',
+                    jenis_topik: this.fetch.jenis_topik || '',
+                    order: this.fetch.order || '',
                     image: this.fetch.img || '',
                     old: this.fetch.img || '',
-                    _method: (this.fetch.judul ? 'PUT' : 'POST')
+                    _method: (this.fetch.jenis_topik ? 'PUT' : 'POST')
                 },
 
-                editor: ClassicEditor,
-                editorConfig: {
-                    // The configuration of the editor.
-                },
+                order: {},
 
                 loading: false,
-                img: this.fetch.img || 'Pilih Gambar Cover Berita',
+                img: this.fetch.img || 'Pilih Gambar Cover Topik',
 
                 err: {},
             }
@@ -137,6 +152,14 @@
                     return;
                 this.createImage(files[0]);
             },
+
+            getOrder() {
+                axios.get(this.datas)
+                    .then(res => this.order = res.data)
+                    .catch(err => console.log(err))
+            },
+
+
             createImage(file) {
                 let reader = new FileReader();
                 let vm = this;
@@ -148,7 +171,7 @@
             simpan() {
                 this.loading = true;
 
-                if (!this.fetch.judul) {
+                if (!this.fetch.jenis_topik) {
                     // create
                     axios.post(this.fetch, this.form)
                         .then(res => {
@@ -170,7 +193,7 @@
                         })
                 } else {
                     // update
-                    axios.post('/pustakawan/berita/' + this.fetch.id, this.form)
+                    axios.post('/pustakawan/topik/' + this.fetch.id, this.form)
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',

@@ -73,7 +73,7 @@
 
         methods: {
             edit(val) {
-                return `berita/${val}/edit`;
+                return `topik/${val}/edit`;
             },
 
             deleted(val) {
@@ -87,7 +87,7 @@
                     confirmButtonText: 'Yes, hapus!'
                 }).then((result) => {
                     if (result.value) {
-                        axios.post('/pustakawan/berita/' + val, {
+                        axios.post('/pustakawan/topik/' + val, {
                                 _method: 'DELETE'
                             })
                             .then(res => {
@@ -119,7 +119,7 @@
 
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
-                axios.get('/pustakawan/berita-search?q=' + query)
+                axios.get('/pustakawan/topik-search?q=' + query)
                     .then(res => {
                         // console.log(res)
                         this.datas = res.data

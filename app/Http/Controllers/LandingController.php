@@ -16,7 +16,7 @@ class LandingController extends Controller
         $user = User::all()->count();
         $buku = Buku::all()->count();
         $info = Info::all()->first();
-        $topik = Topik::latest()->get();
+        $topik = Topik::orderBy('order', 'ASC')->limit(4)->get();
         $berita =  Berita::latest()->get();
         return view('layouts.app', compact('berita','buku','user','info', 'topik'));
     }
