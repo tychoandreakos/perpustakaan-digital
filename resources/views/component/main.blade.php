@@ -23,6 +23,9 @@
             </div>
         </div>
 
+        <div class="img">
+                <div class="img-1"></div>
+           </div>
 
         {{-- topik --}}
         <h5 class="mb-3 mt-4">Pilih Topik</h5>

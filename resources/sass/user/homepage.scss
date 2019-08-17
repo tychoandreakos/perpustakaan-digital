@@ -33,6 +33,20 @@
     padding: 10px 0 0 25px;
 }
 
+.img {
+    position: relative;
+    width: 100%;
+
+    .img-1 {
+        top: -240px;
+        right: -350px;
+        width: 100%;
+        height: 50em;
+        position: absolute;
+        z-index: -99;
+        background: url('img/user/j.jpg') no-repeat;
+    }
+}
 
 .card-topik {
     position: relative;
