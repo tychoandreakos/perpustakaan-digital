@@ -70639,15 +70639,19 @@ var render = function() {
                       staticStyle: { background: "#637bff" }
                     },
                     [
-                      _c("img", {
-                        attrs: {
-                          src: "../storage/cover/" + item.gambar_sampul,
-                          alt: "cover"
-                        }
-                      }),
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("img", {
+                          attrs: {
+                            src: "../storage/cover/" + item.gambar_sampul,
+                            alt: "cover"
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
-                      _c("h6", { staticClass: "text-white pl-4 pr-4 pt-4" }, [
-                        _vm._v(_vm._s(_vm._f("capitalize")(item.judul)))
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("h6", { staticClass: "text-white pl-4 pr-4 pt-4" }, [
+                          _vm._v(_vm._s(_vm._f("capitalize")(item.judul)))
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("a", { attrs: { href: "#" } }, [
