@@ -416,7 +416,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload PDF</label>
                                 <div class="custom-file">
-                                    <input type="file" v-on:change="onPdfChange" class="custom-file-input" id="validatedCustomFile">
+                                    <input type="file" v-on:change="onPdfChange" class="custom-file-input"
+                                        id="validatedCustomFile">
                                     <label class="custom-file-label" for="validatedCustomFile">{{ pdf }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                                 </div>
@@ -632,7 +633,7 @@
                 reader.readAsDataURL(file);
             },
             onPdfChange(e) {
-                this.pdf= e.target.files[0].name;
+                this.pdf = e.target.files[0].name;
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
@@ -752,7 +753,11 @@
 
                 if (!this.fetch.judul) {
                     // create
-                    axios.post(this.fetch, this.form)
+                    axios.post(this.fetch, this.form, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',

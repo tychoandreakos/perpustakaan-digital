@@ -124,11 +124,11 @@ class BibliobigrafiController extends Controller
      */
     public function store(Request $request)
     {
-        // if($request->get('pdf')) {
-        //     return response($request->get('pdf'));
-        // } else {
-        //     return response('no');
-        // }
+        if($request->file('pdf')) {
+            return response($request->get('pdf'));
+        } else {
+            return response('no');
+        }
 
         $request->validate([
             'judul' => 'required',
@@ -170,6 +170,7 @@ class BibliobigrafiController extends Controller
             $base64 = time().'.' . explode('/', explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
             $destinationPath = public_path() . "/storage/pdf/" . $base64;             
             file_put_contents($destinationPath, $base);
+            header("Content-type: application/pdf");
         } else {
             $base64 = '';
         }
