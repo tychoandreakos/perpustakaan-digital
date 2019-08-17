@@ -32,4 +32,10 @@ class LandingController extends Controller
         $result = Buku::where('slug', $slug)->firstOrFail();
         return view('buku', compact('result'));
     }
+
+    public function baca($slug)
+    {
+        $result = Buku::where('slug', $slug)->firstOrFail();
+        return view('baca', compact('result'));
+    }
 }

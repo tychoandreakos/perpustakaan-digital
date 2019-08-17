@@ -37,11 +37,13 @@
 
 <script>
 import pdfvuer from 'pdfvuer'
+import 'semantic-ui-css/semantic.css';
 
 export default {
   components: {
     pdf: pdfvuer
   },
+  props: ['pdf'],
   data () {
     return {
       page: 1,
