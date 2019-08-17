@@ -35,9 +35,17 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import pdfvuer from 'pdfvuer'
-import 'semantic-ui-css/semantic.css';
+// import 'semantic-ui-css/semantic.css';
+// import 'semantic-ui-css/components/button.css';
+// import 'semantic-ui-css/components/icon.css';
+// import 'semantic-ui-css/components/container.css';
+// import 'semantic-ui-css/components/grid.css';
+// import 'semantic-ui-css/components/progress.css';
+// import 'semantic-ui-css/components/menu.css';
+// import 'semantic-ui-css/components/item.css';
+// import 'semantic-ui-css/components/loader.css';
 
 export default {
   components: {
@@ -77,7 +85,7 @@ export default {
   methods: {
     getPdf () {
       var self = this;
-      self.pdfdata = pdfvuer.createLoadingTask('../storage/pdf/11657-23256-1-SM.pdf');
+      self.pdfdata = pdfvuer.createLoadingTask('../storage/pdf/'+this.pdf);
       self.pdfdata.then(pdf => {
         self.numPages = pdf.numPages;
         window.onscroll = function() { 
@@ -119,7 +127,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+  // @import url('~semantic-ui-css/semantic.css');
+
   #buttons {
     margin-left: 0 !important;
     margin-right: 0 !important;

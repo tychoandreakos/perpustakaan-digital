@@ -4,7 +4,7 @@
             <h5 class="mb-4 mt-4">Browse Buku</h5>
             <div class="row">
                 <div class="col col-md-4 mb-5 d-flex align-items-stretch" v-for="item in buku" :key="item.id">
-                    <div class="card mb-4 mb-lg-0">
+                    <div class="card mb-4 mb-lg-0" style="width: 366px">
                        <div class="d-flex align-items-stretch">
                             <div style="background: #637bff;" class="book-cover text-center pt-4 pb-4">
                             <a :href="'buku/'+item.slug"><img :src="'../storage/cover/' + item.gambar_sampul" alt="cover"></a>
@@ -68,11 +68,13 @@
     .card {
         border-radius: 0.75em !important;
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        position: relative;
     }
 
     .book-cover {
         border-radius: 0.75em !important;
         height: 365px;
+        width: 100%;
     }
 
     img {

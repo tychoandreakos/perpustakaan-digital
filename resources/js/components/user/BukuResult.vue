@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col col-md-7 pt-5">
                         <h5>{{ buku.judul }}</h5>
-                        <a :href="'/baca/'+buku.slug" class="btn btn-outline-primary">Baca</a>
+                        <a v-if="buku.pdf" :href="'/baca/'+buku.slug" class="btn btn-outline-primary">Baca</a>
                         <button type="button" class="btn btn-outline-primary">Unduh</button>
                         <button type="button" class="btn btn-outline-primary">Pinjam</button>
                     </div>

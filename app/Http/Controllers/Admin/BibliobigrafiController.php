@@ -17,6 +17,7 @@ use App\BukuTransaksi;
 use App\EksemplarPola;
 use App\EksemplarTransaksi;
 use App\Koleksi;
+use Illuminate\Support\Facades\Storage;
 
 class BibliobigrafiController extends Controller
 {
@@ -123,7 +124,13 @@ class BibliobigrafiController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
+        // if($request->get('pdf')) {
+        //     return response($request->get('pdf'));
+        // } else {
+        //     return response('no');
+        // }
+
+        $request->validate([
             'judul' => 'required',
             'edisi' => 'nullable',
             'isbn_isnn' => 'required',
@@ -145,20 +152,32 @@ class BibliobigrafiController extends Controller
             'slug' => 'nullable',
             'pdf' => 'nullable',
             'gambar_sampul' => 'nullable'
-        ]);
-
+            ]);
+            
         if(!$request->image == '')
-       {
-          $image = $request->get('image');
-          $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-          \Image::make($request->get('image'))->save(public_path('storage/cover/').$name);
+        {
+            $image = $request->get('image');
+            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            \Image::make($request->get('image'))->save(public_path('storage/cover/').$name);
         } else {
             $name = 'img.jpg';
         }
 
-       $requestData = $request->all();
-       $requestData['slug'] = str_slug($request->judul);
-       $requestData['gambar_sampul'] = $name;
+        if(!$request->pdf == '')
+        {
+            $file = $request->get('pdf');
+            $base = base64_decode($file);  
+            $base64 = time().'.' . explode('/', explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
+            $destinationPath = public_path() . "/storage/pdf/" . $base64;             
+            file_put_contents($destinationPath, $base);
+        } else {
+            $base64 = '';
+        }
+
+        $requestData = $request->all();
+        $requestData['slug'] = str_slug($request->judul);
+        $requestData['gambar_sampul'] = $name;
+        $requestData['pdf'] = $base64;
         $buku = Buku::create($requestData);
 
        foreach ($request->pengarang_id as $pengarang) {

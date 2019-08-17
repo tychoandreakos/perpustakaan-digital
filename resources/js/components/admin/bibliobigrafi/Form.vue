@@ -416,8 +416,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload PDF</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="validatedCustomFile">
-                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <input type="file" v-on:change="onPdfChange" class="custom-file-input" id="validatedCustomFile">
+                                    <label class="custom-file-label" for="validatedCustomFile">{{ pdf }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                                 </div>
                                 <template v-if="err.catatan">
@@ -527,6 +527,7 @@
                 eksemplarData: [],
                 pola_eksemplar: [],
                 img: 'Pilih Gambar Sampul',
+                pdf: 'Pilih PDF',
 
                 form: {
                     judul: this.fetch.judul || '',
@@ -627,6 +628,21 @@
                 let vm = this;
                 reader.onload = (e) => {
                     vm.form.image = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            onPdfChange(e) {
+                this.pdf= e.target.files[0].name;
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createPdf(files[0]);
+            },
+            createPdf(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.form.pdf = e.target.result;
                 };
                 reader.readAsDataURL(file);
             },
