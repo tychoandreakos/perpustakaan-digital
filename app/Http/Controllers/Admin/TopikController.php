@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Topik;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TopikController extends Controller
 {
@@ -123,7 +124,7 @@ class TopikController extends Controller
             'image' =>  'required',
             'slug' => 'nullable',
             'old' => 'required',
-            'order' => 'required|unique:topik,order,'. $topik->order
+            'order' => 'required',Rule::unique('topik')->ignore($topik->order)
         ]);
 
         if($request->image != $request->old){

@@ -9404,7 +9404,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         jenis_topik: this.fetch.jenis_topik || '',
-        order: this.fetch.order || '',
+        order: Number(this.fetch.order) || '',
         image: this.fetch.img || '',
         old: this.fetch.img || '',
         _method: this.fetch.jenis_topik ? 'PUT' : 'POST'
