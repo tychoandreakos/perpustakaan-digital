@@ -7,9 +7,9 @@
                     <div class="card mb-4 mb-lg-0">
                        <div class="d-flex align-items-stretch">
                             <div style="background: #637bff;" class="book-cover text-center pt-4 pb-4">
-                            <a href="#"><img :src="'../storage/cover/' + item.gambar_sampul" alt="cover"></a>
-                           <a href="#"> <h6 class="text-white pl-4 pr-4 pt-4">{{ item.judul | capitalize }}</h6></a>
-                            <a href="#">
+                            <a :href="'buku/'+item.slug"><img :src="'../storage/cover/' + item.gambar_sampul" alt="cover"></a>
+                           <a :href="'buku/'+item.slug"> <h6 class="text-white pl-4 pr-4 pt-4">{{ item.judul | capitalize }}</h6></a>
+                            <a :href="'buku/'+item.slug">
                                 <h6 style="font-size: 15px" class="text-white"><i class="ni ni-single-02 mr-1"></i> 
                                 <template v-for="transaksi in item.buku_transaksi">
                                    <a href="#" :key="transaksi.id"> {{ transaksi.pengarang.nama_pengarang }},</a>

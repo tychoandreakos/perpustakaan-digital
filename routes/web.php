@@ -17,6 +17,7 @@
 
 Route::get('/', 'LandingController@index')->name('landing');
 Route::get('berita/{slug}', 'LandingController@berita');
+Route::get('buku/{slug}', 'LandingController@Buku');
 
 Route::get('/daftar-tamu', function() {
     return view('tamu');
