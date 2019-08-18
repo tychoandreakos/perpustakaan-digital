@@ -36,6 +36,11 @@ class BukuTransaksi extends Model
         return $this->belongsTo(Bahasa::class);
     }
 
+    public function gmd()
+    {
+        return $this->belongsTo(Gmd::class);
+    }
+
 
     public function penerbit()
     {
