@@ -14,19 +14,22 @@
 // Route::get('/', function () {
 //     return view('user');
 // });
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'LandingController@index')->name('landing');
 Route::get('berita/{slug}', 'LandingController@berita');
-Route::get('buku/{slug}', 'LandingController@buku');
-Route::get('baca/{slug}', 'LandingController@baca');
+Route::get('buku/{slug}', 'LandingController@buku')->middleware('auth');
+Route::get('baca/{slug}', 'LandingController@baca')->middleware('auth');
 
-Route::get('/daftar-tamu', function() {
+Route::get('/tamu', function() {
     return view('tamu');
 })->name('user.tamu');
 
-Route::get('users', function(){
+Route::get('beranda', function(){
     return view('homes');
-});
+})->middleware('auth');
 
 // fetch
 Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');
@@ -144,6 +147,4 @@ Route::get('eksemplar-keluar', function() {
 
 
 });
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
