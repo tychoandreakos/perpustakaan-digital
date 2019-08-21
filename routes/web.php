@@ -33,6 +33,8 @@ Route::get('beranda', function(){
 
 // fetch
 Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');
+Route::get('random-fetch', 'LandingController@random_topik')->name('random.fetch');
+Route::get('item-topik-fetch/{id}', 'LandingController@item')->name('topik.item');
 
 // Route::view('/', 'user');
 // Route::view('/{any}', 'user');

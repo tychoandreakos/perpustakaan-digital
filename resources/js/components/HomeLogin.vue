@@ -3,25 +3,22 @@
         <!-- popular -->
         <app-popular :buku="this.buku"></app-popular>
 
-        <!-- Temukan: Pemrograman -->
-       <div class="container mt-4 mb-2">
-            <h4>Temukan: Pemrograman</h4>
-       </div>
+        <div class="container">
+            <div class="row">
+            <div class="col col-md-9">
+                <!-- Temukan: Pemrograman -->
+                <app-discover :topik="this.topik"></app-discover>
 
-        <!-- Temukan: Pemrograman -->
-       <div class="container mt-4 mb-2">
-            <h4>Temukan: Jurnal</h4>
-       </div>
+                <!-- Temukan: Jurnal -->
+               <app-discover :topik="this.topik"></app-discover>
 
-        <!-- Temukan: Pemrograman -->
-       <div class="container mt-4 mb-2">
-            <h4>Temukan: Manajemen</h4>
-       </div>
+            </div>
 
-        <!-- Temukan: Pemrograman -->
-       <div class="container mt-4 mb-2">
-            <h4>Temukan: Arsitek</h4>
-       </div>
+            <div class="col col-md-3">
+                Top Listened
+            </div>
+        </div>
+        </div>
 
         <!-- browse buku -->
         <app-browse :buku="this.buku"></app-browse>
@@ -31,12 +28,14 @@
 <script>
     import Popular from './user/Popular'
     import Browse from './user/Browse'
+    import Discover from './user/Discover'
 
     export default {
-        props: ['buku'],
+        props: ['buku', 'topik', 'fetch'],
         components: {
             AppPopular: Popular,
             AppBrowse: Browse,
+            AppDiscover: Discover,
         }
     }
 

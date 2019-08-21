@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Berita;
 use App\Buku;
+use App\BukuTransaksi;
 use App\Info;
 use App\Topik;
 use App\User;
@@ -52,4 +53,17 @@ class LandingController extends Controller
         $result = Buku::where('slug', $slug)->firstOrFail();
         return view('baca', compact('result'));
     }
+
+    public function random_topik()
+    {
+        return Topik::orderByRaw("RAND()")->first();
+    }
+
+    public function item($id)
+    {
+        return Buku::with(['buku_transaksi.pengarang' => function($q) {
+            $q->select('id', 'nama_pengarang');
+        }])->where('topik_id', $id)->limit(4)->get();
+    }
+
 }

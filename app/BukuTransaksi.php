@@ -12,7 +12,7 @@ class BukuTransaksi extends Model
         'pengarang_id',
         'kota_id',
         'bahasa_id',
-        'penerbit_id',
+        'penerbit_id',  
         // 'lokasi_id'
     ];
 

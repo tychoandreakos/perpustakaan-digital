@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
+use App\BukuTransaksi;
 use App\Http\Controllers\Controller;
 
 use App\Topik;
