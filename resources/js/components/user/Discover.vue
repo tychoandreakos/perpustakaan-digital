@@ -17,7 +17,7 @@
                         </div>
 
                         <div class="col-md-8">
-                            <h6 class="pt-3"><a href="#" class="judul">{{ n.judul }}</a></h6>
+                            <h6 class="pt-3"><a :href="'buku/'+n.slug" class="judul">{{ n.judul }}</a></h6>
                             <span v-for="buku in n.buku_transaksi" :key="buku"><a class="pengarang" href="#">
                                     {{ buku.pengarang.nama_pengarang }},
                                 </a></span>

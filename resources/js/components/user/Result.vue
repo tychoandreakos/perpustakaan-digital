@@ -9,12 +9,13 @@
                                 :src="'../storage/cover/' + item.gambar_sampul" alt="gambar">
                         </div>
                         <div class="col col-md-5">
-                            <h5><a href="#" class="judul">
+                            <h5><a :href="'buku/'+item.slug" class="judul">
                                     {{ item.judul.substring(0, 122) | capitalize }}</a></h5>
                             <span v-for="buku_transaksi in item.buku_transaksi" :key="buku_transaksi.id"><a
                                     class="pengarang"
                                     href="#">{{ buku_transaksi.pengarang.nama_pengarang | capitalize }},</a></span>
-                            <p class="pt-3">{{ item.catatan.substring(0, 120) }} .....</p>
+                            <p class="pt-3" v-if="item.catatan">{{ item.catatan.substring(0, 120) }} .....</p>
+                            <p class="pt-3" v-else>Belum ada catatan!</p>
                         </div>
                         <div class="col col-md-4">
                             <div class="row">
