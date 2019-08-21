@@ -19,4 +19,15 @@ class Topik extends Model
     {
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
     }
+
+    public function buku()
+    {
+        return $this->hasMany(Buku::class);
+    }
+
+    // hapus ini ketika databse sudah fixed
+    public function buku_transaksi()
+    {
+        return $this->belongsTo(BukuTransaksi::class);
+    }
 }

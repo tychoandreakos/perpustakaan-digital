@@ -66,4 +66,16 @@ class LandingController extends Controller
         }])->where('topik_id', $id)->limit(4)->get();
     }
 
+    public function result($slug)
+    {
+       $topik = Topik::with(['buku', 'buku.buku_transaksi.pengarang' => function($q) {
+            $q->select('id', 'nama_pengarang');
+        }, 'buku.buku_transaksi.penerbit', 'buku.bibliobigrafi.gmd' => function($q) {
+            $q->select('id', 'nama_gmd')->first();
+        }])->where('slug', $slug)->first();
+
+        return view('result-topik', compact('topik'));
+    }
+
+
 }

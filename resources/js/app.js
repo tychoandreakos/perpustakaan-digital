@@ -128,6 +128,7 @@ Vue.component('app-berita', require('./components/Berita.vue').default);
 Vue.component('app-article', require('./components/user/Article.vue').default);
 Vue.component('app-buku-result', require('./components/user/BukuResult.vue').default);
 Vue.component('app-baca', require('./components/user/Baca.vue').default);
+Vue.component('app-result', require('./components/user/Result.vue').default);
 
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));

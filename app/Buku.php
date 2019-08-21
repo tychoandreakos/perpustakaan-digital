@@ -40,4 +40,9 @@ class Buku extends Model
     {
         return $this->hasMany(Bibliobigrafi::class);
     }
+
+    public function topik()
+    {
+        return $this->belongsTo(Topik::class);
+    }
 }

@@ -2,7 +2,7 @@
     <div class="mt-4 mb-2">
         <h4>Temukan: {{ data3.jenis_topik | capitalize }}</h4>
         <div class="float-right">
-            <span>Lihat Lainnya</span>
+            <span><a class="pengarang" :href="'lihat-topik/' + data3.slug">Lihat Lainnya</a></span>
         </div>
         <div class="clearfix"></div>
         <div class="row mt-4">
