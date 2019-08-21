@@ -70,7 +70,7 @@
 
 
         <div class="col col-lg-6" style="z-index: -1">
-            <img style="margin-left: -100px"
+            <img style="margin-left: -130px"
                 src="https://cdn.dribbble.com/users/369527/screenshots/4301615/pietrasiak_.png">
         </div>
     </div>
