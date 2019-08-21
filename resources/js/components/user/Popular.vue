@@ -14,7 +14,7 @@
                         </div>
                         <div class="col col-lg-7">
                             <a href="#" class="popular-link">
-                                <h5>{{ item.judul | short }}</h5>
+                                <h5 class="lor">{{ item.judul | short }}</h5>
                             </a>
                             <template v-for="transaksi in item.buku_transaksi">
                                 <p style="margin: 0" :key="transaksi.id">{{ transaksi.pengarang.nama_pengarang}}</p>
@@ -83,7 +83,7 @@
 <style lang="scss" scoped>
     .swiper-slide {
         width: 416px !important;
-        background: linear-gradient(180deg, #9DDAFE 0%, #C4E9FF 100%);
+        background: linear-gradient(90deg, rgba(151,215,255,1) 0%, rgba(180,228,255,1) 38%, rgba(180,228,255,1) 100%);
         border-radius: 15px;
         height: 250px;
         cursor: pointer;
@@ -91,6 +91,10 @@
         &:first-child {
             border-radius: 0 15px 15px 0;
         }
+    }
+
+    .lor {
+        color: #111;
     }
 
     .popular-link {
@@ -103,12 +107,12 @@
     }
 
     .swiper-slide:nth-child(2n) {
-        background: linear-gradient(180deg, #D4CBFF 0%, #BDB3FF 100%);
+       background: linear-gradient(90deg, rgba(214,206,255,1) 0%, rgba(205,197,255,1) 38%, rgba(192,180,255,1) 100%);
         box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.103);
     }
 
     .swiper-slide:nth-child(3n) {
-        background: linear-gradient(180deg, #FDC8CE 0%, #FAA9B4 100%);
+        background: linear-gradient(90deg, rgba(255,205,208,1) 0%, rgba(254,186,195,1) 38%, rgba(251,172,183,1) 100%);
     }
 
     .item {

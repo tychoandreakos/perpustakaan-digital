@@ -29,7 +29,7 @@ Route::get('/tamu', function() {
 
 Route::get('beranda', function(){
     return view('homes');
-})->middleware('auth');
+})->name('beranda')->middleware('auth');
 
 // fetch
 Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');

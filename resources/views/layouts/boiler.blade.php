@@ -37,7 +37,9 @@
     <style>
     *{
         outline: none;
+        text-decoration: none !important;
     }
+
     </style>
 </head>
 
@@ -84,23 +86,13 @@
                     </ul>
 
                     <ul class="navbar-nav ml-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-icon" href="#">
-                                <i class="ni ni-favourite-28"></i>
-                                <span class="nav-link-inner--text d-lg-none">Discover</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-icon" href="#">
-                                <i class="ni ni-notification-70"></i>
-                                <span class="nav-link-inner--text d-lg-none">Profile</span>
-                            </a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ni ni-circle-08"></i>
-                                <span> {{ ucwords(Auth::user()->name) }}</span>
+                                data-toggle="dropdown" style="display: flex;
+                                align-items: center;
+                            }" aria-haspopup="true" aria-expanded="false">
+                                <i class="ni ni-circle-08" style="font-size: 35px;"></i>
+                                <span class="ml-2"> {{ ucwords(Auth::user()->name) }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                                 <a class="dropdown-item" href="#">Action</a>

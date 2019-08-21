@@ -25,13 +25,13 @@
                 </div>
             </div>
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-              <li class="nav-item dropdown">
-                <a href="#" class="nav-link" data-toggle="dropdown" role="button">
-                  <i class="ni ni-collection d-lg-none"></i>
-                  <span class="nav-link-inner--text">Beranda</span>
-                </a>
-              </li>
-              @guest
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Beranda</span>
+                    </a>
+                </li>
+                @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Masuk') }}</a>
                 </li>
@@ -122,6 +122,12 @@
                 @endif
                 @else
                 <li class="nav-item dropdown">
+                    <a href="{{ route('beranda') }}" class="nav-link">
+                        <i class="ni ni-collection d-lg-none"></i>
+                        <span class="nav-link-inner--text">Buka Digital Library</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
                     <a href="#" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-ui-04 d-lg-none"></i>
                         <span class="nav-link-inner--text">Info Perpustakaan</span>
@@ -194,13 +200,13 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
@@ -210,7 +216,7 @@
                         </form>
                     </div>
                 </li>
-            @endguest
+                @endguest
             </ul>
         </div>
     </div>
