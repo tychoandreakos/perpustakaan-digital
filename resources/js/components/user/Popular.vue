@@ -52,6 +52,11 @@
             }
         },
 
+        created() {
+            AOS.init();
+        },
+
+
         data() {
             return {
                 swiperOption: {
@@ -83,7 +88,7 @@
 <style lang="scss" scoped>
     .swiper-slide {
         width: 416px !important;
-        background: linear-gradient(90deg, rgba(151,215,255,1) 0%, rgba(180,228,255,1) 38%, rgba(180,228,255,1) 100%);
+        background: linear-gradient(90deg, rgba(151, 215, 255, 1) 0%, rgba(180, 228, 255, 1) 38%, rgba(180, 228, 255, 1) 100%);
         border-radius: 15px;
         height: 250px;
         cursor: pointer;
@@ -107,12 +112,12 @@
     }
 
     .swiper-slide:nth-child(2n) {
-       background: linear-gradient(90deg, rgba(214,206,255,1) 0%, rgba(205,197,255,1) 38%, rgba(192,180,255,1) 100%);
+        background: linear-gradient(90deg, rgba(214, 206, 255, 1) 0%, rgba(205, 197, 255, 1) 38%, rgba(192, 180, 255, 1) 100%);
         box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.103);
     }
 
     .swiper-slide:nth-child(3n) {
-        background: linear-gradient(90deg, rgba(255,205,208,1) 0%, rgba(254,186,195,1) 38%, rgba(251,172,183,1) 100%);
+        background: linear-gradient(90deg, rgba(255, 205, 208, 1) 0%, rgba(254, 186, 195, 1) 38%, rgba(251, 172, 183, 1) 100%);
     }
 
     .item {

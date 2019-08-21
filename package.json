@@ -26,11 +26,13 @@
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^12.3.1",
         "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
+        "aos": "^2.3.4",
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "laravel-vue-pagination": "^2.3.0",
         "pdfvuer": "^1.3.0",
         "semantic-ui-css": "^2.4.1",
         "vue-awesome-swiper": "^3.1.3",
+        "vue-infinite-scroll": "^2.0.2",
         "vue-instant": "^1.0.4",
         "vue-js-modal": "^1.3.31",
         "vue-multiselect": "^2.1.6",

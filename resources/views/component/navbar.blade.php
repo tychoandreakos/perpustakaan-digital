@@ -124,7 +124,7 @@
                 <li class="nav-item dropdown">
                     <a href="{{ route('beranda') }}" class="nav-link">
                         <i class="ni ni-collection d-lg-none"></i>
-                        <span class="nav-link-inner--text">Buka Digital Library</span>
+                    <span class="nav-link-inner--text">Buka Digital Library</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">

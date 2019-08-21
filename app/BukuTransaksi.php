@@ -26,6 +26,11 @@ class BukuTransaksi extends Model
         return $this->belongsTo(Kota::class);
     }
 
+    public function topik()
+    {
+        return $this->belongsTo(Topik::class);
+    }
+
     public function pengarang()
     {
         return $this->belongsTo(Pengarang::class);

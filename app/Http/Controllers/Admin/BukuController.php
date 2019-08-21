@@ -25,6 +25,8 @@ class BukuController extends Controller
             $q->select('id', 'nama_pengarang');
         }, 'buku_transaksi.penerbit' => function($q) {
             $q->select('id', 'nama_penerbit');
+        }, 'buku_transaksi.topik' => function($q) {
+            $q->select('id', 'jenis_topik', 'warna');
         }])->latest()->paginate(10);
     }
 

@@ -13,6 +13,9 @@ import VModal from 'vue-js-modal'
 import 'vue-instant/dist/vue-instant.css'
 import VueInstant from 'vue-instant'
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import infiniteScroll from 'vue-infinite-scroll'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 window.User = User;
 window.Vue = require('vue');
@@ -29,6 +32,7 @@ Vue.use(VueSweetalert2);
 Vue.use(VModal);
 Vue.use(VueInstant)
 Vue.use(CKEditor);
+Vue.use(infiniteScroll);
 
 /**
  * The following block of code may be used to automatically register your
@@ -157,7 +161,6 @@ const app = new Vue({
     scrollBehavior (to, from, savedPosition) {
       return { x: 0, y: 0 }
     },
-    
     
     data: {
         search: ''
