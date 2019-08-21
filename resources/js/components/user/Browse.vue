@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <h5 class="mb-4 mt-4">Browse Buku</h5>
+            <h4 class="mb-4 mt-4">Browse Buku</h4>
             <div class="row">
                 <div class="col col-md-4 mb-5 d-flex align-items-stretch" v-for="item in buku" :key="item.id">
                     <div class="card mb-4 mb-lg-0" style="width: 366px">

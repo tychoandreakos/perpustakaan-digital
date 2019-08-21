@@ -2,7 +2,7 @@
     <div>
         <div>
             <div class="container">
-                <h5 class="mb-4 mt-4">Buku Paling Populer</h5>
+                <h4 class="mb-4 mt-4">Buku Paling Populer</h4>
             </div>
             <!-- swiper -->
             <swiper :options="swiperOption">
