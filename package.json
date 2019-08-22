@@ -18,8 +18,8 @@
         "lodash": "^4.17.13",
         "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
-        "sass-loader": "^7.2.0",
+        "sass": "^1.22.10",
+        "sass-loader": "^7.3.1",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
     },

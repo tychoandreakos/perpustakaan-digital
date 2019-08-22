@@ -12,7 +12,7 @@
                 <h5 style="width: 100%" class="text-center">Belum ada data!</h5>
             </template>
             <template v-else>
-                <div class="col col-md-6 mb-5" v-for="n in item" :key="n.id">
+                <div class="col col-md-6 mb-5" v-for="(n, index) in item" :key="index">
                     <div class="row">
                         <div class="col-md-4">
                             <img :src="'../storage/cover/' + n.gambar_sampul" alt="img">
