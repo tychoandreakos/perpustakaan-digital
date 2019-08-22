@@ -253,7 +253,58 @@
                                 </v-tab>
 
                                 <v-tab title="Histori Peminjaman">
-                                    Third tab content
+                                  <template v-if="pinjam.length > 0">
+                                        <div class="table-responsive">
+                                            <div>
+                                                <table class="table align-items-center">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col">
+                                                                Kode Eksemplar
+                                                            </th>
+                                                            <th scope="col">
+                                                                Judul
+                                                            </th>
+                                                            <th scope="col">Tipe Koleksi</th>
+                                                            <th scope="col">
+                                                                Tanggal Pinjam
+                                                            </th>
+                                                            <th scope="col">Tanggal Dikembalikan</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="list">
+
+                                                        <tr v-for="item in pinjam" :key="item.id">
+                                                            <template v-if="item.status_pinjam == 0">
+                                                                <td>
+                                                                    {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ item.bibliobigrafi.buku.judul | capitalize }}
+                                                                </td>
+
+                                                                <td>
+                                                                    {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ item.tgl_pinjam }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ item.tgl_kembali }}
+                                                                </td>
+                                                            </template>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <h3 class="text-center mt-3">Belum ada data!</h3>
+                                    </template>
                                 </v-tab>
                             </vue-tabs>
                         </template>
