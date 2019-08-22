@@ -192,37 +192,46 @@
                                                     <tbody class="list">
 
                                                         <tr v-for="item in pinjam" :key="item.id">
-                                                            <th scope="row" class="name">
-                                                                <button type="button" class="btn btn-sm btn-success"
-                                                                    data-toggle="tooltip" data-placement="bottom"
-                                                                    title="Kembalikan Eksemplar Ini">
-                                                                    <i class="ni ni-curved-next text-white"></i>
-                                                                </button>
-                                                                <form style="display: inline"
-                                                                    @submit.prevent="perpanjang(item.id, form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku)">
-                                                                    <button type="submit" class="btn btn-sm btn-primary"
-                                                                        data-toggle="tooltip" data-placement="bottom"
-                                                                        title="Perpanjang Buku">
-                                                                        <i class="ni ni-fat-add text-white"></i>
-                                                                    </button>
-                                                                </form>
-                                                            </th>
-                                                            <td>
-                                                                {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
-                                                            </td>
-                                                            <td>
-                                                                {{ item.bibliobigrafi.buku.judul | capitalize }}
-                                                            </td>
+                                                            <template v-if="item.status_pinjam == 1">
+                                                                <th scope="row" class="name">
+                                                                    <form @submit.prevent="back(item.id)"
+                                                                        style="display: inline">
+                                                                        <button type="submit"
+                                                                            class="btn btn-sm btn-success"
+                                                                            data-toggle="tooltip"
+                                                                            data-placement="bottom"
+                                                                            title="Kembalikan Eksemplar Ini">
+                                                                            <i class="ni ni-curved-next text-white"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                    <form style="display: inline"
+                                                                        @submit.prevent="perpanjang(item.id, form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku)">
+                                                                        <button type="submit"
+                                                                            class="btn btn-sm btn-primary"
+                                                                            data-toggle="tooltip"
+                                                                            data-placement="bottom"
+                                                                            title="Perpanjang Buku">
+                                                                            <i class="ni ni-fat-add text-white"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </th>
+                                                                <td>
+                                                                    {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ item.bibliobigrafi.buku.judul | capitalize }}
+                                                                </td>
 
-                                                            <td>
-                                                                {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
-                                                            </td>
-                                                            <td>
-                                                                {{ item.tgl_pinjam }}
-                                                            </td>
-                                                            <td>
-                                                                {{ item.tanggal_habis_pinjam }}
-                                                            </td>
+                                                                <td>
+                                                                    {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ item.tgl_pinjam }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ item.tanggal_habis_pinjam }}
+                                                                </td>
+                                                            </template>
                                                         </tr>
 
 
@@ -275,7 +284,7 @@
             VTab,
             SpinnerComponent: Spinner,
         },
-        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs'],
+        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back'],
         data() {
             return {
                 loading: false,
@@ -343,6 +352,33 @@
                     .catch(err => console.log(err))
             },
 
+            back(id) {
+
+                this.$swal({
+                    title: 'Kembalian Buku?',
+                    text: "Apakah anda ingin mengembalikan buku ini?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Kembalikan!'
+                }).then((result) => {
+                    axios.post(this.back, {
+                        id,
+                    })
+                    then(res => {
+                            this.$swal({
+                                position: 'top-end',
+                                type: 'success',
+                                title: res.data.message.toUpperCase(),
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        })
+                        .catch(err => console.log(err))
+                })
+            },
+
             perpanjang(id, duration) {
 
                 this.$swal({
@@ -359,13 +395,13 @@
                         duration,
                     })
                     then(res => {
-                            axios.get('/pustakawan/pinjaman', {
-                                    params: {
-                                        id: this.form.id
-                                    }
-                                })
-                                .then(res => this.pinjam = res.data.data)
-                                .catch(err => console.log(err))
+                            this.$swal({
+                                position: 'top-end',
+                                type: 'success',
+                                title: res.data.message.toUpperCase(),
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
                         })
                         .catch(err => console.log(err))
                 })
