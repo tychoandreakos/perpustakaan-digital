@@ -17,7 +17,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group mt-4">
                                             <label for="">Cari Anggota</label>
-                                            <multiselect v-model="form" :options="options" :custom-label="nameWithLang"
+                                            <multiselect v-model="form" :options="options"
                                                 placeholder="Select one" label="id" track-by="id">
                                                 <template slot="singleLabel"
                                                     slot-scope="{ option }"><strong>{{ option.id }}</strong> -
@@ -79,7 +79,7 @@
                                     <div class="col col-lg-4">
                                         <div class="form-group">
                                             <label style="font-size: 14px" for="nama">Tipe Keanggotaan</label>
-                                            <h4>{{ form.tipe_anggota.tipe_anggota | capitalize }}</h4>
+                                            <h4>{{ form.anggota_transaksi.tipe_anggota.tipe_anggota | capitalize }}</h4>
                                         </div>
                                     </div>
                                     <div class="col col-lg-4">
@@ -89,7 +89,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button @click.prevent="simpan" type="button"
+                                <button @click.prevent="simpan" :disabled="disabled" type="button"
                                     class="btn btn-primary mt-3 btn-lg btn-block">Selesai
                                     Transaksi</button>
                             </div>
@@ -116,7 +116,7 @@
                                                             </multiselect>
 
                                                             <template>
-                                                                <div class="table-responsive">
+                                                                <div class="table-responsive mt-3">
                                                                     <div>
                                                                         <table class="table align-items-center">
                                                                             <thead class="thead-light">
@@ -143,7 +143,7 @@
                                                                                     <td>{{ item.buku.judul | capitalize }}
                                                                                     </td>
                                                                                     <td>{{ dates }}</td>
-                                                                                    <td>{{ kembali(form.tipe_anggota.masa_pinjaman_buku) }}
+                                                                                    <td>{{ kembali(form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku) }}
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -156,18 +156,7 @@
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-auto">
-                                                        <div
-                                                            class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                                            <i class="fas fa-chart-bar"></i>
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                                <p class="mt-3 mb-0 text-muted text-sm">
-                                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
-                                                        3.48%</span>
-                                                    <span class="text-nowrap">Since last month</span>
-                                                </p>
                                             </div>
                                         </div>
 
@@ -178,6 +167,7 @@
                                 </v-tab>
 
                                 <v-tab title="Pinjaman Saat Ini">
+                                    <template v-if="pinjam.length > 0">
                                     <div class="table-responsive">
                                         <div>
                                             <table class="table align-items-center">
@@ -246,6 +236,10 @@
                                         </div>
 
                                     </div>
+                                    </template>
+                                    <template v-else>
+                                        <h3 class="text-center mt-3">Belum ada data!</h3>
+                                    </template>
 
 
                                 </v-tab>
@@ -296,7 +290,7 @@
                 value: [],
                 option: [],
                 date2: '',
-                pinjam: {}
+                pinjam: {},
             }
         },
 
@@ -305,9 +299,17 @@
                 return (this.form != '' ? false : true)
             },
 
+            disabled(){
+                if (this.value.length > 0) {
+                    return false
+                } else {
+                    return true;
+                }
+            },
+
             forms() {
                 return {
-                    user_id: this.form.user_id,
+                    user_id: this.form.id,
                     bibliobigrafi: this.value.map(r => r.id),
                     tanggal_habis_pinjam: this.date2,
                 }
@@ -347,7 +349,7 @@
                 axios.post(this.perpanjangs, {
                     params: {
                         id,
-                        user: this.form.tipe_anggota.masa_pinjaman_buku,
+                        user: this.form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku,
                         user_id,
                         bibliobigrafi_id,
                         tgl_pinjam,

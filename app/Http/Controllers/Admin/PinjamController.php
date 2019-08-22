@@ -24,7 +24,7 @@ class PinjamController extends Controller
         }
 
         return response()->json([
-            'message' => 'data berhasil disimpan']);
+            'message' => 'Buku berhasil dipinjam']);
     }
 
     public function pinjaman(Request $request)
