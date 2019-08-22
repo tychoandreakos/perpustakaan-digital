@@ -22,7 +22,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Start your development with a Design System for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>Argon Design System - Free Design System for Bootstrap 4</title>
+    <title>Perputakaan AMIK BANDUNG</title>
     <!-- Favicon -->
     <link href="{{ asset('img/brand/favicon.png') }}" rel="icon" type="image/png">
     <!-- Fonts -->
