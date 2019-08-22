@@ -12,8 +12,8 @@ class PinjamController extends Controller
 {
     public function store(Request $request)
     {
-        $total = PinjamTransaksi::where('user_id', $request->id)->count();
-        if(!$total > $request->jumlah_pinjaman){
+        $total = PinjamTransaksi::where('user_id', $request->user_id)->count();
+        if(!$total >= $request->jumlah_pinjaman){
             foreach ($request->bibliobigrafi as $bilio) {
                 $requestData = $request->all();
             $requestData['tgl_pinjam'] = Carbon::now();
@@ -48,16 +48,13 @@ class PinjamController extends Controller
 
     public function perpanjang(Request $request)
     {
-        $pinjam = PinjamTransaksi::where('bibliobigrafi_id', $request->id)->get();
-        // $pinjam->delete();
-        return $request->has('tgl_pinjam');
-        // $requestData = $request->para;
-        $requestData['user_id'] = $request->has('user_id');
-        $requestData['bibliobigrafi_id'] = $request->has('bibliobigrafi_id');
-        $requestData['tgl_pinjam'] = $request->has('tgl_pinjam');
-        $requestData['status_pinjam'] = $request->has('status_pinjam');
-        $requestData['tanggal_habis_pinjam'] = Carbon::now()->addDays($request->user);
-        PinjamTransaksi::create($requestData);
+        $pinjam = PinjamTransaksi::findOrFail($request->id);
+        $new = new Carbon($pinjam->tanggal_habis_pinjam);
+        $pinjam->tanggal_habis_pinjam = $new->addDays($request->duration);
+        $pinjam->save();
+
+        return response()->json([
+            'message' => 'Buku berhasil diperpanjang']);
     }
 
     public function histori()

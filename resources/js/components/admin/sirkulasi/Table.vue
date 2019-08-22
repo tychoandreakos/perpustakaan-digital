@@ -198,19 +198,14 @@
                                                                     title="Kembalikan Eksemplar Ini">
                                                                     <i class="ni ni-curved-next text-white"></i>
                                                                 </button>
-                                                                <button @click="perpanjang(
-
-                                                                item.bibliobigrafi.pola_eksemplar,
-                                                                item.user_id,
-                                                                item.bibliobigrafi_id,
-                                                                item.tgl_pinjam,
-                                                                item.status_pinjam
-                                                                
-                                                                )" type="button" class="btn btn-sm btn-primary"
-                                                                    data-toggle="tooltip" data-placement="bottom"
-                                                                    title="Perpanjang Buku">
-                                                                    <i class="ni ni-fat-add text-white"></i>
-                                                                </button>
+                                                                <form style="display: inline"
+                                                                    @submit.prevent="perpanjang(item.id, form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku)">
+                                                                    <button type="submit" class="btn btn-sm btn-primary"
+                                                                        data-toggle="tooltip" data-placement="bottom"
+                                                                        title="Perpanjang Buku">
+                                                                        <i class="ni ni-fat-add text-white"></i>
+                                                                    </button>
+                                                                </form>
                                                             </th>
                                                             <td>
                                                                 {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
@@ -348,27 +343,32 @@
                     .catch(err => console.log(err))
             },
 
-            perpanjang(id, user_id, bibliobigrafi_id, tgl_pinjam, status_pinjam) {
-                axios.post(this.perpanjangs, {
-                    params: {
+            perpanjang(id, duration) {
+
+                this.$swal({
+                    title: 'Perpanjang Buku?',
+                    text: "Apakah anda ingin memperpanjang durasi buku ini?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Perpanjang!'
+                }).then((result) => {
+                    axios.post(this.perpanjangs, {
                         id,
-                        user: this.form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku,
-                        user_id,
-                        bibliobigrafi_id,
-                        tgl_pinjam,
-                        status_pinjam
-                    }
-                }).
-                then(res => {
-                        axios.get('/pustakawan/pinjaman', {
-                                params: {
-                                    id: this.form.id
-                                }
-                            })
-                            .then(res => this.pinjam = res.data.data)
-                            .catch(err => console.log(err))
+                        duration,
                     })
-                    .catch(err => console.log(err))
+                    then(res => {
+                            axios.get('/pustakawan/pinjaman', {
+                                    params: {
+                                        id: this.form.id
+                                    }
+                                })
+                                .then(res => this.pinjam = res.data.data)
+                                .catch(err => console.log(err))
+                        })
+                        .catch(err => console.log(err))
+                })
             },
 
             simpan() {
@@ -388,7 +388,7 @@
                                 window.location = this.index;
                             }, 3200)
                         } else {
-                             this.$swal({
+                            this.$swal({
                                 position: 'center',
                                 type: 'warning',
                                 title: res.data.message.toUpperCase(),

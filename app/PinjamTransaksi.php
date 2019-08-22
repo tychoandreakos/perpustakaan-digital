@@ -23,10 +23,10 @@ class PinjamTransaksi extends Model
         'tanggal_habis_pinjam'
     ];
 
-    public function getTanggalHabisPinjamAttribute($value)
-    {
-        return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
-    }
+    // public function getTanggalHabisPinjamAttribute($value)
+    // {
+    //     return $this->attributes['tanggal_habis_pinjam'] = Carbon::parse($value)->diffForHumans();
+    // }
     
     public function user()
     {
