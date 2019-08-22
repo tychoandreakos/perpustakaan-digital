@@ -15,7 +15,7 @@
             </div>
 
             <div class="col col-md-3">
-                Top Listened
+               <app-top></app-top>
             </div>
         </div>
         </div>
@@ -29,6 +29,7 @@
     import Popular from './user/Popular'
     import Browse from './user/Browse'
     import Discover from './user/Discover'
+    import Top from './user/Top'
 
     export default {
         props: ['buku', 'topik', 'fetch'],
@@ -36,6 +37,7 @@
             AppPopular: Popular,
             AppBrowse: Browse,
             AppDiscover: Discover,
+            AppTop: Top,
         }
     }
 
