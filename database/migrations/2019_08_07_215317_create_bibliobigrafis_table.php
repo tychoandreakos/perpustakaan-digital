@@ -24,7 +24,7 @@ class CreateBibliobigrafisTable extends Migration
             $table->foreign('buku_id')->references('id')->on('buku');
             $table->foreign('klasifikasi_id')->references('id')->on('klasifikasi');
             $table->foreign('gmd_id')->references('id')->on('gmd');
-            $table->foreign('pola_eksemplar')->references('pola_eksemplar')->on('eksemplar_transaksi');
+            $table->foreign('pola_eksemplar')->references('pola_eksemplar')->on('eksemplar_transaksi')->onDelete('cascade');
         });
     }
 

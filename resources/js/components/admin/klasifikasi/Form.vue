@@ -15,13 +15,28 @@
             <form @submit.prevent="simpan">
                 <h6 class="heading-small text-muted mb-4">Klasifikasi information</h6>
                 <div class="pl-lg-4">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="kode_klasifikasi">Kode Klasifikasi</label>
+                                <input autocomplete="off" type="text" v-model="form.kode_klasifikasi" id="kode_klasifikasi"
+                                    class="form-control form-control-alternative" name="kode_klasifikasi"
+                                    placeholder="Kode Klasifikasi">
+                                <template v-if="err.kode_klasifikasi">
+                                    <span class="text-danger">{{ err.kode_klasifikasi[0] }}</span>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="tipe_klasifikasi">Jenis Klasifikasi</label>
-                                <input type="text" v-model="form.tipe_klasifikasi" id="tipe_klasifikasi"
+                                <input autocomplete="off" type="text" v-model="form.tipe_klasifikasi" id="tipe_klasifikasi"
                                     class="form-control form-control-alternative" name="tipe_klasifikasi"
-                                    placeholder="Nama Penerbit">
+                                    placeholder="Tipe Klasifikasi">
                                 <template v-if="err.tipe_klasifikasi">
                                     <span class="text-danger">{{ err.tipe_klasifikasi[0] }}</span>
                                 </template>
@@ -84,6 +99,7 @@
         data() {
             return {
                 form: {
+                    tipe_klasifikasi: this.fetch.tipe_klasifikasi || '',
                     tipe_klasifikasi: this.fetch.tipe_klasifikasi || '',
                     _method: (this.fetch.tipe_klasifikasi ? 'PUT' : 'POST')
                 },

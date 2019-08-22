@@ -8,36 +8,45 @@
                             <h3 class="mb-0">Daftar Bahasa</h3>
                         </div>
                         <div class="col text-right">
-                            <a :href="this.route" class="btn btn-sm btn-primary"><i class="ni ni-fat-add text-white"></i> Tambah Bahasa</a>
+                            <a :href="this.route" class="btn btn-sm btn-primary"><i
+                                    class="ni ni-fat-add text-white"></i> Tambah Bahasa</a>
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Aksi</th>
-                                <th scope="col">Jenis Bahasa</th>
-                                <th scope="col">Perubahan Terakhir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="item in datas.data" :key="item.id">
-                                <th scope="row" style="width: 19%">
-                                    <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i class="ni ni-check-bold text-white"></i> Edit</a>
-                                    <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i class="ni ni-fat-remove text-white"></i> Hapus</button>
-                                </th>
-                                <td>
-                                    {{ item.jenis_bahasa | capitalize}}
-                                </td>
-                                <td>
-                                    {{ item.updated_at }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <template v-if="datas.data.length > 0">
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush text-center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Aksi</th>
+                                    <th scope="col">Jenis Bahasa</th>
+                                    <th scope="col">Perubahan Terakhir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in datas.data" :key="item.id">
+                                    <th scope="row" style="width: 19%">
+                                        <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
+                                                class="ni ni-check-bold text-white"></i> Edit</a>
+                                        <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
+                                                class="ni ni-fat-remove text-white"></i> Hapus</button>
+                                    </th>
+                                    <td>
+                                        {{ item.jenis_bahasa | capitalize}}
+                                    </td>
+                                    <td>
+                                        {{ item.updated_at }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <template v-else>
+                    <h4 class="text-center">Belum Ada Data!</h4>
+                </template>
 
                 <div class="mx-auto mt-3">
                     <pagination :data="datas" @pagination-change-page="getResults"></pagination>
@@ -60,7 +69,7 @@
             edit(val) {
                 return `bahasa/${val}/edit`;
             },
-            
+
             deleted(val) {
                 this.$swal({
                     title: 'Hapus Data?',

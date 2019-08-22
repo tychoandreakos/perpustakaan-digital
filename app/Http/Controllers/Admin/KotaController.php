@@ -44,7 +44,7 @@ class KotaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_kota' => 'required',
+            'nama_kota' => 'required|min: 3',
         ]);
 
         Kota::create($request->all());

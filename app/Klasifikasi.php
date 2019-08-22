@@ -9,7 +9,8 @@ class Klasifikasi extends Model
 {
     protected $table = 'klasifikasi';
     protected $fillable = [
-        'tipe_klasifikasi'
+        'tipe_klasifikasi',
+        'kode_klasifikasi'
     ];
 
     protected $dates = [

@@ -51,10 +51,10 @@ class BukuController extends Controller
     {
     //    $request->slug = str_slug($request->judul);
         $validatedData = $request->validate([
-            'judul' => 'required',
+            'judul' => 'required|min: 3',
             'edisi' => 'nullable',
-            'isbn_isnn' => 'required',
-            'deskripsi_fisik' => 'required',
+            'isbn_isnn' => 'required|min: 3',
+            'deskripsi_fisik' => 'required|min: 3',
             'tahun_terbit' => 'required',
             'judul_seri' => 'nullable',
             'catatan' => 'nullable',

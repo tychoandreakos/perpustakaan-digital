@@ -539,7 +539,7 @@
                     judul_seri: this.fetch.judul_seri || '',
                     catatan: this.fetch.catatan || '',
                     slug: this.fetch.slug || '',
-                    pdf: this.fetch.pdf || '',
+                    // pdf: this.fetch.pdf || '',
                     image: this.fetch.gambar_sampul || '',
                     klasifikasi_id: this.klasifikasi2,
                     pengarang_id: this.pengarang2,
@@ -552,7 +552,7 @@
                     pola_eksemplar: this.pola_eksemplar2,
                     no_panggil: '',
                     total: '',
-                    _method: (this.fetch.judul ? 'PUT' : 'POST')
+                   _method: (this.fetch.judul ? 'PUT' : 'POST')
                 },
 
             }
@@ -753,11 +753,7 @@
 
                 if (!this.fetch.judul) {
                     // create
-                    axios.post(this.fetch, this.form, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        })
+                    axios.post(this.fetch, this.form)
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',

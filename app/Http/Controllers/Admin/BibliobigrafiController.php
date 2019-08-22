@@ -35,7 +35,7 @@ class BibliobigrafiController extends Controller
     {
         return Buku::with(['buku_transaksi.pengarang' => function($q) {
             $q->select('id', 'nama_pengarang');
-        }])->withCount('biblio')->latest()->paginate(5);
+        }])->withCount('bibliobigrafi')->latest()->paginate(5);
     }
 
     public function sirkulasi()
@@ -124,13 +124,8 @@ class BibliobigrafiController extends Controller
      */
     public function store(Request $request)
     {
-        // if($request->file('pdf')) {
-        //     return response($request->get('pdf'));
-        // } else {
-        //     return response('no');
-        // }
-
-        $request->validate([
+        // return response($request->all());
+        $validatedData = $request->validate([
             'judul' => 'required',
             'edisi' => 'nullable',
             'isbn_isnn' => 'required',
@@ -150,12 +145,12 @@ class BibliobigrafiController extends Controller
             'judul_seri' => 'nullable',
             'catatan' => 'nullable',
             'slug' => 'nullable',
-            'pdf' => 'nullable',
+            // 'pdf' => 'nullable',
             'gambar_sampul' => 'nullable'
             ]);
             
-        if(!$request->image == '')
-        {
+            if(!$request->image == '')
+            {
             $image = $request->get('image');
             $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
             \Image::make($request->get('image'))->save(public_path('storage/cover/').$name);
@@ -163,22 +158,9 @@ class BibliobigrafiController extends Controller
             $name = 'img.jpg';
         }
 
-        // if(!$request->pdf == '')
-        // {
-        //     $file = $request->get('pdf');
-        //     $base = base64_decode($file);  
-        //     $base64 = time().'.' . explode('/', explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
-        //     $destinationPath = public_path() . "/storage/pdf/" . $base64;             
-        //     file_put_contents($destinationPath, $base);
-        //     header("Content-type: application/pdf");
-        // } else {
-        //     $base64 = '';
-        // }
-
         $requestData = $request->all();
         $requestData['slug'] = str_slug($request->judul);
         $requestData['gambar_sampul'] = $name;
-        // $requestData['pdf'] = $base64;
         $buku = Buku::create($requestData);
 
        foreach ($request->pengarang_id as $pengarang) {
@@ -262,8 +244,21 @@ class BibliobigrafiController extends Controller
      * @param  \App\Bibliobigrafi  $bibliobigrafi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bibliobigrafi $bibliobigrafi)
+    public function destroy($id)
     {
-        //
+        $bukuTransaksi = Buku::where('id', $id)->first();
+        
+        $bil = Bibliobigrafi::where('buku_id', $id)->count();
+       for ($i=0; $i < $bil; $i++) { 
+        $bilio = Bibliobigrafi::where('buku_id', $id)->first();
+        $bilio->pola_eksemplar()->delete();
+        }
+
+        $bukuTransaksi->bibliobigrafi()->delete();
+        $bukuTransaksi->buku_transaksi()->delete();
+        $bukuTransaksi->delete();
+
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }

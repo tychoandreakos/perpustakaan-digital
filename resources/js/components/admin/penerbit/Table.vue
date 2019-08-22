@@ -8,13 +8,14 @@
                             <h3 class="mb-0">Daftar Penerbit</h3>
                         </div>
                         <div class="col text-right">
-                            <a :href="this.route" class="btn btn-sm btn-primary"><i class="ni ni-fat-add text-white"></i> Tambah GMD</a>
+                            <a :href="this.route" class="btn btn-sm btn-primary"><i class="ni ni-fat-add text-white"></i> Tambah Penerbit</a>
                         </div>
                     </div>
                 </div>
+                  <template v-if="datas.data.length > 0">
                 <div class="table-responsive">
                     <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
+                    <table class="table align-items-center table-flush text-center">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Aksi</th>
@@ -38,6 +39,11 @@
                         </tbody>
                     </table>
                 </div>
+                </template>
+
+                <template v-else>
+                    <h4 class="text-center">Belum Ada Data!</h4>
+                </template>
 
                 <div class="mx-auto mt-3">
                     <pagination :data="datas" @pagination-change-page="getResults"></pagination>

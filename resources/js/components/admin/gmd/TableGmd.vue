@@ -13,9 +13,10 @@
                         </div>
                     </div>
                 </div>
+                <template v-if="datas.data.length > 0">
                 <div class="table-responsive">
                     <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
+                    <table class="table align-items-center table-flush text-center">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Aksi</th>
@@ -36,7 +37,7 @@
                                     {{ gmd.kode_gmd }}
                                 </td>
                                 <td>
-                                    {{ gmd.nama_gmd | capitalize }}
+                                    {{ gmd.nama_gmd.toUpperCase() }}
                                 </td>
                                 <td>
                                     {{ gmd.updated_at }}
@@ -45,6 +46,11 @@
                         </tbody>
                     </table>
                 </div>
+                </template>
+
+                <template v-else>
+                    <h4 class="text-center">Belum Ada Data!</h4>
+                </template>
 
                 <div class="mx-auto mt-3">
                     <pagination :data="datas" @pagination-change-page="getResults"></pagination>

@@ -18,7 +18,7 @@ class CreateEksemplarTransaksisTable extends Migration
             $table->string('kode_eksemplar');
             $table->timestamps();
 
-            $table->foreign('kode_eksemplar')->references('kode_eksemplar')->on('eksemplar_pola');
+            $table->foreign('kode_eksemplar')->references('kode_eksemplar')->on('eksemplar_pola')->onDelete('cascade');
         });
     }
 

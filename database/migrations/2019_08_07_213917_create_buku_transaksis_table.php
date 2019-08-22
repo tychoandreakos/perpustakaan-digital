@@ -22,11 +22,11 @@ class CreateBukuTransaksisTable extends Migration
             $table->unsignedBigInteger('penerbit_id');
             $table->timestamps();
 
-            $table->foreign('buku_id')->references('id')->on('buku');
-            $table->foreign('pengarang_id')->references('id')->on('pengarang');
-            $table->foreign('kota_id')->references('id')->on('kota');
-            $table->foreign('bahasa_id')->references('id')->on('bahasa');
-            $table->foreign('penerbit_id')->references('id')->on('penerbit');
+            $table->foreign('buku_id')->references('id')->on('buku')->onDelete('cascade');
+            $table->foreign('pengarang_id')->references('id')->on('pengarang')->onDelete('cascade');
+            $table->foreign('kota_id')->references('id')->on('kota')->onDelete('cascade');
+            $table->foreign('bahasa_id')->references('id')->on('bahasa')->onDelete('cascade');
+            $table->foreign('penerbit_id')->references('id')->on('penerbit')->onDelete('cascade');
         });
     }
 

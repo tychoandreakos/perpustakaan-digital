@@ -19,7 +19,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="nama_kota">Nama Kota</label>
-                                <input type="text" v-model="form.nama_kota" id="nama_kota"
+                                <input autocomplete="off" type="text" v-model="form.nama_kota" id="nama_kota"
                                     class="form-control form-control-alternative" name="nama_kota"
                                     placeholder="Nama Penerbit">
                                 <template v-if="err.nama_kota">

@@ -44,8 +44,8 @@ class GmdController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kode_gmd' => 'required|unique:gmd',
-            'nama_gmd' => 'required',
+            'kode_gmd' => 'required|unique:gmd||min: 3',
+            'nama_gmd' => 'required|min: 3',
         ]);
 
         Gmd::create($request->all());

@@ -44,7 +44,8 @@ class KlasifikasiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'tipe_klasifikasi' => 'required',
+            'kode_klasifikasi' => 'required|unique:klasifikasi|min: 3',
+            'tipe_klasifikasi' => 'required|min: 3',
         ]);
         
         Klasifikasi::create($request->all());

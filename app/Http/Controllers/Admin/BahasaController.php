@@ -44,7 +44,7 @@ class BahasaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'jenis_bahasa' => 'required',
+            'jenis_bahasa' => 'required|min: 3',
         ]);
 
         Bahasa::create($request->all());

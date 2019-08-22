@@ -19,7 +19,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="kode_gmd">Kode GMD</label>
-                                <input type="text" v-model="form.kode_gmd" id="kode_gmd"
+                                <input autocomplete="off" type="text" v-model="form.kode_gmd" id="kode_gmd"
                                     class="form-control form-control-alternative" name="kode_gmd"
                                     placeholder="KODE GMD">
                                 <template v-if="err.kode_gmd">
@@ -30,7 +30,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="nama_gmd">Nama GMD</label>
-                                <input type="text" v-model="form.nama_gmd" id="nama_gmd"
+                                <input type="text" autocomplete="off" v-model="form.nama_gmd" id="nama_gmd"
                                     class="form-control form-control-alternative" name="nama_gmd"
                                     placeholder="NAMA GMD">
                                 <template v-if="err.nama_gmd">

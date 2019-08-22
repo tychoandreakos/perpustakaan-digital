@@ -24,7 +24,7 @@ class CreatePinjamTransaksisTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('bibliobigrafi_id')->references('id')->on('bibliobigrafi');
+            $table->foreign('bibliobigrafi_id')->references('id')->on('bibliobigrafi')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

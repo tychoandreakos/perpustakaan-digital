@@ -45,9 +45,9 @@ class BeritaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'judul' => 'required',
-            'isi' =>  'required',
-            'slug' => 'nullable',
+            'judul' => 'required|min: 3',
+            'isi' =>  'required|min: 3',
+            'slug' => 'nullable|min: 3',
             'img' => 'nullable'
         ]);
 

@@ -19,7 +19,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="jenis_bahasa">Jenis Bahasa</label>
-                                <input type="text" v-model="form.jenis_bahasa" id="jenis_bahasa"
+                                <input autocomplete="off" type="text" v-model="form.jenis_bahasa" id="jenis_bahasa"
                                     class="form-control form-control-alternative" name="jenis_bahasa"
                                     placeholder="Nama Penerbit">
                                 <template v-if="err.jenis_bahasa">

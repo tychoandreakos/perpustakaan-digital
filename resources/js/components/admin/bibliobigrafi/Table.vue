@@ -12,50 +12,58 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Aksi</th>
-                                <th scope="col">Judul Buku</th>
-                                <th scope="col">Salinan</th>
-                                <th scope="col">ISBN ISNN</th>
-                                <th scope="col">Perubahan Terakhir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="data in datas.data" :key="data.id">
-                                <th scope="row" style="width: 19%">
-                                    <button class="btn btn-primary btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
-                                </th>
-                                <td>
-                                    <div class="row">
-                                        <div class="col col-lg-12">
-                                            {{ data.judul }}
+                <template v-if="datas.data.length > 0">
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Aksi</th>
+                                    <th scope="col">Judul Buku</th>
+                                    <th scope="col">Salinan</th>
+                                    <th scope="col">ISBN ISNN</th>
+                                    <th scope="col">Perubahan Terakhir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="data in datas.data" :key="data.id">
+                                    <th scope="row" style="width: 19%">
+                                        <button class="btn btn-primary btn-sm">Edit</button>
+                                        <button @click="deleted(data.id)" class="btn btn-danger btn-sm">Hapus</button>
+                                    </th>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col col-lg-12">
+                                                {{ data.judul }}
+                                            </div>
+                                            <div class="mt-2" v-for="buku_transaksi in data.buku_transaksi"
+                                                :key="buku_transaksi.id">
+                                                <span
+                                                    class="ml-2 badge badge-pill badge-success">{{ buku_transaksi.pengarang.nama_pengarang }}
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="mt-2" v-for="buku_transaksi in data.buku_transaksi"
-                                            :key="buku_transaksi.id">
-                                            <span
-                                                class="ml-2 badge badge-pill badge-success">{{ buku_transaksi.pengarang.nama_pengarang }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    {{ data.biblio_count }}
-                                </td>
-                                <td>
-                                    {{ data.isbn_isnn }}
-                                </td>
-                                <td>
-                                    {{ data.updated_at }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                    </td>
+                                    <td class="text-center">
+                                        {{ data.bibliobigrafi_count }}
+                                    </td>
+                                    <td>
+                                        {{ data.isbn_isnn }}
+                                    </td>
+                                    <td>
+                                        {{ data.updated_at }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </template>
+
+                <template v-else>
+                    <h4 class="text-center">Belum Ada Data!</h4>
+                </template>
+
             </div>
         </div>
 

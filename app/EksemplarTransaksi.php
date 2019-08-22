@@ -19,8 +19,8 @@ class EksemplarTransaksi extends Model
         return $this->belongsTo(EksemplarPola::class);
     }
 
-    public function biblio()
+    public function bibliobigrafi()
     {
-        return $this->hasMany(Bibliobigrafi::class);
+        return $this->belongsTo(Bibliobigrafi::class);
     }
 }

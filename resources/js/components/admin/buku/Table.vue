@@ -9,6 +9,7 @@
                         </div>
                     </div>
                 </div>
+                  <template v-if="datas.data.length > 0">
                 <div class="table-responsive">
                     <!-- Projects table -->
                     <table class="table align-items-center table-flush">
@@ -45,6 +46,11 @@
                         </tbody>
                     </table>
                 </div>
+                </template>
+
+                <template v-else>
+                    <h4 class="text-center">Belum Ada Data!</h4>
+                </template>
 
                 <modal name="buku">
                     <modal-component></modal-component>

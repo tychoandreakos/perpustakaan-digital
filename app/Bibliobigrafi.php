@@ -18,6 +18,13 @@ class Bibliobigrafi extends Model
         'no_panggil'
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'pdf',
+        'img'
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -45,7 +52,7 @@ class Bibliobigrafi extends Model
 
     public function pola_eksemplar()
     {
-        return $this->belongsTo(EksemplarTransaksi::class);
+        return $this->HasMany(EksemplarTransaksi::class, 'pola_eksemplar', 'pola_eksemplar');
     }
 
     public function pinjam_transaksi()
