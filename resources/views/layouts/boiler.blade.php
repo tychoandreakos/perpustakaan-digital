@@ -62,7 +62,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/beranda') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"

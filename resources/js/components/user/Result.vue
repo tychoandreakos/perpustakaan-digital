@@ -9,7 +9,7 @@
                                 :src="'../storage/cover/' + item.gambar_sampul" alt="gambar">
                         </div>
                         <div class="col col-md-5">
-                            <h5><a :href="'buku/'+item.slug" class="judul">
+                            <h5><a :href="'/buku/'+item.slug" class="judul">
                                     {{ item.judul.substring(0, 122) | capitalize }}</a></h5>
                             <span v-for="buku_transaksi in item.buku_transaksi" :key="buku_transaksi.id"><a
                                     class="pengarang"
