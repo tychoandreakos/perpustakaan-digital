@@ -30,7 +30,7 @@
                                         </div>
                                     </template>
                                     <template v-else>
-                                        <button :disabled="ds" class="btn btn-icon btn-3 btn-primary" type="submit">
+                                        <button class="btn btn-icon btn-3 btn-primary" type="submit">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
 
                                             <span class="btn-inner--text">Lanjut</span>
@@ -66,17 +66,6 @@
                 option: [],
                 form: {}
             }
-        },
-
-        computed: {
-            ds() {
-                if (this.form.id > 1) {
-                    return false
-                } else {
-                    return true
-                }
-            },
-
         },
 
         methods: {

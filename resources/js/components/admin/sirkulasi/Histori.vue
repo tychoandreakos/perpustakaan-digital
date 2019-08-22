@@ -34,7 +34,7 @@
                                         {{ item.user.name | capitalize}}
                                     </td>
                                     <td>
-                                        {{ item.user.anggota_transaksi[0].tipe_anggota.tipe_anggota | capitalize}}
+                                        {{ item.user.anggota_transaksi.tipe_anggota.tipe_anggota | capitalize}}
                                     </td>
                                     <td>
                                         {{ item.bibliobigrafi.pola_eksemplar | capitalize}}
