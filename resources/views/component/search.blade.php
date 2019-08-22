@@ -9,7 +9,7 @@
                     style="box-shadow: none;" aria-describedby="button-addon3"
                     class="form-control bg-light border-0 ml-2" required>
                 <div class="input-group-append border-0">
-                    <button id="button-addon3" type="submit" class="btn btn-link text-success"><i
+                    <button id="button-addon3" type="submit" class="btn btn-link text-danger"><i
                             class="fa fa-search"></i></button>
                 </div>
             </div>

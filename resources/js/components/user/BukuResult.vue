@@ -2,6 +2,9 @@
     <div>
         <div class="heading p-5 bg-danger" style="margin-top: -90px;">
             <div class="container">
+
+            
+
                 <div class="row">
                     <div class="col col-md-7 pt-5">
                         <h5 class="text-white">{{ buku.judul | capitalize }}</h5>
