@@ -114,6 +114,8 @@
             </div>
         </nav>
 
+        @include('component.search')
+
         @yield('main')
     </main>
 

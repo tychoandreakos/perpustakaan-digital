@@ -1,16 +1,5 @@
 <template>
     <div>
-
-        <!-- hello -->
-        <div class="jumbotron bg-danger text-white">
-          
-            <p class="lead">
-                <!-- search -->
-                <!-- <hr style="background: #fff !important"> -->
-                <app-search :username="this.username"></app-search>
-            </p>
-        </div>
-
         <!-- popular -->
         <app-popular :buku="this.buku"></app-popular>
 
@@ -44,7 +33,6 @@
     import Browse from './user/Browse'
     import Discover from './user/Discover'
     import Top from './user/Top'
-    import Search from './user/SearchUser'
 
     export default {
         props: ['buku', 'topik', 'fetch', 'username'],
@@ -53,7 +41,6 @@
             AppBrowse: Browse,
             AppDiscover: Discover,
             AppTop: Top,
-            AppSearch: Search,
         }
     }
 

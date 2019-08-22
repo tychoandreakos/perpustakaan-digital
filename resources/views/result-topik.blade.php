@@ -2,6 +2,6 @@
 
 {{-- @include('layouts.user-navbar') --}}
 @section('main')
-<app-result :result="{{ $topik }}"></app-result>
+<app-result :result="{{ $result }}"></app-result>
 @endsection
 

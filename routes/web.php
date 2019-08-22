@@ -20,8 +20,9 @@ Auth::routes();
 
 Route::get('/', 'LandingController@index')->name('landing');
 Route::get('berita/{slug}', 'LandingController@berita');
-Route::get('buku/{slug}', 'LandingController@buku')->middleware('auth');
+Route::get('buku/{slug}', 'LandingController@buku');
 Route::get('baca/{slug}', 'LandingController@baca')->middleware('auth');
+Route::get('buku/', 'LandingController@cari')->name('cari');
 
 Route::get('/tamu', function() {
     return view('tamu');

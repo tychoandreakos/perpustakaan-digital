@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="heading p-5">
+        <div class="heading p-5 bg-danger" style="margin-top: -90px;">
             <div class="container">
                 <div class="row">
                     <div class="col col-md-7 pt-5">
@@ -145,7 +145,7 @@
 
     .heading {
         width: 100%;
-        background: #ec454f;
+        /* background: #ec454f; */
         height: 450px;
         color: #fff;
     }
