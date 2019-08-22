@@ -17,8 +17,8 @@
                                     <div class="col-md-12">
                                         <div class="form-group mt-4">
                                             <label for="">Cari Anggota</label>
-                                            <multiselect v-model="form" :options="options"
-                                                placeholder="Select one" label="id" track-by="id">
+                                            <multiselect v-model="form" :options="options" placeholder="Select one"
+                                                label="id" track-by="id">
                                                 <template slot="singleLabel"
                                                     slot-scope="{ option }"><strong>{{ option.id }}</strong> -
                                                     <strong>
@@ -168,37 +168,37 @@
 
                                 <v-tab title="Pinjaman Saat Ini">
                                     <template v-if="pinjam.length > 0">
-                                    <div class="table-responsive">
-                                        <div>
-                                            <table class="table align-items-center">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col" style="width: 120px;">
-                                                            Aksi
-                                                        </th>
-                                                        <th scope="col">
-                                                            Kode Eksemplar
-                                                        </th>
-                                                        <th scope="col">
-                                                            Judul
-                                                        </th>
-                                                        <th scope="col">Tipe Koleksi</th>
-                                                        <th scope="col">
-                                                            Tanggal Pinjam
-                                                        </th>
-                                                        <th scope="col">Tanggal Kembali</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="list">
+                                        <div class="table-responsive">
+                                            <div>
+                                                <table class="table align-items-center">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col" style="width: 120px;">
+                                                                Aksi
+                                                            </th>
+                                                            <th scope="col">
+                                                                Kode Eksemplar
+                                                            </th>
+                                                            <th scope="col">
+                                                                Judul
+                                                            </th>
+                                                            <th scope="col">Tipe Koleksi</th>
+                                                            <th scope="col">
+                                                                Tanggal Pinjam
+                                                            </th>
+                                                            <th scope="col">Tanggal Kembali</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="list">
 
-                                                    <tr v-for="item in pinjam" :key="item.id">
-                                                        <th scope="row" class="name">
-                                                            <button type="button" class="btn btn-sm btn-success"
-                                                                data-toggle="tooltip" data-placement="bottom"
-                                                                title="Kembalikan Eksemplar Ini">
-                                                                <i class="ni ni-curved-next text-white"></i>
-                                                            </button>
-                                                            <button @click="perpanjang(
+                                                        <tr v-for="item in pinjam" :key="item.id">
+                                                            <th scope="row" class="name">
+                                                                <button type="button" class="btn btn-sm btn-success"
+                                                                    data-toggle="tooltip" data-placement="bottom"
+                                                                    title="Kembalikan Eksemplar Ini">
+                                                                    <i class="ni ni-curved-next text-white"></i>
+                                                                </button>
+                                                                <button @click="perpanjang(
 
                                                                 item.bibliobigrafi.pola_eksemplar,
                                                                 item.user_id,
@@ -207,35 +207,35 @@
                                                                 item.status_pinjam
                                                                 
                                                                 )" type="button" class="btn btn-sm btn-primary"
-                                                                data-toggle="tooltip" data-placement="bottom"
-                                                                title="Perpanjang Buku">
-                                                                <i class="ni ni-fat-add text-white"></i>
-                                                            </button>
-                                                        </th>
-                                                        <td>
-                                                            {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
-                                                        </td>
-                                                        <td>
-                                                            {{ item.bibliobigrafi.buku.judul | capitalize }}
-                                                        </td>
+                                                                    data-toggle="tooltip" data-placement="bottom"
+                                                                    title="Perpanjang Buku">
+                                                                    <i class="ni ni-fat-add text-white"></i>
+                                                                </button>
+                                                            </th>
+                                                            <td>
+                                                                {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
+                                                            </td>
+                                                            <td>
+                                                                {{ item.bibliobigrafi.buku.judul | capitalize }}
+                                                            </td>
 
-                                                        <td>
-                                                            {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
-                                                        </td>
-                                                        <td>
-                                                            {{ item.tgl_pinjam }}
-                                                        </td>
-                                                        <td>
-                                                            {{ item.tanggal_habis_pinjam }}
-                                                        </td>
-                                                    </tr>
+                                                            <td>
+                                                                {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
+                                                            </td>
+                                                            <td>
+                                                                {{ item.tgl_pinjam }}
+                                                            </td>
+                                                            <td>
+                                                                {{ item.tanggal_habis_pinjam }}
+                                                            </td>
+                                                        </tr>
 
 
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
                                         </div>
-
-                                    </div>
                                     </template>
                                     <template v-else>
                                         <h3 class="text-center mt-3">Belum ada data!</h3>
@@ -299,7 +299,7 @@
                 return (this.form != '' ? false : true)
             },
 
-            disabled(){
+            disabled() {
                 if (this.value.length > 0) {
                     return false
                 } else {
@@ -308,10 +308,13 @@
             },
 
             forms() {
-                return {
-                    user_id: this.form.id,
-                    bibliobigrafi: this.value.map(r => r.id),
-                    tanggal_habis_pinjam: this.date2,
+                if (this.value.length > 0) {
+                    return {
+                        user_id: this.form.id,
+                        bibliobigrafi: this.value.map(r => r.id),
+                        tanggal_habis_pinjam: this.date2,
+                        jumlah_pinjaman: this.form.anggota_transaksi.tipe_anggota.jumlah_pinjaman
+                    }
                 }
             },
             dates() {
@@ -372,17 +375,27 @@
                 this.loading = true;
                 axios.post(this.store, this.forms)
                     .then(res => {
-                        this.$swal({
-                            position: 'top-end',
-                            type: 'success',
-                            title: res.data.message.toUpperCase(),
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
+                        if (res.data.condition) {
+                            this.$swal({
+                                position: 'top-end',
+                                type: 'success',
+                                title: res.data.message.toUpperCase(),
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
 
-                        setTimeout(() => {
-                            window.location = this.index;
-                        }, 3200)
+                            setTimeout(() => {
+                                window.location = this.index;
+                            }, 3200)
+                        } else {
+                             this.$swal({
+                                position: 'center',
+                                type: 'warning',
+                                title: res.data.message.toUpperCase(),
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
                     })
                     .catch(err => {
                         this.err = err.response.data.errors;

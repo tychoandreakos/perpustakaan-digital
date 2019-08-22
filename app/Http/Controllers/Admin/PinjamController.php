@@ -12,19 +12,27 @@ class PinjamController extends Controller
 {
     public function store(Request $request)
     {
-        foreach ($request->bibliobigrafi as $bilio) {
-            $requestData = $request->all();
-        $requestData['tgl_pinjam'] = Carbon::now();
-        $requestData['bibliobigrafi_id'] = $bilio;
-        PinjamTransaksi::create($requestData);
-
-        $bilio = Bibliobigrafi::find($bilio);
-        $bilio->status_pinjam = 1;
-        $bilio->update();
+        $total = PinjamTransaksi::where('user_id', $request->id)->count();
+        if(!$total > $request->jumlah_pinjaman){
+            foreach ($request->bibliobigrafi as $bilio) {
+                $requestData = $request->all();
+            $requestData['tgl_pinjam'] = Carbon::now();
+            $requestData['bibliobigrafi_id'] = $bilio;
+            PinjamTransaksi::create($requestData);
+    
+            $bilio = Bibliobigrafi::find($bilio);
+            $bilio->status_pinjam = 1;
+            $bilio->update();
+            }
+    
+            return response()->json([
+                'condition' => true,
+                'message' => 'Buku berhasil dipinjam']);
+        } else {
+            return response()->json([
+                'condition' => false,
+                'message' => 'Anggota yang bersangkutan sudah melebihi batas pinjam buku']);
         }
-
-        return response()->json([
-            'message' => 'Buku berhasil dipinjam']);
     }
 
     public function pinjaman(Request $request)
