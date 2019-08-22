@@ -3,7 +3,7 @@
         <div class="card-header bg-white border-0">
             <div class="row align-items-center">
                 <div class="col-8">
-                    <h3 class="mb-0" v-if="this.fetch.id">Update Data Anggota</h3>
+                    <h3 class="mb-0" v-if="this.users.id">Update Data Anggota</h3>
                     <h3 class="mb-0" v-else>Tambah Data Anggota</h3>
                 </div>
                 <div class="col-4 text-right">
@@ -176,7 +176,7 @@
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <template v-if="this.fetch.id">
+                        <template v-if="this.users.id">
                             <button :disabled="isDisabled" class="btn btn-success">
                                 Perbarui</button>
                         </template>
@@ -185,6 +185,8 @@
                                 Tambah</button>
                         </template>
                     </template>
+
+                    <input type="hidden" :value="jk">
                 </div>
             </form>
         </div>
@@ -204,7 +206,8 @@
         props: [
             'index',
             'fetch',
-            'tipe'
+            'tipe',
+            'users'
         ],
 
         computed: {
@@ -218,7 +221,16 @@
 
              tipe_ang() {
                 return this.form.tipe = this.value.masa_berlaku_anggota
+            },
+
+            jk() {
+                    return this.form.jk = (this.fetch.jk == 0 ? 'Pria' : 'Wanita')
             }
+
+            // executeLoader()
+            // {
+            //     return 'halo'
+            // }
         },
 
         data() {
@@ -230,16 +242,16 @@
 
 
                 form: {
-                    id: this.fetch.id || '',
-                    name: this.fetch.name || '',
-                    email: this.fetch.email || '',
-                    password: this.fetch.password || '',
-                    password_confirmation: this.fetch.password_confirmation || '',
+                    id: this.users.id || '',
+                    name: this.users.name || '',
+                    email: this.users.email || '',
+                    password: this.users.password || '',
+                    password_confirmation: this.users.password_confirmation || '',
                     tgl_lahir: this.fetch.tgl_lahir || '06/20/2019',
                     tgl_registrasi: this.fetch.tgl_registrasi || '',
                     tgl_ekspired: this.fetch.tgl_ekspired || '',
                     alamat: this.fetch.alamat || '',
-                    jk: this.fetch.jk || '',
+                    jk: this.jk || '',
                     no_telp: this.fetch.no_telp || '',
                     foto: this.fetch.foto || '',
                     tipe: this.tipe_ang,
@@ -267,7 +279,7 @@
             simpan() {
                 this.loading = true;
 
-                if (!this.fetch.id) {
+                if (!this.users.id) {
                     // create
                     axios.post(this.fetch, this.form)
                         .then(res => {
@@ -289,7 +301,7 @@
                         })
                 } else {
                     // update
-                    axios.post('/pustakawan/bahasa/' + this.fetch.id, this.form)
+                    axios.post('/pustakawan/bahasa/' + this.users.id, this.form)
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',

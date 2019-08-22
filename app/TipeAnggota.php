@@ -13,4 +13,5 @@ class TipeAnggota extends Model
     {
         return $this->hasMany(AnggotaTransaksi::class);
     }
+    
 }

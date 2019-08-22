@@ -9,51 +9,58 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">ID Anggota</th>
-                                <th scope="col">Nama Anggota</th>
-                                <th scope="col">Tipe Keanggotaan</th>
-                                <th scope="col">Kode Eksemplar</th>
-                                <th scope="col">Judul Buku</th>
-                                <th scope="col">Tanggal Pinjam</th>
-                                <th scope="col">Tanggal Kembali</th>
-                                <th scope="col">Perubahan Terakhir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="item in datas.data" :key="item.id">
-                                <td>
-                                    {{ item.user_id | capitalize}}
-                                </td>
-                                <td>
-                                    {{ item.user.name | capitalize}}
-                                </td>
-                                 <td>
-                                    {{ item.user.anggota_transaksi[0].tipe_anggota.tipe_anggota | capitalize}}
-                                </td>
-                                 <td>
-                                    {{ item.bibliobigrafi.pola_eksemplar | capitalize}}
-                                </td>
-                                 <td>
-                                    {{ item.bibliobigrafi.buku.judul | capitalize}}
-                                </td>
-                                 <td>
-                                    {{ item.tgl_pinjam}}
-                                </td>
-                                 <td>
-                                    {{ item.tgl_kembali}}
-                                </td>
-                                <td>
-                                    {{ item.updated_at }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <template v-if="datas.data.length > 0">
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">ID Anggota</th>
+                                    <th scope="col">Nama Anggota</th>
+                                    <th scope="col">Tipe Keanggotaan</th>
+                                    <th scope="col">Kode Eksemplar</th>
+                                    <th scope="col">Judul Buku</th>
+                                    <th scope="col">Tanggal Pinjam</th>
+                                    <th scope="col">Tanggal Kembali</th>
+                                    <th scope="col">Perubahan Terakhir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in datas.data" :key="item.id">
+                                    <td>
+                                        {{ item.user_id | capitalize}}
+                                    </td>
+                                    <td>
+                                        {{ item.user.name | capitalize}}
+                                    </td>
+                                    <td>
+                                        {{ item.user.anggota_transaksi[0].tipe_anggota.tipe_anggota | capitalize}}
+                                    </td>
+                                    <td>
+                                        {{ item.bibliobigrafi.pola_eksemplar | capitalize}}
+                                    </td>
+                                    <td>
+                                        {{ item.bibliobigrafi.buku.judul | capitalize}}
+                                    </td>
+                                    <td>
+                                        {{ item.tgl_pinjam}}
+                                    </td>
+                                    <td>
+                                        {{ item.tgl_kembali}}
+                                    </td>
+                                    <td>
+                                        {{ item.updated_at }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </template>
+
+                <template v-else>
+                    <h4 class="text-center">Belum Ada Data!</h4>
+                </template>
 
                 <div class="mx-auto mt-3">
                     <pagination :data="datas" @pagination-change-page="getResults"></pagination>
@@ -76,7 +83,7 @@
             edit(val) {
                 return `kota/${val}/edit`;
             },
-            
+
             deleted(val) {
                 this.$swal({
                     title: 'Hapus Data?',
@@ -149,4 +156,5 @@
     .buku:hover {
         color: #233dd2;
     }
+
 </style>

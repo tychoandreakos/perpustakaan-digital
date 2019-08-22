@@ -20,9 +20,9 @@
                                             <multiselect v-model="form" :options="options" :custom-label="nameWithLang"
                                                 placeholder="Select one" label="id" track-by="id">
                                                 <template slot="singleLabel"
-                                                    slot-scope="{ option }"><strong>{{ option.user.id }}</strong> -
+                                                    slot-scope="{ option }"><strong>{{ option.id }}</strong> -
                                                     <strong>
-                                                        {{ option.user.name }}</strong></template>
+                                                        {{ option.name }}</strong></template>
                                             </multiselect>
                                         </div>
 
@@ -52,19 +52,19 @@
                                     <div class="col col-lg-4">
                                         <div class="form-group">
                                             <label style="font-size: 14px" for="nama">Nama Anggota</label>
-                                            <h4>{{ form.user.name | capitalize }}</h4>
+                                            <h4>{{ form.name | capitalize }}</h4>
                                         </div>
                                     </div>
                                     <div class="col col-lg-4">
                                         <div class="form-group">
                                             <label style="font-size: 14px" for="nama">Email</label>
-                                            <h4>{{ form.user.email | capitalize }}a</h4>
+                                            <h4>{{ form.email | capitalize }}a</h4>
                                         </div>
                                     </div>
                                     <div class="col col-lg-4">
                                         <div class="form-group">
                                             <label style="font-size: 14px" for="nama">Tanggal Registrasi</label>
-                                            <h4>{{ form.user.anggota.tgl_registrasi }}</h4>
+                                            <h4>{{ form.anggota.tgl_registrasi }}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                     <div class="col col-lg-4">
                                         <div class="form-group">
                                             <label style="font-size: 14px" for="nama">ID Anggota</label>
-                                            <h4>{{ form.user.id }}</h4>
+                                            <h4>{{ form.id }}</h4>
                                         </div>
                                     </div>
                                     <div class="col col-lg-4">
@@ -85,7 +85,7 @@
                                     <div class="col col-lg-4">
                                         <div class="form-group">
                                             <label style="font-size: 14px" for="nama">Berlaku Hingga</label>
-                                            <h4>{{ form.user.anggota.tgl_expired }}</h4>
+                                            <h4>{{ form.anggota.tgl_expired }}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -336,7 +336,7 @@
             getPinjaman() {
                 axios.post('/pustakawan/pinjaman', {
                         params: {
-                            id: this.form.user.id
+                            id: this.form.id
                         }
                     })
                     .then(res => this.pinjam = res.data.data)
@@ -357,7 +357,7 @@
                 then(res => {
                         axios.get('/pustakawan/pinjaman', {
                                 params: {
-                                    id: this.form.user.id
+                                    id: this.form.id
                                 }
                             })
                             .then(res => this.pinjam = res.data.data)
@@ -412,7 +412,7 @@
                 this.loading = true;
                 axios.get('/pustakawan/pinjaman', {
                         params: {
-                            id: this.form.user.id
+                            id: this.form.id
                         }
                     })
                     .then(res => this.pinjam = res.data.data)

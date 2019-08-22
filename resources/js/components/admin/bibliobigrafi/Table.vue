@@ -39,7 +39,7 @@
                                             <div class="mt-2" v-for="buku_transaksi in data.buku_transaksi"
                                                 :key="buku_transaksi.id">
                                                 <span
-                                                    class="ml-2 badge badge-pill badge-success">{{ buku_transaksi.pengarang.nama_pengarang }}
+                                                    class="ml-3 badge badge-pill badge-success">{{ buku_transaksi.pengarang.nama_pengarang }}
                                                 </span>
                                             </div>
                                         </div>

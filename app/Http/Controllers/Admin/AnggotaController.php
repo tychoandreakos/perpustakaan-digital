@@ -24,7 +24,7 @@ class AnggotaController extends Controller
 
     public function fetch()
     {
-        return AnggotaTransaksi::with('user', 'tipe_anggota', 'user.anggota')->latest()->paginate(5);
+        return User::with('anggota_transaksi.tipe_anggota', 'anggota')->latest()->paginate(5);
     }
 
     /**
@@ -47,7 +47,7 @@ class AnggotaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            // 'id' => 'required|unique:users|integer',
+            'id' => 'required|unique:users|integer',
             'name' => 'required|min:3',
             'password' => 'required|confirmed|min:6',
             'email' => 'required|min:6',
@@ -95,10 +95,12 @@ class AnggotaController extends Controller
      * @param  \App\Anggota  $anggota
      * @return \Illuminate\Http\Response
      */
-    public function edit(Anggota $anggota)
+    public function edit($id)
     {
         $title = 'Update Anggota';
-        return view('admin.anggota.edit' ,compact('anggota', 'title'));
+        $anggota = Anggota::with('users', 'users.anggota_transaksi.tipe_anggota')->where('user_id', $id)->first();
+        $users = User::with('anggota')->where('id', $id)->first();
+        return view('admin.anggota.edit', compact('anggota', 'users', 'title'));
     }
 
     public function search(Request $request)

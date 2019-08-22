@@ -9,39 +9,45 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Kode Eksemplar</th>
-                                <th scope="col">ID Anggota</th>
-                                <th scope="col">Judul</th>
-                                <th scope="col">Tanggal Pinjam</th>
-                                <th scope="col">Tanggal Kembali</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="item in datas.data" :key="item.id">
-                                <td>
-                                    {{ item.pola_eksemplar | capitalize}}
-                                </td>
-                                <td>
-                                    {{ item.pinjam_transaksi.user_id }}
-                                </td>
-                                <td>
-                                    {{ item.buku.judul | capitalize }}
-                                </td>
-                                <td>
-                                    {{ item.pinjam_transaksi.tgl_pinjam }}
-                                </td>
-                                <td>
-                                    {{ item.pinjam_transaksi.tanggal_habis_pinjam }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <template v-if="datas.data.length > 0">
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Kode Eksemplar</th>
+                                    <th scope="col">ID Anggota</th>
+                                    <th scope="col">Judul</th>
+                                    <th scope="col">Tanggal Pinjam</th>
+                                    <th scope="col">Tanggal Kembali</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in datas.data" :key="item.id">
+                                    <td>
+                                        {{ item.pola_eksemplar | capitalize}}
+                                    </td>
+                                    <td>
+                                        {{ item.pinjam_transaksi.user_id }}
+                                    </td>
+                                    <td>
+                                        {{ item.buku.judul | capitalize }}
+                                    </td>
+                                    <td>
+                                        {{ item.pinjam_transaksi.tgl_pinjam }}
+                                    </td>
+                                    <td>
+                                        {{ item.pinjam_transaksi.tanggal_habis_pinjam }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <template v-else>
+                    <h4 class="text-center">Belum Ada Data!</h4>
+                </template>
 
                 <div class="mx-auto mt-3">
                     <pagination :data="datas" @pagination-change-page="getResults"></pagination>

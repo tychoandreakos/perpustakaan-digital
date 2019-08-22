@@ -45,9 +45,10 @@ class TipeAnggotaController extends Controller
     {
         $validatedData = $request->validate([
             'tipe_anggota' => 'required|unique:tipe_anggota',
-            'jumlah_pinjaman' => 'required',
-            'masa_berlaku_anggota' => 'required',
-            'batas_perpanjangan_anggota' => 'required',
+            'jumlah_pinjaman' => 'required|numeric',
+            'masa_berlaku_anggota' => 'required|numeric',
+            'masa_pinjaman_buku' => 'required|numeric',
+            'batas_perpanjangan_anggota' => 'required|numeric',
             'denda' => 'required',    
         ]);
 

@@ -16,7 +16,7 @@
                 <h6 class="heading-small text-muted mb-4">Tipe Anggota information</h6>
                 <div class="pl-lg-4">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="tipe_anggota">Tipe Anggota</label>
                                 <input autocomplete="off" type="text" v-model="form.tipe_anggota" id="tipe_anggota"
@@ -27,13 +27,25 @@
                                 </template>
                             </div>
                         </div>
+
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="masa_pinjaman_buku">Masa Pinjaman Per Buku (hari)</label>
+                                <input autocomplete="off" type="number" v-model="form.masa_pinjaman_buku" id="masa_pinjaman_buku"
+                                    class="form-control form-control-alternative" name="masa_pinjaman_buku"
+                                    placeholder="Tipe Anggota">
+                                <template v-if="err.masa_pinjaman_buku">
+                                    <span class="text-danger">{{ err.tipe_anggota[0] }}</span>
+                                </template>
+                            </div>
+                        </div>
                     </div>
 
                      <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="jumlah_pinjaman">Jumlah Pinjaman</label>
-                                <input autocomplete="off" type="text" v-model="form.jumlah_pinjaman" id="jumlah_pinjaman"
+                                <label class="form-control-label" for="jumlah_pinjaman">Max Jumlah Pinjaman Buku Per Anggota</label>
+                                <input autocomplete="off" type="number" v-model="form.jumlah_pinjaman" id="jumlah_pinjaman"
                                     class="form-control form-control-alternative" name="jumlah_pinjaman"
                                     placeholder="Jumlah Pinjaman">
                                 <template v-if="err.jumlah_pinjaman">
@@ -44,8 +56,8 @@
 
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="masa_berlaku_anggota">Masa Berlaku</label>
-                                <input type="text" v-model="form.masa_berlaku_anggota" id="masa_berlaku_anggota"
+                                <label class="form-control-label" for="masa_berlaku_anggota">Masa Berlaku Anggota (tahun)</label>
+                                <input type="number" v-model="form.masa_berlaku_anggota" id="masa_berlaku_anggota"
                                     class="form-control form-control-alternative" name="masa_berlaku_anggota"
                                     placeholder="Masa Berlaku">
                                 <template v-if="err.masa_berlaku_anggota">
@@ -58,8 +70,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="batas_perpanjangan_anggota">Batas Perpanjangan</label>
-                                <input autocomplete="off" type="text" v-model="form.batas_perpanjangan_anggota" id="batas_perpanjangan_anggota"
+                                <label class="form-control-label" for="batas_perpanjangan_anggota">Max Batas Perpanjangan Anggota (kali)</label>
+                                <input autocomplete="off" type="number" v-model="form.batas_perpanjangan_anggota" id="batas_perpanjangan_anggota"
                                     class="form-control form-control-alternative" name="batas_perpanjangan_anggota"
                                     placeholder="Batas Perpanjangan">
                                 <template v-if="err.batas_perpanjangan_anggota">
@@ -71,7 +83,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="denda">Denda</label>
-                                <input autocomplete="off" type="text" v-model="form.denda" id="denda"
+                                <input autocomplete="off" type="number" v-model="form.denda" id="denda"
                                     class="form-control form-control-alternative" name="denda"
                                     placeholder="Denda">
                                 <template v-if="err.denda">
@@ -128,6 +140,7 @@
                     tipe_anggota: this.fetch.tipe_anggota || '',
                     jumlah_pinjaman: this.fetch.jumlah_pinjaman || '',
                     masa_berlaku_anggota: this.fetch.masa_berlaku_anggota || '',
+                    masa_pinjaman_buku: this.fetch.masa_pinjaman_buku || '',
                     batas_perpanjangan_anggota: this.fetch.batas_perpanjangan_anggota || '',
                     denda: this.fetch.denda || '',
                     _method: (this.fetch.tipe_anggota ? 'PUT' : 'POST')

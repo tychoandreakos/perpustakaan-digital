@@ -103,8 +103,12 @@ class EksemplarTransaksiController extends Controller
      * @param  \App\Bibliobigrafi  $bibliobigrafi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bibliobigrafi $bibliobigrafi)
+    public function destroy($id)
     {
-        //
+        $bilio = Bibliobigrafi::where('id', $id)->first();
+        $bilio->pola_eksemplar()->delete();
+        
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }

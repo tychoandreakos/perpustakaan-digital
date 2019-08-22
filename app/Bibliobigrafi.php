@@ -18,12 +18,6 @@ class Bibliobigrafi extends Model
         'no_panggil'
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-        'pdf',
-        'img'
-    ];
 
     protected $dates = [
         'created_at',
