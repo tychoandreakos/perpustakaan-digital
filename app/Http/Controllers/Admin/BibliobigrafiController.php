@@ -170,10 +170,17 @@ class BibliobigrafiController extends Controller
             BukuTransaksi::create($requestTrans);
        }
         
+
+       $eksemplar_pola = EksemplarPola::find($request->pola_eksemplar);
+       $prefix = $eksemplar_pola->prefix;
+       $suffix = $eksemplar_pola->suffix;
+       $serial = $eksemplar_pola->serial;
         
        for ($i=0; $i < $request->total; $i++) {
 
         $eksemplar = EksemplarTransaksi::orderBy('pola_eksemplar', 'DESC')->first();
+
+        // slice string
 
         if($eksemplar) {
             $requestTransaksi = $request->all();

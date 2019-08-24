@@ -268,7 +268,7 @@
                                                             <th scope="col">
                                                                 Tanggal Pinjam
                                                             </th>
-                                                            <th scope="col">Tanggal Kembali</th>
+                                                            <th scope="col">Tanggal Harus Kembali</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="list">
