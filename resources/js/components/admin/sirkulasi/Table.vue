@@ -194,7 +194,7 @@
                                                         <tr v-for="item in pinjam" :key="item.id">
                                                             <template v-if="item.status_pinjam == 1">
                                                                 <th scope="row" class="name">
-                                                                    <form @submit.prevent="back(item.id)"
+                                                                    <form @submit.prevent="back2(item.id)"
                                                                         style="display: inline">
                                                                         <button type="submit"
                                                                             class="btn btn-sm btn-success"
@@ -403,7 +403,7 @@
                     .catch(err => console.log(err))
             },
 
-            back(id) {
+            back2(id) {
 
                 this.$swal({
                     title: 'Kembalian Buku?',

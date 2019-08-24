@@ -12,8 +12,8 @@ class PinjamController extends Controller
 {
     public function store(Request $request)
     {
-        $total = PinjamTransaksi::where('user_id', $request->user_id)->count();
-        if(!$total >= $request->jumlah_pinjaman){
+        $total = PinjamTransaksi::where([['user_id', $request->user_id], ['status_pinjam', 1]])->count();
+        if($total != $request->jumlah_pinjaman){
             foreach ($request->bibliobigrafi as $bilio) {
                 $requestData = $request->all();
             $requestData['tgl_pinjam'] = Carbon::now();

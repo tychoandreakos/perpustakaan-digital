@@ -34,7 +34,7 @@
                                     </td>
                                     <td>
                                         <div class="row">
-                                            <div class="col col-lg-12">
+                                            <div class="col col-lg-12 text-left">
                                                 {{ item.buku.judul }}
                                             </div>
                                             <!-- <div class="mt-2" v-for="buku_transaksi in item.buku.buku_transaksi"
