@@ -55,7 +55,7 @@
             <app-berita :berita="{{ $berita }}"></app-berita>
         </div>
 
-        {{-- info --}}
+        {{-- info
         <div id="info" class="mt-5">
             <div class="container">
                 <div class="infomt-5">
@@ -65,20 +65,18 @@
                             <h6>Jadwal Perpustakan</h6>
 
                             <div class="mt-3 mb-3">
-                                <span>{{ ucwords($info->regular) }}</span>
+                                <span>{{ isset($info->regular) ? ucwords($info->regular) : 'Belum ada data!' }}</span>
                                 <p>{{ $info->waktu_regular }}</p>
                             </div>
 
-                            @isset($info->weekend)
                             <div class="mb-3">
-                                <span>{{ ucwords($info->weekend) }}</span>
+                                <span>{{ isset($info->weekend) ? ucwords($info->weekend) : 'Belum ada data!' }}</span>
                                 <p>{{ $info->waktu_weekend }}</p>
                             </div>
-                            @endisset
 
                             <div class="mb-3">
                                 <span>Jam Istirahat</span>
-                                <p>{{ $info->waktu_istirahat }}</p>
+                                <p>{{ isset($info->waktu_istirahat) ? ucwords($info->waktu_istirahat) : 'Belum ada data!' }}</p>
                             </div>
                         </div>
                         <div class="col col-lg-5">
@@ -91,18 +89,18 @@
 
                             <div class="mb-3">
                                 <span>Phone Number</span>
-                                <p>{{ $info->no_telp }} </p>
+                                <p>{{ isset($info->no_telp) ? ucwords($info->no_telp) : 'Belum ada data!' }}</p>
                             </div>
 
                             <div class="mb-3">
                                 <span>Pustakawan</span>
-                                <p>{{ ucwords($info->pustakawan) }}</p>
+                                <p>{{ isset($info->pustakawan) ? ucwords($info->pustakawan) : 'Belum ada data!' }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
     </div>
