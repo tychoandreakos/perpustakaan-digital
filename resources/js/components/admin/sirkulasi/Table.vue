@@ -249,11 +249,90 @@
                                 </v-tab>
 
                                 <v-tab title="Denda">
-                                    Third tab content
+                                    <template v-if="denda.length > 0">
+                                        <div class="table-responsive">
+                                            <div>
+                                                <table class="table align-items-center">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col" style="width: 120px;">
+                                                                Aksi
+                                                            </th>
+                                                            <th scope="col">
+                                                                Kode Eksemplar
+                                                            </th>
+                                                            <th scope="col">
+                                                                Judul
+                                                            </th>
+                                                            <th scope="col">Tipe Koleksi</th>
+                                                            <th scope="col">
+                                                                Tanggal Pinjam
+                                                            </th>
+                                                            <th scope="col">Tanggal Kembali</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="list">
+
+                                                        <tr v-for="item in denda" :key="item.id">
+                                                            <template v-if="item.status_denda == 0">
+                                                                <template v-if="item.tanggal_habis_pinjam">
+                                                                    <th scope="row" class="name">
+                                                                        <form @submit.prevent="back2(item.id)"
+                                                                            style="display: inline">
+                                                                            <button type="submit"
+                                                                                class="btn btn-sm btn-success"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="bottom"
+                                                                                title="Kembalikan Eksemplar Ini">
+                                                                                <i
+                                                                                    class="ni ni-curved-next text-white"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                        <form style="display: inline"
+                                                                            @submit.prevent="perpanjang(item.id, form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku)">
+                                                                            <button type="submit"
+                                                                                class="btn btn-sm btn-primary"
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="bottom"
+                                                                                title="Perpanjang Buku">
+                                                                                <i class="ni ni-fat-add text-white"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </th>
+                                                                    <td>
+                                                                        {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ item.bibliobigrafi.buku.judul | capitalize }}
+                                                                    </td>
+
+                                                                    <td>
+                                                                        {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ item.tgl_pinjam }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ item.tanggal_habis_pinjam }}
+                                                                    </td>
+                                                                </template>
+                                                            </template>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <h3 class="text-center mt-3">Belum ada data!</h3>
+                                    </template>
                                 </v-tab>
 
                                 <v-tab title="Histori Peminjaman">
-                                  <template v-if="pinjam.length > 0">
+                                    <template v-if="pinjam.length > 0">
                                         <div class="table-responsive">
                                             <div>
                                                 <table class="table align-items-center">
@@ -346,6 +425,7 @@
                 option: [],
                 date2: '',
                 pinjam: {},
+                denda: {}
             }
         },
 
@@ -401,6 +481,12 @@
                     })
                     .then(res => this.pinjam = res.data.data)
                     .catch(err => console.log(err))
+            },
+
+            geDenda() {
+                axios.get('denda/' + this.form.id)
+                    .then(res => this.denda = res.data.data)
+                    .catch(err => console.log(err));
             },
 
             back2(id) {
@@ -512,6 +598,7 @@
 
             go() {
                 this.loading = true;
+                this.geDenda();
                 axios.get('/pustakawan/pinjaman', {
                         params: {
                             id: this.form.id

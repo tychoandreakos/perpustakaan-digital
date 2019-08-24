@@ -92,6 +92,7 @@ Route::get('pengembalian-fetch', 'PinjamController@pengembalian')->name('pengemb
 Route::get('berita-fetch', 'BeritaController@fetch')->name('berita.fetch');
 Route::get('info-fetch', 'InfoController@fetch')->name('info.fetch');
 Route::get('topik-fetch', 'TopikController@fetch')->name('topik.fetch');
+Route::get('denda/{id}', 'PinjamController@denda')->name('sirkulasi.denda');
 
 
 // Bibliobigrafi

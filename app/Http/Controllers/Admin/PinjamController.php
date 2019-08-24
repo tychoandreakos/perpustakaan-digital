@@ -46,6 +46,17 @@ class PinjamController extends Controller
         }])->where('user_id', $request->id)->orderBy('tanggal_habis_pinjam', 'ASC')->paginate(10);
     }
 
+    public function denda($id)
+    {
+        return PinjamTransaksi::with(['bibliobigrafi' => function($q){
+            $q->select("id", 'buku_id', 'pola_eksemplar', 'klasifikasi_id');
+        }, 'bibliobigrafi.buku' => function($q){
+            $q->select('id', 'judul');
+        }, 'bibliobigrafi.klasifikasi' => function($q){
+            $q->select('id', 'tipe_klasifikasi');
+        }])->where([['user_id', $id], ['tanggal_habis_pinjam', '<', Carbon::now()]])->orderBy('tanggal_habis_pinjam', 'ASC')->paginate(10);
+    }
+
     public function perpanjang(Request $request)
     {
         $pinjam = PinjamTransaksi::findOrFail($request->id);
