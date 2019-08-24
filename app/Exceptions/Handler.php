@@ -4,10 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Illuminate\Http\Response;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use PhpParser\Lexer\TokenEmulator\TokenEmulatorInterface;
 
 class Handler extends ExceptionHandler
