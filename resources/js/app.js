@@ -131,6 +131,10 @@ Vue.component('app-baca', require('./components/user/Baca.vue').default);
 Vue.component('app-result', require('./components/user/Result.vue').default);
 Vue.component('app-result-search', require('./components/user/ResultSearch.vue').default);
 
+// laporan
+Vue.component('table-koleksi-component', require('./components/admin/laporan/Koleksi.vue').default);
+
+
 // package
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('search-component', require('./components/user/Search').default);

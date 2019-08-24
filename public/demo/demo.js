@@ -86,7 +86,7 @@ demo = {
       type: 'line',
       responsive: true,
       data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul2", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
           label: "Active Users",
           borderColor: "#f96332",

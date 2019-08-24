@@ -123,6 +123,9 @@ Route::get('eksemplar-keluar-search', 'PinjamController@search');
 Route::get('berita-search', 'BeritaController@search');
 Route::get('topik-search', 'TopikController@search');
 
+// laporan
+Route::get('statistik-koleksi-buku', 'LaporanController@koleksi')->name('laporan.koleksi');
+
 // tool
 Route::get('sirkulasi', function() {
     $title = 'Sirkulasi';
