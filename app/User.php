@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(AnggotaTransaksi::class);
     }
+
+    public function pinjam_transaksi()
+    {
+        return $this->hasMany(PinjamTransaksi::class);
+    }
 }

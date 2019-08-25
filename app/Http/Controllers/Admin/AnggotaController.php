@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Anggota;
 use Illuminate\Http\Request;
 use App\AnggotaTransaksi;
+use App\Bibliobigrafi;
+use App\PinjamTransaksi;
 use App\User;
 use Carbon\Carbon;
 
@@ -92,10 +94,10 @@ class AnggotaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Anggota  $anggota
+     * @param  \App\Anggota  $anggotum
      * @return \Illuminate\Http\Response
      */
-    public function show(Anggota $anggota)
+    public function show(Anggota $anggotum)
     {
         //
     }
@@ -103,13 +105,14 @@ class AnggotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Anggota  $anggota
+     * @param  \App\Anggota  $anggotum
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $title = 'Update Anggota';
-        $anggota = Anggota::with('users', 'users.anggota_transaksi.tipe_anggota')->where('user_id', $id)->first();
+        // return
+        $anggota = Anggota::with('anggota_transaksi.tipe_anggota')->where('user_id', $id)->first();
         $users = User::with('anggota')->where('id', $id)->first();
         return view('admin.anggota.edit', compact('anggota', 'users', 'title'));
     }
@@ -120,7 +123,7 @@ class AnggotaController extends Controller
 
             $search = $request->q;
 
-            return Anggota::where('jenis_anggota','LIKE',"%$search%")
+            return User::with('anggota_transaksi.tipe_anggota', 'anggota')->where('name','LIKE',"%$search%")
             ->latest()->paginate(5);
         }
 
@@ -130,13 +133,22 @@ class AnggotaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Anggota  $anggota
+     * @param  \App\Anggota  $anggotum
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anggota $anggota)
+    public function update(Request $request)
     {
-        
-        $anggota->update($request->all());
+        $user = User::find($request->id)->first();
+        $user->update($request->all());
+        $user->save();
+
+        $anggota = Anggota::find($request->id)->first();
+        $anggota->update($anggota->all());
+        $anggota->save();
+
+        $transaksi = AnggotaTransaksi::find($request->id)->first();
+        $transaksi->update($request->all());
+        $transaksi->save();
 
         return response()->json([
             'message' => 'data berhasil diubah']);
@@ -145,12 +157,25 @@ class AnggotaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Anggota  $anggota
+     * @param  \App\Anggota  $anggotum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Anggota $anggota)
+    public function destroy($id)
     {
-        $anggota->delete();
+        $user = User::find($id)->first();
+
+        $count = PinjamTransaksi::where('user_id', $id)->count();
+        for ($i=0; $i < $count ; $i++) { 
+            $pinjam = PinjamTransaksi::where('user_id', $id)->first();
+            $bilio = $pinjam->bibliobigrafi()->first();
+            $bilio->status_pinjam = 0;
+            $bilio->save();
+        }
+
+        $user->pinjam_transaksi()->delete();
+        $user->anggota_transaksi()->delete();
+        $user->anggota()->delete();
+        $user->delete();
 
         return response()->json([
             'message' => 'data berhasil dihapus']);

@@ -253,7 +253,7 @@
                     tipe: this.tipe_ang,
                     image: this.fetch.image || '',
                     tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
-                    _method: (this.fetch.name ? 'PUT' : 'POST')
+                    _method: (this.users.id ? 'PUT' : 'POST')
                 },
 
                 loading: false,
@@ -314,7 +314,7 @@
                         })
                 } else {
                     // update
-                    axios.post('/pustakawan/bahasa/' + this.users.id, this.form)
+                    axios.post('/pustakawan/anggota/' + this.users.id, this.form)
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',

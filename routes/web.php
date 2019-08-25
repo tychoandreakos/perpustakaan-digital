@@ -19,31 +19,31 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'LandingController@index')->name('landing');
-Route::get('berita/{slug}', 'LandingController@berita');
-Route::get('buku/{slug}', 'LandingController@buku');
-Route::get('baca/{slug}', 'LandingController@baca')->middleware('auth');
-Route::get('buku/', 'LandingController@cari')->name('cari');
+// Route::get('berita/{slug}', 'LandingController@berita');
+// Route::get('buku/{slug}', 'LandingController@buku');
+// Route::get('baca/{slug}', 'LandingController@baca')->middleware('auth');
+// Route::get('buku/', 'LandingController@cari')->name('cari');
 
-Route::get('/tamu', function() {
-    return view('tamu');
-})->name('user.tamu');
+// Route::get('/tamu', function() {
+//     return view('tamu');
+// })->name('user.tamu');
 
-Route::get('beranda', function(){
-    return view('homes');
-})->name('beranda')->middleware('auth');
+// Route::get('beranda', function(){
+//     return view('homes');
+// })->name('beranda')->middleware('auth');
 
-// Route::get('lihat-topik', function(){
-//     return view('result-topik');
-// })->name('lihat.topik')->middleware('auth');
+// // Route::get('lihat-topik', function(){
+// //     return view('result-topik');
+// // })->name('lihat.topik')->middleware('auth');
 
-// fetch
-Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');
-Route::get('random-fetch', 'LandingController@random_topik')->name('random.fetch')->middleware('auth');
-Route::get('item-topik-fetch/{id}', 'LandingController@item')->name('topik.item')->middleware('auth');
-Route::get('lihat-topik/{slug}', 'LandingController@result')->name('topik.view')->middleware('auth');
+// // fetch
+// Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');
+// Route::get('random-fetch', 'LandingController@random_topik')->name('random.fetch')->middleware('auth');
+// Route::get('item-topik-fetch/{id}', 'LandingController@item')->name('topik.item')->middleware('auth');
+// Route::get('lihat-topik/{slug}', 'LandingController@result')->name('topik.view')->middleware('auth');
 
-// Route::view('/', 'user');
-// Route::view('/{any}', 'user');
+// // Route::view('/', 'user');
+// // Route::view('/{any}', 'user');
 
 // admin prefix
 Route::prefix('pustakawan')->namespace('Admin')->group(function() {

@@ -38,6 +38,6 @@ class Anggota extends Model
 
     public function anggota_transaksi()
     {
-        return $this->hasOne(AnggotaTransaksi::class);
+        return $this->hasOne(AnggotaTransaksi::class, 'user_id', 'user_id');
     }
 }
