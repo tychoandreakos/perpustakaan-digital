@@ -116,7 +116,9 @@ class PinjamController extends Controller
     {
         return Bibliobigrafi::with(['buku' => function($q){
             $q->select('id', 'judul');
-        }, 'pinjam_transaksi'])->where('status_pinjam', 1)->paginate(5);
+        }, 'pinjam_transaksi' => function($q){
+            $q->orderBy('tanggal_habis_pinjam', 'DESC');
+        }])->where('status_pinjam', 1)->orderBy('updated_at')->paginate(5);
     }
 
     public function getAllMonth() {

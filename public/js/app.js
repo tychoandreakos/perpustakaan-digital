@@ -8928,8 +8928,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post(_this5.perpanjangs, {
           id: id,
           duration: duration
-        });
-        then(function (res) {
+        }).then(function (res) {
           _this5.$swal({
             position: 'top-end',
             type: 'success',
@@ -8937,6 +8936,10 @@ __webpack_require__.r(__webpack_exports__);
             showConfirmButton: false,
             timer: 3000
           });
+
+          setTimeout(function () {
+            window.location = _this5.index;
+          }, 3200);
         })["catch"](function (err) {
           return console.log(err);
         });

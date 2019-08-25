@@ -531,7 +531,7 @@
                         id,
                         duration,
                     })
-                    then(res => {
+                    .then(res => {
                             this.$swal({
                                 position: 'top-end',
                                 type: 'success',
@@ -539,6 +539,10 @@
                                 showConfirmButton: false,
                                 timer: 3000
                             });
+
+                            setTimeout(() => {
+                                window.location = this.index;
+                            }, 3200)
                         })
                         .catch(err => console.log(err))
                 })
