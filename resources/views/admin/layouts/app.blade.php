@@ -58,12 +58,7 @@
     <!--   Core   -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('js/admin.js') }}"></script>
-    {{-- <script src="{{ asset('js/plugins/chart.js/dist/Chart.extension.js') }}"></script> --}}
-
-
-    <!--   Argon JS   -->
-    {{-- <script src="{{ asset('js/argon-dashboard.min.js') }}"></script> --}}
+<script src="{{ asset('js/admin.js') }}"></script>
 </body>
 
 </html>
