@@ -19,7 +19,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="id">ID Anggota</label>
-                                <input type="text" v-model="form.id" id="id"
+                                <input autocomplete="off" type="text" v-model="form.id" id="id"
                                     class="form-control form-control-alternative" name="id" placeholder="ID Anggota">
                                 <template v-if="err.id">
                                     <span class="text-danger">{{ err.id[0] }}</span>
@@ -29,7 +29,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="name">Nama Anggota</label>
-                                <input type="text" v-model="form.name" id="name"
+                                <input autocomplete="off" type="text" v-model="form.name" id="name"
                                     class="form-control form-control-alternative" name="name"
                                     placeholder="Nama Anggota">
                                 <template v-if="err.name">
@@ -58,7 +58,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input class="form-control datepicker" v-model="form.tgl_lahir" placeholder="Pilih tanggal lahir" type="text">
+                                    <input autocomplete="off" class="form-control datepicker" v-model="form.tgl_lahir"
+                                        placeholder="Pilih tanggal lahir" type="text">
                                 </div>
                             </div>
                         </div>
@@ -78,36 +79,25 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="alamat">Alamat</label>
-                                <input type="text" v-model="form.alamat" id="alamat"
-                                    class="form-control form-control-alternative" name="alamat" placeholder="Alamat">
-                                <template v-if="err.alamat">
-                                    <span class="text-danger">{{ err.alamat[0] }}</span>
+                                <label class="form-control-label" for="no_telp">No Telp</label>
+                                <input autocomplete="off" type="text" v-model="form.no_telp" id="no_telp"
+                                    class="form-control form-control-alternative" name="no_telp"
+                                    placeholder="Number Telp">
+                                <template v-if="err.no_telp">
+                                    <span class="text-danger">{{ err.no_telp[0] }}</span>
                                 </template>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="email">Email</label>
-                                <input type="email" v-model="form.email" id="email"
+                                <input autocomplete="off" type="email" v-model="form.email" id="email"
                                     class="form-control form-control-alternative" name="email" placeholder="Email">
                                 <template v-if="err.email">
                                     <span class="text-danger">{{ err.email[0] }}</span>
-                                </template>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="no_telp">No Telp</label>
-                                <input type="text" v-model="form.no_telp" id="no_telp"
-                                    class="form-control form-control-alternative" name="no_telp"
-                                    placeholder="Number Telp">
-                                <template v-if="err.no_telp">
-                                    <span class="text-danger">{{ err.no_telp[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -131,7 +121,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="password">Password</label>
-                                <input type="password" v-model="form.password" id="password"
+                                <input autocomplete="off" type="password" v-model="form.password" id="password"
                                     class="form-control form-control-alternative" name="password"
                                     placeholder="***********">
                                 <template v-if="err.password">
@@ -143,8 +133,8 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="password_confirmation">Password
                                     Confirmation</label>
-                                <input type="password" v-model="form.password_confirmation" id="password_confirmation"
-                                    class="form-control form-control-alternative"
+                                <input autocomplete="off" type="password" v-model="form.password_confirmation"
+                                    id="password_confirmation" class="form-control form-control-alternative"
                                     password_confirmation="password_confirmation" placeholder="***********">
                                 <template v-if="err.password_confirmation">
                                     <span class="text-danger">{{ err.password_confirmation[0] }}</span>
@@ -153,20 +143,25 @@
                         </div>
                     </div>
 
-                    <input type="hidden" v-model="tipe_anggota">
-                     <input type="hidden" v-model="tipe_ang">
+                    <input autocomplete="off" type="hidden" v-model="tipe_anggota">
+                    <input autocomplete="off" type="hidden" v-model="tipe_ang">
 
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label class="form-control-label" for="id">Upload Foto Anggota</label>
+                                <label class="form-control-label" for="catatan">Upload Foto Anggota</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <input type="file" v-on:change="onImageChange" class="custom-file-input"
+                                        id="validatedCustomFile">
+                                    <label class="custom-file-label" for="validatedCustomFile">{{ img }}</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                    <!-- <span class="text-danger mt-2">{{ img }}</span> -->
                                 </div>
+                                <template v-if="err.catatan">
+                                    <span class="text-danger">{{ err.catatan[0] }}</span>
+                                </template>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -186,7 +181,7 @@
                         </template>
                     </template>
 
-                    <input type="hidden" :value="jk">
+                    <input autocomplete="off" type="hidden" :value="jk">
                 </div>
             </form>
         </div>
@@ -219,12 +214,12 @@
                 return this.form.tipe_anggota_id = this.value.id
             },
 
-             tipe_ang() {
+            tipe_ang() {
                 return this.form.tipe = this.value.masa_berlaku_anggota
             },
 
             jk() {
-                    return this.form.jk = (this.fetch.jk == 0 ? 'Pria' : 'Wanita')
+                return this.form.jk = (this.fetch.jk == 0 ? 'Pria' : 'Wanita')
             }
 
             // executeLoader()
@@ -239,6 +234,7 @@
                 value: '',
                 jkelamin: ['Pria', 'Wanita'],
                 options: [],
+                img: 'Pilih Foto Anggota',
 
 
                 form: {
@@ -255,6 +251,7 @@
                     no_telp: this.fetch.no_telp || '',
                     foto: this.fetch.foto || '',
                     tipe: this.tipe_ang,
+                    image: this.fetch.image || '',
                     tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
                     _method: (this.fetch.name ? 'PUT' : 'POST')
                 },
@@ -274,6 +271,22 @@
                 return axios.get(this.tipe)
                     .then(res => this.options = res.data.data)
                     .catch(err => console.log(err));
+            },
+
+            onImageChange(e) {
+                this.img = e.target.files[0].name;
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.form.image = e.target.result;
+                };
+                reader.readAsDataURL(file);
             },
 
             simpan() {

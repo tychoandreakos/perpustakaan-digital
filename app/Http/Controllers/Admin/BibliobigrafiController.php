@@ -17,7 +17,6 @@ use App\BukuTransaksi;
 use App\EksemplarPola;
 use App\EksemplarTransaksi;
 use App\Koleksi;
-use Illuminate\Support\Facades\Storage;
 
 class BibliobigrafiController extends Controller
 {

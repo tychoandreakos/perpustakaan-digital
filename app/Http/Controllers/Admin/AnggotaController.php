@@ -50,13 +50,23 @@ class AnggotaController extends Controller
             'id' => 'required|unique:users|integer',
             'name' => 'required|min:3',
             'password' => 'required|confirmed|min:6',
-            'email' => 'required|min:6',
-            'tgl_lahir' => 'required',
+            'email' => 'required|min:6|email',
+            'tgl_lahir' => 'required|date',
             'alamat' => 'nullable|min:6',
             'jk' => 'nullable',
-            'no_telp' => 'nullable|min:6',
+            'no_telp' => 'nullable|min:6|numeric',
             'foto' => 'nullable',
+            'image' => 'nullable',
         ]);
+
+        if(!$request->image == '')
+        {
+            $image = $request->get('image');
+            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            \Image::make($request->get('image'))->save(public_path('storage/anggota/').$name);
+        } else {
+        $name = 'img.jpg';
+        }
 
         $dt = Carbon::now();
 
@@ -72,6 +82,7 @@ class AnggotaController extends Controller
         $requestData['tgl_expired'] = $dt->addYears($request->tipe);
         $requestData['tgl_lahir'] = date('Y-m-d', strtotime($request->tgl_lahir));
         $requestData['jk'] = ($request->jk == 'pria' || $request->jk == 'Pria') ? 0 : 1;
+        $requestData['foto'] = $name;
         Anggota::create($requestData);
        
         return response()->json([
