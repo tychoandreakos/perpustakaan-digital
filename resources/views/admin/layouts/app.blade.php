@@ -28,10 +28,10 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <!-- Icons -->
-    <link href="{{ asset('js/plugins/nucleo/css/nucleo.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     <link href="{{ asset('js/plugins/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
-    <link href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('css/argon-dashboard.css') }}" rel="stylesheet" /> --}}
     <style>
         * {
             outline: none;
@@ -57,9 +57,9 @@
 
     <!--   Core   -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/plugins/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/chart.js/dist/Chart.extension.js') }}"></script>
-    <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
+    {{-- <script src="{{ asset('js/plugins/chart.js/dist/Chart.extension.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script> --}}
 
 
     <!--   Argon JS   -->

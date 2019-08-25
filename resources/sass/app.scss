@@ -7,5 +7,11 @@
 // // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
-// costum
-@import 'user/homepage';
+// nucleo
+@import 'admin/nucleo.scss';
+
+// argon-dashboard
+@import 'admin/argon-dashboard.scss';
+
+// costums
+// @import 'user/homepage';
