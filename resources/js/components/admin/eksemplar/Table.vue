@@ -21,7 +21,7 @@
                                     <!-- <th scope="col">Tipe Koleksi</th>
                                 <th scope="col">Lokasi</th> -->
                                     <th scope="col">Klasifikasi</th>
-                                    <th scope="col">Perubahan Terakhir</th>
+                                    <th scope="col">Terakhir Dipinjam</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -56676,7 +56676,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Klasifikasi")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Perubahan Terakhir")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Terakhir Dipinjam")])
       ])
     ])
   }

@@ -71,9 +71,11 @@ class PinjamController extends Controller
 
     public function histori()
     {
-        return PinjamTransaksi::with(['bibliobigrafi.buku' => function($q) {
+        return PinjamTransaksi::with(['bibliobigrafi' => function($q) {
+            $q->select('id', 'buku_id', 'pola_eksemplar');
+        },  'bibliobigrafi.buku' => function($q) {
             $q->select('id', 'judul');
-        },  'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 0)->latest()->paginate(5);
+        }, 'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 0)->latest()->paginate(5);
     }
 
     public function kembali(Request $request)
@@ -82,7 +84,7 @@ class PinjamController extends Controller
         $bilio->status_pinjam = 0;
         $bilio->save();
 
-        $transaksi = PinjamTransaksi::where('bibliobigrafi_id', $request->id)->first();
+        $transaksi = PinjamTransaksi::where('bibliobigrafi_id', $request->id)->where('status_pinjam', 1)->first();
         $transaksi->status_pinjam = 0;
         $transaksi->tgl_kembali = Carbon::now();
         $transaksi->save();
