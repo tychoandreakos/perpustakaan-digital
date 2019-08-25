@@ -18,7 +18,7 @@
          </div>
          <!-- User -->
          <!-- Right Side Of Navbar -->
-         <ul class="navbar-nav ml-auto">
+         <ul class="navbar-nav align-items-center d-none d-md-flex">
              <!-- Authentication Links -->
              @guest('admin')
              <li class="nav-item">
