@@ -4,8 +4,9 @@
 
 <div class="container-fluid">
     <div class="header-body">
+
         <!-- Card stats -->
-        @include('admin.component.card-home')
+        @include('admin.component.laporan-home')
         {{-- {{ $gmd }} --}}
         <!-- overview panel -->
         <div class="container-fluid mt--7">
@@ -16,36 +17,20 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-                                    <h2 class="text-white mb-0">Sales value</h2>
-                                </div>
-                                <div class="col">
-                                    <ul class="nav nav-pills justify-content-end">
-                                        <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales"
-                                            data-update='{"data":{"datasets":[{"data":{[0, 20, 10, 30, 15, 40, 20, 60, 60]}}]}}'
-                                            data-prefix="$" data-suffix="k">
-                                            <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                                                <span class="d-none d-md-block">Month</span>
-                                                <span class="d-md-none">M</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item" data-toggle="chart" data-target="#chart-sales"
-                                            data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}'
-                                            data-prefix="$" data-suffix="k">
-                                            <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                                                <span class="d-none d-md-block">Week</span>
-                                                <span class="d-md-none">W</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <h2 class="text-white mb-0">10 Buku Terpopuler</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <!-- Chart -->
-                            <div class="chart">
-                                <!-- Chart wrapper -->
-                                <canvas id="chart-sales" class="chart-canvas"></canvas>
-                            </div>
+                            <ol>
+                                @if (!$popular->isEmpty())
+                                @foreach ($popular as $item)
+                                <li class="text-white">{{ $item }}</li>
+                                @endforeach
+                                @else
+                                    <div class="h4 text-white text-center">Belum ada data!</div>
+                                @endif
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -54,7 +39,8 @@
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase text-muted ls-1 mb-1">Statistik Anggota Yang Terdaftar Tiap Bulan</h6>
+                                    <h6 class="text-uppercase text-muted ls-1 mb-1">Statistik Anggota Yang Terdaftar
+                                        SETiap Bulan</h6>
                                     <h2 class="mb-0">Total orders</h2>
                                 </div>
                             </div>
