@@ -46,7 +46,7 @@ Route::get('/', 'LandingController@index')->name('landing');
 // // Route::view('/{any}', 'user');
 
 // admin prefix
-Route::prefix('pustakawan')->namespace('Admin')->group(function() {
+Route::prefix('pustakawan')->namespace('Admin')->middleware('auth:admin')->group(function() {
 
     Route::view('/', 'admin.home')->name('home');
 
