@@ -127,10 +127,13 @@ Route::get('topik-search', 'TopikController@search');
 // chart
 Route::get('anggota-chart', 'AnggotaController@chart');
 Route::get('buku-chart', 'BukuController@chart');
+Route::get('pinjam-chart', 'PinjamController@chart');
 
 // laporan
 Route::get('statistik-koleksi-buku', 'LaporanController@koleksi')->name('laporan.koleksi');
 Route::get('statistik-anggota', 'LaporanController@anggota')->name('laporan.anggota');
+Route::get('statistik-pinjam', 'LaporanController@pinjam')->name('laporan.pinjam');
+
 
 // tool
 Route::get('sirkulasi', function() {

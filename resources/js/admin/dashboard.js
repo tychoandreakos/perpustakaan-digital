@@ -964,6 +964,7 @@ var Charts = (function() {
 // chart
 require('./chart/buku');
 require('./chart/anggota');
+require('./chart/pinjam');
 
 
 //
