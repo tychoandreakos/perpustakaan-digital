@@ -91,13 +91,24 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="email">Email</label>
                                 <input autocomplete="off" type="email" v-model="form.email" id="email"
                                     class="form-control form-control-alternative" name="email" placeholder="Email">
                                 <template v-if="err.email">
                                     <span class="text-danger">{{ err.email[0] }}</span>
+                                </template>
+                            </div>
+                        </div>
+
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="jurusan">Jurusan</label>
+                                <input autocomplete="off" type="text" v-model="form.jurusan" id="jurusan"
+                                    class="form-control form-control-alternative" name="jurusan" placeholder="Email">
+                                <template v-if="err.jurusan">
+                                    <span class="text-danger">{{ err.jurusan[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -251,6 +262,7 @@
                     no_telp: this.fetch.no_telp || '',
                     foto: this.fetch.foto || '',
                     tipe: this.tipe_ang,
+                    jurusan: this.fetch.jurusan || '',
                     image: this.fetch.image || '',
                     tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
                     _method: (this.users.id ? 'PUT' : 'POST')

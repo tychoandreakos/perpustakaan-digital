@@ -18,7 +18,8 @@ class Anggota extends Model
         'alamat',
         'jk',
         'no_telp',
-        'foto'
+        'foto',
+        'jurusan'
     ];
 
     protected $dates = [

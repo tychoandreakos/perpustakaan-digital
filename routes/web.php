@@ -130,6 +130,7 @@ Route::get('buku-chart', 'BukuController@chart');
 
 // laporan
 Route::get('statistik-koleksi-buku', 'LaporanController@koleksi')->name('laporan.koleksi');
+Route::get('statistik-anggota', 'LaporanController@anggota')->name('laporan.anggota');
 
 // tool
 Route::get('sirkulasi', function() {

@@ -59,6 +59,7 @@ class AnggotaController extends Controller
             'jk' => 'nullable',
             'no_telp' => 'nullable|min:6|numeric',
             'foto' => 'nullable',
+            'jurusan' => 'nullable',
             'image' => 'nullable',
         ]);
 

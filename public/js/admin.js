@@ -27056,6 +27056,181 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
 
 /***/ }),
 
+/***/ "./resources/js/admin/chart/anggota.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/chart/anggota.js ***!
+  \*********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+// Orders chart
+//
+
+$(document).ready(function () {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('anggota-chart').then(function (res) {
+    var OrdersChart = function () {
+      //
+      // Variables
+      //
+      var $chart = $('#chart-orders-anggota'); //
+      // Methods
+      //
+      // Init chart
+
+      function initChart($chart) {
+        // Create chart
+        var ordersChart = new Chart($chart, {
+          type: 'bar',
+          options: {
+            scales: {
+              yAxes: [{
+                gridLines: {
+                  lineWidth: 1,
+                  color: '#dfe2e6',
+                  zeroLineColor: '#dfe2e6'
+                },
+                ticks: {
+                  callback: function callback(value) {
+                    if (!(value % 10)) {
+                      //return '$' + value + 'k'
+                      return value;
+                    }
+                  }
+                }
+              }]
+            },
+            tooltips: {
+              callbacks: {
+                label: function label(item, data) {
+                  var label = data.datasets[item.datasetIndex].label || '';
+                  var yLabel = item.yLabel;
+                  var content = '';
+
+                  if (data.datasets.length > 1) {
+                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                  }
+
+                  content += '<span class="popover-body-value">' + yLabel + '</span>';
+                  return content;
+                }
+              }
+            }
+          },
+          data: {
+            labels: res.data.months,
+            datasets: [{
+              label: 'Anggota',
+              data: res.data.post_count_data
+            }]
+          }
+        }); // Save to jQuery object
+
+        $chart.data('chart', ordersChart);
+      } // Init chart
+
+
+      if ($chart.length) {
+        initChart($chart);
+      }
+    }();
+  })["catch"]();
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/chart/buku.js":
+/*!******************************************!*\
+  !*** ./resources/js/admin/chart/buku.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+// Orders chart
+//
+
+$(document).ready(function () {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('buku-chart').then(function (res) {
+    var OrdersChart = function () {
+      //
+      // Variables
+      //
+      var $chart = $('#chart-orders-buku');
+      var $ordersSelect = $('[name="ordersSelect"]'); //
+      // Methods
+      //
+      // Init chart
+
+      function initChart($chart) {
+        // Create chart
+        var ordersChart = new Chart($chart, {
+          type: 'bar',
+          options: {
+            scales: {
+              yAxes: [{
+                gridLines: {
+                  lineWidth: 1,
+                  color: '#dfe2e6',
+                  zeroLineColor: '#dfe2e6'
+                },
+                ticks: {
+                  callback: function callback(value) {
+                    if (!(value % 10)) {
+                      //return '$' + value + 'k'
+                      return value;
+                    }
+                  }
+                }
+              }]
+            },
+            tooltips: {
+              callbacks: {
+                label: function label(item, data) {
+                  var label = data.datasets[item.datasetIndex].label || '';
+                  var yLabel = item.yLabel;
+                  var content = '';
+
+                  if (data.datasets.length > 1) {
+                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                  }
+
+                  content += '<span class="popover-body-value">' + yLabel + '</span>';
+                  return content;
+                }
+              }
+            }
+          },
+          data: {
+            labels: res.data.months,
+            datasets: [{
+              label: 'Anggota',
+              data: res.data.post_count_data
+            }]
+          }
+        }); // Save to jQuery object
+
+        $chart.data('chart', ordersChart);
+      } // Init chart
+
+
+      if ($chart.length) {
+        initChart($chart);
+      }
+    }();
+  })["catch"]();
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/dashboard.js":
 /*!*****************************************!*\
   !*** ./resources/js/admin/dashboard.js ***!
@@ -27871,83 +28046,15 @@ var Charts = function () {
     fonts: fonts,
     mode: mode
   };
-}(); //
-// Orders chart
-//
+}(); // chart
 
 
-$(document).ready(function () {
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('buku-chart').then(function (res) {
-    var OrdersChart = function () {
-      //
-      // Variables
-      //
-      var $chart = $('#chart-orders-buku');
-      var $ordersSelect = $('[name="ordersSelect"]'); //
-      // Methods
-      //
-      // Init chart
+__webpack_require__(/*! ./chart/buku */ "./resources/js/admin/chart/buku.js");
 
-      function initChart($chart) {
-        // Create chart
-        var ordersChart = new Chart($chart, {
-          type: 'bar',
-          options: {
-            scales: {
-              yAxes: [{
-                gridLines: {
-                  lineWidth: 1,
-                  color: '#dfe2e6',
-                  zeroLineColor: '#dfe2e6'
-                },
-                ticks: {
-                  callback: function callback(value) {
-                    if (!(value % 10)) {
-                      //return '$' + value + 'k'
-                      return value;
-                    }
-                  }
-                }
-              }]
-            },
-            tooltips: {
-              callbacks: {
-                label: function label(item, data) {
-                  var label = data.datasets[item.datasetIndex].label || '';
-                  var yLabel = item.yLabel;
-                  var content = '';
-
-                  if (data.datasets.length > 1) {
-                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
-                  }
-
-                  content += '<span class="popover-body-value">' + yLabel + '</span>';
-                  return content;
-                }
-              }
-            }
-          },
-          data: {
-            labels: res.data.months,
-            datasets: [{
-              label: 'Anggota',
-              data: res.data.post_count_data
-            }]
-          }
-        }); // Save to jQuery object
-
-        $chart.data('chart', ordersChart);
-      } // Init chart
-
-
-      if ($chart.length) {
-        initChart($chart);
-      }
-    }();
-  })["catch"]();
-}); //
+__webpack_require__(/*! ./chart/anggota */ "./resources/js/admin/chart/anggota.js"); //
 // Charts
 //
+
 
 'use strict'; //
 // Sales chart

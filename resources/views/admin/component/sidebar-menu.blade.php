@@ -89,7 +89,7 @@
             <div class="dropdown-menu" style="left: 15px;">
                 <a href="{{ route('laporan.koleksi') }}" class="dropdown-item">Statistik Koleksi Buku</a>
                 <a href="#" class="dropdown-item">Laporan Peminjaman</a>
-                <a href="#" class="dropdown-item">Laporan Anggota</a>
+                <a href="{{ route('laporan.anggota') }}" class="dropdown-item">Laporan Anggota</a>
                 <a href="#" class="dropdown-item">Rekapitulasi</a>
                 <a href="#" class="dropdown-item">Statistik Pengunjung</a>
                 <a href="#" class="dropdown-item">Statistik Pengunjung (Per Hari)</a>

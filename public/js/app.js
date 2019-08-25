@@ -2165,6 +2165,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2211,6 +2222,7 @@ __webpack_require__.r(__webpack_exports__);
         no_telp: this.fetch.no_telp || '',
         foto: this.fetch.foto || '',
         tipe: this.tipe_ang,
+        jurusan: this.fetch.jurusan || '',
         image: this.fetch.image || '',
         tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
         _method: this.users.id ? 'PUT' : 'POST'
@@ -51089,7 +51101,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-12" }, [
+              _c("div", { staticClass: "col-lg-6" }, [
                 _c(
                   "div",
                   { staticClass: "form-group" },
@@ -51135,6 +51147,60 @@ var render = function() {
                       ? [
                           _c("span", { staticClass: "text-danger" }, [
                             _vm._v(_vm._s(_vm.err.email[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "jurusan" }
+                      },
+                      [_vm._v("Jurusan")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.jurusan,
+                          expression: "form.jurusan"
+                        }
+                      ],
+                      staticClass: "form-control form-control-alternative",
+                      attrs: {
+                        autocomplete: "off",
+                        type: "text",
+                        id: "jurusan",
+                        name: "jurusan",
+                        placeholder: "Email"
+                      },
+                      domProps: { value: _vm.form.jurusan },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "jurusan", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.err.jurusan
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.jurusan[0]))
                           ])
                         ]
                       : _vm._e()
