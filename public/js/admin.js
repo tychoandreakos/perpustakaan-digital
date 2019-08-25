@@ -27231,6 +27231,94 @@ $(document).ready(function () {
 
 /***/ }),
 
+/***/ "./resources/js/admin/chart/pengunjung.js":
+/*!************************************************!*\
+  !*** ./resources/js/admin/chart/pengunjung.js ***!
+  \************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+// Orders chart
+//
+
+$(document).ready(function () {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('pengunjung-chart').then(function (res) {
+    var OrdersChart = function () {
+      //
+      // Variables
+      //
+      var $chart = $('#chart-orders-pengunjung');
+      var $ordersSelect = $('[name="ordersSelect"]'); //
+      // Methods
+      //
+      // Init chart
+
+      function initChart($chart) {
+        // Create chart
+        var ordersChart = new Chart($chart, {
+          type: 'bar',
+          options: {
+            scales: {
+              yAxes: [{
+                gridLines: {
+                  lineWidth: 1,
+                  color: '#dfe2e6',
+                  zeroLineColor: '#dfe2e6'
+                },
+                ticks: {
+                  callback: function callback(value) {
+                    if (!(value % 10)) {
+                      //return '$' + value + 'k'
+                      return value;
+                    }
+                  }
+                }
+              }]
+            },
+            tooltips: {
+              callbacks: {
+                label: function label(item, data) {
+                  var label = data.datasets[item.datasetIndex].label || '';
+                  var yLabel = item.yLabel;
+                  var content = '';
+
+                  if (data.datasets.length > 1) {
+                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                  }
+
+                  content += '<span class="popover-body-value">' + yLabel + '</span>';
+                  return content;
+                }
+              }
+            }
+          },
+          data: {
+            labels: res.data.months,
+            datasets: [{
+              label: 'Anggota',
+              data: res.data.post_count_data
+            }]
+          }
+        }); // Save to jQuery object
+
+        $chart.data('chart', ordersChart);
+      } // Init chart
+
+
+      if ($chart.length) {
+        initChart($chart);
+      }
+    }();
+  })["catch"]();
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/chart/pinjam.js":
 /*!********************************************!*\
   !*** ./resources/js/admin/chart/pinjam.js ***!
@@ -28140,17 +28228,19 @@ __webpack_require__(/*! ./chart/buku */ "./resources/js/admin/chart/buku.js");
 
 __webpack_require__(/*! ./chart/anggota */ "./resources/js/admin/chart/anggota.js");
 
-__webpack_require__(/*! ./chart/pinjam */ "./resources/js/admin/chart/pinjam.js"); //
+__webpack_require__(/*! ./chart/pinjam */ "./resources/js/admin/chart/pinjam.js");
+
+__webpack_require__(/*! ./chart/anggota */ "./resources/js/admin/chart/anggota.js");
+
+__webpack_require__(/*! ./chart/pengunjung */ "./resources/js/admin/chart/pengunjung.js"); //
 // Charts
 //
 
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('pinjam-chart').then(function (res) {
-  console.log(res.data);
   'use strict'; //
   // Sales chart
   //
-
 
   var SalesChart = function () {
     // Variables

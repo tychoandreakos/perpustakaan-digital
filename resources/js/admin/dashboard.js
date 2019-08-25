@@ -965,6 +965,8 @@ var Charts = (function() {
 require('./chart/buku');
 require('./chart/anggota');
 require('./chart/pinjam');
+require('./chart/anggota');
+require('./chart/pengunjung');
 
 
 //
@@ -973,7 +975,6 @@ require('./chart/pinjam');
 
 Axios.get('pinjam-chart')
 .then(res => {
-  console.log(res.data)
   'use strict';
 
 //

@@ -82,6 +82,8 @@ Vue.component('histori-component', require('./components/admin/sirkulasi/Histori
 Vue.component('table-eksemplar-keluar-component', require('./components/admin/eksemplar-keluar/Table.vue').default);
 Vue.component('form-eksemplar-keluar-component', require('./components/admin/eksemplar-keluar/Form.vue').default);
 
+// daftar pengunjung
+Vue.component('table-pengunjung-component', require('./components/admin/pengunjung/Table.vue').default);
 
 
 

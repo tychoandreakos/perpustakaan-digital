@@ -93,7 +93,11 @@ Route::get('pengembalian-fetch', 'PinjamController@pengembalian')->name('pengemb
 Route::get('berita-fetch', 'BeritaController@fetch')->name('berita.fetch');
 Route::get('info-fetch', 'InfoController@fetch')->name('info.fetch');
 Route::get('topik-fetch', 'TopikController@fetch')->name('topik.fetch');
+Route::get('tamu-fetch', 'BukuTamuController@fetch')->name('tamu.fetch');
+
+
 Route::get('denda/{id}', 'PinjamController@denda')->name('sirkulasi.denda');
+
 
 
 // Bibliobigrafi
@@ -123,11 +127,13 @@ Route::get('anggota-search', 'AnggotaController@search');
 Route::get('eksemplar-keluar-search', 'PinjamController@search');
 Route::get('berita-search', 'BeritaController@search');
 Route::get('topik-search', 'TopikController@search');
+Route::get('pengunjung-search', 'BukuTamuController@search');
 
 // chart
 Route::get('anggota-chart', 'AnggotaController@chart');
 Route::get('buku-chart', 'BukuController@chart');
 Route::get('pinjam-chart', 'PinjamController@chart');
+Route::get('pengunjung-chart', 'BukuTamuController@chart');
 
 // laporan
 Route::get('statistik-koleksi-buku', 'LaporanController@koleksi')->name('laporan.koleksi');
@@ -152,6 +158,11 @@ Route::get('histori', function(){
     $title = 'Histori Peminjaman';
     return view('admin.sirkulasi.histori', compact('title'));
 })->name('sirkulasi.histori');
+Route::get('daftar-pengunjung', function(){
+    $title = 'Daftar Pengunjung Perpustakaan';
+    return view('admin.pengunjung', compact('title'));
+})->name('pengunjung');
+
 
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
 Route::get('pinjaman', 'PinjamController@pinjaman')->name('pinjam.pinjaman');

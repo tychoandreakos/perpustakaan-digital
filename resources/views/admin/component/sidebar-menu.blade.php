@@ -104,7 +104,7 @@
 <!-- Navigation -->
 <ul class="navbar-nav mb-md-3">
     <li class="nav-item">
-        <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
+        <a class="nav-link" href="{{ route('pengunjung') }}">
             <i class="ni ni-align-left-2"></i> Daftar Pengunjung
         </a>
     </li>

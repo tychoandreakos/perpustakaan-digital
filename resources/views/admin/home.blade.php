@@ -55,15 +55,15 @@
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase text-muted ls-1 mb-1">Statistik Koleksi Buku Per Bulan</h6>
-                                    <h2 class="mb-0">Total Buku</h2>
+                                    <h6 class="text-uppercase text-muted ls-1 mb-1">Statistik Pengunjung Per Bulan Berdasarkan Buku Tamu</h6>
+                                    <h2 class="mb-0">Total Pengunjung</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <!-- Chart -->
                             <div class="chart">
-                                <canvas id="chart-orders-anggota" class="chart-canvas"></canvas>
+                                <canvas id="chart-orders-pengunjung" class="chart-canvas"></canvas>
                             </div>
                         </div>
                     </div>
@@ -84,6 +84,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
+                                @if (!$pinjam->isEmpty())
                             <!-- Projects table -->
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
@@ -97,27 +98,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pinjam as $item)
-                                    <tr>
-                                        <th scope="row">
-                                            {{ strtoupper($item->bibliobigrafi->pola_eksemplar) }}
-                                        </th>
-                                        <td>
-                                            {{ $item->user_id }}
-                                        </td>
-                                        <td>
-                                            {{ ucwords($item->user->name) }}
-                                        </td>
-                                        <td>
-                                            {{ ucwords($item->bibliobigrafi->buku->judul) }}
-                                        </td>
-                                        <td>{{ $item->tgl_pinjam }}</td>
-                                        <td>{{ $item->tanggal_habis_pinjam }}</td>
-                                    </tr>
-                                    @endforeach
-
+                                   @foreach ($pinjam as $item)
+                                   <tr>
+                                       <th scope="row">
+                                           {{ strtoupper($item->bibliobigrafi->pola_eksemplar) }}
+                                       </th>
+                                       <td>
+                                           {{ $item->user_id }}
+                                       </td>
+                                       <td>
+                                           {{ ucwords($item->user->name) }}
+                                       </td>
+                                       <td>
+                                           {{ ucwords($item->bibliobigrafi->buku->judul) }}
+                                       </td>
+                                       <td>{{ $item->tgl_pinjam }}</td>
+                                       <td>{{ $item->tanggal_habis_pinjam }}</td>
+                                   </tr>
+                                   @endforeach
+                                   
                                 </tbody>
                             </table>
+                            @else
+                                   <h4 class="text-center">Belum Ada Data</h4>
+                                   @endif
                         </div>
                     </div>
                 </div>
@@ -134,6 +138,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
+                            @if (!$anggota->isEmpty())
                             <!-- Projects table -->
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
@@ -163,6 +168,9 @@
                                    @endforeach
                                 </tbody>
                             </table>
+                            @else
+                            <h4 class="text-center">Belum Ada Data</h4>
+                            @endif
                         </div>
                     </div>
                 </div>
