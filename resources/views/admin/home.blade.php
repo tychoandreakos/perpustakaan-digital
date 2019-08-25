@@ -143,7 +143,7 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">ID</th>
+                                        <th scope="col">ID / NPM</th>
                                         <th scope="col">Nama Lengkap</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Jurusan</th>

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
+use App\Bibliobigrafi;
 use App\Http\Controllers\Controller;
 use App\PinjamTransaksi;
 use App\User;
@@ -15,9 +17,11 @@ class homePageController extends Controller
         $pinjam = PinjamTransaksi::with('bibliobigrafi.buku', 'user')->where('status_pinjam', 1)->latest()->limit(5)->get();
         // return
         $anggota = User::with('anggota', 'anggota_transaksi.tipe_anggota')->latest()->limit(4)->get();
-        // return
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
         $statistik = $this->chart();
-        return view('admin.home', compact('pinjam', 'anggota', 'statistik'));
+        return view('admin.home', compact('pinjam', 'anggota', 'statistik', 'anggota_count', 'koleksi', 'eksemplar'));
     }
 
     public function getAllMonth() {
