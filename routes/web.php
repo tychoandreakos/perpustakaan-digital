@@ -49,7 +49,7 @@ Route::get('/coba', 'Coba@getMonthData')->name('landing');
 // admin prefix
 Route::prefix('pustakawan')->namespace('Admin')->middleware('auth:admin')->group(function() {
 
-    Route::get('/', 'homePageController@index')->name('home');
+    Route::get('/beranda', 'homePageController@index')->name('home');
 
 
 // master file

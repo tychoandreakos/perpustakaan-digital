@@ -28145,71 +28145,76 @@ __webpack_require__(/*! ./chart/pinjam */ "./resources/js/admin/chart/pinjam.js"
 //
 
 
-'use strict'; //
-// Sales chart
-//
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('pinjam-chart').then(function (res) {
+  console.log(res.data);
+  'use strict'; //
+  // Sales chart
+  //
 
 
-var SalesChart = function () {
-  // Variables
-  var $chart = $('#chart-sales'); // Methods
+  var SalesChart = function () {
+    // Variables
+    var $chart = $('#chart-sales'); // Methods
 
-  function init($chart) {
-    // this.ajaxget();
-    var salesChart = new Chart($chart, {
-      type: 'line',
-      options: {
-        scales: {
-          yAxes: [{
-            gridLines: {
-              lineWidth: 1,
-              color: Charts.colors.gray[900],
-              zeroLineColor: Charts.colors.gray[900]
-            },
-            ticks: {
-              callback: function callback(value) {
-                if (!(value % 10)) {
-                  return '$' + value + 'k';
+    function init($chart) {
+      // this.ajaxget();
+      var salesChart = new Chart($chart, {
+        type: 'line',
+        options: {
+          scales: {
+            yAxes: [{
+              gridLines: {
+                lineWidth: 1,
+                color: Charts.colors.gray[900],
+                zeroLineColor: Charts.colors.gray[900]
+              },
+              ticks: {
+                callback: function callback(value) {
+                  if (!(value % 10)) {
+                    return value;
+                  }
                 }
               }
-            }
-          }]
-        },
-        tooltips: {
-          callbacks: {
-            label: function label(item, data) {
-              var label = data.datasets[item.datasetIndex].label || '';
-              var yLabel = item.yLabel;
-              var content = '';
+            }]
+          },
+          tooltips: {
+            callbacks: {
+              label: function label(item, data) {
+                var label = data.datasets[item.datasetIndex].label || '';
+                var yLabel = item.yLabel;
+                var content = '';
 
-              if (data.datasets.length > 1) {
-                content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                if (data.datasets.length > 1) {
+                  content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                }
+
+                content += '<span class="popover-body-value">' + yLabel + '</span>';
+                return content;
               }
-
-              content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
-              return content;
             }
           }
+        },
+        data: {
+          labels: res.data.months,
+          datasets: [{
+            label: 'Performance',
+            data: res.data.post_count_data
+          }]
         }
-      },
-      data: {
-        labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-          label: 'Performance',
-          data: [20, 20, 10, 30, 25, 40, 20, 60, 60]
-        }]
-      }
-    }); // Save to jQuery object
+      }); // Save to jQuery object
 
-    $chart.data('chart', salesChart);
-  }
+      $chart.data('chart', salesChart);
+    }
 
-  ; // Events
+    ; // Events
 
-  if ($chart.length) {
-    init($chart);
-  }
-}();
+    if ($chart.length) {
+      init($chart);
+    }
+  }();
+})["catch"](function (err) {
+  return console.log(err);
+});
 
 /***/ }),
 

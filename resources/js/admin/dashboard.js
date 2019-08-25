@@ -971,7 +971,10 @@ require('./chart/pinjam');
 // Charts
 //
 
-'use strict';
+Axios.get('pinjam-chart')
+.then(res => {
+  console.log(res.data)
+  'use strict';
 
 //
 // Sales chart
@@ -1003,7 +1006,7 @@ var SalesChart = (function() {
             ticks: {
               callback: function(value) {
                 if (!(value % 10)) {
-                  return '$' + value + 'k';
+                  return value;
                 }
               }
             }
@@ -1020,17 +1023,17 @@ var SalesChart = (function() {
                 content += '<span class="popover-body-label mr-auto">' + label + '</span>';
               }
 
-              content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
+              content += '<span class="popover-body-value">' + yLabel + '</span>';
               return content;
             }
           }
         }
       },
       data: {
-        labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: res.data.months,
         datasets: [{
           label: 'Performance',
-          data: [20, 20, 10, 30, 25, 40, 20, 60, 60]
+          data: res.data.post_count_data
         }]
       }
     });
@@ -1047,4 +1050,6 @@ var SalesChart = (function() {
     init($chart);
   }
 
-})();
+})()
+})
+.catch(err => console.log(err));
