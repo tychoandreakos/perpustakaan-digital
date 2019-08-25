@@ -19,6 +19,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'LandingController@index')->name('landing');
+Route::get('/coba', 'Coba@getMonthData')->name('landing');
 // Route::get('berita/{slug}', 'LandingController@berita');
 // Route::get('buku/{slug}', 'LandingController@buku');
 // Route::get('baca/{slug}', 'LandingController@baca')->middleware('auth');
@@ -122,6 +123,9 @@ Route::get('anggota-search', 'AnggotaController@search');
 Route::get('eksemplar-keluar-search', 'PinjamController@search');
 Route::get('berita-search', 'BeritaController@search');
 Route::get('topik-search', 'TopikController@search');
+
+// chart
+Route::get('anggota-chart', 'AnggotaController@chart');
 
 // laporan
 Route::get('statistik-koleksi-buku', 'LaporanController@koleksi')->name('laporan.koleksi');

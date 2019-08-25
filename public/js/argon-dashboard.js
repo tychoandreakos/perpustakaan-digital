@@ -1019,7 +1019,7 @@ var OrdersChart = (function() {
         }
       },
       data: {
-        labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: ['Jul', 'Aussg2', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
           label: 'Sales',
           data: [25, 20, 10, 22, 17, 29]
