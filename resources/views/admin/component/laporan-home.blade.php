@@ -20,6 +20,7 @@
                         <span>Total dari judul buku yang tersedia di koleksi</span>
                       </p>
                     </div>
+                    <div class="col-auto"></div>
                   </div>
                 </div>
                 <div class="col-xl-3 col-lg-6">

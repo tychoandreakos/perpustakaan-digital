@@ -126,6 +126,7 @@ Route::get('topik-search', 'TopikController@search');
 
 // chart
 Route::get('anggota-chart', 'AnggotaController@chart');
+Route::get('buku-chart', 'BukuController@chart');
 
 // laporan
 Route::get('statistik-koleksi-buku', 'LaporanController@koleksi')->name('laporan.koleksi');
