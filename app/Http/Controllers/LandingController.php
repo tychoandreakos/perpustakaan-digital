@@ -129,12 +129,19 @@ class LandingController extends Controller
 
     public function cari(Request $request)
     {
-        $result = Buku::with(['buku_transaksi.pengarang' => function($q) {
+        $validatedData = $request->validate([
+            'cari' => 'required|min:3'
+        ]);
+
+        $query = $request->cari;
+
+        // return
+        $result = Buku::with(['buku_transaksi.pengarang' => function($q) use ($query) {
             $q->select('id', 'nama_pengarang');
         }, 'buku_transaksi.penerbit', 'bibliobigrafi.gmd' => function($q) {
             $q->select('id', 'nama_gmd')->first();
-        }])->where('judul', 'LIKE' ,"%".$request->cari."%")->get();
-        $cari = $request->cari;
+        }])->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);
+        $cari = $query;
         return view('cari', compact('result', 'cari'));
     }
 

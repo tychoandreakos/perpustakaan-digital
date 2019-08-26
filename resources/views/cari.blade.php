@@ -4,7 +4,7 @@
 @include('component.navbar-landkit')
 
 
-@include('component.cari-page')
-@include('component.footer-2')
+@include('component.search-buku')
+@include('component.footer')
 
 @endsection
