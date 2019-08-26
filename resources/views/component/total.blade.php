@@ -23,8 +23,8 @@
                   
                   <!-- Heading -->
                   <h2>
-                    Stay focused on your business. <br>
-                    <span class="text-primary">Let us handle the design</span>.
+                   Ayok daftar sekarang juga di <br>
+                    <span class="text-primary">Diglib STMIK AMIKBANDUNG</span>.
                   </h2>
       
                   <!-- Text -->
@@ -36,29 +36,28 @@
                   <div class="d-flex">
                     <div class="pr-5">
                       <h3 class="mb-0">
-                        <span data-toggle="countup" data-from="0" data-to="100" data-aos data-aos-id="countup:in"></span>%
+                        <span data-toggle="countup" data-from="0" data-to="100" data-aos data-aos-id="countup:in"></span>
                       </h3>
                       <p class="text-gray-700 mb-0">
-                        Satisfaction
+                      PDF
                       </p>
                     </div>
                     <div class="border-left border-gray-300"></div>
                     <div class="px-5">
                       <h3 class="mb-0">
-                        <span data-toggle="countup" data-from="0" data-to="24" data-aos data-aos-id="countup:in"></span>/
-                        <span data-toggle="countup" data-from="0" data-to="7" data-aos data-aos-id="countup:in"></span>
+                          <span data-toggle="countup" data-from="0" data-to="100" data-aos data-aos-id="countup:in"></span>
                       </h3>
                       <p class="text-gray-700 mb-0">
-                        Support
+                       Jurnal
                       </p>
                     </div>
                     <div class="border-left border-gray-300"></div>
                     <div class="pl-5">
                       <h3 class="mb-0">
-                        <span data-toggle="countup" data-from="0" data-to="100" data-aos data-aos-id="countup:in"></span>k+
+                        <span data-toggle="countup" data-from="0" data-to="100" data-aos data-aos-id="countup:in"></span>
                       </h3>
                       <p class="text-gray-700 mb-0">
-                        Sales
+                        Koleksi Buku
                       </p>
                     </div>
                   </div>

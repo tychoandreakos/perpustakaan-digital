@@ -18,8 +18,8 @@ class LandingController extends Controller
         // $buku = Buku::all()->count();
         // $info = Info::all()->first();
         // $topik = Topik::orderBy('order', 'ASC')->limit(4)->get();
-        // $berita =  Berita::latest()->get();
-        return view('landing');
+        $berita =  Berita::latest()->get();
+        return view('landing', compact('berita'));
     }
 
     public function berita($slug)

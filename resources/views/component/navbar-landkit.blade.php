@@ -383,7 +383,7 @@
                                      </div>
 
                                  </a>
-                                 <a class="list-group-item" href="docs/changelog.html">
+                                 <a class="list-group-item" href="{{ route('home') }}">
 
                                      <!-- Icon -->
                                      <div class="icon icon-sm text-primary">
@@ -413,7 +413,7 @@
 
                                          <!-- Heading -->
                                          <h6 class="font-weight-bold text-uppercase text-primary mb-0">
-                                             Changelog
+                                            Masuk Pustakawan
                                          </h6>
 
                                          <!-- Text -->

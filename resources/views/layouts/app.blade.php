@@ -35,6 +35,8 @@
     <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script> --}}
 
  
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.8.2/countUp.min.js'></script>
 
     <!-- Map -->
     <script src='../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>

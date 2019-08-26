@@ -5,7 +5,8 @@ require('./user/flikity');
 require('./user/jarallax')
 require('./user/jarallax-element');
 require('./user/jarallax-video');
-require('./user/count');
+// require('./user/countUp');
+// import 'countup';
 require('./user/highlight');
 require('./user/fancy');
 require('./user/theme.js')
