@@ -2,10 +2,9 @@
 @section('main')
 
 @include('component.navbar-landkit')
+@include('component.all-stories')
 
 
-@include('component.artikel')
-
-@include('component.footer')
+@include('component.footer-2')
 
 @endsection

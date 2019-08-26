@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Berita extends Model
 {
@@ -13,4 +14,10 @@ class Berita extends Model
         'slug',
         'img'
     ];
+
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
+    }
 }

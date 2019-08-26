@@ -19,8 +19,11 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'LandingController@index')->name('landing');
+Route::get('/cari', 'LandingController@cari')->name('cari');
+Route::get('berita/{slug}', 'LandingController@berita')->name('berita');
+Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua');
+
 // Route::get('/coba', 'Coba@getMonthData')->name('landing');
-// Route::get('berita/{slug}', 'LandingController@berita');
 // Route::get('buku/{slug}', 'LandingController@buku');
 // Route::get('baca/{slug}', 'LandingController@baca')->middleware('auth');
 // Route::get('buku/', 'LandingController@cari')->name('cari');

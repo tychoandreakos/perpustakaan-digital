@@ -54,7 +54,7 @@
                     <div class="border-left border-gray-300"></div>
                     <div class="pl-5">
                       <h3 class="mb-0">
-                        <span data-toggle="countup" data-from="0" data-to="100" data-aos data-aos-id="countup:in"></span>
+                        <span data-toggle="countup" data-from="0" data-to="{{ $buku }}" data-aos data-aos-id="countup:in"></span>
                       </h3>
                       <p class="text-gray-700 mb-0">
                         Koleksi Buku

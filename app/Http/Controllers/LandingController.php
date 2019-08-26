@@ -15,17 +15,24 @@ class LandingController extends Controller
     public function index()
     {
         // $user = User::all()->count();
-        // $buku = Buku::all()->count();
         // $info = Info::all()->first();
         // $topik = Topik::orderBy('order', 'ASC')->limit(4)->get();
-        $berita =  Berita::latest()->get();
-        return view('landing', compact('berita'));
+        $berita =  Berita::latest()->limit(3)->get();
+        $buku = Buku::all()->count();
+        return view('landing', compact('berita', 'buku'));
     }
 
     public function berita($slug)
     {
         $result = Berita::where('slug', $slug)->firstOrFail();
-        return view('berita', compact('result')); 
+        $berita = Berita::latest()->limit(3)->get();
+        return view('berita', compact('result', 'berita')); 
+    }
+
+    public function beritaSemua()
+    {
+        $result = Berita::latest()->paginate(3);
+        return view('berita-semua', compact('result'));
     }
 
     public function buku($slug)
@@ -74,7 +81,7 @@ class LandingController extends Controller
             $q->select('id', 'nama_gmd')->first();
         }])->where('judul', 'LIKE' ,"%".$request->cari."%")->get();
         $cari = $request->cari;
-        return view('result-topik-search', compact('result', 'cari'));
+        return view('cari', compact('result', 'cari'));
     }
 
     public function result($slug)
