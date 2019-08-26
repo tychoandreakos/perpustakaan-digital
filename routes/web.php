@@ -94,6 +94,7 @@ Route::get('berita-fetch', 'BeritaController@fetch')->name('berita.fetch');
 Route::get('info-fetch', 'InfoController@fetch')->name('info.fetch');
 Route::get('topik-fetch', 'TopikController@fetch')->name('topik.fetch');
 Route::get('tamu-fetch', 'BukuTamuController@fetch')->name('tamu.fetch');
+Route::get('terlambat-fetch', 'PinjamController@terlambat')->name('terlambat.fetch');
 
 
 Route::get('denda/{id}', 'PinjamController@denda')->name('sirkulasi.denda');
@@ -162,6 +163,10 @@ Route::get('daftar-pengunjung', function(){
     $title = 'Daftar Pengunjung Perpustakaan';
     return view('admin.pengunjung', compact('title'));
 })->name('pengunjung');
+Route::get('daftar-keterlambatan', function(){
+    $title = 'Daftar Keterlambatan Buku';
+    return view('admin.keterlambatan', compact('title'));
+})->name('keterlambatan');
 
 
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');

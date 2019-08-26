@@ -35,7 +35,7 @@ return [
     | This way you can keep your admin page secure.
     | Default : admin
     */
-    'prefix' => 'admin',
+    'prefix' => 'pustakawan',
 
     /*
     |--------------------------------------------------------------------------

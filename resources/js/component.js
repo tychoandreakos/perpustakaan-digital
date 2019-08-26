@@ -85,6 +85,9 @@ Vue.component('form-eksemplar-keluar-component', require('./components/admin/eks
 // daftar pengunjung
 Vue.component('table-pengunjung-component', require('./components/admin/pengunjung/Table.vue').default);
 
+// daftar keterlambatan
+Vue.component('table-keterlambatan-component', require('./components/admin/keterlambatan/Table.vue').default);
+
 
 
 // laporan
