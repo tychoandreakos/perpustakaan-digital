@@ -37,7 +37,7 @@
                     </a>
                     @endif
                     @else
-                    <a href="overview.html" class="btn btn-primary shadow lift mr-1">
+                    <a href="{{ route('beranda') }}" class="btn btn-primary shadow lift mr-1">
                         Masuk Menu Perpustakaan <i class="fe fe-arrow-right d-none d-md-inline ml-3"></i>
                     </a>
                     @endguest

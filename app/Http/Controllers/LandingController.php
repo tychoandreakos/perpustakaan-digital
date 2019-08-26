@@ -24,7 +24,11 @@ class LandingController extends Controller
 
     public function beranda()
     {
-        return view('beranda');
+        // return
+        $terbaru = Buku::with(['buku_transaksi.pengarang', 'buku_transaksi.penerbit', 'topik', 'buku_transaksi.bahasa' => function($q) {
+            $q->select('id', 'jenis_bahasa');
+        }])->latest()->limit(3)->get();
+        return view('beranda', compact('terbaru'));
     }
 
     public function berita($slug)

@@ -17,7 +17,6 @@ class CreateTopiksTable extends Migration
             $table->bigIncrements('id');
             $table->string('jenis_topik', 50);
             $table->string('slug', 50);
-            $table->string('img', 100);
             $table->timestamps();
         });
     }

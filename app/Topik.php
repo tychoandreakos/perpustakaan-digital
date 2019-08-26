@@ -12,7 +12,7 @@ class Topik extends Model
         'jenis_topik',
         'slug',
         'order',
-        'img'
+        'warna'
     ];
 
     public function getUpdatedAtAttribute($value)

@@ -1,0 +1,110 @@
+<!-- ARTICLES
+      ================================================== -->
+<section class="pt-7 pt-md-10">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-12 col-md">
+
+                <!-- Heading -->
+                <h3 class="mb-0">
+                    Koleksi Terbaru
+                </h3>
+
+                <!-- Text -->
+                <p class="mb-0 text-muted">
+                    Here’s what we've been up to recently.
+                </p>
+
+            </div>
+            <div class="col-12 col-md-auto">
+
+                <!-- Button -->
+                <a href="#!" class="btn btn-sm btn-outline-gray-300 d-none d-md-inline">
+                    View all
+                </a>
+
+            </div>
+        </div> <!-- / .row -->
+        <div class="row">
+            @foreach ($terbaru as $item)
+            <div class="col-12 col-md-6 col-lg-4 d-flex">
+
+                <!-- Card -->
+                <div class="card mb-6 mb-lg-0 shadow-light-lg lift lift-lg">
+
+                    <!-- Image -->
+                    <a class="card-img-top" href="#!">
+
+                        <!-- Image -->
+                        <div style="display: flex; background: {{ isset($item->topik->warna) ?$item->topik->warna : '#335eea' }}; width: 100%; height: 250px"
+                            class="card-img-top">
+                            <div style="background:url('{{  url('storage/cover/'.$item->gambar_sampul) }}') center no-repeat;background-size: cover; width: 115px;
+                                height: 160px;margin: auto; display:flex; align-self: center
+                            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);"></div>
+                        </div>
+
+                        <!-- Shape -->
+                        <div class="position-relative">
+                            <div class="shape shape-bottom shape-fluid-x svg-shim text-white">
+                                <svg viewBox="0 0 2880 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M2160 0C1440 240 720 240 720 240H0V480H2880V0H2160Z" fill="currentColor" />
+                                </svg>
+                            </div>
+                        </div>
+
+                    </a>
+
+                    <!-- Body -->
+                    <a class="card-body" href="#!">
+
+                        <!-- Heading -->
+                        <h3>
+                            {{ $item->judul }}
+                        </h3>
+
+                        <!-- Text -->
+                        <span class="badge badge-primary">{{ $item->isbn_isnn }}</span>
+                        <span class="badge badge-secondary">{{ $item->tahun_terbit }}</span>
+                        <span class="badge badge-success">{{ ucwords($item->buku_transaksi[0]->penerbit->nama_penerbit) }}</span>
+                        @isset($item->topik->jenis_topik)
+                        <span class="badge badge-danger">{{ ucwords($item->topik->jenis_topik) }}</span>
+                        @endisset
+                        <span class="badge badge-warning">{{ ucwords($item->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
+
+                        <p class="mb-0 text-muted mt-4">
+                            {{ isset($item->catatan) ? substr($item->catatan, 0, 150) .' ...' : 'Belum ada data' }}
+                        </p>
+
+                    </a>
+
+                    <!-- Meta -->
+                    <a class="card-meta mt-auto" href="#!">
+
+                        <!-- Divider -->
+                        <hr class="card-meta-divider">
+
+                        <!-- Author -->
+                        <h6 class="text-uppercase mr-2 mb-0">
+                            @foreach ($item->buku_transaksi as $p)
+                            {{ $p->pengarang->nama_pengarang }}
+                            @endforeach
+                        </h6>
+
+                        <!-- Date -->
+                        <p class="h6 text-uppercase text-muted mb-0 ml-auto">
+                            <button data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+                                class="btn btn-danger-soft btn-rounded-circle btn-sm">
+                                <i class="fe fe-eye"></i>
+                            </button>
+                        </p>
+
+                    </a>
+
+                </div>
+
+            </div>
+            @endforeach
+        </div> <!-- / .row -->
+    </div> <!-- / .container -->
+</section>

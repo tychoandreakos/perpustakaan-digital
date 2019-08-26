@@ -52,25 +52,10 @@ class TopikController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'jenis_topik' => 'required',
-            'image' => 'required',
-            'slug' => 'nullable',
-            'order' => 'required|unique:topik,order'
-        ]);
-
-        if(!$request->image == '')
-        {
-           $image = $request->get('image');
-           $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-           \Image::make($request->get('image'))->save(public_path('storage/topik/').$name);
-         } else {
-             $name = 'img.jpg';
-         }
+       
  
         $requestData = $request->all();
         $requestData['slug'] = str_slug($request->jenis_topik);
-        $requestData['img'] = $name;
         Topik::create($requestData);
        
         return response()->json([

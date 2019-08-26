@@ -34,38 +34,12 @@
                                 <input type="text" autocomplete="off" v-model="form.jenis_topik" id="jenis_topik"
                                     class="form-control form-control-alternative" name="jenis_topik"
                                     placeholder="Judul Topik">
-                                <template v-if="err.jenis_topik">
+                                <template v-if="err.Jenis_topik">
                                     <span class="text-danger">{{ err.jenis_topik[0] }}</span>
-                                </template>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label class="form-control-label" for="catatan">Upload Gambar</label>
-                                <div class="custom-file">
-                                    <input type="file" v-on:change="onImageChange" class="custom-file-input"
-                                        id="validatedCustomFile">
-                                    <label class="custom-file-label" for="validatedCustomFile">{{ img }}</label>
-                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
-                                    <!-- <span class="text-danger mt-2">{{ img }}</span> -->
-                                </div>
-                                <template v-if="err.catatan">
-                                    <span class="text-danger">{{ err.catatan[0] }}</span>
                                 </template>
                             </div>
                         </div>
 
-                        <!-- <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="jenis_topik">Nama GMD</label>
-                                <input type="text" v-model="form.jenis_topik" id="jenis_topik"
-                                    class="form-control form-control-alternative" name="jenis_topik"
-                                    placeholder="NAMA GMD">
-                                <template v-if="err.jenis_topik">
-                                    <span class="text-danger">{{ err.jenis_topik[0] }}</span>
-                                </template>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 
@@ -94,6 +68,8 @@
 
 <script>
     import Spinner from '../tools/Spanner';
+    var randomColor = require('randomcolor');
+
     export default {
 
         components: {
@@ -130,15 +106,13 @@
                 form: {
                     jenis_topik: this.fetch.jenis_topik || '',
                     order: Number(this.fetch.order) || '',
-                    image: this.fetch.img || '',
-                    old: this.fetch.img || '',
+                    warna: randomColor(),
                     _method: (this.fetch.jenis_topik ? 'PUT' : 'POST')
                 },
 
                 order: {},
 
                 loading: false,
-                img: this.fetch.img || 'Pilih Gambar Cover Topik',
 
                 err: {},
             }
@@ -217,5 +191,3 @@
     }
 
 </script>
-
-
