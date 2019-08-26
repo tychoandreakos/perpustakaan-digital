@@ -22,6 +22,7 @@ Route::get('/', 'LandingController@index')->name('landing');
 Route::get('/cari', 'LandingController@cari')->name('cari');
 Route::get('berita/{slug}', 'LandingController@berita')->name('berita');
 Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua');
+Route::get('beranda', 'LandingController@beranda')->name('beranda');
 
 // Route::get('/coba', 'Coba@getMonthData')->name('landing');
 // Route::get('buku/{slug}', 'LandingController@buku');

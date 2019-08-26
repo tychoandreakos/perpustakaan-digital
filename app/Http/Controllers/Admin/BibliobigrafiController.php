@@ -175,10 +175,10 @@ class BibliobigrafiController extends Controller
        }
         
 
-       $eksemplar_pola = EksemplarPola::find($request->pola_eksemplar);
-       $prefix = $eksemplar_pola->prefix;
-       $suffix = $eksemplar_pola->suffix;
-       $serial = $eksemplar_pola->serial;
+    //    $eksemplar_pola = EksemplarPola::find($request->pola_eksemplar);
+    //    $prefix = $eksemplar_pola->prefix;
+    //    $suffix = $eksemplar_pola->suffix;
+    //    $serial = $eksemplar_pola->serial;
         
        for ($i=0; $i < $request->total; $i++) {
 

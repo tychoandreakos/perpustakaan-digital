@@ -22,6 +22,11 @@ class LandingController extends Controller
         return view('landing', compact('berita', 'buku'));
     }
 
+    public function beranda()
+    {
+        return view('beranda');
+    }
+
     public function berita($slug)
     {
         $result = Berita::where('slug', $slug)->firstOrFail();
