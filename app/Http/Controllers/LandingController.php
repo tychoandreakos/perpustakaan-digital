@@ -90,7 +90,7 @@ class LandingController extends Controller
             $q->select('id', 'tipe_klasifikasi');
         }, 'buku_transaksi.topik' => function($q) {
             $q->select('id', 'jenis_topik', 'warna');
-        }])->where('slug', $slug)->firstOrFail();
+        }, 'topik'])->where('slug', $slug)->firstOrFail();
 
         return view('buku', compact('result'));
     }

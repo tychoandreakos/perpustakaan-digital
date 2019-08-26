@@ -165,6 +165,7 @@ class BibliobigrafiController extends Controller
             $image = $request->get('image');
             $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
             \Image::make($request->get('image'))->resize(115, 160)->save(public_path('storage/cover/').$name);
+            \Image::make($request->get('image'))->resize(250, 308)->save(public_path('storage/resize/').$name);
         } else {
             $name = 'img.jpg';
         }

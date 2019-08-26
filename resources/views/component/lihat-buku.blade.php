@@ -6,9 +6,11 @@
              <div class="col-12 col-md">
 
                  <!-- Link -->
-                 <a href="#!" class="font-weight-bold font-size-sm text-decoration-none mb-3">
+                 <a href="{{ url()->previous() }}" class="font-weight-bold font-size-sm text-decoration-none mb-3">
                      <i class="fe fe-arrow-left mr-3"></i> Kembali
                  </a>
+
+
 
                  <!-- Heading -->
                  <h1 class="display-4 mb-2">
@@ -182,7 +184,10 @@
 
              </div>
              <div class="col-12 col-md-4">
-
+                 <span style="background: {{ $result->topik->warna }}"
+                     class="badge badge-pill badge-float badge-float-outside">
+                     <span class="h6 text-white text-uppercase">{{ ucwords($result->topik->jenis_topik) }}</span>
+                 </span>
                  <!-- Card -->
                  {{-- <div class="card shadow-light-lg mb-5"> --}}
                  <div class="text-center">
@@ -438,7 +443,7 @@
 
                                      <!-- Text -->
                                      <p class="font-size-sm text-muted mb-0">
-                                        {{ ucwords($result->buku_transaksi[0]->bahasa->jenis_bahasa) }}
+                                         {{ ucwords($result->buku_transaksi[0]->bahasa->jenis_bahasa) }}
                                      </p>
 
                                  </div>
@@ -465,7 +470,7 @@
 
  <!-- FORM
           ================================================== -->
- <section class="pt-8 pt-md-11 pb-8 pb-md-14">
+ <section class="pb-5 pb-md-10">
 
  </section>
 
