@@ -116,6 +116,8 @@ Route::get('bibliobigrafi-fetch-koleksi', 'BibliobigrafiController@koleksi')->na
 Route::get('bibliobigrafi-fetch-bahasa', 'BibliobigrafiController@bahasa')->name('bibliobigrafi.bahasa');
 Route::get('bibliobigrafi-fetch-pola', 'BibliobigrafiController@pola')->name('bibliobigrafi.pola');
 Route::get('histori-fecth', 'PinjamController@histori')->name('histori.fetch');
+Route::get('bibliobigrafi-fetch-topik', 'BibliobigrafiController@topik')->name('bibliobigrafi.topik');
+
 
 // search
 Route::get('gmd-search', 'GmdController@search');

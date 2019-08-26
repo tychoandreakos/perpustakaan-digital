@@ -18,6 +18,7 @@ use App\EksemplarPola;
 use App\EksemplarTransaksi;
 use App\Koleksi;
 use App\PinjamTransaksi;
+use App\Topik;
 use App\User;
 
 class BibliobigrafiController extends Controller
@@ -120,6 +121,11 @@ class BibliobigrafiController extends Controller
         return LokasiRak::all();
     }
 
+    public function topik()
+    {
+        return Topik::all();
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -149,6 +155,7 @@ class BibliobigrafiController extends Controller
             'judul_seri' => 'nullable',
             'catatan' => 'nullable',
             'slug' => 'nullable',
+            'topik_id' => 'required',
             // 'pdf' => 'nullable',
             'gambar_sampul' => 'nullable'
             ]);

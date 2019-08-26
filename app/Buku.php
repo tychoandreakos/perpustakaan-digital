@@ -19,6 +19,7 @@ class Buku extends Model
         'slug',
         'pdf',
         'gambar_sampul',
+        'topik_id'
     ];
     
     protected $dates = [

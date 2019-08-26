@@ -333,6 +333,32 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
+                                <div :class="{ 'invalid': isInvalid }">
+                                    <div class="float-right mb-2">
+                                        <button @click="showLokasi" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                            type="button">
+                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--text">Tambah Topik Buku</span>
+                                        </button>
+                                    </div>
+                                    <label class="form-control-label" for="lokasi">Topik Buku*</label>
+                                    <multiselect class="mt-1" v-model="topik_id" :options="topikData"
+                                        group-label="language" :group-select="true" placeholder="Pilih topik buku ...."
+                                        track-by="id" label="jenis_topik"><span slot="noResult">Oops!
+                                            No
+                                            elements found.
+                                            Consider changing the search query.</span></multiselect>
+                                    <template v-if="err.topik_id">
+                                        <span class="text-danger mt-1">{{ err.topik_id[0] }}</span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
                                 <label class="form-control-label" for="catatan">Catatan</label>
                                 <textarea autocomplete="off" v-model="form.catatan"
                                     class="form-control form-control-alternative" cols="30" placeholder="Catatan"
@@ -353,10 +379,16 @@
                     <input type="text" hidden v-model="gmd2">
                     <input type="text" hidden v-model="pola_eksemplar2">
                     <input type="text" hidden v-model="koleksi2">
+                    <input type="text" hidden v-model="topik2">
 
                     <modal height="auto" name="eksemplar">
                         <pola-component @closeEksemplar="hideEksemplar" @updateEksemplar="getPola" :pola="this.pol">
                         </pola-component>
+                    </modal>
+
+                    <modal height="auto" name="eksemplar">
+                        <topik-component @closeTopik="hideTopik" @updateTopik="getTopik" :topik="this.top">
+                        </topik-component>
                     </modal>
 
                     <modal height="auto" name="pengarang">
@@ -464,6 +496,7 @@
     import Klasifikasi from './add/Klasifikasi';
     import Lokasi from './add/Lokasi';
     import Koleksi from './add/Koleksi';
+     import Topik from './add/Topik';
 
     export default {
 
@@ -478,6 +511,7 @@
             KlasifikasiComponent: Klasifikasi,
             LokasiComponent: Lokasi,
             KoleksiComponent: Koleksi,
+            TopikComponent: Topik,
         },
 
         props: [
@@ -499,7 +533,8 @@
             'tipeklasifikasi',
             'lokasi3',
             'koleksi',
-            'koleksi3'
+            'koleksi3',
+            'top'
         ],
 
         data() {
@@ -515,6 +550,7 @@
                 gmdData: [],
                 koleksiData: [],
                 klasifikasiData: [],
+                topikData: [],
                 lokasiData: [],
                 bahasaData: [],
                 klasifikasi_id: [],
@@ -523,6 +559,7 @@
                 kota_id: [],
                 gmd_id: [],
                 koleksi_id: [],
+                topik_id: [],
                 bahasa_id: [],
                 lokasi_id: [],
                 eksemplarData: [],
@@ -547,12 +584,13 @@
                     kota_id: this.kota2,
                     lokasi_id: this.lokasi2,
                     koleksi_id: this.koleksi2,
+                    topik_id: this.topik2,
                     bahasa_id: this.bahasa2,
                     gmd_id: this.gmd2,
                     pola_eksemplar: this.pola_eksemplar2,
                     no_panggil: '',
                     total: '',
-                   _method: (this.fetch.judul ? 'PUT' : 'POST')
+                    _method: (this.fetch.judul ? 'PUT' : 'POST')
                 },
 
             }
@@ -568,6 +606,7 @@
             this.getBahasa();
             this.getPola();
             this.getKoleksi();
+            this.getTopik();
         },
 
         computed: {
@@ -577,6 +616,10 @@
 
             bahasa2() {
                 return this.form.bahasa_id = this.bahasa_id.id
+            },
+
+            topik2() {
+                return this.form.topik_id = this.topik_id.id
             },
 
             koleksi2() {
@@ -653,6 +696,12 @@
             hideEksemplar() {
                 this.$modal.hide('eksemplar');
             },
+            showTopik() {
+                this.$modal.show('topik');
+            },
+            hideTopik() {
+                this.$modal.hide('topik');
+            },
             showKoleksi() {
                 this.$modal.show('koleksi');
             },
@@ -716,6 +765,11 @@
             getBahasa() {
                 return axios.get(this.bahasa)
                     .then(res => this.bahasaData = res.data)
+                    .catch(err => console.log(err));
+            },
+            getTopik() {
+                return axios.get(this.top)
+                    .then(res => this.topikData = res.data)
                     .catch(err => console.log(err));
             },
             getPenerbit() {
