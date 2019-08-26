@@ -2317,6 +2317,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2382,12 +2384,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
   data: function data() {
     return {
       datas: {}
     };
+  },
+  filters: {
+    dateUpdate: function dateUpdate(val) {
+      moment__WEBPACK_IMPORTED_MODULE_0__["locale"]('id');
+      return moment__WEBPACK_IMPORTED_MODULE_0__().format('MMMM Do YYYY, h:mm:ss a');
+    }
   },
   methods: {
     edit: function edit(val) {
@@ -5255,6 +5264,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5314,12 +5325,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['fetch', 'index'],
   data: function data() {
     return {
       datas: {}
     };
+  },
+  filters: {
+    dateFormat: function dateFormat(val) {
+      moment__WEBPACK_IMPORTED_MODULE_0__["locale"]('id');
+      return moment__WEBPACK_IMPORTED_MODULE_0__(val).format('MMMM Do YYYY');
+    }
   },
   methods: {
     getResults: function getResults() {
@@ -5581,6 +5599,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       datas: {}
     };
+  },
+  filters: {
+    dateFormat: function dateFormat(val) {
+      moment.locale('id');
+      return moment(val).format('MMMM Do YYYY');
+    }
   },
   methods: {
     edit: function edit(val) {
@@ -8256,6 +8280,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -8328,12 +8354,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
   data: function data() {
     return {
       datas: {}
     };
+  },
+  filters: {
+    dateFormat: function dateFormat(val) {
+      moment__WEBPACK_IMPORTED_MODULE_0__["locale"]('id');
+      return moment__WEBPACK_IMPORTED_MODULE_0__(val).format('MMMM Do YYYY');
+    },
+    dateUpdate: function dateUpdate(val) {
+      moment__WEBPACK_IMPORTED_MODULE_0__["locale"]('id');
+      return moment__WEBPACK_IMPORTED_MODULE_0__().format('MMMM Do YYYY, h:mm:ss a');
+    }
   },
   methods: {
     edit: function edit(val) {
@@ -9383,6 +9420,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -9457,12 +9496,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
   data: function data() {
     return {
       datas: {}
     };
+  },
+  filters: {
+    dateUpdate: function dateUpdate(val) {
+      moment__WEBPACK_IMPORTED_MODULE_0__["locale"]('id');
+      return moment__WEBPACK_IMPORTED_MODULE_0__().format('MMMM Do YYYY, h:mm:ss a');
+    }
   },
   methods: {
     edit: function edit(val) {
@@ -69605,9 +69651,9 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                "\n                                " +
+                                "\n                                    " +
                                   _vm._s(_vm._f("capitalize")(item.id)) +
-                                  "\n                            "
+                                  "\n                                "
                               )
                             ]),
                             _vm._v(" "),
@@ -69632,9 +69678,11 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                "\n                                " +
-                                  _vm._s(item.updated_at) +
-                                  "\n                            "
+                                "\n                                    " +
+                                  _vm._s(
+                                    _vm._f("dateUpdate")(item.updated_at)
+                                  ) +
+                                  "\n                                "
                               )
                             ])
                           ])
@@ -74088,7 +74136,11 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(item.pinjam_transaksi.tgl_pinjam) +
+                                  _vm._s(
+                                    _vm._f("dateFormat")(
+                                      item.pinjam_transaksi.tgl_pinjam
+                                    )
+                                  ) +
                                   "\n                                "
                               )
                             ]),
@@ -74097,7 +74149,7 @@ var render = function() {
                               _vm._v(
                                 "\n                                    " +
                                   _vm._s(
-                                    _vm._f("capitalize")(
+                                    _vm._f("dateFormat")(
                                       item.pinjam_transaksi.tanggal_habis_pinjam
                                     )
                                   ) +
@@ -77621,7 +77673,9 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(item.tgl_pinjam) +
+                                  _vm._s(
+                                    _vm._f("dateFormat")(item.tgl_pinjam)
+                                  ) +
                                   "\n                                "
                               )
                             ]),
@@ -77629,7 +77683,9 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(item.tgl_kembali) +
+                                  _vm._s(
+                                    _vm._f("dateFormat")(item.tgl_kembali)
+                                  ) +
                                   "\n                                "
                               )
                             ]),
@@ -77637,7 +77693,9 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(item.updated_at) +
+                                  _vm._s(
+                                    _vm._f("dateUpdate")(item.updated_at)
+                                  ) +
                                   "\n                                "
                               )
                             ])
@@ -79809,7 +79867,9 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(item.updated_at) +
+                                  _vm._s(
+                                    _vm._f("dateUpdate")(item.updated_at)
+                                  ) +
                                   "\n                                "
                               )
                             ])

@@ -78,6 +78,13 @@
             }
         },
 
+         filters: {
+            dateFormat(val) {
+                moment.locale('id')
+                return moment(val).format('MMMM Do YYYY');
+            }
+        },
+
         methods: {
             edit(val) {
                 return `transaksi-eksemplar/${val}/edit`;

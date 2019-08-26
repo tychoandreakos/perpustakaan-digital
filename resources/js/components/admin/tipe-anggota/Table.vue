@@ -52,7 +52,7 @@
                                         RP. {{ item.denda }}
                                     </td>
                                     <td>
-                                        {{ item.updated_at }}
+                                        {{ item.updated_at | dateUpdate }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+    import * as moment from 'moment'
     export default {
         props: ['route', 'fetch', 'index'],
         data() {
@@ -80,6 +81,14 @@
                 datas: {},
             }
         },
+
+        filters: {
+            dateUpdate(val) {
+                moment.locale('id')
+                return moment().format('MMMM Do YYYY, h:mm:ss a')
+            }
+        },
+
 
         methods: {
             edit(val) {

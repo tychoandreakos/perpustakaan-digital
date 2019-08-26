@@ -13,43 +13,43 @@
                         </div>
                     </div>
                 </div>
-                 <template v-if="datas.data.length > 0">
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Aksi</th>
-                                <th scope="col">ID Anggota</th>
-                                <th scope="col">Nama Anggota</th>
-                                <th scope="col">Tipe Keanggotaan</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Perubahan Terakhir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="item in datas.data" :key="item.id">
-                                <th scope="row" style="width: 19%">
-                                    <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
-                                            class="ni ni-check-bold text-white"></i> Edit</a>
-                                    <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
-                                            class="ni ni-fat-remove text-white"></i> Hapus</button>
-                                </th>
-                                <td>
-                                    {{ item.id | capitalize}}
-                                </td>
-                                <td>{{ item.name | capitalize}}</td>
-                                <td>{{ item.anggota_transaksi.tipe_anggota.tipe_anggota | capitalize }}</td>
-                                <td>{{ item.email | capitalize }}</td>
-                                <td>
-                                    {{ item.updated_at }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <template v-if="datas.data.length > 0">
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Aksi</th>
+                                    <th scope="col">ID Anggota</th>
+                                    <th scope="col">Nama Anggota</th>
+                                    <th scope="col">Tipe Keanggotaan</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Perubahan Terakhir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in datas.data" :key="item.id">
+                                    <th scope="row" style="width: 19%">
+                                        <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
+                                                class="ni ni-check-bold text-white"></i> Edit</a>
+                                        <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
+                                                class="ni ni-fat-remove text-white"></i> Hapus</button>
+                                    </th>
+                                    <td>
+                                        {{ item.id | capitalize}}
+                                    </td>
+                                    <td>{{ item.name | capitalize}}</td>
+                                    <td>{{ item.anggota_transaksi.tipe_anggota.tipe_anggota | capitalize }}</td>
+                                    <td>{{ item.email | capitalize }}</td>
+                                    <td>
+                                        {{ item.updated_at | dateUpdate}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                   </template>
+                </template>
 
                 <template v-else>
                     <h4 class="text-center">Belum Ada Data!</h4>
@@ -64,11 +64,19 @@
 </template>
 
 <script>
+    import * as moment from 'moment'
     export default {
         props: ['route', 'fetch', 'index'],
         data() {
             return {
                 datas: {},
+            }
+        },
+
+        filters: {
+            dateUpdate(val) {
+                moment.locale('id')
+                return moment().format('MMMM Do YYYY, h:mm:ss a')
             }
         },
 

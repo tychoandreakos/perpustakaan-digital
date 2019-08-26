@@ -43,13 +43,13 @@
                                         {{ item.bibliobigrafi.buku.judul | capitalize}}
                                     </td>
                                     <td>
-                                        {{ item.tgl_pinjam}}
+                                        {{ item.tgl_pinjam | dateFormat}}
                                     </td>
                                     <td>
-                                        {{ item.tgl_kembali}}
+                                        {{ item.tgl_kembali | dateFormat}}
                                     </td>
                                     <td>
-                                        {{ item.updated_at }}
+                                        {{ item.updated_at | dateUpdate}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -71,11 +71,24 @@
 </template>
 
 <script>
+ import * as moment from 'moment'
     export default {
         props: ['route', 'fetch', 'index'],
         data() {
             return {
                 datas: {},
+            }
+        },
+
+        filters: {
+            dateFormat(val) {
+                moment.locale('id')
+                return moment(val).format('MMMM Do YYYY');
+            },
+
+            dateUpdate(val) {
+                moment.locale('id')
+                return moment().format('MMMM Do YYYY, h:mm:ss a')
             }
         },
 
