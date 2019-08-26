@@ -20,6 +20,7 @@ use App\Koleksi;
 use App\PinjamTransaksi;
 use App\Topik;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class BibliobigrafiController extends Controller
 {
@@ -134,7 +135,6 @@ class BibliobigrafiController extends Controller
      */
     public function store(Request $request)
     {
-        // return response($request->all());
         $validatedData = $request->validate([
             'judul' => 'required',
             'edisi' => 'nullable',
@@ -170,9 +170,18 @@ class BibliobigrafiController extends Controller
             $name = 'img.jpg';
         }
 
+        $file = $request->input('pdf');
+       
+        if(isset($file)) {
+            foreach ($file as $val) {
+                $file = $this->base64($val, '/file');
+               }
+        }
+
         $requestData = $request->all();
         $requestData['slug'] = str_slug($request->judul);
         $requestData['gambar_sampul'] = $name;
+        $requestData['pdf'] = isset($file) ? substr($file, 15, 50) : '';
         $buku = Buku::create($requestData);
 
        foreach ($request->pengarang_id as $pengarang) {
@@ -221,6 +230,48 @@ class BibliobigrafiController extends Controller
 
         return response()->json([
             'message' => 'data berhasil disimpan']);
+    }
+
+   private function base64($base64_file, $path)
+    {
+        $pool = '01234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $file = $base64_file;
+
+        $check_base_64 = strrpos($file, "base64"); // check jika file valid
+
+        if($check_base_64 > 0) {
+            $explode = explode(",", $file);
+            
+            $decoded_file = base64_decode($explode[1]);
+            $date = date('dmYHis');
+            $random_string = substr(str_shuffle(str_repeat($pool, 5)),0, 10);
+
+            $file_extension = $this->uf_get_base64_file_extension($explode[0]);
+
+            $filename = $date. $random_string .'.'. $file_extension;
+
+            Storage::disk('public')->put($path. "/" .$filename, $decoded_file, 'public');
+
+            $url = Storage::url($path ."/". $filename);
+           
+            return $url;
+        } else {
+            return false;
+        }
+    }
+
+    private function uf_get_base64_file_extension($type)
+    {
+        $mime = str_replace(';base64', '', $type);
+        $mime = str_replace('data:', '', $mime);
+
+        $extension = [
+            'application/pdf' => 'pdf',
+            'application/epub+zip' => 'epub',
+        ];
+
+
+        return $extension[$mime];
     }
 
     /**

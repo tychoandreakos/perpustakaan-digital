@@ -360,9 +360,8 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Catatan</label>
-                                <textarea autocomplete="off" v-model="form.catatan"
-                                    class="form-control form-control-alternative" cols="30" placeholder="Catatan"
-                                    rows="10"></textarea>
+                                <ckeditor :editor="editor" v-model.lazy="form.catatan" :config="editorConfig">
+                                </ckeditor>
                                 <template v-if="err.catatan">
                                     <span class="text-danger mt-1">{{ err.catatan[0] }}</span>
                                 </template>
@@ -448,7 +447,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload PDF</label>
                                 <div class="custom-file">
-                                    <input type="file" v-on:change="onPdfChange" class="custom-file-input"
+                                    <input type="file" v-on:change="multipleFileChange" class="custom-file-input"
                                         id="validatedCustomFile">
                                     <label class="custom-file-label" for="validatedCustomFile">{{ pdf }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
@@ -496,7 +495,8 @@
     import Klasifikasi from './add/Klasifikasi';
     import Lokasi from './add/Lokasi';
     import Koleksi from './add/Koleksi';
-     import Topik from './add/Topik';
+    import Topik from './add/Topik';
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
     export default {
 
@@ -566,6 +566,10 @@
                 pola_eksemplar: [],
                 img: 'Pilih Gambar Sampul',
                 pdf: 'Pilih PDF',
+                editor: ClassicEditor,
+                editorConfig: {
+                    // The configuration of the editor.
+                },
 
                 form: {
                     judul: this.fetch.judul || '',
@@ -576,7 +580,7 @@
                     judul_seri: this.fetch.judul_seri || '',
                     catatan: this.fetch.catatan || '',
                     slug: this.fetch.slug || '',
-                    // pdf: this.fetch.pdf || '',
+                    pdf: this.fetch.pdf || '',
                     image: this.fetch.gambar_sampul || '',
                     klasifikasi_id: this.klasifikasi2,
                     pengarang_id: this.pengarang2,
@@ -660,6 +664,23 @@
                 this.value = value
                 if (value.indexOf('Reset me!') !== -1) this.value = []
             },
+
+            multipleFileChange() {
+                var vm = this;
+                vm.form.pdf = [];
+                for (let i = event.target.files.length - 1; i >= 0; i--) {
+                    const fileReader = new FileReader();
+                    fileReader.readAsDataURL(event.target.files[i]);
+
+                    const type = event.target.files[i].type;
+                    const name = event.target.files[i].name;
+
+                    fileReader.onload = event => {
+                        vm.form.pdf.push(event.target.result);
+                    }
+                }
+            },
+
             onImageChange(e) {
                 this.img = e.target.files[0].name;
                 let files = e.target.files || e.dataTransfer.files;

@@ -3066,6 +3066,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_Lokasi__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./add/Lokasi */ "./resources/js/components/admin/bibliobigrafi/add/Lokasi.vue");
 /* harmony import */ var _add_Koleksi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./add/Koleksi */ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue");
 /* harmony import */ var _add_Topik__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./add/Topik */ "./resources/js/components/admin/bibliobigrafi/add/Topik.vue");
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11__);
 //
 //
 //
@@ -3552,7 +3554,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 
 
 
@@ -3607,6 +3609,9 @@ __webpack_require__.r(__webpack_exports__);
       pola_eksemplar: [],
       img: 'Pilih Gambar Sampul',
       pdf: 'Pilih PDF',
+      editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11___default.a,
+      editorConfig: {// The configuration of the editor.
+      },
       form: {
         judul: this.fetch.judul || '',
         edisi: this.fetch.edisi || '',
@@ -3616,7 +3621,7 @@ __webpack_require__.r(__webpack_exports__);
         judul_seri: this.fetch.judul_seri || '',
         catatan: this.fetch.catatan || '',
         slug: this.fetch.slug || '',
-        // pdf: this.fetch.pdf || '',
+        pdf: this.fetch.pdf || '',
         image: this.fetch.gambar_sampul || '',
         klasifikasi_id: this.klasifikasi2,
         pengarang_id: this.pengarang2,
@@ -3687,6 +3692,21 @@ __webpack_require__.r(__webpack_exports__);
     onChange: function onChange(value) {
       this.value = value;
       if (value.indexOf('Reset me!') !== -1) this.value = [];
+    },
+    multipleFileChange: function multipleFileChange() {
+      var vm = this;
+      vm.form.pdf = [];
+
+      for (var i = event.target.files.length - 1; i >= 0; i--) {
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL(event.target.files[i]);
+        var type = event.target.files[i].type;
+        var name = event.target.files[i].name;
+
+        fileReader.onload = function (event) {
+          vm.form.pdf.push(event.target.result);
+        };
+      }
     },
     onImageChange: function onImageChange(e) {
       this.img = e.target.files[0].name;
@@ -72585,30 +72605,14 @@ var render = function() {
                         [_vm._v("Catatan")]
                       ),
                       _vm._v(" "),
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.catatan,
-                            expression: "form.catatan"
-                          }
-                        ],
-                        staticClass: "form-control form-control-alternative",
-                        attrs: {
-                          autocomplete: "off",
-                          cols: "30",
-                          placeholder: "Catatan",
-                          rows: "10"
-                        },
-                        domProps: { value: _vm.form.catatan },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "catatan", $event.target.value)
-                          }
+                      _c("ckeditor", {
+                        attrs: { editor: _vm.editor, config: _vm.editorConfig },
+                        model: {
+                          value: _vm.form.catatan,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "catatan", $$v)
+                          },
+                          expression: "form.catatan"
                         }
                       }),
                       _vm._v(" "),
@@ -73029,7 +73033,7 @@ var render = function() {
                         _c("input", {
                           staticClass: "custom-file-input",
                           attrs: { type: "file", id: "validatedCustomFile" },
-                          on: { change: _vm.onPdfChange }
+                          on: { change: _vm.multipleFileChange }
                         }),
                         _vm._v(" "),
                         _c(
