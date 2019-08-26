@@ -1,49 +1,40 @@
-<section class="section section-lg section-hero section-shaped">
-    <!-- Background circles -->
-    <div class="homepage">
-        {{-- <span class="span-150"></span>
-        <span class="span-50"></span>
-        <span class="span-50"></span>
-        <span class="span-75"></span>
-        <span class="span-100"></span>
-        <span class="span-75"></span>
-        <span class="span-50"></span>
-        <span class="span-100"></span>
-        <span class="span-50"></span>
-        <span class="span-100"></span> --}}
-    </div>
-    <div class="container shape-container d-flex align-items-center py-lg">
-        <div class="col px-0">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <img alt="image" src="{{ asset('img/brand/white.png') }}" style="width: 200px;" class="img-fluid">
-                    <p class="lead text-white" style="font-size: 33px">Selamat Datang DI DIGITAL LIBRARY STMIK
-                        AMIKBANDUNG.</p>
-                    <div class="form-group">
-                        <search-component></search-component>
-                    </div>
-                    {{-- <div class="btn-wrapper mt-5">
-                        <a href="https://github.com/creativetimofficial/argon-design-system"
-                            class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
-                            <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
-                            <span class="btn-inner--text"><span class="text-success">Cari</span> Koleksi Buku</span>
-                        </a>
-                    </div> --}}
-                    <div class="mt-5">
-                        <small class="text-white font-weight-bold mb-0 mr-2">*proudly coded by</small>
-                        <img alt="image" src="{{ asset('img/brand/creativetim-white-slim.png') }}"
-                            style="height: 28px;">
-                    </div>
-                </div>
+<!-- WELCOME
+    ================================================== -->
+<section class="pt-4 pt-md-11">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-5 col-lg-6 order-md-2">
+
+                <!-- Image -->
+                <img src="{{ asset('img/illustrations/illustration-2.png') }}"
+                    class="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0" alt="..." data-aos="fade-up"
+                    data-aos-delay="100">
+
             </div>
-        </div>
-    </div>
-    <!-- SVG separator -->
-    <div class="separator separator-bottom separator-skew zindex-100">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
-            xmlns="http://www.w3.org/2000/svg">
-            <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
-    </div>
+            <div class="col-12 col-md-7 col-lg-6 order-md-1" data-aos="fade-up">
+
+                <!-- Heading -->
+                <h1 class="display-3 text-center text-md-left">
+                    Selamat Datang Di <span class="text-primary">DIGLIB</span>. <br>
+                    STMIK AMIKBANDUNG.
+                </h1>
+
+                <!-- Text -->
+                <p class="lead text-center text-md-left text-muted mb-6 mb-lg-8">
+                    Anda dapat mencari seluruh koleksi yang tersedia di perpustakaan kami.
+                </p>
+
+                <!-- Buttons -->
+                <div class="text-center text-md-left">
+                    <a href="overview.html" class="btn btn-primary shadow lift mr-1">
+                       Cari Buku <i class="fe fe-arrow-right d-none d-md-inline ml-3"></i>
+                    </a>
+                    <a href="docs/index.html" class="btn btn-primary-soft lift">
+                        Daftar
+                    </a>
+                </div>
+
+            </div>
+        </div> <!-- / .row -->
+    </div> <!-- / .container -->
 </section>
-</div>

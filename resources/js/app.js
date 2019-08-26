@@ -13,8 +13,6 @@ import 'vue-instant/dist/vue-instant.css'
 import VueInstant from 'vue-instant'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import infiniteScroll from 'vue-infinite-scroll'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
 
 window.User = User;
 window.Vue = require('vue');

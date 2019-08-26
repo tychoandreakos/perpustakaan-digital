@@ -14,12 +14,12 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $user = User::all()->count();
-        $buku = Buku::all()->count();
-        $info = Info::all()->first();
-        $topik = Topik::orderBy('order', 'ASC')->limit(4)->get();
-        $berita =  Berita::latest()->get();
-        return view('layouts.app', compact('berita','buku','user','info', 'topik'));
+        // $user = User::all()->count();
+        // $buku = Buku::all()->count();
+        // $info = Info::all()->first();
+        // $topik = Topik::orderBy('order', 'ASC')->limit(4)->get();
+        // $berita =  Berita::latest()->get();
+        return view('landing');
     }
 
     public function berita($slug)

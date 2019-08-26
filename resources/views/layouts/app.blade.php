@@ -1,61 +1,55 @@
-<!--
-=========================================================
-* Argon Design System - v1.1.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/argon-design-system
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md)
-* Coded by Creative Tim
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Start your development with a Design System for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
-    <title>Argon Design System - Free Design System for Bootstrap 4</title>
-    <!-- Favicon -->
-    <link href="{{ asset('img/brand/favicon.png') }}" rel="icon" type="image/png">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" 
-    rel="stylesheet">
-    <!-- Icons -->
-    <link href="{{ asset('vendor/nucleo/css/nucleo.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <!-- Argon CSS -->
-    <link type="text/css" href="{{ asset('css/argon.css') }}" rel="stylesheet">
-    <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Map -->
+        <link href='../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="{{ asset('css/user.css') }}">
+    </head>
 
 <body>
-    <header class="header-global">
-        @include('component.navbar')
-    </header>
-    <main id="app">
-        <!--
-=========================================================
-* Argon Design System - v1.1.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/argon-design-system
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md)
-* Coded by Creative Tim
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
-<div class="position-relative">
-    <!-- Hero for FREE version -->
-    @include('component.hero')
-    @include('component.main')
-</div>
 
-    </main>
-    
-    @include('layouts.footer')
-    @include('layouts.script')
+    <div id="app">
+
+        @include('component.navbar-landkit')
+
+        @yield('main')
+
+    </div>
+
+    <!-- JAVASCRIPT
+    ================================================== -->
+    <!-- Libs JS -->
+    {{-- <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script> --}}
+
+ 
+
+    <!-- Map -->
+    <script src='../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+    <!-- Theme JS -->
+    <script src="{{ asset('js/user.js') }}"></script>
 </body>
+
+<!-- Mirrored from landkit.goodthemes.co/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 26 Aug 2019 03:35:28 GMT -->
 
 </html>

@@ -24,7 +24,6 @@
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^12.3.1",
         "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
-        "aos": "^2.3.4",
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "bootstrap-datepicker": "^1.9.0",
         "laravel-vue-pagination": "^2.3.0",
