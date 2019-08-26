@@ -23,9 +23,7 @@
 <body>
 
     <div id="app">
-
-        @include('component.navbar-landkit')
-
+        
         @yield('main')
 
     </div>

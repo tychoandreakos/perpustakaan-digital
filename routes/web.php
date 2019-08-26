@@ -19,7 +19,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'LandingController@index')->name('landing');
-Route::get('/coba', 'Coba@getMonthData')->name('landing');
+// Route::get('/coba', 'Coba@getMonthData')->name('landing');
 // Route::get('berita/{slug}', 'LandingController@berita');
 // Route::get('buku/{slug}', 'LandingController@buku');
 // Route::get('baca/{slug}', 'LandingController@baca')->middleware('auth');

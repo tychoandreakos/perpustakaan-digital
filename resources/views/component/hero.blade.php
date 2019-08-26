@@ -24,14 +24,23 @@
                     Anda dapat mencari seluruh koleksi yang tersedia di perpustakaan kami.
                 </p>
 
+                @guest
                 <!-- Buttons -->
                 <div class="text-center text-md-left">
                     <a href="overview.html" class="btn btn-primary shadow lift mr-1">
-                       Cari Buku <i class="fe fe-arrow-right d-none d-md-inline ml-3"></i>
+                        Cari Buku <i class="fe fe-arrow-right d-none d-md-inline ml-3"></i>
                     </a>
-                    <a href="docs/index.html" class="btn btn-primary-soft lift">
+
+                    @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="btn btn-primary-soft lift">
                         Daftar
                     </a>
+                    @endif
+                    @else
+                    <a href="overview.html" class="btn btn-primary shadow lift mr-1">
+                        Masuk Menu Perpustakaan <i class="fe fe-arrow-right d-none d-md-inline ml-3"></i>
+                    </a>
+                    @endguest
                 </div>
 
             </div>
