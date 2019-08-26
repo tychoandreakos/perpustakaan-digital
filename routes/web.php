@@ -25,9 +25,9 @@ Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua'
 Route::get('beranda', 'LandingController@beranda')->name('beranda');
 Route::get('koleksi-terbaru', 'LandingController@terbaru')->name('terbaru');
 Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
+Route::get('baca/{slug}', 'LandingController@baca')->name('baca')->middleware('auth');
 
 // Route::get('/coba', 'Coba@getMonthData')->name('landing');
-// Route::get('baca/{slug}', 'LandingController@baca')->middleware('auth');
 // Route::get('buku/', 'LandingController@cari')->name('cari');
 
 // Route::get('/tamu', function() {

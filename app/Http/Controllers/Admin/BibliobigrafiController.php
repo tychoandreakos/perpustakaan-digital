@@ -156,7 +156,7 @@ class BibliobigrafiController extends Controller
             'catatan' => 'nullable',
             'slug' => 'nullable',
             'topik_id' => 'required',
-            // 'pdf' => 'nullable',
+            'pdf' => 'nullable|max:10240',
             'gambar_sampul' => 'nullable'
             ]);
             

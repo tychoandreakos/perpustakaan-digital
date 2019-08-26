@@ -31,9 +31,11 @@
                  <a href="#!" class="btn btn-primary-soft mr-1">
                      Pinjam
                  </a>
-                 <a href="#!" class="btn btn-primary">
-                     Baca
-                 </a>
+                 @isset($result->pdf)
+                 <a href="{{ route('baca', $result->slug) }}" class="btn btn-primary">
+                    Baca
+                </a>
+                 @endisset
 
              </div>
          </div> <!-- / .row -->
@@ -191,7 +193,7 @@
                  <!-- Card -->
                  {{-- <div class="card shadow-light-lg mb-5"> --}}
                  <div class="text-center">
-                     <img src="{{ url('storage/cover/'. $result->gambar_sampul) }}" alt="...">
+                     <img src="{{ url('storage/resize/'. $result->gambar_sampul) }}" alt="...">
                  </div>
                  {{-- </div> --}}
 

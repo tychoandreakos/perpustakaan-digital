@@ -9,6 +9,7 @@ use App\Info;
 use App\Topik;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class LandingController extends Controller
 {
@@ -98,7 +99,20 @@ class LandingController extends Controller
     public function baca($slug)
     {
         $result = Buku::where('slug', $slug)->firstOrFail();
-        return view('baca', compact('result'));
+
+        $filename = $result->pdf;
+
+        $path = storage_path('app/public/file/'.$filename);
+
+        return Response::make(file_get_contents($path), 200, [
+
+        'Content-Type'
+        => 'application/pdf',
+
+
+        'Content-Disposition' => 'inline; filename="'.$filename.'"'
+
+        ]);
     }
 
     public function random_topik()
