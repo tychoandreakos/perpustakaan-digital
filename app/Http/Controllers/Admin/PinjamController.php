@@ -167,12 +167,9 @@ class PinjamController extends Controller
             }
         }
 
-        $max_no = max( $month_post_arr );
-        $max = round(($max_no + 30/2) / 30) * 30;
         $month_data_arr = [
             'months' => $month_name_arr,
             'post_count_data' => $month_post_arr,
-            'max' => $max,
         ];
 
         return $month_data_arr;
