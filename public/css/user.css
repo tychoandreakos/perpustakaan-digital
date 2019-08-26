@@ -22105,3 +22105,7 @@ body.compensate-for-scrollbar {
   }
 }
 
+.pagination {
+  justify-content: center !important;
+}
+

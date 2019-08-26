@@ -23,6 +23,11 @@ class LokasiRak extends Model
         return $this->attributes['nama_lokasi'] = ucwords($value);
     }
 
+    public function bibliobigrafi()
+    {
+        return $this->hasMany(Bibliobigrafi::class);
+    }
+
     public function getUpdatedAtAttribute($value)
     {
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();

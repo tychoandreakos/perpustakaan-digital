@@ -25,10 +25,39 @@ class LandingController extends Controller
     public function beranda()
     {
         // return
-        $terbaru = Buku::with(['buku_transaksi.pengarang', 'buku_transaksi.penerbit', 'topik', 'buku_transaksi.bahasa' => function($q) {
+        $terbaru = Buku::with(['buku_transaksi' => function($q) {
+            $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id', 'bahasa_id');
+        },'buku_transaksi.pengarang' => function($q){
+            $q->select('id', 'nama_pengarang');
+        }, 'buku_transaksi.penerbit' => function($q) {
+            $q->select('id', 'nama_penerbit');
+        }, 'topik' => function($q) {
+            $q->select('id','jenis_topik', 'warna');
+        }, 'buku_transaksi.bahasa' => function($q) {
             $q->select('id', 'jenis_bahasa');
+        }, 'bibliobigrafi.lokasi_rak' => function($q) {
+            $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->latest()->limit(3)->get();
         return view('beranda', compact('terbaru'));
+    }
+
+    public function terbaru()
+    {
+        // return
+        $terbaru = Buku::with(['buku_transaksi' => function($q) {
+            $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id', 'bahasa_id');
+        },'buku_transaksi.pengarang' => function($q){
+            $q->select('id', 'nama_pengarang');
+        }, 'buku_transaksi.penerbit' => function($q) {
+            $q->select('id', 'nama_penerbit');
+        }, 'topik' => function($q) {
+            $q->select('id','jenis_topik', 'warna');
+        }, 'buku_transaksi.bahasa' => function($q) {
+            $q->select('id', 'jenis_bahasa');
+        }, 'bibliobigrafi.lokasi_rak' => function($q) {
+            $q->select('id', 'nama_lokasi', 'kode_lokasi');
+        }])->latest()->limit(9)->paginate(3);
+        return view('terbaru', compact('terbaru'));
     }
 
     public function berita($slug)

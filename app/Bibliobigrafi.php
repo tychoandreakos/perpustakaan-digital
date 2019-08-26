@@ -15,7 +15,8 @@ class Bibliobigrafi extends Model
         'gmd_id',
         'pola_eksemplar',
         'koleksi_id',
-        'no_panggil'
+        'no_panggil',
+        'lokasi_rak_id'
     ];
 
 
@@ -37,6 +38,11 @@ class Bibliobigrafi extends Model
     public function klasifikasi()
     {
         return $this->belongsTo(Klasifikasi::class);
+    }
+
+    public function lokasi_rak()
+    {
+        return $this->belongsTo(LokasiRak::class);
     }
 
     public function gmd()

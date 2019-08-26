@@ -305,8 +305,8 @@
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
-                                    <template v-if="err.lokasi_id">
-                                        <span class="text-danger mt-1">{{ err.lokasi_id[0] }}</span>
+                                    <template v-if="err.lokasi_rak_id">
+                                        <span class="text-danger mt-1">{{ err.lokasi_rak_id[0] }}</span>
                                     </template>
                                 </div>
                             </div>
@@ -582,7 +582,7 @@
                     pengarang_id: this.pengarang2,
                     penerbit_id: this.penerbit2,
                     kota_id: this.kota2,
-                    lokasi_id: this.lokasi2,
+                    lokasi_rak_id: this.lokasi2,
                     koleksi_id: this.koleksi2,
                     topik_id: this.topik2,
                     bahasa_id: this.bahasa2,
@@ -651,7 +651,7 @@
             },
 
             lokasi2() {
-                return this.form.lokasi_id = this.lokasi_id.id
+                return this.form.lokasi_rak_id = this.lokasi_id.id
             }
         },
 

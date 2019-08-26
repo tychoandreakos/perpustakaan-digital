@@ -148,7 +148,7 @@ class BibliobigrafiController extends Controller
             'kota_id' => 'required',
             'gmd_id' => 'required',
             'bahasa_id' => 'required',
-            'lokasi_id' => 'required',
+            'lokasi_rak_id' => 'required',
             'no_panggil' => 'required',
             'total' => 'required',
             'pola_eksemplar' => 'required',

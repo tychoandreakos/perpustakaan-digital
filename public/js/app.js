@@ -3622,7 +3622,7 @@ __webpack_require__.r(__webpack_exports__);
         pengarang_id: this.pengarang2,
         penerbit_id: this.penerbit2,
         kota_id: this.kota2,
-        lokasi_id: this.lokasi2,
+        lokasi_rak_id: this.lokasi2,
         koleksi_id: this.koleksi2,
         topik_id: this.topik2,
         bahasa_id: this.bahasa2,
@@ -3680,7 +3680,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.form.penerbit_id = this.penerbit_id.id;
     },
     lokasi2: function lokasi2() {
-      return this.form.lokasi_id = this.lokasi_id.id;
+      return this.form.lokasi_rak_id = this.lokasi_id.id;
     }
   },
   methods: {
@@ -72414,10 +72414,10 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm.err.lokasi_id
+                        _vm.err.lokasi_rak_id
                           ? [
                               _c("span", { staticClass: "text-danger mt-1" }, [
-                                _vm._v(_vm._s(_vm.err.lokasi_id[0]))
+                                _vm._v(_vm._s(_vm.err.lokasi_rak_id[0]))
                               ])
                             ]
                           : _vm._e()
