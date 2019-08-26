@@ -75,6 +75,7 @@ class LandingController extends Controller
 
     public function buku($slug)
     {
+        // return
         $result = Buku::with(['buku_transaksi.pengarang' => function($q){
             $q->select('id', 'nama_pengarang');
         }, 'buku_transaksi.penerbit' => function($q){
@@ -90,7 +91,8 @@ class LandingController extends Controller
         }, 'buku_transaksi.topik' => function($q) {
             $q->select('id', 'jenis_topik', 'warna');
         }])->where('slug', $slug)->firstOrFail();
-        return view('buku', compact('result'));;
+
+        return view('buku', compact('result'));
     }
 
     public function baca($slug)
