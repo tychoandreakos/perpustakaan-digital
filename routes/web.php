@@ -98,7 +98,7 @@ Route::get('terlambat-fetch', 'PinjamController@terlambat')->name('terlambat.fet
 
 
 Route::get('denda/{id}', 'PinjamController@denda')->name('sirkulasi.denda');
-
+Route::post('denda/bayar', 'DendaController@store')->name('denda');
 
 
 // Bibliobigrafi

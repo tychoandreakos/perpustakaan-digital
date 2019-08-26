@@ -33,6 +33,9 @@ class PinjamTransaksi extends Model
         return $this->belongsTo(User::class);
     }
     
+    public function denda(){
+        return $this->hasOne('denda');
+    }
 
     public function bibliobigrafi()
     {

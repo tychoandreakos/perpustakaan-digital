@@ -36,8 +36,9 @@
                                         </button>
                                     </td>
                                     <td class="text-center">
-                                        <button style="display: inline" type="button" class="btn btn-sm btn-success"
-                                            data-toggle="tooltip" data-placement="top" title="Bayar Disini">
+                                        <button @click="showDenda" style="display: inline" type="button"
+                                            class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top"
+                                            title="Bayar Disini">
                                             RP. {{ total }}
                                         </button>
 
@@ -63,6 +64,12 @@
                                     <td>
                                         {{ item.tanggal_habis_pinjam | dateFormat }}
                                     </td>
+
+                                    <modal height="auto" name="eksemplar">
+                                        <denda-component @closeDenda="hideDenda" @updateDenda="getResults"
+                                            :denda="item" :total="total" :store="stores">
+                                        </denda-component>
+                                    </modal>
                                 </tr>
                             </tbody>
                         </table>
@@ -85,14 +92,20 @@
     import * as moment from 'moment'
     var momentRange = require('moment-range');
     momentRange.extendMoment(moment);
+    import Denda from './Denda';
 
     export default {
-        props: ['fetch'],
+        props: ['fetch', 'store'],
         data() {
             return {
                 datas: {},
                 total: '',
+                stores: this.store
             }
+        },
+
+        components:{
+            DendaComponent: Denda,
         },
 
         filters: {
@@ -107,6 +120,13 @@
                 return axios.get(this.fetch + '?page=' + page)
                     .then(res => this.datas = res.data)
                     .catch(err => console.log(err));
+            },
+
+            showDenda() {
+                this.$modal.show('eksemplar');
+            },
+            hideDenda() {
+                this.$modal.hide('eksemplar');
             },
 
             denda(val, dend) {
