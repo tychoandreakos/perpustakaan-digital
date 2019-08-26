@@ -8732,10 +8732,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _tools_Spanner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
-/* harmony import */ var vue_nav_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-nav-tabs */ "./node_modules/vue-nav-tabs/dist/vue-tabs.common.js");
-/* harmony import */ var vue_nav_tabs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_nav_tabs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue_nav_tabs_themes_vue_tabs_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-nav-tabs/themes/vue-tabs.css */ "./node_modules/vue-nav-tabs/themes/vue-tabs.css");
-/* harmony import */ var vue_nav_tabs_themes_vue_tabs_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_nav_tabs_themes_vue_tabs_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_nav_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-nav-tabs */ "./node_modules/vue-nav-tabs/dist/vue-tabs.common.js");
+/* harmony import */ var vue_nav_tabs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_nav_tabs__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_nav_tabs_themes_vue_tabs_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-nav-tabs/themes/vue-tabs.css */ "./node_modules/vue-nav-tabs/themes/vue-tabs.css");
+/* harmony import */ var vue_nav_tabs_themes_vue_tabs_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_nav_tabs_themes_vue_tabs_css__WEBPACK_IMPORTED_MODULE_4__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9138,13 +9166,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
+
+
+var momentRange = __webpack_require__(/*! moment-range */ "./node_modules/moment-range/dist/moment-range.js");
+
+momentRange.extendMoment(moment__WEBPACK_IMPORTED_MODULE_2__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a,
-    VueTabs: vue_nav_tabs__WEBPACK_IMPORTED_MODULE_2__["VueTabs"],
-    VTab: vue_nav_tabs__WEBPACK_IMPORTED_MODULE_2__["VTab"],
+    VueTabs: vue_nav_tabs__WEBPACK_IMPORTED_MODULE_3__["VueTabs"],
+    VTab: vue_nav_tabs__WEBPACK_IMPORTED_MODULE_3__["VTab"],
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back'],
@@ -9192,6 +9225,13 @@ __webpack_require__.r(__webpack_exports__);
       if (month.length < 2) month = '0' + month;
       if (day.length < 2) day = '0' + day;
       return [year, month, day].join('-');
+    }
+  },
+  filters: {
+    convert: function convert(val) {
+      var a = moment__WEBPACK_IMPORTED_MODULE_2__();
+      var b = val;
+      return a.diff(b, 'days') + ' Hari';
     }
   },
   methods: {
@@ -78890,6 +78930,12 @@ var render = function() {
                                                     "th",
                                                     { attrs: { scope: "col" } },
                                                     [_vm._v("Tanggal Kembali")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "th",
+                                                    { attrs: { scope: "col" } },
+                                                    [_vm._v("Status Terlambat")]
                                                   )
                                                 ])
                                               ]
@@ -79081,7 +79127,43 @@ var render = function() {
                                                                 ) +
                                                                 "\n                                                            "
                                                             )
-                                                          ])
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          item.status_denda
+                                                            ? _c("td", [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "badge badge-danger"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        _vm._f(
+                                                                          "convert"
+                                                                        )(
+                                                                          item.tanggal_habis_pinjam
+                                                                        )
+                                                                      )
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ])
+                                                            : _c("td", [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "badge badge-secondary"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "Tidak\n                                                                    Ada."
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ])
                                                         ]
                                                       : _vm._e()
                                                   ],
@@ -79483,6 +79565,18 @@ var render = function() {
                                                         "Tanggal Dikembalikan"
                                                       )
                                                     ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "th",
+                                                    { attrs: { scope: "col" } },
+                                                    [_vm._v("Status Terlambat")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "th",
+                                                    { attrs: { scope: "col" } },
+                                                    [_vm._v("Status Bayar")]
                                                   )
                                                 ])
                                               ]
@@ -79568,7 +79662,73 @@ var render = function() {
                                                                 ) +
                                                                 "\n                                                            "
                                                             )
-                                                          ])
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          item.status_denda
+                                                            ? _c("td", [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "badge badge-danger"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        _vm._f(
+                                                                          "convert"
+                                                                        )(
+                                                                          item.tanggal_habis_pinjam
+                                                                        )
+                                                                      )
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ])
+                                                            : _c("td", [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "badge badge-secondary"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "Tidak\n                                                                    Ada."
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ]),
+                                                          _vm._v(" "),
+                                                          item.status_denda
+                                                            ? _c("td", [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "badge badge-success"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "Lunas"
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ])
+                                                            : _c("td", [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "badge badge-secondary"
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "Tidak\n                                                                    Ada."
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ])
                                                         ]
                                                       : _vm._e()
                                                   ],

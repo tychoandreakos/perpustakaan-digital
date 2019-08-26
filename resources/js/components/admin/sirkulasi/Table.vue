@@ -187,6 +187,7 @@
                                                                 Tanggal Pinjam
                                                             </th>
                                                             <th scope="col">Tanggal Kembali</th>
+                                                            <th scope="col">Status Terlambat</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="list">
@@ -230,6 +231,14 @@
                                                                 </td>
                                                                 <td>
                                                                     {{ item.tanggal_habis_pinjam }}
+                                                                </td>
+                                                                <td v-if="item.status_denda">
+                                                                    <span
+                                                                        class="badge badge-danger">{{ item.tanggal_habis_pinjam | convert }}</span>
+                                                                </td>
+                                                                <td v-else>
+                                                                    <span class="badge badge-secondary">Tidak
+                                                                        Ada.</span>
                                                                 </td>
                                                             </template>
                                                         </tr>
@@ -349,6 +358,8 @@
                                                                 Tanggal Pinjam
                                                             </th>
                                                             <th scope="col">Tanggal Dikembalikan</th>
+                                                            <th scope="col">Status Terlambat</th>
+                                                            <th scope="col">Status Bayar</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="list">
@@ -370,6 +381,21 @@
                                                                 </td>
                                                                 <td>
                                                                     {{ item.tgl_kembali }}
+                                                                </td>
+                                                                <td v-if="item.status_denda">
+                                                                    <span
+                                                                        class="badge badge-danger">{{ item.tanggal_habis_pinjam | convert }}</span>
+                                                                </td>
+                                                                <td v-else>
+                                                                    <span class="badge badge-secondary">Tidak
+                                                                        Ada.</span>
+                                                                </td>
+                                                                <td v-if="item.status_denda">
+                                                                    <span class="badge badge-success">Lunas</span>
+                                                                </td>
+                                                                <td v-else>
+                                                                    <span class="badge badge-secondary">Tidak
+                                                                        Ada.</span>
                                                                 </td>
                                                             </template>
                                                         </tr>
@@ -401,6 +427,9 @@
 <script>
     import Multiselect from 'vue-multiselect'
     import Spinner from '../tools/Spanner';
+    import * as moment from 'moment'
+    var momentRange = require('moment-range');
+    momentRange.extendMoment(moment);
     import {
         VueTabs,
         VTab
@@ -465,13 +494,20 @@
             },
         },
 
+        filters: {
+            convert(val) {
+                var a = moment();
+                var b = val;
+                return a.diff(b, 'days') + ' Hari'
+            }
+        },
+
         methods: {
             getAnggota() {
                 return axios.get(this.fetch)
                     .then(res => this.options = res.data.data)
                     .catch(err => console.log(err));
             },
-
 
             getPinjaman() {
                 axios.post('/pustakawan/pinjaman', {
@@ -528,10 +564,10 @@
                     confirmButtonText: 'Yes, Perpanjang!'
                 }).then((result) => {
                     axios.post(this.perpanjangs, {
-                        id,
-                        duration,
-                    })
-                    .then(res => {
+                            id,
+                            duration,
+                        })
+                        .then(res => {
                             this.$swal({
                                 position: 'top-end',
                                 type: 'success',

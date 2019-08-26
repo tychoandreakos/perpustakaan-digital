@@ -17,6 +17,8 @@ use App\BukuTransaksi;
 use App\EksemplarPola;
 use App\EksemplarTransaksi;
 use App\Koleksi;
+use App\PinjamTransaksi;
+use App\User;
 
 class BibliobigrafiController extends Controller
 {
@@ -27,7 +29,10 @@ class BibliobigrafiController extends Controller
      */
     public function index()
     {
-        return view('admin.bibliobigrafi.home');
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        return view('admin.bibliobigrafi.home', compact('koleksi', 'anggota_count', 'eksemplar'));
     }
 
     public function fetch()
