@@ -15,8 +15,8 @@
 
                 <!-- Heading -->
                 <h1 class="display-3 text-center text-md-left">
-                    Selamat Datang Di <span class="text-primary">DIGLIB</span>. <br>
-                    STMIK AMIKBANDUNG.
+                    Selamat Datang Di DIGLIB <br>
+                    <span class="text-primary">STMIK AMIKBANDUNG.</span>
                 </h1>
 
                 <!-- Text -->
