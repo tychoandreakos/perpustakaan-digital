@@ -6,7 +6,11 @@
 
 @include('component.hero')
 @include('component.fitur')
-@include('component.news')
+
+    @isset($berita)
+    @include('component.news')
+    @endisset
+
 @include('component.total')
 @include('component.footer')
 
