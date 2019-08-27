@@ -40,6 +40,8 @@ class LandingController extends Controller
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->latest()->limit(3)->get();
 
+        $berita = Berita::latest()->limit(3)->get();
+
         $random = Buku::with(['buku_transaksi' => function($q) {
             $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id', 'bahasa_id');
         },'buku_transaksi.pengarang' => function($q){
@@ -53,7 +55,7 @@ class LandingController extends Controller
         }, 'bibliobigrafi.lokasi_rak' => function($q) {
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->inRandomOrder()->first();
-        return view('beranda', compact('terbaru', 'random'));
+        return view('beranda', compact('terbaru', 'random', 'berita'));
     }
 
     public function terbaru()

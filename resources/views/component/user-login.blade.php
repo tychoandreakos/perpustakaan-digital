@@ -121,7 +121,7 @@
 
                              <!-- Badge -->
                              <span class="badge badge-pill badge-light badge-float badge-float-inside">
-                                 <span class="h6 text-uppercase">Featured</span>
+                                 <span class="h6 text-uppercase">{{ ucwords($random->topik->jenis_topik) }}</span>
                              </span>
 
                          </div>
@@ -147,15 +147,30 @@
                          <div class="col-12 col-md-6 order-md-1">
 
                              <!-- Body -->
-                             <a class="card-body" href="#!">
+                         <a class="card-body" href="{{ route('buku', $random->slug) }}">
 
                                  <!-- Heading -->
                                  <h3>
                                     {{ $random->judul }}
                                  </h3>
 
+                                 <span class="badge badge-primary">{{ $random->isbn_isnn }}</span>
+                                 <span class="badge badge-secondary">{{ $random->tahun_terbit }}</span>
+                                 <span
+                                     class="badge badge-success">{{ ucwords($random->buku_transaksi[0]->penerbit->nama_penerbit) }}</span>
+                                 @isset($random->topik->jenis_topik)
+                                 @endisset
+                                 <span
+                                     class="badge badge-warning">{{ ucwords($random->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
+                                 <span class="badge badge-info">{{ $random->deskripsi_fisik }}</span>
+                                 <span class="badge badge-light">
+                                     {{ $random->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} -
+                                     {{ ucwords($random->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
+                                 <span class="badge badge-dark">{{ $random->bibliobigrafi[0]->no_panggil }}</span>
+                                 
+
                                  <!-- Text -->
-                                 <div class="mb-0 text-muted">
+                                 <div class="mb-0 text-muted mt-5">
                                     {!! substr($random->catatan, 0, 250) . ' ....' !!}
                                  </div>
 
@@ -179,8 +194,8 @@
                                  </h6>
 
                                  <!-- Date -->
-                                 <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                                     <time datetime="2019-05-02">May 02</time>
+                                 <p class="h6 ok text-uppercase text-muted mb-0 ml-auto">
+                                        Baca Buku Ini
                                  </p>
 
                              </a>
@@ -206,7 +221,7 @@
 
                  <!-- Heading -->
                  <h3 class="mb-0">
-                     Case Studies
+                     Berita Terbaru Perpustakaan
                  </h3>
 
                  <!-- Text -->
@@ -218,151 +233,92 @@
              <div class="col-12 col-md-auto">
 
                  <!-- Button -->
-                 <a href="#!" class="btn btn-sm btn-outline-gray-300 d-none d-md-inline">
-                     View all
+                 <a href="{{ route('berita.semua') }}" class="btn btn-sm btn-outline-gray-300 d-none d-md-inline">
+                    Lihat Semua
                  </a>
 
              </div>
          </div> <!-- / .row -->
          <div class="row">
-             <div class="col-12">
-
-                 <!-- Card -->
-                 <div class="card card-row shadow-light-lg mb-6">
-                     <div class="row no-gutters">
-                         <div class="col-12 col-md-6">
-
-                             <!-- Slider -->
-                             <div class="card-img-slider"
-                                 data-flickity='{"fade": true, "imagesLoaded": true, "pageDots": false, "prevNextButtons": false, "asNavFor": "#blogSlider", "draggable": false}'>
-                                 <a class="card-img-left bg-cover"
-                                     style="background-image: url({{ asset('img/photos/photo-1.jpg') }});" href="#!">
-
-                                     <!-- Image (placeholder) -->
-                                     <img src="{{ asset('img/photos/photo-1.jpg') }}" alt="..."
-                                         class="img-fluid d-md-none invisible">
-
-                                 </a>
-                                 <a class="card-img-left bg-cover"
-                                     style="background-image: url({{ asset('img/photos/photo-26.jpg') }});" href="#!">
-
-                                     <!-- Image (placeholder) -->
-                                     <img src="{{ asset('img/photos/photo-26.jpg') }}" alt="..."
-                                         class="img-fluid d-md-none invisible">
-
-                                 </a>
-                             </div>
-
-                             <!-- Shape -->
-                             <div class="shape shape-right shape-fluid-y svg-shim text-white d-none d-md-block">
-                                 <svg viewBox="0 0 112 690" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                     <path d="M116 0H51V172C76 384 0 517 0 517V690H116V0Z" fill="currentColor" />
-                                 </svg>
-                             </div>
-
-                         </div>
-                         <div class="col-12 col-md-6 position-static">
-
-                             <!-- Slider -->
-                             <div class="position-static"
-                                 data-flickity='{"wrapAround": true, "pageDots": false, "imagesLoaded": true, "adaptiveHeight": true}'
-                                 id="blogSlider">
-                                 <div class="w-100">
-
-                                     <!-- Body -->
-                                     <a class="card-body" href="#!">
-
-                                         <!-- Heading -->
-                                         <h3>
-                                             Spending Time Outside the Office with Coworkers Is Great for Productivity.
-                                         </h3>
-
-                                         <!-- Text -->
-                                         <p class="mb-0 text-muted">
-                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec
-                                             condimentum quam. Fusce pellentesque faucibus lorem at viverra. Integer at
-                                             feugiat odio. In placerat euismod risus proin erat purus.
-                                         </p>
-
-                                     </a>
-
-                                     <!-- Meta -->
-                                     <a class="card-meta mt-auto" href="#!">
-
-                                         <!-- Divider -->
-                                         <hr class="card-meta-divider">
-
-                                         <!-- Avatar -->
-                                         <div class="avatar avatar-sm mr-2">
-                                             <img src="{{ asset('img/avatars/avatar-2.jpg') }}" alt="..."
-                                                 class="avatar-img rounded-circle">
-                                         </div>
-
-                                         <!-- Author -->
-                                         <h6 class="text-uppercase text-muted mr-2 mb-0">
-                                             Adolfo Hess
-                                         </h6>
-
-                                         <!-- Date -->
-                                         <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                                             <time datetime="2019-05-02">May 02</time>
-                                         </p>
-
-                                     </a>
-
-                                 </div>
-                                 <div class="w-100">
-
-                                     <!-- Body -->
-                                     <a class="card-body" href="#!">
-
-                                         <!-- Heading -->
-                                         <h3>
-                                             Working in Cafes Doesn't Inspire You. It Kills Your Output and Costs Money.
-                                         </h3>
-
-                                         <!-- Text -->
-                                         <p class="mb-0 text-muted">
-                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec
-                                             condimentum quam. Fusce pellentesque faucibus lorem at viverra. Integer at
-                                             feugiat odio. In placerat euismod risus proin erat purus.
-                                         </p>
-
-                                     </a>
-
-                                     <!-- Meta -->
-                                     <a class="card-meta mt-auto" href="#!">
-
-                                         <!-- Divider -->
-                                         <hr class="card-meta-divider">
-
-                                         <!-- Avatar -->
-                                         <div class="avatar avatar-sm mr-2">
-                                             <img src="{{ asset('img/avatars/avatar-1.jpg') }}" alt="..."
-                                                 class="avatar-img rounded-circle">
-                                         </div>
-
-                                         <!-- Author -->
-                                         <h6 class="text-uppercase text-muted mr-2 mb-0">
-                                             Ab Hadley
-                                         </h6>
-
-                                         <!-- Date -->
-                                         <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                                             <time datetime="2019-05-02">May 02</time>
-                                         </p>
-
-                                     </a>
-
-                                 </div>
-                             </div>
-
-                         </div>
-                     </div> <!-- / .row -->
-                 </div>
-
-             </div>
-         </div> <!-- / .row -->
+                <div class="col-12">
+  
+                    <!-- Card -->
+                    <div class="card card-row shadow-light-lg mb-6">
+                        <div class="row no-gutters">
+                            <div class="col-12 col-md-6">
+  
+                                <!-- Slider -->
+                                <div class="card-img-slider"
+                                    data-flickity='{"fade": true, "imagesLoaded": true, "pageDots": false, "prevNextButtons": false, "asNavFor": "#blogSlider", "draggable": false}'>
+  
+                                    @foreach ($berita as $item)
+                                    <a class="card-img-left bg-cover"
+                                        style="background-image: url({{ url('storage/berita/'.$item->img) }});"
+                                        href="{{ route('berita', $item->slug) }}">
+  
+                                        <!-- Image (placeholder) -->
+                                        <img src="{{ url('storage/berita/'.$item->img) }}" alt="..."
+                                            class="img-fluid d-md-none invisible">
+  
+                                    </a>
+                                    @endforeach
+                                </div>
+  
+                                <!-- Shape -->
+                                <div class="shape shape-right shape-fluid-y svg-shim text-white d-none d-md-block">
+                                    <svg viewBox="0 0 112 690" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M116 0H51V172C76 384 0 517 0 517V690H116V0Z" fill="currentColor" />
+                                    </svg>
+                                </div>
+  
+                            </div>
+  
+                            <div class="col-12 col-md-6 position-static">
+  
+                                <!-- Slider -->
+                                <div class="position-static"
+                                    data-flickity='{"wrapAround": true, "pageDots": false, "imagesLoaded": true, "adaptiveHeight": true}'
+                                    id="blogSlider">
+  
+                                    @foreach ($berita as $item)
+                                    <div class="w-100">
+  
+                                        <!-- Body -->
+                                        <div class="card-body">
+                                            <blockquote class="blockquote text-center mb-0">
+  
+                                                <!-- Brand -->
+                                                <div class="row justify-content-center mb-5 mb-md-7">
+                                                    <a href="{{ route('berita', $item->slug) }}">
+                                                        <h3>{{ substr($item->judul, 0, 125) }}</h3>
+                                                    </a>
+                                                </div> <!-- / .row -->
+  
+                                                <!-- Text -->
+                                                <p class="mb-5 mb-md-7">
+                                                    {!! substr($item->isi, 0, 150) !!} ...
+                                                </p>
+  
+                                                <!-- Footer -->
+                                                <footer class="blockquote-footer">
+                                                    <span class="h6 text-uppercase">Russ D'Sa</span>
+                                                </footer>
+  
+                                            </blockquote>
+                                        </div>
+  
+                                    </div>
+                                    @endforeach
+  
+  
+                                </div>
+  
+                            </div>
+                        </div> <!-- / .row -->
+                    </div>
+  
+                </div>
+            </div> <!-- / .row -->
      </div> <!-- / .container -->
  </section>
 
