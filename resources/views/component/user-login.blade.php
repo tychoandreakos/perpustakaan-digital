@@ -456,7 +456,7 @@
  <!-- MORE
       ================================================== -->
  <section class="py-7 py-md-10">
-     <div class="container">
+     {{-- <div class="container">
          <div class="row justify-content-center">
              <div class="col-12 col-md-9 col-lg-8 col-xl-7">
 
@@ -467,7 +467,7 @@
 
              </div>
          </div> <!-- / .row -->
-     </div> <!-- / .container -->
+     </div> <!-- / .container --> --}}
  </section>
 
  <!-- SHAPE

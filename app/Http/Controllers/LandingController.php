@@ -20,6 +20,11 @@ class LandingController extends Controller
         $buku = Buku::all()->count();
         return view('landing', compact('berita', 'buku'));
     }
+    
+    public function approval()
+    {
+        return view('approval');
+    }
 
     public function beranda()
     {
