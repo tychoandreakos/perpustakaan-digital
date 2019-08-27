@@ -16,12 +16,14 @@ class PinjamController extends Controller
         $total = PinjamTransaksi::where([['user_id', $request->user_id], ['status_pinjam', 1]])->count();
         if($total != $request->jumlah_pinjaman){
             foreach ($request->bibliobigrafi as $bilio) {
-                $requestData = $request->all();
+            $requestData = $request->all();
             $requestData['tgl_pinjam'] = Carbon::now();
             $requestData['bibliobigrafi_id'] = $bilio;
+            
+            $bilio = Bibliobigrafi::find($bilio);
+            $requestData['buku_id'] = $bilio->buku_id;
             PinjamTransaksi::create($requestData);
     
-            $bilio = Bibliobigrafi::find($bilio);
             $bilio->status_pinjam = 1;
             $bilio->update();
             }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Anggota;
+use App\AnggotaTransaksi;
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -49,7 +52,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'id' => ['required'],
+            'id' => ['required', 'min:5', 'integer'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -64,11 +67,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'id' => $data['id'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $transaksi = AnggotaTransaksi::create([
+            'user_id' => $data['id'],
+            'tipe_anggota_id' => 1
+        ]);
+
+        $dt = new Carbon();
+
+        Anggota::create([
+            'user_id' => $data['id'],
+            'tgl_registrasi' => Carbon::now(),
+            'tgl_expired' => $dt->addYears($transaksi->tipe_anggota->masa_berlaku_anggota)
+        ]);
+
+        return $user;
+
     }
 }

@@ -7,7 +7,7 @@
 
                 <!-- Heading -->
                 <h3 class="mb-0">
-                    Koleksi Terbaru
+                    Popular 7 Hari Terakhir 
                 </h3>
 
                 <!-- Text -->
@@ -26,7 +26,8 @@
             </div>
         </div> <!-- / .row -->
         <div class="row">
-            @foreach ($terbaru as $item)
+            @foreach ($popular as $item)
+            @if ($item->pinjam_transaksi_count > 0)
             <div class="col-12 col-md-6 col-lg-4 d-flex">
 
                 <!-- Card -->
@@ -74,7 +75,8 @@
                         <span
                             class="badge badge-warning">{{ ucwords($item->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
                         <span class="badge badge-info">{{ $item->deskripsi_fisik }}</span>
-                        <span class="badge badge-light"> {{ $item->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} - {{ ucwords($item->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
+                        <span class="badge badge-light"> {{ $item->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} -
+                            {{ ucwords($item->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
                         <span class="badge badge-dark">{{ $item->bibliobigrafi[0]->no_panggil }}</span>
 
                         <div class="mb-0 text-muted mt-4">
@@ -97,13 +99,14 @@
                         </h6>
 
                         @isset($item->pdf)
-                            <!-- Date -->
+                        <!-- Date -->
                         <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                                <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-                                        class="btn btn-danger-soft btn-rounded-circle btn-sm">
-                                        <i class="fe fe-eye"></i>
-                                    </button>
-                                </p>
+                            <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip"
+                                data-placement="top" title="Baca Buku"
+                                class="btn btn-danger-soft btn-rounded-circle btn-sm">
+                                <i class="fe fe-eye"></i>
+                            </button>
+                        </p>
                         @endisset
 
                     </a>
@@ -111,6 +114,7 @@
                 </div>
 
             </div>
+            @endif
             @endforeach
         </div> <!-- / .row -->
     </div> <!-- / .container -->

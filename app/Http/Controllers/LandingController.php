@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Berita;
 use App\Buku;
-use App\BukuTransaksi;
-use App\Info;
 use App\Topik;
-use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -55,7 +53,40 @@ class LandingController extends Controller
         }, 'bibliobigrafi.lokasi_rak' => function($q) {
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->inRandomOrder()->first();
-        return view('beranda', compact('terbaru', 'random', 'berita'));
+
+
+        // return
+        $date = Carbon::today()->subDays(7);
+        $popular = Buku::with(['buku_transaksi' => function($q) {
+            $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id', 'bahasa_id');
+        },'buku_transaksi.pengarang' => function($q){
+            $q->select('id', 'nama_pengarang');
+        }, 'buku_transaksi.penerbit' => function($q) {
+            $q->select('id', 'nama_penerbit');
+        }, 'topik' => function($q) {
+            $q->select('id','jenis_topik', 'warna');
+        }, 'buku_transaksi.bahasa' => function($q) {
+            $q->select('id', 'jenis_bahasa');
+        }, 'bibliobigrafi.lokasi_rak' => function($q) {
+            $q->select('id', 'nama_lokasi', 'kode_lokasi');
+        }])->where('created_at', '>=', $date)->withCount('pinjam_transaksi')->limit(3)->get();
+
+        $date = Carbon::today()->subDays(30);
+        $popular30 = Buku::with(['buku_transaksi' => function($q) {
+            $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id', 'bahasa_id');
+        },'buku_transaksi.pengarang' => function($q){
+            $q->select('id', 'nama_pengarang');
+        }, 'buku_transaksi.penerbit' => function($q) {
+            $q->select('id', 'nama_penerbit');
+        }, 'topik' => function($q) {
+            $q->select('id','jenis_topik', 'warna');
+        }, 'buku_transaksi.bahasa' => function($q) {
+            $q->select('id', 'jenis_bahasa');
+        }, 'bibliobigrafi.lokasi_rak' => function($q) {
+            $q->select('id', 'nama_lokasi', 'kode_lokasi');
+        }])->where('created_at', '>=', $date)->withCount('pinjam_transaksi')->limit(2)->get();
+
+        return view('beranda', compact('terbaru', 'random', 'berita', 'popular', 'popular30'));
     }
 
     public function terbaru()

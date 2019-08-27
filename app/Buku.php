@@ -41,6 +41,11 @@ class Buku extends Model
         return $this->hasMany('denda');
     }
 
+    public function pinjam_transaksi()
+    {
+        return $this->hasMany(PinjamTransaksi::class);
+    }
+
     public function bibliobigrafi()
     {
         return $this->hasMany(Bibliobigrafi::class);

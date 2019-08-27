@@ -10,6 +10,7 @@ class PinjamTransaksi extends Model
     protected $table = 'pinjam_transaksi';
     protected $fillable = [
         'user_id',
+        'buku_id',
         'bibliobigrafi_id',
         'tgl_pinjam',
         'tanggal_habis_pinjam',
@@ -35,6 +36,10 @@ class PinjamTransaksi extends Model
     
     public function denda(){
         return $this->hasOne('denda');
+    }
+
+    public function buku() {
+        return $this->belongsTo(Buku::class);
     }
 
     public function bibliobigrafi()
