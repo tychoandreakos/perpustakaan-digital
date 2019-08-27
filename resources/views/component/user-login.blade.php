@@ -126,21 +126,24 @@
 
                          </div>
                          <a class="col-12 col-md-6 order-md-2 bg-cover card-img-right"
-                             style="background-image: url({{ asset('img/photos/photo-27.jpg') }});" href="#!">
+                         href="{{ route('buku', $random->slug) }}">
 
-                             <!-- Image (placeholder) -->
-                             <img src="{{ asset('img/photos/photo-27.jpg') }}" alt="..."
-                                 class="img-fluid d-md-none invisible">
+                         <div style="display: flex; background: {{ isset($random->topik->warna) ?$random->topik->warna : '#335eea' }}; width: 100%; height: 100%"
+                             class="card-img-top">
+                             <div style="background:url('{{  url('storage/resize/'.$random->gambar_sampul) }}') center no-repeat;background-size: cover; width: 150px;height: 200px;margin: auto; display:flex; align-self: center
+                                       box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);"></div>
+                         </div>
 
-                             <!-- Shape -->
-                             <div class="shape shape-left shape-fluid-y svg-shim text-white d-none d-md-block">
-                                 <svg viewBox="0 0 112 690" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                     <path d="M2.14577e-06 0H62.7586V172C38.6207 384 112 517 112 517V690H2.14577e-06V0Z"
-                                         fill="currentColor" />
-                                 </svg>
-                             </div>
+                         <!-- Shape -->
+                         <div class="shape shape-left shape-fluid-y svg-shim text-white d-none d-md-block">
+                             <svg viewBox="0 0 112 690" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path
+                                     d="M2.14577e-06 0H62.7586V172C38.6207 384 112 517 112 517V690H2.14577e-06V0Z"
+                                     fill="currentColor" />
+                             </svg>
+                         </div>
 
-                         </a>
+                     </a>
                          <div class="col-12 col-md-6 order-md-1">
 
                              <!-- Body -->
@@ -148,15 +151,13 @@
 
                                  <!-- Heading -->
                                  <h3>
-                                     Travel Can Keep You Creatively Inspired.
+                                    {{ $random->judul }}
                                  </h3>
 
                                  <!-- Text -->
-                                 <p class="mb-0 text-muted">
-                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec condimentum quam.
-                                     Fusce pellentesque faucibus lorem at viverra. Integer at feugiat odio. In placerat
-                                     euismod risus proin erat purus.
-                                 </p>
+                                 <div class="mb-0 text-muted">
+                                    {!! substr($random->catatan, 0, 250) . ' ....' !!}
+                                 </div>
 
                              </a>
 

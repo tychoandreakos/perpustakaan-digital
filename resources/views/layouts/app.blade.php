@@ -52,6 +52,7 @@
 
     <!-- Theme JS -->
     <script src="{{ asset('js/user.js') }}"></script>
+  
 </body>
 
 <!-- Mirrored from landkit.goodthemes.co/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 26 Aug 2019 03:35:28 GMT -->

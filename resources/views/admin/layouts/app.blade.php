@@ -36,6 +36,7 @@
         * {
             outline: none;
         }
+
     </style>
 </head>
 
@@ -48,17 +49,17 @@
 
         <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 
-        @yield('content')
-        
-        @include('admin.partials.footer')
-        
+            @yield('content')
+
+            @include('admin.partials.footer')
+
         </div>
     </div>
 
     <!--   Core   -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 </body>
 
 </html>
