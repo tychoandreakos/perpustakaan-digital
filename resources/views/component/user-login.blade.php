@@ -189,15 +189,11 @@
                                  <!-- Divider -->
                                  <hr class="card-meta-divider">
 
-                                 <!-- Avatar -->
-                                 <div class="avatar avatar-sm mr-2">
-                                     <img src="{{ asset('img/avatars/avatar-1.jpg') }}" alt="..."
-                                         class="avatar-img rounded-circle">
-                                 </div>
-
                                  <!-- Author -->
                                  <h6 class="text-uppercase text-muted mr-2 mb-0">
-                                     Ab Hadley
+                                        @foreach ($random->buku_transaksi as $p)
+                                        {{ $p->pengarang->nama_pengarang }}
+                                        @endforeach
                                  </h6>
 
                                  <!-- Date -->

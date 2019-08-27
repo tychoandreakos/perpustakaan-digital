@@ -28,7 +28,7 @@
 
                 <!-- Link -->
                 <div class="text-center">
-                        <a href="{{ route('cari') }}" class="btn btn-primary-soft shadow lift mr-1">
+                        <a href="{{ route('landing') }}" class="btn btn-primary-soft shadow lift mr-1">
                                 Kembali </i>
                             </a>
                     <a href="{{ route('cari') }}" class="btn btn-primary shadow lift mr-1">
