@@ -22,8 +22,8 @@ Route::get('/', 'LandingController@index')->name('landing');
 Route::get('/cari', 'LandingController@cari')->name('cari');
 Route::get('berita/{slug}', 'LandingController@berita')->name('berita');
 Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua');
-Route::get('beranda', 'LandingController@beranda')->name('beranda');
-Route::get('koleksi-terbaru', 'LandingController@terbaru')->name('terbaru');
+Route::get('beranda', 'LandingController@beranda')->name('beranda')->middleware('auth');
+Route::get('koleksi-terbaru', 'LandingController@terbaru')->name('terbaru')->middleware('auth');
 Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
 Route::get('baca/{slug}', 'LandingController@baca')->name('baca')->middleware('auth');
 

@@ -33,7 +33,7 @@
 
                               </div>
                               <a class="col-12 col-md-6 order-md-2 bg-cover card-img-right"
-                                  href="{{ route('berita', $item->slug) }}">
+                                  href="{{ route('buku', $item->slug) }}">
 
                                   <div style="display: flex; background: {{ isset($item->topik->warna) ?$item->topik->warna : '#335eea' }}; width: 100%; height: 100%"
                                       class="card-img-top">
@@ -55,7 +55,7 @@
                               <div class="col-12 col-md-6 order-md-1">
 
                                   <!-- Body -->
-                                  <a class="card-body" href="{{ route('berita', $item->slug) }}">
+                                  <a class="card-body" href="{{ route('buku', $item->slug) }}">
 
                                       <!-- Heading -->
                                       <h3>
@@ -87,7 +87,7 @@
                                   </a>
 
                                   <!-- Meta -->
-                                  <a class="card-meta" href="{{ route('berita', $item->slug) }}">
+                                  <a class="card-meta" href="{{ route('buku', $item->slug) }}">
 
                                       <!-- Divider -->
                                       <hr class="card-meta-divider">
@@ -126,7 +126,7 @@
 
                               </div>
                               <a class="col-12 col-md-6 bg-cover card-img-left"
-                                  href="{{ route('berita', $item->slug) }}">
+                                  href="{{ route('buku', $item->slug) }}">
 
                                   <!-- Image (placeholder) -->
                                   <div style="display: flex; background: {{ isset($item->topik->warna) ?$item->topik->warna : '#335eea' }}; width: 100%; height: 100%"
@@ -147,7 +147,7 @@
                               <div class="col-12 col-md-6">
 
                                   <!-- Body -->
-                                  <a class="card-body" href="{{ route('berita', $item->slug) }}">
+                                  <a class="card-body" href="{{ route('buku', $item->slug) }}">
 
                                       <!-- Heading -->
                                       <h3>
@@ -179,7 +179,7 @@
                                   </a>
 
                                   <!-- Meta -->
-                                  <a class="card-meta" href="{{ route('berita', $item->slug) }}">
+                                  <a class="card-meta" href="{{ route('buku', $item->slug) }}">
 
                                       <!-- Divider -->
                                       <hr class="card-meta-divider">

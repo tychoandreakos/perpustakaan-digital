@@ -15,6 +15,7 @@ class UpdateTopik extends Migration
     {
         Schema::table('topik', function (Blueprint $table) {
             $table->integer('order')->nullable()->after('slug');
+            $table->string('warna', 50)->after('order');
         });
     }
 

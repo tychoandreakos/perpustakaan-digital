@@ -34,11 +34,11 @@
                     <!-- Email -->
                     <div class="form-group">
                       <label for="email">
-                        Email Address
+                       Npm / ID
                       </label>
-                      <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                      value="{{ old('email') }}" required autocomplete="email" autofocus>
-                      @error('email')
+                      <input id="id" placeholder="Masukkan NPM Anda" type="text" class="form-control @error('id') is-invalid @enderror" name="id"
+                      value="{{ old('id') }}" required autocomplete="off" autofocus>
+                      @error('id')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>
@@ -67,7 +67,7 @@
       
                   <!-- Text -->
                   <p class="mb-0 font-size-sm text-center text-muted">
-                   Silahkan daftar jika belum, <a href="{{ route('login') }}">Daftar</a>.
+                   Silahkan daftar jika belum, <a href="{{ route('register') }}">Daftar</a>.
                   </p>
       
                 </div>
