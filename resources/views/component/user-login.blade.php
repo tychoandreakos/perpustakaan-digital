@@ -86,18 +86,11 @@
                      <div class="col ml-n5">
 
                          <!-- Badges -->
-                         <a class="badge badge-pill badge-secondary-soft" href="blog-search.html">
-                             <span class="h6 text-uppercase">Design</span>
-                         </a>
-                         <a class="badge badge-pill badge-secondary-soft" href="blog-search.html">
-                             <span class="h6 text-uppercase">Product</span>
-                         </a>
-                         <a class="badge badge-pill badge-secondary-soft" href="blog-search.html">
-                             <span class="h6 text-uppercase">UX</span>
-                         </a>
-                         <a class="badge badge-pill badge-secondary-soft" href="blog-search.html">
-                             <span class="h6 text-uppercase">Resources</span>
-                         </a>
+                        @foreach ($randomTags as $item)
+                        <a class="badge badge-pill badge-secondary-soft" href="blog-search.html">
+                                <span class="h6 text-uppercase">{{ ucwords($item->jenis_topik) }}</span>
+                            </a>
+                        @endforeach
 
                      </div>
                  </div> <!-- / .row -->
@@ -111,6 +104,21 @@
       ================================================== -->
  <section class="pt-7 pt-md-10">
      <div class="container">
+            <div class="row align-items-center mb-5">
+                    <div class="col-12 col-md">
+        
+                        <!-- Heading -->
+                        <h3 class="mb-0">
+                            Mungkin anda suka?
+                        </h3>
+        
+                        <!-- Text -->
+                        <p class="mb-0 text-muted">
+                            Here’s what we've been up to recently.
+                        </p>
+        
+                    </div>
+                </div> <!-- / .row -->
          <div class="row">
              <div class="col-12">
 

@@ -86,7 +86,9 @@ class LandingController extends Controller
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->where('created_at', '>=', $date)->withCount('pinjam_transaksi')->limit(2)->get();
 
-        return view('beranda', compact('terbaru', 'random', 'berita', 'popular', 'popular30'));
+        $randomTags = Topik::inRandomOrder()->limit(4)->get();
+
+        return view('beranda', compact('terbaru', 'random', 'berita', 'popular', 'popular30', 'randomTags'));
     }
 
     public function terbaru()
