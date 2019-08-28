@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('main')
 
-
 <!-- WELCOME
     ================================================== -->
 <section class="border-bottom">
@@ -48,10 +47,10 @@
                 </div>
 
             </div>
-            <div class="col-12 col-md-5 py-4 py-md-8 order-md-1" data-aos="fade-right">
+            <div style="margin-top: -5.5px" class="col-12 col-md-5 py-5 py-md-9 order-md-1" data-aos="fade-right">
 
                 <!-- Heading -->
-                <h1 class="display-3">
+                <h1 class="display-3 ">
                     Silahkan Isi <span class="text-primary">Data Diri</span> Anda.
                 </h1>
 

@@ -134,6 +134,8 @@
 
 </script>
 
-<style>
-
+<style scoped>
+* {
+    overflow: hidden !important;
+}
 </style>
