@@ -7,7 +7,6 @@
                   
                   <!-- Icon -->
                   <div class="icon text-primary mb-3">
-                    <?xml version="1.0" encoding="UTF-8"?>
                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
                         <title>Stockholm-icons / General / Settings-1</title>
@@ -35,7 +34,6 @@
       
                   <!-- Icon -->
                   <div class="icon text-primary mb-3">
-                    <?xml version="1.0" encoding="UTF-8"?>
                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
                         <title>Stockholm-icons / Layout / Layout-arrange</title>
@@ -63,7 +61,6 @@
                     
                   <!-- Icon -->
                   <div class="icon text-primary mb-3">
-                    <?xml version="1.0" encoding="UTF-8"?>
                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
                         <title>Stockholm-icons / Code / Code</title>
