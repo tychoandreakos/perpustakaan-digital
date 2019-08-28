@@ -34,7 +34,9 @@ class BibliobigrafiController extends Controller
         $koleksi = Bibliobigrafi::all()->count();
         $anggota_count = User::all()->count();
         $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
-        return view('admin.bibliobigrafi.home', compact('koleksi', 'anggota_count', 'eksemplar'));
+        $approve = User::whereNull('approved_at')->get()->count();
+        $title = 'Bibliobigrafi';
+        return view('admin.bibliobigrafi.home', compact('title' ,'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function fetch()
@@ -74,7 +76,12 @@ class BibliobigrafiController extends Controller
     public function create()
     {
         $title = 'Tambah Bibiliobigrafi';
-        return view('admin.bibliobigrafi.add', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        
+        return view('admin.bibliobigrafi.add', compact('title' ,'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function pengarang()

@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
+use App\Bibliobigrafi;
 use App\Http\Controllers\Controller;
 
 use App\Buku;
+use App\PinjamTransaksi;
+use App\User;
 use DateTime;
 use Illuminate\Http\Request;
 
@@ -17,7 +21,11 @@ class BukuController extends Controller
     public function index()
     {
         $title = 'Daftar Buku';
-        return view('admin.master.buku.home', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.buku.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function fetch()
@@ -39,7 +47,11 @@ class BukuController extends Controller
     public function create()
     {
         $title = 'Tambah Buku';
-        return view('admin.master.buku.add', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.buku.add', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**

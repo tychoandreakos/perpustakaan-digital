@@ -17,11 +17,14 @@ class homePageController extends Controller
         $pinjam = PinjamTransaksi::with('bibliobigrafi.buku', 'user')->where('status_pinjam', 1)->latest()->limit(5)->get();
         // return
         $anggota = User::with('anggota', 'anggota_transaksi.tipe_anggota')->latest()->limit(4)->get();
+        
         $koleksi = Bibliobigrafi::all()->count();
         $anggota_count = User::all()->count();
         $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+
         $statistik = $this->chart();
-        return view('admin.home', compact('pinjam', 'anggota', 'statistik', 'anggota_count', 'koleksi', 'eksemplar'));
+        return view('admin.home', compact('pinjam', 'anggota', 'statistik', 'anggota_count', 'koleksi', 'eksemplar', 'approve'));
     }
 
     public function getAllMonth() {

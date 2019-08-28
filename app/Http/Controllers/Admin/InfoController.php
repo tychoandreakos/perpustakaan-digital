@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
+use App\Bibliobigrafi;
 use App\Http\Controllers\Controller;
 
 use App\Info;
+use App\PinjamTransaksi;
+use App\User;
 use Illuminate\Http\Request;
 
 class InfoController extends Controller
@@ -16,7 +20,11 @@ class InfoController extends Controller
     public function index()
     {
         $title = 'Info Pepustakaan';
-        return view('admin.info.home', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksii::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.info.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function fetch()

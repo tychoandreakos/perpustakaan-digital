@@ -4,6 +4,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 
 use App\Berita;
+use App\Bibliobigrafi;
+use App\PinjamTransaksi;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,8 +19,12 @@ class BeritaController extends Controller
      */
     public function index()
     {
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
         $title = 'Daftar Berita';
-        return view('admin.berita.home', compact('title'));
+        return view('admin.berita.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function fetch()
@@ -33,7 +40,11 @@ class BeritaController extends Controller
     public function create()
     {
         $title = 'Tambah Berita';
-        return view('admin.berita.add', compact('title'));//
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        $title = 'Daftar Berita';
+        return view('admin.berita.add', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**

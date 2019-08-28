@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 
 use App\Bibliobigrafi;
+use App\PinjamTransaksi;
+use App\User;
 use Illuminate\Http\Request;
 
 class EksemplarTransaksiController extends Controller
@@ -16,7 +18,11 @@ class EksemplarTransaksiController extends Controller
     public function index()
     {
         $title = 'Daftar Eksemplar';
-        return view('admin.master.eksemplar.home', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.eksemplar.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function fetch()

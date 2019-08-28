@@ -31,11 +31,11 @@
                  <!-- Navigation -->
                  <ul class="navbar-nav ml-auto">
                      <li class="nav-item dropdown">
-                         <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#"
+                         <a class="nav-link dropdown-toggle" href="{{ route('tamu') }}"
                              aria-haspopup="true" aria-expanded="false">
-                             Landings
+                            Buku Tamu
                          </a>
-                         <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
+                         {{-- <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
                              <div class="row no-gutters">
                                  <div class="col-12 col-lg-6">
                                      <div class="dropdown-img-left"
@@ -119,7 +119,7 @@
                                      </div>
                                  </div>
                              </div> <!-- / .row -->
-                         </div>
+                         </div> --}}
                      </li>
                      <li class="nav-item dropdown">
                          <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#"

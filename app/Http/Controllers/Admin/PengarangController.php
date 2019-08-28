@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
+use App\Bibliobigrafi;
 use App\Http\Controllers\Controller;
 
 use App\Pengarang;
+use App\PinjamTransaksi;
+use App\User;
 use Illuminate\Http\Request;
 
 class PengarangController extends Controller
@@ -16,7 +20,11 @@ class PengarangController extends Controller
     public function index()
     {
         $title = 'Daftar Pengarang';
-        return view('admin.master.pengarang.home', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.pengarang.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**
@@ -32,7 +40,11 @@ class PengarangController extends Controller
     public function create()
     {
         $title = 'Tambah Pengarang';
-        return view('admin.master.pengarang.add', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.pengarang.add', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**

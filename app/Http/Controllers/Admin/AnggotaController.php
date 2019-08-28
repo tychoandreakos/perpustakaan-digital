@@ -22,7 +22,11 @@ class AnggotaController extends Controller
     public function index()
     {
         $title = 'Daftar Anggota';
-        return view('admin.anggota.home', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.anggota.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function fetch()
@@ -38,7 +42,11 @@ class AnggotaController extends Controller
     public function create()
     {
         $title = 'Tambah Anggota';
-        return view('admin.anggota.add', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.anggota.add', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**

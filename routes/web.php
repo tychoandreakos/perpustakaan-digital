@@ -23,6 +23,8 @@ Route::get('/cari', 'LandingController@cari')->name('cari');
 Route::get('berita/{slug}', 'LandingController@berita')->name('berita');
 Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua');
 Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
+Route::get('tamu', 'LandingController@tamu')->name('tamu');
+Route::post('tamu', 'LandingController@tamu_store')->name('tamu.store');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -36,29 +38,6 @@ Route::middleware(['auth'])->group(function () {
    
 });
 
-// Route::get('/coba', 'Coba@getMonthData')->name('landing');
-// Route::get('buku/', 'LandingController@cari')->name('cari');
-
-// Route::get('/tamu', function() {
-//     return view('tamu');
-// })->name('user.tamu');
-
-// Route::get('beranda', function(){
-//     return view('homes');
-// })->name('beranda')->middleware('auth');
-
-// // Route::get('lihat-topik', function(){
-// //     return view('result-topik');
-// // })->name('lihat.topik')->middleware('auth');
-
-// // fetch
-// Route::post('buku-tamu', 'ToolController@tamu')->name('tool.tamu');
-// Route::get('random-fetch', 'LandingController@random_topik')->name('random.fetch')->middleware('auth');
-// Route::get('item-topik-fetch/{id}', 'LandingController@item')->name('topik.item')->middleware('auth');
-// Route::get('lihat-topik/{slug}', 'LandingController@result')->name('topik.view')->middleware('auth');
-
-// // Route::view('/', 'user');
-// // Route::view('/{any}', 'user');
 
 // admin prefix
 Route::prefix('pustakawan')->namespace('Admin')->middleware('auth:admin')->group(function() {

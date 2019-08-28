@@ -67,18 +67,17 @@
                     <div class="card-body">
                       <div class="row">
                         <div class="col">
-                          <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                          <span class="h2 font-weight-bold mb-0">49,65%</span>
+                          <h5 class="card-title text-uppercase text-muted mb-0">Approval Anggota</h5>
+                          <span class="h2 font-weight-bold mb-0">{{ $approve }}</span>
                         </div>
                         <div class="col-auto">
                           <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                            <i class="fas fa-percent"></i>
+                            <i class="fas fa-address-card"></i>
                           </div>
                         </div>
                       </div>
                       <p class="mt-3 mb-0 text-muted text-sm">
-                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                        <span class="text-nowrap">Since last month</span>
+                        <span>Total anggota baru yang belum disetujui</span>
                       </p>
                     </div>
                   </div>

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\BukuTransaksi;
+use App\Bibliobigrafi;
 use App\Http\Controllers\Controller;
-
+use App\PinjamTransaksi;
 use App\Topik;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +20,11 @@ class TopikController extends Controller
     public function index()
     {
         $title = 'Daftar Topik';
-        return view('admin.topik.home', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.topik.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
 
@@ -41,7 +46,11 @@ class TopikController extends Controller
     public function create()
     {
         $title = 'Tambah Topik';
-        return view('admin.topik.add', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.topik.add', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**

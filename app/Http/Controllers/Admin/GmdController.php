@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
+use App\Bibliobigrafi;
 use App\Http\Controllers\Controller;
 
 use App\Gmd;
+use App\PinjamTransaksi;
+use App\User;
 use Illuminate\Http\Request;
 
 class GmdController extends Controller
@@ -16,7 +20,11 @@ class GmdController extends Controller
     public function index()
     {
         $title = 'Daftar GMD';
-        return view('admin.master.gmd.home', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.gmd.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function fetch()
@@ -32,7 +40,11 @@ class GmdController extends Controller
     public function create()
     {
         $title = 'Tambah GMD';
-        return view('admin.master.gmd.add', compact('title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.gmd.add', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**
