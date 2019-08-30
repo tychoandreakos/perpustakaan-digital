@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnggotaTransaksi;
 use App\Berita;
 use App\Buku;
 use App\PinjamTransaksi;
@@ -9,6 +10,7 @@ use App\Tamu;
 use App\Topik;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class LandingController extends Controller
@@ -52,6 +54,9 @@ class LandingController extends Controller
     {
         $buku = Buku::where('slug', $slug)->first();
        $random =  $this->generateRandomString(4);
+       $total = PinjamTransaksi::where('user_id', Auth::user()->id)
+        ->whereNotNull('kode_pinjam')->where('status_verifikasi', 1)->count();
+        $jumlah = AnggotaTransaksi::where('user_id', Auth::user()->id)->first()->tipe_anggota()->first()->jumlah_pinjaman;
 
        $check = PinjamTransaksi::where('kode_pinjam', $random)->first();
        if($check) {
@@ -59,11 +64,27 @@ class LandingController extends Controller
         return false;
        }
 
-       PinjamTransaksi::create([
-        'kode_pinjam' => strtolower($random),
-        'buku_id' => $buku->id,
-        'status_pinjam' => 0
-    ]);
+       if($total < $jumlah) {
+        $pinjam = PinjamTransaksi::create([
+            'user_id' => Auth::user()->id,
+            'status_verifikasi' => 1,
+            'kode_pinjam' => strtolower($random),
+            'buku_id' => $buku->id,
+            'status_pinjam' => 0
+        ]);
+    
+        return response()->json([
+            'msg' => true,
+            'message' => 'Kode verifikasi anda <br>'. $pinjam->kode_pinjam .'',
+            ]);
+       } else {
+        return response()->json([
+            'msg' => false,
+            'message' => 'Silahkan verifikasikan dahulu pinjaman ada yang sebelumnya!',
+            ]);
+       }
+
+       
     }
 
     private function generateRandomString($length) {
@@ -197,7 +218,13 @@ class LandingController extends Controller
             $q->select('id', 'jenis_topik', 'warna');
         }, 'topik'])->where('slug', $slug)->firstOrFail();
 
-        return view('buku', compact('result'));
+        $total = PinjamTransaksi::where('user_id', Auth::user()->id)
+        ->whereNotNull('kode_pinjam')->where('status_verifikasi', 1)->count();
+    
+
+       $anggota = AnggotaTransaksi::with('tipe_anggota')->where('user_id', Auth::user()->id)->get();
+
+        return view('buku', compact('result', 'total', 'anggota'));
     }
 
     public function baca($slug)

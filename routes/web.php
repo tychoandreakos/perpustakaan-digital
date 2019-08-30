@@ -146,7 +146,8 @@ Route::get('daftar-pengunjung', 'SirkulasiController@pengunjung')->name('pengunj
 Route::get('daftar-keterlambatan', 'SirkulasiController@keterlambatan')->name('keterlambatan');
 Route::get('sirkulasi-digital', 'SirkulasiController@digital')->name('sirkulasi.digital');
 Route::get('eksemplar-keluar', 'SirkulasiController@keluar')->name('eksemplar.keluar');
-Route::get('sirkulasi-verifikasi', 'SirkulasiController@verifikasi')->name('sirkulasi.verifikasi');
+Route::post('sirkulasi-verifikasi', 'SirkulasiController@verifikasi')->name('sirkulasi.verifikasi');
+Route::post('sirkulasi-digital-pinjam', 'SirkulasiController@pinjam')->name('sirkulasi.digital2');
 
 
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');

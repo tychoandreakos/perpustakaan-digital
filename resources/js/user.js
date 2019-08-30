@@ -17,8 +17,11 @@ window.Vue = require('vue');
 Vue.use(VueSweetalert2);
 
 
+
 // tamu
 Vue.component('app-tamu', require('./components/Tamu.vue').default);
+
+Vue.component('app-button-pinjam', require('./components/user/ButtonPinjam.vue').default);
 
 
 

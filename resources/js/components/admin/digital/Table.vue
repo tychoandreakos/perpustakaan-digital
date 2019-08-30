@@ -9,16 +9,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="container">
-                    <form @submit.prevent="save">
-                        <div class="form-group">
-                            <label for="f">Kode Verifikasi</label>
-                            <input type="text" v-model="form.kode" class="form-control"
-                                placeholder="Masukkan Kode Verifikasi">
-                        </div>
-                        <button :disabled="!dis" type="submit" class="btn btn-success mb-4">Verifikasi</button>
-                    </form>
-                </div>
+                <template v-if="!data.length">
+                    <div class="container">
+                        <form @submit.prevent="save">
+                            <div class="form-group">
+                                <label for="f">Kode Verifikasi</label>
+                                <input type="text" v-model="form.kode" class="form-control"
+                                    placeholder="Masukkan Kode Verifikasi">
+                            </div>
+                            <button :disabled="!dis" type="submit" class="btn btn-success mb-4">Verifikasi</button>
+                        </form>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="container">
+                        <form @submit.prevent="save">
+                            <div class="form-group">
+                                <label for="f">User ID</label>
+                                <input type="text" v-model="forms.user_id" class="form-control"
+                                    placeholder="Masukkan User ID">
+                            </div>
+                            <div class="form-group">
+                                <label for="f">Pola Eksemplar Buku</label>
+                                <input type="text" v-model="forms.pola_eksemplar" class="form-control"
+                                    placeholder="Masukkan pola eksemplar buku">
+                            </div>
+                            <button :disabled="!dis" type="submit" class="btn btn-success mb-4">Pinjam Buku</button>
+                        </form>
+                    </div>
+                </template>
             </div>
         </div>
     </div>
@@ -26,26 +45,39 @@
 
 <script>
     export default {
-        props: ['kode'],
+        props: ['kode', 'kode2'],
         computed: {
             dis() {
                 return this.form.kode
-            }
+            },
         },
         data() {
             return {
                 form: {
                     kode: '',
-                }
+                },
+
+                forms: {
+                    id: '',
+                    pola_eksemplar: '',
+                },
+
+                data: {},
             }
         },
 
         methods: {
 
             save() {
-                axios.get(this.kode, this.form)
-                    .then(res => console.log(res))
-                    .catch(err => console.log(err.data))
+                if (!this.data.length) {
+                    axios.post(this.kode, this.form)
+                        .then(res => this.data = res.data)
+                        .catch(err => console.log(err.data))
+                } else {
+                    axios.post(this.kode2, this.forms)
+                        .then(res => this.data = res.data)
+                        .catch(err => console.log(err.data))
+                }
             }
         },
     }

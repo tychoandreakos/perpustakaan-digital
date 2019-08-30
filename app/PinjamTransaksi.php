@@ -15,6 +15,7 @@ class PinjamTransaksi extends Model
         'tgl_pinjam',
         'tanggal_habis_pinjam',
         'tgl_kembali',
+        'status_verifikasi',
         'status_pinjam',
         'kode_pinjam',
         'verified_at',
@@ -24,7 +25,7 @@ class PinjamTransaksi extends Model
         'created_at',
         'updated_at',
         'verified_at',
-        'tanggal_habis_pinjam'
+        'tanggal_habis_pinjam',
     ];
 
     // public function getTanggalHabisPinjamAttribute($value)

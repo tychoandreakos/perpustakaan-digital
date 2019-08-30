@@ -5419,8 +5419,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['kode'],
+  props: ['kode', 'kode2'],
   computed: {
     dis: function dis() {
       return this.form.kode;
@@ -5430,16 +5449,31 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         kode: ''
-      }
+      },
+      forms: {
+        id: '',
+        pola_eksemplar: ''
+      },
+      data: {}
     };
   },
   methods: {
     save: function save() {
-      axios.get(this.kode, this.form).then(function (res) {
-        return console.log(res);
-      })["catch"](function (err) {
-        return console.log(err.data);
-      });
+      var _this = this;
+
+      if (!this.data.length) {
+        axios.post(this.kode, this.form).then(function (res) {
+          return _this.data = res.data;
+        })["catch"](function (err) {
+          return console.log(err.data);
+        });
+      } else {
+        axios.post(this.kode2, this.forms).then(function (res) {
+          return _this.data = res.data;
+        })["catch"](function (err) {
+          return console.log(err.data);
+        });
+      }
     }
   }
 });
@@ -75294,64 +75328,167 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-xl-12 mb-12 mb-xl-0" }, [
-      _c("div", { staticClass: "card shadow" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "container" }, [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.save($event)
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "f" } }, [
-                  _vm._v("Kode Verifikasi")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
+      _c(
+        "div",
+        { staticClass: "card shadow" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          !_vm.data.length
+            ? [
+                _c("div", { staticClass: "container" }, [
+                  _c(
+                    "form",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.kode,
-                      expression: "form.kode"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Masukkan Kode Verifikasi"
-                  },
-                  domProps: { value: _vm.form.kode },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.save($event)
+                        }
                       }
-                      _vm.$set(_vm.form, "kode", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success mb-4",
-                  attrs: { disabled: !_vm.dis, type: "submit" }
-                },
-                [_vm._v("Verifikasi")]
-              )
-            ]
-          )
-        ])
-      ])
+                    },
+                    [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "f" } }, [
+                          _vm._v("Kode Verifikasi")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.kode,
+                              expression: "form.kode"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Masukkan Kode Verifikasi"
+                          },
+                          domProps: { value: _vm.form.kode },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "kode", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success mb-4",
+                          attrs: { disabled: !_vm.dis, type: "submit" }
+                        },
+                        [_vm._v("Verifikasi")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            : [
+                _c("div", { staticClass: "container" }, [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.save($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "f" } }, [
+                          _vm._v("User ID")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.forms.user_id,
+                              expression: "forms.user_id"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Masukkan User ID"
+                          },
+                          domProps: { value: _vm.forms.user_id },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.forms,
+                                "user_id",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "f" } }, [
+                          _vm._v("Pola Eksemplar Buku")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.forms.pola_eksemplar,
+                              expression: "forms.pola_eksemplar"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Masukkan pola eksemplar buku"
+                          },
+                          domProps: { value: _vm.forms.pola_eksemplar },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.forms,
+                                "pola_eksemplar",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success mb-4",
+                          attrs: { disabled: !_vm.dis, type: "submit" }
+                        },
+                        [_vm._v("Pinjam Buku")]
+                      )
+                    ]
+                  )
+                ])
+              ]
+        ],
+        2
+      )
     ])
   ])
 }

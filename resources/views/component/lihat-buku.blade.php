@@ -26,15 +26,17 @@
 
              </div>
              <div class="col-auto">
-
                  <!-- Buttons -->
-                 <a href="{{ route('pinjam', $result->slug) }}" class="btn btn-primary-soft mr-1">
-                     Pinjam
-                 </a>
+                 @if ($total >= $anggota[0]->tipe_anggota->jumlah_pinjaman)
+                 @else
+                 <app-button-pinjam judul="{{ $result->judul }}" style="display: inline-block" class="mr-1"
+                     route="{{ route('pinjam', $result->slug) }}"></app-button-pinjam>
+                 @endif
+
                  @isset($result->pdf)
                  <a href="{{ route('baca', $result->slug) }}" class="btn btn-primary">
-                    Baca
-                </a>
+                     Baca
+                 </a>
                  @endisset
 
              </div>
@@ -51,7 +53,7 @@
 
 
              <div class="col-12 col-md-8">
-                {!! $result->catatan !!}
+                 {!! $result->catatan !!}
              </div>
 
 

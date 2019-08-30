@@ -30,12 +30,21 @@
 
                  <!-- Navigation -->
                  <ul class="navbar-nav ml-auto">
+                     @guest
                      <li class="nav-item dropdown">
-                         <a class="nav-link dropdown-toggle" href="{{ route('tamu') }}"
-                             aria-haspopup="true" aria-expanded="false">
-                            Buku Tamu
+                         <a class="nav-link dropdown-toggle" href="{{ route('tamu') }}" aria-haspopup="true"
+                             aria-expanded="false">
+                             Buku Tamu
                          </a>
-                         {{-- <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
+                     </li>
+                     @endguest
+                     <li class="nav-item dropdown">
+                         <a class="nav-link dropdown-toggle" href="{{ route('tamu') }}" aria-haspopup="true"
+                             aria-expanded="false">
+                             Perpustakaan
+                         </a>
+                         {{-- @endguest --}}
+                         <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
                              <div class="row no-gutters">
                                  <div class="col-12 col-lg-6">
                                      <div class="dropdown-img-left"
@@ -43,7 +52,7 @@
 
                                          <!-- Heading -->
                                          <h4 class="font-weight-bold text-white mb-0">
-                                             Want to see an overview?
+                                             Lihat Status Pinjam Buku ?
                                          </h4>
 
                                          <!-- Text -->
@@ -53,7 +62,7 @@
 
                                          <!-- Button -->
                                          <a href="overview.html" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
-                                             View all pages
+                                             Lihat Semua Pinjaman
                                          </a>
 
                                      </div>
@@ -119,100 +128,7 @@
                                      </div>
                                  </div>
                              </div> <!-- / .row -->
-                         </div> --}}
-                     </li>
-                     <li class="nav-item dropdown">
-                         <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#"
-                             aria-haspopup="true" aria-expanded="false">
-                             Pages
-                         </a>
-                         <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="navbarPages">
-                             <div class="row no-gutters">
-                                 <div class="col-6 col-lg-4">
-
-                                     <!-- Heading -->
-                                     <h6 class="dropdown-header">
-                                         Career
-                                     </h6>
-
-                                     <!-- List -->
-                                     <a class="dropdown-item" href="careers.html">
-                                         Listing
-                                     </a>
-                                     <a class="dropdown-item mb-5" href="career-single.html">
-                                         Opening
-                                     </a>
-
-                                     <!-- Heading -->
-                                     <h6 class="dropdown-header">
-                                         Company
-                                     </h6>
-
-                                     <!-- List -->
-                                     <a class="dropdown-item" href="about.html">
-                                         About
-                                     </a>
-                                     <a class="dropdown-item" href="pricing.html">
-                                         Pricing
-                                     </a>
-                                     <a class="dropdown-item mb-5 mb-lg-0" href="terms-of-service.html">
-                                         Terms
-                                     </a>
-
-                                 </div>
-                                 <div class="col-6 col-lg-4">
-
-                                     <!-- Heading -->
-                                     <h6 class="dropdown-header">
-                                         Help center
-                                     </h6>
-
-                                     <!-- List -->
-                                     <a class="dropdown-item" href="help-center.html">
-                                         Overview
-                                     </a>
-                                     <a class="dropdown-item mb-5" href="help-center-article.html">
-                                         Article
-                                     </a>
-
-                                     <!-- Heading -->
-                                     <h6 class="dropdown-header">
-                                         Contact
-                                     </h6>
-
-                                     <!-- List -->
-                                     <a class="dropdown-item" href="contact.html">
-                                         Basic
-                                     </a>
-                                     <a class="dropdown-item" href="contact-alt.html">
-                                         Cover
-                                     </a>
-
-                                 </div>
-                                 <div class="col-6 col-lg-4">
-
-                                     <!-- Heading -->
-                                     <h6 class="dropdown-header">
-                                         Blog
-                                     </h6>
-
-                                     <!-- List -->
-                                     <a class="dropdown-item" href="blog.html">
-                                         Rich View
-                                     </a>
-                                     <a class="dropdown-item" href="blog-post.html">
-                                         Article
-                                     </a>
-                                     <a class="dropdown-item" href="blog-showcase.html">
-                                         Showcase
-                                     </a>
-                                     <a class="dropdown-item" href="blog-search.html">
-                                         Search
-                                     </a>
-
-                                 </div>
-                             </div>
-                         </div> <!-- / .row -->
+                         </div>
                      </li>
                      @guest
                      <li class="nav-item dropdown">
@@ -279,7 +195,8 @@
                                                  stroke-width="1" fill="none" fill-rule="evenodd">
                                                  <rect id="bound" x="0" y="0" width="24" height="24"></rect>
                                                  <rect id="Rectangle-7" fill="#335EEA" x="4" y="4" width="7" height="7"
-                                                     rx="1.5"></rect>
+                                                     rx="1.5">
+                                                 </rect>
                                                  <path
                                                      d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
                                                      id="Combined-Shape" fill="#335EEA" opacity="0.3"></path>
@@ -320,9 +237,11 @@
                                                      d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
                                                      id="Combined-Shape" fill="#335EEA" opacity="0.3"></path>
                                                  <rect id="Rectangle" fill="#335EEA" x="6" y="11" width="9" height="2"
-                                                     rx="1"></rect>
+                                                     rx="1">
+                                                 </rect>
                                                  <rect id="Rectangle-Copy" fill="#335EEA" x="6" y="15" width="5"
-                                                     height="2" rx="1"></rect>
+                                                     height="2" rx="1">
+                                                 </rect>
                                              </g>
                                          </svg>
                                      </div>

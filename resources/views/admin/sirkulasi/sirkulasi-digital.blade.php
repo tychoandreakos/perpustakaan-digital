@@ -9,5 +9,5 @@
         {{-- {{ $sirkulasi }} --}}
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <digital-component kode="{{ route('sirkulasi.verifikasi') }}"></digital-component>
+        <digital-component kode2="{{ route('sirkulasi.digital2') }}" kode="{{ route('sirkulasi.verifikasi') }}"></digital-component>
             @endsection
