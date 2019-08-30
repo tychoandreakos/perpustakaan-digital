@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Berita;
 use App\Buku;
+use App\PinjamTransaksi;
 use App\Tamu;
 use App\Topik;
 use Carbon\Carbon;
@@ -45,6 +46,34 @@ class LandingController extends Controller
 
         return response()->json([
             'message' => 'Halo, '.ucwords($request->nama).' Selamat Datang']);
+    }
+
+    public function pinjam($slug)
+    {
+        $buku = Buku::where('slug', $slug)->first();
+       $random =  $this->generateRandomString(4);
+
+       $check = PinjamTransaksi::where('kode_pinjam', $random)->first();
+       if($check) {
+        $random;
+        return false;
+       }
+
+       PinjamTransaksi::create([
+        'kode_pinjam' => strtolower($random),
+        'buku_id' => $buku->id,
+        'status_pinjam' => 0
+    ]);
+    }
+
+    private function generateRandomString($length) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
     public function beranda()

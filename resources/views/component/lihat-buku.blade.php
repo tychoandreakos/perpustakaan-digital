@@ -28,7 +28,7 @@
              <div class="col-auto">
 
                  <!-- Buttons -->
-                 <a href="#!" class="btn btn-primary-soft mr-1">
+                 <a href="{{ route('pinjam', $result->slug) }}" class="btn btn-primary-soft mr-1">
                      Pinjam
                  </a>
                  @isset($result->pdf)

@@ -15,12 +15,15 @@ class PinjamTransaksi extends Model
         'tgl_pinjam',
         'tanggal_habis_pinjam',
         'tgl_kembali',
-        'status_pinjam'
+        'status_pinjam',
+        'kode_pinjam',
+        'verified_at',
     ];
-
+    
     protected $dates = [
         'created_at',
         'updated_at',
+        'verified_at',
         'tanggal_habis_pinjam'
     ];
 

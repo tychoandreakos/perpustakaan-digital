@@ -88,6 +88,9 @@ Vue.component('table-pengunjung-component', require('./components/admin/pengunju
 // daftar keterlambatan
 Vue.component('table-keterlambatan-component', require('./components/admin/keterlambatan/Table.vue').default);
 
+// digital
+Vue.component('digital-component', require('./components/admin/digital/Table.vue').default);
+Vue.component('form-digital-component', require('./components/admin/digital/Form.vue').default);
 
 
 // laporan

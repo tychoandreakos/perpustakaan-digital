@@ -22,7 +22,6 @@ Route::get('/', 'LandingController@index')->name('landing');
 Route::get('/cari', 'LandingController@cari')->name('cari');
 Route::get('berita/{slug}', 'LandingController@berita')->name('berita');
 Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua');
-Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
 Route::get('tamu', 'LandingController@tamu')->name('tamu');
 Route::post('tamu', 'LandingController@tamu_store')->name('tamu.store');
 
@@ -34,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('beranda', 'LandingController@beranda')->name('beranda');
         Route::get('baca/{slug}', 'LandingController@baca')->name('baca');
         Route::get('koleksi-terbaru', 'LandingController@terbaru')->name('terbaru');
+        Route::get('pinjam/{slug}', 'LandingController@pinjam')->name('pinjam');
+        Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
     });
    
 });
@@ -138,30 +139,14 @@ Route::get('statistik-pinjam', 'LaporanController@pinjam')->name('laporan.pinjam
 
 
 // tool
-Route::get('sirkulasi', function() {
-    $title = 'Sirkulasi';
-    return view('admin.sirkulasi.sirkulasi', compact('title'));
-})->name('sirkulasi.index');
-Route::get('sirkulasi/{$id}', function() {
-    $title = 'Sirkulasi';
-    return view('admin.sirkulasi.table', compact('title'));
-})->name('sirkulasi.pinjam');
-Route::get('pengembalian', function() {
-    $title = 'Pengembalian Buku';
-    return view('admin.sirkulasi.kembali', compact('title'));
-})->name('sirkulasi.pengembalian');
-Route::get('histori', function(){
-    $title = 'Histori Peminjaman';
-    return view('admin.sirkulasi.histori', compact('title'));
-})->name('sirkulasi.histori');
-Route::get('daftar-pengunjung', function(){
-    $title = 'Daftar Pengunjung Perpustakaan';
-    return view('admin.pengunjung', compact('title'));
-})->name('pengunjung');
-Route::get('daftar-keterlambatan', function(){
-    $title = 'Daftar Keterlambatan Buku';
-    return view('admin.keterlambatan', compact('title'));
-})->name('keterlambatan');
+Route::get('sirkulasi', 'SirkulasiController@sirkulasi')->name('sirkulasi.index');
+Route::get('pengembalian', 'SirkulasiController@pengembalian')->name('sirkulasi.pengembalian');
+Route::get('histori', 'SirkulasiController@histori')->name('sirkulasi.histori');
+Route::get('daftar-pengunjung', 'SirkulasiController@pengunjung')->name('pengunjung');
+Route::get('daftar-keterlambatan', 'SirkulasiController@keterlambatan')->name('keterlambatan');
+Route::get('sirkulasi-digital', 'SirkulasiController@digital')->name('sirkulasi.digital');
+Route::get('eksemplar-keluar', 'SirkulasiController@keluar')->name('eksemplar.keluar');
+Route::get('sirkulasi-verifikasi', 'SirkulasiController@verifikasi')->name('sirkulasi.verifikasi');
 
 
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
@@ -171,12 +156,6 @@ Route::get('kembali', 'PinjamController@kembali')->name('sirkulasi.kembali');
 Route::post('kembali2', 'PinjamController@kembali')->name('sirkulasi.kembali2');
 Route::get('last', 'TopikController@last')->name('topik.last');
 
-
-// eksemplar keluar
-Route::get('eksemplar-keluar', function() {
-    $title = 'Daftar Eksemplar Keluar';
-    return view('admin.eksemplar.home', compact('title'));    
-})->name('eksemplar.keluar');
 
 
 });

@@ -27,6 +27,7 @@
             </a>
             <div class="dropdown-menu" style="left: 15px;">
                 <a href="{{ route('sirkulasi.index') }}" class="dropdown-item">Mulai Transaksi</a>
+                <a href="{{ route('sirkulasi.digital') }}" class="dropdown-item">Transaksi Digital</a>
                 <a href="{{ route('sirkulasi.pengembalian') }}" class="dropdown-item">Pengembalian Buku</a>
                 <a href="{{ route('sirkulasi.histori') }}" class="dropdown-item">Histori Peminjaman</a>
                 <a href="{{ route('keterlambatan') }}" class="dropdown-item">Daftar Keterlambatan</a>

@@ -15,12 +15,12 @@ class CreatePinjamTransaksisTable extends Migration
     {
         Schema::create('pinjam_transaksi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('bibliobigrafi_id');
-            $table->date('tgl_pinjam');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('bibliobigrafi_id')->nullable();
+            $table->date('tgl_pinjam')->nullable();
             $table->timestamp('tanggal_habis_pinjam')->nullable();
-            $table->date('tgl_kembali')->nullable();
-            $table->boolean('status_pinjam')->default('1');
+            $table->date('tgl_kembali')->nullable()->nullable();
+            $table->boolean('status_pinjam')->default('1')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

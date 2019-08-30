@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdatePinjamTransaksiAddStatusDenda extends Migration
+class AddVerificationToPinjamTransaksi extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class UpdatePinjamTransaksiAddStatusDenda extends Migration
     public function up()
     {
         Schema::table('pinjam_transaksi', function (Blueprint $table) {
-           $table->boolean('status_denda')->default(0)->after('status_pinjam')->nullable();
+            $table->string('kode_pinjam', 10)->after('status_denda')->nullable();
+            $table->timestamp('verified_at')->before('created_at')->nullable();
         });
     }
 
