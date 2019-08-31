@@ -10,6 +10,11 @@
                     </div>
                 </div>
                 <template v-if="!data.length">
+                <div class="pr-5 pl-5">
+                    <div v-if="error" class="alert alert-danger" role="alert">
+                        Kode verifikasi tidak dapat ditemukan
+                    </div>
+                </div>
                     <div class="container">
                         <form @submit.prevent="save">
                             <div class="form-group">
@@ -17,7 +22,12 @@
                                 <input type="text" v-model="form.kode" class="form-control"
                                     placeholder="Masukkan Kode Verifikasi">
                             </div>
-                            <button :disabled="!dis" type="submit" class="btn btn-success mb-4">Verifikasi</button>
+                            <template v-if="loading">
+                                <spinner-component></spinner-component>
+                            </template>
+                            <template v-else>
+                                <button :disabled="!dis" type="submit" class="btn btn-success mb-4">Verifikasi</button>
+                            </template>
                         </form>
                     </div>
                 </template>
@@ -37,7 +47,12 @@
                                     </template>
                                 </multiselect>
                             </div>
-                            <button type="submit" class="btn btn-success mb-4">Pinjam Buku</button>
+                            <template v-if="loading">
+                                <spinner-component></spinner-component>
+                            </template>
+                            <template v-else>
+                                <button type="submit" class="btn btn-success mb-4">Pinjam Buku</button>
+                            </template>
                         </form>
                     </div>
                 </template>
@@ -86,6 +101,10 @@
 
                 pola_eksemplar: '',
 
+                option: {},
+                loading: false,
+                error: false,
+
                 wow: {
                     user_id: '',
                     id: '',
@@ -96,19 +115,16 @@
             }
         },
 
-        created() {
-            this.getData();
-        },
-
         methods: {
 
             getData() {
-                axios.get(this.fetch)
+                axios.post(this.fetch, this.form)
                     .then(res => this.option = res.data)
                     .catch(err => console.log(err))
             },
 
             update() {
+                this.loading = true;
                 axios.post(this.kode2, this.wow)
                     .then(res => {
                         this.$swal({
@@ -120,16 +136,30 @@
                         });
 
                         setTimeout(() => {
+                            this.loading = false;
                             window.location = this.index;
                         }, 3200)
                     })
-                    .catch(err => console.log(err.data))
+                    .catch(err => {
+                        this.loading = false;
+                        this.error = true;
+                    })
             },
 
             save() {
+                this.loading = true;
                 axios.post(this.kode, this.form)
-                    .then(res => this.data = res.data)
-                    .catch(err => console.log(err.data))
+                    .then(res => {
+                        setTimeout(() => {
+                            this.getData();
+                            this.data = res.data;
+                            this.loading = false;
+                            this.error = true;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        this.loading = false;
+                    })
             }
         },
     }

@@ -37,9 +37,11 @@ class SirkulasiController extends Controller
             return PinjamTransaksi::where('kode_pinjam', strtolower($request->kode))->get();
     }
 
-    public function pola()
+   
+    public function pola(Request $request)
     {
-        return Bibliobigrafi::where('status_pinjam', 0)->get();
+        $pinjam = PinjamTransaksi::where('kode_pinjam', $request->kode)->first();
+        return Bibliobigrafi::where('buku_id', $pinjam->buku_id)->where('status_pinjam', 0)->get();
     }
 
     public function pinjam(Request $request)

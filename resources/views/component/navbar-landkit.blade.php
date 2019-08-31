@@ -6,11 +6,13 @@
              <!-- Brand -->
              @guest
              <a class="navbar-brand" href="{{ route('landing') }}">
-                 <img src="{{ asset('img/brand.svg') }}" class="navbar-brand-img" alt="...">
+                 {{-- <img src="{{ asset('img/brand.svg') }}" class="navbar-brand-img" alt="..."> --}}
+                 <h3 class="font-weight-bold">Digital Library.</h3>
              </a>
              @else
              <a class="navbar-brand" href="{{ route('beranda') }}">
-                 <img src="{{ asset('img/brand.svg') }}" class="navbar-brand-img" alt="...">
+                 {{-- <img src="{{ asset('img/brand.svg') }}" class="navbar-brand-img" alt="..."> --}}
+                 <h3 class="font-weight-bold">Digital Library.</h3>
              </a>
              @endguest
              <!-- Toggler -->

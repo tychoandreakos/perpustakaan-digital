@@ -5480,6 +5480,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5511,6 +5526,9 @@ __webpack_require__.r(__webpack_exports__);
         kode: ''
       },
       pola_eksemplar: '',
+      option: {},
+      loading: false,
+      error: false,
       wow: {
         user_id: '',
         id: '',
@@ -5519,14 +5537,11 @@ __webpack_require__.r(__webpack_exports__);
       data: {}
     };
   },
-  created: function created() {
-    this.getData();
-  },
   methods: {
     getData: function getData() {
       var _this = this;
 
-      axios.get(this.fetch).then(function (res) {
+      axios.post(this.fetch, this.form).then(function (res) {
         return _this.option = res.data;
       })["catch"](function (err) {
         return console.log(err);
@@ -5535,6 +5550,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this2 = this;
 
+      this.loading = true;
       axios.post(this.kode2, this.wow).then(function (res) {
         _this2.$swal({
           position: 'top-end',
@@ -5545,19 +5561,28 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         setTimeout(function () {
+          _this2.loading = false;
           window.location = _this2.index;
         }, 3200);
       })["catch"](function (err) {
-        return console.log(err.data);
+        _this2.loading = false;
+        _this2.error = true;
       });
     },
     save: function save() {
       var _this3 = this;
 
+      this.loading = true;
       axios.post(this.kode, this.form).then(function (res) {
-        return _this3.data = res.data;
+        setTimeout(function () {
+          _this3.getData();
+
+          _this3.data = res.data;
+          _this3.loading = false;
+          _this3.error = true;
+        }, 2000);
       })["catch"](function (err) {
-        return console.log(err.data);
+        _this3.loading = false;
       });
     }
   }
@@ -75444,6 +75469,23 @@ var render = function() {
           _vm._v(" "),
           !_vm.data.length
             ? [
+                _c("div", { staticClass: "pr-5 pl-5" }, [
+                  _vm.error
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-danger",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Kode verifikasi tidak dapat ditemukan\n                "
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "container" }, [
                   _c(
                     "form",
@@ -75487,15 +75529,20 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success mb-4",
-                          attrs: { disabled: !_vm.dis, type: "submit" }
-                        },
-                        [_vm._v("Verifikasi")]
-                      )
-                    ]
+                      _vm.loading
+                        ? [_c("spinner-component")]
+                        : [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success mb-4",
+                                attrs: { disabled: !_vm.dis, type: "submit" }
+                              },
+                              [_vm._v("Verifikasi")]
+                            )
+                          ]
+                    ],
+                    2
                   )
                 ])
               ]
@@ -75621,15 +75668,20 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success mb-4",
-                          attrs: { type: "submit" }
-                        },
-                        [_vm._v("Pinjam Buku")]
-                      )
-                    ]
+                      _vm.loading
+                        ? [_c("spinner-component")]
+                        : [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success mb-4",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Pinjam Buku")]
+                            )
+                          ]
+                    ],
+                    2
                   )
                 ])
               ]
