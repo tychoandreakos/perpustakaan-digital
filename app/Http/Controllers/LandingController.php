@@ -8,6 +8,7 @@ use App\Buku;
 use App\PinjamTransaksi;
 use App\Tamu;
 use App\Topik;
+use Bitfumes\Multiauth\Model\Admin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class LandingController extends Controller
         // $user = User::all()->count();
         // $info = Info::all()->first();
         // $topik = Topik::orderBy('order', 'ASC')->limit(4)->get();
-        $berita =  Berita::latest()->limit(3)->get();
+        $berita =  Berita::with('admin')->latest()->limit(3)->get();
         $buku = Buku::all()->count();
         return view('landing', compact('berita', 'buku'));
     }
@@ -114,7 +115,7 @@ class LandingController extends Controller
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->latest()->limit(3)->get();
 
-        $berita = Berita::latest()->limit(3)->get();
+        $berita =  Berita::with('admin')->latest()->limit(3)->get();
 
         $random = Buku::with(['buku_transaksi' => function($q) {
             $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id', 'bahasa_id');
@@ -132,20 +133,20 @@ class LandingController extends Controller
 
 
         // return
-        $date = Carbon::today()->subDays(7);
-        $popular = Buku::with(['buku_transaksi' => function($q) {
-            $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id', 'bahasa_id');
-        },'buku_transaksi.pengarang' => function($q){
-            $q->select('id', 'nama_pengarang');
-        }, 'buku_transaksi.penerbit' => function($q) {
-            $q->select('id', 'nama_penerbit');
-        }, 'topik' => function($q) {
-            $q->select('id','jenis_topik', 'warna');
-        }, 'buku_transaksi.bahasa' => function($q) {
-            $q->select('id', 'jenis_bahasa');
-        }, 'bibliobigrafi.lokasi_rak' => function($q) {
-            $q->select('id', 'nama_lokasi', 'kode_lokasi');
-        }])->where('created_at', '>=', $date)->withCount('pinjam_transaksi')->limit(3)->get();
+        // $date = Carbon::today()->subDays(7);
+        // $popular = Buku::with(['buku_transaksi' => function($q) {
+        //     $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id', 'bahasa_id');
+        // },'buku_transaksi.pengarang' => function($q){
+        //     $q->select('id', 'nama_pengarang');
+        // }, 'buku_transaksi.penerbit' => function($q) {
+        //     $q->select('id', 'nama_penerbit');
+        // }, 'topik' => function($q) {
+        //     $q->select('id','jenis_topik', 'warna');
+        // }, 'buku_transaksi.bahasa' => function($q) {
+        //     $q->select('id', 'jenis_bahasa');
+        // }, 'bibliobigrafi.lokasi_rak' => function($q) {
+        //     $q->select('id', 'nama_lokasi', 'kode_lokasi');
+        // }])->where('created_at', '>=', $date)->withCount('pinjam_transaksi')->limit(3)->get();
 
         $date = Carbon::today()->subDays(30);
         $popular30 = Buku::with(['buku_transaksi' => function($q) {

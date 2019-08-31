@@ -266,7 +266,7 @@
                                      href="{{ route('berita', $item->slug) }}">
 
                                      <!-- Image (placeholder) -->
-                                     <img src="{{ url('storage/berita/'.$item->img) }}" alt="..."
+                                     <img src="{{ url('storage/resize/'.$item->img) }}" alt="..."
                                          class="img-fluid d-md-none invisible">
 
                                  </a>
@@ -310,7 +310,7 @@
 
                                              <!-- Footer -->
                                              <footer class="blockquote-footer">
-                                                 <span class="h6 text-uppercase">Russ D'Sa</span>
+                                                 <span class="h6 text-uppercase">{{ ucwords($item->admin->name) }}</span>
                                              </footer>
 
                                          </blockquote>
@@ -447,7 +447,6 @@
      </div> <!-- / .container -->
  </section>
 
- @include('component.popular-mini')
 
  <!-- MORE
       ================================================== -->

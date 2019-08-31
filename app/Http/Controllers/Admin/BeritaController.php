@@ -8,6 +8,7 @@ use App\Bibliobigrafi;
 use App\PinjamTransaksi;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
@@ -75,6 +76,7 @@ class BeritaController extends Controller
         $requestData = $request->all();
         $requestData['slug'] = str_slug($request->judul);
         $requestData['img'] = $name;
+        $requestData['admin_id'] = Auth::user()->id;
         Berita::create($requestData);
        
         return response()->json([
