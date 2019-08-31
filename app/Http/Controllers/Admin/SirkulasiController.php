@@ -32,28 +32,41 @@ class SirkulasiController extends Controller
         return view('admin.sirkulasi.kembali', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
+
     public function verifikasi(Request $request)
     {
-            return PinjamTransaksi::where('kode_pinjam', strtolower($request->kode))->get();
+        return $request->all();
+        $title = 'Daftar Keterlambatan Buku';   
+            $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+            $pinjam = PinjamTransaksi::where('kode_pinjam', strtolower($kode))->get();
+            return view('admin.sirkulasi.verifikasi-data', compact('pinjam', 'koleksi', 'anggota_count','eksemplar','approve'));
+    }
+
+    public function pola()
+    {
+        return Bibliobigrafi::where('status_pinjam', 0)->get();
     }
 
     public function pinjam(Request $request)
     {
+        // return $request->all();
         $total = PinjamTransaksi::where([['user_id', $request->user_id], ['status_pinjam', 1]])->count();
-        $anggota = AnggotaTransaksi::where('user_id', $request->user_id)->first();
-
+        return $anggota = AnggotaTransaksi::where('user_id', $request->user_id)->first();
         if($total != $anggota->tipe_anggota->jumlah_pinjaman){
-
-            $pinjam = PinjamTransaksi::find($request->id);
+            
             $dt = new Carbon;
             $bilio = Bibliobigrafi::where('pola_eksemplar', strtoupper($request->pola_eksemplar))->first();
-
-            $pinjam;
+            
+            $pinjam = PinjamTransaksi::find($request->id);
             $pinjam->bibliobigrafi_id = $bilio->id;
             $pinjam->tgl_pinjam = Carbon::now();
             $pinjam->tanggal_habis_pinjam = $dt->addDay($anggota->tipe_anggota->masa_pinjaman_buku);
             $pinjam->status_pinjam = 1;
             $pinjam->verified_at = Carbon::now();
+            $pinjam->status_verifikasi = 0;
             $pinjam->update();
 
 

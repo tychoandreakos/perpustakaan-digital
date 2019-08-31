@@ -9,7 +9,6 @@
                         </div>
                     </div>
                 </div>
-                <template v-if="!data.length">
                     <div class="container">
                         <form @submit.prevent="save">
                             <div class="form-group">
@@ -20,32 +19,18 @@
                             <button :disabled="!dis" type="submit" class="btn btn-success mb-4">Verifikasi</button>
                         </form>
                     </div>
-                </template>
-                <template v-else>
-                    <div class="container">
-                        <form @submit.prevent="save">
-                            <div class="form-group">
-                                <label for="f">User ID</label>
-                                <input type="text" v-model="forms.user_id" class="form-control"
-                                    placeholder="Masukkan User ID">
-                            </div>
-                            <div class="form-group">
-                                <label for="f">Pola Eksemplar Buku</label>
-                                <input type="text" v-model="forms.pola_eksemplar" class="form-control"
-                                    placeholder="Masukkan pola eksemplar buku">
-                            </div>
-                            <button :disabled="!dis" type="submit" class="btn btn-success mb-4">Pinjam Buku</button>
-                        </form>
-                    </div>
-                </template>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+  import Spinner from '../tools/Spanner';
     export default {
-        props: ['kode', 'kode2'],
+        props: ['index'],
+          components: {
+            SpinnerComponent: Spinner,
+        },
         computed: {
             dis() {
                 return this.form.kode
@@ -56,28 +41,18 @@
                 form: {
                     kode: '',
                 },
-
-                forms: {
-                    id: '',
-                    pola_eksemplar: '',
-                },
-
-                data: {},
+        
             }
         },
+
 
         methods: {
 
             save() {
-                if (!this.data.length) {
-                    axios.post(this.kode, this.form)
-                        .then(res => this.data = res.data)
+                console.log(this.form.kode)
+                    axios.post('sirkulasi-verifikasi/'+ this.form.kode)
+                        .then(res => console.log(res))
                         .catch(err => console.log(err.data))
-                } else {
-                    axios.post(this.kode2, this.forms)
-                        .then(res => this.data = res.data)
-                        .catch(err => console.log(err.data))
-                }
             }
         },
     }
