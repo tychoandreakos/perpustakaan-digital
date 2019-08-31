@@ -25,6 +25,7 @@
                  </p>
 
              </div>
+             @isset($anggota)
              <div class="col-auto">
                  <!-- Buttons -->
                  @if ($total >= $anggota[0]->tipe_anggota->jumlah_pinjaman)
@@ -40,6 +41,10 @@
                  @endisset
 
              </div>
+             @else
+            <h4>Silahkan <a href="{{ route('login') }}">login</a> untuk pinjam dan baca koleksi ini.</h4>
+             @endisset
+
          </div> <!-- / .row -->
          <div class="row">
              <div class="col-12">
@@ -106,12 +111,34 @@
 
                                      <!-- Heading -->
                                      <p class="font-weight-bold mb-1">
-                                         Jumlah Buku Tersedia
+                                        Total Koleksi Tersedia
                                      </p>
 
                                      <!-- Text -->
                                      <p class="font-size-sm text-muted mb-0">
-                                         {{ $result->bibliobigrafi->count() }} Sampel
+                                         {{ $result->bibliobigrafi->count() }} Koleksi
+                                     </p>
+
+                                 </div>
+
+
+
+                             </div>
+                             @endisset
+                             @isset($bibliobigrafi)
+                             <div class="list-group-item d-flex align-items-center">
+
+                                 <!-- Text -->
+                                 <div class="mr-auto">
+
+                                     <!-- Heading -->
+                                     <p class="font-weight-bold mb-1">
+                                         Jumlah Koleksi Yang Belum Dipinjam
+                                     </p>
+
+                                     <!-- Text -->
+                                     <p class="font-size-sm text-muted mb-0">
+                                         {{ $bibliobigrafi->count() }} Koleksi
                                      </p>
 
                                  </div>

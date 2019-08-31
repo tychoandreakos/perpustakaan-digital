@@ -26,6 +26,7 @@ Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua'
 Route::get('tamu', 'LandingController@tamu')->name('tamu');
 Route::get('lengkapi-profile', 'LandingController@lengkapi')->name('profile.lengkapi');
 Route::post('update-profile', 'LandingController@update_profile')->name('lengkapi.profile');
+Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
 
 Route::post('tamu', 'LandingController@tamu_store')->name('tamu.store');
 
@@ -38,7 +39,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('baca/{slug}', 'LandingController@baca')->name('baca');
         Route::get('koleksi-terbaru', 'LandingController@terbaru')->name('terbaru');
         Route::get('pinjam/{slug}', 'LandingController@pinjam')->name('pinjam');
-        Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
     });
    
 });

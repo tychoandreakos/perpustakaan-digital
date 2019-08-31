@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Anggota;
 use App\AnggotaTransaksi;
 use App\Berita;
+use App\Bibliobigrafi;
 use App\Buku;
 use App\PinjamTransaksi;
 use App\Tamu;
@@ -240,13 +241,21 @@ class LandingController extends Controller
             $q->select('id', 'jenis_topik', 'warna');
         }, 'topik'])->where('slug', $slug)->firstOrFail();
 
-        $total = PinjamTransaksi::where('user_id', Auth::user()->id)
-        ->whereNotNull('kode_pinjam')->where('status_verifikasi', 1)->count();
+        $buku = Buku::where('slug', $slug)->first();
+        $bibliobigrafi = Bibliobigrafi::where('buku_id', $buku->id)->where('status_pinjam', 0)->get();
+
+        if(isset(Auth::user()->id)) {
+            $total = PinjamTransaksi::where('user_id', Auth::user()->id)
+            ->whereNotNull('kode_pinjam')->where('status_verifikasi', 1)->count();
+        
     
+           $anggota = AnggotaTransaksi::with('tipe_anggota')->where('user_id', Auth::user()->id)->get();
+    
+            return view('buku', compact('result', 'total', 'anggota', 'bibliobigrafi'));
+        }
 
-       $anggota = AnggotaTransaksi::with('tipe_anggota')->where('user_id', Auth::user()->id)->get();
-
-        return view('buku', compact('result', 'total', 'anggota'));
+        return view('buku', compact('result', 'bibliobigrafi'));
+       
     }
 
     public function baca($slug)
