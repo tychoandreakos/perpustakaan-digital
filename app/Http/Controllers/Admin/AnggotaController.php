@@ -11,6 +11,7 @@ use App\PinjamTransaksi;
 use App\User;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\Hash;
 
 class AnggotaController extends Controller
 {
@@ -82,7 +83,9 @@ class AnggotaController extends Controller
 
         $dt = Carbon::now();
 
-        $user = User::create($request->all());
+        $requestData = $request->all();
+        $requestData['password'] = Hash::make($request['password']);
+        $user = User::create($requestData);
 
         $requestTrans = $request->all();
         $requestTrans['user_id'] = $user->id;
