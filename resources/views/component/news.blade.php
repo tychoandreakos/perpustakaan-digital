@@ -75,7 +75,7 @@
 
                                               <!-- Text -->
                                               <p class="mb-5 mb-md-7">
-                                                  {{ substr($item->isi, 0, 150) }} ...
+                                                  {!! substr($item->isi, 0, 150) !!} ...
                                               </p>
 
                                               <!-- Footer -->

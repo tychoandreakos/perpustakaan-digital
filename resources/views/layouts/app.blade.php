@@ -51,7 +51,38 @@
   </script>
 
     <!-- Theme JS -->
+    <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/user.js') }}"></script>
+    <script>
+      var Datepicker = (function() {
+
+// Variables
+
+var $datepicker = $('.datepicker');
+
+
+// Methods
+
+function init($this) {
+  var options = {
+    disableTouchKeyboard: true,
+    autoclose: false
+  };
+
+  $this.datepicker(options);
+}
+
+
+// Events
+
+if ($datepicker.length) {
+  $datepicker.each(function() {
+    init($(this));
+  });
+}
+
+})();
+    </script>
   
 </body>
 

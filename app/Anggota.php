@@ -8,7 +8,7 @@ use Illuminate\Support\Carbon;
 class Anggota extends Model
 {
     protected $table = 'anggota';
-    protected $primary = 'user_id';
+    protected $primaryKey = 'user_id';
     public $incrementing = false;
     protected $fillable = [
         'user_id',

@@ -23,6 +23,9 @@ Route::get('/cari', 'LandingController@cari')->name('cari');
 Route::get('berita/{slug}', 'LandingController@berita')->name('berita');
 Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua');
 Route::get('tamu', 'LandingController@tamu')->name('tamu');
+Route::get('lengkapi-profile', 'LandingController@lengkapi')->name('profile.lengkapi');
+Route::post('update-profile', 'LandingController@update_profile')->name('lengkapi.profile');
+
 Route::post('tamu', 'LandingController@tamu_store')->name('tamu.store');
 
 

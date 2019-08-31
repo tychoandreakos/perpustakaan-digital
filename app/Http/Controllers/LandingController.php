@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Anggota;
 use App\AnggotaTransaksi;
 use App\Berita;
 use App\Buku;
 use App\PinjamTransaksi;
 use App\Tamu;
 use App\Topik;
-use Bitfumes\Multiauth\Model\Admin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +49,21 @@ class LandingController extends Controller
 
         return response()->json([
             'message' => 'Halo, '.ucwords($request->nama).' Selamat Datang']);
+    }
+
+    public function update_profile(Request $request)
+    {
+        $anggota = Anggota::find(Auth::user()->id)->first();
+
+        $anggota->jurusan = $request->jurusan;
+        $anggota->tgl_lahir = $request->tgl_lahir;
+        $anggota->alamat = $request->alamat;
+        $anggota->jk = $request->jk;
+        $anggota->no_telp = $request->no_telp;
+        $anggota->save();
+
+        return response()->json([
+            'message' => 'Halo '.Auth::user()->name.', data kamu berhasil diperbaharui']);
     }
 
     public function pinjam($slug)
@@ -166,6 +181,12 @@ class LandingController extends Controller
         $randomTags = Topik::inRandomOrder()->limit(4)->get();
 
         return view('beranda', compact('terbaru', 'random', 'berita', 'popular', 'popular30', 'randomTags'));
+    }
+
+    public function lengkapi()
+    {
+        $anggota = Anggota::find(Auth::user()->id);
+        return view('lengkapi', compact('anggota'));
     }
 
     public function terbaru()

@@ -296,7 +296,7 @@
                                      <a class="dropdown-item" href="signin-cover.html">
                                          Update Foto
                                      </a>
-                                     <a class="dropdown-item" href="signin-illustration.html">
+                                     <a class="dropdown-item" href="{{ route('profile.lengkapi') }}">
                                          Lengkapi Profil
                                      </a>
                                      <a class="dropdown-item" href="signin.html">
