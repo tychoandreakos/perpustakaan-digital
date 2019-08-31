@@ -280,6 +280,34 @@ class LandingController extends Controller
         }])->where('topik_id', $id)->limit(4)->get();
     }
 
+    public function search(Request $request)
+    {
+        if($request->has('cari')){
+           
+            $validatedData = $request->validate([
+                'cari' => 'required|min:3'
+            ]);
+
+            $query = $request->cari;
+            $result = Buku::with(['buku_transaksi.pengarang' => function($q) use ($query) {
+                $q->select('id', 'nama_pengarang');
+            }, 'buku_transaksi.penerbit', 'bibliobigrafi.gmd' => function($q) {
+                $q->select('id', 'nama_gmd')->first();
+            }])->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);
+            $cari = $query;
+            return view('search', compact('result', 'cari'));
+
+
+        } else {
+            $total = Buku::with(['buku_transaksi.pengarang' => function($q) {
+                $q->select('id', 'nama_pengarang');
+            }, 'buku_transaksi.penerbit', 'bibliobigrafi.gmd' => function($q) {
+                $q->select('id', 'nama_gmd');
+            }])->latest()->paginate(6);
+            return view('search', compact('total'));
+        }
+    }
+
     public function cari(Request $request)
     {
         $validatedData = $request->validate([

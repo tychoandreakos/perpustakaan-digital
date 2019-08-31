@@ -19,6 +19,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'LandingController@index')->name('landing');
+Route::get('search', 'LandingController@search')->name('search');
 Route::get('/cari', 'LandingController@cari')->name('cari');
 Route::get('berita/{slug}', 'LandingController@berita')->name('berita');
 Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua');
