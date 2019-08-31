@@ -78,7 +78,7 @@
                         <span class="badge badge-dark">{{ $item->bibliobigrafi[0]->no_panggil }}</span>
 
                         <div class="mb-0 text-muted mt-4">
-                            {!! isset($item->catatan) ? substr($item->catatan, 0, 150) .' ...' : 'Belum ada data' !!}
+                            {{ isset($item->catatan) ? substr(strip_tags($item->catatan), 0, 150) .' ...' : 'Belum ada data' }}
                         </div>
 
                     </a>

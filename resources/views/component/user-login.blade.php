@@ -178,7 +178,7 @@
 
                                  <!-- Text -->
                                  <div class="mb-0 text-muted mt-5">
-                                     {!! substr($random->catatan, 0, 250) . ' ....' !!}
+                                     {{ substr(strip_tags($random->catatan), 0, 250) . ' ....' }}
                                  </div>
 
                              </a>
@@ -447,6 +447,7 @@
      </div> <!-- / .container -->
  </section>
 
+ @include('component.popular-mini')
 
  <!-- MORE
       ================================================== -->
