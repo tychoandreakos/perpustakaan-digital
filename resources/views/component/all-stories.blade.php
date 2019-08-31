@@ -20,20 +20,16 @@
               @foreach ($result as $item)
               <div class="row">
                   <div class="col-12">
-                      @if ($loop->iteration  % 2 == 0)
+                      @if ($loop->iteration % 2 == 0)
                       <!-- Card -->
                       <div class="card card-row shadow-light-lg mb-6">
                           <div class="row no-gutters">
                               <div class="col-12">
 
-                                  <!-- Badge -->
-                                  <span class="badge badge-pill badge-gray-600 badge-float badge-float-outside">
-                                      <span class="h6 text-uppercase">Featured</span>
-                                  </span>
-
                               </div>
                               <a class="col-12 col-md-6 order-md-2 bg-cover card-img-right"
-                                  style="background-image: url({{ url('storage/berita/'. $item->img) }});" href="{{ route('berita', $item->slug) }}">
+                                  style="background-image: url({{ url('storage/berita/'. $item->img) }});"
+                                  href="{{ route('berita', $item->slug) }}">
 
                                   <!-- Image (placeholder) -->
                                   <img src="{{ url('storage/berita/'. $item->img) }}" alt="..."
@@ -61,9 +57,7 @@
 
                                       <!-- Text -->
                                       <p class="mb-0 text-muted">
-                                          This is the body text of the blog post to give visitors an idea of what the
-                                          post is about beyond just the title. It can be a long snippet, a short
-                                          snippet, whatever you prefer the size of card and description to be.
+                                          {{ substr(strip_tags($item->isi), 0, 150) }} ...
                                       </p>
 
                                   </a>
@@ -75,14 +69,13 @@
                                       <hr class="card-meta-divider">
 
                                       <!-- Avatar -->
-                                      <div class="avatar avatar-sm mr-2">
-                                          <img src="{{ asset('img/avatars/avatar-1.jpg') }}" alt="..."
-                                              class="avatar-img rounded-circle">
+                                      <div class="mr-2">
+                                          <i class="text-muted fa fa-user" aria-hidden="true"></i>
                                       </div>
 
                                       <!-- Author -->
                                       <h6 class="text-uppercase text-muted mr-2 mb-0">
-                                          Ab Hadley
+                                          {{ ucwords($item->admin->name) }}
                                       </h6>
 
                                       <!-- Date -->
@@ -102,14 +95,10 @@
                           <div class="row no-gutters">
                               <div class="col-12">
 
-                                  <!-- Badge -->
-                                  <span class="badge badge-pill badge-gray-600 badge-float badge-float-outside">
-                                      <span class="h6 text-uppercase">Featured</span>
-                                  </span>
-
                               </div>
                               <a class="col-12 col-md-6 bg-cover card-img-left"
-                                  style="background-image: url({{ url('storage/berita/'. $item->img) }});" href="{{ route('berita', $item->slug) }}">
+                                  style="background-image: url({{ url('storage/berita/'. $item->img) }});"
+                                  href="{{ route('berita', $item->slug) }}">
 
                                   <!-- Image (placeholder) -->
                                   <img src="{{ url('storage/berita/'. $item->img) }}" alt="..."
@@ -135,9 +124,7 @@
 
                                       <!-- Text -->
                                       <p class="mb-0 text-muted">
-                                          This is the body text of the blog post to give visitors an idea of what the
-                                          post is about beyond just the title. It can be a long snippet, a short
-                                          snippet, whatever you prefer the size of card and description to be.
+                                            {{ substr(strip_tags($item->isi), 0, 150) }} ...
                                       </p>
 
                                   </a>
@@ -149,14 +136,13 @@
                                       <hr class="card-meta-divider">
 
                                       <!-- Avatar -->
-                                      <div class="avatar avatar-sm mr-2">
-                                          <img src="{{ asset('img/avatars/avatar-2.jpg') }}" alt="..."
-                                              class="avatar-img rounded-circle">
-                                      </div>
+                                      <div class="mr-2">
+                                            <i class="text-muted fa fa-user" aria-hidden="true"></i>
+                                        </div>
 
                                       <!-- Author -->
                                       <h6 class="text-uppercase text-muted mr-2 mb-0">
-                                          Adolfo Hess
+                                            {{ ucwords($item->admin->name) }}
                                       </h6>
 
                                       <!-- Date -->
@@ -180,6 +166,5 @@
       <!-- ARTICLES
           ================================================== -->
       <section class="pb-8 pt-7 pb-md-11 pt-md-10">
-        {{ $result->links() }}
+          {{ $result->links() }}
       </section>
-

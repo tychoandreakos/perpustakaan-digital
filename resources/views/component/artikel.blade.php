@@ -16,7 +16,7 @@
 
             <!-- Text -->
             <p class="lead mb-7 text-center text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec condimentum quam. Fusce pellentesque faucibus lorem at viverra. Integer at feugiat odio. In placerat euismod risus proin.
+             {{ substr(strip_tags($result->isi), 0, 188) }} ...
             </p>
 
             @include('component.author-profile')

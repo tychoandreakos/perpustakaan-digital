@@ -12,10 +12,11 @@
         "bitfumes/laravel-multiauth": "^1.0",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
         "intervention/image": "^2.5",
+        "jorenvanhocht/laravel-share": "^3.0",
         "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0",
-        "fzaninotto/faker": "^1.4"  
+        "laravel/tinker": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -13,7 +13,7 @@
 
         <!-- Map -->
         <link href='../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Theme CSS -->
         <link rel="stylesheet" href="{{ asset('css/user.css') }}">
 
@@ -53,36 +53,7 @@
     <!-- Theme JS -->
     <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/user.js') }}"></script>
-    <script>
-      var Datepicker = (function() {
-
-// Variables
-
-var $datepicker = $('.datepicker');
-
-
-// Methods
-
-function init($this) {
-  var options = {
-    disableTouchKeyboard: true,
-    autoclose: false
-  };
-
-  $this.datepicker(options);
-}
-
-
-// Events
-
-if ($datepicker.length) {
-  $datepicker.each(function() {
-    init($(this));
-  });
-}
-
-})();
-    </script>
+    <script src="{{ asset('js/share.js') }}"></script>
   
 </body>
 

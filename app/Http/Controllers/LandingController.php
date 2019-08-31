@@ -211,14 +211,14 @@ class LandingController extends Controller
 
     public function berita($slug)
     {
-        $result = Berita::where('slug', $slug)->firstOrFail();
+        $result = Berita::with('admin')->where('slug', $slug)->firstOrFail();
         $berita = Berita::latest()->limit(3)->get();
         return view('berita', compact('result', 'berita')); 
     }
 
     public function beritaSemua()
     {
-        $result = Berita::latest()->paginate(3);
+        $result = Berita::with('admin')->latest()->paginate(3);
         return view('berita-semua', compact('result'));
     }
 
