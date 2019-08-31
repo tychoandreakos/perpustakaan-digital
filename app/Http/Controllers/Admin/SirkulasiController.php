@@ -32,17 +32,9 @@ class SirkulasiController extends Controller
         return view('admin.sirkulasi.kembali', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
-
     public function verifikasi(Request $request)
     {
-        return $request->all();
-        $title = 'Daftar Keterlambatan Buku';   
-            $koleksi = Bibliobigrafi::all()->count();
-        $anggota_count = User::all()->count();
-        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
-        $approve = User::whereNull('approved_at')->get()->count();
-            $pinjam = PinjamTransaksi::where('kode_pinjam', strtolower($kode))->get();
-            return view('admin.sirkulasi.verifikasi-data', compact('pinjam', 'koleksi', 'anggota_count','eksemplar','approve'));
+            return PinjamTransaksi::where('kode_pinjam', strtolower($request->kode))->get();
     }
 
     public function pola()
@@ -52,7 +44,6 @@ class SirkulasiController extends Controller
 
     public function pinjam(Request $request)
     {
-        // return $request->all();
         $total = PinjamTransaksi::where([['user_id', $request->user_id], ['status_pinjam', 1]])->count();
         return $anggota = AnggotaTransaksi::where('user_id', $request->user_id)->first();
         if($total != $anggota->tipe_anggota->jumlah_pinjaman){

@@ -91,8 +91,6 @@ Vue.component('table-keterlambatan-component', require('./components/admin/keter
 // digital
 Vue.component('digital-component', require('./components/admin/digital/Table.vue').default);
 Vue.component('form-digital-component', require('./components/admin/digital/Form.vue').default);
-Vue.component('verifikasi-component', require('./components/admin/digital/Digital.vue').default);
-
 
 
 // laporan
