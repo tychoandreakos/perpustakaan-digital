@@ -30,6 +30,11 @@
 
                  <!-- Navigation -->
                  <ul class="navbar-nav ml-auto">
+                     <li class="nav-item">
+                         <a href="{{ route('beranda') }}" class="nav-link">
+                             Beranda
+                         </a>
+                     </li>
                      @guest
                      <li class="nav-item dropdown">
                          <a class="nav-link dropdown-toggle" href="{{ route('tamu') }}" aria-haspopup="true"
@@ -37,100 +42,6 @@
                              Buku Tamu
                          </a>
                      </li>
-                     @endguest
-                     <li class="nav-item dropdown">
-                         <a class="nav-link dropdown-toggle" href="{{ route('tamu') }}" aria-haspopup="true"
-                             aria-expanded="false">
-                             Perpustakaan
-                         </a>
-                         {{-- @endguest --}}
-                         <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
-                             <div class="row no-gutters">
-                                 <div class="col-12 col-lg-6">
-                                     <div class="dropdown-img-left"
-                                         style="background-image: url({{ asset('img/photos/photo-3.jpg') }});">
-
-                                         <!-- Heading -->
-                                         <h4 class="font-weight-bold text-white mb-0">
-                                             Lihat Status Pinjam Buku ?
-                                         </h4>
-
-                                         <!-- Text -->
-                                         <p class="font-size-sm text-white">
-                                             See all the pages at once.
-                                         </p>
-
-                                         <!-- Button -->
-                                         <a href="overview.html" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
-                                             Lihat Semua Pinjaman
-                                         </a>
-
-                                     </div>
-                                 </div>
-                                 <div class="col-12 col-lg-6">
-                                     <div class="dropdown-body">
-                                         <div class="row no-gutters">
-                                             <div class="col-6">
-
-                                                 <!-- Heading -->
-                                                 <h6 class="dropdown-header">
-                                                     Services
-                                                 </h6>
-
-                                                 <!-- List -->
-                                                 <a class="dropdown-item" href="coworking.html">
-                                                     Coworking
-                                                 </a>
-                                                 <a class="dropdown-item" href="rental.html">
-                                                     Rental
-                                                 </a>
-                                                 <a class="dropdown-item mb-5" href="job.html">
-                                                     Job Listing
-                                                 </a>
-
-                                                 <!-- Heading -->
-                                                 <h6 class="dropdown-header">
-                                                     Apps
-                                                 </h6>
-
-                                                 <!-- List -->
-                                                 <a class="dropdown-item" href="desktop-app.html">
-                                                     Desktop
-                                                 </a>
-                                                 <a class="dropdown-item" href="mobile-app.html">
-                                                     Mobile
-                                                 </a>
-
-                                             </div>
-                                             <div class="col-6">
-
-                                                 <!-- Heading -->
-                                                 <h6 class="dropdown-header">
-                                                     Web
-                                                 </h6>
-
-                                                 <!-- List -->
-                                                 <a class="dropdown-item" href="index-2.html">
-                                                     Basic
-                                                 </a>
-                                                 <a class="dropdown-item" href="enterprise.html">
-                                                     Enterprise
-                                                 </a>
-                                                 <a class="dropdown-item" href="service.html">
-                                                     Service
-                                                 </a>
-                                                 <a class="dropdown-item" href="cloud.html">
-                                                     Cloud Hosting
-                                                 </a>
-
-                                             </div>
-                                         </div> <!-- / .row -->
-                                     </div>
-                                 </div>
-                             </div> <!-- / .row -->
-                         </div>
-                     </li>
-                     @guest
                      <li class="nav-item dropdown">
                          <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#"
                              aria-haspopup="true" aria-expanded="false">
@@ -270,6 +181,99 @@
                              </div>
                          </div>
                      </li>
+                     @else
+                     <li class="nav-item dropdown">
+                         <a class="nav-link dropdown-toggle" href="{{ route('tamu') }}" aria-haspopup="true"
+                             aria-expanded="false">
+                             Perpustakaan
+                         </a>
+                         {{-- @endguest --}}
+                         <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
+                             <div class="row no-gutters">
+                                 <div class="col-12 col-lg-6">
+                                     <div class="dropdown-img-left"
+                                         style="background-image: url({{ asset('img/photos/photo-3.jpg') }});">
+
+                                         <!-- Heading -->
+                                         <h4 class="font-weight-bold text-white mb-0">
+                                             Lihat Status Pinjam Buku ?
+                                         </h4>
+
+                                         <!-- Text -->
+                                         <p class="font-size-sm text-white">
+                                             See all the pages at once.
+                                         </p>
+
+                                         <!-- Button -->
+                                         <a href="overview.html" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
+                                             Lihat Semua Pinjaman
+                                         </a>
+
+                                     </div>
+                                 </div>
+                                 <div class="col-12 col-lg-6">
+                                     <div class="dropdown-body">
+                                         <div class="row no-gutters">
+                                             <div class="col-6">
+
+                                                 <!-- Heading -->
+                                                 <h6 class="dropdown-header">
+                                                     Services
+                                                 </h6>
+
+                                                 <!-- List -->
+                                                 <a class="dropdown-item" href="coworking.html">
+                                                     Coworking
+                                                 </a>
+                                                 <a class="dropdown-item" href="rental.html">
+                                                     Rental
+                                                 </a>
+                                                 <a class="dropdown-item mb-5" href="job.html">
+                                                     Job Listing
+                                                 </a>
+
+                                                 <!-- Heading -->
+                                                 <h6 class="dropdown-header">
+                                                     Apps
+                                                 </h6>
+
+                                                 <!-- List -->
+                                                 <a class="dropdown-item" href="desktop-app.html">
+                                                     Desktop
+                                                 </a>
+                                                 <a class="dropdown-item" href="mobile-app.html">
+                                                     Mobile
+                                                 </a>
+
+                                             </div>
+                                             <div class="col-6">
+
+                                                 <!-- Heading -->
+                                                 <h6 class="dropdown-header">
+                                                     Web
+                                                 </h6>
+
+                                                 <!-- List -->
+                                                 <a class="dropdown-item" href="index-2.html">
+                                                     Basic
+                                                 </a>
+                                                 <a class="dropdown-item" href="enterprise.html">
+                                                     Enterprise
+                                                 </a>
+                                                 <a class="dropdown-item" href="service.html">
+                                                     Service
+                                                 </a>
+                                                 <a class="dropdown-item" href="cloud.html">
+                                                     Cloud Hosting
+                                                 </a>
+
+                                             </div>
+                                         </div> <!-- / .row -->
+                                     </div>
+                                 </div>
+                             </div> <!-- / .row -->
+                         </div>
+                     </li>
                      @endguest
 
 
@@ -293,14 +297,8 @@
                                      Edit Profile
                                  </a>
                                  <div class="dropdown-menu">
-                                     <a class="dropdown-item" href="signin-cover.html">
-                                         Update Foto
-                                     </a>
                                      <a class="dropdown-item" href="{{ route('profile.lengkapi') }}">
                                          Lengkapi Profil
-                                     </a>
-                                     <a class="dropdown-item" href="signin.html">
-                                         Lihat Profil
                                      </a>
                                  </div>
                              </li>
@@ -310,42 +308,10 @@
                                  </a>
                                  <div class="dropdown-menu">
                                      <a class="dropdown-item" href="signup-cover.html">
-                                         Status Akun
+                                         Lihat Profil
                                      </a>
                                      <a class="dropdown-item" href="signup-cover.html">
                                          Ubah Password
-                                     </a>
-                                 </div>
-                             </li>
-                             <li class="dropdown-item dropright">
-                                 <a class="dropdown-link dropdown-toggle" data-toggle="dropdown" href="#">
-                                     Password Reset
-                                 </a>
-                                 <div class="dropdown-menu">
-                                     <a class="dropdown-item" href="password-reset-cover.html">
-                                         Side Cover
-                                     </a>
-                                     <a class="dropdown-item" href="password-reset-illustration.html">
-                                         Illustration
-                                     </a>
-                                     <a class="dropdown-item" href="password-reset.html">
-                                         Basic
-                                     </a>
-                                 </div>
-                             </li>
-                             <li class="dropdown-item dropright">
-                                 <a class="dropdown-link dropdown-toggle" data-toggle="dropdown" href="#">
-                                     Error
-                                 </a>
-                                 <div class="dropdown-menu">
-                                     <a class="dropdown-item" href="error-cover.html">
-                                         Side Cover
-                                     </a>
-                                     <a class="dropdown-item" href="error-illustration.html">
-                                         Illustration
-                                     </a>
-                                     <a class="dropdown-item" href="error.html">
-                                         Basic
                                      </a>
                                  </div>
                              </li>

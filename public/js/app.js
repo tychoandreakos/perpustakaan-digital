@@ -5476,6 +5476,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5508,9 +5512,9 @@ __webpack_require__.r(__webpack_exports__);
       },
       pola_eksemplar: '',
       wow: {
-        user_id: this.user_id,
-        id: this.id,
-        pola_eksemplar: this.eksemplar
+        user_id: '',
+        id: '',
+        pola_eksemplar: ''
       },
       data: {}
     };
@@ -5531,7 +5535,6 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this2 = this;
 
-      console.log(this.wow);
       axios.post(this.kode2, this.wow).then(function (res) {
         _this2.$swal({
           position: 'top-end',
@@ -75497,6 +75500,69 @@ var render = function() {
                 ])
               ]
             : [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user_id,
+                      expression: "user_id"
+                    }
+                  ],
+                  attrs: { type: "hidden" },
+                  domProps: { value: _vm.user_id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.user_id = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.id,
+                      expression: "id"
+                    }
+                  ],
+                  attrs: { type: "hidden" },
+                  domProps: { value: _vm.id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.id = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.eksemplar,
+                      expression: "eksemplar"
+                    }
+                  ],
+                  attrs: { type: "hidden" },
+                  domProps: { value: _vm.eksemplar },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.eksemplar = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c("div", { staticClass: "container" }, [
                   _c(
                     "form",

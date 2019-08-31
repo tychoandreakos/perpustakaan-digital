@@ -9,5 +9,5 @@
         {{-- {{ $sirkulasi }} --}}
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <digital-component fetch="{{ route('sirkulasi.pola') }}" index="{{ route('sirkulasi.digital') }}" kode2="{{ route('sirkulasi.digital2') }}" kode="{{ route('sirkulasi.verifikasi') }}"></digital-component>
+        <digital-component fetch="{{ route('sirkulasi.pola') }}" index="{{ route('eksemplar.keluar') }}" kode2="{{ route('sirkulasi.digital2') }}" kode="{{ route('sirkulasi.verifikasi') }}"></digital-component>
             @endsection

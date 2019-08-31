@@ -22,6 +22,9 @@
                     </div>
                 </template>
                 <template v-else>
+                    <input type="hidden" v-model="user_id">
+                    <input type="hidden" v-model="id">
+                    <input type="hidden" v-model="eksemplar">
                     <div class="container">
                         <form @submit.prevent="update">
 
@@ -41,15 +44,16 @@
 
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
- import Multiselect from 'vue-multiselect'
-  import Spinner from '../tools/Spanner';
+    import Multiselect from 'vue-multiselect'
+    import Spinner from '../tools/Spanner';
     export default {
         props: ['kode', 'kode2', 'index', 'fetch'],
-          components: {
+        components: {
             Multiselect,
             SpinnerComponent: Spinner,
         },
@@ -81,11 +85,11 @@
                 },
 
                 pola_eksemplar: '',
-                
+
                 wow: {
-                    user_id: this.user_id,
-                    id: this.id,
-                    pola_eksemplar: this.eksemplar,
+                    user_id: '',
+                    id: '',
+                    pola_eksemplar: '',
                 },
 
                 data: {},
@@ -105,28 +109,27 @@
             },
 
             update() {
-                console.log(this.wow);
                 axios.post(this.kode2, this.wow)
-                        .then(res => {
-                            this.$swal({
-                                position: 'top-end',
-                                type: 'success',
-                                title: res.data.message.toUpperCase(),
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
+                    .then(res => {
+                        this.$swal({
+                            position: 'top-end',
+                            type: 'success',
+                            title: res.data.message.toUpperCase(),
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
 
-                            setTimeout(() => {
-                                window.location = this.index;
-                            }, 3200)
-                        })
-                        .catch(err => console.log(err.data))
+                        setTimeout(() => {
+                            window.location = this.index;
+                        }, 3200)
+                    })
+                    .catch(err => console.log(err.data))
             },
 
             save() {
-                    axios.post(this.kode, this.form)
-                        .then(res => this.data = res.data)
-                        .catch(err => console.log(err.data))
+                axios.post(this.kode, this.form)
+                    .then(res => this.data = res.data)
+                    .catch(err => console.log(err.data))
             }
         },
     }

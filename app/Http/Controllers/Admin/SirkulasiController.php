@@ -45,7 +45,7 @@ class SirkulasiController extends Controller
     public function pinjam(Request $request)
     {
         $total = PinjamTransaksi::where([['user_id', $request->user_id], ['status_pinjam', 1]])->count();
-        return $anggota = AnggotaTransaksi::where('user_id', $request->user_id)->first();
+        $anggota = AnggotaTransaksi::where('user_id', $request->user_id)->first();
         if($total != $anggota->tipe_anggota->jumlah_pinjaman){
             
             $dt = new Carbon;
