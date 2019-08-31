@@ -149,6 +149,7 @@ Route::get('eksemplar-keluar', 'SirkulasiController@keluar')->name('eksemplar.ke
 Route::post('sirkulasi-verifikasi', 'SirkulasiController@verifikasi')->name('sirkulasi.verifikasi');
 Route::post('sirkulasi-digital-pinjam', 'SirkulasiController@pinjam')->name('sirkulasi.digital2');
 Route::get('sirkulasi-pola', 'SirkulasiController@pola')->name('sirkulasi.pola');
+Route::post('anggota-approve/{id}', 'AnggotaController@verifikasi');
 
 
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');

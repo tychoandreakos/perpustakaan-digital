@@ -2343,6 +2343,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
@@ -2361,22 +2364,20 @@ __webpack_require__.r(__webpack_exports__);
     edit: function edit(val) {
       return "anggota/".concat(val, "/edit");
     },
-    deleted: function deleted(val) {
+    app: function app(val) {
       var _this = this;
 
       this.$swal({
-        title: 'Hapus Data?',
-        text: "Jika anda menghapus data ini, data lain kemungkinan besar akan ikut terhapus",
+        title: 'Setujui Anggota?',
+        text: "Jika anda yakin silahkan tekan yes!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, hapus!'
+        confirmButtonText: 'Yes, setujui!'
       }).then(function (result) {
         if (result.value) {
-          axios.post('/pustakawan/anggota/' + val, {
-            _method: 'DELETE'
-          }).then(function (res) {
+          axios.post('anggota-approve/' + val).then(function (res) {
             _this.$swal({
               position: 'top-end',
               type: 'success',
@@ -2394,25 +2395,58 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    getResults: function getResults() {
+    deleted: function deleted(val) {
       var _this2 = this;
+
+      this.$swal({
+        title: 'Hapus Data?',
+        text: "Jika anda menghapus data ini, data lain kemungkinan besar akan ikut terhapus",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, hapus!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('/pustakawan/anggota/' + val, {
+            _method: 'DELETE'
+          }).then(function (res) {
+            _this2.$swal({
+              position: 'top-end',
+              type: 'success',
+              title: res.data.message.toUpperCase(),
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+            setTimeout(function () {
+              window.location = _this2.index;
+            }, 1800);
+          })["catch"](function (err) {
+            return console.log(err);
+          });
+        }
+      });
+    },
+    getResults: function getResults() {
+      var _this3 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       return axios.get(this.fetch + '?page=' + page).then(function (res) {
-        return _this2.datas = res.data;
+        return _this3.datas = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     Fire.$on('searching', function () {
-      var query = _this3.$parent.search;
+      var query = _this4.$parent.search;
       axios.get('/pustakawan/anggota-search?q=' + query).then(function (res) {
         // console.log(res)
-        _this3.datas = res.data;
+        _this4.datas = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -70708,6 +70742,29 @@ var render = function() {
                                 attrs: { scope: "row" }
                               },
                               [
+                                item.approved_at == null
+                                  ? _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-success btn-sm",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.app(item.id)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "ni ni-check-bold text-white"
+                                        }),
+                                        _vm._v(
+                                          "\n                                        Approve"
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
                                 _c(
                                   "a",
                                   {

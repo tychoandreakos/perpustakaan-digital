@@ -30,6 +30,9 @@
                             <tbody>
                                 <tr v-for="item in datas.data" :key="item.id">
                                     <th scope="row" style="width: 19%">
+                                        <button v-if="item.approved_at == null" @click="app(item.id)"
+                                            class="btn btn-success btn-sm"><i class="ni ni-check-bold text-white"></i>
+                                            Approve</button>
                                         <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
                                                 class="ni ni-check-bold text-white"></i> Edit</a>
                                         <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
@@ -83,6 +86,37 @@
         methods: {
             edit(val) {
                 return `anggota/${val}/edit`;
+            },
+
+            app(val) {
+                this.$swal({
+                    title: 'Setujui Anggota?',
+                    text: "Jika anda yakin silahkan tekan yes!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, setujui!'
+                }).then((result) => {
+                    if (result.value) {
+                        axios.post('anggota-approve/' + val)
+                            .then(res => {
+                                this.$swal({
+                                    position: 'top-end',
+                                    type: 'success',
+                                    title: res.data.message.toUpperCase(),
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+
+                                setTimeout(() => {
+                                    window.location = this.index;
+                                }, 1800);
+                            })
+                            .catch(err => console.log(err))
+                    }
+                });
+
             },
 
             deleted(val) {

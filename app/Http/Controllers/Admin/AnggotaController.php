@@ -146,6 +146,17 @@ class AnggotaController extends Controller
      * @param  \App\Anggota  $anggotum
      * @return \Illuminate\Http\Response
      */
+
+    public function verifikasi($id)
+    {
+        $user = User::find($id);
+        $user->approved_at = Carbon::now();
+        $user->save();
+
+        return response()->json([
+            'message' => 'user dengan '.$id.' berhasil diaktifkan.']);
+    }
+
     public function update(Request $request)
     {
         $user = User::find($request->id)->first();
