@@ -86,11 +86,11 @@
                      <div class="col ml-n5">
 
                          <!-- Badges -->
-                        @foreach ($randomTags as $item)
-                        <a class="badge badge-pill badge-secondary-soft" href="blog-search.html">
-                                <span class="h6 text-uppercase">{{ ucwords($item->jenis_topik) }}</span>
-                            </a>
-                        @endforeach
+                         @foreach ($randomTags as $item)
+                         <a class="badge badge-pill badge-secondary-soft" href="blog-search.html">
+                             <span class="h6 text-uppercase">{{ ucwords($item->jenis_topik) }}</span>
+                         </a>
+                         @endforeach
 
                      </div>
                  </div> <!-- / .row -->
@@ -104,21 +104,21 @@
       ================================================== -->
  <section class="pt-7 pt-md-10">
      <div class="container">
-            <div class="row align-items-center mb-5">
-                    <div class="col-12 col-md">
-        
-                        <!-- Heading -->
-                        <h3 class="mb-0">
-                            Mungkin anda suka?
-                        </h3>
-        
-                        <!-- Text -->
-                        <p class="mb-0 text-muted">
-                            Here’s what we've been up to recently.
-                        </p>
-        
-                    </div>
-                </div> <!-- / .row -->
+         <div class="row align-items-center mb-5">
+             <div class="col-12 col-md">
+
+                 <!-- Heading -->
+                 <h3 class="mb-0">
+                     Mungkin anda suka?
+                 </h3>
+
+                 <!-- Text -->
+                 <p class="mb-0 text-muted">
+                     Here’s what we've been up to recently.
+                 </p>
+
+             </div>
+         </div> <!-- / .row -->
          <div class="row">
              <div class="col-12">
 
@@ -161,19 +161,20 @@
                                      {{ $random->judul }}
                                  </h3>
 
-                                 <span class="badge badge-primary">{{ $random->isbn_isnn }}</span>
-                                 <span class="badge badge-secondary">{{ $random->tahun_terbit }}</span>
-                                 <span
-                                     class="badge badge-success">{{ ucwords($random->buku_transaksi[0]->penerbit->nama_penerbit) }}</span>
+                                 <span class="badge badge-primary">ISBN: {{ $random->isbn_isnn }}</span>
+                                 <span class="badge badge-secondary">Tahun Terbit: {{ $random->tahun_terbit }}</span>
+                                 <span class="badge badge-success">Penerbit:
+                                     {{ ucwords($random->buku_transaksi[0]->penerbit->nama_penerbit) }}</span>
                                  @isset($random->topik->jenis_topik)
                                  @endisset
-                                 <span
-                                     class="badge badge-warning">{{ ucwords($random->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
-                                 <span class="badge badge-info">{{ $random->deskripsi_fisik }}</span>
-                                 <span class="badge badge-light">
+                                 <span class="badge badge-warning">Bahasa:
+                                     {{ ucwords($random->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
+                                 <span class="badge badge-info">Deskripsi Fisik: {{ $random->deskripsi_fisik }}</span>
+                                 <span class="badge badge-light">Tempat Terbit:
                                      {{ $random->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} -
                                      {{ ucwords($random->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
-                                 <span class="badge badge-dark">{{ $random->bibliobigrafi[0]->no_panggil }}</span>
+                                 <span class="badge badge-dark">No Panggil:
+                                     {{ $random->bibliobigrafi[0]->no_panggil }}</span>
 
 
                                  <!-- Text -->
@@ -191,9 +192,9 @@
 
                                  <!-- Author -->
                                  <h6 class="text-uppercase text-muted mr-2 mb-0">
-                                        @foreach ($random->buku_transaksi as $p)
-                                        {{ $p->pengarang->nama_pengarang }}
-                                        @endforeach
+                                     @foreach ($random->buku_transaksi as $p)
+                                     {{ $p->pengarang->nama_pengarang }}
+                                     @endforeach
                                  </h6>
 
                                  <!-- Date -->
@@ -310,7 +311,8 @@
 
                                              <!-- Footer -->
                                              <footer class="blockquote-footer">
-                                                 <span class="h6 text-uppercase">{{ ucwords($item->admin->name) }}</span>
+                                                 <span
+                                                     class="h6 text-uppercase">{{ ucwords($item->admin->name) }}</span>
                                              </footer>
 
                                          </blockquote>
@@ -351,94 +353,94 @@
              </div>
          </div> <!-- / .row -->
          <div class="row">
-            @foreach ($popular30 as $item)
-            <div class="col-12 col-md-6 d-flex">
+             @foreach ($popular30 as $item)
+             <div class="col-12 col-md-6 d-flex">
 
-                <!-- Card -->
-                <div class="card mb-6 shadow-light-lg lift lift-lg">
+                 <!-- Card -->
+                 <div class="card mb-6 shadow-light-lg lift lift-lg">
 
-                    <!-- Image -->
-                    <a class="card-img-top" href="{{ route('buku', $item->slug) }}">
+                     <!-- Image -->
+                     <a class="card-img-top" href="{{ route('buku', $item->slug) }}">
 
-                        <!-- Image -->
-                        <div style="display: flex; background: {{ isset($item->topik->warna) ?$item->topik->warna : '#335eea' }}; width: 100%; height: 250px"
-                            class="card-img-top">
-                            <div style="background:url('{{  url('storage/cover/'.$item->gambar_sampul) }}') center no-repeat;background-size: cover; width: 115px;
+                         <!-- Image -->
+                         <div style="display: flex; background: {{ isset($item->topik->warna) ?$item->topik->warna : '#335eea' }}; width: 100%; height: 250px"
+                             class="card-img-top">
+                             <div style="background:url('{{  url('storage/cover/'.$item->gambar_sampul) }}') center no-repeat;background-size: cover; width: 115px;
                                 height: 160px;margin: auto; display:flex; align-self: center
                             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);"></div>
-                        </div>
+                         </div>
 
-                        <!-- Shape -->
-                        <div class="position-relative">
-                            <div class="shape shape-bottom shape-fluid-x svg-shim text-white">
-                                <svg viewBox="0 0 2880 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M2160 0C1440 240 720 240 720 240H0V480H2880V0H2160Z" fill="currentColor" />
-                                </svg>
-                            </div>
-                        </div>
+                         <!-- Shape -->
+                         <div class="position-relative">
+                             <div class="shape shape-bottom shape-fluid-x svg-shim text-white">
+                                 <svg viewBox="0 0 2880 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                     <path fill-rule="evenodd" clip-rule="evenodd"
+                                         d="M2160 0C1440 240 720 240 720 240H0V480H2880V0H2160Z" fill="currentColor" />
+                                 </svg>
+                             </div>
+                         </div>
 
-                    </a>
+                     </a>
 
-                    <!-- Body -->
-                    <a class="card-body" href="{{ route('buku', $item->slug) }}">
+                     <!-- Body -->
+                     <a class="card-body" href="{{ route('buku', $item->slug) }}">
 
-                        <!-- Heading -->
-                        <h3>
-                           {{ $item->judul }}
-                        </h3>
+                         <!-- Heading -->
+                         <h3>
+                             {{ $item->judul }}
+                         </h3>
 
-                       <!-- badge-->
-                       <span class="badge badge-primary">{{ $item->isbn_isnn }}</span>
-                       <span class="badge badge-secondary">{{ $item->tahun_terbit }}</span>
-                       <span
-                           class="badge badge-success">{{ ucwords($item->buku_transaksi[0]->penerbit->nama_penerbit) }}</span>
-                       @isset($item->topik->jenis_topik)
-                       <span class="badge badge-danger">{{ ucwords($item->topik->jenis_topik) }}</span>
-                       @endisset
-                       <span
-                           class="badge badge-warning">{{ ucwords($item->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
-                       <span class="badge badge-info">{{ $item->deskripsi_fisik }}</span>
-                       <span class="badge badge-light"> {{ $item->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} -
-                           {{ ucwords($item->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
-                       <span class="badge badge-dark">{{ $item->bibliobigrafi[0]->no_panggil }}</span>
+                         <!-- badge-->
+                         <span class="badge badge-primary">{{ $item->isbn_isnn }}</span>
+                         <span class="badge badge-secondary">{{ $item->tahun_terbit }}</span>
+                         <span
+                             class="badge badge-success">{{ ucwords($item->buku_transaksi[0]->penerbit->nama_penerbit) }}</span>
+                         @isset($item->topik->jenis_topik)
+                         <span class="badge badge-danger">{{ ucwords($item->topik->jenis_topik) }}</span>
+                         @endisset
+                         <span
+                             class="badge badge-warning">{{ ucwords($item->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
+                         <span class="badge badge-info">{{ $item->deskripsi_fisik }}</span>
+                         <span class="badge badge-light"> {{ $item->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} -
+                             {{ ucwords($item->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
+                         <span class="badge badge-dark">{{ $item->bibliobigrafi[0]->no_panggil }}</span>
 
-                       <div class="mb-0 text-muted mt-4">
-                           {!! isset($item->catatan) ? substr($item->catatan, 0, 150) .' ...' : 'Belum ada data' !!}
-                       </div>
+                         <div class="mb-0 text-muted mt-4">
+                             {!! isset($item->catatan) ? substr($item->catatan, 0, 150) .' ...' : 'Belum ada data' !!}
+                         </div>
 
-                    </a>
+                     </a>
 
-                    <!-- Meta -->
-                    <a class="card-meta mt-auto" href="#!">
+                     <!-- Meta -->
+                     <a class="card-meta mt-auto" href="#!">
 
-                        <!-- Divider -->
-                        <hr class="card-meta-divider">
+                         <!-- Divider -->
+                         <hr class="card-meta-divider">
 
-                        <!-- Author -->
-                        <h6 class="text-uppercase text-muted mr-2 mb-0">
-                            @foreach ($item->buku_transaksi as $p)
-                            {{ $p->pengarang->nama_pengarang }}
-                            @endforeach
-                        </h6>
+                         <!-- Author -->
+                         <h6 class="text-uppercase text-muted mr-2 mb-0">
+                             @foreach ($item->buku_transaksi as $p)
+                             {{ $p->pengarang->nama_pengarang }}
+                             @endforeach
+                         </h6>
 
-                        @isset($item->pdf)
-                        <!-- Date -->
-                        <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                            <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip"
-                                data-placement="top" title="Baca Buku"
-                                class="btn btn-danger-soft btn-rounded-circle btn-sm">
-                                <i class="fe fe-eye"></i>
-                            </button>
-                        </p>
-                        @endisset
+                         @isset($item->pdf)
+                         <!-- Date -->
+                         <p class="h6 text-uppercase text-muted mb-0 ml-auto">
+                             <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip"
+                                 data-placement="top" title="Baca Buku"
+                                 class="btn btn-danger-soft btn-rounded-circle btn-sm">
+                                 <i class="fe fe-eye"></i>
+                             </button>
+                         </p>
+                         @endisset
 
-                    </a>
+                     </a>
 
-                </div>
+                 </div>
 
-            </div>
-            @endforeach
+             </div>
+             @endforeach
 
 
          </div>

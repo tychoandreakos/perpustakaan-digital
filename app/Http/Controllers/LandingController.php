@@ -113,7 +113,7 @@ class LandingController extends Controller
             $q->select('id', 'jenis_bahasa');
         }, 'bibliobigrafi.lokasi_rak' => function($q) {
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
-        }])->latest()->limit(3)->get();
+        }])->latest()->limit(2)->get();
 
         $berita =  Berita::with('admin')->latest()->limit(3)->get();
 

@@ -27,7 +27,7 @@
         </div> <!-- / .row -->
         <div class="row">
             @foreach ($terbaru as $item)
-            <div class="col-12 col-md-6 col-lg-4 d-flex">
+            <div class="col-12 col-md-6 d-flex">
 
                 <!-- Card -->
                 <div class="card mb-6 mb-lg-0 shadow-light-lg lift lift-lg">
@@ -64,18 +64,20 @@
                         </h3>
 
                         <!-- badge-->
-                        <span class="badge badge-primary">{{ $item->isbn_isnn }}</span>
-                        <span class="badge badge-secondary">{{ $item->tahun_terbit }}</span>
-                        <span
-                            class="badge badge-success">{{ ucwords($item->buku_transaksi[0]->penerbit->nama_penerbit) }}</span>
+                        <span class="badge badge-primary">ISBN: {{ $item->isbn_isnn }}</span>
+                        <span class="badge badge-secondary">Tahun Terbit: {{ $item->tahun_terbit }}</span>
+                        <span class="badge badge-success">Penerbit:
+                            {{ ucwords($item->buku_transaksi[0]->penerbit->nama_penerbit) }}</span>
                         @isset($item->topik->jenis_topik)
-                        <span class="badge badge-danger">{{ ucwords($item->topik->jenis_topik) }}</span>
                         @endisset
-                        <span
-                            class="badge badge-warning">{{ ucwords($item->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
-                        <span class="badge badge-info">{{ $item->deskripsi_fisik }}</span>
-                        <span class="badge badge-light"> {{ $item->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} - {{ ucwords($item->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
-                        <span class="badge badge-dark">{{ $item->bibliobigrafi[0]->no_panggil }}</span>
+                        <span class="badge badge-warning">Bahasa:
+                            {{ ucwords($item->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
+                        <span class="badge badge-info">Deskripsi Fisik: {{ $item->deskripsi_fisik }}</span>
+                        <span class="badge badge-light">Tempat Terbit:
+                            {{ $item->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} -
+                            {{ ucwords($item->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
+                        <span class="badge badge-dark">No Panggil:
+                            {{ $item->bibliobigrafi[0]->no_panggil }}</span>
 
                         <div class="mb-0 text-muted mt-4">
                             {{ isset($item->catatan) ? substr(strip_tags($item->catatan), 0, 150) .' ...' : 'Belum ada data' }}
