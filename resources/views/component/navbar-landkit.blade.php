@@ -198,7 +198,7 @@
                          {{-- @endguest --}}
                          <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
                              <div class="row no-gutters">
-                                 <div class="col-12 col-lg-6">
+                                 <div class="col-12 col-lg-12">
                                      <div class="dropdown-img-left"
                                          style="background-image: url({{ asset('img/photos/photo-3.jpg') }});">
 
@@ -209,7 +209,7 @@
 
                                          <!-- Text -->
                                          <p class="font-size-sm text-white">
-                                             See all the pages at once.
+                                             Lihat Semua Transaksi Mengenai Peminjaman
                                          </p>
 
                                          <!-- Button -->
@@ -219,7 +219,7 @@
 
                                      </div>
                                  </div>
-                                 <div class="col-12 col-lg-6">
+                                 {{-- <div class="col-12 col-lg-6">
                                      <div class="dropdown-body">
                                          <div class="row no-gutters">
                                              <div class="col-6">
@@ -278,7 +278,7 @@
                                              </div>
                                          </div> <!-- / .row -->
                                      </div>
-                                 </div>
+                                 </div> --}}
                              </div> <!-- / .row -->
                          </div>
                      </li>

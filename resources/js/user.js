@@ -23,6 +23,7 @@ Vue.component('app-tamu', require('./components/Tamu.vue').default);
 
 Vue.component('app-button-pinjam', require('./components/user/ButtonPinjam.vue').default);
 Vue.component('app-lengkapi', require('./components/user/Lengkapi.vue').default);
+Vue.component('app-batal', require('./components/user/Batal.vue').default);
 
 
 

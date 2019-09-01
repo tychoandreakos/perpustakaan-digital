@@ -149,29 +149,29 @@
                             <!-- List group -->
                             <div>
                                 <div class="list-group list-group-flush">
-                                        @if ($histori->count() > 0)
-                                        @foreach ($histori as $item)
-                                        <a class="list-group-item text-reset text-decoration-none"
-                                            href="{{ route('buku', $item->buku->slug) }}">
-            
-                                            <p class="font-weight-bold mb-1">
-                                                {{ ucwords($item->buku->judul) }}
-                                            </p>
-                                            <p class="font-size-sm text-muted mb-0">
-                                                Tanggal Pinjam: {{ $item->tgl_pinjam }}
-                                            </p>
-                                            <p class="font-size-sm text-muted mb-0">
-                                                Tanggal Kembali: {{ $item->tanggal_habis_pinjam }}
-                                            </p>
-                                            <p class="font-size-sm text-success mb-0">
-                                                Tanggal Dikembalikan: {{ $item->tgl_kembali }}
-                                            </p>
-            
-                                        </a>
-                                        @endforeach
-                                        @else
-                                        <h5 class="text-center text-muted">Belum ada data!</h5>
-                                        @endif
+                                    @if ($histori->count() > 0)
+                                    @foreach ($histori as $item)
+                                    <a class="list-group-item text-reset text-decoration-none"
+                                        href="{{ route('buku', $item->buku->slug) }}">
+
+                                        <p class="font-weight-bold mb-1">
+                                            {{ ucwords($item->buku->judul) }}
+                                        </p>
+                                        <p class="font-size-sm text-muted mb-0">
+                                            Tanggal Pinjam: {{ $item->tgl_pinjam }}
+                                        </p>
+                                        <p class="font-size-sm text-muted mb-0">
+                                            Tanggal Kembali: {{ $item->tanggal_habis_pinjam }}
+                                        </p>
+                                        <p class="font-size-sm text-success mb-0">
+                                            Tanggal Dikembalikan: {{ $item->tgl_kembali }}
+                                        </p>
+
+                                    </a>
+                                    @endforeach
+                                    @else
+                                    <h5 class="text-center text-muted">Belum ada data!</h5>
+                                    @endif
                                 </div>
                             </div>
 
@@ -179,39 +179,42 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                        <div class="card card-border border-primary shadow-light-lg mb-6 mb-md-8" data-aos="fade-up">
-                                <div class="card-body">
-                
-                                    <!-- Heading -->
-                                    <h6 class="text-uppercase text-primary d-inline-block mb-5 mr-1">
-                                        Peminjaman Yang Belum Diverifikasi
-                                    </h6>
-                
-                
-                                    <!-- List group -->
-                                    <div>
-                                        <div class="list-group list-group-flush">
-                                                @if ($verifikasi->count() > 0)
-                                                @foreach ($verifikasi as $item)
-                                                <a class="list-group-item text-reset text-decoration-none"
-                                                    href="{{ route('buku', $item->buku->slug) }}">
-            
-                                                    <p class="font-weight-bold mb-1">
-                                                        {{ ucwords($item->buku->judul) }}
-                                                    </p>
-                                                    <p class="font-size-sm text-muted mb-0">
-                                                            Kode Verifikasi: <span class="text-bold">{{ strtoupper($item->kode_pinjam) }}</span>
-                                                        </p>
-                                                </a>
-                                                @endforeach
-                                                @else
-                                                <h5 class="text-center text-muted">Belum ada data!</h5>
-                                                @endif
-                                        </div>
-                                    </div>
-                
+                    <div class="card card-border border-primary shadow-light-lg mb-6 mb-md-8" data-aos="fade-up">
+                        <div class="card-body">
+
+                            <!-- Heading -->
+                            <h6 class="text-uppercase text-primary d-inline-block mb-5 mr-1">
+                                Peminjaman Yang Belum Diverifikasi
+                            </h6>
+
+
+                            <!-- List group -->
+                            <div>
+                                <div class="list-group list-group-flush">
+                                    @if ($verifikasi->count() > 0)
+                                    @foreach ($verifikasi as $item)
+                                    <a class="list-group-item text-reset text-decoration-none"
+                                        href="{{ route('buku', $item->buku->slug) }}">
+
+                                        <p class="font-weight-bold mb-1">
+                                            {{ ucwords($item->buku->judul) }}
+                                        </p>
+                                        <p class="font-size-sm text-muted mb-0">
+                                            Kode Verifikasi: <span
+                                                class="text-bold">{{ strtoupper($item->kode_pinjam) }}</span>
+                                        </p>
+                                    <app-batal index="{{ route('pinjaman') }}" judul="{{ ucwords($item->buku->judul) }}" batal="{{ route('batal') }}" kode="{{ strtolower($item->kode_pinjam) }}"></app-batal>
+                                    </a>
+                                    
+                                    @endforeach
+                                    @else
+                                    <h5 class="text-center text-muted">Belum ada data!</h5>
+                                    @endif
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 

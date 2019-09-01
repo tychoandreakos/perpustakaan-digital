@@ -80,7 +80,7 @@
                         <span class="badge badge-dark">{{ $item->bibliobigrafi[0]->no_panggil }}</span>
 
                         <div class="mb-0 text-muted mt-4">
-                            {!! isset($item->catatan) ? substr($item->catatan, 0, 150) .' ...' : 'Belum ada data' !!}
+                            {{ isset($item->catatan) ? substr(strip_tags($item->catatan), 0, 150) .' ...' : 'Belum ada data' }}
                         </div>
 
                     </a>
@@ -98,7 +98,7 @@
                             @endforeach
                         </h6>
 
-                        @isset($item->pdf)
+                        @if($item->pdf)
                         <!-- Date -->
                         <p class="h6 text-uppercase text-muted mb-0 ml-auto">
                             <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip"
@@ -107,7 +107,7 @@
                                 <i class="fe fe-eye"></i>
                             </button>
                         </p>
-                        @endisset
+                        @endif
 
                     </a>
 

@@ -16,6 +16,7 @@ $factory->define(Buku::class, function (Faker $faker) {
         'judul_seri' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'catatan' => $faker->paragraph(),
         'slug' => str_slug($judul),
+        
         'gambar_sampul' => ''
     ];
 });

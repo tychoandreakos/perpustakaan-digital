@@ -35,11 +35,11 @@
                  </app-button-pinjam>
                  @endif
 
-                 @isset($result->pdf)
+                 @if($result->pdf)
                  <a href="{{ route('baca', $result->slug) }}" class="btn btn-primary">
                      Baca
                  </a>
-                 @endisset
+                 @endif
 
              </div>
              @else
@@ -51,6 +51,9 @@
              <div class="col-12">
 
                  <!-- Divider -->
+                 @if(!$result->pdf)
+                 <span class="font-size-sm text-danger">Mohon maaf buku ini tidak memiliki akses PDF.</span>
+                 @endif
                  <hr class="my-6 my-md-8 border-gray-300">
 
              </div>

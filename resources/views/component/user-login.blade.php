@@ -87,7 +87,7 @@
 
                          <!-- Badges -->
                          @foreach ($randomTags as $item)
-                         <a class="badge badge-pill badge-secondary-soft" href="blog-search.html">
+                         <a class="badge badge-pill badge-secondary-soft" href="{{ route('tags', $item->jenis_topik) }}">
                              <span class="h6 text-uppercase">{{ ucwords($item->jenis_topik) }}</span>
                          </a>
                          @endforeach
@@ -170,7 +170,7 @@
                                  <span class="badge badge-warning">Bahasa:
                                      {{ ucwords($random->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
                                  <span class="badge badge-info">Deskripsi Fisik: {{ $random->deskripsi_fisik }}</span>
-                                 <span class="badge badge-light">Tempat Terbit:
+                                 <span class="badge badge-light">Lokasi Rak:
                                      {{ $random->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} -
                                      {{ ucwords($random->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
                                  <span class="badge badge-dark">No Panggil:
@@ -198,7 +198,7 @@
                                  </h6>
 
                                  <!-- Date -->
-                                 @isset($random->pdf)
+                                 @if($random->pdf)
                                  <p class="h6 ok text-uppercase text-muted mb-0 ml-auto">
                                      <button onclick="location.href='{{ route('baca', $random->slug) }}'"
                                          data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -206,7 +206,7 @@
                                          <i class="fe fe-eye"></i>
                                      </button>
                                  </p>
-                                 @endisset
+                                 @endif
 
                              </a>
 
@@ -424,7 +424,7 @@
                              @endforeach
                          </h6>
 
-                         @isset($item->pdf)
+                         @if($item->pdf)
                          <!-- Date -->
                          <p class="h6 text-uppercase text-muted mb-0 ml-auto">
                              <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip"
@@ -433,7 +433,7 @@
                                  <i class="fe fe-eye"></i>
                              </button>
                          </p>
-                         @endisset
+                         @endif
 
                      </a>
 

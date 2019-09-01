@@ -98,11 +98,20 @@ class LandingController extends Controller
        } else {
         return response()->json([
             'msg' => false,
-            'message' => 'Silahkan verifikasikan dahulu pinjaman ada yang sebelumnya!',
+            'message' => 'Silahkan verifikasikan dahulu pinjaman anda yang sebelumnya!',
             ]);
        }
 
        
+    }
+
+    public function batal(Request $request)
+    {
+        PinjamTransaksi::where('kode_pinjam', $request->id)->delete();
+        
+        return response()->json([
+            'message' => 'Kode verifikasi <br>'. $request->id .' berhasil dihapus.',
+            ]);
     }
 
     private function generateRandomString($length) {
@@ -113,6 +122,18 @@ class LandingController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function tags($id)
+    {
+         $result = Topik::with(['buku.buku_transaksi.pengarang' => function($q){
+            $q->select('id', 'nama_pengarang');
+        },  'buku.buku_transaksi.penerbit', 'buku.bibliobigrafi.gmd' => function($q) {
+            $q->select('id', 'nama_gmd')->first();
+        }])->where('jenis_topik', $id)->first();
+
+        $cari = '';
+        return view('topik', compact('result', 'cari'));
     }
 
     public function beranda()

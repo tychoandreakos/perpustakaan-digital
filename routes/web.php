@@ -38,8 +38,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pinjam/{slug}', 'LandingController@pinjam')->name('pinjam');
         Route::get('lengkapi-profile', 'LandingController@lengkapi')->name('profile.lengkapi');
         Route::get('pinjaman', 'LandingController@pinjaman')->name('pinjaman');
+        Route::get('tags/{id}', 'LandingController@tags')->name('tags');
 
         Route::post('update-profile', 'LandingController@update_profile')->name('lengkapi.profile');
+        Route::post('update-profile', 'LandingController@batal')->name('batal');
     });
    
 });

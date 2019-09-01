@@ -73,7 +73,7 @@
                         <span class="badge badge-warning">Bahasa:
                             {{ ucwords($item->buku_transaksi[0]->bahasa->jenis_bahasa) }}</span>
                         <span class="badge badge-info">Deskripsi Fisik: {{ $item->deskripsi_fisik }}</span>
-                        <span class="badge badge-light">Tempat Terbit:
+                        <span class="badge badge-light">Lokasi Rak:
                             {{ $item->bibliobigrafi[0]->lokasi_rak->kode_lokasi }} -
                             {{ ucwords($item->bibliobigrafi[0]->lokasi_rak->nama_lokasi) }}</span>
                         <span class="badge badge-dark">No Panggil:
@@ -98,7 +98,7 @@
                             @endforeach
                         </h6>
 
-                        @isset($item->pdf)
+                        @if($item->pdf)
                             <!-- Date -->
                         <p class="h6 text-uppercase text-muted mb-0 ml-auto">
                                 <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -106,7 +106,7 @@
                                         <i class="fe fe-eye"></i>
                                     </button>
                                 </p>
-                        @endisset
+                        @endif
 
                     </a>
 
