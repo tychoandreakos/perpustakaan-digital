@@ -25,6 +25,7 @@ Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua'
 Route::get('tamu', 'LandingController@tamu')->name('tamu');
 Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
 Route::post('tamu', 'LandingController@tamu_store')->name('tamu.store');
+Route::get('search', 'LandingController@search')->name('search');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -32,7 +33,6 @@ Route::middleware(['auth'])->group(function () {
     
     Route::middleware(['approved'])->group(function () {
         Route::get('beranda', 'LandingController@beranda')->name('beranda');
-        Route::get('search', 'LandingController@search')->name('search');
         Route::get('baca/{slug}', 'LandingController@baca')->name('baca');
         Route::get('koleksi-terbaru', 'LandingController@terbaru')->name('terbaru');
         Route::get('pinjam/{slug}', 'LandingController@pinjam')->name('pinjam');

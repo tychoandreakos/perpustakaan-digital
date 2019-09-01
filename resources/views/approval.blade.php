@@ -31,7 +31,7 @@
                         <a href="{{ route('landing') }}" class="btn btn-primary-soft shadow lift mr-1">
                                 Kembali </i>
                             </a>
-                    <a href="{{ route('cari') }}" class="btn btn-primary shadow lift mr-1">
+                    <a href="{{ route('search') }}" class="btn btn-primary shadow lift mr-1">
                         Cari Buku <i class="fe fe-arrow-right d-none d-md-inline ml-3"></i>
                     </a>
                 </div>

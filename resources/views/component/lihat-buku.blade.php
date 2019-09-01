@@ -28,6 +28,7 @@
              @isset($anggota)
              <div class="col-auto">
                  <!-- Buttons -->
+                 @if (Auth::user()->approved_at)
                  @if ($total >= $anggota[0]->tipe_anggota->jumlah_pinjaman)
                  @else
                  <app-button-pinjam check="{{ $bibliobigrafi->count() }}" judul="{{ $result->judul }}"
@@ -40,7 +41,9 @@
                      Baca
                  </a>
                  @endif
-
+                 @else
+                 <h4 class="font-size-sm text-danger">Mohon maaf, akun anda belum terverifikasi.</h4>
+                 @endif
              </div>
              @else
              <h4>Silahkan <a href="{{ route('login') }}">login</a> untuk pinjam dan baca koleksi ini.</h4>
@@ -51,11 +54,15 @@
              <div class="col-12">
 
                  <!-- Divider -->
+                 @guest
+                 @else
                  @if(!$result->pdf)
+                 @if (Auth::user()->approved_at)
                  <span class="font-size-sm text-danger">Mohon maaf buku ini tidak memiliki akses PDF.</span>
                  @endif
+                 @endif
+                 @endguest
                  <hr class="my-6 my-md-8 border-gray-300">
-
              </div>
          </div> <!-- / .row -->
          <div class="row">
