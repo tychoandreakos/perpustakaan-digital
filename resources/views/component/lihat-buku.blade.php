@@ -30,8 +30,9 @@
                  <!-- Buttons -->
                  @if ($total >= $anggota[0]->tipe_anggota->jumlah_pinjaman)
                  @else
-                 <app-button-pinjam judul="{{ $result->judul }}" style="display: inline-block" class="mr-1"
-                     route="{{ route('pinjam', $result->slug) }}"></app-button-pinjam>
+                 <app-button-pinjam check="{{ $bibliobigrafi->count() }}" judul="{{ $result->judul }}"
+                     style="display: inline-block" class="mr-1" route="{{ route('pinjam', $result->slug) }}">
+                 </app-button-pinjam>
                  @endif
 
                  @isset($result->pdf)
@@ -42,7 +43,7 @@
 
              </div>
              @else
-            <h4>Silahkan <a href="{{ route('login') }}">login</a> untuk pinjam dan baca koleksi ini.</h4>
+             <h4>Silahkan <a href="{{ route('login') }}">login</a> untuk pinjam dan baca koleksi ini.</h4>
              @endisset
 
          </div> <!-- / .row -->
@@ -111,7 +112,7 @@
 
                                      <!-- Heading -->
                                      <p class="font-weight-bold mb-1">
-                                        Total Koleksi Tersedia
+                                         Total Koleksi Tersedia
                                      </p>
 
                                      <!-- Text -->

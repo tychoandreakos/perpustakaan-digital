@@ -1981,8 +1981,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['route', 'judul'],
+  props: ['route', 'judul', 'check'],
+  computed: {
+    dis: function dis() {
+      return this.check == 0 ? false : true;
+    }
+  },
   methods: {
     save: function save() {
       var _this = this;
@@ -58930,26 +58938,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "form",
-      {
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.save($event)
-          }
-        }
-      },
-      [
+  return _vm.dis
+    ? _c("div", [
         _c(
-          "button",
-          { staticClass: "btn btn-primary-soft", attrs: { type: "submit" } },
-          [_vm._v("\n            Pinjam\n        ")]
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.save($event)
+              }
+            }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary-soft",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("\n            Pinjam\n        ")]
+            )
+          ]
         )
-      ]
-    )
-  ])
+      ])
+    : _c("div", [
+        _c("h5", { staticClass: "text-danger" }, [
+          _vm._v("Koleksi Tidak Tersedia Untuk Dipinjam.")
+        ])
+      ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -33,9 +33,15 @@
                  <!-- Navigation -->
                  <ul class="navbar-nav ml-auto">
                      <li class="nav-item">
+                         @guest
+                         <a href="{{ route('landing') }}" class="nav-link">
+                             Beranda
+                         </a>
+                         @else
                          <a href="{{ route('beranda') }}" class="nav-link">
                              Beranda
                          </a>
+                         @endguest
                      </li>
                      @guest
                      <li class="nav-item dropdown">

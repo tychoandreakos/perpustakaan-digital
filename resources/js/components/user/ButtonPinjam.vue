@@ -1,16 +1,25 @@
 <template>
-    <div>
+    <div v-if="dis">
         <form @submit.prevent="save">
             <button class="btn btn-primary-soft" type="submit">
                 Pinjam
             </button>
         </form>
     </div>
+    <div v-else>
+        <h5 class="text-danger">Koleksi Tidak Tersedia Untuk Dipinjam.</h5>
+    </div>
 </template>
 
 <script>
     export default {
-        props: ['route', 'judul'],
+        props: ['route', 'judul', 'check'],
+
+        computed: {
+            dis() {
+                return (this.check == 0 ? false : true);
+            }
+        },
 
         methods: {
             save() {
