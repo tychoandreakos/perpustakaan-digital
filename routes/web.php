@@ -19,26 +19,27 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'LandingController@index')->name('landing');
-Route::get('search', 'LandingController@search')->name('search');
 Route::get('/cari', 'LandingController@cari')->name('cari');
 Route::get('berita/{slug}', 'LandingController@berita')->name('berita');
 Route::get('berita-semua', 'LandingController@beritaSemua')->name('berita.semua');
 Route::get('tamu', 'LandingController@tamu')->name('tamu');
-Route::get('lengkapi-profile', 'LandingController@lengkapi')->name('profile.lengkapi');
-Route::post('update-profile', 'LandingController@update_profile')->name('lengkapi.profile');
 Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
-
 Route::post('tamu', 'LandingController@tamu_store')->name('tamu.store');
 
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/approval', 'LandingController@approval')->name('approval');
-
+    
     Route::middleware(['approved'])->group(function () {
         Route::get('beranda', 'LandingController@beranda')->name('beranda');
+        Route::get('search', 'LandingController@search')->name('search');
         Route::get('baca/{slug}', 'LandingController@baca')->name('baca');
         Route::get('koleksi-terbaru', 'LandingController@terbaru')->name('terbaru');
         Route::get('pinjam/{slug}', 'LandingController@pinjam')->name('pinjam');
+        Route::get('lengkapi-profile', 'LandingController@lengkapi')->name('profile.lengkapi');
+        Route::get('pinjaman', 'LandingController@pinjaman')->name('pinjaman');
+
+        Route::post('update-profile', 'LandingController@update_profile')->name('lengkapi.profile');
     });
    
 });

@@ -26,7 +26,7 @@
                 </div>
 
                 <!-- Slider -->
-                <div class="position-relative h-100 vw-50 d-none d-md-block" data-aos="fade-left">
+                <div class="position-relative h-100 vw-50  d-none d-md-block" data-aos="fade-left">
 
                     <!-- Slider -->
                     <div class="flickity-button-bottom flickity-button-white h-100 w-100"
@@ -47,7 +47,7 @@
                 </div>
 
             </div>
-            <div style="margin-top: -5.5px" class="col-12 col-md-5 py-5 py-md-9 order-md-1" data-aos="fade-right">
+            <div style="margin-top: -5.5px" class="col-12 col-md-5 py-8 py-md-14 order-md-1" data-aos="fade-right">
 
                 <!-- Heading -->
                 <h1 class="display-3 ">

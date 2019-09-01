@@ -1871,41 +1871,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     check: function check() {
@@ -6664,7 +6629,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n*[data-v-fd058d80] {\n    overflow: hidden !important;\n}\n", ""]);
+exports.push([module.i, "\n*[data-v-fd058d80] {\n    overflow: hidden !important;\n}\n\n", ""]);
 
 // exports
 
@@ -58702,149 +58667,8 @@ var render = function() {
           "div",
           { staticClass: "form-group" },
           [
-            _c("label", { attrs: { for: "nama" } }, [
-              _vm._v("\n                Nama Lengkap*\n            ")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.nama,
-                  expression: "form.nama"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                autocomplete: "off",
-                type: "text",
-                required: "",
-                id: "nama",
-                placeholder: "Nama Lengkap"
-              },
-              domProps: { value: _vm.form.nama },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "nama", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.err.nama
-              ? [
-                  _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(_vm.err.nama[0]))
-                  ])
-                ]
-              : _vm._e()
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "jurusan" } }, [
-              _vm._v("\n                Jurusan*\n            ")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.jurusan,
-                  expression: "form.jurusan"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                autocomplete: "off",
-                type: "text",
-                required: "",
-                id: "jurusan",
-                placeholder: "Teknik Informatika"
-              },
-              domProps: { value: _vm.form.jurusan },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "jurusan", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.err.jurusan
-              ? [
-                  _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(_vm.err.jurusan[0]))
-                  ])
-                ]
-              : _vm._e()
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "alamat" } }, [
-              _vm._v("\n                Alamat*\n            ")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.alamat,
-                  expression: "form.alamat"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                autocomplete: "off",
-                type: "text",
-                required: "",
-                id: "alamat",
-                placeholder: "Masukkan Alamat"
-              },
-              domProps: { value: _vm.form.alamat },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "alamat", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.err.alamat
-              ? [
-                  _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(_vm.err.alamat[0]))
-                  ])
-                ]
-              : _vm._e()
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
             _c("label", { attrs: { for: "keperluan" } }, [
-              _vm._v("\n                Keperluan*\n            ")
+              _vm._v("\n               NPM / ID*\n            ")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -58861,7 +58685,7 @@ var render = function() {
                 autocomplete: "off",
                 type: "text",
                 id: "keperluan",
-                placeholder: "Isi Keperluan"
+                placeholder: "Masukkan NPM / ID"
               },
               domProps: { value: _vm.form.keperluan },
               on: {

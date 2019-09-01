@@ -7,12 +7,12 @@
              @guest
              <a class="navbar-brand" href="{{ route('landing') }}">
                  {{-- <img src="{{ asset('img/brand.svg') }}" class="navbar-brand-img" alt="..."> --}}
-                 <h3 class="font-weight-bold">Digital Library.</h3>
+                 <h4 class="font-weight-bold">Digital Library.</h4>
              </a>
              @else
              <a class="navbar-brand" href="{{ route('beranda') }}">
                  {{-- <img src="{{ asset('img/brand.svg') }}" class="navbar-brand-img" alt="..."> --}}
-                 <h3 class="font-weight-bold">Digital Library.</h3>
+                 <h4 class="font-weight-bold">Digital Library.</h4>
              </a>
              @endguest
              <!-- Toggler -->
@@ -213,7 +213,7 @@
                                          </p>
 
                                          <!-- Button -->
-                                         <a href="overview.html" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
+                                         <a href="{{ route('pinjaman') }}" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
                                              Lihat Semua Pinjaman
                                          </a>
 

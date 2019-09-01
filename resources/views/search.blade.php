@@ -156,13 +156,7 @@
                                 @endforeach
                             </h6>
     
-                            <!-- Date -->
-                            <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                                <button data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-                                    class="btn btn-danger-soft btn-rounded-circle btn-sm">
-                                    <i class="fe fe-eye"></i>
-                                </button>
-                            </p>
+                           
     
                         </a>
     
@@ -261,13 +255,7 @@
                                 @endforeach
                             </h6>
     
-                            <!-- Date -->
-                            <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                                <button data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-                                    class="btn btn-danger-soft btn-rounded-circle btn-sm">
-                                    <i class="fe fe-eye"></i>
-                                </button>
-                            </p>
+                           
     
                         </a>
     

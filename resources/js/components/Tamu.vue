@@ -1,48 +1,13 @@
 <template>
     <div>
         <form class="mb-6" @submit.prevent="simpan">
-
-            <!-- Email -->
-            <div class="form-group">
-                <label for="nama">
-                    Nama Lengkap*
-                </label>
-                <input autocomplete="off" type="text" v-model="form.nama" required class="form-control" id="nama"
-                    placeholder="Nama Lengkap">
-                <template v-if="err.nama">
-                    <span class="text-danger">{{ err.nama[0] }}</span>
-                </template>
-            </div>
-
-            <div class="form-group">
-                <label for="jurusan">
-                    Jurusan*
-                </label>
-                <input autocomplete="off" type="text" v-model="form.jurusan" required class="form-control" id="jurusan"
-                    placeholder="Teknik Informatika">
-                     <template v-if="err.jurusan">
-                    <span class="text-danger">{{ err.jurusan[0] }}</span>
-                </template>
-            </div>
-
-            <div class="form-group">
-                <label for="alamat">
-                    Alamat*
-                </label>
-                <input autocomplete="off" type="text" required v-model="form.alamat" class="form-control" id="alamat"
-                    placeholder="Masukkan Alamat">
-                     <template v-if="err.alamat">
-                    <span class="text-danger">{{ err.alamat[0] }}</span>
-                </template>
-            </div>
-
             <div class="form-group">
                 <label for="keperluan">
-                    Keperluan*
+                   NPM / ID*
                 </label>
                 <input autocomplete="off" type="text" v-model="form.keperluan" class="form-control" id="keperluan"
-                    placeholder="Isi Keperluan">
-                     <template v-if="err.keperluan">
+                    placeholder="Masukkan NPM / ID">
+                <template v-if="err.keperluan">
                     <span class="text-danger">{{ err.keperluan[0] }}</span>
                 </template>
             </div>
@@ -135,7 +100,8 @@
 </script>
 
 <style scoped>
-* {
-    overflow: hidden !important;
-}
+    * {
+        overflow: hidden !important;
+    }
+
 </style>

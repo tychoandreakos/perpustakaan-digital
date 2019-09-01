@@ -131,7 +131,7 @@
                         <span class="badge badge-dark">{{ $item->bibliobigrafi[0]->no_panggil }}</span>
 
                         <p class="mb-0 text-muted mt-4">
-                            {{ isset($item->catatan) ? substr($item->catatan, 0, 150) .' ...' : 'Belum ada data' }}
+                            {{ isset($item->catatan) ? substr(strip_tags($item->catatan), 0, 150) .' ...' : 'Belum ada data' }}
                         </p>
 
                     </a>
@@ -151,7 +151,7 @@
 
                         <!-- Date -->
                         <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                            <button data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+                            <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip" data-placement="top" title="Tooltip on top"
                                 class="btn btn-danger-soft btn-rounded-circle btn-sm">
                                 <i class="fe fe-eye"></i>
                             </button>

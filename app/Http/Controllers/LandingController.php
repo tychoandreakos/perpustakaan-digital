@@ -11,6 +11,7 @@ use App\PinjamTransaksi;
 use App\Tamu;
 use App\Topik;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -207,6 +208,25 @@ class LandingController extends Controller
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->latest()->limit(9)->paginate(3);
         return view('terbaru', compact('terbaru'));
+    }
+
+     public static function denda($val)
+    {
+        $datetime1 = new DateTime($val);
+        $datetime2 = new DateTime(Carbon::now());
+        $interval = $datetime1->diff($datetime2);
+        return $interval->format('%a');
+    }
+
+    public function pinjaman()
+    {
+        $pinjam = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_pinjam', 1)->get();
+
+        $terlambat = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->get();
+
+        $tipe = AnggotaTransaksi::with('tipe_anggota')->where('user_id', Auth::user()->id)->first();
+
+        return view('pinjaman', compact('pinjam', 'tipe', 'terlambat'));
     }
 
     public function berita($slug)
