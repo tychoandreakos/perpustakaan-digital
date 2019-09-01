@@ -220,13 +220,17 @@ class LandingController extends Controller
 
     public function pinjaman()
     {
-        $pinjam = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_pinjam', 1)->get();
+        $pinjam = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_pinjam', 1)->where('status_verifikasi', 0)->where('tanggal_habis_pinjam', '>', Carbon::now())->latest()->paginate(5);
 
-        $terlambat = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->get();
+        $terlambat = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_pinjam', 1)->where('status_verifikasi', 0)->where('tanggal_habis_pinjam', '<', Carbon::now())->latest()->get();
+
+        $verifikasi = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_verifikasi', 1)->latest()->get();
 
         $tipe = AnggotaTransaksi::with('tipe_anggota')->where('user_id', Auth::user()->id)->first();
 
-        return view('pinjaman', compact('pinjam', 'tipe', 'terlambat'));
+        $histori = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_pinjam', 0)->where('status_verifikasi', 0)->latest()->get();
+
+        return view('pinjaman', compact('pinjam', 'tipe', 'terlambat', 'histori', 'verifikasi'));
     }
 
     public function berita($slug)
