@@ -6,10 +6,9 @@
 
 @include('component.hero')
 @include('component.fitur')
-
-    @isset($berita)
+    @if(empty($berita))
     @include('component.news')
-    @endisset
+    @endif
 
 @include('component.total')
 @include('component.footer')

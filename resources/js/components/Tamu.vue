@@ -5,9 +5,9 @@
                 <label for="keperluan">
                    NPM / ID*
                 </label>
-                <input autocomplete="off" type="text" v-model="form.keperluan" class="form-control" id="keperluan"
+                <input autocomplete="off" type="text" v-model="form.npm" class="form-control" id="npm"
                     placeholder="Masukkan NPM / ID">
-                <template v-if="err.keperluan">
+                <template v-if="err.npm">
                     <span class="text-danger">{{ err.keperluan[0] }}</span>
                 </template>
             </div>
@@ -36,12 +36,9 @@
 
         computed: {
             check() {
-                let nama = this.form.nama;
-                let jurusan = this.form.jurusan;
-                let alamat = this.form.alamat;
-                let keperluan = this.form.keperluan;
+                let npm = this.form.npm;
 
-                return nama && jurusan && alamat && keperluan;
+                return npm;
             }
         },
 
@@ -53,10 +50,7 @@
             return {
 
                 form: {
-                    nama: '',
-                    jurusan: '',
-                    alamat: '',
-                    keperluan: '',
+                    npm: '',
                     _method: 'POST'
                 },
                 loading: false,
@@ -78,10 +72,7 @@
                             showConfirmButton: false,
                             timer: 3000
                         });
-                        this.form.nama = '';
-                        this.form.jurusan = '';
-                        this.form.keperluan = '';
-                        this.form.alamat = '';
+                        this.form.npm = '';
                         setTimeout(() => {
                             this.loading = false;
                             this.err = {};

@@ -15,10 +15,7 @@ class CreateTamusTable extends Migration
     {
         Schema::create('buku_tamu', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama', 100);
-            $table->string('jurusan', 50);
-            $table->text('alamat');
-            $table->string('keperluan', 50);
+            $table->string('npm', 20);
             $table->timestamps();
         });
     }

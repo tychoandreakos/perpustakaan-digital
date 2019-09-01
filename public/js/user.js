@@ -1874,21 +1874,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     check: function check() {
-      var nama = this.form.nama;
-      var jurusan = this.form.jurusan;
-      var alamat = this.form.alamat;
-      var keperluan = this.form.keperluan;
-      return nama && jurusan && alamat && keperluan;
+      var npm = this.form.npm;
+      return npm;
     }
   },
   props: ['store'],
   data: function data() {
     return {
       form: {
-        nama: '',
-        jurusan: '',
-        alamat: '',
-        keperluan: '',
+        npm: '',
         _method: 'POST'
       },
       loading: false,
@@ -1909,10 +1903,7 @@ __webpack_require__.r(__webpack_exports__);
           timer: 3000
         });
 
-        _this.form.nama = '';
-        _this.form.jurusan = '';
-        _this.form.keperluan = '';
-        _this.form.alamat = '';
+        _this.form.npm = '';
         setTimeout(function () {
           _this.loading = false;
           _this.err = {};
@@ -58734,29 +58725,29 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.keperluan,
-                  expression: "form.keperluan"
+                  value: _vm.form.npm,
+                  expression: "form.npm"
                 }
               ],
               staticClass: "form-control",
               attrs: {
                 autocomplete: "off",
                 type: "text",
-                id: "keperluan",
+                id: "npm",
                 placeholder: "Masukkan NPM / ID"
               },
-              domProps: { value: _vm.form.keperluan },
+              domProps: { value: _vm.form.npm },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "keperluan", $event.target.value)
+                  _vm.$set(_vm.form, "npm", $event.target.value)
                 }
               }
             }),
             _vm._v(" "),
-            _vm.err.keperluan
+            _vm.err.npm
               ? [
                   _c("span", { staticClass: "text-danger" }, [
                     _vm._v(_vm._s(_vm.err.keperluan[0]))

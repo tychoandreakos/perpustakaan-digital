@@ -9,7 +9,7 @@ require('./user/jarallax-video');
 // import 'countup';
 require('./user/highlight');
 require('./user/fancy');
-require('./user/theme.js')
+require('./user/theme.js');
 
 
 import VueSweetalert2 from 'vue-sweetalert2';

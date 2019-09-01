@@ -10,6 +10,7 @@ use App\Buku;
 use App\PinjamTransaksi;
 use App\Tamu;
 use App\Topik;
+use App\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -25,7 +26,8 @@ class LandingController extends Controller
         // $topik = Topik::orderBy('order', 'ASC')->limit(4)->get();
         $berita =  Berita::with('admin')->latest()->limit(3)->get();
         $buku = Buku::all()->count();
-        return view('landing', compact('berita', 'buku'));
+        $anggota = User::all()->count();
+        return view('landing', compact('berita', 'buku', 'anggota'));
     }
     
     public function approval()
@@ -41,16 +43,13 @@ class LandingController extends Controller
     public function tamu_store(Request $request)
     {
         $validation = $request->validate([
-            'nama' => 'required|min:3',
-            'jurusan' => 'required|min:2',
-            'alamat' => 'required|min:5',
-            'keperluan' => 'required|min:3'
+            'npm' => 'required|min:3',
         ]);
 
         Tamu::create($validation);
 
         return response()->json([
-            'message' => 'Halo, '.ucwords($request->nama).' Selamat Datang']);
+            'message' => 'Halo, Selamat Datang']);
     }
 
     public function update_profile(Request $request)
