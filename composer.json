@@ -16,7 +16,8 @@
         "intervention/image": "^2.5",
         "jorenvanhocht/laravel-share": "^3.0",
         "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "ext-imagick": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
