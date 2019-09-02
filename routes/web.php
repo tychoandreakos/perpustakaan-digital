@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('tags/{id}', 'LandingController@tags')->name('tags');
 
         Route::post('update-profile', 'LandingController@update_profile')->name('lengkapi.profile');
-        Route::post('update-profile', 'LandingController@batal')->name('batal');
+        Route::post('batal', 'LandingController@batal')->name('batal');
     });
    
 });

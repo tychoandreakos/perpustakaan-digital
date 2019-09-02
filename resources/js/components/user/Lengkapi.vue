@@ -75,8 +75,12 @@
                             </label>
 
                             <!-- Input -->
-                            <input type="text" v-model="form.jk" class="form-control" id="contactEmail"
-                                placeholder="hello@domain.com">
+                            <multiselect v-model="form.jk" :options="jkelamin" :searchable="false"
+                                :close-on-select="false" :show-labels="false" placeholder="Pilih jenis kelamin">
+                            </multiselect>
+                            <template v-if="err.id">
+                                <span class="text-danger">{{ err.jk[0] }}</span>
+                            </template>
 
                         </div>
                         <div class="form-group mb-5">
@@ -112,11 +116,13 @@
 
 <script>
     import Datepicker from 'vuejs-datepicker';
+    import Multiselect from 'vue-multiselect'
     import * as moment from 'moment'
     export default {
         props: ['name', 'store', 'anggota'],
         components: {
-            Datepicker
+            Datepicker,
+            Multiselect
         },
 
         methods: {
@@ -145,18 +151,25 @@
                 return this.form.tgl_lahir = dateTime = moment(dateTime).format("YYYY-MM-DD");
             },
 
-        
+            jk() {
+                return (typeof (this.anggota.jk) == 'undefined' ? this.form.jk = (this.anggota.jk == 0 ? 'Pria' :
+                    'Wanita') : '');
+            }
+
+
         },
 
         data() {
             return {
-                date: this.anggota.tgl_lahir,
+                jkelamin: ['Pria', 'Wanita'],
+                err: {},
+                date: (typeof (this.anggota.tgl_lahir) == 'undefined' ? this.anggota.tgl_lahir : ''),
                 form: {
-                    jurusan: this.anggota.jurusan.toUpperCase() || '',
+                    jurusan: (typeof (this.anggota.jurusan) == 'undefined' ? this.anggota.jurusan.toUpperCase() : ''),
                     tgl_lahir: '',
-                    alamat: this.anggota.alamat,
-                    jk: '',
-                    no_telp: this.anggota.no_telp,
+                    alamat: (typeof (this.anggota.alamat) == 'undefined' ? this.anggota.alamat : ''),
+                    jk: this.jk,
+                    no_telp: (typeof (this.anggota.no_telp) == 'undefined' ? this.anggota.no_telp : ''),
                 }
             }
         }

@@ -168,7 +168,7 @@
                 {{ $result->links() }}
                 @else
                 <h4 class="text-center">
-                    Tidak ditemukan pencarian dengan kata kunci {{ $cari }}
+                    Tidak ditemukan pencarian dengan kata kunci {{ isset($cari) ? $cari : ''  }}
                  
                 </h4>
                 @endif
@@ -267,7 +267,7 @@
                 {{ $total->links() }}
                 @else
                 <h4 class="text-center">
-                    Tidak ditemukan pencarian dengan kata kunci {{ $cari }}
+                    Tidak ditemukan pencarian dengan kata kunci {{ isset($cari) ? $cari : '' }}
                  
                 </h4>
                 @endif

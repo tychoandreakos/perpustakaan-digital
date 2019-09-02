@@ -15,7 +15,7 @@
 
                 <!-- Text -->
                 <p class="text-muted mb-6 mb-md-8">
-                    We get thousands of job postings weekly, but only accept the openings at the top companies.
+                   Silahkan lakukan reload, jika halaman yang ditampilkan mengalami kerusakan.
                 </p>
 
             </div>

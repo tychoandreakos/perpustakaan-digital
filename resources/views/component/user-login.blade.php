@@ -86,11 +86,16 @@
                      <div class="col ml-n5">
 
                          <!-- Badges -->
+                         @if(empty($randomTags))
                          @foreach ($randomTags as $item)
-                         <a class="badge badge-pill badge-secondary-soft" href="{{ route('tags', $item->jenis_topik) }}">
+                         <a class="badge badge-pill badge-secondary-soft"
+                             href="{{ route('tags', $item->jenis_topik) }}">
                              <span class="h6 text-uppercase">{{ ucwords($item->jenis_topik) }}</span>
                          </a>
                          @endforeach
+                         @else
+                         Belum ada data!
+                         @endif
 
                      </div>
                  </div> <!-- / .row -->
@@ -114,7 +119,7 @@
 
                  <!-- Text -->
                  <p class="mb-0 text-muted">
-                     Here’s what we've been up to recently.
+                     Here’s what maybe you like.
                  </p>
 
              </div>
@@ -124,10 +129,12 @@
 
                  <!-- Card -->
                  <div class="card card-row shadow-light-lg mb-6 lift lift-lg">
+                     @isset($random)
                      <div class="row no-gutters">
                          <div class="col-12">
 
                              <!-- Badge -->
+
                              <span class="badge badge-pill badge-light badge-float badge-float-inside">
                                  <span class="h6 text-uppercase">{{ ucwords($random->topik->jenis_topik) }}</span>
                              </span>
@@ -139,7 +146,7 @@
                              <div style="display: flex; background: {{ isset($random->topik->warna) ?$random->topik->warna : '#335eea' }}; width: 100%; height: 100%"
                                  class="card-img-top">
                                  <div style="background:url('{{  url('storage/resize/'.$random->gambar_sampul) }}') center no-repeat;background-size: cover; width: 150px;height: 200px;margin: auto; display:flex; align-self: center
-                                       box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);"></div>
+                                      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);"></div>
                              </div>
 
                              <!-- Shape -->
@@ -213,6 +220,9 @@
                          </div>
 
                      </div> <!-- / .row -->
+                     @else
+                     <h4 class="text-center">belum ada data!</h4>
+                     @endisset
                  </div>
 
              </div>
@@ -236,7 +246,7 @@
 
                  <!-- Text -->
                  <p class="mb-0 text-muted">
-                     In-depth looks at our work.
+                    Here’s what latest news of library.
                  </p>
 
              </div>
@@ -249,6 +259,7 @@
 
              </div>
          </div> <!-- / .row -->
+         @if(empty($berita))
          <div class="row">
              <div class="col-12">
 
@@ -330,6 +341,9 @@
 
              </div>
          </div> <!-- / .row -->
+         @else
+         <h4 class="text-center">Belum ada data!</h4>
+         @endif
      </div> <!-- / .container -->
  </section>
 
@@ -347,11 +361,12 @@
 
                  <!-- Text -->
                  <p class="mb-5 text-muted">
-                     Here’s what’s big in the past week!
+                     Here’s what’s big in the past month!
                  </p>
 
              </div>
          </div> <!-- / .row -->
+         @if(empty($popular30))
          <div class="row">
              @foreach ($popular30 as $item)
              <div class="col-12 col-md-6 d-flex">
@@ -366,8 +381,8 @@
                          <div style="display: flex; background: {{ isset($item->topik->warna) ?$item->topik->warna : '#335eea' }}; width: 100%; height: 250px"
                              class="card-img-top">
                              <div style="background:url('{{  url('storage/cover/'.$item->gambar_sampul) }}') center no-repeat;background-size: cover; width: 115px;
-                                height: 160px;margin: auto; display:flex; align-self: center
-                            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);"></div>
+                                   height: 160px;margin: auto; display:flex; align-self: center
+                               box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);"></div>
                          </div>
 
                          <!-- Shape -->
@@ -444,12 +459,17 @@
 
 
          </div>
+         @else
+         <h4 class="text-center">Belum ada data!</h4>
+         @endif
      </div>
      </div> <!-- / .row -->
      </div> <!-- / .container -->
  </section>
 
+ @if (empty($popular))
  @include('component.popular-mini')
+ @endif
 
  <!-- MORE
       ================================================== -->

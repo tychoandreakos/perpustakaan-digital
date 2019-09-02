@@ -73,7 +73,7 @@
                                     :close-on-select="false" :show-labels="false" placeholder="Pilih jenis kelamin">
                                 </multiselect>
                                 <template v-if="err.id">
-                                    <span class="text-danger">{{ err.id[0] }}</span>
+                                    <span class="text-danger">{{ err.jk[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -198,7 +198,6 @@
         </div>
     </div>
 </template>
-
 <script>
     import Spinner from '../tools/Spanner';
     import Multiselect from 'vue-multiselect'
@@ -350,3 +349,4 @@
     }
 
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
