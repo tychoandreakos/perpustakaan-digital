@@ -3613,7 +3613,7 @@ __webpack_require__.r(__webpack_exports__);
     KoleksiComponent: _add_Koleksi__WEBPACK_IMPORTED_MODULE_9__["default"],
     TopikComponent: _add_Topik__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
-  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi', 'koleksi3', 'top'],
+  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi', 'koleksi3', 'top', 'topikk'],
   data: function data() {
     return {
       loading: false,
@@ -3727,6 +3727,7 @@ __webpack_require__.r(__webpack_exports__);
       if (value.indexOf('Reset me!') !== -1) this.value = [];
     },
     multipleFileChange: function multipleFileChange() {
+      this.pdf = event.target.files[0].name;
       var vm = this;
       vm.form.pdf = [];
 
@@ -3869,7 +3870,7 @@ __webpack_require__.r(__webpack_exports__);
     getTopik: function getTopik() {
       var _this5 = this;
 
-      return axios.get(this.top).then(function (res) {
+      return axios.get(this.topikk).then(function (res) {
         return _this5.topikData = res.data;
       })["catch"](function (err) {
         return console.log(err);
@@ -4833,6 +4834,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+var randomColor = __webpack_require__(/*! randomcolor */ "./node_modules/randomcolor/randomColor.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['topik'],
   components: {
@@ -4841,7 +4845,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        nama_topik: ''
+        jenis_topik: '',
+        warna: randomColor()
       },
       loading: false
     };
@@ -4850,7 +4855,6 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      console.log(this.form);
       this.loading = true, axios.post(this.topik, this.form).then(function (res) {
         _this.$swal({
           position: 'top-end',
@@ -4863,11 +4867,11 @@ __webpack_require__.r(__webpack_exports__);
         setTimeout(function () {
           _this.loading = false;
 
-          _this.$emit('closeKota');
+          _this.$emit('closeTopik');
 
-          _this.$emit('updateKota');
+          _this.$emit('updateTopik');
 
-          _this.form.nama_topik = '';
+          _this.form.jenis_topik = '';
         }, 2200);
       })["catch"](function (err) {
         return console.log(err);
@@ -4876,7 +4880,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     check: function check() {
-      return this.form.nama_topik == '' ? true : false;
+      return this.form.jenis_topik == '' ? true : false;
     }
   }
 });
@@ -7370,19 +7374,6 @@ momentRange.extendMoment(moment__WEBPACK_IMPORTED_MODULE_0__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7463,12 +7454,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   data: function data() {
-    var _form;
-
     return {
-      form: (_form = {
-        tipe_klasifikasi: this.fetch.tipe_klasifikasi || ''
-      }, _defineProperty(_form, "tipe_klasifikasi", this.fetch.tipe_klasifikasi || ''), _defineProperty(_form, "_method", this.fetch.tipe_klasifikasi ? 'PUT' : 'POST'), _form),
+      form: {
+        tipe_klasifikasi: this.fetch.tipe_klasifikasi || '',
+        kode_klasifikasi: this.fetch.kode_klasifikasi || '',
+        _method: this.fetch.tipe_klasifikasi ? 'PUT' : 'POST'
+      },
       loading: false,
       err: {}
     };
@@ -10315,18 +10306,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 var randomColor = __webpack_require__(/*! randomcolor */ "./node_modules/randomcolor/randomColor.js");
@@ -10339,27 +10318,15 @@ var randomColor = __webpack_require__(/*! randomcolor */ "./node_modules/randomc
   computed: {
     isDisabled: function isDisabled() {
       return this.form.jenis_topik.length == '' ? true : false;
-    },
-    som: function som() {
-      if (!this.fetch.jenis_topik) {
-        return this.form.order = this.order.order + 1;
-      }
-    }
-  },
-  created: function created() {
-    if (!this.fetch.jenis_topik) {
-      this.getOrder();
     }
   },
   data: function data() {
     return {
       form: {
         jenis_topik: this.fetch.jenis_topik || '',
-        order: Number(this.fetch.order) || '',
-        warna: randomColor(),
+        warna: this.fetch.warna || randomColor(),
         _method: this.fetch.jenis_topik ? 'PUT' : 'POST'
       },
-      order: {},
       loading: false,
       err: {}
     };
@@ -10370,15 +10337,6 @@ var randomColor = __webpack_require__(/*! randomcolor */ "./node_modules/randomc
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
-    },
-    getOrder: function getOrder() {
-      var _this = this;
-
-      axios.get(this.datas).then(function (res) {
-        return _this.order = res.data;
-      })["catch"](function (err) {
-        return console.log(err);
-      });
     },
     createImage: function createImage(file) {
       var reader = new FileReader();
@@ -10391,14 +10349,14 @@ var randomColor = __webpack_require__(/*! randomcolor */ "./node_modules/randomc
       reader.readAsDataURL(file);
     },
     simpan: function simpan() {
-      var _this2 = this;
+      var _this = this;
 
       this.loading = true;
 
       if (!this.fetch.jenis_topik) {
         // create
         axios.post(this.fetch, this.form).then(function (res) {
-          _this2.$swal({
+          _this.$swal({
             position: 'top-end',
             type: 'success',
             title: res.data.message.toUpperCase(),
@@ -10407,16 +10365,16 @@ var randomColor = __webpack_require__(/*! randomcolor */ "./node_modules/randomc
           });
 
           setTimeout(function () {
-            window.location = _this2.index;
+            window.location = _this.index;
           }, 3200);
         })["catch"](function (err) {
-          _this2.err = err.response.data.errors;
-          _this2.loading = false;
+          _this.err = err.response.data.errors;
+          _this.loading = false;
         });
       } else {
         // update
         axios.post('/pustakawan/topik/' + this.fetch.id, this.form).then(function (res) {
-          _this2.$swal({
+          _this.$swal({
             position: 'top-end',
             type: 'success',
             title: res.data.message.toUpperCase(),
@@ -10425,11 +10383,11 @@ var randomColor = __webpack_require__(/*! randomcolor */ "./node_modules/randomc
           });
 
           setTimeout(function () {
-            window.location = _this2.index;
+            window.location = _this.index;
           }, 2800);
         })["catch"](function (err) {
           console.log(err);
-          _this2.loading = false;
+          _this.loading = false;
         });
       }
     }
@@ -10447,10 +10405,6 @@ var randomColor = __webpack_require__(/*! randomcolor */ "./node_modules/randomc
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -72424,7 +72378,7 @@ var render = function() {
                               options: _vm.kotaData,
                               "group-label": "language",
                               "group-select": true,
-                              placeholder: "Pilij tempat terbit",
+                              placeholder: "Pilih tempat terbit",
                               "track-by": "nama_kota",
                               label: "nama_kota"
                             },
@@ -72894,7 +72848,7 @@ var render = function() {
                               staticClass:
                                 "btn btn-icon btn-3 btn-primary btn-sm",
                               attrs: { type: "button" },
-                              on: { click: _vm.showLokasi }
+                              on: { click: _vm.showTopik }
                             },
                             [
                               _vm._m(8),
@@ -73228,7 +73182,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "modal",
-                { attrs: { height: "auto", name: "eksemplar" } },
+                { attrs: { height: "auto", name: "topik" } },
                 [
                   _c("topik-component", {
                     attrs: { topik: this.top },
@@ -73347,7 +73301,7 @@ var render = function() {
                         "label",
                         {
                           staticClass: "form-control-label",
-                          attrs: { for: "catatan" }
+                          attrs: { for: "img" }
                         },
                         [_vm._v("Upload Cover")]
                       ),
@@ -73355,7 +73309,11 @@ var render = function() {
                       _c("div", { staticClass: "custom-file" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
-                          attrs: { type: "file", id: "validatedCustomFile" },
+                          attrs: {
+                            accept: "image/jpeg",
+                            type: "file",
+                            id: "validatedCustomFile"
+                          },
                           on: { change: _vm.onImageChange }
                         }),
                         _vm._v(" "),
@@ -73373,10 +73331,10 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm.err.catatan
+                      _vm.err.img
                         ? [
                             _c("span", { staticClass: "text-danger" }, [
-                              _vm._v(_vm._s(_vm.err.catatan[0]))
+                              _vm._v(_vm._s(_vm.err.img[0]))
                             ])
                           ]
                         : _vm._e()
@@ -73404,7 +73362,11 @@ var render = function() {
                       _c("div", { staticClass: "custom-file" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
-                          attrs: { type: "file", id: "validatedCustomFile" },
+                          attrs: {
+                            accept: "application/pdf",
+                            type: "file",
+                            id: "validatedCustomFile"
+                          },
                           on: { change: _vm.multipleFileChange }
                         }),
                         _vm._v(" "),
@@ -74482,7 +74444,7 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-5 btn-success",
-                        attrs: { type: "button", disabled: _vm.check }
+                        attrs: { type: "submit", disabled: _vm.check }
                       },
                       [_vm._v("Simpan")]
                     )
@@ -74534,7 +74496,7 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "prefix" } }, [_vm._v("Nama Kota")]),
+              _c("label", { attrs: { for: "jenis" } }, [_vm._v("Jenis Topik")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -74542,23 +74504,23 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.form.nama_topik,
-                    expression: "form.nama_topik"
+                    value: _vm.form.jenis_topik,
+                    expression: "form.jenis_topik"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: {
                   autocomplete: "off",
                   type: "text",
-                  placeholder: "Nama Kota"
+                  placeholder: "Jenis Topik"
                 },
-                domProps: { value: _vm.form.nama_topik },
+                domProps: { value: _vm.form.jenis_topik },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.form, "nama_topik", $event.target.value)
+                    _vm.$set(_vm.form, "jenis_topik", $event.target.value)
                   }
                 }
               })
@@ -82195,61 +82157,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "pl-lg-4" }, [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-control-label",
-                        attrs: { for: "order" }
-                      },
-                      [_vm._v("Order Topik")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.order,
-                          expression: "form.order"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        type: "number",
-                        autocomplete: "off",
-                        id: "order",
-                        name: "order",
-                        placeholder: "Order Topik"
-                      },
-                      domProps: { value: _vm.form.order },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "order", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.order
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.order[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "col-lg-12" }, [
                 _c(
                   "div",
                   { staticClass: "form-group" },
@@ -82460,20 +82368,12 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(_vm._f("capitalize")(item.order)) +
-                          "\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
                     _c("td"),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
                         "\n                               " +
-                          _vm._s(_vm._f("capitalize")(item.jenis_topik)) +
+                          _vm._s(item.jenis_topik.toUpperCase()) +
                           "\n                            "
                       )
                     ]),
@@ -82526,8 +82426,6 @@ var staticRenderFns = [
         _c("th", { staticStyle: { width: "21%" }, attrs: { scope: "col" } }, [
           _vm._v("Aksi")
         ]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Order")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }),
         _vm._v(" "),

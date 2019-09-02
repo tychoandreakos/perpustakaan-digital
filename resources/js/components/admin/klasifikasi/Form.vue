@@ -42,17 +42,6 @@
                                 </template>
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="tipe_klasifikasi">Nama GMD</label>
-                                <input type="text" v-model="form.tipe_klasifikasi" id="tipe_klasifikasi"
-                                    class="form-control form-control-alternative" name="tipe_klasifikasi"
-                                    placeholder="NAMA GMD">
-                                <template v-if="err.tipe_klasifikasi">
-                                    <span class="text-danger">{{ err.tipe_klasifikasi[0] }}</span>
-                                </template>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 
@@ -100,7 +89,7 @@
             return {
                 form: {
                     tipe_klasifikasi: this.fetch.tipe_klasifikasi || '',
-                    tipe_klasifikasi: this.fetch.tipe_klasifikasi || '',
+                    kode_klasifikasi: this.fetch.kode_klasifikasi || '',
                     _method: (this.fetch.tipe_klasifikasi ? 'PUT' : 'POST')
                 },
 

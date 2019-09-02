@@ -86,7 +86,11 @@ class KlasifikasiController extends Controller
     public function edit(Klasifikasi $klasifikasi)
     {
         $title = 'Update Klasifikasi';
-        return view('admin.master.klasifikasi.edit' ,compact('klasifikasi', 'title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.klasifikasi.edit' ,compact('klasifikasi', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function search(Request $request)

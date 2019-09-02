@@ -85,7 +85,11 @@ class PenerbitController extends Controller
     public function edit(Penerbit $penerbit)
     {
         $title = 'Update Penerbit';
-        return view('admin.master.penerbit.edit' ,compact('penerbit', 'title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.penerbit.edit' ,compact('penerbit', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
     
     public function search(Request $request)

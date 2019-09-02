@@ -201,7 +201,7 @@
                                     </div>
                                     <label class="form-control-label" for="tempat">Tempat Terbit*</label>
                                     <multiselect class="mt-1" v-model="kota_id" :options="kotaData"
-                                        group-label="language" :group-select="true" placeholder="Pilij tempat terbit"
+                                        group-label="language" :group-select="true" placeholder="Pilih tempat terbit"
                                         track-by="nama_kota" label="nama_kota"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
@@ -335,7 +335,7 @@
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
                                     <div class="float-right mb-2">
-                                        <button @click="showLokasi" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                        <button @click="showTopik" class="btn btn-icon btn-3 btn-primary btn-sm"
                                             type="button">
                                             <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
                                             <span class="btn-inner--text">Tambah Topik Buku</span>
@@ -385,7 +385,7 @@
                         </pola-component>
                     </modal>
 
-                    <modal height="auto" name="eksemplar">
+                    <modal height="auto" name="topik">
                         <topik-component @closeTopik="hideTopik" @updateTopik="getTopik" :topik="this.top">
                         </topik-component>
                     </modal>
@@ -427,16 +427,16 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label class="form-control-label" for="catatan">Upload Cover</label>
+                                <label class="form-control-label" for="img">Upload Cover</label>
                                 <div class="custom-file">
-                                    <input type="file" v-on:change="onImageChange" class="custom-file-input"
+                                    <input accept="image/jpeg" type="file" v-on:change="onImageChange" class="custom-file-input"
                                         id="validatedCustomFile">
                                     <label class="custom-file-label" for="validatedCustomFile">{{ img }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
                                     <!-- <span class="text-danger mt-2">{{ img }}</span> -->
                                 </div>
-                                <template v-if="err.catatan">
-                                    <span class="text-danger">{{ err.catatan[0] }}</span>
+                                <template v-if="err.img">
+                                    <span class="text-danger">{{ err.img[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -447,7 +447,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="catatan">Upload PDF</label>
                                 <div class="custom-file">
-                                    <input type="file" v-on:change="multipleFileChange" class="custom-file-input"
+                                    <input accept="application/pdf" type="file" v-on:change="multipleFileChange" class="custom-file-input"
                                         id="validatedCustomFile">
                                     <label class="custom-file-label" for="validatedCustomFile">{{ pdf }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
@@ -534,7 +534,8 @@
             'lokasi3',
             'koleksi',
             'koleksi3',
-            'top'
+            'top',
+            'topikk'
         ],
 
         data() {
@@ -666,6 +667,7 @@
             },
 
             multipleFileChange() {
+                this.pdf = event.target.files[0].name;
                 var vm = this;
                 vm.form.pdf = [];
                 for (let i = event.target.files.length - 1; i >= 0; i--) {
@@ -789,7 +791,7 @@
                     .catch(err => console.log(err));
             },
             getTopik() {
-                return axios.get(this.top)
+                return axios.get(this.topikk)
                     .then(res => this.topikData = res.data)
                     .catch(err => console.log(err));
             },

@@ -6,7 +6,7 @@
                 <div class="col-12 col-md-4" data-aos="fade-up">
                   
                   <!-- Icon -->
-                  <div class="icon text-primary mb-3">
+                  <div class="icon text-center text-primary mb-3">
                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
                         <title>Stockholm-icons / General / Settings-1</title>
@@ -21,19 +21,19 @@
       
                   <!-- Heading -->
                   <h3>
-                    Built for developers
+                    Collections
                   </h3>
       
                   <!-- Text -->
                   <p class="text-muted mb-6 mb-md-0">
-                    Landkit is built to make your life easier. Variables, build tooling, documentation, and reusable components.
+                    We have many types of collections in our library, range from Fictions to Sciences Material, from printed material to digital collections such CD-ROM, CD, VCD and DVD.
                   </p>
       
                 </div>
                 <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="50">
       
                   <!-- Icon -->
-                  <div class="icon text-primary mb-3">
+                  <div class="icon text-center text-primary mb-3">
                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
                         <title>Stockholm-icons / Layout / Layout-arrange</title>
@@ -48,19 +48,19 @@
       
                   <!-- Heading -->
                   <h3>
-                    Designed to be modern
+                    Library Membership
                   </h3>
       
                   <!-- Text -->
                   <p class="text-muted mb-6 mb-md-0">
-                    Designed with the latest design trends in mind. Landkit feels modern, minimal, and beautiful.
+                    To be able to loan our library collections, you must first become library member. There is terms and conditions that you must obey.
                   </p>
       
                 </div>
                 <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
                     
                   <!-- Icon -->
-                  <div class="icon text-primary mb-3">
+                  <div class="icon text-center text-primary mb-3">
                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
                         <title>Stockholm-icons / Code / Code</title>

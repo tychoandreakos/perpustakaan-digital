@@ -86,7 +86,8 @@ class GmdController extends Controller
     public function edit(Gmd $gmd)
     {
         $title = 'Update GMD';
-        return view('admin.master.gmd.edit' ,compact('gmd', 'title'));
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.gmd.edit' ,compact('gmd', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function search(Request $request)

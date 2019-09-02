@@ -5,9 +5,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="prefix">Nama Kota</label>
-                        <input v-focus autocomplete="off" type="text" class="form-control" v-model="form.nama_topik"
-                            placeholder="Nama Kota">
+                        <label for="jenis">Jenis Topik</label>
+                        <input v-focus autocomplete="off" type="text" class="form-control" v-model="form.jenis_topik"
+                            placeholder="Jenis Topik">
                     </div>
                 </div>
 
@@ -32,6 +32,7 @@
 
 <script>
     import Spinner from '../../tools/Spanner';
+    var randomColor = require('randomcolor');
     export default {
 
         props: ['topik'],
@@ -43,7 +44,8 @@
         data() {
             return {
                 form: {
-                    nama_topik: ''
+                    jenis_topik: '',
+                    warna: randomColor()
                 },
                 loading: false,
             }
@@ -51,7 +53,6 @@
 
         methods: {
             submit() {
-                console.log(this.form);
                 this.loading = true,
                     axios.post(this.topik, this.form)
                     .then(res => {
@@ -64,9 +65,9 @@
                         });
                         setTimeout(() => {
                             this.loading = false
-                            this.$emit('closeKota');
-                            this.$emit('updateKota');
-                            this.form.nama_topik = ''
+                            this.$emit('closeTopik');
+                            this.$emit('updateTopik');
+                            this.form.jenis_topik = ''
                         }, 2200)
 
                     })
@@ -78,7 +79,7 @@
 
             check() {
                 return (
-                    this.form.nama_topik == '' ? true : false
+                    this.form.jenis_topik == '' ? true : false
                 );
             },
         }

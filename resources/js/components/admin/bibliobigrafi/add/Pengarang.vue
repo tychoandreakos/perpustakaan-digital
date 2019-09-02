@@ -18,7 +18,7 @@
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <button type="button" :disabled="check" class="btn btn-5 btn-success">Simpan</button>
+                        <button type="submit" :disabled="check" class="btn btn-5 btn-success">Simpan</button>
                     </template>
 
                 </div>

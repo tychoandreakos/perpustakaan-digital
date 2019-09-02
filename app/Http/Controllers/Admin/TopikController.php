@@ -30,13 +30,13 @@ class TopikController extends Controller
 
     public function fetch()
     {
-        return Topik::orderBy('order', 'ASC')->paginate(5);
+        return Topik::latest()->get();
     }
 
-    public function last()
-    {
-        return Topik::orderBy('order', 'DESC')->first();
-    }
+    // public function last()
+    // {
+    //     return Topik::orderBy('order', 'DESC')->first();
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -91,7 +91,11 @@ class TopikController extends Controller
     public function edit(Topik $topik)
     {
         $title = 'Update Topik';
-        return view('admin.topik.edit' ,compact('topik', 'title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.topik.edit' ,compact('topik', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function search(Request $request)
@@ -117,24 +121,10 @@ class TopikController extends Controller
     {
         $validatedData = $request->validate([
             'jenis_topik' => 'required',
-            'image' =>  'required',
             'slug' => 'nullable',
-            'old' => 'required',
-            'order' => 'required',Rule::unique('topik')->ignore($topik->order)
         ]);
 
-        if($request->image != $request->old){
-            $image = $request->get('image');
-            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-            \Image::make($request->get('image'))->save(public_path('storage/topik/').$name);
-            unlink(public_path('storage/topik/'. $request->old));
-        }
-
-        $requestData = $request->all();
-        if(isset($name)){
-            $requestData['img'] = $name;
-        }
-        $topik->update($requestData);
+        $topik->update($validatedData);
 
         return response()->json([
             'message' => 'data berhasil diubah']);

@@ -11,7 +11,6 @@ class Topik extends Model
     protected $fillable = [
         'jenis_topik',
         'slug',
-        'order',
         'warna'
     ];
 

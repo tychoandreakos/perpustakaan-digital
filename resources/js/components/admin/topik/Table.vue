@@ -19,7 +19,6 @@
                         <thead class="thead-light">
                             <tr class="text-center">
                                 <th scope="col" style="width: 21%;">Aksi</th>
-                                <th scope="col">Order</th>
                                 <th scope="col"></th>
                                 <th scope="col">Jenis Topik</th>
                                 <th scope="col">Terakhir Diperbaharui</th>
@@ -33,12 +32,9 @@
                                     <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
                                             class="ni ni-fat-remove text-white"></i> Hapus</button>
                                 </th>
-                                <td>
-                                    {{ item.order | capitalize}}
-                                </td>
                                 <td></td>
                                 <td>
-                                   {{ item.jenis_topik | capitalize }}
+                                   {{ item.jenis_topik.toUpperCase() }}
                                 </td>
                                 <td>
                                     {{ item.updated_at }}

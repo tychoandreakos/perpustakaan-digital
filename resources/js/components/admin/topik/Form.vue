@@ -16,19 +16,7 @@
                 <h6 class="heading-small text-muted mb-4">Topik information</h6>
                 <div class="pl-lg-4">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label" for="order">Order Topik</label>
-                                <input type="number" autocomplete="off" v-model="form.order" id="order"
-                                    class="form-control form-control-alternative" name="order"
-                                    placeholder="Order Topik">
-                                <template v-if="err.order">
-                                    <span class="text-danger">{{ err.order[0] }}</span>
-                                </template>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-control-label" for="jenis_topik">Jenis Topik</label>
                                 <input type="text" autocomplete="off" v-model="form.jenis_topik" id="jenis_topik"
@@ -87,30 +75,15 @@
                 return (this.form.jenis_topik.length == '' ? true : false)
             },
 
-            som() {
-                if (!this.fetch.jenis_topik) {
-                    return this.form.order = this.order.order + 1;
-                }
-            }
-
-        },
-
-        created() {
-            if (!this.fetch.jenis_topik) {
-                this.getOrder();
-            }
         },
 
         data() {
             return {
                 form: {
                     jenis_topik: this.fetch.jenis_topik || '',
-                    order: Number(this.fetch.order) || '',
-                    warna: randomColor(),
+                    warna: this.fetch.warna || randomColor(),
                     _method: (this.fetch.jenis_topik ? 'PUT' : 'POST')
                 },
-
-                order: {},
 
                 loading: false,
 
@@ -126,13 +99,6 @@
                     return;
                 this.createImage(files[0]);
             },
-
-            getOrder() {
-                axios.get(this.datas)
-                    .then(res => this.order = res.data)
-                    .catch(err => console.log(err))
-            },
-
 
             createImage(file) {
                 let reader = new FileReader();
