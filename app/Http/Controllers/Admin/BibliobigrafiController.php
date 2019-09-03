@@ -20,6 +20,7 @@ use App\Koleksi;
 use App\PinjamTransaksi;
 use App\Topik;
 use App\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class BibliobigrafiController extends Controller
