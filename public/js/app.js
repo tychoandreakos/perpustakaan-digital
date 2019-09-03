@@ -2177,7 +2177,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      value: '',
+      value: this.fetch.anggota_transaksi.tipe_anggota || '',
       jkelamin: ['Pria', 'Wanita'],
       options: [],
       img: this.fetch.foto || 'Pilih Foto Anggota',

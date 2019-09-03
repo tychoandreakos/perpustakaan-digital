@@ -142,6 +142,7 @@ class AnggotaController extends Controller
         $approve = User::whereNull('approved_at')->get()->count();
         $anggota = Anggota::with('anggota_transaksi.tipe_anggota')->where('user_id', $id)->first();
         $users = User::with('anggota')->where('id', $id)->first();
+        
         return view('admin.anggota.edit', compact('anggota', 'users', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
