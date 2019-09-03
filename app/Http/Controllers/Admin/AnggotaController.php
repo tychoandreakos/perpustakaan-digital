@@ -207,7 +207,7 @@ class AnggotaController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        // $user->save();
+        $user->save();
 
         $anggota = Anggota::find($request->id);
         $anggota->jurusan = $request->jurusan;
@@ -260,7 +260,7 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->first();
+        $user = User::find($id);
 
         $count = PinjamTransaksi::where('user_id', $id)->count();
         for ($i=0; $i < $count ; $i++) { 
