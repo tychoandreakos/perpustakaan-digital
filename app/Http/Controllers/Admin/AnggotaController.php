@@ -124,7 +124,10 @@ class AnggotaController extends Controller
      */
     public function show(Anggota $anggotum)
     {
-        //
+        // sayangku? hallo cintaku tersayanggg :*
+        // sayangku udh lanca lagi?
+        // udh cintakuu :D :* :* :* 
+        // sayangku liatin aku dulu sebentar ada error :D 
     }
 
     /**

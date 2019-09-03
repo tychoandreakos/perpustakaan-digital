@@ -84,7 +84,8 @@ class RegisterController extends Controller
         Anggota::create([
             'user_id' => $data['id'],
             'tgl_registrasi' => Carbon::now(),
-            'tgl_expired' => $dt->addYears($transaksi->tipe_anggota->masa_berlaku_anggota)
+            'tgl_expired' => $dt->addYears($transaksi->tipe_anggota->masa_berlaku_anggota),
+            'foto' => 'img.svg'
         ]);
 
         return $user;
