@@ -3686,9 +3686,9 @@ __webpack_require__.r(__webpack_exports__);
         bahasa_id: this.bahasa2,
         gmd_id: this.gmd2,
         pola_eksemplar: this.pola_eksemplar2,
-        no_panggil: typeof this.buku !== 'undefined' ? this.buku.bibliobigrafi[0].no_panggil : '',
-        total: typeof this.buku !== 'undefined' ? this.buku.bibliobigrafi.length : '',
-        _method: this.buku.judul ? 'PATCH' : 'POST'
+        no_panggil: typeof this.buku.judul !== 'undefined' ? this.buku.bibliobigrafi[0].no_panggil : '',
+        total: typeof this.buku.judul !== 'undefined' ? this.buku.bibliobigrafi.length : '',
+        _method: typeof this.buku.judul !== 'undefined' ? 'PATCH' : 'POST'
       }
     };
   },
