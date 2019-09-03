@@ -62,7 +62,7 @@ class AnggotaController extends Controller
             'id' => 'required|unique:users|integer',
             'name' => 'required|min:3',
             'password' => 'required|confirmed|min:6',
-            'email' => 'required|min:6|email',
+            'email' => 'required|min:6|email|unique:users',
             'tgl_lahir' => 'required|date',
             'alamat' => 'nullable|min:6',
             'jk' => 'nullable',
@@ -85,6 +85,7 @@ class AnggotaController extends Controller
 
         $requestData = $request->all();
         $requestData['password'] = Hash::make($request['password']);
+        $requestData['approved_at'] = $dt;
         $user = User::create($requestData);
 
         $requestTrans = $request->all();
@@ -124,10 +125,13 @@ class AnggotaController extends Controller
     public function edit($id)
     {
         $title = 'Update Anggota';
-        // return
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
         $anggota = Anggota::with('anggota_transaksi.tipe_anggota')->where('user_id', $id)->first();
         $users = User::with('anggota')->where('id', $id)->first();
-        return view('admin.anggota.edit', compact('anggota', 'users', 'title'));
+        return view('admin.anggota.edit', compact('anggota', 'users', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     public function search(Request $request)
@@ -162,15 +166,40 @@ class AnggotaController extends Controller
 
     public function update(Request $request)
     {
+
+        $request->validate([
+            'id' => 'required|integer|unique:users,id,'.$request->id,
+            'name' => 'required|min:3',
+            'password' => 'nullable',
+            'email' => 'required|min:6|email',
+            'tgl_lahir' => 'required|date',
+            'alamat' => 'nullable|min:6',
+            'jk' => 'nullable',
+            'no_telp' => 'nullable|min:6|numeric',
+            'foto' => 'nullable',
+            'jurusan' => 'nullable',
+            'image' => 'nullable',
+        ]);
+
         $user = User::find($request->id)->first();
-        $user->update($request->all());
+        $user->name = $request->name;
+        $user->email = $request->email;
+       
+        if(!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+
         $user->save();
 
         $anggota = Anggota::find($request->id)->first();
-        $anggota->update($anggota->all());
+        $anggota->jurusan = $request->jurusan;
+        $anggota->tgl_lahir = $request->tgl_lahir;
+        $anggota->alamat = $request->alamat;
+        $anggota->jk = ($request->jk == 'pria' || $request->jk == 'Pria') ? 0 : 1;
+        $anggota->no_telp = $request->no_telp;
         $anggota->save();
 
-        $transaksi = AnggotaTransaksi::find($request->id)->first();
+        $transaksi = AnggotaTransaksi::where('user_id', $request->id)->first();
         $transaksi->update($request->all());
         $transaksi->save();
 

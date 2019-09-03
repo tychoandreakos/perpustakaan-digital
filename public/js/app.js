@@ -2154,11 +2154,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     jk: function jk() {
       return this.form.jk = this.fetch.jk == 0 ? 'Pria' : 'Wanita';
-    } // executeLoader()
-    // {
-    //     return 'halo'
-    // }
-
+    }
   },
   data: function data() {
     return {
@@ -2170,7 +2166,7 @@ __webpack_require__.r(__webpack_exports__);
         id: this.users.id || '',
         name: this.users.name || '',
         email: this.users.email || '',
-        password: this.users.password || '',
+        password: '',
         password_confirmation: this.users.password_confirmation || '',
         tgl_lahir: this.fetch.tgl_lahir || '06/20/2019',
         tgl_registrasi: this.fetch.tgl_registrasi || '',
@@ -2256,7 +2252,7 @@ __webpack_require__.r(__webpack_exports__);
             window.location = _this2.index;
           }, 2800);
         })["catch"](function (err) {
-          console.log(err);
+          _this2.err = err.response.data.errors;
           _this2.loading = false;
         });
       }

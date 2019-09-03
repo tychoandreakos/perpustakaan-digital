@@ -230,7 +230,7 @@
 
             jk() {
                 return this.form.jk = (this.fetch.jk == 0 ? 'Pria' : 'Wanita')
-            }
+            },
 
             // executeLoader()
             // {
@@ -251,7 +251,7 @@
                     id: this.users.id || '',
                     name: this.users.name || '',
                     email: this.users.email || '',
-                    password: this.users.password || '',
+                    password: '',
                     password_confirmation: this.users.password_confirmation || '',
                     tgl_lahir: this.fetch.tgl_lahir || '06/20/2019',
                     tgl_registrasi: this.fetch.tgl_registrasi || '',
@@ -340,7 +340,7 @@
                             }, 2800);
                         })
                         .catch(err => {
-                            console.log(err);
+                            this.err = err.response.data.errors;
                             this.loading = false;
                         })
                 }
