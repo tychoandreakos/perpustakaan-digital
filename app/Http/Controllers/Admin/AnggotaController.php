@@ -193,6 +193,9 @@ class AnggotaController extends Controller
             'foto' => 'nullable',
             'jurusan' => 'nullable',
             'image' => 'nullable',
+            'foto' => 'required',
+            'old' => 'required',
+            'tipe_anggota_id' => 'required'
         ]);
 
 
@@ -213,7 +216,8 @@ class AnggotaController extends Controller
         $anggota->jk = ($request->jk == 'pria' || $request->jk == 'Pria') ? 0 : 1;
         $anggota->no_telp = $request->no_telp;
 
-        if($request->image !== $anggota->foto)
+        
+        if($request->foto !== $anggota->foto)
         {
             $image = $request->get('image');
             $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
@@ -226,7 +230,7 @@ class AnggotaController extends Controller
                 File::makeDirectory($preview, 0777, true, true);
             }
 
-            if($request->image !== 'img.svg') {
+            if(!$request->old === 'img.svg') {
                 unlink(public_path('storage/anggota/'. $anggota->foto));
                 unlink(public_path('storage/preview/'. $anggota->foto));
             }

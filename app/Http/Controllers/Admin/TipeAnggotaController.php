@@ -63,7 +63,8 @@ class TipeAnggotaController extends Controller
             'denda' => 'required',    
         ]);
 
-        TipeAnggota::create($request->all());
+        $validatedData['tipe_anggota'] = ucwords($request->tipe_anggota);
+        TipeAnggota::create($validatedData);
        
         return response()->json([
             'message' => 'data berhasil disimpan']);

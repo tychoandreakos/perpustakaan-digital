@@ -2146,6 +2146,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2168,16 +2170,14 @@ __webpack_require__.r(__webpack_exports__);
       return this.form.jk = this.fetch.jk == 0 ? 'Pria' : 'Wanita';
     },
     profil: function profil() {
+      this.form.foto = this.fetch.foto;
+      this.form.old = this.fetch.foto;
       return this.form.image = this.fetch.foto;
-    } // executeLoader()
-    // {
-    //     return 'halo'
-    // }
-
+    }
   },
   data: function data() {
     return {
-      value: this.fetch.anggota_transaksi.tipe_anggota || '',
+      value: this.users.id ? this.fetch.anggota_transaksi.tipe_anggota : '',
       jkelamin: ['Pria', 'Wanita'],
       options: [],
       img: this.fetch.foto || 'Pilih Foto Anggota',
@@ -2187,7 +2187,7 @@ __webpack_require__.r(__webpack_exports__);
         email: this.users.email || '',
         password: '',
         password_confirmation: this.users.password_confirmation || '',
-        tgl_lahir: this.fetch.tgl_lahir || '06/20/2019',
+        tgl_lahir: this.fetch.tgl_lahir || '',
         tgl_registrasi: this.fetch.tgl_registrasi || '',
         tgl_ekspired: this.fetch.tgl_ekspired || '',
         alamat: this.fetch.alamat || '',
@@ -2196,6 +2196,8 @@ __webpack_require__.r(__webpack_exports__);
         tipe: this.tipe_ang,
         jurusan: this.fetch.jurusan || '',
         image: '',
+        foto: '',
+        old: '',
         tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
         _method: this.users.id ? 'PUT' : 'POST'
       },
@@ -2218,6 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     onImageChange: function onImageChange(e) {
       this.img = e.target.files[0].name;
+      this.form.foto = e.target.files[0].name;
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
@@ -69939,9 +69942,13 @@ var render = function() {
           }
         },
         [
-          _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
-            _vm._v(_vm._s(_vm._f("capitalize")(_vm.form.name)))
-          ]),
+          this.users.id
+            ? _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
+                _vm._v(_vm._s(_vm._f("capitalize")(_vm.form.name)))
+              ])
+            : _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
+                _vm._v("Anggota Information")
+              ]),
           _vm._v(" "),
           this.users.id
             ? [
@@ -70013,7 +70020,6 @@ var render = function() {
                           ],
                           staticClass: "form-control form-control-alternative",
                           attrs: {
-                            disabled: true,
                             autocomplete: "off",
                             type: "text",
                             id: "id",
@@ -70108,7 +70114,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "form-control-label",
-                        attrs: { for: "id" }
+                        attrs: { for: "tipe_anggota_id" }
                       },
                       [_vm._v("Tipe Anggota")]
                     ),
@@ -70130,10 +70136,10 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm.err.id
+                    _vm.err.tipe_anggota_id
                       ? [
                           _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.id[0]))
+                            _vm._v(_vm._s(_vm.err.tipe_anggota_id[0]))
                           ])
                         ]
                       : _vm._e()
@@ -70143,47 +70149,67 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-lg-6" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    { staticClass: "form-control-label", attrs: { for: "id" } },
-                    [_vm._v("Tanggal Lahir")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "input-group input-group-alternative" },
-                    [
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.tgl_lahir,
-                            expression: "form.tgl_lahir"
-                          }
-                        ],
-                        staticClass: "form-control datepicker",
-                        attrs: {
-                          autocomplete: "off",
-                          placeholder: "Pilih tanggal lahir",
-                          type: "text"
-                        },
-                        domProps: { value: _vm.form.tgl_lahir },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-control-label",
+                        attrs: { for: "tgl_lahir" }
+                      },
+                      [_vm._v("Tanggal Lahir")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "input-group input-group-alternative" },
+                      [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.tgl_lahir,
+                              expression: "form.tgl_lahir"
                             }
-                            _vm.$set(_vm.form, "tgl_lahir", $event.target.value)
+                          ],
+                          staticClass: "form-control datepicker",
+                          attrs: {
+                            autocomplete: "off",
+                            placeholder: "Pilih tanggal lahir",
+                            type: "text"
+                          },
+                          domProps: { value: _vm.form.tgl_lahir },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "tgl_lahir",
+                                $event.target.value
+                              )
+                            }
                           }
-                        }
-                      })
-                    ]
-                  )
-                ])
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.err.tgl_lahir
+                      ? [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.err.tgl_lahir[0]))
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
               ])
             ]),
             _vm._v(" "),
@@ -70197,7 +70223,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "form-control-label",
-                        attrs: { for: "id" }
+                        attrs: { for: "jk" }
                       },
                       [_vm._v("Jenis Kelamin")]
                     ),
@@ -70219,7 +70245,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm.err.id
+                    _vm.err.jk
                       ? [
                           _c("span", { staticClass: "text-danger" }, [
                             _vm._v(_vm._s(_vm.err.jk[0]))
@@ -70508,65 +70534,52 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-lg-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c(
-                      "label",
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-control-label",
+                      attrs: { for: "password_confirmation" }
+                    },
+                    [
+                      _vm._v(
+                        "Password\n                                Confirmation"
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "form-control-label",
-                        attrs: { for: "password_confirmation" }
-                      },
-                      [
-                        _vm._v(
-                          "Password\n                                Confirmation"
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.password_confirmation,
-                          expression: "form.password_confirmation"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        autocomplete: "off",
-                        type: "password",
-                        id: "password_confirmation",
-                        password_confirmation: "password_confirmation",
-                        placeholder: "***********"
-                      },
-                      domProps: { value: _vm.form.password_confirmation },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.form,
-                            "password_confirmation",
-                            $event.target.value
-                          )
-                        }
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.password_confirmation,
+                        expression: "form.password_confirmation"
                       }
-                    }),
-                    _vm._v(" "),
-                    _vm.err.password_confirmation
-                      ? [
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v(_vm._s(_vm.err.password_confirmation[0]))
-                          ])
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
+                    ],
+                    staticClass: "form-control form-control-alternative",
+                    attrs: {
+                      autocomplete: "off",
+                      type: "password",
+                      id: "password_confirmation",
+                      password_confirmation: "password_confirmation",
+                      placeholder: "***********"
+                    },
+                    domProps: { value: _vm.form.password_confirmation },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.form,
+                          "password_confirmation",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
               ])
             ]),
             _vm._v(" "),

@@ -13,7 +13,8 @@
         </div>
         <div class="card-body">
             <form @submit.prevent="simpan">
-                <h6 class="heading-small text-muted mb-4">{{ form.name | capitalize }}</h6>
+                <h6 v-if="this.users.id" class="heading-small text-muted mb-4">{{ form.name | capitalize }}</h6>
+                <h6 v-else class="heading-small text-muted mb-4">Anggota Information</h6>
 
                 <template class="text-center" v-if="this.users.id">
                     <div class="form-group">
@@ -30,7 +31,7 @@
                                 <input v-if="this.users.id" :disabled="true" autocomplete="off" type="text"
                                     v-model="form.id" id="id" class="form-control form-control-alternative" name="id"
                                     placeholder="ID Anggota">
-                                <input v-else :disabled="true" autocomplete="off" type="text" v-model="form.id" id="id"
+                                <input v-else autocomplete="off" type="text" v-model="form.id" id="id"
                                     class="form-control form-control-alternative" name="id" placeholder="ID Anggota">
                                 <template v-if="err.id">
                                     <span class="text-danger">{{ err.id[0] }}</span>
@@ -53,18 +54,18 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="id">Tipe Anggota</label>
+                                <label class="form-control-label" for="tipe_anggota_id">Tipe Anggota</label>
                                 <multiselect v-model="value" tag-placeholder="Add this as new tag"
                                     placeholder="Pilih tipe anggota" label="tipe_anggota" track-by="tipe_anggota"
                                     :options="options"></multiselect>
-                                <template v-if="err.id">
-                                    <span class="text-danger">{{ err.id[0] }}</span>
+                                <template v-if="err.tipe_anggota_id">
+                                    <span class="text-danger">{{ err.tipe_anggota_id[0] }}</span>
                                 </template>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="id">Tanggal Lahir</label>
+                                <label class="form-control-label" for="tgl_lahir">Tanggal Lahir</label>
                                 <div class="input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
@@ -72,6 +73,10 @@
                                     <input autocomplete="off" class="form-control datepicker" v-model="form.tgl_lahir"
                                         placeholder="Pilih tanggal lahir" type="text">
                                 </div>
+
+                                 <template v-if="err.tgl_lahir">
+                                    <span class="text-danger">{{ err.tgl_lahir[0] }}</span>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -79,11 +84,11 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="id">Jenis Kelamin</label>
+                                <label class="form-control-label" for="jk">Jenis Kelamin</label>
                                 <multiselect v-model="form.jk" :options="jkelamin" :searchable="false"
                                     :close-on-select="false" :show-labels="false" placeholder="Pilih jenis kelamin">
                                 </multiselect>
-                                <template v-if="err.id">
+                                <template v-if="err.jk">
                                     <span class="text-danger">{{ err.jk[0] }}</span>
                                 </template>
                             </div>
@@ -158,9 +163,6 @@
                                 <input autocomplete="off" type="password" v-model="form.password_confirmation"
                                     id="password_confirmation" class="form-control form-control-alternative"
                                     password_confirmation="password_confirmation" placeholder="***********">
-                                <template v-if="err.password_confirmation">
-                                    <span class="text-danger">{{ err.password_confirmation[0] }}</span>
-                                </template>
                             </div>
                         </div>
                     </div>
@@ -212,7 +214,7 @@
 </template>
 <script>
     import Spinner from '../tools/Spanner';
-    import Multiselect from 'vue-multiselect'
+    import Multiselect from 'vue-multiselect';
     export default {
 
         components: {
@@ -245,8 +247,10 @@
             },
 
             profil() {
+                this.form.foto = this.fetch.foto;
+                this.form.old = this.fetch.foto;
                 return this.form.image = this.fetch.foto;
-            }
+            },
 
             // executeLoader()
             // {
@@ -257,7 +261,7 @@
         data() {
             return {
 
-                value: this.fetch.anggota_transaksi.tipe_anggota || '',
+                value: (this.users.id ? this.fetch.anggota_transaksi.tipe_anggota : ''),
                 jkelamin: ['Pria', 'Wanita'],
                 options: [],
                 img: this.fetch.foto || 'Pilih Foto Anggota',
@@ -269,7 +273,7 @@
                     email: this.users.email || '',
                     password: '',
                     password_confirmation: this.users.password_confirmation || '',
-                    tgl_lahir: this.fetch.tgl_lahir || '06/20/2019',
+                    tgl_lahir: this.fetch.tgl_lahir || '',
                     tgl_registrasi: this.fetch.tgl_registrasi || '',
                     tgl_ekspired: this.fetch.tgl_ekspired || '',
                     alamat: this.fetch.alamat || '',
@@ -278,6 +282,8 @@
                     tipe: this.tipe_ang,
                     jurusan: this.fetch.jurusan || '',
                     image: '',
+                    foto: '',
+                    old: '',
                     tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
                     _method: (this.users.id ? 'PUT' : 'POST')
                 },
@@ -301,6 +307,7 @@
 
             onImageChange(e) {
                 this.img = e.target.files[0].name;
+                this.form.foto = e.target.files[0].name;
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
