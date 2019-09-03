@@ -45,6 +45,11 @@ class Bibliobigrafi extends Model
         return $this->belongsTo(LokasiRak::class);
     }
 
+    public function koleksi()
+    {
+        return $this->belongsTo(Koleksi::class);
+    }
+
     public function gmd()
     {
         return $this->belongsTo(Gmd::class);

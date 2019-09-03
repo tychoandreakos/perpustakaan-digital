@@ -3605,7 +3605,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3632,7 +3631,7 @@ __webpack_require__.r(__webpack_exports__);
     KoleksiComponent: _add_Koleksi__WEBPACK_IMPORTED_MODULE_9__["default"],
     TopikComponent: _add_Topik__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
-  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi', 'koleksi3', 'top', 'topikk'],
+  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi', 'koleksi3', 'top', 'topikk', 'buku'],
   data: function data() {
     return {
       loading: false,
@@ -3659,22 +3658,24 @@ __webpack_require__.r(__webpack_exports__);
       lokasi_id: [],
       eksemplarData: [],
       pola_eksemplar: [],
-      img: 'Pilih Gambar Sampul',
-      pdf: 'Pilih PDF',
+      img: typeof this.buku.gambar_sampul !== 'undefined' ? this.buku.gambar_sampul : 'Pilih Gambar Sampul',
+      pdf: typeof this.buku.pdf !== 'undefined' ? this.buku.pdf : 'Pilih PDF',
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11___default.a,
       editorConfig: {// The configuration of the editor.
       },
       form: {
-        judul: this.fetch.judul || '',
-        edisi: this.fetch.edisi || '',
-        tahun_terbit: this.fetch.tahun_terbit || '',
-        isbn_isnn: this.fetch.isbn_isnn || '',
-        deskripsi_fisik: this.fetch.deskripsi_fisik || '',
-        judul_seri: this.fetch.judul_seri || '',
-        catatan: this.fetch.catatan || '',
-        slug: this.fetch.slug || '',
-        pdf: this.fetch.pdf || '',
-        image: this.fetch.gambar_sampul || '',
+        judul: typeof this.buku.judul !== 'undefined' ? this.buku.judul : '',
+        edisi: typeof this.buku.edisi !== 'undefined' ? this.buku.edisi : '',
+        tahun_terbit: typeof this.buku.tahun_terbit !== 'undefined' ? this.buku.tahun_terbit : '',
+        isbn_isnn: typeof this.buku.isbn_isnn !== 'undefined' ? this.buku.isbn_isnn : '',
+        deskripsi_fisik: typeof this.buku.deskripsi_fisik !== 'undefined' ? this.buku.deskripsi_fisik : '',
+        judul_seri: typeof this.buku.judul_seri !== 'undefined' ? this.buku.judul_seri : '',
+        catatan: typeof this.buku.catatan !== 'undefined' ? this.buku.catatan : '',
+        slug: typeof this.buku.slug !== 'undefined' ? this.buku.slug : '',
+        pdf: typeof this.buku.pdf !== 'undefined' ? this.buku.pdf : '',
+        image: typeof this.buku.gambar_sampul !== 'undefined' ? this.buku.gambar_sampul : '',
+        oldPdf: '',
+        oldImage: '',
         klasifikasi_id: this.klasifikasi2,
         pengarang_id: this.pengarang2,
         penerbit_id: this.penerbit2,
@@ -3685,9 +3686,9 @@ __webpack_require__.r(__webpack_exports__);
         bahasa_id: this.bahasa2,
         gmd_id: this.gmd2,
         pola_eksemplar: this.pola_eksemplar2,
-        no_panggil: '',
-        total: '',
-        _method: this.fetch.judul ? 'PUT' : 'POST'
+        no_panggil: typeof this.buku !== 'undefined' ? this.buku.bibliobigrafi[0].no_panggil : '',
+        total: typeof this.buku !== 'undefined' ? this.buku.bibliobigrafi.length : '',
+        _method: this.buku.judul ? 'PATCH' : 'POST'
       }
     };
   },
@@ -3706,6 +3707,27 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     isInvalid: function isInvalid() {
       return this.isTouched && this.value.length === 0;
+    },
+    dataUpdate: function dataUpdate() {
+      if (this.buku.judul) {
+        this.pengarang_id = this.buku.buku_transaksi.map(function (s) {
+          return s.pengarang;
+        }); // this.gmd_id = this.buku.bibliobigrafi.map(s => s.gmd);
+
+        this.koleksi_id = this.buku.bibliobigrafi[0].koleksi;
+        this.gmd_id = this.buku.bibliobigrafi[0].gmd;
+        this.kota_id = this.buku.buku_transaksi[0].kota;
+        this.bahasa_id = this.buku.buku_transaksi[0].bahasa;
+        this.klasifikasi_id = this.buku.bibliobigrafi[0].klasifikasi;
+        this.lokasi_id = this.buku.bibliobigrafi[0].lokasi_rak;
+        this.topik_id = this.buku.topik;
+        this.penerbit_id = this.buku.buku_transaksi[0].penerbit;
+        this.form.oldPdf = this.buku.pdf;
+        this.form.oldImage = this.buku.gambar_sampul;
+        return this.pola_eksemplar = {
+          kode_eksemplar: this.buku.bibliobigrafi[0].pola_eksemplar[0].kode_eksemplar
+        };
+      }
     },
     bahasa2: function bahasa2() {
       return this.form.bahasa_id = this.bahasa_id.id;
@@ -3949,7 +3971,7 @@ __webpack_require__.r(__webpack_exports__);
       this.loading = true;
       console.log(this.form);
 
-      if (!this.fetch.judul) {
+      if (!this.buku.judul) {
         // create
         axios.post(this.fetch, this.form).then(function (res) {
           _this11.$swal({
@@ -3969,7 +3991,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         // update
-        axios.post('/pustakawan/klasifikasi/' + this.fetch.id, this.form).then(function (res) {
+        axios.post('/pustakawan/bibliobigrafi/' + this.buku.id, this.form).then(function (res) {
           _this11.$swal({
             position: 'top-end',
             type: 'success',
@@ -71732,7 +71754,7 @@ var render = function() {
     _c("div", { staticClass: "card-header bg-white border-0" }, [
       _c("div", { staticClass: "row align-items-center" }, [
         _c("div", { staticClass: "col-8" }, [
-          this.fetch.judul
+          this.buku.judul
             ? _c("h3", { staticClass: "mb-0" }, [
                 _vm._v("Update Data Bibliobigrafi")
               ])
@@ -71803,7 +71825,7 @@ var render = function() {
                           type: "text",
                           id: "judul",
                           name: "judul",
-                          placeholder: "Nama Penerbit"
+                          placeholder: "Judul Buku"
                         },
                         domProps: { value: _vm.form.judul },
                         on: {
@@ -73493,6 +73515,11 @@ var render = function() {
             1
           ),
           _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "" },
+            domProps: { value: _vm.dataUpdate }
+          }),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "float-right" },
@@ -73669,8 +73696,11 @@ var render = function() {
                               },
                               [
                                 _c(
-                                  "button",
-                                  { staticClass: "btn btn-primary btn-sm" },
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-primary btn-sm",
+                                    attrs: { href: _vm.edit(data.id) }
+                                  },
                                   [_vm._v("Edit")]
                                 ),
                                 _vm._v(" "),

@@ -28,7 +28,7 @@
                             <tbody>
                                 <tr v-for="data in datas.data" :key="data.id">
                                     <th scope="row" style="width: 19%">
-                                        <button class="btn btn-primary btn-sm">Edit</button>
+                                        <a :href="edit(data.id)" class="btn btn-primary btn-sm">Edit</a>
                                         <button @click="deleted(data.id)" class="btn btn-danger btn-sm">Hapus</button>
                                     </th>
                                     <td>

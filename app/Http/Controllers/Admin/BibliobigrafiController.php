@@ -309,9 +309,39 @@ class BibliobigrafiController extends Controller
      * @param  \App\Bibliobigrafi  $bibliobigrafi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bibliobigrafi $bibliobigrafi)
+    public function edit($id)
     {
-        //
+        $title = 'Edit Bibiliobigrafi';
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        // return
+        $buku = Buku::with(['buku_transaksi.pengarang' => function($q) {
+            $q->select('id', 'nama_pengarang');
+        }, 'buku_transaksi.penerbit' => function($q){
+            $q->select('id', 'nama_penerbit');
+        }, 'bibliobigrafi' => function($q) {
+            $q->select('id', 'buku_id', 'klasifikasi_id', 'gmd_id', 'pola_eksemplar', 'koleksi_id', 'lokasi_rak_id', 'no_panggil');
+        }, 'bibliobigrafi.koleksi' => function($q) {
+            $q->select('id', 'tipe_koleksi');
+        }, 'topik' => function($q) {
+            $q->select('id', 'jenis_topik');
+        }, 'bibliobigrafi.lokasi_rak' => function($q) {
+            $q->select('id', 'kode_lokasi', 'nama_lokasi');
+        }, 'buku_transaksi.kota' => function($q) {
+            $q->select('id', 'nama_kota');
+        }, 'bibliobigrafi.gmd' => function($q) {
+            $q->select('id', 'kode_gmd', 'nama_gmd');
+        }, 'bibliobigrafi.klasifikasi' => function($q){
+            $q->select('id', 'kode_klasifikasi', 'tipe_klasifikasi');
+        }, 'buku_transaksi.bahasa' => function($q) {
+            $q->select('id', 'jenis_bahasa');
+        }, 'bibliobigrafi.pola_eksemplar' => function($q) {
+            $q->select('pola_eksemplar', 'kode_eksemplar');
+        }])->where('id', $id)->first();
+        
+        return view('admin.bibliobigrafi.edit', compact('title' ,'koleksi', 'anggota_count', 'eksemplar', 'approve', 'buku'));
     }
 
     /**
@@ -321,9 +351,137 @@ class BibliobigrafiController extends Controller
      * @param  \App\Bibliobigrafi  $bibliobigrafi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bibliobigrafi $bibliobigrafi)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'judul' => 'required',
+            'edisi' => 'nullable',
+            'isbn_isnn' => 'required',
+            'deskripsi_fisik' => 'required',
+            'tahun_terbit' => 'required|numeric',
+            'klasifikasi_id' => 'required',
+            'koleksi_id' => 'required',
+            'pengarang_id' => 'required',
+            'penerbit_id' => 'required',
+            'kota_id' => 'required',
+            'gmd_id' => 'required',
+            'bahasa_id' => 'required',
+            'lokasi_rak_id' => 'required',
+            'no_panggil' => 'required',
+            'total' => 'required',
+            'pola_eksemplar' => 'required',
+            'judul_seri' => 'nullable',
+            'oldPdf' => 'required',
+            'oldImage' => 'required',
+            'catatan' => 'nullable',
+            'slug' => 'nullable',
+            'topik_id' => 'required',
+            'pdf' => 'nullable|max:10240',
+            'gambar_sampul' => 'nullable'
+            ]);
+
+            $buku = Buku::find($id);
+            
+        //     if($buku->gambar_sampul !== $request->image)
+        //     {
+        //         $image = $request->get('image');
+        //         $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+    
+        //         $path = public_path('storage/cover/');
+        //         $resize = public_path('storage/resize/');
+                
+        //         if(!File::isDirectory($path) && !File::isDirectory($resize)){
+        //             File::makeDirectory($path, 0777, true, true);
+        //             File::makeDirectory($resize, 0777, true, true);
+        //         }
+
+        //         if(!$request->old === 'img.svg') {
+        //             unlink(public_path('storage/cover/'. $buku->gambar_sampul));
+        //             unlink(public_path('storage/rezize/'. $buku->gambar_sampul));
+        //         }
+    
+        //         \Image::make($request->get('image'))->resize(115, 160)->save(public_path('storage/cover/').$name);
+        //         \Image::make($request->get('image'))->resize(250, 308)->save(public_path('storage/resize/').$name);
+        //     } else {
+        //     $name = 'img.jpg';
+        //     }
+
+        // $file = $request->input('pdf');
+       
+        // if(isset($file)) {
+        //     foreach ($file as $val) {
+        //         $file = $this->base64($val, '/file');
+        //        }
+        // }
+
+        $requestData = $request->all();
+
+        if($buku->judul !== $request->judul) {
+            $requestData['slug'] = str_slug($request->judul);
+        }
+        // $requestData['gambar_sampul'] = $name;
+        // $requestData['pdf'] = isset($file) ? substr($file, 15, 50) : '';
+        $buku = Buku::update($requestData);
+        $buku->save();
+
+       foreach ($request->pengarang_id as $pengarang) {
+            
+            $transaksi = BukuTransaksi::where('buku_id', $id)->where('pengarang_id', $pengarang)->first();
+
+            $requestTrans['buku_id'] = $buku->id;
+            $requestTrans['pengarang_id'] = $pengarang;   
+            BukuTransaksi::update($requestTrans);
+            $buku->save();
+       }
+        
+
+    //    $eksemplar_pola = EksemplarPola::find($request->pola_eksemplar);
+    //    $prefix = $eksemplar_pola->prefix;
+    //    $suffix = $eksemplar_pola->suffix;
+    //    $serial = $eksemplar_pola->serial;
+        
+       (int)$total = $request->total - $buku->bibliobigrafi->count();
+       
+       if($total > 1) {
+        for ($i=0; $i < $total; $i++) {
+
+            $eksemplar = EksemplarTransaksi::orderBy('pola_eksemplar', 'DESC')->first();
+    
+            // slice string
+    
+            if($eksemplar) {
+                $requestTransaksi = $request->all();
+                $requestTransaksi['pola_eksemplar'] = ++$eksemplar->pola_eksemplar;
+                $requestTransaksi['kode_eksemplar'] = $request->pola_eksemplar;
+                $eks = EksemplarTransaksi::create($requestTransaksi);
+            } else {
+                $requestTransaksi = $request->all();
+                $requestTransaksi['pola_eksemplar'] = $request->pola_eksemplar;
+                $requestTransaksi['kode_eksemplar'] = $request->pola_eksemplar;
+                $eks = EksemplarTransaksi::create($requestTransaksi);
+            }
+       }
+
+       
+
+        $requestBilio = $request->all();
+        $requestBilio['buku_id'] = $buku->id;
+        $requestBilio['klasifikasi_id'] = $request->klasifikasi_id;
+        $requestBilio['gmd_id'] = $request->gmd_id;
+
+        if(isset($eks)) {
+            $requestBilio['pola_eksemplar'] = $eks->pola_eksemplar;
+        }
+
+        $requestBilio['koleksi_id'] = $request->koleksi_id;
+        $requestBilio['no_panggil'] = $request->no_panggil;
+        $bilio = Bibliobigrafi::update($requestBilio);
+        $bilio->save();
+
+       }
+
+        return response()->json([
+            'message' => 'data berhasil disimpan']);
     }
 
     /**
