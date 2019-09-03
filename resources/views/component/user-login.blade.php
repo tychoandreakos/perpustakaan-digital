@@ -143,7 +143,7 @@
                          <a class="col-12 col-md-6 order-md-2 bg-cover card-img-right"
                              href="{{ route('buku', $random->slug) }}">
 
-                             <div style="display: flex; background: {{ isset($random->topik->warna) ?$random->topik->warna : '#335eea' }}; width: 100%; height: 100%"
+                             <div style="display: flex; background: {{ isset($random->topik->warna) ? $random->topik->warna : '#335eea' }}; width: 100%; height: 100%"
                                  class="card-img-top">
                                  <div style="background:url('{{  url('storage/resize/'.$random->gambar_sampul) }}') center no-repeat;background-size: cover; width: 150px;height: 200px;margin: auto; display:flex; align-self: center
                                       box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);"></div>
