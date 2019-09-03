@@ -11,6 +11,7 @@ use App\PinjamTransaksi;
 use App\User;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class AnggotaController extends Controller
@@ -76,9 +77,19 @@ class AnggotaController extends Controller
         {
             $image = $request->get('image');
             $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-            \Image::make($request->get('image'))->save(public_path('storage/anggota/').$name);
+
+            $path = public_path('storage/anggota/');
+            $preview = public_path('storage/preview/');
+            
+            if(!File::isDirectory($path) && !File::isDirectory($preview)){
+                File::makeDirectory($path, 0777, true, true);
+                File::makeDirectory($preview, 0777, true, true);
+            }
+
+            \Image::make($request->get('image'))->crop(354, 472)->save($path.$name);
+            \Image::make($request->get('image'))->crop(354, 472)->fit(250, 250)->save($preview.$name);
         } else {
-        $name = 'img.jpg';
+        $name = 'img.svg';
         }
 
         $dt = Carbon::now();
@@ -166,12 +177,11 @@ class AnggotaController extends Controller
 
     public function update(Request $request)
     {
-
         $request->validate([
             'id' => 'required|integer|unique:users,id,'.$request->id,
             'name' => 'required|min:3',
             'password' => 'nullable',
-            'email' => 'required|min:6|email',
+            'email' => 'required|min:6|email|unique:users,email,'.$request->id.',id',
             'tgl_lahir' => 'required|date',
             'alamat' => 'nullable|min:6',
             'jk' => 'nullable',
@@ -181,7 +191,8 @@ class AnggotaController extends Controller
             'image' => 'nullable',
         ]);
 
-        $user = User::find($request->id)->first();
+
+        $user = User::find($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
        
@@ -197,6 +208,27 @@ class AnggotaController extends Controller
         $anggota->alamat = $request->alamat;
         $anggota->jk = ($request->jk == 'pria' || $request->jk == 'Pria') ? 0 : 1;
         $anggota->no_telp = $request->no_telp;
+
+        // if(!$request->image == $anggota->foto)
+        // {
+        //     $image = $request->get('image');
+        //     $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+
+        //     $path = public_path('storage/anggota/');
+        //     $preview = public_path('storage/preview/');
+            
+        //     if(!File::isDirectory($path) && !File::isDirectory($preview)){
+        //         File::makeDirectory($path, 0777, true, true);
+        //         File::makeDirectory($preview, 0777, true, true);
+        //     }
+
+        //     \Image::make($request->get('image'))->crop(354, 472)->save($path.$name);
+        //     \Image::make($request->get('image'))->crop(354, 472)->fit(250, 250)->save($preview.$name);
+            
+        //     $anggota->foto = $name;
+        // }
+
+
         $anggota->save();
 
         $transaksi = AnggotaTransaksi::where('user_id', $request->id)->first();
@@ -223,6 +255,12 @@ class AnggotaController extends Controller
             $bilio = $pinjam->bibliobigrafi()->first();
             $bilio->status_pinjam = 0;
             $bilio->save();
+        }
+
+
+        if($user->anggota->foto !== 'img.svg') {
+            unlink(public_path('storage/anggota/'. $user->anggota->foto));
+            unlink(public_path('storage/preview/'. $user->anggota->foto));
         }
 
         $user->pinjam_transaksi()->delete();

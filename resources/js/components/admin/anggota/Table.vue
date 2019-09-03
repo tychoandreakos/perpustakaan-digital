@@ -21,6 +21,7 @@
                                 <tr>
                                     <th scope="col">Aksi</th>
                                     <th scope="col">ID Anggota</th>
+                                    <th></th>
                                     <th scope="col">Nama Anggota</th>
                                     <th scope="col">Tipe Keanggotaan</th>
                                     <th scope="col">Email</th>
@@ -41,6 +42,7 @@
                                     <td>
                                         {{ item.id | capitalize}}
                                     </td>
+                                    <td><img class="avatar avatar-sm rounded-circle" :src="'../../../../storage/preview/'+item.anggota.foto" alt="profil"> </td>
                                     <td>{{ item.name | capitalize}}</td>
                                     <td>{{ item.anggota_transaksi.tipe_anggota.tipe_anggota | capitalize }}</td>
                                     <td>{{ item.email | capitalize }}</td>

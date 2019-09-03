@@ -2134,6 +2134,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2161,7 +2172,7 @@ __webpack_require__.r(__webpack_exports__);
       value: '',
       jkelamin: ['Pria', 'Wanita'],
       options: [],
-      img: 'Pilih Foto Anggota',
+      img: this.fetch.foto || 'Pilih Foto Anggota',
       form: {
         id: this.users.id || '',
         name: this.users.name || '',
@@ -2273,6 +2284,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -69920,8 +69933,22 @@ var render = function() {
         },
         [
           _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
-            _vm._v("Anggota information")
+            _vm._v(_vm._s(_vm._f("capitalize")(_vm.form.name)))
           ]),
+          _vm._v(" "),
+          this.users.id
+            ? [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("img", {
+                    staticClass: "img-thumbnail mx-auto d-block rounded-circle",
+                    attrs: {
+                      src: "../../../../storage/preview/" + _vm.form.foto,
+                      alt: "profil"
+                    }
+                  })
+                ])
+              ]
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "pl-lg-4" }, [
             _c("div", { staticClass: "row" }, [
@@ -69939,33 +69966,63 @@ var render = function() {
                       [_vm._v("ID Anggota")]
                     ),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.id,
-                          expression: "form.id"
-                        }
-                      ],
-                      staticClass: "form-control form-control-alternative",
-                      attrs: {
-                        autocomplete: "off",
-                        type: "text",
-                        id: "id",
-                        name: "id",
-                        placeholder: "ID Anggota"
-                      },
-                      domProps: { value: _vm.form.id },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                    this.users.id
+                      ? _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.id,
+                              expression: "form.id"
+                            }
+                          ],
+                          staticClass: "form-control form-control-alternative",
+                          attrs: {
+                            disabled: true,
+                            autocomplete: "off",
+                            type: "text",
+                            id: "id",
+                            name: "id",
+                            placeholder: "ID Anggota"
+                          },
+                          domProps: { value: _vm.form.id },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "id", $event.target.value)
+                            }
                           }
-                          _vm.$set(_vm.form, "id", $event.target.value)
-                        }
-                      }
-                    }),
+                        })
+                      : _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.id,
+                              expression: "form.id"
+                            }
+                          ],
+                          staticClass: "form-control form-control-alternative",
+                          attrs: {
+                            disabled: true,
+                            autocomplete: "off",
+                            type: "text",
+                            id: "id",
+                            name: "id",
+                            placeholder: "ID Anggota"
+                          },
+                          domProps: { value: _vm.form.id },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "id", $event.target.value)
+                            }
+                          }
+                        }),
                     _vm._v(" "),
                     _vm.err.id
                       ? [
@@ -70635,7 +70692,8 @@ var render = function() {
             ],
             2
           )
-        ]
+        ],
+        2
       )
     ])
   ])
@@ -70785,6 +70843,18 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("td", [
+                              _c("img", {
+                                staticClass: "avatar avatar-sm rounded-circle",
+                                attrs: {
+                                  src:
+                                    "../../../../storage/preview/" +
+                                    item.anggota.foto,
+                                  alt: "profil"
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
                               _vm._v(_vm._s(_vm._f("capitalize")(item.name)))
                             ]),
                             _vm._v(" "),
@@ -70861,6 +70931,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Aksi")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ID Anggota")]),
+        _vm._v(" "),
+        _c("th"),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama Anggota")]),
         _vm._v(" "),

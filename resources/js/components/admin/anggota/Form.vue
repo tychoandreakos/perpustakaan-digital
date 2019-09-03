@@ -13,13 +13,24 @@
         </div>
         <div class="card-body">
             <form @submit.prevent="simpan">
-                <h6 class="heading-small text-muted mb-4">Anggota information</h6>
+                <h6 class="heading-small text-muted mb-4">{{ form.name | capitalize }}</h6>
+
+                <template class="text-center" v-if="this.users.id">
+                    <div class="form-group">
+                        <img class="img-thumbnail mx-auto d-block rounded-circle"
+                            :src="'../../../../storage/preview/'+form.foto" alt="profil">
+                    </div>
+                </template>
+
                 <div class="pl-lg-4">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="id">ID Anggota</label>
-                                <input autocomplete="off" type="text" v-model="form.id" id="id"
+                                <input v-if="this.users.id" :disabled="true" autocomplete="off" type="text"
+                                    v-model="form.id" id="id" class="form-control form-control-alternative" name="id"
+                                    placeholder="ID Anggota">
+                                <input v-else :disabled="true" autocomplete="off" type="text" v-model="form.id" id="id"
                                     class="form-control form-control-alternative" name="id" placeholder="ID Anggota">
                                 <template v-if="err.id">
                                     <span class="text-danger">{{ err.id[0] }}</span>
@@ -102,7 +113,7 @@
                             </div>
                         </div>
 
-                         <div class="col-lg-6">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="jurusan">Jurusan</label>
                                 <input autocomplete="off" type="text" v-model="form.jurusan" id="jurusan"
@@ -244,7 +255,7 @@
                 value: '',
                 jkelamin: ['Pria', 'Wanita'],
                 options: [],
-                img: 'Pilih Foto Anggota',
+                img: this.fetch.foto || 'Pilih Foto Anggota',
 
 
                 form: {
