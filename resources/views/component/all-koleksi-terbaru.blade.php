@@ -187,9 +187,17 @@
 
                                       <!-- Author -->
                                       <h6 class="text-uppercase text-muted mr-2 mb-0">
-                                          @foreach ($item->buku_transaksi as $p)
-                                          <p> {{ $p->pengarang->nama_pengarang }}</p>
-                                          @endforeach
+                                            @php
+                                            $i = 0;
+                                            $tr = [];   
+                                           @endphp
+                                           @foreach ($item->buku_transaksi as $p)
+                                           @php
+                                           $tr[$i++] = $p->pengarang->nama_pengarang;
+                                           // array_push($tr, );
+                                           print_r(join(', ', $tr));
+                                           @endphp
+                                           @endforeach
                                       </h6>
 
                                       <!-- Date -->

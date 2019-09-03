@@ -93,9 +93,17 @@
 
                         <!-- Author -->
                         <h6 class="text-uppercase mr-2 mb-0">
-                            @foreach ($item->buku_transaksi as $p)
-                            {{ $p->pengarang->nama_pengarang }}
-                            @endforeach
+                                @php
+                                $i = 0;
+                                $tr = [];   
+                               @endphp
+                               @foreach ($item->buku_transaksi as $p)
+                               @php
+                               $tr[$i++] = $p->pengarang->nama_pengarang;
+                               // array_push($tr, );
+                               print_r(join(', ', $tr));
+                               @endphp
+                               @endforeach
                         </h6>
 
                         @if($item->pdf)

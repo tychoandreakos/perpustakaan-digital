@@ -19,9 +19,17 @@
 
                  <!-- Text -->
                  <p class="font-size-lg text-gray-700 mb-5 mb-md-0">
-                     @foreach ($result->buku_transaksi as $p)
-                     {{ ucwords($p->pengarang->nama_pengarang) }},
-                     @endforeach
+                        @php
+                        $i = 0;
+                        $tr = [];   
+                       @endphp
+                       @foreach ($result->buku_transaksi as $p)
+                       @php
+                       $tr[$i++] = $p->pengarang->nama_pengarang;
+                       // array_push($tr, );
+                       print_r(join(', ', $tr));
+                       @endphp
+                       @endforeach
                  </p>
 
              </div>
