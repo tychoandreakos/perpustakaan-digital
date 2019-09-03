@@ -18,7 +18,7 @@
                 <template class="text-center" v-if="this.users.id">
                     <div class="form-group">
                         <img class="img-thumbnail mx-auto d-block rounded-circle"
-                            :src="'../../../../storage/preview/'+form.foto" alt="profil">
+                            :src="'../../../../storage/preview/'+form.image" alt="profil">
                     </div>
                 </template>
 
@@ -204,6 +204,7 @@
                     </template>
 
                     <input autocomplete="off" type="hidden" :value="jk">
+                    <input autocomplete="off" type="hidden" :value="profil">
                 </div>
             </form>
         </div>
@@ -243,6 +244,10 @@
                 return this.form.jk = (this.fetch.jk == 0 ? 'Pria' : 'Wanita')
             },
 
+            profil() {
+                return this.form.image = this.fetch.foto;
+            }
+
             // executeLoader()
             // {
             //     return 'halo'
@@ -270,10 +275,9 @@
                     alamat: this.fetch.alamat || '',
                     jk: this.jk || '',
                     no_telp: this.fetch.no_telp || '',
-                    foto: this.fetch.foto || '',
                     tipe: this.tipe_ang,
                     jurusan: this.fetch.jurusan || '',
-                    image: this.fetch.image || '',
+                    image: '',
                     tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
                     _method: (this.users.id ? 'PUT' : 'POST')
                 },

@@ -2145,6 +2145,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2165,7 +2166,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     jk: function jk() {
       return this.form.jk = this.fetch.jk == 0 ? 'Pria' : 'Wanita';
-    }
+    },
+    profil: function profil() {
+      return this.form.image = this.fetch.foto;
+    } // executeLoader()
+    // {
+    //     return 'halo'
+    // }
+
   },
   data: function data() {
     return {
@@ -2185,10 +2193,9 @@ __webpack_require__.r(__webpack_exports__);
         alamat: this.fetch.alamat || '',
         jk: this.jk || '',
         no_telp: this.fetch.no_telp || '',
-        foto: this.fetch.foto || '',
         tipe: this.tipe_ang,
         jurusan: this.fetch.jurusan || '',
-        image: this.fetch.image || '',
+        image: '',
         tipe_anggota_id: this.fetch.tipe_anggota_id || this.tipe_anggota,
         _method: this.users.id ? 'PUT' : 'POST'
       },
@@ -69942,7 +69949,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "img-thumbnail mx-auto d-block rounded-circle",
                     attrs: {
-                      src: "../../../../storage/preview/" + _vm.form.foto,
+                      src: "../../../../storage/preview/" + _vm.form.image,
                       alt: "profil"
                     }
                   })
@@ -70688,6 +70695,11 @@ var render = function() {
               _c("input", {
                 attrs: { autocomplete: "off", type: "hidden" },
                 domProps: { value: _vm.jk }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { autocomplete: "off", type: "hidden" },
+                domProps: { value: _vm.profil }
               })
             ],
             2

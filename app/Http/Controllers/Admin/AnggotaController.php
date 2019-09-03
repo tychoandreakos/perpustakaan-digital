@@ -200,33 +200,38 @@ class AnggotaController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        $user->save();
+        // $user->save();
 
-        $anggota = Anggota::find($request->id)->first();
+        $anggota = Anggota::find($request->id);
         $anggota->jurusan = $request->jurusan;
         $anggota->tgl_lahir = $request->tgl_lahir;
         $anggota->alamat = $request->alamat;
         $anggota->jk = ($request->jk == 'pria' || $request->jk == 'Pria') ? 0 : 1;
         $anggota->no_telp = $request->no_telp;
 
-        // if(!$request->image == $anggota->foto)
-        // {
-        //     $image = $request->get('image');
-        //     $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+        if($request->image !== $anggota->foto)
+        {
+            $image = $request->get('image');
+            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
 
-        //     $path = public_path('storage/anggota/');
-        //     $preview = public_path('storage/preview/');
+            $path = public_path('storage/anggota/');
+            $preview = public_path('storage/preview/');
             
-        //     if(!File::isDirectory($path) && !File::isDirectory($preview)){
-        //         File::makeDirectory($path, 0777, true, true);
-        //         File::makeDirectory($preview, 0777, true, true);
-        //     }
+            if(!File::isDirectory($path) && !File::isDirectory($preview)){
+                File::makeDirectory($path, 0777, true, true);
+                File::makeDirectory($preview, 0777, true, true);
+            }
 
-        //     \Image::make($request->get('image'))->crop(354, 472)->save($path.$name);
-        //     \Image::make($request->get('image'))->crop(354, 472)->fit(250, 250)->save($preview.$name);
+            if($request->image !== 'img.svg') {
+                unlink(public_path('storage/anggota/'. $anggota->foto));
+                unlink(public_path('storage/preview/'. $anggota->foto));
+            }
+
+            \Image::make($request->get('image'))->crop(354, 472)->save($path.$name);
+            \Image::make($request->get('image'))->crop(354, 472)->fit(250, 250)->save($preview.$name);
             
-        //     $anggota->foto = $name;
-        // }
+            $anggota->foto = $name;
+        }
 
 
         $anggota->save();
