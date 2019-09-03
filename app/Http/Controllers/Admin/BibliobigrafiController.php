@@ -171,6 +171,14 @@ class BibliobigrafiController extends Controller
             {
             $image = $request->get('image');
             $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+
+            $path = public_path('storage/cover/');
+            $resize = public_path('storage/resize/');
+            
+            if(!File::isDirectory($path) && !File::isDirectory($resize)){
+                File::makeDirectory($path, 0777, true, true);
+            }
+
             \Image::make($request->get('image'))->resize(115, 160)->save(public_path('storage/cover/').$name);
             \Image::make($request->get('image'))->resize(250, 308)->save(public_path('storage/resize/').$name);
         } else {
