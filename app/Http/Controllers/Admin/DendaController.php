@@ -27,6 +27,11 @@ class DendaController extends Controller
         return view('admin.master.denda.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
+    public function fetch()
+    {
+        return Denda::latest()->paginate(5);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

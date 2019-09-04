@@ -46,6 +46,11 @@ Vue.component('form-klasifikasi-component', require('./components/admin/klasifik
 Vue.component('table-bahasa-component', require('./components/admin/bahasa/Table.vue').default);
 Vue.component('form-bahasa-component', require('./components/admin/bahasa/Form.vue').default);
 
+// denda
+Vue.component('table-denda-component', require('./components/admin/denda/Table.vue').default);
+Vue.component('form-denda-component', require('./components/admin/denda/Form.vue').default);
+
+
 // topik
 Vue.component('table-topik-component', require('./components/admin/topik/Table.vue').default);
 Vue.component('form-topik-component', require('./components/admin/topik/Form.vue').default);
@@ -91,6 +96,7 @@ Vue.component('table-keterlambatan-component', require('./components/admin/keter
 // digital
 Vue.component('digital-component', require('./components/admin/digital/Table.vue').default);
 Vue.component('form-digital-component', require('./components/admin/digital/Form.vue').default);
+
 
 
 // laporan

@@ -83,6 +83,7 @@ Route::get('penerbit-fetch', 'PenerbitController@fetch')->name('penerbit.fetch')
 Route::get('buku-fetch', 'BukuController@fetch')->name('buku.fetch');
 Route::get('pengarang-fetch', 'PengarangController@fetch')->name('pengarang.fetch');
 Route::get('kota-fetch', 'KotaController@fetch')->name('kota.fetch');
+Route::get('denda-fetch', 'KotaController@fetch')->name('denda.fetch');
 Route::get('klasifikasi-fetch', 'KlasifikasiController@fetch')->name('klasifikasi.fetch');
 Route::get('bahasa-fetch', 'BahasaController@fetch')->name('bahasa.fetch');
 Route::get('tipe-anggota-fetch', 'TipeAnggotaController@fetch')->name('tipe-anggota.fetch');
