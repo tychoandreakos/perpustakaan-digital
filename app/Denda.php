@@ -17,16 +17,16 @@ class Denda extends Model
 
     public function buku()
     {
-        $this->belongsTo(Buku::class);
+        return $this->belongsTo(Buku::class);
     }
 
     public function pinjam_transaksi()
     {
-        $this->belongsTo(PinjamTransaksi::class);
+        return $this->belongsTo(PinjamTransaksi::class);
     }
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

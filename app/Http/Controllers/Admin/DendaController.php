@@ -29,7 +29,17 @@ class DendaController extends Controller
 
     public function fetch()
     {
-        return Denda::latest()->paginate(5);
+        return Denda::with(['user' => function($q) {
+            $q->select('id', 'name');
+        }, 'user.anggota_transaksi.tipe_anggota' => function($q) {
+            $q->select('id', 'denda');
+        }, 'pinjam_transaksi' => function($q) {
+            $q->select('id', 'bibliobigrafi_id', 'tgl_pinjam', 'tanggal_habis_pinjam', 'tgl_kembali');
+        }, 'pinjam_transaksi.bibliobigrafi' => function($q){
+            $q->select('id', 'pola_eksemplar');
+        }, 'buku' => function($q) {
+            $q->select('id', 'judul');
+        }])->latest()->paginate(5);
     }
 
     /**

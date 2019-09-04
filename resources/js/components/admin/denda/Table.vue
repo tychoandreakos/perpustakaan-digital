@@ -5,7 +5,7 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="mb-0">Daftar Bahasa</h3>
+                            <h3 class="mb-0">Daftar Denda</h3>
                         </div>
                         <div class="col text-right">
                             <a :href="this.route" class="btn btn-sm btn-primary"><i
@@ -19,21 +19,36 @@
                         <table class="table align-items-center table-flush text-center">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Aksi</th>
-                                    <th scope="col">Jenis Bahasa</th>
+                                    <th scope="col">ID / NPM</th>
+                                    <th scope="col">Nama Anggota</th>
+                                    <th scope="col">Kode Eksemplar</th>
+                                    <th scope="col">Buku</th>
+                                    <th scope="col">Total Hari Terlambat</th>
+                                    <th scope="col">Jumlah Bayar</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Perubahan Terakhir</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="item in datas.data" :key="item.id">
-                                    <th scope="row" style="width: 19%">
-                                        <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
-                                                class="ni ni-check-bold text-white"></i> Edit</a>
-                                        <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
-                                                class="ni ni-fat-remove text-white"></i> Hapus</button>
-                                    </th>
                                     <td>
-                                        {{ item.jenis_bahasa | capitalize}}
+                                        {{ item.user.id }}
+                                    </td>
+                                    <td>
+                                        {{ item.user.name | capitalize}}
+                                    </td>
+                                    <td>
+                                        {{ item.pinjam_transaksi.bibliobigrafi.pola_eksemplar.toUpperCase() }}
+                                    </td>
+                                    <td>{{ item.buku.judul | capitalize }}</td>
+                                    <td class="text-danger">
+                                       {{ denda(item.pinjam_transaksi.tanggal_habis_pinjam, item.user.anggota_transaksi.tipe_anggota.denda) }}
+                                    </td>
+                                    <td>
+                                        {{ item.jumlah_bayar }}
+                                    </td>
+                                    <td>
+                                       <span class="badge badge-success">Lunas</span>
                                     </td>
                                     <td>
                                         {{ item.updated_at }}
@@ -57,6 +72,9 @@
 </template>
 
 <script>
+    import * as moment from 'moment'
+    var momentRange = require('moment-range');
+    momentRange.extendMoment(moment);
     export default {
         props: ['route', 'fetch', 'index'],
         data() {
@@ -64,42 +82,20 @@
                 datas: {},
             }
         },
+        
+         filters: {
+            dateFormat(val) {
+                moment.locale('id')
+                return moment(val).format('MMMM Do YYYY');
+            }
+        },
 
         methods: {
-            edit(val) {
-                return `bahasa/${val}/edit`;
-            },
-
-            deleted(val) {
-                this.$swal({
-                    title: 'Hapus Data?',
-                    text: "Jika anda menghapus data ini, data lain kemungkinan besar akan ikut terhapus",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, hapus!'
-                }).then((result) => {
-                    if (result.value) {
-                        axios.post('/pustakawan/bahasa/' + val, {
-                                _method: 'DELETE'
-                            })
-                            .then(res => {
-                                this.$swal({
-                                    position: 'top-end',
-                                    type: 'success',
-                                    title: res.data.message.toUpperCase(),
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-
-                                setTimeout(() => {
-                                    window.location = this.index;
-                                }, 1800);
-                            })
-                            .catch(err => console.log(err))
-                    }
-                });
+           denda(val, dend) {
+                var a = moment();
+                var b = val;
+                this.total = a.diff(b, 'days') * dend;
+                return a.diff(b, 'days') + ' Hari'
             },
 
             getResults(page = 1) {
@@ -113,7 +109,7 @@
 
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
-                axios.get('/pustakawan/bahasa-search?q=' + query)
+                axios.get('/pustakawan/denda-search?q=' + query)
                     .then(res => {
                         // console.log(res)
                         this.datas = res.data
@@ -124,9 +120,13 @@
             this.getResults();
         },
     }
-
 </script>
 
 <style scoped>
+    .table td,
+    .table th {
+        font-size: 0.8125rem;
+        white-space: normal !important;
+    }
 
 </style>
