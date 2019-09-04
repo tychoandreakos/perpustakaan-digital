@@ -343,7 +343,7 @@ class LandingController extends Controller
 
             $query = $request->cari;
             $result = Buku::with(['buku_transaksi.pengarang' => function($q) use ($query) {
-                $q->select('id', 'nama_pengarang');
+                $q->select('id', 'nama_pengarang')->where('nama_pengarang', 'LIKE' ,"%".$query."%");
             }, 'buku_transaksi.penerbit', 'bibliobigrafi.gmd' => function($q) {
                 $q->select('id', 'nama_gmd')->first();
             }])->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);
@@ -371,7 +371,7 @@ class LandingController extends Controller
 
         // return
         $result = Buku::with(['buku_transaksi.pengarang' => function($q) use ($query) {
-            $q->select('id', 'nama_pengarang');
+            $q->select('id', 'nama_pengarang')->where('nama_pengarang', 'LIKE' ,"%".$query."%");
         }, 'buku_transaksi.penerbit', 'bibliobigrafi.gmd' => function($q) {
             $q->select('id', 'nama_gmd')->first();
         }])->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);
@@ -382,7 +382,7 @@ class LandingController extends Controller
     public function result($slug)
     {
        $result = Topik::with(['buku', 'buku.buku_transaksi.pengarang' => function($q) {
-            $q->select('id', 'nama_pengarang');
+        $q->select('id', 'nama_pengarang')->where('nama_pengarang', 'LIKE' ,"%".$q."%");
         }, 'buku.buku_transaksi.penerbit', 'buku.bibliobigrafi.gmd' => function($q) {
             $q->select('id', 'nama_gmd')->first();
         }])->where('slug', $slug)->first();

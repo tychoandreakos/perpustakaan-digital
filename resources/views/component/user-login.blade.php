@@ -86,7 +86,7 @@
                      <div class="col ml-n5">
 
                          <!-- Badges -->
-                         @if(empty($randomTags))
+                         @if(!empty($randomTags))
                          @foreach ($randomTags as $item)
                          <a class="badge badge-pill badge-secondary-soft"
                              href="{{ route('tags', $item->jenis_topik) }}">
