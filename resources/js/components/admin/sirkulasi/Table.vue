@@ -258,7 +258,7 @@
                                 </v-tab>
 
                                 <v-tab title="Denda">
-                                    <template v-if="denda.length > 0">
+                                    <template v-if="typeof(denda) !== 'undefined'">
                                         <div class="table-responsive">
                                             <div>
                                                 <table class="table align-items-center">
@@ -444,7 +444,7 @@
             SpinnerComponent: Spinner,
             DendaComponent: Denda,
         },
-        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back', 'terlambat', 'stores'],
+        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back', 'terlambat', 'stores2'],
         data() {
             return {
                 loading: false,
@@ -457,7 +457,7 @@
                 pinjam: {},
                 denda: {},
                 total: '',
-                stores: this.stores,
+                stores: this.stores2,
                 user: ''
             }
         },
@@ -552,7 +552,7 @@
             },
 
             geDenda() {
-                axios.get('denda/' + this.form.id)
+                axios.get('denda-user/' + this.form.id)
                     .then(res => this.denda = res.data.data)
                     .catch(err => console.log(err));
             },

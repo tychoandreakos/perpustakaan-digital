@@ -9827,7 +9827,7 @@ momentRange.extendMoment(moment__WEBPACK_IMPORTED_MODULE_2__);
     SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_1__["default"],
     DendaComponent: _Denda__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back', 'terlambat', 'stores'],
+  props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back', 'terlambat', 'stores2'],
   data: function data() {
     return {
       loading: false,
@@ -9840,7 +9840,7 @@ momentRange.extendMoment(moment__WEBPACK_IMPORTED_MODULE_2__);
       pinjam: {},
       denda: {},
       total: '',
-      stores: this.stores,
+      stores: this.stores2,
       user: ''
     };
   },
@@ -9933,7 +9933,7 @@ momentRange.extendMoment(moment__WEBPACK_IMPORTED_MODULE_2__);
     geDenda: function geDenda() {
       var _this3 = this;
 
-      axios.get('denda/' + this.form.id).then(function (res) {
+      axios.get('denda-user/' + this.form.id).then(function (res) {
         return _this3.denda = res.data.data;
       })["catch"](function (err) {
         return console.log(err);
@@ -81246,7 +81246,7 @@ var render = function() {
                           "v-tab",
                           { attrs: { title: "Denda" } },
                           [
-                            _vm.denda.length > 0
+                            typeof _vm.denda !== "undefined"
                               ? [
                                   _c(
                                     "div",

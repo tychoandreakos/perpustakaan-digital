@@ -70,6 +70,7 @@ Route::resource('anggota', 'AnggotaController');
 Route::resource('berita', 'BeritaController');
 Route::resource('info', 'InfoController');
 Route::resource('topik', 'TopikController');
+Route::resource('denda', 'DendaController');
 
 
 // transaksi file
@@ -98,7 +99,7 @@ Route::get('tamu-fetch', 'BukuTamuController@fetch')->name('tamu.fetch');
 Route::get('terlambat-fetch', 'PinjamController@terlambat')->name('terlambat.fetch');
 
 
-Route::get('denda/{id}', 'PinjamController@denda')->name('sirkulasi.denda');
+Route::get('denda-user/{id}', 'PinjamController@denda')->name('sirkulasi.denda');
 Route::post('denda/bayar', 'DendaController@store')->name('denda');
 
 

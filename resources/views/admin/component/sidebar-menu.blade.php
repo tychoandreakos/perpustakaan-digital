@@ -107,7 +107,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
+        <a class="nav-link" href="{{ route('denda.index') }}">
             <i class="ni ni-collection"></i> Laporan Denda
         </a>
     </li>
