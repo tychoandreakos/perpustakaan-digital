@@ -62,17 +62,15 @@ class DendaController extends Controller
     {
         Denda::create($request->all());
         
-        $bilio = Bibliobigrafi::find($request->bilio_id)->first();
+        $bilio = Bibliobigrafi::find($request->bilio_id);
         $bilio->status_pinjam = 0;
         $bilio->save();
 
-        $transaksi = PinjamTransaksi::where('id', $request->pinjam_transaksi_id)->first();
+        $transaksi = PinjamTransaksi::find($request->pinjam_transaksi_id);
         $transaksi->status_pinjam = 0;
         $transaksi->status_denda = 1;
         $transaksi->tgl_kembali = Carbon::now();
         $transaksi->save();
-
-
 
         return response()->json([
             'message' => 'Data Pembayaran Berhasil disimpan']);
