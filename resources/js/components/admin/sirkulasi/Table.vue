@@ -264,69 +264,67 @@
                                                 <table class="table align-items-center">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            <th scope="col" style="width: 120px;">
-                                                                Aksi
-                                                            </th>
-                                                            <th scope="col">
-                                                                Kode Eksemplar
-                                                            </th>
-                                                            <th scope="col">
-                                                                Judul
-                                                            </th>
-                                                            <th scope="col">Tipe Koleksi</th>
-                                                            <th scope="col">
-                                                                Tanggal Pinjam
-                                                            </th>
+                                                            <th style="width: 250px" scope="col">Aksi</th>
+                                                            <th scope="col">Jumlah Denda</th>
+                                                            <th scope="col">ID / NPM</th>
+                                                            <th scope="col">Nama Lengkap</th>
+                                                            <th scope="col">No Eksemplar</th>
+                                                            <th scope="col">Judul</th>
+                                                            <th scope="col">Total Hari Terlambat</th>
+                                                            <th scope="col">Tanggal Pinjam</th>
                                                             <th scope="col">Tanggal Harus Kembali</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="list">
 
                                                         <tr v-for="item in denda" :key="item.id">
-                                                            <template v-if="item.status_denda == 0">
-                                                                <template v-if="item.tanggal_habis_pinjam">
-                                                                    <th scope="row" class="name">
-                                                                        <form @submit.prevent="back2(item.id)"
-                                                                            style="display: inline">
-                                                                            <button type="submit"
-                                                                                class="btn btn-sm btn-success"
-                                                                                data-toggle="tooltip"
-                                                                                data-placement="bottom"
-                                                                                title="Kembalikan Eksemplar Ini">
-                                                                                <i
-                                                                                    class="ni ni-curved-next text-white"></i>
-                                                                            </button>
-                                                                        </form>
-                                                                        <form style="display: inline"
-                                                                            @submit.prevent="perpanjang(item.id, form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku)">
-                                                                            <button type="submit"
-                                                                                class="btn btn-sm btn-primary"
-                                                                                data-toggle="tooltip"
-                                                                                data-placement="bottom"
-                                                                                title="Perpanjang Buku">
-                                                                                <i class="ni ni-fat-add text-white"></i>
-                                                                            </button>
-                                                                        </form>
-                                                                    </th>
-                                                                    <td>
-                                                                        {{ item.bibliobigrafi.pola_eksemplar | capitalize }}
-                                                                    </td>
-                                                                    <td>
-                                                                        {{ item.bibliobigrafi.buku.judul | capitalize }}
-                                                                    </td>
+                                                            <td>
+                                                                <button style="display: inline" type="button"
+                                                                    class="btn btn-sm btn-white" data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    :title="'Kirim email ke '+form.email">
+                                                                    Kirim Email
+                                                                </button>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <button @click="showDenda" style="display: inline"
+                                                                    type="button" class="btn btn-sm btn-success"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Bayar Disini">
+                                                                    RP. {{ total }}
+                                                                </button>
 
-                                                                    <td>
-                                                                        {{ item.bibliobigrafi.klasifikasi.tipe_klasifikasi | capitalize }}
-                                                                    </td>
-                                                                    <td>
-                                                                        {{ item.tgl_pinjam }}
-                                                                    </td>
-                                                                    <td>
-                                                                        {{ item.tanggal_habis_pinjam }}
-                                                                    </td>
-                                                                </template>
-                                                            </template>
+                                                            </td>
+                                                            <td>
+                                                                {{ form.id }}
+                                                            </td>
+                                                            <td>
+                                                                {{ form.name | capitalize}}
+                                                            </td>
+                                                            <td>
+                                                                {{ item.bibliobigrafi.pola_eksemplar | capitalize}}
+                                                            </td>
+                                                            <td>
+                                                                {{ item.bibliobigrafi.buku.judul }}
+                                                            </td>
+                                                            <td class="text-danger">
+                                                                {{ denda3(item.tanggal_habis_pinjam, form.anggota_transaksi.tipe_anggota.denda) }}
+                                                            </td>
+                                                            <td>
+                                                                {{ item.tgl_pinjam | dateFormat }}
+                                                            </td>
+                                                            <td>
+                                                                {{ item.tanggal_habis_pinjam | dateFormat }}
+                                                            </td>
+
+                                                            <modal height="auto" name="eksemplar">
+                                                                <denda-component :user="user" @closeDenda="hideDenda"
+                                                                    @updateDenda="getResults" :denda="item"
+                                                                    :total="total" :store="stores">
+                                                                </denda-component>
+                                                            </modal>
                                                         </tr>
+
 
 
                                                     </tbody>
@@ -429,6 +427,8 @@
     import Spinner from '../tools/Spanner';
     import * as moment from 'moment'
     var momentRange = require('moment-range');
+    import Denda from './Denda';
+
     momentRange.extendMoment(moment);
     import {
         VueTabs,
@@ -442,8 +442,9 @@
             VueTabs,
             VTab,
             SpinnerComponent: Spinner,
+            DendaComponent: Denda,
         },
-        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back'],
+        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back', 'terlambat', 'stores'],
         data() {
             return {
                 loading: false,
@@ -454,7 +455,10 @@
                 option: [],
                 date2: '',
                 pinjam: {},
-                denda: {}
+                denda: {},
+                total: '',
+                stores: this.stores,
+                user: ''
             }
         },
 
@@ -473,6 +477,11 @@
 
             forms() {
                 if (this.value.length > 0) {
+                    this.user = {
+                        id: this.form.id,
+                        name: this.form.name
+                    }
+
                     return {
                         user_id: this.form.id,
                         bibliobigrafi: this.value.map(r => r.id),
@@ -495,6 +504,11 @@
         },
 
         filters: {
+            dateFormat(val) {
+                moment.locale('id')
+                return moment(val).format('MMMM Do YYYY');
+            },
+
             convert(val) {
                 var a = moment();
                 var b = val;
@@ -509,6 +523,10 @@
                     .catch(err => console.log(err));
             },
 
+            getResults() {
+                return window.location = this.terlambat;
+            },
+
             getPinjaman() {
                 axios.post('/pustakawan/pinjaman', {
                         params: {
@@ -517,6 +535,20 @@
                     })
                     .then(res => this.pinjam = res.data.data)
                     .catch(err => console.log(err))
+            },
+
+            showDenda() {
+                this.$modal.show('eksemplar');
+            },
+            hideDenda() {
+                this.$modal.hide('eksemplar');
+            },
+
+            denda3(val, dend) {
+                var a = moment();
+                var b = val;
+                this.total = a.diff(b, 'days') * dend;
+                return a.diff(b, 'days') + ' Hari'
             },
 
             geDenda() {
@@ -660,7 +692,6 @@
             this.getEksemplar();
         },
     }
-
 </script>
 
 <style scoped>
@@ -678,5 +709,4 @@
     .buku:hover {
         color: #233dd2;
     }
-
 </style>
