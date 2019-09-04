@@ -19,7 +19,7 @@ class DendaController extends Controller
      */
     public function index()
     {
-        $title = 'Daftar GMD';
+        $title = 'Daftar Denda';
         $koleksi = Bibliobigrafi::all()->count();
         $anggota_count = User::all()->count();
         $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();

@@ -5542,10 +5542,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 var momentRange = __webpack_require__(/*! moment-range */ "./node_modules/moment-range/dist/moment-range.js");
@@ -76047,25 +76043,7 @@ var render = function() {
         "div",
         { staticClass: "card shadow" },
         [
-          _c("div", { staticClass: "card-header border-0" }, [
-            _c("div", { staticClass: "row align-items-center" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "col text-right" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-sm btn-primary",
-                    attrs: { href: this.route }
-                  },
-                  [
-                    _c("i", { staticClass: "ni ni-fat-add text-white" }),
-                    _vm._v(" Tambah Bahasa")
-                  ]
-                )
-              ])
-            ])
-          ]),
+          _vm._m(0),
           _vm._v(" "),
           _vm.datas.data.length > 0
             ? [
@@ -76183,8 +76161,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("h3", { staticClass: "mb-0" }, [_vm._v("Daftar Denda")])
+    return _c("div", { staticClass: "card-header border-0" }, [
+      _c("div", { staticClass: "row align-items-center" }, [
+        _c("div", { staticClass: "col" }, [
+          _c("h3", { staticClass: "mb-0" }, [_vm._v("Daftar Denda")])
+        ])
+      ])
     ])
   },
   function() {
