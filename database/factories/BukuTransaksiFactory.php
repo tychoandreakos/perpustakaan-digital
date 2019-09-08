@@ -12,10 +12,10 @@ use App\Kota;
 
 $factory->define(BukuTransaksi::class, function (Faker $faker) {
     return [
-        'buku_id' => factory(Buku::class)->create()->id,
-        'pengarang_id' => factory(Pengarang::class)->create()->id,
-        'kota_id' => factory(Kota::class)->create()->id,
-        'bahasa_id' => factory(Bahasa::class)->create()->id,
-        'penerbit_id' => factory(Penerbit::class)->create()->id,
+        'buku_id' => Buku::all()->random()->id,
+        'pengarang_id' => Pengarang::all()->random()->id,
+        'kota_id' => Kota::all()->random()->id,
+        'bahasa_id' => Bahasa::all()->random()->id,
+        'penerbit_id' => Penerbit::all()->random()->id,
     ];
 });

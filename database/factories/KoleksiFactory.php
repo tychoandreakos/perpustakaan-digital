@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Koleksi::class, function (Faker $faker) {
     return [
-        //
+        'tipe_koleksi' => $faker->sentence(4)
     ];
 });
