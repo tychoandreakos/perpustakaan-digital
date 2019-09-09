@@ -27872,9 +27872,9 @@ var Charts = function () {
   var mode = 'light'; //(themeMode) ? themeMode : 'light';
 
   var fonts = {
-    base: 'Open Sans' // Colors
+    base: 'Open Sans'
+  }; // Colors
 
-  };
   var colors = {
     gray: {
       100: '#f6f9fc',
@@ -28054,9 +28054,9 @@ var Charts = function () {
             return content;
           }
         }
-      } // yAxes
+      }
+    }; // yAxes
 
-    };
     Chart.scaleService.updateScaleDefaults('linear', {
       gridLines: {
         borderDash: [2],
