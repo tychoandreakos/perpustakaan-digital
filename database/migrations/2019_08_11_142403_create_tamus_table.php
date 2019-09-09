@@ -15,8 +15,10 @@ class CreateTamusTable extends Migration
     {
         Schema::create('buku_tamu', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('npm', 20);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->reference('id')->on('user');
         });
     }
 

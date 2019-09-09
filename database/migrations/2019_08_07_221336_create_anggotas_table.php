@@ -20,7 +20,7 @@ class CreateAnggotasTable extends Migration
             $table->date('tgl_expired');
             $table->string('alamat')->nullable();
             $table->boolean('jk')->nullable();
-            $table->string('no_telp', 20)->nullable();
+            $table->string('no_telp', 50)->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
 
