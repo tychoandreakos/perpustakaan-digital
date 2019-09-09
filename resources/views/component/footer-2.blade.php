@@ -6,7 +6,11 @@
                 <div class="col-12 col-md-4 col-lg-4">
    
                     <!-- Brand -->
-                    <img src="{{ asset('img/brand.svg') }}" alt="..." class="footer-brand img-fluid mb-2">
+                    <img src="{{ asset('img/logo.svg') }}" class="navbar-brand-img" alt="...">
+                    <h4 style="display: inline" class="font-weight-bold text-white">Digital Library.</h4>
+   
+                    <!-- Text -->
+                    <p class="font-size-sm mt-2 text-gray-700 mb-2">
    
                     <!-- Text -->
                     <p class="font-size-sm text-gray-700 mb-2">
