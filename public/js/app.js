@@ -8904,6 +8904,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['fetch'],
   data: function data() {
@@ -15677,7 +15700,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.table td[data-v-5519f0b5],\n.table th[data-v-5519f0b5] {\n    font-size: 0.8125rem;\n    white-space: normal !important;\n}\n\n", ""]);
+exports.push([module.i, "\n.table td[data-v-5519f0b5],\n.table th[data-v-5519f0b5] {\n    font-size: 0.8125rem;\n    white-space: normal !important;\n}\n", ""]);
 
 // exports
 
@@ -80049,47 +80072,104 @@ var render = function() {
                       _c(
                         "tbody",
                         _vm._l(_vm.datas.data, function(item) {
-                          return _c("tr", { key: item.id }, [
-                            _c("td", [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm._f("capitalize")(item.nama)) +
-                                  "\n                                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm._f("capitalize")(item.jurusan)) +
-                                  "\n                                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm._f("capitalize")(item.alamat)) +
-                                  "\n                                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm._f("capitalize")(item.keperluan)) +
-                                  "\n                                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(item.updated_at) +
-                                  "\n                                "
-                              )
-                            ])
-                          ])
+                          return _c(
+                            "tr",
+                            { key: item.id },
+                            [
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(item.user_id) +
+                                    "\n                                "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(
+                                      _vm._f("capitalize")(item.user.name)
+                                    ) +
+                                    "\n                                "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              item.user.anggota.jurusan
+                                ? [
+                                    _c("td", [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            _vm._f("capitalize")(
+                                              item.user.anggota.jurusan
+                                            )
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ])
+                                  ]
+                                : [
+                                    _c(
+                                      "td",
+                                      {
+                                        staticClass: "small font-weight-light"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        Tidak ada data!\n                                    "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(
+                                      _vm._f("capitalize")(item.user.email)
+                                    ) +
+                                    "\n                                "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              item.user.anggota.alamat
+                                ? [
+                                    _c("td", [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            _vm._f("capitalize")(
+                                              item.user.anggota.alamat
+                                            )
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ])
+                                  ]
+                                : [
+                                    _c(
+                                      "td",
+                                      {
+                                        staticClass: "small font-weight-light"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        Tidak ada data!\n                                    "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(item.updated_at) +
+                                    "\n                                "
+                                )
+                              ])
+                            ],
+                            2
+                          )
                         }),
                         0
                       )
@@ -80139,13 +80219,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("NPM / ID")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nama")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Jurusan")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Alamat")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Keperluan")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Alamat")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Jam Masuk")])
       ])

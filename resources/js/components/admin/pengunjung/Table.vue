@@ -15,27 +15,50 @@
                         <table class="table align-items-center table-flush text-center">
                             <thead class="thead-light">
                                 <tr>
+                                    <th scope="col">NPM / ID</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Jurusan</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Alamat</th>
-                                    <th scope="col">Keperluan</th>
                                     <th scope="col">Jam Masuk</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="item in datas.data" :key="item.id">
                                     <td>
-                                        {{ item.nama | capitalize}}
+                                        {{ item.user_id }}
                                     </td>
-                                     <td>
-                                        {{ item.jurusan| capitalize}}
+                                    <td>
+                                        {{ item.user.name | capitalize}}
                                     </td>
-                                     <td>
-                                        {{ item.alamat | capitalize}}
+
+                                    <template v-if="item.user.anggota.jurusan">
+                                        <td>
+                                            {{ item.user.anggota.jurusan| capitalize}}
+                                        </td>
+                                    </template>
+                                    <template v-else>
+                                        <td class="small font-weight-light">
+                                            Tidak ada data!
+                                        </td>
+                                    </template>
+                                    
+                                    <td>
+                                        {{ item.user.email | capitalize}}
                                     </td>
-                                     <td>
-                                        {{ item.keperluan | capitalize}}
-                                    </td>
+
+                                     <template v-if="item.user.anggota.alamat">
+                                        <td>
+                                            {{ item.user.anggota.alamat| capitalize}}
+                                        </td>
+                                    </template>
+                                    <template v-else>
+                                        <td class="small font-weight-light">
+                                            Tidak ada data!
+                                        </td>
+                                    </template>
+
+
                                     <td>
                                         {{ item.updated_at }}
                                     </td>
@@ -89,7 +112,6 @@
             this.getResults();
         },
     }
-
 </script>
 
 <style scoped>
@@ -98,5 +120,4 @@
         font-size: 0.8125rem;
         white-space: normal !important;
     }
-
 </style>

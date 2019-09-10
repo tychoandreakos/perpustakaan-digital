@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-xl-3 col-lg-6">
                   <div class="card card-stats mb-4 mb-xl-0">
-                    <div class="card-body">
+                  <a href="{{ route('anggota.index') }}" class="card-body">
                       <div class="row">
                         <div class="col">
                           <h5 class="card-title text-uppercase text-muted mb-0">Approval Anggota</h5>
@@ -79,7 +79,7 @@
                       <p class="mt-3 mb-0 text-muted text-sm">
                         <span>Total anggota baru yang belum disetujui</span>
                       </p>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>

@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasOne(Anggota::class);
     }
 
+    public function buku_tamu()
+    {
+        return $this->hasMany(Tamu::class);
+    }
+
     public function anggota_transaksi()
     {
         return $this->hasOne(AnggotaTransaksi::class);

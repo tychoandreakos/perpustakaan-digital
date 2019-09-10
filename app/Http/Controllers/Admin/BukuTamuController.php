@@ -10,7 +10,11 @@ class BukuTamuController extends Controller
 {
     public function fetch()
     {
-        return Tamu::latest()->paginate(10);
+        return Tamu::with(['user' => function($q) {
+            $q->select('id', 'id', 'name', 'email');
+        } ,'user.anggota' => function($q) {
+            $q->select('user_id', 'jurusan', 'alamat');
+        }])->latest()->paginate(75);
     }
 
         public function getAllMonth() {
@@ -41,12 +45,15 @@ class BukuTamuController extends Controller
 
             $search = $request->q;
 
-            return Tamu::where('nama','LIKE',"%$search%")
-            ->orWhere('alamat','LIKE',"%$search%")
-            ->orWhere('jurusan','LIKE',"%$search%")
-            // ->orWhere('isbn_isnn','LIKE',"%$search%")
+            return Tamu::with(['user' => function($q) {
+                $q->select('id', 'id', 'name', 'email');
+            } ,'user.anggota' => function($q) {
+                $q->select('user_id', 'jurusan', 'alamat');
+            }])->whereHas('user', function($q) use ($search){
+                $q->where('name', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%");
+            })
             ->latest()
-            ->paginate(5);
+            ->paginate(75);
         }
 
 

@@ -43,13 +43,21 @@ class LandingController extends Controller
     public function tamu_store(Request $request)
     {
         $validation = $request->validate([
-            'npm' => 'required|min:3',
+            'user_id' => 'required|min:3',
         ]);
+
+        $user = User::find($request->user_id);
+        if(!$user) {
+            return response()->json([
+                'type' => false,
+                'message' => 'Maaf, NPM yang anda masukkan tidak dapat kami proses!, silahkan masukkan ulang NPM anda.']);
+        }
 
         Tamu::create($validation);
 
         return response()->json([
-            'message' => 'Halo, Selamat Datang']);
+            'type' => true,
+            'message' => 'Halo '. ucwords($user->name) .', Selamat Datang']);
     }
 
     public function update_profile(Request $request)

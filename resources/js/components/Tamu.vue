@@ -5,9 +5,9 @@
                 <label for="keperluan">
                    NPM / ID*
                 </label>
-                <input autocomplete="off" type="text" v-model="form.npm" class="form-control" id="npm"
+                <input autocomplete="off" type="text" v-model="form.user_id" class="form-control" id="user_id"
                     placeholder="Masukkan NPM / ID">
-                <template v-if="err.npm">
+                <template v-if="err.user_id">
                     <span class="text-danger">{{ err.keperluan[0] }}</span>
                 </template>
             </div>
@@ -36,9 +36,9 @@
 
         computed: {
             check() {
-                let npm = this.form.npm;
+                let user_id = this.form.user_id;
 
-                return npm;
+                return user_id;
             }
         },
 
@@ -50,7 +50,7 @@
             return {
 
                 form: {
-                    npm: '',
+                    user_id: '',
                     _method: 'POST'
                 },
                 loading: false,
@@ -65,18 +65,29 @@
                 this.loading = true;
                 axios.post(this.store, this.form)
                     .then(res => {
-                        this.$swal({
+                      if(!res.data.type) {
+                            this.$swal({
+                            position: 'top-end',
+                            type: 'warning',
+                            title: res.data.message.toUpperCase(),
+                            showConfirmButton: false,
+                            timer: 4000
+                        });
+                      } else {
+                          this.$swal({
                             position: 'top-end',
                             type: 'success',
                             title: res.data.message.toUpperCase(),
                             showConfirmButton: false,
-                            timer: 3000
+                            timer: 4000
                         });
-                        this.form.npm = '';
+                      }
+                        
+                        this.form.user_id = '';
                         setTimeout(() => {
                             this.loading = false;
                             this.err = {};
-                        }, 3200);
+                        }, 4200);
                     })
                     .catch(err => {
                         this.err = err.response.data.errors;

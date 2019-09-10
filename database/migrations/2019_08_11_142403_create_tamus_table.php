@@ -18,7 +18,7 @@ class CreateTamusTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('user_id')->reference('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

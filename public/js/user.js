@@ -1874,15 +1874,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     check: function check() {
-      var npm = this.form.npm;
-      return npm;
+      var user_id = this.form.user_id;
+      return user_id;
     }
   },
   props: ['store'],
   data: function data() {
     return {
       form: {
-        npm: '',
+        user_id: '',
         _method: 'POST'
       },
       loading: false,
@@ -1895,19 +1895,29 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       axios.post(this.store, this.form).then(function (res) {
-        _this.$swal({
-          position: 'top-end',
-          type: 'success',
-          title: res.data.message.toUpperCase(),
-          showConfirmButton: false,
-          timer: 3000
-        });
+        if (!res.data.type) {
+          _this.$swal({
+            position: 'top-end',
+            type: 'warning',
+            title: res.data.message.toUpperCase(),
+            showConfirmButton: false,
+            timer: 4000
+          });
+        } else {
+          _this.$swal({
+            position: 'top-end',
+            type: 'success',
+            title: res.data.message.toUpperCase(),
+            showConfirmButton: false,
+            timer: 4000
+          });
+        }
 
-        _this.form.npm = '';
+        _this.form.user_id = '';
         setTimeout(function () {
           _this.loading = false;
           _this.err = {};
-        }, 3200);
+        }, 4200);
       })["catch"](function (err) {
         _this.err = err.response.data.errors;
         _this.loading = false;
@@ -58738,29 +58748,29 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.npm,
-                  expression: "form.npm"
+                  value: _vm.form.user_id,
+                  expression: "form.user_id"
                 }
               ],
               staticClass: "form-control",
               attrs: {
                 autocomplete: "off",
                 type: "text",
-                id: "npm",
+                id: "user_id",
                 placeholder: "Masukkan NPM / ID"
               },
-              domProps: { value: _vm.form.npm },
+              domProps: { value: _vm.form.user_id },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "npm", $event.target.value)
+                  _vm.$set(_vm.form, "user_id", $event.target.value)
                 }
               }
             }),
             _vm._v(" "),
-            _vm.err.npm
+            _vm.err.user_id
               ? [
                   _c("span", { staticClass: "text-danger" }, [
                     _vm._v(_vm._s(_vm.err.keperluan[0]))
