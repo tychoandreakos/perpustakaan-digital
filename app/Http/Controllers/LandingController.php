@@ -27,7 +27,8 @@ class LandingController extends Controller
         $berita =  Berita::with('admin')->latest()->limit(3)->get();
         $buku = Buku::all()->count();
         $anggota = User::all()->count();
-        return view('landing', compact('berita', 'buku', 'anggota'));
+        $pdf = Buku::whereNotNull('pdf')->get()->count();
+        return view('landing', compact('berita', 'buku', 'anggota', 'pdf'));
     }
     
     public function approval()
