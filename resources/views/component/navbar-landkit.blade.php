@@ -7,12 +7,12 @@
              @guest
              <a class="navbar-brand" href="{{ route('landing') }}">
                  <img src="{{ asset('img/logo.svg') }}" class="navbar-brand-img" alt="...">
-                 <h4 style="display: inline" class="font-weight-bold">Digital Library.</h4>
+                 <h4 style="display: inline" class="font-weight-bold">STMIK Digital Library.</h4>
              </a>
              @else
              <a class="navbar-brand" href="{{ route('beranda') }}">
                 <img src="{{ asset('img/logo.svg') }}" class="navbar-brand-img" alt="...">
-                 <h4 style="display: inline" class="font-weight-bold">Digital Library.</h4>
+                 <h4 style="display: inline" class="font-weight-bold">STMIK Digital Library.</h4>
              </a>
              @endguest
              <!-- Toggler -->

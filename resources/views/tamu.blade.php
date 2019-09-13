@@ -108,6 +108,18 @@
             </div>
             <div style="margin-top: -5.5px" class="col-12 col-md-5 py-8 py-md-14 order-md-1" data-aos="fade-right">
 
+                    @guest
+                    <a class="navbar-brand" href="{{ route('landing') }}">
+                        <img src="{{ asset('img/logo.svg') }}" class="navbar-brand-img" alt="...">
+                        <h4 style="display: inline" class="font-weight-bold">STMIK Digital Library.</h4>
+                    </a>
+                    @else
+                    <a class="navbar-brand" href="{{ route('beranda') }}">
+                       <img src="{{ asset('img/logo.svg') }}" class="navbar-brand-img" alt="...">
+                        <h4 style="display: inline" class="font-weight-bold">STMIK Digital Library.</h4>
+                    </a>
+                    @endguest
+
                 <!-- Heading -->
                 <h1 class="display-3 ">
                     Silahkan Isi <span class="text-primary">Data Diri</span> Anda.
