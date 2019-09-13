@@ -6,6 +6,7 @@
 
 @include('component.hero')
 @include('component.fitur')
+
     @if(empty($berita))
     @include('component.news')
     @endif

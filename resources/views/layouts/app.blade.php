@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/user.css') }}">
-
     <style>
         * {
             outline: none;
@@ -34,10 +33,6 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    <!-- Libs JS -->
-    {{-- <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script> --}}
-
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.8.2/countUp.min.js'></script>
@@ -54,9 +49,5 @@
     <script src="{{ asset('js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/user.js') }}"></script>
     <script src="{{ asset('js/share.js') }}"></script>
-
 </body>
-
-<!-- Mirrored from landkit.goodthemes.co/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 26 Aug 2019 03:35:28 GMT -->
-
 </html>

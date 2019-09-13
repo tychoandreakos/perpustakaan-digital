@@ -43,7 +43,8 @@
         },
 
         props: [
-            'store'
+            'store',
+            'index'
         ],
 
         data() {
@@ -73,21 +74,28 @@
                             showConfirmButton: false,
                             timer: 4000
                         });
+
+                          this.form.user_id = '';
+                        setTimeout(() => {
+                            this.loading = false;
+                            this.err = {};
+                        }, 3700);
                       } else {
                           this.$swal({
                             position: 'top-end',
                             type: 'success',
                             title: res.data.message.toUpperCase(),
                             showConfirmButton: false,
-                            timer: 4000
+                            timer: 3500
                         });
-                      }
-                        
-                        this.form.user_id = '';
+
+                          this.form.user_id = '';
                         setTimeout(() => {
                             this.loading = false;
                             this.err = {};
-                        }, 4200);
+                            window.location = this.index;
+                        }, 3700);
+                      }
                     })
                     .catch(err => {
                         this.err = err.response.data.errors;

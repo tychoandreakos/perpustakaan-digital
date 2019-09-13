@@ -1,0 +1,110 @@
+
+:root {
+    --blue: #5e72e4;
+    --indigo: #5603ad;
+    --purple: #8965e0;
+    --pink: #f3a4b5;
+    --red: #f5365c;
+    --orange: #fb6340;
+    --yellow: #ffd600;
+    --green: #2dce89;
+    --teal: #11cdef;
+    --cyan: #2bffc6;
+    --white: #fff;
+    --gray: #8898aa;
+    --gray-dark: #32325d;
+    --light: #ced4da;
+    --lighter: #e9ecef;
+    --primary: #5e72e4;
+    --secondary: #f7fafc;
+    --success: #2dce89;
+    --info: #11cdef;
+    --warning: #fb6340;
+    --danger: #f5365c;
+    --light: #adb5bd;
+    --dark: #212529;
+    --default: #172b4d;
+    --white: #fff;
+    --neutral: #fff;
+    --darker: black;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: Open Sans, sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+    
+  a.bg-translucent-default:hover,
+  a.bg-translucent-default:focus,
+  button.bg-translucent-default:hover,
+  button.bg-translucent-default:focus {
+    background-color: rgba(9, 17, 30, 0.6) !important;
+  }
+  
+  .bg-gradient-default {
+    background: linear-gradient(87deg, #172b4d 0, #1a174d 100%) !important;
+  }
+  
+  
+  .chart {
+    position: relative;
+    height: 350px;
+  }
+  
+  .chart-sm {
+    height: 230px;
+  }
+  
+  .chart-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+    font-size: 0.875rem;
+    text-align: center;
+    color: #8898aa;
+  }
+  
+  .chart-legend-item {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .chart-legend-item+.chart-legend-item {
+    margin-left: 1rem;
+  }
+  
+  .chart-legend-indicator {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.375rem;
+    border-radius: 50%;
+  }
+  
+  #chart-tooltip {
+    z-index: 0;
+  }
+  
+  #chart-tooltip .arrow {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateX(-0.5rem);
+  }
+  
+  .chart-info-overlay {
+    position: absolute;
+    top: 0;
+    left: 5%;
+    max-width: 350px;
+    padding: 20px;
+    z-index: 1;
+  }
+  

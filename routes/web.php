@@ -26,6 +26,7 @@ Route::get('tamu', 'LandingController@tamu')->name('tamu');
 Route::get('buku/{slug}', 'LandingController@buku')->name('buku');
 Route::post('tamu', 'LandingController@tamu_store')->name('tamu.store');
 Route::get('search', 'LandingController@search')->name('search');
+Route::get('pengunjung-chart', 'LandingController@chart');
 
 
 Route::middleware(['auth'])->group(function () {

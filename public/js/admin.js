@@ -27300,7 +27300,7 @@ $(document).ready(function () {
           data: {
             labels: res.data.months,
             datasets: [{
-              label: 'Anggota',
+              label: 'Grafik Buku Tamu',
               data: res.data.post_count_data
             }]
           }
