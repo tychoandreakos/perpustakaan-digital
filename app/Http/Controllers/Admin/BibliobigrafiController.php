@@ -16,6 +16,7 @@ use App\Buku;
 use App\BukuTransaksi;
 use App\EksemplarPola;
 use App\EksemplarTransaksi;
+use App\GmdTransaksi;
 use App\Koleksi;
 use App\PinjamTransaksi;
 use App\Topik;
@@ -238,11 +239,18 @@ class BibliobigrafiController extends Controller
         $requestBilio = $request->all();
         $requestBilio['buku_id'] = $buku->id;
         $requestBilio['klasifikasi_id'] = $request->klasifikasi_id;
-        $requestBilio['gmd_id'] = $request->gmd_id;
         $requestBilio['pola_eksemplar'] = $eks->pola_eksemplar;
         $requestBilio['koleksi_id'] = $request->koleksi_id;
         $requestBilio['no_panggil'] = $request->no_panggil;
-        Bibliobigrafi::create($requestBilio);
+        $bibliobigrafi = Bibliobigrafi::create($requestBilio);
+
+
+        foreach ($request->gmd_id as $gmd) {
+            $requestTrans = $request->all();
+            $requestTrans['bibliobigrafi_id'] = $bibliobigrafi;
+            $requestTrans['gmd_id'] = $gmd;   
+            GmdTransaksi::create($requestTrans);
+       }
 
        }
 

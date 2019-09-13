@@ -17,7 +17,6 @@ class CreateBibliobigrafisTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('buku_id');
             $table->unsignedBigInteger('klasifikasi_id');
-            $table->unsignedBigInteger('gmd_id');
             $table->string('pola_eksemplar');
             $table->timestamps();
 

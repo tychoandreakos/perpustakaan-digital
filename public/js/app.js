@@ -3751,7 +3751,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     gmd2: function gmd2() {
-      return this.form.gmd_id = this.gmd_id.id;
+      return this.form.gmd_id = this.gmd_id.map(function (gmd) {
+        return gmd.id;
+      });
     },
     kota2: function kota2() {
       return this.form.kota_id = this.kota_id.id;
@@ -4314,6 +4316,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['tipeklasifikasi'],
@@ -4323,6 +4332,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
+        kode_klasifikasi: '',
         tipe_klasifikasi: ''
       },
       loading: false
@@ -72479,6 +72489,7 @@ var render = function() {
                         staticClass: "form-control form-control-alternative",
                         attrs: {
                           type: "text",
+                          autocomplete: "off",
                           id: "edisi",
                           name: "edisi",
                           placeholder: "Edisi"
@@ -73141,6 +73152,7 @@ var render = function() {
                           {
                             staticClass: "mt-1",
                             attrs: {
+                              multiple: true,
                               options: _vm.gmdData,
                               "group-label": "language",
                               "group-select": true,
@@ -74518,7 +74530,42 @@ var render = function() {
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "form-group" }, [
               _c("label", { attrs: { for: "prefix" } }, [
-                _vm._v("Nama Klasifikasi")
+                _vm._v("Kode Klasifikasi")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  { name: "focus", rawName: "v-focus" },
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.kode_klasifikasi,
+                    expression: "form.kode_klasifikasi"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  type: "text",
+                  placeholder: "Nama Klasifikasi"
+                },
+                domProps: { value: _vm.form.kode_klasifikasi },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "kode_klasifikasi", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "prefix" } }, [
+                _vm._v("Jenis Klasifikasi")
               ]),
               _vm._v(" "),
               _c("input", {

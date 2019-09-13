@@ -62,7 +62,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="edisi">Edisi</label>
-                                <input type="text" v-model="form.edisi" id="edisi"
+                                <input type="text" autocomplete="off" v-model="form.edisi" id="edisi"
                                     class="form-control form-control-alternative" name="edisi" placeholder="Edisi">
                                 <template v-if="err.edisi">
                                     <span class="text-danger mt-1">{{ err.edisi[0] }}</span>
@@ -235,7 +235,7 @@
                                         </button>
                                     </div>
                                     <label class="form-control-label" for="gmd">GMD*</label>
-                                    <multiselect class="mt-1" v-model="gmd_id" :options="gmdData" group-label="language"
+                                    <multiselect class="mt-1" v-model="gmd_id"  :multiple="true" :options="gmdData" group-label="language"
                                         :group-select="true" placeholder="Pilih gmd ..." track-by="nama_gmd"
                                         label="nama_gmd"><span slot="noResult">Oops! No
                                             elements found.
@@ -662,7 +662,7 @@
             },
 
             gmd2() {
-                return this.form.gmd_id = this.gmd_id.id
+                return this.form.gmd_id = this.gmd_id.map(gmd => gmd.id);
             },
 
             kota2() {

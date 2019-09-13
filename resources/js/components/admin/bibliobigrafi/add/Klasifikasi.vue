@@ -5,9 +5,16 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="prefix">Nama Klasifikasi</label>
-                        <input v-focus autocomplete="off" type="text" class="form-control" v-model="form.tipe_klasifikasi"
-                            placeholder="Nama Klasifikasi">
+                        <label for="prefix">Kode Klasifikasi</label>
+                        <input v-focus autocomplete="off" type="text" class="form-control"
+                            v-model="form.kode_klasifikasi" placeholder="Nama Klasifikasi">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="prefix">Jenis Klasifikasi</label>
+                        <input v-focus autocomplete="off" type="text" class="form-control"
+                            v-model="form.tipe_klasifikasi" placeholder="Nama Klasifikasi">
                     </div>
                 </div>
 
@@ -43,6 +50,7 @@
         data() {
             return {
                 form: {
+                    kode_klasifikasi: '',
                     tipe_klasifikasi: ''
                 },
                 loading: false,
@@ -84,5 +92,4 @@
         }
 
     }
-
 </script>

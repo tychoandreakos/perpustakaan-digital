@@ -73,7 +73,7 @@
                 <i class="ni ni-tablet-button text-success"></i> Digital Library
             </a>
             <div class="dropdown-menu" style="left: 15px;">
-                <a href="{{ route('landing') }}" class="dropdown-item">Halaman Digital Library</a>
+                <a href="{{ route('landing') }}" target="_blank" class="dropdown-item">Halaman Digital Library</a>
                 <a href="{{ route('berita.index') }}" class="dropdown-item">Berita</a>
                 <a href="{{ route('info.index') }}" class="dropdown-item">Atur Info Perpustakaan</a>
             </div>

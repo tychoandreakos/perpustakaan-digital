@@ -12,7 +12,6 @@ class Bibliobigrafi extends Model
     protected $fillable = [
         'buku_id',
         'klasifikasi_id',
-        'gmd_id',
         'pola_eksemplar',
         'koleksi_id',
         'no_panggil',
