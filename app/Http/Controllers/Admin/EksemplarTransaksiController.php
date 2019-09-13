@@ -33,7 +33,7 @@ class EksemplarTransaksiController extends Controller
             $q->select('id');
         }, 'klasifikasi' => function($q) {
             $q->select('id', 'tipe_klasifikasi');
-        }])->latest()->paginate(20);
+        }])->latest()->paginate(50);
     }
 
     public function search(Request $request)

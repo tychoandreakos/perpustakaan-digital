@@ -39,7 +39,7 @@ class DendaController extends Controller
             $q->select('id', 'pola_eksemplar');
         }, 'buku' => function($q) {
             $q->select('id', 'judul');
-        }])->latest()->paginate(5);
+        }])->latest()->paginate(50);
     }
 
     /**

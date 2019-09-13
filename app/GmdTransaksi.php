@@ -11,4 +11,15 @@ class GmdTransaksi extends Model
         'biblibigrafi_id',
         'gmd_id'
     ];
+
+
+    public function bibliobigrafi()
+    {
+        return $this->belongsTo(Bibliobigrafi::class);
+    }
+
+    public function gmd()
+    {
+        return $this->belongsTo(Gmd::class);
+    }
 }

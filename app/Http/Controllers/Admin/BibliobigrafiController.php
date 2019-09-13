@@ -45,7 +45,11 @@ class BibliobigrafiController extends Controller
     {
         return Buku::with(['buku_transaksi.pengarang' => function($q) {
             $q->select('id', 'nama_pengarang');
-        }])->withCount('bibliobigrafi')->latest()->paginate(5);
+        }, 'bibliobigrafi.gmd_transaksi' => function($q){
+            $q->select('id', 'bibliobigrafi_id', 'gmd_id');
+        }, 'bibliobigrafi.gmd_transaksi.gmd' => function($q) {
+            $q->select('id', 'kode_gmd', 'nama_gmd');
+        }])->withCount('bibliobigrafi')->latest()->paginate(50);
     }
 
     public function sirkulasi()
@@ -246,10 +250,10 @@ class BibliobigrafiController extends Controller
 
 
         foreach ($request->gmd_id as $gmd) {
-            $requestTrans = $request->all();
-            $requestTrans['bibliobigrafi_id'] = $bibliobigrafi;
-            $requestTrans['gmd_id'] = $gmd;   
-            GmdTransaksi::create($requestTrans);
+            $bil = new GmdTransaksi;
+            $bil->bibliobigrafi_id = $bibliobigrafi->id;
+            $bil->gmd_id = $gmd;
+            $bil->save();
        }
 
        }

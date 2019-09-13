@@ -29,7 +29,7 @@ class KlasifikasiController extends Controller
 
     public function fetch()
     {
-        return Klasifikasi::latest()->paginate(5);
+        return Klasifikasi::latest()->paginate(50);
     }
 
     /**

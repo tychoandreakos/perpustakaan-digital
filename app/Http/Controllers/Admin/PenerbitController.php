@@ -29,7 +29,7 @@ class PenerbitController extends Controller
 
     public function fetch()
     {
-        return Penerbit::latest()->paginate(5);
+        return Penerbit::latest()->paginate(50);
     }
 
     /**

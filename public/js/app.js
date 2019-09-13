@@ -3119,11 +3119,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_Kota__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./add/Kota */ "./resources/js/components/admin/bibliobigrafi/add/Kota.vue");
 /* harmony import */ var _add_Gmd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./add/Gmd */ "./resources/js/components/admin/bibliobigrafi/add/Gmd.vue");
 /* harmony import */ var _add_Klasifikasi__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./add/Klasifikasi */ "./resources/js/components/admin/bibliobigrafi/add/Klasifikasi.vue");
-/* harmony import */ var _add_Lokasi__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./add/Lokasi */ "./resources/js/components/admin/bibliobigrafi/add/Lokasi.vue");
-/* harmony import */ var _add_Koleksi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./add/Koleksi */ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue");
-/* harmony import */ var _add_Topik__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./add/Topik */ "./resources/js/components/admin/bibliobigrafi/add/Topik.vue");
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _add_Bahasa__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./add/Bahasa */ "./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue");
+/* harmony import */ var _add_Lokasi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./add/Lokasi */ "./resources/js/components/admin/bibliobigrafi/add/Lokasi.vue");
+/* harmony import */ var _add_Koleksi__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./add/Koleksi */ "./resources/js/components/admin/bibliobigrafi/add/Koleksi.vue");
+/* harmony import */ var _add_Topik__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./add/Topik */ "./resources/js/components/admin/bibliobigrafi/add/Topik.vue");
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_12__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3609,6 +3612,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3631,13 +3647,16 @@ __webpack_require__.r(__webpack_exports__);
     KotaComponent: _add_Kota__WEBPACK_IMPORTED_MODULE_5__["default"],
     GmdComponent: _add_Gmd__WEBPACK_IMPORTED_MODULE_6__["default"],
     KlasifikasiComponent: _add_Klasifikasi__WEBPACK_IMPORTED_MODULE_7__["default"],
-    LokasiComponent: _add_Lokasi__WEBPACK_IMPORTED_MODULE_8__["default"],
-    KoleksiComponent: _add_Koleksi__WEBPACK_IMPORTED_MODULE_9__["default"],
-    TopikComponent: _add_Topik__WEBPACK_IMPORTED_MODULE_10__["default"]
+    LokasiComponent: _add_Lokasi__WEBPACK_IMPORTED_MODULE_9__["default"],
+    KoleksiComponent: _add_Koleksi__WEBPACK_IMPORTED_MODULE_10__["default"],
+    TopikComponent: _add_Topik__WEBPACK_IMPORTED_MODULE_11__["default"],
+    BahasaComponent: _add_Bahasa__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
-  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi', 'koleksi3', 'top', 'topikk', 'buku'],
+  props: ['index', 'fetch', 'pengarang', 'penerbit', 'kota', 'gmd', 'klasifikasi', 'lokasi', 'bahasa', 'pola', 'pol', 'peng', 'pener', 'kota3', 'gmd3', 'tipeklasifikasi', 'lokasi3', 'koleksi', 'koleksi3', 'top', 'topikk', 'buku', 'bahasaa'],
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       loading: false,
       err: {},
       isDisabled: false,
@@ -3649,52 +3668,36 @@ __webpack_require__.r(__webpack_exports__);
       koleksiData: [],
       klasifikasiData: [],
       topikData: [],
-      lokasiData: [],
       bahasaData: [],
-      klasifikasi_id: [],
-      pengarang_id: [],
-      penerbit_id: [],
-      kota_id: [],
-      gmd_id: [],
-      koleksi_id: [],
-      topik_id: [],
-      bahasa_id: [],
-      lokasi_id: [],
-      eksemplarData: [],
-      pola_eksemplar: [],
-      img: typeof this.buku.gambar_sampul !== 'undefined' ? this.buku.gambar_sampul : 'Pilih Gambar Sampul',
-      pdf: typeof this.buku.pdf !== 'undefined' ? this.buku.pdf : 'Pilih PDF',
-      editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_11___default.a,
-      editorConfig: {// The configuration of the editor.
-      },
-      form: {
-        judul: typeof this.buku.judul !== 'undefined' ? this.buku.judul : '',
-        edisi: typeof this.buku.edisi !== 'undefined' ? this.buku.edisi : '',
-        tahun_terbit: typeof this.buku.tahun_terbit !== 'undefined' ? this.buku.tahun_terbit : '',
-        isbn_isnn: typeof this.buku.isbn_isnn !== 'undefined' ? this.buku.isbn_isnn : '',
-        deskripsi_fisik: typeof this.buku.deskripsi_fisik !== 'undefined' ? this.buku.deskripsi_fisik : '',
-        judul_seri: typeof this.buku.judul_seri !== 'undefined' ? this.buku.judul_seri : '',
-        catatan: typeof this.buku.catatan !== 'undefined' ? this.buku.catatan : '',
-        slug: typeof this.buku.slug !== 'undefined' ? this.buku.slug : '',
-        pdf: typeof this.buku.pdf !== 'undefined' ? this.buku.pdf : '',
-        image: typeof this.buku.gambar_sampul !== 'undefined' ? this.buku.gambar_sampul : '',
-        oldPdf: '',
-        oldImage: '',
-        klasifikasi_id: this.klasifikasi2,
-        pengarang_id: this.pengarang2,
-        penerbit_id: this.penerbit2,
-        kota_id: this.kota2,
-        lokasi_rak_id: this.lokasi2,
-        koleksi_id: this.koleksi2,
-        topik_id: this.topik2,
-        bahasa_id: this.bahasa2,
-        gmd_id: this.gmd2,
-        pola_eksemplar: this.pola_eksemplar2,
-        no_panggil: typeof this.buku.judul !== 'undefined' ? this.buku.bibliobigrafi[0].no_panggil : '',
-        total: typeof this.buku.judul !== 'undefined' ? this.buku.bibliobigrafi.length : '',
-        _method: typeof this.buku.judul !== 'undefined' ? 'PATCH' : 'POST'
-      }
-    };
+      lokasiData: []
+    }, _defineProperty(_ref, "bahasaData", []), _defineProperty(_ref, "klasifikasi_id", []), _defineProperty(_ref, "pengarang_id", []), _defineProperty(_ref, "penerbit_id", []), _defineProperty(_ref, "kota_id", []), _defineProperty(_ref, "gmd_id", []), _defineProperty(_ref, "bahasa_id", []), _defineProperty(_ref, "koleksi_id", []), _defineProperty(_ref, "topik_id", []), _defineProperty(_ref, "bahasa_id", []), _defineProperty(_ref, "lokasi_id", []), _defineProperty(_ref, "eksemplarData", []), _defineProperty(_ref, "pola_eksemplar", []), _defineProperty(_ref, "img", typeof this.buku.gambar_sampul !== 'undefined' ? this.buku.gambar_sampul : 'Pilih Gambar Sampul'), _defineProperty(_ref, "pdf", typeof this.buku.pdf !== 'undefined' ? this.buku.pdf : 'Pilih PDF'), _defineProperty(_ref, "editor", _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_12___default.a), _defineProperty(_ref, "editorConfig", {// The configuration of the editor.
+    }), _defineProperty(_ref, "form", {
+      judul: typeof this.buku.judul !== 'undefined' ? this.buku.judul : '',
+      edisi: typeof this.buku.edisi !== 'undefined' ? this.buku.edisi : '',
+      tahun_terbit: typeof this.buku.tahun_terbit !== 'undefined' ? this.buku.tahun_terbit : '',
+      isbn_isnn: typeof this.buku.isbn_isnn !== 'undefined' ? this.buku.isbn_isnn : '',
+      deskripsi_fisik: typeof this.buku.deskripsi_fisik !== 'undefined' ? this.buku.deskripsi_fisik : '',
+      judul_seri: typeof this.buku.judul_seri !== 'undefined' ? this.buku.judul_seri : '',
+      catatan: typeof this.buku.catatan !== 'undefined' ? this.buku.catatan : '',
+      slug: typeof this.buku.slug !== 'undefined' ? this.buku.slug : '',
+      pdf: typeof this.buku.pdf !== 'undefined' ? this.buku.pdf : '',
+      image: typeof this.buku.gambar_sampul !== 'undefined' ? this.buku.gambar_sampul : '',
+      oldPdf: '',
+      oldImage: '',
+      klasifikasi_id: this.klasifikasi2,
+      pengarang_id: this.pengarang2,
+      penerbit_id: this.penerbit2,
+      kota_id: this.kota2,
+      lokasi_rak_id: this.lokasi2,
+      koleksi_id: this.koleksi2,
+      topik_id: this.topik2,
+      bahasa_id: this.bahasa2,
+      gmd_id: this.gmd2,
+      pola_eksemplar: this.pola_eksemplar2,
+      no_panggil: typeof this.buku.judul !== 'undefined' ? this.buku.bibliobigrafi[0].no_panggil : '',
+      total: typeof this.buku.judul !== 'undefined' ? this.buku.bibliobigrafi.length : '',
+      _method: typeof this.buku.judul !== 'undefined' ? 'PATCH' : 'POST'
+    }), _ref;
   },
   created: function created() {
     this.getData();
@@ -3773,6 +3776,9 @@ __webpack_require__.r(__webpack_exports__);
       this.value = value;
       if (value.indexOf('Reset me!') !== -1) this.value = [];
     },
+    fieldBahasa: function fieldBahasa() {
+      console.log('wow');
+    },
     multipleFileChange: function multipleFileChange() {
       this.pdf = event.target.files[0].name;
       var vm = this;
@@ -3820,6 +3826,12 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       reader.readAsDataURL(file);
+    },
+    showBahasa: function showBahasa() {
+      this.$modal.show('bahasa');
+    },
+    hideBahasa: function hideBahasa() {
+      this.$modal.hide('bahasa');
     },
     showEksemplar: function showEksemplar() {
       this.$modal.show('eksemplar');
@@ -4101,6 +4113,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
   data: function data() {
@@ -4169,6 +4185,98 @@ __webpack_require__.r(__webpack_exports__);
       });
     });
     this.getResults();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/Spanner */ "./resources/js/components/admin/tools/Spanner.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['bahasa'],
+  components: {
+    SpinnerComponent: _tools_Spanner__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      form: {
+        jenis_bahasa: ''
+      },
+      loading: false
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      this.loading = true, axios.post(this.bahasa, this.form).then(function (res) {
+        _this.$swal({
+          position: 'top-end',
+          type: 'success',
+          title: res.data.message.toUpperCase(),
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        setTimeout(function () {
+          _this.loading = false;
+
+          _this.$emit('closeBahasa');
+
+          _this.$emit('updateBahasa');
+
+          _this.form.jenis_bahasa = '';
+        }, 2200);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  },
+  computed: {
+    check: function check() {
+      return this.form.jenis_bahasa == '' ? true : false;
+    }
   }
 });
 
@@ -73423,6 +73531,25 @@ var render = function() {
                       "div",
                       { class: { invalid: _vm.isInvalid } },
                       [
+                        _c("div", { staticClass: "float-right mb-2" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-icon btn-3 btn-primary btn-sm",
+                              attrs: { type: "button" },
+                              on: { click: _vm.showBahasa }
+                            },
+                            [
+                              _vm._m(8),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "btn-inner--text" }, [
+                                _vm._v("Tambah Bahasa")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
                         _c(
                           "label",
                           {
@@ -73435,6 +73562,7 @@ var render = function() {
                         _c(
                           "multiselect",
                           {
+                            staticClass: "mt-1",
                             attrs: {
                               options: _vm.bahasaData,
                               "group-label": "language",
@@ -73495,7 +73623,7 @@ var render = function() {
                               on: { click: _vm.showTopik }
                             },
                             [
-                              _vm._m(8),
+                              _vm._m(9),
                               _vm._v(" "),
                               _c("span", { staticClass: "btn-inner--text" }, [
                                 _vm._v("Tambah Topik Buku")
@@ -73907,6 +74035,21 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "modal",
+                { attrs: { height: "auto", name: "bahasa" } },
+                [
+                  _c("bahasa-component", {
+                    attrs: { bahasa: this.bahasaa },
+                    on: {
+                      closeBahasa: _vm.hideBahasa,
+                      updateBahasa: _vm.getBahasa
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "modal",
                 { attrs: { height: "auto", name: "koleksi" } },
                 [
                   _c("koleksi-component", {
@@ -74092,7 +74235,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   },
   function() {
@@ -74100,7 +74243,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   },
   function() {
@@ -74108,7 +74251,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   },
   function() {
@@ -74116,7 +74259,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   },
   function() {
@@ -74124,7 +74267,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   },
   function() {
@@ -74132,7 +74275,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   },
   function() {
@@ -74140,7 +74283,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   },
   function() {
@@ -74148,7 +74291,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   },
   function() {
@@ -74156,7 +74299,15 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "btn-inner--icon" }, [
-      _c("i", { staticClass: "ni ni-bag-17" })
+      _c("i", { staticClass: "ni ni-check-bold" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "btn-inner--icon" }, [
+      _c("i", { staticClass: "ni ni-check-bold" })
     ])
   }
 ]
@@ -74305,6 +74456,12 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
+                                "\n                                    as\n                                "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
                                 "\n                                    " +
                                   _vm._s(data.isbn_isnn) +
                                   "\n                                "
@@ -74358,6 +74515,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Salinan")]),
         _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("GMD")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ISBN ISNN")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Perubahan Terakhir")])
@@ -74365,6 +74524,104 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=template&id=f673765a&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=template&id=f673765a& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container p-4" }, [
+    _c("h3", [_vm._v("Tambah Data Jenis Bahasa")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.submit($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "prefix" } }, [
+                _vm._v("Jenis Bahasa")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  { name: "focus", rawName: "v-focus" },
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.jenis_bahasa,
+                    expression: "form.jenis_bahasa"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  type: "text",
+                  placeholder: "Jenis Bahasa"
+                },
+                domProps: { value: _vm.form.jenis_bahasa },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "jenis_bahasa", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col col-md-12" },
+            [
+              _vm.loading
+                ? [_c("spinner-component")]
+                : [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-5 btn-success",
+                        attrs: { type: "submit", disabled: _vm.check }
+                      },
+                      [_vm._v("Simpan")]
+                    )
+                  ]
+            ],
+            2
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -97333,6 +97590,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_4925fc82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Table_vue_vue_type_template_id_4925fc82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Bahasa_vue_vue_type_template_id_f673765a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Bahasa.vue?vue&type=template&id=f673765a& */ "./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=template&id=f673765a&");
+/* harmony import */ var _Bahasa_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bahasa.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Bahasa_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Bahasa_vue_vue_type_template_id_f673765a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Bahasa_vue_vue_type_template_id_f673765a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/bibliobigrafi/add/Bahasa.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bahasa_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Bahasa.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bahasa_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=template&id=f673765a&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=template&id=f673765a& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bahasa_vue_vue_type_template_id_f673765a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Bahasa.vue?vue&type=template&id=f673765a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/bibliobigrafi/add/Bahasa.vue?vue&type=template&id=f673765a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bahasa_vue_vue_type_template_id_f673765a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bahasa_vue_vue_type_template_id_f673765a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

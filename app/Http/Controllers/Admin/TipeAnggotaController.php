@@ -28,7 +28,7 @@ class TipeAnggotaController extends Controller
 
     public function fetch()
     {
-        return TipeAnggota::latest()->paginate(5);
+        return TipeAnggota::latest()->paginate(50);
     }
 
     /**

@@ -21,6 +21,7 @@
                                     <th scope="col">Aksi</th>
                                     <th scope="col">Judul Buku</th>
                                     <th scope="col">Salinan</th>
+                                    <th scope="col">GMD</th>
                                     <th scope="col">ISBN ISNN</th>
                                     <th scope="col">Perubahan Terakhir</th>
                                 </tr>
@@ -46,6 +47,9 @@
                                     </td>
                                     <td class="text-center">
                                         {{ data.bibliobigrafi_count }}
+                                    </td>
+                                    <td>
+                                        as
                                     </td>
                                     <td>
                                         {{ data.isbn_isnn }}

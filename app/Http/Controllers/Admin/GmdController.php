@@ -29,7 +29,7 @@ class GmdController extends Controller
 
     public function fetch()
     {
-        return Gmd::latest()->paginate(5);
+        return Gmd::latest()->paginate(50);
     }
 
     /**

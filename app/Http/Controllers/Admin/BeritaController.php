@@ -30,7 +30,7 @@ class BeritaController extends Controller
 
     public function fetch()
     {
-        return Berita::latest()->paginate(5);
+        return Berita::latest()->paginate(50);
     }
 
     /**

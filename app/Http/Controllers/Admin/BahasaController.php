@@ -28,7 +28,7 @@ class BahasaController extends Controller
 
     public function fetch()
     {
-        return Bahasa::latest()->paginate(5);
+        return Bahasa::latest()->paginate(50);
     }
 
     /**

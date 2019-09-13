@@ -35,7 +35,7 @@
                                     <div class="float-right mb-2">
                                         <button class="btn btn-icon btn-3 btn-primary btn-sm" @click="showPengarang"
                                             type="button">
-                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                             <span class="btn-inner--text">Tambah Pengarang</span>
                                         </button>
                                     </div>
@@ -102,7 +102,7 @@
                                     <div class="float-right mb-2">
                                         <button @click="showPenerbit" class="btn btn-icon btn-3 btn-primary btn-sm"
                                             type="button">
-                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                             <span class="btn-inner--text">Tambah Penerbit</span>
                                         </button>
                                     </div>
@@ -120,11 +120,11 @@
                         </div>
                     </div>
                     <button @click="showEksemplar" class="btn btn-icon btn-primary btn-sm mb-3" type="button">
-                        <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                        <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                         <span class="btn-inner--text">Tambah Pola Eksemplar</span>
                     </button>
                     <button @click="showKoleksi" class="btn btn-icon btn-primary btn-sm mb-3" type="button">
-                        <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                        <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                         <span class="btn-inner--text">Tambah Tipe Koleksi</span>
                     </button>
                     <div class="row">
@@ -194,7 +194,7 @@
                                     <div class="float-right mb-2">
                                         <button @click="showKota" class="btn btn-icon btn-3 btn-primary btn-sm"
                                             type="button">
-                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                             <span class="btn-inner--text">Tambah Tempat Terbit</span>
                                         </button>
                                     </div>
@@ -230,14 +230,14 @@
                                     <div class="float-right mb-2">
                                         <button @click="showGmd" class="btn btn-icon btn-3 btn-primary btn-sm"
                                             type="button">
-                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                             <span class="btn-inner--text">Tambah GMD</span>
                                         </button>
                                     </div>
                                     <label class="form-control-label" for="gmd">GMD*</label>
-                                    <multiselect class="mt-1" v-model="gmd_id"  :multiple="true" :options="gmdData" group-label="language"
-                                        :group-select="true" placeholder="Pilih gmd ..." track-by="nama_gmd"
-                                        label="nama_gmd"><span slot="noResult">Oops! No
+                                    <multiselect class="mt-1" v-model="gmd_id" :multiple="true" :options="gmdData"
+                                        group-label="language" :group-select="true" placeholder="Pilih gmd ..."
+                                        track-by="nama_gmd" label="nama_gmd"><span slot="noResult">Oops! No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
                                     <template v-if="err.gmd_id">
@@ -267,7 +267,7 @@
                                     <div class="float-right mb-2">
                                         <button @click="showKlasifikasi" class="btn btn-icon btn-3 btn-primary btn-sm"
                                             type="button">
-                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                             <span class="btn-inner--text">Tambah Klasifikasi</span>
                                         </button>
                                     </div>
@@ -293,7 +293,7 @@
                                     <div class="float-right mb-2">
                                         <button @click="showLokasi" class="btn btn-icon btn-3 btn-primary btn-sm"
                                             type="button">
-                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                             <span class="btn-inner--text">Tambah Lokasi Rak</span>
                                         </button>
                                     </div>
@@ -314,10 +314,17 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div :class="{ 'invalid': isInvalid }">
+                                    <div class="float-right mb-2">
+                                        <button @click="showBahasa" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                            type="button">
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+                                            <span class="btn-inner--text">Tambah Bahasa</span>
+                                        </button>
+                                    </div>
                                     <label class="form-control-label" for="bahasa">Bahasa*</label>
-                                    <multiselect v-model="bahasa_id" :options="bahasaData" group-label="language"
-                                        :group-select="true" placeholder="Pilih bahasa ...." track-by="jenis_bahasa"
-                                        label="jenis_bahasa"><span slot="noResult">Oops!
+                                    <multiselect class="mt-1" v-model="bahasa_id" :options="bahasaData"
+                                        group-label="language" :group-select="true" placeholder="Pilih bahasa ...."
+                                        track-by="jenis_bahasa" label="jenis_bahasa"><span slot="noResult">Oops!
                                             No
                                             elements found.
                                             Consider changing the search query.</span></multiselect>
@@ -336,7 +343,7 @@
                                     <div class="float-right mb-2">
                                         <button @click="showTopik" class="btn btn-icon btn-3 btn-primary btn-sm"
                                             type="button">
-                                            <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                            <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
                                             <span class="btn-inner--text">Tambah Topik Buku</span>
                                         </button>
                                     </div>
@@ -413,13 +420,18 @@
                             :tipeklasifikasi="this.tipeklasifikasi"></klasifikasi-component>
                     </modal>
 
+                    <modal height="auto" name="bahasa">
+                        <bahasa-component @closeBahasa="hideBahasa" @updateBahasa="getBahasa"
+                            :bahasa="this.bahasaa"></bahasa-component>
+                    </modal>
+
                     <modal height="auto" name="koleksi">
                         <koleksi-component @closeKoleksi="hideKoleksi" @updateKoleksi="getKoleksi"
                             :koleksi="this.koleksi3"></koleksi-component>
                     </modal>
 
                     <modal height="auto" name="lokasi">
-                        <lokasi-component @closeLokasi="hideLokasi" @updateLokasi="getLokasi" :lokasi3="this.lokasi3">
+                        <lokasi-component @closeLokasi="hideLokasi"  @updateLokasi="getLokasi" :lokasi3="this.lokasi3">
                         </lokasi-component>
                     </modal>
 
@@ -492,6 +504,7 @@
     import Kota from './add/Kota';
     import Gmd from './add/Gmd';
     import Klasifikasi from './add/Klasifikasi';
+    import Bahasa from './add/Bahasa';
     import Lokasi from './add/Lokasi';
     import Koleksi from './add/Koleksi';
     import Topik from './add/Topik';
@@ -511,6 +524,7 @@
             LokasiComponent: Lokasi,
             KoleksiComponent: Koleksi,
             TopikComponent: Topik,
+            BahasaComponent: Bahasa,
         },
 
         props: [
@@ -535,7 +549,8 @@
             'koleksi3',
             'top',
             'topikk',
-            'buku'
+            'buku',
+            'bahasaa'
         ],
 
         data() {
@@ -552,6 +567,7 @@
                 koleksiData: [],
                 klasifikasiData: [],
                 topikData: [],
+                bahasaData: [],
                 lokasiData: [],
                 bahasaData: [],
                 klasifikasi_id: [],
@@ -559,30 +575,33 @@
                 penerbit_id: [],
                 kota_id: [],
                 gmd_id: [],
+                bahasa_id: [],
                 koleksi_id: [],
                 topik_id: [],
                 bahasa_id: [],
                 lokasi_id: [],
                 eksemplarData: [],
                 pola_eksemplar: [],
-                img: (typeof(this.buku.gambar_sampul) !== 'undefined' ? this.buku.gambar_sampul : 'Pilih Gambar Sampul'),
-                pdf: (typeof(this.buku.pdf) !== 'undefined' ? this.buku.pdf : 'Pilih PDF'),
+                img: (typeof (this.buku.gambar_sampul) !== 'undefined' ? this.buku.gambar_sampul :
+                    'Pilih Gambar Sampul'),
+                pdf: (typeof (this.buku.pdf) !== 'undefined' ? this.buku.pdf : 'Pilih PDF'),
                 editor: ClassicEditor,
                 editorConfig: {
                     // The configuration of the editor.
                 },
 
                 form: {
-                    judul: (typeof(this.buku.judul) !== 'undefined' ? this.buku.judul : ''),
-                    edisi: (typeof(this.buku.edisi) !== 'undefined' ? this.buku.edisi : ''),
-                    tahun_terbit: (typeof(this.buku.tahun_terbit) !== 'undefined' ? this.buku.tahun_terbit : ''),
-                    isbn_isnn: (typeof(this.buku.isbn_isnn) !== 'undefined' ? this.buku.isbn_isnn : ''),
-                    deskripsi_fisik: (typeof(this.buku.deskripsi_fisik) !== 'undefined' ? this.buku.deskripsi_fisik : ''),
-                    judul_seri: (typeof(this.buku.judul_seri) !== 'undefined' ? this.buku.judul_seri : ''),
-                    catatan: (typeof(this.buku.catatan) !== 'undefined' ? this.buku.catatan : ''),
-                    slug: (typeof(this.buku.slug) !== 'undefined' ? this.buku.slug : ''),
-                    pdf: (typeof(this.buku.pdf) !== 'undefined' ? this.buku.pdf : ''),
-                    image: (typeof(this.buku.gambar_sampul) !== 'undefined' ? this.buku.gambar_sampul : ''),
+                    judul: (typeof (this.buku.judul) !== 'undefined' ? this.buku.judul : ''),
+                    edisi: (typeof (this.buku.edisi) !== 'undefined' ? this.buku.edisi : ''),
+                    tahun_terbit: (typeof (this.buku.tahun_terbit) !== 'undefined' ? this.buku.tahun_terbit : ''),
+                    isbn_isnn: (typeof (this.buku.isbn_isnn) !== 'undefined' ? this.buku.isbn_isnn : ''),
+                    deskripsi_fisik: (typeof (this.buku.deskripsi_fisik) !== 'undefined' ? this.buku.deskripsi_fisik :
+                        ''),
+                    judul_seri: (typeof (this.buku.judul_seri) !== 'undefined' ? this.buku.judul_seri : ''),
+                    catatan: (typeof (this.buku.catatan) !== 'undefined' ? this.buku.catatan : ''),
+                    slug: (typeof (this.buku.slug) !== 'undefined' ? this.buku.slug : ''),
+                    pdf: (typeof (this.buku.pdf) !== 'undefined' ? this.buku.pdf : ''),
+                    image: (typeof (this.buku.gambar_sampul) !== 'undefined' ? this.buku.gambar_sampul : ''),
                     oldPdf: '',
                     oldImage: '',
                     klasifikasi_id: this.klasifikasi2,
@@ -595,9 +614,9 @@
                     bahasa_id: this.bahasa2,
                     gmd_id: this.gmd2,
                     pola_eksemplar: this.pola_eksemplar2,
-                    no_panggil: (typeof(this.buku.judul) !== 'undefined' ? this.buku.bibliobigrafi[0].no_panggil : ''),
-                    total: (typeof(this.buku.judul) !== 'undefined' ? this.buku.bibliobigrafi.length : ''),
-                    _method: (typeof(this.buku.judul) !== 'undefined' ? 'PATCH' : 'POST'),
+                    no_panggil: (typeof (this.buku.judul) !== 'undefined' ? this.buku.bibliobigrafi[0].no_panggil : ''),
+                    total: (typeof (this.buku.judul) !== 'undefined' ? this.buku.bibliobigrafi.length : ''),
+                    _method: (typeof (this.buku.judul) !== 'undefined' ? 'PATCH' : 'POST'),
                 },
 
             }
@@ -688,6 +707,10 @@
                 if (value.indexOf('Reset me!') !== -1) this.value = []
             },
 
+            fieldBahasa() {
+               console.log('wow')
+            },
+
             multipleFileChange() {
                 this.pdf = event.target.files[0].name;
                 var vm = this;
@@ -735,6 +758,12 @@
                 };
                 reader.readAsDataURL(file);
             },
+             showBahasa() {
+                this.$modal.show('bahasa');
+            },
+            hideBahasa() {
+                this.$modal.hide('bahasa');
+            },
             showEksemplar() {
                 this.$modal.show('eksemplar');
             },
@@ -744,6 +773,7 @@
             showTopik() {
                 this.$modal.show('topik');
             },
+            
             hideTopik() {
                 this.$modal.hide('topik');
             },
@@ -894,7 +924,6 @@
             },
         }
     }
-
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

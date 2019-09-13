@@ -28,6 +28,11 @@ class Gmd extends Model
         return $this->attributes['nama_gmd'] = ucwords($value);
     }
 
+    public function gmd_transaksi()
+    {
+        return $this->hasMany(GmdTransaksi::class);
+    }
+
     public function biblio()
     {
         return $this->hasMany(Bibliobigrafi::class);
