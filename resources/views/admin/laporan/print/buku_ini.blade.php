@@ -7,7 +7,7 @@
             font-size: 11pt;
         }
     </style>
-    <h6 class="text-center mb-4 font-weight-normal">Laporan Buku Pada Bulan {{ ucfirst($month) }} <br> DI Perpustakaan
+    <h6 class="text-center mb-4 font-weight-normal">Laporan Buku Baru Pada Bulan {{ ucfirst($month) }} <br> DI Perpustakaan
         STMIK AMIK BANDUNG</h6>
 
     <table class='table table-bordered'>

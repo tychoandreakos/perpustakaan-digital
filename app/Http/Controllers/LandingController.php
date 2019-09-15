@@ -7,6 +7,7 @@ use App\AnggotaTransaksi;
 use App\Berita;
 use App\Bibliobigrafi;
 use App\Buku;
+use App\Info;
 use App\PinjamTransaksi;
 use App\Tamu;
 use App\Topik;
@@ -22,13 +23,15 @@ class LandingController extends Controller
     public function index()
     {
         // $user = User::all()->count();
-        // $info = Info::all()->first();
+        // $info = Info::all()->first()->first();
         // $topik = Topik::orderBy('order', 'ASC')->limit(4)->get();
         $berita =  Berita::with('admin')->latest()->limit(3)->get();
         $buku = Buku::all()->count();
         $anggota = User::all()->count();
         $pdf = Buku::whereNotNull('pdf')->get()->count();
-        return view('landing', compact('berita', 'buku', 'anggota', 'pdf'));
+        // return
+        $info = Info::all()->first();
+        return view('landing', compact('berita', 'info' ,'buku', 'anggota', 'pdf'));
     }
     
     public function approval()
@@ -186,9 +189,10 @@ class LandingController extends Controller
         },  'buku.buku_transaksi.penerbit', 'buku.bibliobigrafi.gmd' => function($q) {
             $q->select('id', 'nama_gmd')->first();
         }])->where('jenis_topik', $id)->first();
+        $info = Info::all()->first();
 
         $cari = '';
-        return view('topik', compact('result', 'cari'));
+        return view('topik', compact('result', 'info', 'cari'));
     }
 
     public function beranda()
@@ -257,14 +261,16 @@ class LandingController extends Controller
         }])->where('created_at', '>=', $date)->withCount('pinjam_transaksi')->limit(2)->get();
 
         $randomTags = Topik::inRandomOrder()->limit(4)->get();
+        $info = Info::all()->first();
 
-        return view('beranda', compact('terbaru', 'random', 'berita', 'popular', 'popular30', 'randomTags'));
+        return view('beranda', compact('terbaru', 'info', 'random', 'berita', 'popular', 'popular30', 'randomTags'));
     }
 
     public function lengkapi()
     {
         $anggota = Anggota::find(Auth::user()->id);
-        return view('lengkapi', compact('anggota'));
+        $info = Info::all()->first();
+        return view('lengkapi', compact('anggota', 'info'));
     }
 
     public function terbaru()
@@ -283,7 +289,8 @@ class LandingController extends Controller
         }, 'bibliobigrafi.lokasi_rak' => function($q) {
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->latest()->limit(9)->paginate(3);
-        return view('terbaru', compact('terbaru'));
+        $info = Info::all()->first();
+        return view('terbaru', compact('terbaru', 'info'));
     }
 
      public static function denda($val)
@@ -305,21 +312,23 @@ class LandingController extends Controller
         $tipe = AnggotaTransaksi::with('tipe_anggota')->where('user_id', Auth::user()->id)->first();
 
         $histori = PinjamTransaksi::with('buku')->where('user_id', Auth::user()->id)->where('status_pinjam', 0)->where('status_verifikasi', 0)->latest()->get();
-
-        return view('pinjaman', compact('pinjam', 'tipe', 'terlambat', 'histori', 'verifikasi'));
+        $info = Info::all()->first();
+        return view('pinjaman', compact('pinjam', 'tipe', 'info', 'terlambat', 'histori', 'verifikasi'));
     }
 
     public function berita($slug)
     {
         $result = Berita::with('admin')->where('slug', $slug)->firstOrFail();
         $berita = Berita::latest()->limit(3)->get();
-        return view('berita', compact('result', 'berita')); 
+        $info = Info::all()->first();
+        return view('berita', compact('result', 'berita', 'info')); 
     }
 
     public function beritaSemua()
     {
         $result = Berita::with('admin')->latest()->paginate(3);
-        return view('berita-semua', compact('result'));
+        $info = Info::all()->first();
+        return view('berita-semua', compact('result', 'info'));
     }
 
     public function buku($slug)
@@ -352,11 +361,13 @@ class LandingController extends Controller
         
     
            $anggota = AnggotaTransaksi::with('tipe_anggota')->where('user_id', Auth::user()->id)->get();
+           $info = Info::all()->first();
     
-            return view('buku', compact('result', 'total', 'anggota', 'bibliobigrafi'));
+            return view('buku', compact('result', 'total', 'anggota', 'bibliobigrafi', 'info'));
         }
 
-        return view('buku', compact('result', 'bibliobigrafi'));
+        $info = Info::all()->first();
+        return view('buku', compact('result', 'info', 'bibliobigrafi'));
        
     }
 
@@ -408,7 +419,8 @@ class LandingController extends Controller
                 $q->where('nama_pengarang', 'LIKE', "%$query%");
             })->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);
             $cari = $query;
-            return view('search', compact('result', 'cari'));
+            $info = Info::all()->first();
+            return view('search', compact('result', 'cari', 'info'));
 
 
         } else {
@@ -417,7 +429,8 @@ class LandingController extends Controller
             }, 'buku_transaksi.penerbit', 'bibliobigrafi.gmd' => function($q) {
                 $q->select('id', 'nama_gmd');
             }])->latest()->paginate(6);
-            return view('search', compact('total'));
+            $info = Info::all()->first();
+            return view('search', compact('total', 'info'));
         }
     }
 
@@ -436,7 +449,8 @@ class LandingController extends Controller
             $q->select('id', 'nama_gmd')->first();
         }])->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);
         $cari = $query;
-        return view('cari', compact('result', 'cari'));
+        $info = Info::all()->first();
+        return view('cari', compact('result', 'cari', 'info'));
     }
 
     public function result($slug)
@@ -446,8 +460,9 @@ class LandingController extends Controller
         }, 'buku.buku_transaksi.penerbit', 'buku.bibliobigrafi.gmd' => function($q) {
             $q->select('id', 'nama_gmd')->first();
         }])->where('slug', $slug)->first();
+        $info = Info::all()->first();
 
-        return view('result-topik', compact('result'));
+        return view('result-topik', compact('result', 'info'));
     }
 
 

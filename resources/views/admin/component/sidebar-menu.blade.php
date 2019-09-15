@@ -90,7 +90,6 @@
                 <a href="{{ route('laporan.anggota') }}" class="dropdown-item">Laporan Anggota</a>
                 <a href="#" class="dropdown-item">Rekapitulasi</a>
                 <a href="#" class="dropdown-item">Statistik Pengunjung</a>
-                <a href="#" class="dropdown-item">Statistik Pengunjung (Per Hari)</a>
             </div>
         </div>
     </li>

@@ -11,9 +11,11 @@
 
                  <!-- Text -->
                  <p class="font-size-sm mt-2 text-gray-700 mb-2">
-                  Email: info@stmik-amikbandung.ac.id
+                  Email: {{ ucwords($info->email) }}
                   <br>
-                  Telp:  (022) 7271136
+                  Telp:  {{ $info->no_telp }}
+                  <br>
+                  Pustakawan: {{ ucwords($info->pustakawan) }}
                 </p>
 
                  <!-- Social -->
@@ -47,16 +49,16 @@
                  <!-- List -->
                  <ul class="list-unstyled text-muted mb-6 mb-md-8 mb-lg-0">
                      <li class="mb-3">
-                         Senin - Jumat <br>
-                         <span class="font-size-sm">08.00 - 20.00</span>
+                         {{ ucwords($info->regular) }} <br>
+                         <span class="font-size-sm">{{ $info->waktu_regular }}</span>
                      </li>
                      <li class="mb-3">
-                      Sabtu <br>
-                      <span class="font-size-sm">08.00 - 17.00</span>
+                      {{ ucwords($info->weekend) }} <br>
+                      <span class="font-size-sm">{{ $info->waktu_weekend }}</span>
                      </li>
                      <li class="mb-3">
                       Jam Istirahat <br>
-                      <span class="font-size-sm">12.00 - 13.00</span>
+                      <span class="font-size-sm">{{ $info->waktu_istirahat }}</span>
                      </li>
                  </ul>
 
@@ -71,9 +73,7 @@
                  <!-- List -->
                  <ul class="list-unstyled text-muted mb-6 mb-md-8 mb-lg-0">
                      <li class="mb-3">
-                         Jalan Jakarta No 28
-                         Kelurahan Kebonwaru, Kecamatan Batununggal
-                         Kota Bandung, Jawa barat
+                         {{ ucwords($info->alamat) }}
                      </li>
                  </ul>
 

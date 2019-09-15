@@ -12,11 +12,15 @@
 
                       <!--  -->
                       <p class="mb-5 text-muted">
-                          These span the grid's entire width with several options.
+                          These all latests news from library.
                       </p>
 
                   </div>
               </div> <!-- / .row -->
+           
+              @if ($result)
+                  <h4 class="text-center mt-5 mb-0">Belum Ada Berita.</h4>
+              @else
               @foreach ($result as $item)
               <div class="row">
                   <div class="col-12">
@@ -160,6 +164,7 @@
                   </div>
               </div> <!-- / .row -->
               @endforeach
+              @endif
           </div> <!-- / .container -->
       </section>
 

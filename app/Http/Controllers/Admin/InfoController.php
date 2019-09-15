@@ -22,7 +22,7 @@ class InfoController extends Controller
         $title = 'Info Pepustakaan';
         $koleksi = Bibliobigrafi::all()->count();
         $anggota_count = User::all()->count();
-        $eksemplar = PinjamTransaksii::all()->where('status_pinjam', 1)->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
         $approve = User::whereNull('approved_at')->get()->count();
         return view('admin.info.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
