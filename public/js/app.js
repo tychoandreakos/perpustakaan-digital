@@ -4124,6 +4124,14 @@ __webpack_require__.r(__webpack_exports__);
       datas: {}
     };
   },
+  filters: {
+    arr: function arr(val) {
+      var n = val.map(function (gmd_obj) {
+        return gmd_obj.gmd.nama_gmd;
+      });
+      return n.join(', ');
+    }
+  },
   methods: {
     edit: function edit(val) {
       return "bibliobigrafi/".concat(val, "/edit");
@@ -15723,7 +15731,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.table td[data-v-4925fc82],\n.table th[data-v-4925fc82] {\n    font-size: 0.8125rem;\n    white-space: normal !important;\n}\n\n", ""]);
+exports.push([module.i, "\n.table td[data-v-4925fc82],\n.table th[data-v-4925fc82] {\n    font-size: 0.8125rem;\n    white-space: normal !important;\n}\n", ""]);
 
 // exports
 
@@ -74456,7 +74464,13 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
-                                "\n                                    as\n                                "
+                                "\n                                    " +
+                                  _vm._s(
+                                    _vm._f("arr")(
+                                      data.bibliobigrafi[0].gmd_transaksi
+                                    )
+                                  ) +
+                                  "\n                                "
                               )
                             ]),
                             _vm._v(" "),

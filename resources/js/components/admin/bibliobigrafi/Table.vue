@@ -49,7 +49,7 @@
                                         {{ data.bibliobigrafi_count }}
                                     </td>
                                     <td>
-                                        as
+                                        {{ data.bibliobigrafi[0].gmd_transaksi | arr}}
                                     </td>
                                     <td>
                                         {{ data.isbn_isnn }}
@@ -80,6 +80,14 @@
         data() {
             return {
                 datas: {},
+            }
+        },
+
+        filters: {
+            arr(val) {
+                let n = val.map(gmd_obj => gmd_obj.gmd.nama_gmd);
+
+                return n.join(', ');
             }
         },
 
@@ -142,7 +150,6 @@
             this.getResults();
         },
     }
-
 </script>
 
 
@@ -152,5 +159,4 @@
         font-size: 0.8125rem;
         white-space: normal !important;
     }
-
 </style>
