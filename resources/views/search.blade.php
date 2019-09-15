@@ -159,9 +159,11 @@
                                    @php
                                    $tr[$i++] = $p->pengarang->nama_pengarang;
                                    // array_push($tr, );
-                                   print_r(join(', ', $tr));
+                                //    print_r(join(', ', $tr));
                                    @endphp
                                    @endforeach
+
+                                   @php  print_r(join(', ', $tr)) @endphp
                             </h6>
     
                            
