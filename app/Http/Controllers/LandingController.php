@@ -400,11 +400,13 @@ class LandingController extends Controller
             ]);
 
             $query = $request->cari;
-            $result = Buku::with(['buku_transaksi.pengarang' => function($q) use ($query) {
-                $q->select('id', 'nama_pengarang')->where('nama_pengarang', 'LIKE' ,"%".$query."%");
+            $result = Buku::with(['buku_transaksi.pengarang' => function($q) {
+                $q->select('id', 'nama_pengarang');
             }, 'buku_transaksi.penerbit', 'bibliobigrafi.gmd' => function($q) {
                 $q->select('id', 'nama_gmd')->first();
-            }])->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);
+            }])->whereHas('buku_transaksi.pengarang', function($q) use ($query){
+                $q->where('nama_pengarang', 'LIKE', "%$query%");
+            })->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);
             $cari = $query;
             return view('search', compact('result', 'cari'));
 

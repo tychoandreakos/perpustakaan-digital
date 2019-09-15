@@ -204,7 +204,7 @@ class BibliobigrafiController extends Controller
         $requestData = $request->all();
         $requestData['slug'] = str_slug($request->judul);
         $requestData['gambar_sampul'] = $name;
-        $requestData['pdf'] = isset($file) ? substr($file, 15, 50) : '';
+        $requestData['pdf'] = isset($file) ? substr($file, 15, 50) : null;
         $buku = Buku::create($requestData);
 
        foreach ($request->pengarang_id as $pengarang) {
