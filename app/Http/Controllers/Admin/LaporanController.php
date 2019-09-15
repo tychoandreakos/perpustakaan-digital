@@ -18,7 +18,7 @@ class LaporanController extends Controller
         $buku = Buku::all()->count();
         $eksemplar = Bibliobigrafi::all()->count();
         $eksemplar_dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->withCount('bibliobigrafi')->orderBy('bibliobigrafi_count', 'DESC')->get();
+        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->withCount('buku')->orderBy('buku_count', 'DESC')->get();
 
         return view('admin.laporan.koleksi', compact('buku', 'eksemplar', 'eksemplar_dipinjam', 'popular', 'title'));
     }
@@ -39,9 +39,13 @@ class LaporanController extends Controller
         $buku = Buku::all()->count();
         $eksemplar = Bibliobigrafi::all()->count();
         $eksemplar_dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->withCount('bibliobigrafi')->orderBy('bibliobigrafi_count', 'DESC')->get();
+        // return
+        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->withCount('buku')->orderBy('buku_count', 'DESC')->limit(10)->get();
+        $masuk = Buku::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
+        $time = Carbon::now();
+        $title = 'Ringkasan Statistik Koleksi';
 
-        $pdf = PDF::loadview('admin.laporan.print.koleksi', compact('buku', 'eksemplar' ,'eksemplar_dipinjam', 'popular'));
+        $pdf = PDF::loadview('admin.laporan.print.koleksi', compact('buku', 'title', 'time', 'eksemplar', 'masuk' ,'eksemplar_dipinjam', 'popular'));
         return $pdf->stream('laporan-koleksi-stmik-' . Carbon::now());
     }
     
@@ -61,10 +65,11 @@ class LaporanController extends Controller
         }, 'bibliobigrafi.gmd_transaksi.gmd' => function($q) {
             $q->select('id', 'kode_gmd', 'nama_gmd');
         }])->whereDate('created_at', '>', Carbon::now()->subDays(30))->get();
-        $month = Carbon::now()->format('F');
+        $month = Carbon::now()->format('F Y');
         $salinan = 2;
+        $title = 'Laporan Buku Baru Pada Bulan ' . $month;
 
-        $pdf = PDF::loadview('admin.laporan.print.buku_ini', compact('buku', 'month', 'salinan'));
+        $pdf = PDF::loadview('admin.laporan.print.buku_ini', compact('buku', 'title', 'month', 'salinan'));
         return $pdf->stream();
     }
 

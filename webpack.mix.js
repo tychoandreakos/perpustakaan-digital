@@ -15,4 +15,5 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin.js', 'public/js')
     .js('resources/js/user.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/user.scss', 'public/css');
+    .sass('resources/sass/user.scss', 'public/css')
+    .sass('resources/sass/report.scss', 'public/css');
