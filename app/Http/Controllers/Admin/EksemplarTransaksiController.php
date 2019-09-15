@@ -111,7 +111,8 @@ class EksemplarTransaksiController extends Controller
      */
     public function destroy($id)
     {
-        $bilio = Bibliobigrafi::where('id', $id)->first();
+        $bilio = Bibliobigrafi::find($id);
+        $bilio->gmd_transaksi()->delete();
         $bilio->pola_eksemplar()->delete();
         
         return response()->json([
