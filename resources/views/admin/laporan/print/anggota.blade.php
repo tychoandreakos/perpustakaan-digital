@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td>Total Anggota Kadaluarsa</td>
-                <td class="text-center">{{ $masuk }}</td>
+                <td class="text-center">{{ 0 }}</td>
             </tr>
             <tr>
                 <td>10 Anggota Paling Aktif</td>

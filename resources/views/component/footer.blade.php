@@ -11,12 +11,24 @@
 
                  <!-- Text -->
                  <p class="font-size-sm mt-2 text-gray-700 mb-2">
-                  Email: {{ ucwords($info->email) }}
-                  <br>
-                  Telp:  {{ $info->no_telp }}
-                  <br>
-                  Pustakawan: {{ ucwords($info->pustakawan) }}
-                </p>
+                     @if(isset($info->email))
+                     Email: {{ ucwords($info->email) }}
+                     @else
+                     Email: {{ ucwords('info@stmik-amikbandung.ac.id') }}
+                     @endif
+                     <br>
+                     @if (isset($info->no_telp))
+                     Telp: {{ $info->no_telp }}
+                     @else
+                     Telp: (022) 7271136
+                     @endif
+                     <br>
+                     @if (isset($info->pustakawan))
+                     Pustakawan: {{ ucwords($info->pustakawan) }}
+                     @else
+                     Pustakawan: Suhendry
+                     @endif
+                 </p>
 
                  <!-- Social -->
                  <ul class="list-unstyled list-inline list-social mb-6 mb-md-0">
@@ -49,16 +61,36 @@
                  <!-- List -->
                  <ul class="list-unstyled text-muted mb-6 mb-md-8 mb-lg-0">
                      <li class="mb-3">
+                         @if (isset($info->regular))
                          {{ ucwords($info->regular) }} <br>
+                         @else
+                         Senin - Jumat <br>
+                         @endif
+                         @if (isset($info->waktu_regular))
                          <span class="font-size-sm">{{ $info->waktu_regular }}</span>
+                         @else
+                         <span class="font-size-sm">08.00 - 20.00</span>
+                         @endif
                      </li>
                      <li class="mb-3">
-                      {{ ucwords($info->weekend) }} <br>
-                      <span class="font-size-sm">{{ $info->waktu_weekend }}</span>
+                         @if (isset($info->weekend))
+                         {{ ucwords($info->weekend) }} <br>
+                         @else
+                         Sabtu <br>
+                         @endif
+                         @if (isset($info->waktu_weekend))
+                         <span class="font-size-sm">{{ $info->waktu_weekend }}</span>
+                         @else
+                         08.00 - 17.00
+                         @endif
                      </li>
                      <li class="mb-3">
-                      Jam Istirahat <br>
-                      <span class="font-size-sm">{{ $info->waktu_istirahat }}</span>
+                         Jam Istirahat <br>
+                         @if (isset($info->waktu_istirahat))
+                         <span class="font-size-sm">{{ $info->waktu_istirahat }}</span>
+                         @else
+                         12.00 - 13.00
+                         @endif
                      </li>
                  </ul>
 
@@ -73,7 +105,13 @@
                  <!-- List -->
                  <ul class="list-unstyled text-muted mb-6 mb-md-8 mb-lg-0">
                      <li class="mb-3">
+                         @if (isset($info->alamat))
                          {{ ucwords($info->alamat) }}
+                         @else
+                         Jalan Jakarta No 28
+                         Kelurahan Kebonwaru, Kecamatan Batununggal
+                         Kota Bandung, Jawa barat
+                         @endif
                      </li>
                  </ul>
 

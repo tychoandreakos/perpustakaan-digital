@@ -18,7 +18,7 @@ class LaporanController extends Controller
         $buku = Buku::all()->count();
         $eksemplar = Bibliobigrafi::all()->count();
         $eksemplar_dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->where('status_verifikasi', 0)->withCount('buku')->orderBy('buku_count', 'DESC')->get();
+        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->where('status_verifikasi', 0)->withCount('buku')->orderBy('buku_count', 'DESC')->limit(10)->get();
 
         return view('admin.laporan.koleksi', compact('buku', 'eksemplar', 'eksemplar_dipinjam', 'popular', 'title'));
     }
@@ -31,7 +31,7 @@ class LaporanController extends Controller
         $terlambat = PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->get()->count();
         $dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
         $pinjaman = PinjamTransaksi::where('status_verifikasi', 1)->get()->count();
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->where('status_verifikasi', 0)->withCount('buku')->orderBy('buku_count', 'DESC')->get();
+        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->where('status_verifikasi', 0)->withCount('buku')->orderBy('buku_count', 'DESC')->limit(10)->get();
 
         return view('admin.laporan.pinjam', compact('buku', 'eksemplar', 'dipinjam', 'terlambat', 'pinjaman', 'popular', 'title'));
     }
@@ -87,7 +87,7 @@ class LaporanController extends Controller
         $eksemplar = User::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
         $eksemplar_dipinjam = User::whereNull('approved_at')->get()->count();
         // return
-        $popular = PinjamTransaksi::with('user', 'user.anggota')->withCount('user')->orderBy('user_count', 'DESC')->get();
+        $popular = PinjamTransaksi::with('user', 'user.anggota')->withCount('user')->orderBy('user_count', 'DESC')->limit(10)->get();
         $masuk = Buku::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
         $time = Carbon::now();
         $title = 'Ringkasan Statistik Anggota';
@@ -129,7 +129,7 @@ class LaporanController extends Controller
         $eksemplar_dipinjam = User::all()->count();
         $total = User::all()->count();
         $bulan = User::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
-        $popular = PinjamTransaksi::with('user', 'user.anggota')->withCount('user')->orderBy('user_count', 'DESC')->get();
+        $popular = PinjamTransaksi::with('user', 'user.anggota')->withCount('user')->orderBy('user_count', 'DESC')->limit(10)->get();
         $month = Carbon::now()->format('F Y');
         // $kadaluarsa = Anggota::where('tgl_expired', '>=' '')->get()->count();
 
