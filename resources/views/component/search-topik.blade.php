@@ -13,7 +13,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Hasil Pencarian
+                        Hasil Pencarian berdasarkan topik {{ ucwords($tags) }}
                     </li>
                 </ol>
 
@@ -52,9 +52,11 @@
                             <span class="input-group-text border-0 py-0 pl-1 pr-3">
 
                                 <!-- Text -->
+                                @if ($cari)
                                 <span class="h6 text-uppercase text-muted d-none d-md-block mb-0 mr-5">
                                     Ditemukan 0 Pencarian
                                 </span>
+                                @endif
 
                                 <!-- Button -->
                                 <button type="submit" class="btn btn-sm btn-primary">
@@ -144,23 +146,24 @@
 
                         <!-- Author -->
                         <h6 class="text-uppercase mr-2 mb-0">
-                                @php
-                                $i = 0;
-                                $tr = [];   
-                               @endphp
-                               @foreach ($item->buku_transaksi as $p)
-                               @php
-                               $tr[$i++] = $p->pengarang->nama_pengarang;
-                               // array_push($tr, );
-                               @endphp
-                               @endforeach
-                             @php  print_r(join(', ', $tr)) @endphp
+                            @php
+                            $i = 0;
+                            $tr = [];
+                            @endphp
+                            @foreach ($item->buku_transaksi as $p)
+                            @php
+                            $tr[$i++] = $p->pengarang->nama_pengarang;
+                            // array_push($tr, );
+                            @endphp
+                            @endforeach
+                            @php print_r(join(', ', $tr)) @endphp
                         </h6>
 
                         <!-- Date -->
                         @if($item->pdf)
                         <p class="h6 text-uppercase text-muted mb-0 ml-auto">
-                            <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+                            <button onclick="location.href='{{ route('baca', $item->slug) }}'" data-toggle="tooltip"
+                                data-placement="top" title="Tooltip on top"
                                 class="btn btn-danger-soft btn-rounded-circle btn-sm">
                                 <i class="fe fe-eye"></i>
                             </button>
@@ -178,13 +181,13 @@
             @else
             <h4 class="text-center">
                 Tidak ditemukan pencarian dengan kata kunci {{ $cari }}
-             
+
             </h4>
             @endif
 
             <section class="py-6 py-md-8">
 
-              </section>
+            </section>
         </div>
     </div> <!-- / .container -->
 </section>

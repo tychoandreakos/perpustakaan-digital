@@ -110,7 +110,8 @@ Route::post('denda/bayar', 'DendaController@store')->name('denda');
 // print laporan
 Route::get('laporan-koleksi-stmik', 'LaporanController@print_koleksi')->name('print.koleksi');
 Route::get('laporan-buku', 'LaporanController@print_buku_bulan_ini')->name('print.buku_ini');
-
+Route::get('laporan-pinjam', 'LaporanController@print_pinjam')->name('print.pinjam');
+Route::get('laporan-anggota', 'LaporanController@print_anggota')->name('print.anggota');
 
 // Bibliobigrafi
 Route::get('bibliobigrafi-fetch-pengarang', 'BibliobigrafiController@pengarang')->name('bibliobigrafi.pengarang');

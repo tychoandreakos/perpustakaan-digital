@@ -36,6 +36,23 @@ class LaporanController extends Controller
         return view('admin.laporan.pinjam', compact('buku', 'eksemplar', 'dipinjam', 'terlambat', 'pinjaman', 'popular', 'title'));
     }
 
+    public function print_pinjam()
+    {
+        $buku = PinjamTransaksi::whereDate('created_at', '>', Carbon::now()->subDays(7))->get()->count();
+        $eksemplar = PinjamTransaksi::whereDate('created_at', '=', Carbon::now())->get()->count();
+        $eksemplar_dipinjam = PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->get()->count();
+        $dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
+        // return
+        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->withCount('buku')->orderBy('buku_count', 'DESC')->limit(10)->get();
+        $masuk = PinjamTransaksi::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
+        $time = Carbon::now();
+        $tahun = PinjamTransaksi::whereDate('created_at', '>', Carbon::now()->subDays(360))->get()->count();
+        $title = 'Ringkasan Laporan Peminjaman Di STMIK AMIKBANDUNG';
+
+        $pdf = PDF::loadview('admin.laporan.print.pinjaman', compact('buku', 'tahun', 'title', 'time', 'eksemplar', 'masuk' ,'eksemplar_dipinjam', 'popular'));
+        return $pdf->stream('laporan-pinjam-stmik-' . Carbon::now());
+    }
+
     public function print_koleksi()
     {
         $buku = Buku::all()->count();
@@ -49,6 +66,21 @@ class LaporanController extends Controller
 
         $pdf = PDF::loadview('admin.laporan.print.koleksi', compact('buku', 'title', 'time', 'eksemplar', 'masuk' ,'eksemplar_dipinjam', 'popular'));
         return $pdf->stream('laporan-koleksi-stmik-' . Carbon::now());
+    }
+
+    public function print_anggota()
+    {
+        $buku = User::all()->count();
+        $eksemplar = User::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
+        $eksemplar_dipinjam = User::whereNull('approved_at')->get()->count();
+        // return
+        $popular = PinjamTransaksi::with('user', 'user.anggota')->withCount('user')->orderBy('user_count', 'DESC')->get();
+        $masuk = Buku::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
+        $time = Carbon::now();
+        $title = 'Ringkasan Statistik Anggota';
+
+        $pdf = PDF::loadview('admin.laporan.print.anggota', compact('buku', 'title', 'time', 'eksemplar', 'masuk' ,'eksemplar_dipinjam', 'popular'));
+        return $pdf->stream('laporan-anggota-stmik-' . Carbon::now());
     }
     
     public function print_buku_bulan_ini()
@@ -79,12 +111,15 @@ class LaporanController extends Controller
     {
         $title = 'Statistik Anggota';
 
-        $buku = Buku::all()->count();
-        $eksemplar = Bibliobigrafi::all()->count();
-        $eksemplar_dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
+        $buku = User::all()->count();
+        $eksemplar = User::whereNull('approved_at')->get()->count();
+        $eksemplar_dipinjam = User::all()->count();
         $total = User::all()->count();
+        $bulan = User::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
         $popular = PinjamTransaksi::with('user', 'user.anggota')->withCount('user')->orderBy('user_count', 'DESC')->get();
+        $month = Carbon::now()->format('F Y');
+        // $kadaluarsa = Anggota::where('tgl_expired', '>=' '')->get()->count();
 
-        return view('admin.laporan.anggota', compact('buku', 'eksemplar', 'eksemplar_dipinjam', 'popular', 'title', 'total'));
+        return view('admin.laporan.anggota', compact('buku', 'month', 'bulan', 'eksemplar', 'eksemplar_dipinjam', 'popular', 'title', 'total'));
     }
 }

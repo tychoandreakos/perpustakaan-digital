@@ -6,7 +6,7 @@
     <div class="header-body">
 
         <!-- Card stats -->
-        @include('admin.component.laporan-home')
+        @include('admin.component.laporan-anggota')
         {{-- {{ $gmd }} --}}
         <!-- overview panel -->
         <div class="container-fluid mt--7">
@@ -22,7 +22,7 @@
                                 <div class="col">
                                     <ul class="nav nav-pills justify-content-end">
                                         <li class="nav-item">
-                                            <a href="#" class="btn btn-danger py-2 px-3"><span
+                                        <a href="{{ route('print.anggota') }}" class="btn btn-danger py-2 px-3"><span
                                                     class="d-none d-md-block">Cetak Data</span> <span
                                                     class="d-md-none">W</span></a></li>
                                     </ul>

@@ -22,8 +22,8 @@
                                 <div class="col">
                                     <ul class="nav nav-pills justify-content-end">
                                         <li class="nav-item">
-                                            <a href="#" class="btn btn-danger py-2 px-3"><span
-                                                    class="d-none d-md-block">Cetak Data</span> <span
+                                        <a href="{{ route('print.pinjam') }}" class="btn btn-danger py-2 px-3"><span
+                                                    class="d-none d-md-block">Cetak Data Bulan Ini</span> <span
                                                     class="d-md-none">W</span></a></li>
                                     </ul>
                                 </div>

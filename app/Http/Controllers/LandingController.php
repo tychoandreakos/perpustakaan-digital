@@ -192,7 +192,8 @@ class LandingController extends Controller
         $info = Info::all()->first();
 
         $cari = '';
-        return view('topik', compact('result', 'info', 'cari'));
+        $tags = $id;
+        return view('topik', compact('result', 'info', 'tags', 'cari'));
     }
 
     public function beranda()

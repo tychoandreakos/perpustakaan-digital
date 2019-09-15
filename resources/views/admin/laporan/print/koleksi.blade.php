@@ -39,7 +39,7 @@
             </tr>
         </tbody>
 	</table>
-	<span style="font-size: 10pt">{{ $time }}</span>
+	<span style="font-size: 10pt">Dicetak pada: {{ $time }}</span>
 
 </body>
 
