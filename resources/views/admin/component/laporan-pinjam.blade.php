@@ -68,7 +68,7 @@
                       <div class="card-body">
                         <div class="row">
                           <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Total Pinjaman</h5>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Belum Diverifikasi</h5>
                             <span class="h2 font-weight-bold mb-0">{{ isset($pinjaman) ? $pinjaman : 0 }}</span>
                           </div>
                           <div class="col-auto">
@@ -78,7 +78,7 @@
                           </div>
                         </div>
                         <p class="mt-3 mb-0 text-muted text-sm">
-                          <span>Total dari pinjaman bulan ini</span>
+                          <span>Total pinjaman yang belum diverifikasi atau diproses</span>
                         </p>
                       </div>
                       <div class="col-auto"></div>
