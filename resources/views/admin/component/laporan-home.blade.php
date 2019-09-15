@@ -11,8 +11,8 @@
                           <span class="h2 font-weight-bold mb-0">{{ isset($buku) ? $buku : 0 }}</span>
                         </div>
                         <div class="col-auto">
-                          <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                            <i class="fas fa-chart-bar"></i>
+                          <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                            <i class="fas fa-check"></i>
                           </div>
                         </div>
                       </div>
@@ -23,7 +23,7 @@
                     <div class="col-auto"></div>
                   </div>
                 </div>
-                <div class="col-xl-3 col-lg-6">
+                {{-- <div class="col-xl-3 col-lg-6">
                   <div class="card card-stats mb-4 mb-xl-0">
                     <div class="card-body">
                       <div class="row">
@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-auto">
                           <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                            <i class="fas fa-chart-pie"></i>
+                            <i class="fas fa-book"></i>
                           </div>
                         </div>
                       </div>
@@ -42,7 +42,7 @@
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> --}}
                 <div class="col-xl-3 col-lg-6">
                   <div class="card card-stats mb-4 mb-xl-0">
                     <div class="card-body">
@@ -52,8 +52,8 @@
                           <span class="h2 font-weight-bold mb-0">{{ isset($eksemplar) ? $eksemplar : 0 }}</span>
                         </div>
                         <div class="col-auto">
-                          <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                            <i class="fas fa-users"></i>
+                          <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i class="fas fa-copy"></i>
                           </div>
                         </div>
                       </div>
@@ -63,7 +63,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-3 col-lg-6">
+              <a href="{{ route('eksemplar.keluar') }}" class="col-xl-6 col-lg-9">
                   <div class="card card-stats mb-4 mb-xl-0">
                     <div class="card-body">
                       <div class="row">
@@ -73,16 +73,16 @@
                         </div>
                         <div class="col-auto">
                           <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                            <i class="fas fa-percent"></i>
+                            <i class="fas fa-file-import"></i>
                           </div>
                         </div>
                       </div>
                       <p class="mt-3 mb-0 text-muted text-sm">
-                        <span>Total eksemplar yang sedang dipinjam</span>
+                        <span>Total eksemplar yang sedang dipinjam oleh anggota, Anda dapat mengklik item ini untuk melihat keseluruhan peminjaman yang telah dilakukan oleh anggota</span>
                       </p>
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
           </div>

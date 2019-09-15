@@ -14,6 +14,9 @@
 // Route::get('/', function () {
 //     return view('user');
 // });
+
+use Illuminate\Support\Carbon;
+
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -103,6 +106,10 @@ Route::get('terlambat-fetch', 'PinjamController@terlambat')->name('terlambat.fet
 
 Route::get('denda-user/{id}', 'PinjamController@denda')->name('sirkulasi.denda');
 Route::post('denda/bayar', 'DendaController@store')->name('denda');
+
+// print laporan
+Route::get('laporan-koleksi-stmik', 'LaporanController@print_koleksi')->name('print.koleksi');
+Route::get('laporan-buku-bulan-ini', 'LaporanController@print_buku_bulan_ini')->name('print.buku_ini');
 
 
 // Bibliobigrafi
