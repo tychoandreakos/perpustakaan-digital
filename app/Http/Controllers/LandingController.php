@@ -333,9 +333,11 @@ class LandingController extends Controller
             $q->select('id', 'nama_kota');
         }, 'buku_transaksi.bahasa' => function($q){
             $q->select('id', 'jenis_bahasa');
-        }, 'bibliobigrafi.gmd' => function($q){
-            $q->select('id', 'nama_gmd');
-        }, 'bibliobigrafi.klasifikasi' => function($q) {
+        }, 'bibliobigrafi.gmd_transaksi' => function($q){
+            $q->select('id', 'bibliobigrafi_id', 'gmd_id');
+        },  'bibliobigrafi.gmd_transaksi.gmd' => function($q) {
+            $q->select('id', 'nama_gmd', 'kode_gmd');
+        } ,'bibliobigrafi.klasifikasi' => function($q) {
             $q->select('id', 'tipe_klasifikasi');
         }, 'buku_transaksi.topik' => function($q) {
             $q->select('id', 'jenis_topik', 'warna');

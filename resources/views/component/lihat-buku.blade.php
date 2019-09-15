@@ -19,17 +19,19 @@
 
                  <!-- Text -->
                  <p class="font-size-lg text-gray-700 mb-5 mb-md-0">
-                        @php
-                        $i = 0;
-                        $tr = [];   
-                       @endphp
-                       @foreach ($result->buku_transaksi as $p)
-                       @php
-                       $tr[$i++] = $p->pengarang->nama_pengarang;
-                       // array_push($tr, );
-                       print_r(join(', ', $tr));
-                       @endphp
-                       @endforeach
+                     @php
+                     $i = 0;
+                     $tr = [];
+                     @endphp
+                     @foreach ($result->buku_transaksi as $p)
+                     @php
+                     $tr[$i++] = $p->pengarang->nama_pengarang;
+                     @endphp
+                     @endforeach
+
+                     @php
+                     print_r(join(', ', $tr));
+                     @endphp
                  </p>
 
              </div>
@@ -236,7 +238,7 @@
                              </div>
                              @endisset
 
-                             @isset($result->bibliobigrafi[0]->gmd)
+                             @isset($result->bibliobigrafi[0]->gmd_transaksi)
                              <div class="list-group-item d-flex align-items-center">
 
                                  <!-- Text -->
@@ -249,7 +251,20 @@
 
                                      <!-- Text -->
                                      <p class="font-size-sm text-muted mb-0">
-                                         {{ $result->bibliobigrafi[0]->gmd->nama_gmd}}
+                                         @php
+                                         $i = 0;
+                                         $tr = [];
+                                         @endphp
+                                         @foreach ($result->bibliobigrafi[0]->gmd_transaksi as $p)
+                                         @php
+                                         $tr[$i++] = $p->gmd->nama_gmd;
+
+                                         @endphp
+                                         @endforeach
+
+                                         @php
+                                         print_r(join(', ', $tr));
+                                         @endphp
                                      </p>
 
                                  </div>
