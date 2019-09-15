@@ -27,11 +27,13 @@ class LaporanController extends Controller
     {
         $title = 'Statistik Koleksi Pinjaman';
         $buku = Buku::all()->count();
-        $eksemplar = Bibliobigrafi::all()->count();
-        $eksemplar_dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->withCount('bibliobigrafi')->orderBy('bibliobigrafi_count', 'DESC')->get();
+        $eksemplar = PinjamTransaksi::whereDate('created_at', '=', Carbon::now())->get()->count();
+        $terlambat = PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->get()->count();
+        $dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
+        $pinjaman = PinjamTransaksi::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
+        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->withCount('buku')->orderBy('buku_count', 'DESC')->get();
 
-        return view('admin.laporan.pinjam', compact('buku', 'eksemplar', 'eksemplar_dipinjam', 'popular', 'title'));
+        return view('admin.laporan.pinjam', compact('buku', 'eksemplar', 'dipinjam', 'terlambat', 'pinjaman', 'popular', 'title'));
     }
 
     public function print_koleksi()
