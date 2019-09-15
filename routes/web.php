@@ -109,7 +109,7 @@ Route::post('denda/bayar', 'DendaController@store')->name('denda');
 
 // print laporan
 Route::get('laporan-koleksi-stmik', 'LaporanController@print_koleksi')->name('print.koleksi');
-Route::get('laporan-buku-bulan-ini', 'LaporanController@print_buku_bulan_ini')->name('print.buku_ini');
+Route::get('laporan-buku', 'LaporanController@print_buku_bulan_ini')->name('print.buku_ini');
 
 
 // Bibliobigrafi

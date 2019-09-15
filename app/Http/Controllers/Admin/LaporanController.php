@@ -47,10 +47,24 @@ class LaporanController extends Controller
     
     public function print_buku_bulan_ini()
     {
-        $buku = Buku::whereDate('created_at', '>', Carbon::now()->subDays(30))->get();
+        // return
+        $buku = Buku::with(['buku_transaksi' => function($q) {
+            $q->select('id', 'buku_id', 'pengarang_id', 'penerbit_id');
+        }, 'buku_transaksi.penerbit' => function($q) {
+            $q->select('id', 'nama_penerbit');
+        }, 'buku_transaksi.pengarang' => function($q) {
+            $q->select('id', 'nama_pengarang');
+        }, 'bibliobigrafi' => function($q) {
+            $q->select('id', 'buku_id', 'klasifikasi_id');
+        }, 'bibliobigrafi.gmd_transaksi' => function($q) {
+            $q->select('id', 'bibliobigrafi_id', 'gmd_id');
+        }, 'bibliobigrafi.gmd_transaksi.gmd' => function($q) {
+            $q->select('id', 'kode_gmd', 'nama_gmd');
+        }])->whereDate('created_at', '>', Carbon::now()->subDays(30))->get();
         $month = Carbon::now()->format('F');
+        $salinan = 2;
 
-        $pdf = PDF::loadview('admin.laporan.print.buku_ini', compact('buku', 'month'));
+        $pdf = PDF::loadview('admin.laporan.print.buku_ini', compact('buku', 'month', 'salinan'));
         return $pdf->stream();
     }
 
