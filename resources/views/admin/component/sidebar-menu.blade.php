@@ -14,9 +14,9 @@
                 <a href="{{ route('bibliobigrafi.create') }}" class="dropdown-item">Tambah Bibliobigrafi</a>
                 <a href="{{ route('transaksi-eksemplar.index') }}" class="dropdown-item">Daftar Eksemplar</a>
                 <a href="{{ route('eksemplar.keluar') }}" class="dropdown-item">Eksemplar Keluar</a>
-                <a href="#" class="dropdown-item">Cetak Label</a>
+                {{-- <a href="#" class="dropdown-item">Cetak Label</a>
                 <a href="#" class="dropdown-item">Eksport Data</a>
-                <a href="#" class="dropdown-item">Import Data</a>
+                <a href="#" class="dropdown-item">Import Data</a> --}}
             </div>
         </div>
     </li>
@@ -43,9 +43,9 @@
                 <a href="{{ route('anggota.index') }}" class="dropdown-item">Lihat Daftar Anggota</a>
                 <a href="{{ route('anggota.create') }}" class="dropdown-item">Tambah Anggota</a>
                 <a href="{{ route('tipe-anggota.index') }}" class="dropdown-item">Tipe Keanggotaan</a>
-                <a href="#" class="dropdown-item">Cetak Kartu Anggota</a>
+                {{-- <a href="#" class="dropdown-item">Cetak Kartu Anggota</a>
                 <a href="#" class="dropdown-item">Eksport Data</a>
-                <a href="#" class="dropdown-item">Import Data</a>
+                <a href="#" class="dropdown-item">Import Data</a> --}}
             </div>
         </div>
     </li>
@@ -88,8 +88,8 @@
                 <a href="{{ route('laporan.koleksi') }}" class="dropdown-item">Statistik Koleksi Buku</a>
                 <a href="{{ route('laporan.pinjam') }}" class="dropdown-item">Laporan Peminjaman</a>
                 <a href="{{ route('laporan.anggota') }}" class="dropdown-item">Laporan Anggota</a>
-                <a href="#" class="dropdown-item">Rekapitulasi</a>
-                <a href="#" class="dropdown-item">Statistik Pengunjung</a>
+                {{-- <a href="#" class="dropdown-item">Rekapitulasi</a> --}}
+            <a href="{{ route('laporan.pengunjung') }}" class="dropdown-item">Statistik Pengunjung</a>
             </div>
         </div>
     </li>

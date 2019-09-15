@@ -9,7 +9,7 @@
         {{-- <a class="navbar-brand pt-0" href="./index.html">
             <img src="{{ asset('img/brand/blue.png') }}" class="navbar-brand-img" alt="...">
         </a> --}}
-        <a class="navbar-brand pt-0 pb-0" href="{{ route('landing') }}">
+        <a class="navbar-brand pt-0 pb-0" href="{{ route('home') }}">
             <div class="pt-2">
                 <img src="{{ asset('img/logo.svg') }}" class="navbar-brand-img" alt="...">
                 <h3 style="display: inline" class="font-weight-bold">STMIK Digital Library.</h3>

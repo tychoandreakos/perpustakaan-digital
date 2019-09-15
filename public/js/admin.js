@@ -27319,6 +27319,22 @@ $(document).ready(function () {
 
 /***/ }),
 
+/***/ "./resources/js/admin/chart/pengunjung2.js":
+/*!*************************************************!*\
+  !*** ./resources/js/admin/chart/pengunjung2.js ***!
+  \*************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+$(document).ready(function () {});
+
+/***/ }),
+
 /***/ "./resources/js/admin/chart/pinjam.js":
 /*!********************************************!*\
   !*** ./resources/js/admin/chart/pinjam.js ***!
@@ -28232,11 +28248,81 @@ __webpack_require__(/*! ./chart/pinjam */ "./resources/js/admin/chart/pinjam.js"
 
 __webpack_require__(/*! ./chart/anggota */ "./resources/js/admin/chart/anggota.js");
 
-__webpack_require__(/*! ./chart/pengunjung */ "./resources/js/admin/chart/pengunjung.js"); //
+__webpack_require__(/*! ./chart/pengunjung */ "./resources/js/admin/chart/pengunjung.js");
+
+__webpack_require__(/*! ./chart/pengunjung2 */ "./resources/js/admin/chart/pengunjung2.js"); //
 // Charts
 //
 
 
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('pengunjung-chart').then(function (res) {
+  'use strict'; //
+  // Sales chart
+  //
+
+  var SalesChart = function () {
+    // Variables
+    var $chart = $('#chart-sales2'); // Methods
+
+    function init($chart) {
+      // this.ajaxget();
+      var salesChart = new Chart($chart, {
+        type: 'line',
+        options: {
+          scales: {
+            yAxes: [{
+              gridLines: {
+                lineWidth: 1,
+                color: Charts.colors.gray[900],
+                zeroLineColor: Charts.colors.gray[900]
+              },
+              ticks: {
+                callback: function callback(value) {
+                  if (!(value % 10)) {
+                    return value;
+                  }
+                }
+              }
+            }]
+          },
+          tooltips: {
+            callbacks: {
+              label: function label(item, data) {
+                var label = data.datasets[item.datasetIndex].label || '';
+                var yLabel = item.yLabel;
+                var content = '';
+
+                if (data.datasets.length > 1) {
+                  content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                }
+
+                content += '<span class="popover-body-value">' + yLabel + '</span>';
+                return content;
+              }
+            }
+          }
+        },
+        data: {
+          labels: res.data.months,
+          datasets: [{
+            label: 'Performance',
+            data: res.data.post_count_data
+          }]
+        }
+      }); // Save to jQuery object
+
+      $chart.data('chart', salesChart);
+    }
+
+    ; // Events
+
+    if ($chart.length) {
+      init($chart);
+    }
+  }();
+})["catch"](function (err) {
+  return console.log(err);
+});
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('pinjam-chart').then(function (res) {
   'use strict'; //
   // Sales chart

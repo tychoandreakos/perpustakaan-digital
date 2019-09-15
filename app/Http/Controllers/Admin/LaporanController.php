@@ -53,6 +53,19 @@ class LaporanController extends Controller
         return $pdf->stream('laporan-pinjam-stmik-' . Carbon::now());
     }
 
+    public function pengunjung()
+    {
+        $title = 'Statistik Pengunjung';
+        $buku = Buku::all()->count();
+        $eksemplar = PinjamTransaksi::whereDate('created_at', '=', Carbon::now())->get()->count();
+        $terlambat = PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->get()->count();
+        $dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
+        $pinjaman = PinjamTransaksi::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
+        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->withCount('buku')->orderBy('buku_count', 'DESC')->get();
+
+        return view('admin.laporan.pengunjung', compact('buku', 'eksemplar', 'dipinjam', 'terlambat', 'pinjaman', 'popular', 'title'));
+    }
+
     public function print_koleksi()
     {
         $buku = Buku::all()->count();

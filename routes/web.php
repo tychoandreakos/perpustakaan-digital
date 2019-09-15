@@ -154,6 +154,7 @@ Route::get('pengunjung-chart', 'BukuTamuController@chart');
 Route::get('statistik-koleksi-buku', 'LaporanController@koleksi')->name('laporan.koleksi');
 Route::get('statistik-anggota', 'LaporanController@anggota')->name('laporan.anggota');
 Route::get('statistik-pinjam', 'LaporanController@pinjam')->name('laporan.pinjam');
+Route::get('statistik-pengunjung', 'LaporanController@pengunjung')->name('laporan.pengunjung');
 
 
 // tool
