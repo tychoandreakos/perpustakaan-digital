@@ -154,13 +154,19 @@
 
                                      <!-- Heading -->
                                      <p class="font-weight-bold mb-1">
-                                         Jumlah Koleksi Yang Belum Dipinjam
+                                         Jumlah Koleksi Yang Dapat Dipinjam
                                      </p>
 
                                      <!-- Text -->
+                                     @if ($bibliobigrafi->count() == 0)
+                                     <p class="font-size-sm text-danger mb-0">
+                                           Stok Buku Ini Sedang Dipinjam Semua.
+                                        </p>
+                                     @else     
                                      <p class="font-size-sm text-muted mb-0">
                                          {{ $bibliobigrafi->count() }} Koleksi
                                      </p>
+                                     @endif
 
                                  </div>
 

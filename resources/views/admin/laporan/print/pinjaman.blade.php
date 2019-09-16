@@ -38,7 +38,7 @@
                 <td>
                     <ol>
                         @foreach ($popular as $p)
-                        <li>{{ ucwords($p->bibliobigrafi->buku->judul) }}</li>
+                        <li>{{ ucwords($p->judul) }}</li>
                         @endforeach
                     </ol>
                 </td>

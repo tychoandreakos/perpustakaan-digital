@@ -18,7 +18,8 @@ class LaporanController extends Controller
         $buku = Buku::all()->count();
         $eksemplar = Bibliobigrafi::all()->count();
         $eksemplar_dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->where('status_verifikasi', 0)->withCount('buku')->orderBy('buku_count', 'DESC')->limit(10)->get();
+        // return
+        $popular = Buku::latest()->limit(10)->get();
 
         return view('admin.laporan.koleksi', compact('buku', 'eksemplar', 'eksemplar_dipinjam', 'popular', 'title'));
     }
@@ -31,7 +32,11 @@ class LaporanController extends Controller
         $terlambat = PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->get()->count();
         $dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
         $pinjaman = PinjamTransaksi::where('status_verifikasi', 1)->get()->count();
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->where('status_verifikasi', 0)->withCount('buku')->orderBy('buku_count', 'DESC')->limit(10)->get();
+         $popular = Buku::with(['pinjam_transaksi' => function($q){
+            $q->select('id', 'buku_id', 'status_verifikasi');
+        }])->withCount('pinjam_transaksi')->whereHas('pinjam_transaksi', function($q) {
+            $q->where('status_verifikasi', 0);
+        })->orderBy('pinjam_transaksi_count', 'DESC')->limit(10)->get();
 
         return view('admin.laporan.pinjam', compact('buku', 'eksemplar', 'dipinjam', 'terlambat', 'pinjaman', 'popular', 'title'));
     }
@@ -43,7 +48,11 @@ class LaporanController extends Controller
         $eksemplar_dipinjam = PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->get()->count();
         $dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
         // return
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->where('status_verifikasi', 0)->withCount('buku')->orderBy('buku_count', 'DESC')->limit(10)->get();
+         $popular = Buku::with(['pinjam_transaksi' => function($q){
+            $q->select('id', 'buku_id', 'status_verifikasi');
+        }])->withCount('pinjam_transaksi')->whereHas('pinjam_transaksi', function($q) {
+            $q->where('status_verifikasi', 0);
+        })->orderBy('pinjam_transaksi_count', 'DESC')->limit(10)->get();
         $masuk = PinjamTransaksi::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
         $time = Carbon::now();
         $tahun = PinjamTransaksi::whereDate('created_at', '>', Carbon::now()->subDays(360))->get()->count();
@@ -72,7 +81,7 @@ class LaporanController extends Controller
         $eksemplar = Bibliobigrafi::all()->count();
         $eksemplar_dipinjam = Bibliobigrafi::where('status_pinjam', 1)->count();
         // return
-        $popular = PinjamTransaksi::with('bibliobigrafi.buku')->where('status_verifikasi', 0)->withCount('buku')->orderBy('buku_count', 'DESC')->limit(10)->get();
+        $popular = Buku::latest()->limit(10)->get();
         $masuk = Buku::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
         $time = Carbon::now();
         $title = 'Ringkasan Statistik Koleksi';

@@ -28,11 +28,11 @@
                 <td class="text-center">{{ $masuk }}</td>
             </tr>
             <tr>
-                <td>10 Judul Terpopuler</td>
+                <td>10 Buku Baru Yang Terakhir Masuk</td>
                 <td>
                     <ol>
                         @foreach ($popular as $p)
-							<li>{{ ucwords($p->bibliobigrafi->buku->judul) }}</li>
+							<li>{{ ucwords($p->judul) }}</li>
 						@endforeach
                     </ol>
                 </td>

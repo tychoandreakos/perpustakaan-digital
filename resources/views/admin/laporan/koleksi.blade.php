@@ -17,7 +17,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-                                    <h2 class="text-white mb-0">10 Buku Terpopuler</h2>
+                                    <h2 class="text-white mb-0">10 Buku Baru Yang Terakhir Masuk</h2>
                                 </div>
                                 <div class="col">
                                     <ul class="nav nav-pills justify-content-end">
@@ -33,7 +33,7 @@
                             <ol>
                                 @if (!$popular->isEmpty())
                                 @foreach ($popular as $item)
-                                <li class="text-white">{{ ucwords($item->bibliobigrafi->buku->judul) }}</li>
+                                <li class="text-white">{{ ucwords($item->judul) }}</li>
                                 @endforeach
                                 @else
                                 <div class="h4 text-white text-center">Belum ada data!</div>

@@ -33,7 +33,7 @@
                             <ol>
                                 @if (!$popular->isEmpty())
                                 @foreach ($popular as $item)
-                                <li class="text-white">{{ ucwords($item->bibliobigrafi->buku->judul) }}</li>
+                                <li class="text-white">{{ ucwords($item->judul) }}</li>
                                 @endforeach
                                 @else
                                 <div class="h4 text-white text-center">Belum ada data!</div>
