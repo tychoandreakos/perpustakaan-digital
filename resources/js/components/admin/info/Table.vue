@@ -316,6 +316,62 @@
                                 </div>
                                 </div> -->
 
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="alamat">Hari Regular</label>
+                                            <input id="alamat" class="form-control" v-model="form.regular"
+                                                placeholder="Alamat">
+                                            <template v-if="err.regular">
+                                                <span class="text-danger">{{ err.regular[0] }}</span>
+                                            </template>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="alamat">Jam Regular</label>
+                                            <input id="alamat" class="form-control" v-model="form.waktu_regular"
+                                                placeholder="Alamat">
+                                            <template v-if="err.waktu_regular">
+                                                <span class="text-danger">{{ err.waktu_regular[0] }}</span>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="alamat">Hari Weekend</label>
+                                            <input id="alamat" class="form-control" v-model="form.weekend"
+                                                placeholder="Alamat">
+                                            <template v-if="err.weekend">
+                                                <span class="text-danger">{{ err.weekend[0] }}</span>
+                                            </template>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="alamat">Jam Weekend</label>
+                                            <input id="alamat" class="form-control" v-model="form.waktu_weekend"
+                                                placeholder="Alamat">
+                                            <template v-if="err.waktu_weekend">
+                                                <span class="text-danger">{{ err.waktu_weekend[0] }}</span>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" for="alamat">Jam Istirahat</label>
+                                    <input id="alamat" class="form-control" v-model="form.waktu_istirahat" placeholder="Alamat">
+                                    <template v-if="err.waktu_istirahat">
+                                        <span class="text-danger">{{ err.waktu_istirahat[0] }}</span>
+                                    </template>
+                                </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="alamat">Alamat</label>
                                     <textarea id="alamat" class="form-control" v-model="form.alamat"
@@ -382,6 +438,11 @@
         <input type="hidden" :value="no_telp">
         <input type="hidden" :value="pustakawan">
         <input type="hidden" :value="email">
+        <input type="hidden" :value="regular">
+        <input type="hidden" :value="waktu_regular">
+        <input type="hidden" :value="weekend">
+        <input type="hidden" :value="waktu_weekend">
+        <input type="hidden" :value="waktu_istirahat">
 
     </div>
 </template>
@@ -400,11 +461,26 @@
             no_telp() {
                 return this.form.no_telp = this.datas.no_telp;
             },
+            regular() {
+                return this.form.regular = this.datas.regular;
+            },
+            waktu_regular() {
+                return this.form.waktu_regular = this.datas.waktu_regular;
+            },
+            weekend() {
+                return this.form.weekend = this.datas.weekend;
+            },
+            waktu_weekend() {
+                return this.form.waktu_weekend = this.datas.waktu_weekend;
+            },
             pustakawan() {
                 return this.form.pustakawan = this.datas.pustakawan;
             },
             email() {
                 return this.form.email = this.datas.email;
+            },
+            waktu_istirahat() {
+                return this.form.waktu_istirahat = this.datas.waktu_istirahat;
             }
         },
 
@@ -416,6 +492,11 @@
                     no_telp: '',
                     pustakawan: '',
                     email: '',
+                    regular: '',
+                    waktu_regular: '',
+                    weekend: '',
+                    waktu_weekend: '',
+                    waktu_istirahat: '',
                     _method: 'PUT'
                 },
                 err: {},

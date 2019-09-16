@@ -7434,6 +7434,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['route', 'fetch', 'index'],
@@ -7447,11 +7508,26 @@ __webpack_require__.r(__webpack_exports__);
     no_telp: function no_telp() {
       return this.form.no_telp = this.datas.no_telp;
     },
+    regular: function regular() {
+      return this.form.regular = this.datas.regular;
+    },
+    waktu_regular: function waktu_regular() {
+      return this.form.waktu_regular = this.datas.waktu_regular;
+    },
+    weekend: function weekend() {
+      return this.form.weekend = this.datas.weekend;
+    },
+    waktu_weekend: function waktu_weekend() {
+      return this.form.waktu_weekend = this.datas.waktu_weekend;
+    },
     pustakawan: function pustakawan() {
       return this.form.pustakawan = this.datas.pustakawan;
     },
     email: function email() {
       return this.form.email = this.datas.email;
+    },
+    waktu_istirahat: function waktu_istirahat() {
+      return this.form.waktu_istirahat = this.datas.waktu_istirahat;
     }
   },
   data: function data() {
@@ -7462,6 +7538,11 @@ __webpack_require__.r(__webpack_exports__);
         no_telp: '',
         pustakawan: '',
         email: '',
+        regular: '',
+        waktu_regular: '',
+        weekend: '',
+        waktu_weekend: '',
+        waktu_istirahat: '',
         _method: 'PUT'
       },
       err: {},
@@ -78206,6 +78287,268 @@ var render = function() {
                   }
                 },
                 [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "alamat" }
+                            },
+                            [_vm._v("Hari Regular")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.regular,
+                                expression: "form.regular"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "alamat", placeholder: "Alamat" },
+                            domProps: { value: _vm.form.regular },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "regular",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.err.regular
+                            ? [
+                                _c("span", { staticClass: "text-danger" }, [
+                                  _vm._v(_vm._s(_vm.err.regular[0]))
+                                ])
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "alamat" }
+                            },
+                            [_vm._v("Jam Regular")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.waktu_regular,
+                                expression: "form.waktu_regular"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "alamat", placeholder: "Alamat" },
+                            domProps: { value: _vm.form.waktu_regular },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "waktu_regular",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.err.waktu_regular
+                            ? [
+                                _c("span", { staticClass: "text-danger" }, [
+                                  _vm._v(_vm._s(_vm.err.waktu_regular[0]))
+                                ])
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "alamat" }
+                            },
+                            [_vm._v("Hari Weekend")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.weekend,
+                                expression: "form.weekend"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "alamat", placeholder: "Alamat" },
+                            domProps: { value: _vm.form.weekend },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "weekend",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.err.weekend
+                            ? [
+                                _c("span", { staticClass: "text-danger" }, [
+                                  _vm._v(_vm._s(_vm.err.weekend[0]))
+                                ])
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-control-label",
+                              attrs: { for: "alamat" }
+                            },
+                            [_vm._v("Jam Weekend")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.waktu_weekend,
+                                expression: "form.waktu_weekend"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "alamat", placeholder: "Alamat" },
+                            domProps: { value: _vm.form.waktu_weekend },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "waktu_weekend",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.err.waktu_weekend
+                            ? [
+                                _c("span", { staticClass: "text-danger" }, [
+                                  _vm._v(_vm._s(_vm.err.waktu_weekend[0]))
+                                ])
+                              ]
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-control-label",
+                          attrs: { for: "alamat" }
+                        },
+                        [_vm._v("Jam Istirahat")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.waktu_istirahat,
+                            expression: "form.waktu_istirahat"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "alamat", placeholder: "Alamat" },
+                        domProps: { value: _vm.form.waktu_istirahat },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "waktu_istirahat",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.err.waktu_istirahat
+                        ? [
+                            _c("span", { staticClass: "text-danger" }, [
+                              _vm._v(_vm._s(_vm.err.waktu_istirahat[0]))
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "form-group" },
@@ -78279,7 +78622,7 @@ var render = function() {
                           type: "text",
                           id: "no_telp",
                           name: "no_telp",
-                          placeholder: "KODE GMD"
+                          placeholder: "No Telepon"
                         },
                         domProps: { value: _vm.form.no_telp },
                         on: {
@@ -78330,7 +78673,7 @@ var render = function() {
                           type: "text",
                           id: "pustakawan",
                           name: "pustakawan",
-                          placeholder: "KODE GMD"
+                          placeholder: "Nama Pustakawan"
                         },
                         domProps: { value: _vm.form.pustakawan },
                         on: {
@@ -78385,7 +78728,7 @@ var render = function() {
                           type: "text",
                           id: "email",
                           name: "email",
-                          placeholder: "KODE GMD"
+                          placeholder: "Email Kampus"
                         },
                         domProps: { value: _vm.form.email },
                         on: {
@@ -78445,7 +78788,32 @@ var render = function() {
       domProps: { value: _vm.pustakawan }
     }),
     _vm._v(" "),
-    _c("input", { attrs: { type: "hidden" }, domProps: { value: _vm.email } })
+    _c("input", { attrs: { type: "hidden" }, domProps: { value: _vm.email } }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden" },
+      domProps: { value: _vm.regular }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden" },
+      domProps: { value: _vm.waktu_regular }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden" },
+      domProps: { value: _vm.weekend }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden" },
+      domProps: { value: _vm.waktu_weekend }
+    }),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden" },
+      domProps: { value: _vm.waktu_istirahat }
+    })
   ])
 }
 var staticRenderFns = [
