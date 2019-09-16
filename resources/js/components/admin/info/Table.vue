@@ -329,7 +329,7 @@
                                     <label class="form-control-label" for="no_telp">No Telepon</label>
                                     <input type="text" v-model="form.no_telp" id="no_telp"
                                         class="form-control form-control-alternative" name="no_telp"
-                                        placeholder="KODE GMD">
+                                        placeholder="No Telepon">
                                     <template v-if="err.no_telp">
                                         <span class="text-danger">{{ err.no_telp[0] }}</span>
                                     </template>
@@ -339,7 +339,7 @@
                                     <label class="form-control-label" for="pustakawan">Pustakawan</label>
                                     <input type="text" v-model="form.pustakawan" id="pustakawan"
                                         class="form-control form-control-alternative" name="pustakawan"
-                                        placeholder="KODE GMD">
+                                        placeholder="Nama Pustakawan">
                                     <template v-if="err.pustakawan">
                                         <span class="text-danger">{{ err.pustakawan[0] }}</span>
                                     </template>
@@ -349,7 +349,7 @@
                                     <label class="form-control-label" for="email">Email</label>
                                     <input type="text" v-model="form.email" id="email"
                                         class="form-control form-control-alternative" name="email"
-                                        placeholder="KODE GMD">
+                                        placeholder="Email Kampus">
                                     <template v-if="err.email">
                                         <span class="text-danger">{{ err.email[0] }}</span>
                                     </template>
