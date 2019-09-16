@@ -63,7 +63,7 @@
                 <a href="{{ route('kota.index') }}" class="dropdown-item">Kota</a>
                 <a href="{{ route('klasifikasi.index') }}" class="dropdown-item">Klasifikasi</a>
                 <a href="{{ route('bahasa.index') }}" class="dropdown-item">Bahasa</a>
-                <a href="{{ route('topik.index') }}" class="dropdown-item">Topik</a>
+                <a href="{{ route('lokasi.index') }}" class="dropdown-item">Lokasi Rak Buku</a>
             </div>
         </div>
     </li>
@@ -76,6 +76,8 @@
                 <a href="{{ route('landing') }}" target="_blank" class="dropdown-item">Halaman Digital Library</a>
                 <a href="{{ route('berita.index') }}" class="dropdown-item">Berita</a>
                 <a href="{{ route('info.index') }}" class="dropdown-item">Atur Info Perpustakaan</a>
+                <a href="{{ route('topik.index') }}" class="dropdown-item">Topik</a>
+
             </div>
         </div>
     </li>
@@ -89,7 +91,7 @@
                 <a href="{{ route('laporan.pinjam') }}" class="dropdown-item">Laporan Peminjaman</a>
                 <a href="{{ route('laporan.anggota') }}" class="dropdown-item">Laporan Anggota</a>
                 {{-- <a href="#" class="dropdown-item">Rekapitulasi</a> --}}
-            <a href="{{ route('laporan.pengunjung') }}" class="dropdown-item">Statistik Pengunjung</a>
+                <a href="{{ route('laporan.pengunjung') }}" class="dropdown-item">Statistik Pengunjung</a>
             </div>
         </div>
     </li>

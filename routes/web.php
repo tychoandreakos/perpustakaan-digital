@@ -99,9 +99,11 @@ Route::get('eksemplar-keluar-fetch', 'PinjamController@eksemplar')->name('eksemp
 Route::get('pengembalian-fetch', 'PinjamController@pengembalian')->name('pengembalian.fetch');
 Route::get('berita-fetch', 'BeritaController@fetch')->name('berita.fetch');
 Route::get('info-fetch', 'InfoController@fetch')->name('info.fetch');
+Route::get('lokasi-fetch', 'LokasiRakController@fetch')->name('lokasi.fetch');
 Route::get('topik-fetch', 'TopikController@fetch')->name('topik.fetch');
 Route::get('tamu-fetch', 'BukuTamuController@fetch')->name('tamu.fetch');
 Route::get('terlambat-fetch', 'PinjamController@terlambat')->name('terlambat.fetch');
+
 
 
 Route::get('denda-user/{id}', 'PinjamController@denda')->name('sirkulasi.denda');

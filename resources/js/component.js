@@ -55,6 +55,10 @@ Vue.component('form-denda-component', require('./components/admin/denda/Form.vue
 Vue.component('table-topik-component', require('./components/admin/topik/Table.vue').default);
 Vue.component('form-topik-component', require('./components/admin/topik/Form.vue').default);
 
+// lokasi
+Vue.component('table-lokasi-component', require('./components/admin/lokasi/Table.vue').default);
+Vue.component('form-lokasi-component', require('./components/admin/lokasi/Form.vue').default);
+
 
 // bibliobigrafi
 Vue.component('table-bibliobigrafi-component', require('./components/admin/bibliobigrafi/Table.vue').default);
