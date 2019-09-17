@@ -88,7 +88,11 @@ class PengarangController extends Controller
     public function edit(Pengarang $pengarang)
     {
         $title = 'Update Pengarang';
-        return view('admin.master.pengarang.edit' ,compact('pengarang', 'title'));
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.pengarang.edit' ,compact('pengarang', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**

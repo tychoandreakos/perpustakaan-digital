@@ -2204,6 +2204,12 @@ __webpack_require__.r(__webpack_exports__);
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
   },
+  filters: {
+    nama: function nama(val) {
+      name = val.split(" ").splice(0, 2).join(" ");
+      return name + '.';
+    }
+  },
   methods: {
     save: function save() {
       var _this = this;
@@ -59002,7 +59008,9 @@ var render = function() {
           _c("div", { staticClass: "col-12 col-md-6 py-8 py-md-11" }, [
             _c("h2", { staticClass: "font-weight-bold text-center mb-2" }, [
               _vm._v(
-                "\n                    Halo, Elang Indra\n                "
+                "\n                    Halo, " +
+                  _vm._s(_vm._f("nama")(this.name)) +
+                  "\n                "
               )
             ]),
             _vm._v(" "),

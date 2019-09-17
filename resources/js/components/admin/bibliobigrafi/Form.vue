@@ -421,8 +421,8 @@
                     </modal>
 
                     <modal height="auto" name="bahasa">
-                        <bahasa-component @closeBahasa="hideBahasa" @updateBahasa="getBahasa"
-                            :bahasa="this.bahasaa"></bahasa-component>
+                        <bahasa-component @closeBahasa="hideBahasa" @updateBahasa="getBahasa" :bahasa="this.bahasaa">
+                        </bahasa-component>
                     </modal>
 
                     <modal height="auto" name="koleksi">
@@ -431,7 +431,7 @@
                     </modal>
 
                     <modal height="auto" name="lokasi">
-                        <lokasi-component @closeLokasi="hideLokasi"  @updateLokasi="getLokasi" :lokasi3="this.lokasi3">
+                        <lokasi-component @closeLokasi="hideLokasi" @updateLokasi="getLokasi" :lokasi3="this.lokasi3">
                         </lokasi-component>
                     </modal>
 
@@ -474,13 +474,22 @@
 
                 <input type="hidden" name="" :value="dataUpdate">
 
+
+                <template v-if="loading">
+                    <div class="progress">
+                        <!-- PROGRESS BAR DENGAN VALUE NYA KITA DAPATKAN DARI VARIABLE progressBar -->
+                        <div class="progress-bar" role="progressbar" :style="{width: progressBar + '%'}"
+                            :aria-valuenow="progressBar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </template>
+
                 <div class="float-right">
 
                     <template v-if="loading">
                         <spinner-component></spinner-component>
                     </template>
                     <template v-else>
-                        <template v-if="this.fetch.judul">
+                        <template v-if="this.buku.judul">
                             <button :disabled="isDisabled" class="btn btn-success">
                                 Perbarui</button>
                         </template>
@@ -578,6 +587,7 @@
                 bahasa_id: [],
                 koleksi_id: [],
                 topik_id: [],
+                progressBar: 0,
                 bahasa_id: [],
                 lokasi_id: [],
                 eksemplarData: [],
@@ -643,9 +653,8 @@
             dataUpdate() {
                 if (this.buku.judul) {
                     this.pengarang_id = this.buku.buku_transaksi.map(s => s.pengarang);
-                    // this.gmd_id = this.buku.bibliobigrafi.map(s => s.gmd);
                     this.koleksi_id = this.buku.bibliobigrafi[0].koleksi;
-                    this.gmd_id = this.buku.bibliobigrafi[0].gmd;
+                    // this.gmd_id = this.buku.bibliobigrafi[0].gmd;
                     this.kota_id = this.buku.buku_transaksi[0].kota;
                     this.bahasa_id = this.buku.buku_transaksi[0].bahasa;
                     this.klasifikasi_id = this.buku.bibliobigrafi[0].klasifikasi;
@@ -654,9 +663,10 @@
                     this.penerbit_id = this.buku.buku_transaksi[0].penerbit;
                     this.form.oldPdf = this.buku.pdf;
                     this.form.oldImage = this.buku.gambar_sampul;
-                    return this.pola_eksemplar = {
+                    this.pola_eksemplar = {
                         kode_eksemplar: this.buku.bibliobigrafi[0].pola_eksemplar[0].kode_eksemplar
                     }
+                     return this.gmd_id = this.buku.bibliobigrafi[0].gmd_transaksi.map(s => s.gmd);
                 }
             },
 
@@ -708,7 +718,7 @@
             },
 
             fieldBahasa() {
-               console.log('wow')
+                console.log('wow')
             },
 
             multipleFileChange() {
@@ -749,6 +759,7 @@
                 if (!files.length)
                     return;
                 this.createPdf(files[0]);
+
             },
             createPdf(file) {
                 let reader = new FileReader();
@@ -758,7 +769,7 @@
                 };
                 reader.readAsDataURL(file);
             },
-             showBahasa() {
+            showBahasa() {
                 this.$modal.show('bahasa');
             },
             hideBahasa() {
@@ -773,7 +784,7 @@
             showTopik() {
                 this.$modal.show('topik');
             },
-            
+
             hideTopik() {
                 this.$modal.hide('topik');
             },
@@ -882,7 +893,13 @@
 
                 if (!this.buku.judul) {
                     // create
-                    axios.post(this.fetch, this.form)
+                    axios.post(this.fetch, this.form, {
+                            onUploadProgress: function (progressEvent) {
+                                //DATA TERSEBUT AKAN DI ASSIGN KE VARIABLE progressBar
+                                this.progressBar = parseInt(Math.round((progressEvent.loaded * 100) /
+                                    progressEvent.total))
+                            }.bind(this)
+                        })
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',
@@ -924,6 +941,7 @@
             },
         }
     }
+
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

@@ -18,7 +18,7 @@
 
                     <!-- Heading -->
                     <h2 class="font-weight-bold text-center mb-2">
-                        Halo, Elang Indra
+                        Halo, {{ this.name | nama}}
                     </h2>
 
                     <!-- Text -->
@@ -123,6 +123,13 @@
         components: {
             Datepicker,
             Multiselect
+        },
+
+        filters: {
+            nama(val) {
+               name = val.split(" ").splice(0, 2).join(" ");
+                return name + '.';
+            }
         },
 
         methods: {

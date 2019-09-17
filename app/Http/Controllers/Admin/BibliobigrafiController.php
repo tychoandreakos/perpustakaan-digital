@@ -220,6 +220,10 @@ class BibliobigrafiController extends Controller
     //    $suffix = $eksemplar_pola->suffix;
     //    $serial = $eksemplar_pola->serial;
         
+       if($request->total > 100) {
+           $request->total = 100;
+       }
+
        for ($i=0; $i < $request->total; $i++) {
 
         $eksemplar = EksemplarTransaksi::orderBy('pola_eksemplar', 'DESC')->first();
@@ -334,7 +338,7 @@ class BibliobigrafiController extends Controller
         }, 'buku_transaksi.penerbit' => function($q){
             $q->select('id', 'nama_penerbit');
         }, 'bibliobigrafi' => function($q) {
-            $q->select('id', 'buku_id', 'klasifikasi_id', 'gmd_id', 'pola_eksemplar', 'koleksi_id', 'lokasi_rak_id', 'no_panggil');
+            $q->select('id', 'buku_id', 'klasifikasi_id', 'pola_eksemplar', 'koleksi_id', 'lokasi_rak_id', 'no_panggil');
         }, 'bibliobigrafi.koleksi' => function($q) {
             $q->select('id', 'tipe_koleksi');
         }, 'topik' => function($q) {
@@ -343,7 +347,9 @@ class BibliobigrafiController extends Controller
             $q->select('id', 'kode_lokasi', 'nama_lokasi');
         }, 'buku_transaksi.kota' => function($q) {
             $q->select('id', 'nama_kota');
-        }, 'bibliobigrafi.gmd' => function($q) {
+        }, 'bibliobigrafi.gmd_transaksi' => function($q) {
+            $q->select('id', 'bibliobigrafi_id', 'gmd_id');
+        }, 'bibliobigrafi.gmd_transaksi.gmd' => function($q) {
             $q->select('id', 'kode_gmd', 'nama_gmd');
         }, 'bibliobigrafi.klasifikasi' => function($q){
             $q->select('id', 'kode_klasifikasi', 'tipe_klasifikasi');
@@ -433,8 +439,7 @@ class BibliobigrafiController extends Controller
         }
         // $requestData['gambar_sampul'] = $name;
         // $requestData['pdf'] = isset($file) ? substr($file, 15, 50) : '';
-        $buku = Buku::update($requestData);
-        $buku->save();
+        $buku->update($requestData);
 
        foreach ($request->pengarang_id as $pengarang) {
             
@@ -442,8 +447,7 @@ class BibliobigrafiController extends Controller
 
             $requestTrans['buku_id'] = $buku->id;
             $requestTrans['pengarang_id'] = $pengarang;   
-            BukuTransaksi::update($requestTrans);
-            $buku->save();
+            $transaksi->update($requestTrans);
        }
         
 
@@ -487,8 +491,7 @@ class BibliobigrafiController extends Controller
 
         $requestBilio['koleksi_id'] = $request->koleksi_id;
         $requestBilio['no_panggil'] = $request->no_panggil;
-        $bilio = Bibliobigrafi::update($requestBilio);
-        $bilio->save();
+        // $bilio = Bibliobigrafi::where('id', $request->id)->update($requestBilio);
 
        }
 
@@ -509,7 +512,17 @@ class BibliobigrafiController extends Controller
         // Storage::delete('/public' . $bukuTra);
         
         if($bukuTransaksi->gambar_sampul !== 'img.jpg' ) {
-            unlink(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul));
+            if(file_exists(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul))) {
+                unlink(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul));
+            }
+        }
+
+
+        if(!is_null($bukuTransaksi->pdf)) {
+            if(file_exists(public_path('storage/file/'. $bukuTransaksi->pdf))) {
+                unlink(public_path('storage/file/'. $bukuTransaksi->pdf));
+                }
+           
         }
 
         $bil = Bibliobigrafi::where('buku_id', $id)->count();
