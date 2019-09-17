@@ -507,10 +507,15 @@ class BibliobigrafiController extends Controller
         $bukuTransaksi = Buku::where('id', $id)->first();
         
         // Storage::delete('/public' . $bukuTra);
-        unlink(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul));
+        
+        if($bukuTransaksi->gambar_sampul !== 'img.jpg' ) {
+            unlink(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul));
+        }
+
         $bil = Bibliobigrafi::where('buku_id', $id)->count();
        for ($i=0; $i < $bil; $i++) { 
         $bilio = Bibliobigrafi::where('buku_id', $id)->first();
+        $bilio->gmd_transaksi()->delete();
         $bilio->pola_eksemplar()->delete();
         }
 

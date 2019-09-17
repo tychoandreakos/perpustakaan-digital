@@ -70,11 +70,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input autocomplete="off" class="form-control datepicker" v-model="form.tgl_lahir"
+                                    <input autocomplete="off" class="form-control datepicker" v-model="tgl"
                                         placeholder="Pilih tanggal lahir" type="text">
                                 </div>
 
-                                 <template v-if="err.tgl_lahir">
+                                <template v-if="err.tgl_lahir">
                                     <span class="text-danger">{{ err.tgl_lahir[0] }}</span>
                                 </template>
                             </div>
@@ -122,7 +122,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="jurusan">Jurusan</label>
                                 <input autocomplete="off" type="text" v-model="form.jurusan" id="jurusan"
-                                    class="form-control form-control-alternative" name="jurusan" placeholder="Email">
+                                    class="form-control form-control-alternative" name="jurusan" placeholder="Jurusan">
                                 <template v-if="err.jurusan">
                                     <span class="text-danger">{{ err.jurusan[0] }}</span>
                                 </template>
@@ -234,6 +234,10 @@
                 return (this.form.name.length == '' ? true : false)
             },
 
+            tgl() {
+                console.log(this.doto);
+            },
+
             tipe_anggota() {
                 return this.form.tipe_anggota_id = this.value.id
             },
@@ -265,6 +269,7 @@
                 jkelamin: ['Pria', 'Wanita'],
                 options: [],
                 img: this.fetch.foto || 'Pilih Foto Anggota',
+                doto: '',
 
 
                 form: {
@@ -327,7 +332,14 @@
 
                 if (!this.users.id) {
                     // create
-                    axios.post(this.fetch, this.form)
+                    axios.post(this.fetch, this.form, {
+                            //FUNGSI INI YANG MEMILIKI PERAN UNTUK MENGUBAH SEBERAPA JAUH PROGRESS UPLOAD FILE BERJALAN
+                            onUploadProgress: function (progressEvent) {
+                                //DATA TERSEBUT AKAN DI ASSIGN KE VARIABLE progressBar
+                                this.progressBar = parseInt(Math.round((progressEvent.loaded * 100) /
+                                    progressEvent.total))
+                            }.bind(this)
+                        })
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',
