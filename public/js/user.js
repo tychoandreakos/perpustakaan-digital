@@ -2199,7 +2199,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'store', 'anggota'],
+  props: ['name', 'store', 'anggota', 'index'],
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"],
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
@@ -2221,10 +2221,11 @@ __webpack_require__.r(__webpack_exports__);
           title: res.data.message.toUpperCase(),
           showConfirmButton: false,
           timer: 3000
-        }); // setTimeout(() => {
-        //     window.location = this.index;
-        // }, 3200)
+        });
 
+        setTimeout(function () {
+          window.location = _this.index;
+        }, 3200);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2234,22 +2235,19 @@ __webpack_require__.r(__webpack_exports__);
     date2: function date2() {
       var dateTime = this.date;
       return this.form.tgl_lahir = dateTime = moment__WEBPACK_IMPORTED_MODULE_2__(dateTime).format("YYYY-MM-DD");
-    },
-    jk: function jk() {
-      return typeof this.anggota.jk == 'undefined' ? this.form.jk = this.anggota.jk == 0 ? 'Pria' : 'Wanita' : '';
     }
   },
   data: function data() {
     return {
       jkelamin: ['Pria', 'Wanita'],
       err: {},
-      date: typeof this.anggota.tgl_lahir == 'undefined' ? this.anggota.tgl_lahir : '',
+      date: this.anggota.tgl_lahir ? this.anggota.tgl_lahir : '',
       form: {
-        jurusan: typeof this.anggota.jurusan == 'undefined' ? this.anggota.jurusan.toUpperCase() : '',
+        jurusan: this.anggota.jurusan ? this.anggota.jurusan.toUpperCase() : '',
         tgl_lahir: '',
-        alamat: typeof this.anggota.alamat == 'undefined' ? this.anggota.alamat : '',
-        jk: this.jk,
-        no_telp: typeof this.anggota.no_telp == 'undefined' ? this.anggota.no_telp : ''
+        alamat: this.anggota.alamat ? this.anggota.alamat : '',
+        jk: this.anggota.jk === 0 ? 'Pria' : 'Wanita',
+        no_telp: this.anggota.no_telp ? this.anggota.no_telp : ''
       }
     };
   }
@@ -59244,10 +59242,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", {
         staticClass: "d-none d-md-block vw-50 h-100 float-right bg-cover",
-        staticStyle: {
-          "background-image":
-            "url(http://localhost:8000/img/covers/cover-10.jpg)"
-        }
+        staticStyle: { "background-image": "url(./img/covers/new-4.jpg)" }
       })
     ])
   },

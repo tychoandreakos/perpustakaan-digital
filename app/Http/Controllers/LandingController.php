@@ -66,12 +66,12 @@ class LandingController extends Controller
 
     public function update_profile(Request $request)
     {
-        $anggota = Anggota::find(Auth::user()->id)->first();
+        $anggota = Anggota::find(Auth::user()->id);
 
         $anggota->jurusan = $request->jurusan;
         $anggota->tgl_lahir = $request->tgl_lahir;
         $anggota->alamat = $request->alamat;
-        $anggota->jk = $request->jk;
+        $anggota->jk = ($request->jk == 'Pria') ? 0 : 1;
         $anggota->no_telp = $request->no_telp;
         $anggota->save();
 
@@ -351,6 +351,8 @@ class LandingController extends Controller
             $q->select('id', 'tipe_klasifikasi');
         }, 'buku_transaksi.topik' => function($q) {
             $q->select('id', 'jenis_topik', 'warna');
+        }, 'bibliobigrafi.lokasi_rak' => function($q) {
+            $q->select('id', 'kode_lokasi', 'nama_lokasi');
         }, 'topik'])->where('slug', $slug)->firstOrFail();
 
         $buku = Buku::where('slug', $slug)->first();

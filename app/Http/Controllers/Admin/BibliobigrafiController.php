@@ -398,31 +398,30 @@ class BibliobigrafiController extends Controller
             'gambar_sampul' => 'nullable'
             ]);
 
+            // return
             $buku = Buku::find($id);
-            
-        //     if($buku->gambar_sampul !== $request->image)
-        //     {
-        //         $image = $request->get('image');
-        //         $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-    
-        //         $path = public_path('storage/cover/');
-        //         $resize = public_path('storage/resize/');
-                
-        //         if(!File::isDirectory($path) && !File::isDirectory($resize)){
-        //             File::makeDirectory($path, 0777, true, true);
-        //             File::makeDirectory($resize, 0777, true, true);
-        //         }
 
-        //         if(!$request->old === 'img.svg') {
-        //             unlink(public_path('storage/cover/'. $buku->gambar_sampul));
-        //             unlink(public_path('storage/rezize/'. $buku->gambar_sampul));
-        //         }
+            if($buku->gambar_sampul !== $request->image)
+            {
+                $image = $request->get('image');
+                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
     
-        //         \Image::make($request->get('image'))->resize(115, 160)->save(public_path('storage/cover/').$name);
-        //         \Image::make($request->get('image'))->resize(250, 308)->save(public_path('storage/resize/').$name);
-        //     } else {
-        //     $name = 'img.jpg';
-        //     }
+                $path = public_path('storage/cover/');
+                $resize = public_path('storage/resize/');
+                
+                if(!File::isDirectory($path) && !File::isDirectory($resize)){
+                    File::makeDirectory($path, 0777, true, true);
+                    File::makeDirectory($resize, 0777, true, true);
+                }
+
+                if(!$request->old === 'img.jpg') {
+                    unlink(public_path('storage/cover/'. $buku->gambar_sampul));
+                    unlink(public_path('storage/rezize/'. $buku->gambar_sampul));
+                }
+    
+                \Image::make($request->get('image'))->resize(115, 160)->save(public_path('storage/cover/').$name);
+                \Image::make($request->get('image'))->resize(250, 308)->save(public_path('storage/resize/').$name);
+            }
 
         // $file = $request->input('pdf');
        

@@ -33,7 +33,7 @@
                      print_r(join(', ', $tr));
                      @endphp
                  </p>
-
+                <span class="mt-3 text-primary font-size-lg">Lokasi Rak Buku: {{ $result->bibliobigrafi[0]->lokasi_rak->nama_lokasi }}</span>
              </div>
              @isset($anggota)
              <div class="col-auto">
@@ -58,6 +58,7 @@
              @else
              <h4>Silahkan <a href="{{ route('login') }}">login</a> untuk pinjam dan baca koleksi ini.</h4>
              @endisset
+
 
          </div> <!-- / .row -->
          <div class="row">

@@ -224,7 +224,7 @@
                                      </a>
                                  </div>
                              </li>
-                             <li class="dropdown-item dropright">
+                             {{-- <li class="dropdown-item dropright">
                                  <a class="dropdown-link dropdown-toggle" data-toggle="dropdown" href="#">
                                      Status
                                  </a>
@@ -236,7 +236,7 @@
                                          Ubah Password
                                      </a>
                                  </div>
-                             </li>
+                             </li> --}}
                          </ul>
                      </li>
                      <li class="nav-item dropdown">
