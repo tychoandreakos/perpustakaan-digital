@@ -41,6 +41,7 @@ class BeritaController extends Controller
     public function create()
     {
         $title = 'Tambah Berita';
+        $koleksi = Bibliobigrafi::all()->count();
         $anggota_count = User::all()->count();
         $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
         $approve = User::whereNull('approved_at')->get()->count();
