@@ -261,7 +261,7 @@ class LandingController extends Controller
             $q->select('id', 'nama_lokasi', 'kode_lokasi');
         }])->where('created_at', '>=', $date)->withCount('pinjam_transaksi')->limit(2)->get();
 
-        $randomTags = Topik::inRandomOrder()->limit(4)->get();
+        $randomTags = Topik::inRandomOrder()->limit(3)->get();
         $info = Info::all()->first();
 
         return view('beranda', compact('terbaru', 'info', 'random', 'berita', 'popular', 'popular30', 'randomTags'));
@@ -444,8 +444,8 @@ class LandingController extends Controller
         $query = $request->cari;
 
         // return
-        $result = Buku::with(['buku_transaksi.pengarang' => function($q) use ($query) {
-            $q->select('id', 'nama_pengarang')->where('nama_pengarang', 'LIKE' ,"%".$query."%");
+        $result = Buku::with(['buku_transaksi.pengarang' => function($q) {
+            $q->select('id', 'nama_pengarang');
         }, 'buku_transaksi.penerbit', 'bibliobigrafi.gmd' => function($q) {
             $q->select('id', 'nama_gmd')->first();
         }])->where('judul', 'LIKE' ,"%".$query."%")->paginate(5);

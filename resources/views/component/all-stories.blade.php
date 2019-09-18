@@ -18,7 +18,7 @@
                   </div>
               </div> <!-- / .row -->
            
-              @if ($result)
+              @if (!$result)
                   <h4 class="text-center mt-5 mb-0">Belum Ada Berita.</h4>
               @else
               @foreach ($result as $item)

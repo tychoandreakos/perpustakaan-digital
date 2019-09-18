@@ -269,7 +269,7 @@
 
              </div>
          </div> <!-- / .row -->
-         @if(empty($berita))
+         @if(!empty($berita))
          <div class="row">
              <div class="col-12">
 
