@@ -398,13 +398,24 @@ class BibliobigrafiController extends Controller
             'gambar_sampul' => 'nullable'
             ]);
 
-            // return
+            //   buku
             $buku = Buku::find($id);
 
-            if($buku->gambar_sampul !== $request->image)
+            if(!$request->image == '')
             {
-                $image = $request->get('image');
-                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+
+            $image = $request->get('image');
+            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            
+            if($buku->gambar_sampul != $name) {
+                if(file_exists(public_path('storage/cover/'. $buku->gambar_sampul))) {
+
+                        unlink(public_path('storage/cover/'. $buku->gambar_sampul));
+                        unlink(public_path('storage/resize/'. $buku->gambar_sampul));
+
+                }
+
+              
     
                 $path = public_path('storage/cover/');
                 $resize = public_path('storage/resize/');
@@ -413,86 +424,49 @@ class BibliobigrafiController extends Controller
                     File::makeDirectory($path, 0777, true, true);
                     File::makeDirectory($resize, 0777, true, true);
                 }
-
-                if(!$request->old === 'img.jpg') {
-                    unlink(public_path('storage/cover/'. $buku->gambar_sampul));
-                    unlink(public_path('storage/rezize/'. $buku->gambar_sampul));
-                }
     
                 \Image::make($request->get('image'))->resize(115, 160)->save(public_path('storage/cover/').$name);
                 \Image::make($request->get('image'))->resize(250, 308)->save(public_path('storage/resize/').$name);
-            }
-
-        // $file = $request->input('pdf');
-       
-        // if(isset($file)) {
-        //     foreach ($file as $val) {
-        //         $file = $this->base64($val, '/file');
-        //        }
-        // }
-
-        $requestData = $request->all();
-
-        if($buku->judul !== $request->judul) {
-            $requestData['slug'] = str_slug($request->judul);
-        }
-        // $requestData['gambar_sampul'] = $name;
-        // $requestData['pdf'] = isset($file) ? substr($file, 15, 50) : '';
-        $buku->update($requestData);
-
-       foreach ($request->pengarang_id as $pengarang) {
             
-            $transaksi = BukuTransaksi::where('buku_id', $id)->where('pengarang_id', $pengarang)->first();
-
-            $requestTrans['buku_id'] = $buku->id;
-            $requestTrans['pengarang_id'] = $pengarang;   
-            $transaksi->update($requestTrans);
-       }
-        
-
-    //    $eksemplar_pola = EksemplarPola::find($request->pola_eksemplar);
-    //    $prefix = $eksemplar_pola->prefix;
-    //    $suffix = $eksemplar_pola->suffix;
-    //    $serial = $eksemplar_pola->serial;
-        
-       (int)$total = $request->total - $buku->bibliobigrafi->count();
-       
-       if($total > 1) {
-        for ($i=0; $i < $total; $i++) {
-
-            $eksemplar = EksemplarTransaksi::orderBy('pola_eksemplar', 'DESC')->first();
-    
-            // slice string
-    
-            if($eksemplar) {
-                $requestTransaksi = $request->all();
-                $requestTransaksi['pola_eksemplar'] = ++$eksemplar->pola_eksemplar;
-                $requestTransaksi['kode_eksemplar'] = $request->pola_eksemplar;
-                $eks = EksemplarTransaksi::create($requestTransaksi);
+                $buku->gambar_sampul = $name;
             } else {
-                $requestTransaksi = $request->all();
-                $requestTransaksi['pola_eksemplar'] = $request->pola_eksemplar;
-                $requestTransaksi['kode_eksemplar'] = $request->pola_eksemplar;
-                $eks = EksemplarTransaksi::create($requestTransaksi);
+                $name = 'img.jpg';
             }
-       }
+            }
+          
+            $buku->update($request->all());
 
-       
-
-        $requestBilio = $request->all();
-        $requestBilio['buku_id'] = $buku->id;
-        $requestBilio['klasifikasi_id'] = $request->klasifikasi_id;
-        $requestBilio['gmd_id'] = $request->gmd_id;
-
-        if(isset($eks)) {
-            $requestBilio['pola_eksemplar'] = $eks->pola_eksemplar;
+            // buku transaksi
+        foreach ($request->pengarang_id as $pengarang2) {
+        $pengarang = BukuTransaksi::where('buku_id', $id)->orWhere('pengarang_id', $pengarang2)->first();
+                if($pengarang->pengarang_id == $pengarang2) {
+                    // return 'true';
+                    $pengarang->update([
+                        'pengarang_id' => $pengarang2,
+                        'kota_id' => $request->kota_id,
+                        'bahasa_id' => $request->bahasa_id,
+                        'penerbit_id' => $request->penerbit_id
+                    ]);
+                } else {
+                    return 'false';
+                    $requestTrans = $request->all();
+                    $requestTrans['buku_id'] = $id;
+                    $requestTrans['pengarang_id'] = $pengarang2; 
+                    BukuTransaksi::create($requestTrans);
+                }
         }
 
-        $requestBilio['koleksi_id'] = $request->koleksi_id;
-        $requestBilio['no_panggil'] = $request->no_panggil;
-        // $bilio = Bibliobigrafi::where('id', $request->id)->update($requestBilio);
-
-       }
+        // biliobigrafi
+        $bilio = $buku->bibliobigrafi()->get();
+        foreach ($bilio as $item) {
+            $item->update([
+                'klasifikasi_id' => $request->klasifikasi_id,
+                'koleksi_id' =>  $request->koleksi_id,
+                'lokasi_rak_id' => $request->lokasi_rak_id,
+                'no_panggil' => $request->no_panggil,
+            ]);
+        }
+           
 
         return response()->json([
             'message' => 'data berhasil disimpan']);
@@ -513,6 +487,7 @@ class BibliobigrafiController extends Controller
         if($bukuTransaksi->gambar_sampul !== 'img.jpg' ) {
             if(file_exists(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul))) {
                 unlink(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul));
+                unlink(public_path('storage/resize/'. $bukuTransaksi->gambar_sampul));
             }
         }
 
