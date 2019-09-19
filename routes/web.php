@@ -146,6 +146,7 @@ Route::get('berita-search', 'BeritaController@search');
 Route::get('topik-search', 'TopikController@search');
 Route::get('pengunjung-search', 'BukuTamuController@search');
 Route::get('histori-search', 'SirkulasiController@search');
+Route::get('terlambat-search', 'SirkulasiController@search_terlambat');
 
 // chart
 Route::get('anggota-chart', 'AnggotaController@chart');

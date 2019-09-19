@@ -141,7 +141,7 @@
 
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
-                axios.get('/pustakawan/pengunjung-search?q=' + query)
+                axios.get('/pustakawan/terlambat-search?q=' + query)
                     .then(res => {
                         // console.log(res)
                         this.datas = res.data
