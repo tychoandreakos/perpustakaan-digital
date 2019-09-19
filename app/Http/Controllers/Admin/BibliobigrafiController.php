@@ -67,8 +67,15 @@ class BibliobigrafiController extends Controller
 
             $search = $request->q;
 
-            return Buku::with('buku_transaksi.pengarang')->withCount('biblio')
+            return Buku::with(['buku_transaksi.pengarang' => function($q) {
+                $q->select('id', 'nama_pengarang');
+            }, 'bibliobigrafi.gmd_transaksi' => function($q){
+                $q->select('id', 'bibliobigrafi_id', 'gmd_id');
+            }, 'bibliobigrafi.gmd_transaksi.gmd' => function($q) {
+                $q->select('id', 'kode_gmd', 'nama_gmd');
+            }])
             ->where('judul', 'LIKE', "$search%")
+            ->withCount('bibliobigrafi')
             ->latest()->paginate(5);
         }
 
