@@ -29,7 +29,7 @@
                             <tbody>
                                 <tr v-for="item in datas.data" :key="item.id">
                                     <td>
-                                        <button style="display: inline" type="button" class="btn btn-sm btn-white"
+                                        <button style="display: inline" @click="email(item.id)" type="button" class="btn btn-sm btn-white"
                                             data-toggle="tooltip" data-placement="top"
                                             :title="'Kirim email ke '+item.user.email">
                                             Kirim Email
@@ -95,7 +95,7 @@
     import Denda from './Denda';
 
     export default {
-        props: ['fetch', 'store'],
+        props: ['fetch', 'store', 'send'],
         data() {
             return {
                 datas: {},
@@ -127,6 +127,16 @@
             },
             hideDenda() {
                 this.$modal.hide('eksemplar');
+            },
+
+            email(item) {
+                axios.post(this.send, {
+                    id: item
+                })
+                .then(res => {
+
+                })
+                .catch(err => console.log(err));
             },
 
             denda(val, dend) {

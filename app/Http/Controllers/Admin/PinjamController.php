@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\PinjamTransaksi;
 use Illuminate\Support\Carbon;
 use App\Bibliobigrafi;
+use App\Mail\SendMail;
 use DateTime;
+use Illuminate\Support\Facades\Mail;
 
 class PinjamController extends Controller
 {
@@ -74,6 +76,16 @@ class PinjamController extends Controller
 
         return response()->json([
             'message' => 'Buku berhasil diperpanjang']);
+    }
+
+    public function send()
+    {
+        Mail::send(new SendMail());
+    }
+
+    public function email()
+    {
+        $this->load->view('send');
     }
 
     public function histori()

@@ -129,6 +129,9 @@ Route::get('histori-fetch', 'PinjamController@histori')->name('histori.fetch');
 Route::get('bibliobigrafi-fetch-topik', 'BibliobigrafiController@topik')->name('bibliobigrafi.topik');
 
 
+// email
+Route::post('send', 'PinjamController@send')->name('send');
+
 // search
 Route::get('gmd-search', 'GmdController@search');
 Route::get('penerbit-search', 'PenerbitController@search');
