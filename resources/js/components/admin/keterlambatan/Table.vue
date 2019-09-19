@@ -29,11 +29,16 @@
                             <tbody>
                                 <tr v-for="item in datas.data" :key="item.id">
                                     <td>
-                                        <button style="display: inline" @click="email(item.id)" type="button" class="btn btn-sm btn-white"
+                                       <template v-if="!loading">
+                                            <button style="display: inline" @click="email(item.id)" type="button" class="btn btn-sm btn-white"
                                             data-toggle="tooltip" data-placement="top"
                                             :title="'Kirim email ke '+item.user.email">
                                             Kirim Email
                                         </button>
+                                       </template>
+                                       <template v-else>
+                                           <spinner-component></spinner-component>
+                                       </template>
                                     </td>
                                     <td class="text-center">
                                         <button @click="showDenda" style="display: inline" type="button"
@@ -93,6 +98,7 @@
     var momentRange = require('moment-range');
     momentRange.extendMoment(moment);
     import Denda from './Denda';
+    import Spinner from '../tools/Spanner';
 
     export default {
         props: ['fetch', 'store', 'send'],
@@ -100,12 +106,14 @@
             return {
                 datas: {},
                 total: '',
-                stores: this.store
+                stores: this.store,
+                loading: false,
             }
         },
 
         components:{
             DendaComponent: Denda,
+            SpinnerComponent: Spinner,
         },
 
         filters: {
@@ -130,11 +138,23 @@
             },
 
             email(item) {
+                this.loading = true;
                 axios.post(this.send, {
                     id: item
                 })
                 .then(res => {
+                   this.$swal({
+                                position: 'top-end',
+                                type: 'success',
+                                title: 'Email Berhasil Dikirimkan',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
 
+                             setTimeout(() => {
+                                this.loading = false;
+                                // window.location = this.index;
+                            }, 3200)
                 })
                 .catch(err => console.log(err));
             },
