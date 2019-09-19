@@ -125,7 +125,7 @@ Route::get('bibliobigrafi-fetch-lokasi', 'BibliobigrafiController@lokasi')->name
 Route::get('bibliobigrafi-fetch-koleksi', 'BibliobigrafiController@koleksi')->name('bibliobigrafi.koleksi');
 Route::get('bibliobigrafi-fetch-bahasa', 'BibliobigrafiController@bahasa')->name('bibliobigrafi.bahasa');
 Route::get('bibliobigrafi-fetch-pola', 'BibliobigrafiController@pola')->name('bibliobigrafi.pola');
-Route::get('histori-fecth', 'PinjamController@histori')->name('histori.fetch');
+Route::get('histori-fetch', 'PinjamController@histori')->name('histori.fetch');
 Route::get('bibliobigrafi-fetch-topik', 'BibliobigrafiController@topik')->name('bibliobigrafi.topik');
 
 
@@ -145,6 +145,7 @@ Route::get('eksemplar-keluar-search', 'PinjamController@search');
 Route::get('berita-search', 'BeritaController@search');
 Route::get('topik-search', 'TopikController@search');
 Route::get('pengunjung-search', 'BukuTamuController@search');
+Route::get('histori-search', 'SirkulasiController@search');
 
 // chart
 Route::get('anggota-chart', 'AnggotaController@chart');
