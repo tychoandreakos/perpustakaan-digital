@@ -401,13 +401,35 @@ class BibliobigrafiController extends Controller
             //   buku
             $buku = Buku::find($id);
 
-            if(!$request->image == '')
+
+            // pdf
+        $file = $request->input('pdf');
+       
+        if($buku->pdf != $file) {
+            if(isset($file)) {
+                foreach ($file as $val) {
+                    $file2 = $this->base64($val, '/file');
+                    // return $file;
+                   }
+            }
+
+            if(file_exists(public_path('storage/file/'. $buku->pdf))) {
+                unlink(public_path('storage/file/'. $buku->pdf));
+                }
+
+                // return gettype($file2);
+            $buku->pdf = substr($file2, 15, 50);
+        }
+          
+
+            // gambar
+            if($buku->gambar_sampul != $request->image)
             {
 
             $image = $request->get('image');
             $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
             
-            if($buku->gambar_sampul != $name) {
+            if(!$request->image == '' ) {
                 if(file_exists(public_path('storage/cover/'. $buku->gambar_sampul))) {
 
                         unlink(public_path('storage/cover/'. $buku->gambar_sampul));
@@ -429,12 +451,12 @@ class BibliobigrafiController extends Controller
                 \Image::make($request->get('image'))->resize(250, 308)->save(public_path('storage/resize/').$name);
             
                 $buku->gambar_sampul = $name;
-            } else {
-                $name = 'img.jpg';
+                // $buku->update();
             }
             }
-          
-            $buku->update($request->all());
+
+            // return $buku->pdf;
+            $buku->update([$request->all()]);
 
             // buku transaksi
         foreach ($request->pengarang_id as $pengarang2) {
@@ -448,7 +470,6 @@ class BibliobigrafiController extends Controller
                         'penerbit_id' => $request->penerbit_id
                     ]);
                 } else {
-                    return 'false';
                     $requestTrans = $request->all();
                     $requestTrans['buku_id'] = $id;
                     $requestTrans['pengarang_id'] = $pengarang2; 
