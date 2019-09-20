@@ -405,7 +405,7 @@ class BibliobigrafiController extends Controller
             'total' => 'required',
             'pola_eksemplar' => 'required',
             'judul_seri' => 'nullable',
-            'oldPdf' => 'required',
+            'oldPdf' => 'nullable',
             'oldImage' => 'required',
             'catatan' => 'nullable',
             'slug' => 'nullable',
@@ -473,24 +473,36 @@ class BibliobigrafiController extends Controller
 
             // return $buku->pdf;
             $buku->update([$request->all()]);
-
+            
             // buku transaksi
-        foreach ($request->pengarang_id as $pengarang2) {
-        $pengarang = BukuTransaksi::where('buku_id', $id)->orWhere('pengarang_id', $pengarang2)->first();
-                if($pengarang->pengarang_id == $pengarang2) {
-                    // return 'true';
-                    $pengarang->update([
-                        'pengarang_id' => $pengarang2,
-                        'kota_id' => $request->kota_id,
-                        'bahasa_id' => $request->bahasa_id,
-                        'penerbit_id' => $request->penerbit_id
-                    ]);
-                } else {
-                    $requestTrans = $request->all();
-                    $requestTrans['buku_id'] = $id;
-                    $requestTrans['pengarang_id'] = $pengarang2; 
-                    BukuTransaksi::create($requestTrans);
-                }
+            $pengarang = BukuTransaksi::where('buku_id', $id)->get();
+            // cek jika ada pengarang dihapus
+            if(count($pengarang) > count($request->pengarang_id)) {
+                BukuTransaksi::where('buku_id', $id)->whereNotIn('pengarang_id', $request->pengarang_id)->delete();
+            }
+
+            // buku transaksi atau pengarang
+        for ($i=0; $i < count($request->pengarang_id); $i++) {
+
+            if(!empty($pengarang[$i]->pengarang_id)) {
+                $p = $pengarang[$i]->pengarang_id;
+            } else {
+                $p = '';
+            }
+            
+            if($p == $request->pengarang_id[$i]) {
+                $pengarang[$i]->update([
+                    'pengarang_id' => $pengarang[$i]->pengarang_id,
+                    'kota_id' => $request->kota_id,
+                    'bahasa_id' => $request->bahasa_id,
+                    'penerbit_id' => $request->penerbit_id
+                ]);
+            } else {
+                $requestTrans = $request->all();
+                $requestTrans['buku_id'] = $id;
+                $requestTrans['pengarang_id'] = $request->pengarang_id[$i]; 
+                BukuTransaksi::create($requestTrans);
+            }
         }
 
         // biliobigrafi
