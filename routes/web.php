@@ -75,6 +75,7 @@ Route::resource('berita', 'BeritaController');
 Route::resource('info', 'InfoController');
 Route::resource('topik', 'TopikController');
 Route::resource('denda', 'DendaController');
+Route::resource('jurusan', 'JurusanController');
 
 
 // transaksi file
@@ -87,6 +88,7 @@ Route::get('penerbit-fetch', 'PenerbitController@fetch')->name('penerbit.fetch')
 Route::get('buku-fetch', 'BukuController@fetch')->name('buku.fetch');
 Route::get('pengarang-fetch', 'PengarangController@fetch')->name('pengarang.fetch');
 Route::get('kota-fetch', 'KotaController@fetch')->name('kota.fetch');
+Route::get('jurusan-fetch', 'JurusanController@fetch')->name('jurusan.fetch');
 Route::get('denda-fetch', 'DendaController@fetch')->name('denda.fetch');
 Route::get('klasifikasi-fetch', 'KlasifikasiController@fetch')->name('klasifikasi.fetch');
 Route::get('bahasa-fetch', 'BahasaController@fetch')->name('bahasa.fetch');
@@ -150,6 +152,7 @@ Route::get('topik-search', 'TopikController@search');
 Route::get('pengunjung-search', 'BukuTamuController@search');
 Route::get('histori-search', 'SirkulasiController@search');
 Route::get('terlambat-search', 'SirkulasiController@search_terlambat');
+Route::get('jurusan-search', 'JurusanController@search');
 
 // chart
 Route::get('anggota-chart', 'AnggotaController@chart');

@@ -34,6 +34,26 @@
             </div>
         </div>
     </li>
+
+    <li class="nav-item">
+        <div class="dropdown" style="width:100%">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <i class="ni ni-archive-2 text-pink"></i> Master File
+            </a>
+            <div class="dropdown-menu" style="left: 15px;">
+                <a href="{{ route('gmd.index') }}" class="dropdown-item">GMD</a>
+                <a href="{{ route('penerbit.index') }}" class="dropdown-item">Penerbit</a>
+                <a href="{{ route('buku.index') }}" class="dropdown-item">Buku</a>
+                <a href="{{ route('pengarang.index') }}" class="dropdown-item">Pengarang</a>
+                <a href="{{ route('kota.index') }}" class="dropdown-item">Kota</a>
+                <a href="{{ route('klasifikasi.index') }}" class="dropdown-item">Klasifikasi</a>
+                <a href="{{ route('bahasa.index') }}" class="dropdown-item">Bahasa</a>
+                <a href="{{ route('jurusan.index') }}" class="dropdown-item">Jurusan</a>
+                <a href="{{ route('lokasi.index') }}" class="dropdown-item">Lokasi Rak Buku</a>
+            </div>
+        </div>
+    </li>
+
     <li class="nav-item">
         <div class="dropdown" style="width:100%">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -50,23 +70,6 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <div class="dropdown" style="width:100%">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <i class="ni ni-archive-2 text-pink"></i> Master File
-            </a>
-            <div class="dropdown-menu" style="left: 15px;">
-                <a href="{{ route('gmd.index') }}" class="dropdown-item">GMD</a>
-                <a href="{{ route('penerbit.index') }}" class="dropdown-item">Penerbit</a>
-                <a href="{{ route('buku.index') }}" class="dropdown-item">Buku</a>
-                <a href="{{ route('pengarang.index') }}" class="dropdown-item">Pengarang</a>
-                <a href="{{ route('kota.index') }}" class="dropdown-item">Kota</a>
-                <a href="{{ route('klasifikasi.index') }}" class="dropdown-item">Klasifikasi</a>
-                <a href="{{ route('bahasa.index') }}" class="dropdown-item">Bahasa</a>
-                <a href="{{ route('lokasi.index') }}" class="dropdown-item">Lokasi Rak Buku</a>
-            </div>
-        </div>
-    </li>
     <li class="nav-item">
         <div class="dropdown" style="width:100%">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

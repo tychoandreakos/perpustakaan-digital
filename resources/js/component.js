@@ -34,6 +34,11 @@ Vue.component('form-pengarang-component', require('./components/admin/pengarang/
 Vue.component('table-berita-component', require('./components/admin/berita/Table.vue').default);
 Vue.component('form-berita-component', require('./components/admin/berita/Form.vue').default);
 
+// jurusan
+Vue.component('table-jurusan-component', require('./components/admin/jurusan/Table.vue').default);
+Vue.component('form-jurusan-component', require('./components/admin/jurusan/Form.vue').default);
+
+
 // kota
 Vue.component('table-kota-component', require('./components/admin/kota/Table.vue').default);
 Vue.component('form-kota-component', require('./components/admin/kota/Form.vue').default);

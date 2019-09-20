@@ -59,6 +59,7 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $validatedData = $request->validate([
             'id' => 'required|unique:users|integer',
             'name' => 'required|min:3',
@@ -67,6 +68,7 @@ class AnggotaController extends Controller
             'tgl_lahir' => 'required|date',
             'alamat' => 'nullable|min:6',
             'jk' => 'nullable',
+            'jurusan_id' => 'required',
             'no_telp' => 'nullable|min:6|numeric',
             'foto' => 'nullable',
             'jurusan' => 'nullable',
@@ -143,7 +145,7 @@ class AnggotaController extends Controller
         $anggota_count = User::all()->count();
         $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
         $approve = User::whereNull('approved_at')->get()->count();
-        $anggota = Anggota::with('anggota_transaksi.tipe_anggota')->where('user_id', $id)->first();
+        $anggota = Anggota::with('anggota_transaksi.tipe_anggota', 'jurusan')->where('user_id', $id)->first();
         $users = User::with('anggota')->where('id', $id)->first();
         
         return view('admin.anggota.edit', compact('anggota', 'users', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
@@ -211,7 +213,7 @@ class AnggotaController extends Controller
 
         $anggota = Anggota::find($request->id);
         $anggota->jurusan = $request->jurusan;
-        $anggota->tgl_lahir = $request->tgl_lahir;
+        $anggota->tgl_lahir =  date('Y-m-d', strtotime($request->tgl_lahir));
         $anggota->alamat = $request->alamat;
         $anggota->jk = ($request->jk == 'pria' || $request->jk == 'Pria') ? 0 : 1;
         $anggota->no_telp = $request->no_telp;
@@ -272,11 +274,16 @@ class AnggotaController extends Controller
 
 
         if($user->anggota->foto !== 'img.svg') {
-            unlink(public_path('storage/anggota/'. $user->anggota->foto));
-            unlink(public_path('storage/preview/'. $user->anggota->foto));
+            if(file_exists(public_path('storage/anggota/'. $user->anggota->foto))) {
+                unlink(public_path('storage/anggota/'. $user->anggota->foto));
+                unlink(public_path('storage/preview/'. $user->anggota->foto));
+            }
         }
 
-        $user->pinjam_transaksi()->delete();
+        // $user->pinjam_transaksi()->denda()->delete();
+        $user->denda()->delete();
+        $user->buku_tamu()->delete();
+        $user->anggota_transaksi()->delete();
         $user->anggota_transaksi()->delete();
         $user->anggota()->delete();
         $user->delete();

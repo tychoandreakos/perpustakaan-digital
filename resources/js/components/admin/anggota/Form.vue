@@ -56,7 +56,7 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="tipe_anggota_id">Tipe Anggota</label>
                                 <multiselect v-model="value" tag-placeholder="Add this as new tag"
-                                    placeholder="Pilih tipe anggota" label="tipe_anggota" track-by="tipe_anggota"
+                                    placeholder="Pilih Tipe Anggota" label="tipe_anggota" track-by="tipe_anggota"
                                     :options="options"></multiselect>
                                 <template v-if="err.tipe_anggota_id">
                                     <span class="text-danger">{{ err.tipe_anggota_id[0] }}</span>
@@ -121,11 +121,17 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="jurusan">Jurusan</label>
-                                <input autocomplete="off" type="text" v-model="form.jurusan" id="jurusan"
+                                <multiselect v-model="jurusan" tag-placeholder="Add this as new tag"
+                                    placeholder="Pilih Jurusan" label="nama_jurusan" track-by="nama_jurusan"
+                                    :options="opt"></multiselect>
+                                <template v-if="err.jurusan_id">
+                                    <span class="text-danger">{{ err.jurusan_id[0] }}</span>
+                                </template>
+                                <!-- <input autocomplete="off" type="text" v-model="form.jurusan" id="jurusan"
                                     class="form-control form-control-alternative" name="jurusan" placeholder="Jurusan">
                                 <template v-if="err.jurusan">
                                     <span class="text-danger">{{ err.jurusan[0] }}</span>
-                                </template>
+                                </template> -->
                             </div>
                         </div>
                     </div>
@@ -168,6 +174,7 @@
                     </div>
 
                     <input autocomplete="off" type="hidden" v-model="tipe_anggota">
+                    <input autocomplete="off" type="hidden" v-model="jurusan2">
                     <input autocomplete="off" type="hidden" v-model="tgl2">
                     <input autocomplete="off" type="hidden" v-model="tipe_ang">
 
@@ -227,7 +234,8 @@
             'index',
             'fetch',
             'tipe',
-            'users'
+            'users',
+            'jur'
         ],
 
         computed: {
@@ -241,6 +249,10 @@
 
             tipe_anggota() {
                 return this.form.tipe_anggota_id = this.value.id
+            },
+
+            jurusan2() {
+                return this.form.jurusan_id = this.jurusan.id
             },
 
             tipe_ang() {
@@ -271,8 +283,10 @@
                 value: (this.users.id ? this.fetch.anggota_transaksi.tipe_anggota : ''),
                 jkelamin: ['Pria', 'Wanita'],
                 options: [],
+                opt: [],
                 img: this.fetch.foto || 'Pilih Foto Anggota',
                 tgl: '09/05/2019',
+                jurusan: (this.users.id ? this.fetch.anggota.jurusan : ''),
 
 
                 form: {
@@ -284,11 +298,11 @@
                     tgl_lahir: this.fetch.tgl_lahir || '',
                     tgl_registrasi: this.fetch.tgl_registrasi || '',
                     tgl_ekspired: this.fetch.tgl_ekspired || '',
+                    jurusan_id: '',
                     alamat: this.fetch.alamat || '',
                     jk: this.jk || '',
                     no_telp: this.fetch.no_telp || '',
                     tipe: this.tipe_ang,
-                    jurusan: this.fetch.jurusan || '',
                     image: '',
                     foto: '',
                     old: '',
@@ -304,6 +318,7 @@
 
         created() {
             this.getTipe();
+            this.getJurusan();
         },
         
 
@@ -311,6 +326,12 @@
             getTipe() {
                 return axios.get(this.tipe)
                     .then(res => this.options = res.data.data)
+                    .catch(err => console.log(err));
+            },
+
+             getJurusan() {
+                return axios.get(this.jur)
+                    .then(res => this.opt = res.data.data)
                     .catch(err => console.log(err));
             },
 

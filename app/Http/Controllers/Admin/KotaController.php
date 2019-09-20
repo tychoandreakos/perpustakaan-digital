@@ -29,7 +29,7 @@ class KotaController extends Controller
 
     public function fetch()
     {
-        return Kota::latest()->paginate(50);
+        return Kota::latest()->paginate(75);
     }
 
     /**
@@ -99,7 +99,7 @@ class KotaController extends Controller
             $search = $request->q;
 
             return Kota::where('nama_kota','LIKE',"%$search%")
-            ->latest()->paginate(5);
+            ->latest()->paginate(75);
         }
 
     }
