@@ -482,6 +482,7 @@ class BibliobigrafiController extends Controller
             }
 
             // buku transaksi atau pengarang
+        $pengarang = BukuTransaksi::where('buku_id', $id)->get();
         for ($i=0; $i < count($request->pengarang_id); $i++) {
 
             if(!empty($pengarang[$i]->pengarang_id)) {
