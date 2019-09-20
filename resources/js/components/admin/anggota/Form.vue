@@ -70,7 +70,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input autocomplete="off" class="form-control datepicker" v-model="tgl"
+                                    <input autocomplete="off" @change="update($event)" class="form-control datepicker" v-model="tgl"
                                         placeholder="Pilih tanggal lahir" type="text">
                                 </div>
 
@@ -168,6 +168,7 @@
                     </div>
 
                     <input autocomplete="off" type="hidden" v-model="tipe_anggota">
+                    <input autocomplete="off" type="hidden" v-model="tgl2">
                     <input autocomplete="off" type="hidden" v-model="tipe_ang">
 
                     <div class="row">
@@ -234,8 +235,8 @@
                 return (this.form.name.length == '' ? true : false)
             },
 
-            tgl() {
-                console.log(this.doto);
+            tgl2() {
+                return this.form.tgl_lahir = this.tgl;
             },
 
             tipe_anggota() {
@@ -249,6 +250,8 @@
             jk() {
                 return this.form.jk = (this.fetch.jk == 0 ? 'Pria' : 'Wanita')
             },
+
+
 
             profil() {
                 this.form.foto = this.fetch.foto;
@@ -269,7 +272,7 @@
                 jkelamin: ['Pria', 'Wanita'],
                 options: [],
                 img: this.fetch.foto || 'Pilih Foto Anggota',
-                doto: '',
+                tgl: '09/05/2019',
 
 
                 form: {
@@ -302,6 +305,7 @@
         created() {
             this.getTipe();
         },
+        
 
         methods: {
             getTipe() {
@@ -326,6 +330,7 @@
                 };
                 reader.readAsDataURL(file);
             },
+            
 
             simpan() {
                 this.loading = true;
