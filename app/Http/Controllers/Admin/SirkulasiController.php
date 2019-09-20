@@ -86,6 +86,84 @@ class SirkulasiController extends Controller
         return view('admin.sirkulasi.histori', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
+    public function search(Request $request)
+    {
+
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return PinjamTransaksi::with(['bibliobigrafi' => function($q) {
+                $q->select('id', 'buku_id', 'pola_eksemplar');
+            },  'bibliobigrafi.buku' => function($q) {
+                $q->select('id', 'judul');
+            }, 'user.anggota_transaksi.tipe_anggota'])
+            ->where('status_pinjam', 0)
+            ->whereHas('user', function($q) use ($search){
+                $q->where('name', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('bibliobigrafi.buku', function($q) use ($search){
+                $q->where('judul', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('user.anggota_transaksi.tipe_anggota', function($q) use ($search){
+                $q->where('tipe_anggota', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('bibliobigrafi', function($q) use ($search){
+                $q->where('pola_eksemplar', 'LIKE', "%$search%");
+            })
+            ->latest()
+            ->paginate(5);
+
+        }
+
+    }
+
+    public function search_terlambat(Request $request)
+    {
+
+        if($request->has('q')){
+
+            $search = $request->q;
+
+
+            return PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())
+            ->whereHas('user', function($q) use ($search){
+                $q->where('name', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('bibliobigrafi.buku', function($q) use ($search){
+                $q->where('judul', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('user.anggota_transaksi.tipe_anggota', function($q) use ($search){
+                $q->where('tipe_anggota', 'LIKE', "%$search%");
+            })
+            ->latest()
+            ->paginate(7);
+
+            return PinjamTransaksi::with(['bibliobigrafi' => function($q) {
+                $q->select('id', 'buku_id', 'pola_eksemplar');
+            },  'bibliobigrafi.buku' => function($q) {
+                $q->select('id', 'judul');
+            }, 'user.anggota_transaksi.tipe_anggota'])
+            ->where('status_pinjam', 0)
+            ->whereHas('user', function($q) use ($search){
+                $q->where('name', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('bibliobigrafi.buku', function($q) use ($search){
+                $q->where('judul', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('user.anggota_transaksi.tipe_anggota', function($q) use ($search){
+                $q->where('tipe_anggota', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('bibliobigrafi', function($q) use ($search){
+                $q->where('pola_eksemplar', 'LIKE', "%$search%");
+            })
+            ->latest()
+            ->paginate(5);
+
+        }
+
+    }
+
     public function pengunjung()
     {
         $title = 'Daftar Pengunjung Perpustakaan';

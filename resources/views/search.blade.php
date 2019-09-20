@@ -321,7 +321,7 @@
           ================================================== -->
 <section class="pt-6 pt-md-8 bg-gray-200">
     <div class="container pb-6 pb-md-8 border-bottom border-gray-300">
-        <div class="row align-items-center">
+        {{-- <div class="row align-items-center">
             <div class="col-12 col-md">
 
                 <!-- Heading -->
@@ -358,7 +358,7 @@
                 </form>
 
             </div>
-        </div> <!-- / .row -->
+        </div> <!-- / .row --> --}}
     </div> <!-- / .container -->
 </section>
 

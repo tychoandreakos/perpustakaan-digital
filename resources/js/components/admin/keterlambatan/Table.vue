@@ -29,19 +29,10 @@
                             <tbody>
                                 <tr v-for="item in datas.data" :key="item.id">
                                     <td>
-                                        <button style="display: inline" type="button" class="btn btn-sm btn-white"
-                                            data-toggle="tooltip" data-placement="top"
-                                            :title="'Kirim email ke '+item.user.email">
-                                            Kirim Email
-                                        </button>
+                                        <button-component :send="send" :item="item"></button-component>
                                     </td>
                                     <td class="text-center">
-                                        <button @click="showDenda" style="display: inline" type="button"
-                                            class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top"
-                                            title="Bayar Disini">
-                                            RP. {{ total }}
-                                        </button>
-
+                                        <bayar-component :val="item.tanggal_habis_pinjam" :dend="item.user.anggota_transaksi.tipe_anggota.denda" :dendas="item" :stores="store"></bayar-component>
                                     </td>
                                     <td>
                                         {{ item.user.id }}
@@ -64,12 +55,6 @@
                                     <td>
                                         {{ item.tanggal_habis_pinjam | dateFormat }}
                                     </td>
-
-                                    <modal height="auto" name="eksemplar">
-                                        <denda-component @closeDenda="hideDenda" @updateDenda="getResults"
-                                            :denda="item" :total="total" :store="stores">
-                                        </denda-component>
-                                    </modal>
                                 </tr>
                             </tbody>
                         </table>
@@ -92,20 +77,25 @@
     import * as moment from 'moment'
     var momentRange = require('moment-range');
     momentRange.extendMoment(moment);
-    import Denda from './Denda';
+
+    import Button from './Button';
+    import Bayar from './Bayar';
+
 
     export default {
-        props: ['fetch', 'store'],
+        props: ['fetch', 'store', 'send'],
         data() {
             return {
                 datas: {},
-                total: '',
-                stores: this.store
+                stores: this.store,
+                loading: false,
             }
         },
 
-        components:{
-            DendaComponent: Denda,
+        components: {
+            BayarComponent: Bayar,
+            ButtonComponent: Button,
+
         },
 
         filters: {
@@ -122,17 +112,10 @@
                     .catch(err => console.log(err));
             },
 
-            showDenda() {
-                this.$modal.show('eksemplar');
-            },
-            hideDenda() {
-                this.$modal.hide('eksemplar');
-            },
 
             denda(val, dend) {
                 var a = moment();
                 var b = val;
-                this.total = a.diff(b, 'days') * dend;
                 return a.diff(b, 'days') + ' Hari'
             }
         },
@@ -141,7 +124,7 @@
 
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
-                axios.get('/pustakawan/pengunjung-search?q=' + query)
+                axios.get('/pustakawan/terlambat-search?q=' + query)
                     .then(res => {
                         // console.log(res)
                         this.datas = res.data

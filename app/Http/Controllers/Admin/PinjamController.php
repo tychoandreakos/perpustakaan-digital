@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\PinjamTransaksi;
 use Illuminate\Support\Carbon;
 use App\Bibliobigrafi;
+use App\Mail\SendMail;
 use DateTime;
+use Illuminate\Support\Facades\Mail;
 
 class PinjamController extends Controller
 {
@@ -51,7 +53,9 @@ class PinjamController extends Controller
 
     public function terlambat()
     {
-        return PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->paginate(7);
+        return PinjamTransaksi::with(['bibliobigrafi.buku' => function($q){
+            $q->select('id', 'judul');
+        }, 'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->latest()->paginate(7);
     }
 
     public function denda($id)
@@ -74,6 +78,16 @@ class PinjamController extends Controller
 
         return response()->json([
             'message' => 'Buku berhasil diperpanjang']);
+    }
+
+    public function send()
+    {
+        Mail::send(new SendMail());
+    }
+
+    public function email()
+    {
+        $this->load->view('send');
     }
 
     public function histori()

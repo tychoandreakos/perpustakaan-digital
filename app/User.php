@@ -55,7 +55,12 @@ class User extends Authenticatable
     }
 
     public function denda(){
-        return $this->hasMany('denda');
+        return $this->hasMany(Denda::class);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return $this->attributes['name'] = ucwords($value);
     }
 
     public function pinjam_transaksi()

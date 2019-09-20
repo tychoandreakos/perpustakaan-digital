@@ -94,7 +94,7 @@
 
         methods: {
             edit(val) {
-                return `kota/${val}/edit`;
+                return `histori/${val}/edit`;
             },
 
             deleted(val) {
@@ -108,7 +108,7 @@
                     confirmButtonText: 'Yes, hapus!'
                 }).then((result) => {
                     if (result.value) {
-                        axios.post('/pustakawan/kota/' + val, {
+                        axios.post('/pustakawan/histori/' + val, {
                                 _method: 'DELETE'
                             })
                             .then(res => {
@@ -140,7 +140,7 @@
 
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
-                axios.get('/pustakawan/kota-search?q=' + query)
+                axios.get('/pustakawan/histori-search?q=' + query)
                     .then(res => {
                         // console.log(res)
                         this.datas = res.data

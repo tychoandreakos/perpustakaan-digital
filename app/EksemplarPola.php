@@ -14,6 +14,8 @@ class EksemplarPola extends Model
         'serial',
         'suffix'
     ];
+    
+    public $primaryKey = 'kode_eksemplar';
 
     public function eksemplar_transaksi()
     {

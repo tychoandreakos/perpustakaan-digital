@@ -32,9 +32,13 @@
                 <td>10 Anggota Paling Aktif</td>
                 <td>
                     <ol>
-                        @foreach ($popular as $p)
-                        <li>{{  ucwords($p->user->name) }} ({{ $p->user_id }})</li>
-                        @endforeach
+                            @if (!$popular->isEmpty())
+                            @foreach ($popular as $item)
+                            <li>{{ ucwords($item->name) }} ( {{ $item->id }} )</li>
+                            @endforeach
+                            @else
+                            <div class="h4 text-white text-center">Belum ada data!</div>
+                            @endif
                     </ol>
                 </td>
             </tr>

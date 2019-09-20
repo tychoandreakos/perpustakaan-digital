@@ -14,7 +14,9 @@ class AddJurusanToAnggota extends Migration
     public function up()
     {
         Schema::table('anggota', function (Blueprint $table) {
-            $table->string('jurusan', 50)->after('user_id')->nullable();
+            $table->unsignedBigInteger('jurusan_id')->after('user_id');
+
+            $table->foreign('jurusan_id')->references('id')->on('jurusan');
         });
     }
 

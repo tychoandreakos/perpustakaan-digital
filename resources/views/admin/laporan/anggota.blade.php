@@ -33,7 +33,7 @@
                             <ol>
                                 @if (!$popular->isEmpty())
                                 @foreach ($popular as $item)
-                                <li class="text-white">{{ ucwords($item->user->name) }}</li>
+                                <li class="text-white">{{ ucwords($item->name) }} ( {{ $item->id }} )</li>
                                 @endforeach
                                 @else
                                 <div class="h4 text-white text-center">Belum ada data!</div>
