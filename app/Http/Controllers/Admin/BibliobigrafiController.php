@@ -506,6 +506,24 @@ class BibliobigrafiController extends Controller
             }
         }
 
+
+        // gmd
+        // return
+        $gmd = Bibliobigrafi::where('buku_id', $id)->get();
+        
+       foreach ($gmd as $g) {
+        GmdTransaksi::where('bibliobigrafi_id', $g->id)->whereIn('gmd_id', $request->gmd_id)->delete();
+        GmdTransaksi::where('bibliobigrafi_id', $g->id)->whereNotIn('gmd_id', $request->gmd_id)->delete();
+
+        foreach ($request->gmd_id as $gmd) {
+            $bil = new GmdTransaksi;
+            $bil->bibliobigrafi_id = $g->id;
+            $bil->gmd_id = $gmd;
+            $bil->save();
+       }
+       }
+       
+
         // biliobigrafi
         $bilio = $buku->bibliobigrafi()->get();
         foreach ($bilio as $item) {
