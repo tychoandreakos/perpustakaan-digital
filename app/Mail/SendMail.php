@@ -37,7 +37,7 @@ class SendMail extends Mailable
         $buku = $pinjam->buku()->first();
         $denda = $this->denda($pinjam);
         $hari = $this->hari($pinjam);
-        return $this->view('send', compact('user' ,'pinjam', 'buku', 'denda', 'hari'))->to('elangindra12@gmail.com')->subject('Pengembalian Buku')->from('fullstackdev04@gmail.com', 'Perpustakaan STMIK AMIKBANDUNG');
+        return $this->view('send', compact('user' ,'pinjam', 'buku', 'denda', 'hari'))->to($user->email)->subject('Pengembalian Buku')->from('fullstackdev04@gmail.com', 'Perpustakaan STMIK AMIKBANDUNG');
     }
 
     private function hari($pinjam)

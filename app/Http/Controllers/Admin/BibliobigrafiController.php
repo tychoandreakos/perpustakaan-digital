@@ -222,10 +222,10 @@ class BibliobigrafiController extends Controller
        }
         
 
-    //    $eksemplar_pola = EksemplarPola::find($request->pola_eksemplar);
-    //    $prefix = $eksemplar_pola->prefix;
-    //    $suffix = $eksemplar_pola->suffix;
-    //    $serial = $eksemplar_pola->serial;
+       $eksemplar_pola = EksemplarPola::find($request->pola_eksemplar);
+       $prefix = $eksemplar_pola->prefix;
+       $suffix = $eksemplar_pola->suffix;
+       $serial = $eksemplar_pola->serial + $prefix;
         
        if($request->total > 100) {
            $request->total = 100;
@@ -233,13 +233,22 @@ class BibliobigrafiController extends Controller
 
        for ($i=0; $i < $request->total; $i++) {
 
-        $eksemplar = EksemplarTransaksi::orderBy('pola_eksemplar', 'DESC')->first();
+        // return
+        $eksemplar = EksemplarTransaksi::where('kode_eksemplar', $request->pola_eksemplar)->orderBy('pola_eksemplar', 'DESC')->first();
+
+        if(empty($eksemplar)) {
+            $eks = '';
+        } else {
+            $eks = $eksemplar->kode_eksemplar;
+        }
 
         // slice string
+        if($eks === $eksemplar_pola->kode_eksemplar) {
 
-        if($eksemplar) {
+            $serialPrefix = substr($eksemplar->pola_eksemplar, 0, $serial);
+
             $requestTransaksi = $request->all();
-            $requestTransaksi['pola_eksemplar'] = ++$eksemplar->pola_eksemplar;
+            $requestTransaksi['pola_eksemplar'] = ++$serialPrefix . substr($eksemplar->pola_eksemplar, $serial, $suffix);
             $requestTransaksi['kode_eksemplar'] = $request->pola_eksemplar;
             $eks = EksemplarTransaksi::create($requestTransaksi);
         } else {
