@@ -21,6 +21,11 @@ class Bahasa extends Model
     {
         return $this->attributes['updated_at'] = Carbon::parse($value)->diffForHumans();
     }
+
+    public function getJenisBahasaAttribute($value)
+    {
+        return $this->attributes['jenis_bahasa'] = ucwords($value);
+    }
     
     public function buku_transaksi()
     {

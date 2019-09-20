@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->hasMany('denda');
     }
 
+    public function getNameAttribute($value)
+    {
+        return $this->attributes['name'] = ucwords($value);
+    }
+
     public function pinjam_transaksi()
     {
         return $this->hasMany(PinjamTransaksi::class);

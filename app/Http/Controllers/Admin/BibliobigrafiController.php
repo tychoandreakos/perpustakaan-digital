@@ -429,9 +429,11 @@ class BibliobigrafiController extends Controller
                    }
             }
 
+           if(!is_null($buku->pdf)){
             if(file_exists(public_path('storage/file/'. $buku->pdf))) {
                 unlink(public_path('storage/file/'. $buku->pdf));
                 }
+           }
 
                 // return gettype($file2);
             $buku->pdf = substr($file2, 15, 50);
@@ -472,7 +474,9 @@ class BibliobigrafiController extends Controller
             }
 
             // return $buku->pdf;
+            $buku->topik_id = $request->topik_id;
             $buku->update([$request->all()]);
+
             
             // buku transaksi
             $pengarang = BukuTransaksi::where('buku_id', $id)->get();
@@ -537,7 +541,7 @@ class BibliobigrafiController extends Controller
            
 
         return response()->json([
-            'message' => 'data berhasil disimpan']);
+            'message' => 'data berhasil diperbaharui']);
     }
 
     /**

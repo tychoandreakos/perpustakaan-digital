@@ -13,5 +13,10 @@ class TipeAnggota extends Model
     {
         return $this->hasMany(AnggotaTransaksi::class);
     }
+
+    public function getTipeAnggotaAttribute($value)
+    {
+        return $this->attributes['tipe_anggota'] = ucwords($value);
+    }
     
 }
