@@ -33,7 +33,7 @@ class AnggotaController extends Controller
 
     public function fetch()
     {
-        return User::with('anggota_transaksi.tipe_anggota', 'anggota')->latest()->paginate(75);
+        return User::with('anggota_transaksi.tipe_anggota', 'anggota', 'anggota.jurusan')->latest()->paginate(75);
     }
 
     /**

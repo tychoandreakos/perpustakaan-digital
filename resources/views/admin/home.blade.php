@@ -162,7 +162,7 @@
                                       <td>
                                        {{ ucwords($item->email) }}
                                       </td>
-                                    <td>{{ isset($item->anggota->jurusan) ? ucwords($item->anggota->jurusan) : 'Belum ada data!' }}</td>
+                                    <td>{{ isset($item->anggota->jurusan) ? ucwords($item->anggota->jurusan->nama_jurusan) : 'Belum ada data!' }}</td>
                                     <td>{{ isset($item->anggota_transaksi->tipe_anggota->tipe_anggota) ? ucwords($item->anggota_transaksi->tipe_anggota->tipe_anggota) : 'Belum ada data' }}</td>
                                   </tr>
                                    @endforeach
