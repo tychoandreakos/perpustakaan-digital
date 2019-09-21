@@ -70,8 +70,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input autocomplete="off" @change="update($event)" class="form-control datepicker" v-model="tgl"
-                                        placeholder="Pilih tanggal lahir" type="text">
+                                    <input autocomplete="off" @change="update($event)" class="form-control datepicker"
+                                        v-model="tgl" placeholder="Pilih tanggal lahir" type="text">
                                 </div>
 
                                 <template v-if="err.tgl_lahir">
@@ -120,8 +120,15 @@
 
                         <div class="col-lg-6">
                             <div class="form-group">
+                                <div class="float-right mb-2">
+                                    <button @click="showJurusan" class="btn btn-icon btn-3 btn-primary btn-sm"
+                                        type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+                                        <span class="btn-inner--text">Tambah Jurusan</span>
+                                    </button>
+                                </div>
                                 <label class="form-control-label" for="jurusan">Jurusan</label>
-                                <multiselect v-model="jurusan" tag-placeholder="Add this as new tag"
+                                <multiselect v-model="jurusan" class="mt-2" tag-placeholder="Add this as new tag"
                                     placeholder="Pilih Jurusan" label="nama_jurusan" track-by="nama_jurusan"
                                     :options="opt"></multiselect>
                                 <template v-if="err.jurusan_id">
@@ -215,6 +222,12 @@
 
                     <input autocomplete="off" type="hidden" :value="jk">
                     <input autocomplete="off" type="hidden" :value="profil">
+
+                    <modal height="auto" name="jurusan">
+                        <jurusan-component @closeJurusan="hideJurusan" @updateJurusan="getJurusan"
+                            :jurusan="this.tipejurusan"></jurusan-component>
+                    </modal>
+
                 </div>
             </form>
         </div>
@@ -223,10 +236,12 @@
 <script>
     import Spinner from '../tools/Spanner';
     import Multiselect from 'vue-multiselect';
+    import Jurusan from './add/Jurusan';
     export default {
 
         components: {
             SpinnerComponent: Spinner,
+            JurusanComponent: Jurusan,
             Multiselect
         },
 
@@ -235,7 +250,8 @@
             'fetch',
             'tipe',
             'users',
-            'jur'
+            'jur',
+            'tipejurusan',
         ],
 
         computed: {
@@ -320,7 +336,7 @@
             this.getTipe();
             this.getJurusan();
         },
-        
+
 
         methods: {
             getTipe() {
@@ -329,7 +345,14 @@
                     .catch(err => console.log(err));
             },
 
-             getJurusan() {
+            showJurusan() {
+                this.$modal.show('jurusan');
+            },
+            hideJurusan() {
+                this.$modal.hide('jurusan');
+            },
+
+            getJurusan() {
                 return axios.get(this.jur)
                     .then(res => this.opt = res.data.data)
                     .catch(err => console.log(err));
@@ -351,7 +374,7 @@
                 };
                 reader.readAsDataURL(file);
             },
-            
+
 
             simpan() {
                 this.loading = true;

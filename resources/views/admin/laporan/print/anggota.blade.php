@@ -29,7 +29,7 @@
                 <td class="text-center">{{ 0 }}</td>
             </tr>
             <tr>
-                <td>10 Anggota Paling Aktif</td>
+                <td>10 Anggota Paling Aktif Meminjam</td>
                 <td>
                     <ol>
                             @if (!$popular->isEmpty())
