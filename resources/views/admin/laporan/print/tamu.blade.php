@@ -28,7 +28,7 @@
                 <td>
                     <ol>
                         @foreach ($popular as $p)
-							<li>{{ ucwords($p->name) }}</li>
+							<li>{{ ucwords($p->name) }} ({{ $p->buku_tamu_count }} Kali)</li>
 						@endforeach
                     </ol>
                 </td>

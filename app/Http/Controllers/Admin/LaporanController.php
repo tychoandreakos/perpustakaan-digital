@@ -97,7 +97,7 @@ class LaporanController extends Controller
         $eksemplar = Tamu::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
         $eksemplar_dipinjam = Tamu::whereDate('created_at', '>', Carbon::now()->subDays(360))->get()->count();
         // return
-        $popular = User::with('buku_tamu')->withCount('buku_tamu')->orderBy('buku_tamu_count', 'DESC')->get();
+        $popular = User::with('buku_tamu')->having('created_at', '>', Carbon::now()->subDays(30))->withCount('buku_tamu')->orderBy('buku_tamu_count', 'DESC')->limit(10)->get();
         $time = Carbon::now();
         $title = 'Ringkasan Statistik Buku Tamu';
         $month = Carbon::now()->format('F Y');
