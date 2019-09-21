@@ -53,7 +53,9 @@ class PinjamController extends Controller
 
     public function terlambat()
     {
-        return PinjamTransaksi::with('bibliobigrafi.buku', 'user.anggota_transaksi.tipe_anggota')->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->paginate(7);
+        return PinjamTransaksi::with(['bibliobigrafi.buku' => function($q){
+            $q->select('id', 'judul');
+        }, 'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 1)->where('tanggal_habis_pinjam', '<', Carbon::now())->latest()->paginate(7);
     }
 
     public function denda($id)
