@@ -32,7 +32,7 @@
                                         <button-component :send="send" :item="item"></button-component>
                                     </td>
                                     <td class="text-center">
-                                        <bayar-component :val="item.tanggal_habis_pinjam" :dend="item.user.anggota_transaksi.tipe_anggota.denda" :dendas="item" :stores="store"></bayar-component>
+                                        <bayar-component :val="item.tanggal_habis_pinjam" :dend="item.user.anggota_transaksi.tipe_anggota.denda" :item2="item" :stores="stores"></bayar-component>
                                     </td>
                                     <td>
                                         {{ item.user.id }}

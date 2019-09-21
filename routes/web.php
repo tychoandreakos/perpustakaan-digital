@@ -116,6 +116,7 @@ Route::get('laporan-koleksi-stmik', 'LaporanController@print_koleksi')->name('pr
 Route::get('laporan-buku', 'LaporanController@print_buku_bulan_ini')->name('print.buku_ini');
 Route::get('laporan-pinjam', 'LaporanController@print_pinjam')->name('print.pinjam');
 Route::get('laporan-anggota', 'LaporanController@print_anggota')->name('print.anggota');
+Route::get('laporan-tamu', 'LaporanController@print_tamu')->name('print.tamu');
 
 // Bibliobigrafi
 Route::get('bibliobigrafi-fetch-pengarang', 'BibliobigrafiController@pengarang')->name('bibliobigrafi.pengarang');

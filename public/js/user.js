@@ -86990,7 +86990,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/elang/code/laravel/perpustakaan/resources/js/user.js */"./resources/js/user.js");
+module.exports = __webpack_require__(/*! C:\Users\Elang\code\laravel\laravel\perpustakaan-proto\resources\js\user.js */"./resources/js/user.js");
 
 
 /***/ })

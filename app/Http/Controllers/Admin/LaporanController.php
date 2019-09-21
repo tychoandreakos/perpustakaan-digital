@@ -7,6 +7,7 @@ use App\Bibliobigrafi;
 use App\Buku;
 use App\PinjamTransaksi;
 use App\User;
+use App\Tamu;
 use Carbon\Carbon;
 use PDF;
 
@@ -89,6 +90,22 @@ class LaporanController extends Controller
         $pdf = PDF::loadview('admin.laporan.print.koleksi', compact('buku', 'title', 'time', 'eksemplar', 'masuk' ,'eksemplar_dipinjam', 'popular'));
         return $pdf->stream('laporan-koleksi-stmik-' . Carbon::now());
     }
+
+    public function print_tamu()
+    {
+        $buku = Tamu::whereDate('created_at', '>', Carbon::now()->subDays(7))->get()->count();
+        $eksemplar = Tamu::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
+        $eksemplar_dipinjam = Tamu::whereDate('created_at', '>', Carbon::now()->subDays(360))->get()->count();
+        // return
+        $popular = User::with('buku_tamu')->withCount('buku_tamu')->orderBy('buku_tamu_count', 'DESC')->get();
+        $time = Carbon::now();
+        $title = 'Ringkasan Statistik Buku Tamu';
+        $month = Carbon::now()->format('F Y');
+
+        $pdf = PDF::loadview('admin.laporan.print.tamu', compact('buku', 'title', 'month', 'time', 'eksemplar', 'eksemplar_dipinjam', 'popular'));
+        return $pdf->stream('laporan-tamu-stmik-' . Carbon::now());
+    }
+
 
     public function print_anggota()
     {

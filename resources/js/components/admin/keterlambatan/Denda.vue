@@ -38,7 +38,7 @@
 
                         <div class="form-group">
                             <label for="prefix">Total Bayar</label>
-                            <input autocomplete="off" :value="'Rp.' + this.total" disabled type="text"
+                            <input autocomplete="off" :value="this.total" disabled type="text"
                                 class="form-control" placeholder="Nama Gmd">
                         </div>
 

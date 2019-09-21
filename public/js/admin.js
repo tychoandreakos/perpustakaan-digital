@@ -28533,7 +28533,7 @@ Chart.elements.Rectangle.prototype.draw = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/elang/code/laravel/perpustakaan/resources/js/admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! C:\Users\Elang\code\laravel\laravel\perpustakaan-proto\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })
