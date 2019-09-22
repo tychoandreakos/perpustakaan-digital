@@ -8,7 +8,7 @@ use App\Bibliobigrafi;
 use Faker\Generator as Faker;
 
 $factory->define(PinjamTransaksi::class, function (Faker $faker) {
-    $date = '2019-06-23 09:12:42';
+    $date = '2019-07-23 09:12:42';
     $buku = Bibliobigrafi::all()->random();
     return [
         'user_id' => User::all()->random()->id,
@@ -20,7 +20,7 @@ $factory->define(PinjamTransaksi::class, function (Faker $faker) {
         'status_pinjam' => 0,
         'status_denda' => 0,
         'status_verifikasi' => 0,
-        'kode_pinjam' => $faker->word,
+        'kode_pinjam' => $faker->numberBetween($min = 1000, $max = 9000),
         'verified_at' => $date,
         'created_at' => $date
     ];

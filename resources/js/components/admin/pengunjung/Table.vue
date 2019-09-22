@@ -34,7 +34,7 @@
 
                                     <template v-if="item.user.anggota.jurusan">
                                         <td>
-                                            {{ item.user.anggota.jurusan| capitalize}}
+                                            {{ item.user.anggota.jurusan.nama_jurusan| capitalize}}
                                         </td>
                                     </template>
                                     <template v-else>

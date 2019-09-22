@@ -476,6 +476,7 @@ class BibliobigrafiController extends Controller
             // return $buku->pdf;
             $buku->topik_id = $request->topik_id;
             $buku->update([$request->all()]);
+            $buku->update($request->all());
 
             
             // buku transaksi

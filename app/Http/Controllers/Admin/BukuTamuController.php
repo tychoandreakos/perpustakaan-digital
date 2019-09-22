@@ -13,8 +13,8 @@ class BukuTamuController extends Controller
         return Tamu::with(['user' => function($q) {
             $q->select('id', 'id', 'name', 'email');
         } ,'user.anggota' => function($q) {
-            $q->select('user_id', 'jurusan', 'alamat');
-        }])->latest()->paginate(75);
+            $q->select('user_id', 'jurusan_id', 'alamat');
+        }, 'user.anggota.jurusan'])->latest()->paginate(75);
     }
 
         public function getAllMonth() {
@@ -48,10 +48,10 @@ class BukuTamuController extends Controller
             return Tamu::with(['user' => function($q) {
                 $q->select('id', 'id', 'name', 'email');
             } ,'user.anggota' => function($q) {
-                $q->select('user_id', 'jurusan', 'alamat');
+                $q->select('user_id', 'jurusan_id', 'alamat');
             }])->whereHas('user', function($q) use ($search){
                 $q->where('name', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%");
-            })
+            }, 'user.anggota.jurusan')
             ->latest()
             ->paginate(75);
         }

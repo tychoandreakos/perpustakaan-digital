@@ -137,6 +137,8 @@ class PengarangController extends Controller
      */
     public function destroy(Pengarang $pengarang)
     {
+        $pengarang->buku_transaksi()->delete();
+        $pengarang->delete();
         return response()->json([
             'message' => 'data berhasil dihapus']);
     }

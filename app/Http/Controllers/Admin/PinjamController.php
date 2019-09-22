@@ -96,7 +96,7 @@ class PinjamController extends Controller
             $q->select('id', 'buku_id', 'pola_eksemplar');
         },  'bibliobigrafi.buku' => function($q) {
             $q->select('id', 'judul');
-        }, 'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 0)->latest()->paginate(5);
+        }, 'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 0)->latest()->paginate(75);
     }
 
     public function kembali(Request $request)
