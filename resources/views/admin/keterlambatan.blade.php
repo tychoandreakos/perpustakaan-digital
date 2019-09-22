@@ -9,5 +9,5 @@
 
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <table-keterlambatan-component send="{{ route('send') }}" store="{{ route('denda') }}" fetch="{{ route('terlambat.fetch') }}"></table-keterlambatan-component>
+        <table-keterlambatan-component index="{{ route('keterlambatan') }}" send="{{ route('send') }}" store="{{ route('denda') }}" fetch="{{ route('terlambat.fetch') }}"></table-keterlambatan-component>
             @endsection

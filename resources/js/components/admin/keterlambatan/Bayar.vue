@@ -21,7 +21,7 @@
     import Denda from './Denda';
 
     export default {
-        props: ['dend', 'val', 'item2', 'stores'],
+        props: ['dend', 'val', 'item2', 'stores', 'index'],
 
         data() {
             return {
@@ -38,6 +38,10 @@
         },
 
         methods: {
+            getResults() {
+                 window.location = this.index;
+            },
+
             showDenda() {
                 this.$modal.show('eksemplar');
             },

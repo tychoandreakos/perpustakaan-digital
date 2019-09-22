@@ -32,7 +32,7 @@
                                         <button-component :send="send" :item="item"></button-component>
                                     </td>
                                     <td class="text-center">
-                                        <bayar-component :val="item.tanggal_habis_pinjam" :dend="item.user.anggota_transaksi.tipe_anggota.denda" :item2="item" :stores="stores"></bayar-component>
+                                        <bayar-component :index="index" :val="item.tanggal_habis_pinjam" :dend="item.user.anggota_transaksi.tipe_anggota.denda" :item2="item" :stores="stores"></bayar-component>
                                     </td>
                                     <td>
                                         {{ item.user.id }}
@@ -83,7 +83,7 @@
 
 
     export default {
-        props: ['fetch', 'store', 'send'],
+        props: ['fetch', 'store', 'send', 'index'],
         data() {
             return {
                 datas: {},
