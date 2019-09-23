@@ -81,9 +81,11 @@ class KoleksiController extends Controller
      * @param  \App\Koleksi  $koleksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Koleksi $koleksi2)
+    public function edit(Koleksi $koleksi)
     {
         $title = 'Update Koleksi';
+        // return
+        $koleksi2 = $koleksi;
         $koleksi = Bibliobigrafi::all()->count();
         $anggota_count = User::all()->count();
         $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
