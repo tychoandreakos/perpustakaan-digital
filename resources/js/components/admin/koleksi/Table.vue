@@ -67,7 +67,7 @@
 
         methods: {
             edit(val) {
-                return `Koleksi/${val}/edit`;
+                return `koleksi/${val}/edit`;
             },
 
             deleted(val) {
@@ -81,7 +81,7 @@
                     confirmButtonText: 'Yes, hapus!'
                 }).then((result) => {
                     if (result.value) {
-                        axios.post('/pustakawan/Koleksi/' + val, {
+                        axios.post('/pustakawan/koleksi/' + val, {
                                 _method: 'DELETE'
                             })
                             .then(res => {
@@ -113,7 +113,7 @@
 
             Fire.$on('searching', () => {
                 let query = this.$parent.search;
-                axios.get('/pustakawan/Koleksi-search?q=' + query)
+                axios.get('/pustakawan/koleksi-search?q=' + query)
                     .then(res => {
                         // console.log(res)
                         this.datas = res.data

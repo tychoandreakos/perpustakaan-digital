@@ -127,6 +127,7 @@ class KoleksiController extends Controller
      */
     public function destroy(Koleksi $koleksi)
     {
+        // return $
         $koleksi->delete();
 
         return response()->json([
