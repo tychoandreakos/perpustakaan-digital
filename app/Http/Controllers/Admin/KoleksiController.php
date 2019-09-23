@@ -4,6 +4,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 
 use App\Koleksi;
+use App\Bibliobigrafi;
+use App\PinjamTransaksi;
+use App\User;
 use Illuminate\Http\Request;
 
 class KoleksiController extends Controller
@@ -15,7 +18,17 @@ class KoleksiController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Daftar Koleksi';
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.koleksi.home', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
+    }
+
+    public function fetch()
+    {
+        return Koleksi::latest()->paginate(75);
     }
 
     /**
@@ -25,7 +38,12 @@ class KoleksiController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Koleksi';
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.koleksi.add', compact('title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**
@@ -63,9 +81,14 @@ class KoleksiController extends Controller
      * @param  \App\Koleksi  $koleksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Koleksi $koleksi)
+    public function edit(Koleksi $koleksi2)
     {
-       
+        $title = 'Update Koleksi';
+        $koleksi = Bibliobigrafi::all()->count();
+        $anggota_count = User::all()->count();
+        $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
+        $approve = User::whereNull('approved_at')->get()->count();
+        return view('admin.master.koleksi.edit' ,compact('koleksi2', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
 
     /**
@@ -78,7 +101,23 @@ class KoleksiController extends Controller
     public function update(Request $request, Koleksi $koleksi)
     {
         $koleksi->update($request->all());
+
+        return response()->json([
+            'message' => 'data berhasil diubah']);
     }
+
+    public function search(Request $request)
+    {
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Koleksi::where('tipe_koleksi','LIKE',"%$search%")
+            ->latest()->paginate(75);
+        }
+
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -89,5 +128,8 @@ class KoleksiController extends Controller
     public function destroy(Koleksi $koleksi)
     {
         $koleksi->delete();
+
+        return response()->json([
+            'message' => 'data berhasil dihapus']);
     }
 }

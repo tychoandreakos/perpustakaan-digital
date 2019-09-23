@@ -49,6 +49,7 @@
                 <a href="{{ route('klasifikasi.index') }}" class="dropdown-item">Klasifikasi</a>
                 <a href="{{ route('bahasa.index') }}" class="dropdown-item">Bahasa</a>
                 <a href="{{ route('jurusan.index') }}" class="dropdown-item">Jurusan</a>
+                <a href="{{ route('koleksi.index') }}" class="dropdown-item">Koleksi</a>
                 <a href="{{ route('lokasi.index') }}" class="dropdown-item">Lokasi Rak Buku</a>
             </div>
         </div>

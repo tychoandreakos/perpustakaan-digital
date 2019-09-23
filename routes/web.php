@@ -105,6 +105,7 @@ Route::get('lokasi-fetch', 'LokasiRakController@fetch')->name('lokasi.fetch');
 Route::get('topik-fetch', 'TopikController@fetch')->name('topik.fetch');
 Route::get('tamu-fetch', 'BukuTamuController@fetch')->name('tamu.fetch');
 Route::get('terlambat-fetch', 'PinjamController@terlambat')->name('terlambat.fetch');
+Route::get('koleksi-fetch', 'KoleksiController@fetch')->name('koleksi.fetch');
 
 
 
@@ -154,6 +155,7 @@ Route::get('pengunjung-search', 'BukuTamuController@search');
 Route::get('histori-search', 'SirkulasiController@search');
 Route::get('terlambat-search', 'SirkulasiController@search_terlambat');
 Route::get('jurusan-search', 'JurusanController@search');
+Route::get('koleksi-search', 'KoleksiController@search');
 
 // chart
 Route::get('anggota-chart', 'AnggotaController@chart');

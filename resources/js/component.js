@@ -30,9 +30,14 @@ Vue.component('form-buku-component', require('./components/admin/buku/Form.vue')
 Vue.component('table-pengarang-component', require('./components/admin/pengarang/Table.vue').default);
 Vue.component('form-pengarang-component', require('./components/admin/pengarang/Form.vue').default);
 
-// kota
+// berita
 Vue.component('table-berita-component', require('./components/admin/berita/Table.vue').default);
 Vue.component('form-berita-component', require('./components/admin/berita/Form.vue').default);
+
+// koleksi
+Vue.component('table-koleksi-component', require('./components/admin/koleksi/Table.vue').default);
+Vue.component('form-koleksi-component', require('./components/admin/koleksi/Form.vue').default);
+
 
 // jurusan
 Vue.component('table-jurusan-component', require('./components/admin/jurusan/Table.vue').default);
@@ -109,7 +114,7 @@ Vue.component('form-digital-component', require('./components/admin/digital/Form
 
 
 // laporan
-Vue.component('table-koleksi-component', require('./components/admin/laporan/Koleksi.vue').default);
+// Vue.component('table-koleksi-component', require('./components/admin/laporan/Koleksi.vue').default);
 
 
 // package
