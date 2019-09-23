@@ -77,12 +77,14 @@ class LaporanController extends Controller
             $q->select('id', 'judul');
         }])->whereDate('created_at', '>', Carbon::now()->subDays(30))->latest()->get();
 
+        $jumlah_bayar = Denda::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->map->only('jumlah_bayar')->toArray();
+
         $month = Carbon::now()->format('F Y');
         $title = 'Ringkasan Laporan Denda Per Bulan Di STMIK AMIKBANDUNG Pada Bulan '. $month;
         $time = Carbon::now();
 
 
-        $pdf = PDF::loadview('admin.laporan.print.denda.bulanan', compact('denda', 'time', 'month', 'title'));
+        $pdf = PDF::loadview('admin.laporan.print.denda.bulanan', compact('denda', 'jumlah_bayar', 'time', 'month', 'title'));
         return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
     }
 

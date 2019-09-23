@@ -55,7 +55,20 @@
             </tr>
             <tr>
                 <td>Total Uang Terkumpul</td>
-                <td class="text-center">2</td>
+            <td class="text-center">
+                @php
+                    $arr = [];
+                  foreach ($jumlah_bayar as $item) {
+                      foreach ($item as $bayar) {
+                          $some = explode(" ", $bayar);
+                          $sanitize = filter_var($some[1], FILTER_SANITIZE_NUMBER_INT);
+                          $arr[] = $sanitize;
+                      }
+                  }  
+                  $hasil_rupiah = "Rp " . number_format(array_sum($arr),0,',','.');
+	                echo $hasil_rupiah;
+                @endphp
+            </td>
             </tr>
         </tbody>
     </table>
