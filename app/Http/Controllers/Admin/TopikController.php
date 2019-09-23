@@ -62,6 +62,9 @@ class TopikController extends Controller
     public function store(Request $request)
     {
        
+        $request->validate([
+            'jenis_topik' => 'required|unique:topik',
+        ]);
  
         $requestData = $request->all();
         $requestData['slug'] = str_slug($request->jenis_topik);

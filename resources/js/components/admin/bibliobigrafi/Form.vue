@@ -855,7 +855,7 @@
             },
             getTopik() {
                 return axios.get(this.topikk)
-                    .then(res => this.topikData = res.data)
+                    .then(res => this.topikData = res.data.data)
                     .catch(err => console.log(err));
             },
             getPenerbit() {
