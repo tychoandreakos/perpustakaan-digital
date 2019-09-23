@@ -104,8 +104,11 @@ class LaporanController extends Controller
         $month = Carbon::now()->format('F Y');
         $title = 'Ringkasan Laporan Denda Per Tahun Di STMIK AMIKBANDUNG Pada Bulan';
         $time = Carbon::now();
+        
+        $jumlah_bayar = Denda::whereDate('created_at', '>', Carbon::now()->subDays(360))->get()->map->only('jumlah_bayar')->toArray();
 
-        $pdf = PDF::loadview('admin.laporan.print.denda.tahunan', compact('denda', 'time', 'month', 'title'));
+
+        $pdf = PDF::loadview('admin.laporan.print.denda.tahunan', compact('denda', 'jumlah_bayar', 'time', 'month', 'title'));
         return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
     }
 
@@ -125,8 +128,11 @@ class LaporanController extends Controller
         $title = 'Ringkasan Laporan Denda Per Minggu Di STMIK AMIKBANDUNG';
         $month = Carbon::now()->format('F Y');
         $time = Carbon::now();
+        
+        $jumlah_bayar = Denda::whereDate('created_at', '>', Carbon::now()->subDays(7))->get()->map->only('jumlah_bayar')->toArray();
 
-        $pdf = PDF::loadview('admin.laporan.print.denda.mingguan', compact('denda', 'time', 'month', 'title'));
+
+        $pdf = PDF::loadview('admin.laporan.print.denda.mingguan', compact('denda', 'jumlah_bayar', 'time', 'month', 'title'));
         return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
     }
 
@@ -143,11 +149,13 @@ class LaporanController extends Controller
             $q->select('id', 'judul');
         }])->whereDate('created_at', '>', Carbon::now()->subDays(1))->latest()->get();
 
+        $jumlah_bayar = Denda::whereDate('created_at', '>', Carbon::now()->subDays(1))->get()->map->only('jumlah_bayar')->toArray();
+
         $title = 'Ringkasan Laporan Denda Per Hari Di STMIK AMIKBANDUNG';
         $month = Carbon::now()->format('F Y');
         $time = Carbon::now();
 
-        $pdf = PDF::loadview('admin.laporan.print.denda.harian', compact('denda', 'time', 'month', 'title'));
+        $pdf = PDF::loadview('admin.laporan.print.denda.harian', compact('denda', 'time', 'month', 'title', 'jumlah_bayar'));
         return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
     }
 

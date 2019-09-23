@@ -55,7 +55,8 @@
             </tr>
             <tr>
                 <td>Total Uang Terkumpul</td>
-            <td class="text-center">
+            <td class="text-center text-success">
+                
                 @php
                     $arr = [];
                   foreach ($jumlah_bayar as $item) {
