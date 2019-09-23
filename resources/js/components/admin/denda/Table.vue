@@ -7,6 +7,10 @@
                         <div class="col">
                             <h3 class="mb-0">Daftar Denda</h3>
                         </div>
+                        <div class="col text-right">
+                            <a :href="this.route" class="btn btn-sm btn-primary">Cetak Data Bulanan</a>
+                            <a :href="this.route" class="btn btn-sm btn-danger">Opsi</a>
+                        </div>
                     </div>
                 </div>
                 <template v-if="datas.data.length > 0">
@@ -38,13 +42,13 @@
                                     </td>
                                     <td>{{ item.buku.judul | capitalize }}</td>
                                     <td class="text-danger">
-                                       {{ denda(item.pinjam_transaksi.tanggal_habis_pinjam, item.user.anggota_transaksi.tipe_anggota.denda) }}
+                                        {{ denda(item.pinjam_transaksi.tanggal_habis_pinjam, item.user.anggota_transaksi.tipe_anggota.denda) }}
                                     </td>
                                     <td>
                                         {{ item.jumlah_bayar }}
                                     </td>
                                     <td>
-                                       <span class="badge badge-success">Lunas</span>
+                                        <span class="badge badge-success">Lunas</span>
                                     </td>
                                     <td>
                                         {{ item.updated_at }}
@@ -78,8 +82,8 @@
                 datas: {},
             }
         },
-        
-         filters: {
+
+        filters: {
             dateFormat(val) {
                 moment.locale('id')
                 return moment(val).format('MMMM Do YYYY');
@@ -87,7 +91,7 @@
         },
 
         methods: {
-           denda(val, dend) {
+            denda(val, dend) {
                 var a = moment();
                 var b = val;
                 this.total = a.diff(b, 'days') * dend;
@@ -116,6 +120,7 @@
             this.getResults();
         },
     }
+
 </script>
 
 <style scoped>
