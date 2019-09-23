@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in datas" :key="item.id">
+                            <tr v-for="item in datas.data" :key="item.id">
                                 <th scope="row" style="width: 19%">
                                     <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
                                             class="ni ni-check-bold text-white"></i> Edit</a>
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="mx-auto mt-3">
-                    <pagination :data="datas" @pagination-change-page="getResults"></pagination>
+                    <pagination :limit="4" :data="datas" @pagination-change-page="getResults"></pagination>
                 </div>
             </div>
         </div>

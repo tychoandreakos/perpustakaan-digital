@@ -63,7 +63,10 @@
                 </template>
 
                 <div class="mx-auto mt-3">
-                    <pagination :data="datas" @pagination-change-page="getResults"></pagination>
+                    <pagination :limit="4" :data="datas" @pagination-change-page="getResults">
+                        <!-- <span slot="prev-nav">&lt; Previous</span>
+                        <span slot="next-nav">Next &gt;</span> -->
+                    </pagination>
                 </div>
             </div>
         </div>
@@ -71,7 +74,7 @@
 </template>
 
 <script>
- import * as moment from 'moment'
+    import * as moment from 'moment'
     export default {
         props: ['route', 'fetch', 'index'],
         data() {

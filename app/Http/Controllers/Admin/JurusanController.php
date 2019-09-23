@@ -29,7 +29,7 @@ class JurusanController extends Controller
 
     public function fetch()
     {
-        return Jurusan::latest()->paginate(50);
+        return Jurusan::latest()->paginate(5);
     }
 
     /**

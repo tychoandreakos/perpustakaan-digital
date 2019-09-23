@@ -115,7 +115,7 @@ class KoleksiController extends Controller
             $search = $request->q;
 
             return Koleksi::where('tipe_koleksi','LIKE',"%$search%")
-            ->latest()->paginate(75);
+            ->latest()->paginate(5);
         }
 
     }

@@ -96,21 +96,30 @@ class PinjamController extends Controller
             $q->select('id', 'buku_id', 'pola_eksemplar');
         },  'bibliobigrafi.buku' => function($q) {
             $q->select('id', 'judul');
-        }, 'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 0)->latest()->paginate(75);
+        }, 'user.anggota_transaksi.tipe_anggota'])->where('status_pinjam', 0)->latest()->paginate(5);
     }
 
     public function kembali(Request $request)
     {
-        $bilio = Bibliobigrafi::where('id', $request->id)->first();
-        $bilio->status_pinjam = 0;
-        $bilio->save();
 
         $transaksi = PinjamTransaksi::where('bibliobigrafi_id', $request->id)->where('status_pinjam', 1)->first();
+
+        if($transaksi->tanggal_habis_pinjam <= Carbon::now()) {
+            return response()->json([
+                'msg' => false,
+                'message' => 'Peminjaman tidak dapat diproses, karena buku yang dipinjam terlambat dikembalikan']);
+        }
+        
         $transaksi->status_pinjam = 0;
         $transaksi->tgl_kembali = Carbon::now();
         $transaksi->save();
 
+         $bilio = Bibliobigrafi::where('id', $request->id)->first();
+        $bilio->status_pinjam = 0;
+        $bilio->save();
+
         return response()->json([
+            'msg' => true,
             'message' => 'pengembalian buku berhasil']);
     }
 

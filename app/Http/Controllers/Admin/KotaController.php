@@ -29,7 +29,7 @@ class KotaController extends Controller
 
     public function fetch()
     {
-        return Kota::latest()->paginate(75);
+        return Kota::latest()->paginate(5);
     }
 
     /**

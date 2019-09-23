@@ -30,7 +30,7 @@ class TopikController extends Controller
 
     public function fetch()
     {
-        return Topik::latest()->get();
+        return Topik::latest()->paginate(5);
     }
 
     // public function last()

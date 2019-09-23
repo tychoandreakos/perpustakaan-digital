@@ -49,7 +49,7 @@ class BibliobigrafiController extends Controller
             $q->select('id', 'bibliobigrafi_id', 'gmd_id');
         }, 'bibliobigrafi.gmd_transaksi.gmd' => function($q) {
             $q->select('id', 'kode_gmd', 'nama_gmd');
-        }])->withCount('bibliobigrafi')->latest()->paginate(50);
+        }])->withCount('bibliobigrafi')->latest()->paginate(5);
     }
 
     public function sirkulasi()

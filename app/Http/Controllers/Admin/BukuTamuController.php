@@ -14,7 +14,7 @@ class BukuTamuController extends Controller
             $q->select('id', 'id', 'name', 'email');
         } ,'user.anggota' => function($q) {
             $q->select('user_id', 'jurusan_id', 'alamat');
-        }, 'user.anggota.jurusan'])->latest()->paginate(75);
+        }, 'user.anggota.jurusan'])->latest()->paginate(5);
     }
 
         public function getAllMonth() {
@@ -53,7 +53,7 @@ class BukuTamuController extends Controller
                 $q->where('name', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%");
             }, 'user.anggota.jurusan')
             ->latest()
-            ->paginate(75);
+            ->paginate(5);
         }
 
 

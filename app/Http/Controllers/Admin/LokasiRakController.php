@@ -31,7 +31,7 @@ class LokasiRakController extends Controller
 
     public function fetch()
     {
-        return LokasiRak::latest()->paginate(50);
+        return LokasiRak::latest()->paginate(5);
     }
 
     /**

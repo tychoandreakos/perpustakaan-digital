@@ -33,7 +33,7 @@ class AnggotaController extends Controller
 
     public function fetch()
     {
-        return User::with('anggota_transaksi.tipe_anggota', 'anggota', 'anggota.jurusan')->latest()->paginate(75);
+        return User::with('anggota_transaksi.tipe_anggota', 'anggota', 'anggota.jurusan')->latest()->paginate(5);
     }
 
     /**
@@ -160,7 +160,7 @@ class AnggotaController extends Controller
             return User::with('anggota_transaksi.tipe_anggota', 'anggota', 'anggota.jurusan')->where('name','LIKE',"%$search%")
             ->Orwhere('id','LIKE',"%$search%")->whereHas('anggota.jurusan', function($q) use ($search){
                 $q->where('nama_jurusan', 'LIKE', "%$search%");
-            })->latest()->paginate(75);
+            })->latest()->paginate(5);
         }
 
     }

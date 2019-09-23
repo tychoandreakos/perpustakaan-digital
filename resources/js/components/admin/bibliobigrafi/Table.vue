@@ -68,6 +68,10 @@
                     <h4 class="text-center">Belum Ada Data!</h4>
                 </template>
 
+                 <div class="mx-auto mt-3">
+                    <pagination :limit="4" :data="datas" @pagination-change-page="getResults"></pagination>
+                </div>
+
             </div>
         </div>
 

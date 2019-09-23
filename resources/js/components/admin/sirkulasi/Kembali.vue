@@ -84,22 +84,38 @@
             go() {
                 this.loading = true;
                 axios.get(this.kembali, {
-                    params: {
-                        id: this.form.id
-                    }
-                })
+                        params: {
+                            id: this.form.id
+                        }
+                    })
                     .then(res => {
-                        this.$swal({
+                        if (res.msg) {
+                            this.$swal({
+                                position: 'top-end',
+                                type: 'success',
+                                title: res.data.message.toUpperCase(),
+                                showConfirmButton: false,
+                                timer: 2500
+
+                            });
+                            setTimeout(() => {
+                                window.location = this.index;
+                            }, 2800);
+                        } else {
+                              this.$swal({
                             position: 'top-end',
-                            type: 'success',
+                            type: 'error',
                             title: res.data.message.toUpperCase(),
                             showConfirmButton: false,
                             timer: 2500
 
                         });
-                        setTimeout(() => {
-                            window.location = this.index;
-                        }, 2800);
+
+                         setTimeout(() => {
+                                 this.loading = false;
+                            }, 2800);
+                       
+                        }
                     })
                     .catch(err => console.log(err))
 

@@ -63,7 +63,7 @@
                 </template>
 
                 <div class="mx-auto mt-3">
-                    <pagination :data="datas" @pagination-change-page="getResults"></pagination>
+                    <pagination :limit="4" :data="datas" @pagination-change-page="getResults"></pagination>
                 </div>
             </div>
         </div>

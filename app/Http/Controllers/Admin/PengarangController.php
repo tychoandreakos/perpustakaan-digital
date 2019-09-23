@@ -34,7 +34,7 @@ class PengarangController extends Controller
      */
     public function fetch()
     {
-        return Pengarang::latest()->paginate(50);
+        return Pengarang::latest()->paginate(5);
     }
 
     public function create()

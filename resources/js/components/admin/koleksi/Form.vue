@@ -120,7 +120,7 @@
                         })
                 } else {
                     // update
-                    axios.post('/pustakawan/koleksi/' + this.fetch.id, this.form)
+                    axios.post('/pustakawan/koleksi /' + this.fetch.id, this.form)
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',
