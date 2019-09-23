@@ -527,15 +527,15 @@
                 return window.location = this.terlambat;
             },
 
-            getPinjaman() {
-                axios.post('/pustakawan/pinjaman', {
-                        params: {
-                            id: this.form.id
-                        }
-                    })
-                    .then(res => this.pinjam = res.data.data)
-                    .catch(err => console.log(err))
-            },
+            // getPinjaman() {
+            //     axios.post('/pustakawan/p3injaman', {
+            //             params: {
+            //                 id: this.form.id
+            //             }
+            //         })
+            //         .then(res => this.pinjam = res.data.data)
+            //         .catch(err => console.log(err))
+            // },
 
             showDenda() {
                 this.$modal.show('eksemplar');
