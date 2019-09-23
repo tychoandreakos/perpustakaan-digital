@@ -38,8 +38,6 @@ class BukuTamuController extends Controller
 
     public function search(Request $request)
     {
-        // $data = [];
-
 
         if($request->has('q')){
 

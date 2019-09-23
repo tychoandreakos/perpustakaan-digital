@@ -160,6 +160,7 @@ Route::get('histori-search', 'SirkulasiController@search');
 Route::get('terlambat-search', 'SirkulasiController@search_terlambat');
 Route::get('jurusan-search', 'JurusanController@search');
 Route::get('koleksi-search', 'KoleksiController@search');
+Route::get('denda-search', 'DendaController@search');
 
 // chart
 Route::get('anggota-chart', 'AnggotaController@chart');

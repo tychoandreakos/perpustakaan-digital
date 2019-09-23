@@ -40,7 +40,7 @@ class DendaController extends Controller
             $q->select('id', 'pola_eksemplar');
         }, 'buku' => function($q) {
             $q->select('id', 'judul');
-        }])->latest()->paginate(50);
+        }])->latest()->paginate(5);
     }
 
     public function hari($denda, $val) {
@@ -107,6 +107,37 @@ class DendaController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+
+        if($request->has('q')){
+
+            $search = $request->q;
+
+            return Denda::with(['user' => function($q) {
+                $q->select('id', 'name');
+            }, 'user.anggota_transaksi.tipe_anggota' => function($q) {
+                $q->select('id', 'denda');
+            }, 'pinjam_transaksi' => function($q) {
+                $q->select('id', 'bibliobigrafi_id', 'tgl_pinjam', 'tanggal_habis_pinjam', 'tgl_kembali');
+            }, 'pinjam_transaksi.bibliobigrafi' => function($q){
+                $q->select('id', 'pola_eksemplar');
+            }, 'buku' => function($q) {
+                $q->select('id', 'judul');
+            }])
+            ->whereHas('user', function($q) use ($search){
+                $q->where('name', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('buku', function($q) use ($search) {
+                $q->where('judul', 'LIKE', "%$search%");
+            })
+            ->latest()
+            ->paginate(5);
+        }
+
+        
     }
 
     /**
