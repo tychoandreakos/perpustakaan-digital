@@ -118,6 +118,10 @@ Route::get('laporan-buku', 'LaporanController@print_buku_bulan_ini')->name('prin
 Route::get('laporan-pinjam', 'LaporanController@print_pinjam')->name('print.pinjam');
 Route::get('laporan-anggota', 'LaporanController@print_anggota')->name('print.anggota');
 Route::get('laporan-tamu', 'LaporanController@print_tamu')->name('print.tamu');
+Route::get('laporan-denda-harian', 'LaporanController@denda_harian')->name('print.harian');
+Route::get('laporan-denda-bulanan', 'LaporanController@denda_bulanan')->name('print.bulanan');
+Route::get('laporan-denda-mingguan', 'LaporanController@denda_mingguan')->name('print.mingguan');
+Route::get('laporan-denda-tahunan', 'LaporanController@denda_tahunan')->name('print.tahunan');
 
 // Bibliobigrafi
 Route::get('bibliobigrafi-fetch-pengarang', 'BibliobigrafiController@pengarang')->name('bibliobigrafi.pengarang');

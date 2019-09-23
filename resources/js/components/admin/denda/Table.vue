@@ -8,8 +8,19 @@
                             <h3 class="mb-0">Daftar Denda</h3>
                         </div>
                         <div class="col text-right">
-                            <a :href="this.route" class="btn btn-sm btn-primary">Cetak Data Bulanan</a>
-                            <a :href="this.route" class="btn btn-sm btn-danger">Opsi</a>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-danger dropdown-toggle" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Opsi
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" :href="this.harian">Cetak Data Harian</a>
+                                    <a class="dropdown-item" :href="this.mingguan">Cetak Data Mingguan</a>
+                                    <a class="dropdown-item" :href="this.tahunan">Cetak Data Tahunan</a>
+                                </div>
+                            </div>
+                            <a :href="this.bulanan" class="btn btn-sm btn-primary">Cetak Data Bulanan</a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +87,7 @@
     var momentRange = require('moment-range');
     momentRange.extendMoment(moment);
     export default {
-        props: ['route', 'fetch', 'index'],
+        props: ['route', 'fetch', 'index', 'harian', 'tahunan', 'mingguan', 'bulanan'],
         data() {
             return {
                 datas: {},

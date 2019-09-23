@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Bibliobigrafi;
 use App\Buku;
+use App\Denda;
 use App\PinjamTransaksi;
 use App\User;
 use App\Tamu;
@@ -61,6 +62,91 @@ class LaporanController extends Controller
 
         $pdf = PDF::loadview('admin.laporan.print.pinjaman', compact('buku', 'tahun', 'title', 'time', 'eksemplar', 'masuk' ,'eksemplar_dipinjam', 'popular'));
         return $pdf->stream('laporan-pinjam-stmik-' . Carbon::now());
+    }
+
+    public function denda_bulanan() {
+        // return
+       $denda = Denda::with(['user' => function($q) {
+            $q->select('id', 'name');
+        }, 'user.anggota_transaksi.tipe_anggota' => function($q) {
+            $q->select('id', 'denda');
+        }, 'pinjam_transaksi' => function($q) {
+            $q->select('id', 'bibliobigrafi_id', 'tgl_pinjam', 'tanggal_habis_pinjam', 'tgl_kembali');
+        }, 'pinjam_transaksi.bibliobigrafi' => function($q){
+            $q->select('id', 'pola_eksemplar');
+        }, 'buku' => function($q) {
+            $q->select('id', 'judul');
+        }])->whereDate('created_at', '>', Carbon::now()->subDays(30))->latest()->get();
+
+        $month = Carbon::now()->format('F Y');
+        $title = 'Ringkasan Laporan Denda Per Bulan Di STMIK AMIKBANDUNG Pada Bulan '. $month;
+        $time = Carbon::now();
+
+        $pdf = PDF::loadview('admin.laporan.print.denda.bulanan', compact('denda', 'time', 'month', 'title'));
+        return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
+    }
+
+    public function denda_tahunan() {
+        $denda =  Denda::with(['user' => function($q) {
+            $q->select('id', 'name');
+        }, 'user.anggota_transaksi.tipe_anggota' => function($q) {
+            $q->select('id', 'denda');
+        }, 'pinjam_transaksi' => function($q) {
+            $q->select('id', 'bibliobigrafi_id', 'tgl_pinjam', 'tanggal_habis_pinjam', 'tgl_kembali');
+        }, 'pinjam_transaksi.bibliobigrafi' => function($q){
+            $q->select('id', 'pola_eksemplar');
+        }, 'buku' => function($q) {
+            $q->select('id', 'judul');
+        }])->whereDate('created_at', '>', Carbon::now()->subDays(360))->latest()->get();
+
+        $month = Carbon::now()->format('F Y');
+        $title = 'Ringkasan Laporan Denda Per Tahun Di STMIK AMIKBANDUNG Pada Bulan';
+        $time = Carbon::now();
+
+        $pdf = PDF::loadview('admin.laporan.print.denda.tahunan', compact('denda', 'time', 'month', 'title'));
+        return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
+    }
+
+    public function denda_mingguan() {
+        $denda =  Denda::with(['user' => function($q) {
+            $q->select('id', 'name');
+        }, 'user.anggota_transaksi.tipe_anggota' => function($q) {
+            $q->select('id', 'denda');
+        }, 'pinjam_transaksi' => function($q) {
+            $q->select('id', 'bibliobigrafi_id', 'tgl_pinjam', 'tanggal_habis_pinjam', 'tgl_kembali');
+        }, 'pinjam_transaksi.bibliobigrafi' => function($q){
+            $q->select('id', 'pola_eksemplar');
+        }, 'buku' => function($q) {
+            $q->select('id', 'judul');
+        }])->whereDate('created_at', '>', Carbon::now()->subDays(7))->latest()->get();
+
+        $title = 'Ringkasan Laporan Denda Per Minggu Di STMIK AMIKBANDUNG';
+        $month = Carbon::now()->format('F Y');
+        $time = Carbon::now();
+
+        $pdf = PDF::loadview('admin.laporan.print.denda.mingguan', compact('denda', 'time', 'month', 'title'));
+        return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
+    }
+
+    public function denda_harian() {
+        $denda =  Denda::with(['user' => function($q) {
+            $q->select('id', 'name');
+        }, 'user.anggota_transaksi.tipe_anggota' => function($q) {
+            $q->select('id', 'denda');
+        }, 'pinjam_transaksi' => function($q) {
+            $q->select('id', 'bibliobigrafi_id', 'tgl_pinjam', 'tanggal_habis_pinjam', 'tgl_kembali');
+        }, 'pinjam_transaksi.bibliobigrafi' => function($q){
+            $q->select('id', 'pola_eksemplar');
+        }, 'buku' => function($q) {
+            $q->select('id', 'judul');
+        }])->whereDate('created_at', '>', Carbon::now()->subDays(1))->latest()->get();
+
+        $title = 'Ringkasan Laporan Denda Per Hari Di STMIK AMIKBANDUNG';
+        $month = Carbon::now()->format('F Y');
+        $time = Carbon::now();
+
+        $pdf = PDF::loadview('admin.laporan.print.denda.harian', compact('denda', 'time', 'month', 'title'));
+        return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
     }
 
     public function pengunjung()
