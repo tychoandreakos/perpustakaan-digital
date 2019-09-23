@@ -20,6 +20,7 @@ class Denda extends Model
         return $this->belongsTo(Buku::class);
     }
 
+
     public function pinjam_transaksi()
     {
         return $this->belongsTo(PinjamTransaksi::class);

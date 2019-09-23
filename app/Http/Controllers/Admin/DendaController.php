@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\PinjamTransaksi;
 use App\User;
 use Carbon\Carbon;
+use DateTime;
 
 class DendaController extends Controller
 {
@@ -41,6 +42,16 @@ class DendaController extends Controller
             $q->select('id', 'judul');
         }])->latest()->paginate(50);
     }
+
+    public function hari($denda, $val) {
+        $fdate = $denda;
+        $tdate = $val;
+        $datetime1 = new DateTime($fdate);
+        $datetime2 = new DateTime($tdate);
+        $interval = $datetime1->diff($datetime2);
+        return $interval->format('%a');
+    }
+
 
     /**
      * Show the form for creating a new resource.

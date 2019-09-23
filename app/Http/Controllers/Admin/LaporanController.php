@@ -65,7 +65,6 @@ class LaporanController extends Controller
     }
 
     public function denda_bulanan() {
-        // return
        $denda = Denda::with(['user' => function($q) {
             $q->select('id', 'name');
         }, 'user.anggota_transaksi.tipe_anggota' => function($q) {
@@ -81,6 +80,7 @@ class LaporanController extends Controller
         $month = Carbon::now()->format('F Y');
         $title = 'Ringkasan Laporan Denda Per Bulan Di STMIK AMIKBANDUNG Pada Bulan '. $month;
         $time = Carbon::now();
+
 
         $pdf = PDF::loadview('admin.laporan.print.denda.bulanan', compact('denda', 'time', 'month', 'title'));
         return $pdf->stream('laporan-denda-stmik-' . Carbon::now());
