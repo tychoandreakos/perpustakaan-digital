@@ -5,9 +5,10 @@
 2. VueJs 2+
 3. VSCode
 4. JQuery
-5. Bootstrap
+5. Bootstrap 4
 6. SASS
 7. Github
+8. Laragon
 
 ## Usulan Sistem Yang Dirancang
 Sistem ini memiliki kemampuan yang powerfull dalam menampilkan data - data buku, data buku akan ditampilkan secara cepat karena memanfaatkan teknologi **DOM**. Sistem dirancang dalam 2 versi, versi pertama untuk **ADMIN** dan versi kedua untuk **USER** / **Anggota**. Tiap - tiap aktor memiliki tampilan dan fungsinya masing - masing. **Admin** dapat mengelola data buku dan transaksi peminjaman sedang **Anggota** dapat melihat dan membaca buku perpustakaan secara _digital_.
@@ -22,6 +23,13 @@ Untuk melakukan instalasi sistem diharapkan telah menginstal github dan juga tel
 5. Jika sudah selesai, maka copy _file_ yang bernama **.env.example** pastekan di halaman yang sama lalu ubah namanya menjadi **.env**. Untuk linux hanya perlu mengetikkan perintah **cp .env.example .env**.
 6. Selanjutnya ketikkan **php artisan serve key:generate**.
 7. Jika sukses maka akan muncul tulisan **_successful generate key bla... bla..._**.
-8. Lalu buat database namanya **laravel**, jika sudah ketikkan **php artisan migrate** .
+8. Lalu nyalakan **xampp** dan buat database namanya **laravel**, jika sudah ketikkan **php artisan migrate** .
 9. Jika berhasil ketikkan perintah **php artisan serve** dan akan muncul _response_ _**htttp://localhost:8000/**_.
 10. Selamat sistem telah berhasil **diinstal** :).
+
+## Screenshoot Interface
+
+#### Halaman User
+![Screenshot_2019-09-24 Laravel](../Downloads/Screenshot_2019-09-24 Laravel.png)
+![](..\AppData\Roaming\Caret Beta\Introduction\.pastes\2019-09-24-23-44-01.png)
+![](..\AppData\Roaming\Caret Beta\Introduction\.pastes\2019-09-24-23-45-47.png)
