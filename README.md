@@ -31,4 +31,8 @@ Untuk melakukan instalasi sistem diharapkan telah menginstal github dan juga tel
 
 #### Halaman User
 <a href="https://ibb.co/mNpRw1s"><img src="https://i.ibb.co/PDkrn3p/image.png" alt="image" border="0"></a><br />
-<a href="https://ibb.co/nMnxxXv"><img src="https://i.ibb.co/8gd11yp/image.png" alt="image" border="0"></a>
+<a href="https://ibb.co/nMnxxXv"><img src="https://i.ibb.co/8gd11yp/image.png" alt="image" border="0"></a><br/>
+<a href="https://ibb.co/HV1nHTH"><img src="https://i.ibb.co/wR3Mzhz/image.png" alt="image" border="0"></a>
+<a href="https://ibb.co/PgbB7p5"><img src="https://i.ibb.co/x6cVpvM/image.png" alt="image" border="0"></a><br />
+<a href="https://ibb.co/dLxbjdh"><img src="https://i.ibb.co/9VSwcFM/image.png" alt="image" border="0"></a><br />
+<a href="https://ibb.co/2KpSjFb"><img src="https://i.ibb.co/0JzKfnw/image.png" alt="image" border="0"></a><br />
