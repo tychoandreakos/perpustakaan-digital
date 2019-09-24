@@ -88,8 +88,8 @@ class AnggotaController extends Controller
                 File::makeDirectory($preview, 0777, true, true);
             }
 
-            \Image::make($request->get('image'))->crop(354, 472)->save($path.$name);
-            \Image::make($request->get('image'))->crop(354, 472)->fit(250, 250)->save($preview.$name);
+            \Image::make($request->get('image'))->fit(250)->save($path.$name);
+            \Image::make($request->get('image'))->fit(250)->save($preview.$name);
         } else {
         $name = 'img.svg';
         }
@@ -193,7 +193,7 @@ class AnggotaController extends Controller
             'tgl_lahir' => 'required|date',
             'alamat' => 'nullable|min:6',
             'jk' => 'nullable',
-            'no_telp' => 'nullable|min:6|numeric',
+            'no_telp' => 'nullable|min:6',
             'foto' => 'nullable',
             'jurusan' => 'nullable',
             'image' => 'nullable',
@@ -234,13 +234,14 @@ class AnggotaController extends Controller
                 File::makeDirectory($preview, 0777, true, true);
             }
 
-            if(!$request->old === 'img.svg') {
+            if($request->old !== 'img.svg') {
                 unlink(public_path('storage/anggota/'. $anggota->foto));
                 unlink(public_path('storage/preview/'. $anggota->foto));
             }
 
-            \Image::make($request->get('image'))->crop(354, 472)->save($path.$name);
-            \Image::make($request->get('image'))->crop(354, 472)->fit(250, 250)->save($preview.$name);
+
+            \Image::make($request->get('image'))->fit(250)->save($path.$name);
+            \Image::make($request->get('image'))->fit(250)->save($preview.$name);
             
             $anggota->foto = $name;
         }

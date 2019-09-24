@@ -408,7 +408,13 @@
                         })
                 } else {
                     // update
-                    axios.post('/pustakawan/anggota/' + this.users.id, this.form)
+                    axios.post('/pustakawan/anggota/' + this.users.id, this.form,  {
+                            onUploadProgress: function (progressEvent) {
+                                //DATA TERSEBUT AKAN DI ASSIGN KE VARIABLE progressBar
+                                this.progressBar = parseInt(Math.round((progressEvent.loaded * 100) /
+                                    progressEvent.total))
+                            }.bind(this)
+                        })
                         .then(res => {
                             this.$swal({
                                 position: 'top-end',
