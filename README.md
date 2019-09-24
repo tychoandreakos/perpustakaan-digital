@@ -30,4 +30,5 @@ Untuk melakukan instalasi sistem diharapkan telah menginstal github dan juga tel
 ## Screenshoot Interface
 
 #### Halaman User
-<a href="https://ibb.co/mNpRw1s"><img src="https://i.ibb.co/PDkrn3p/image.png" alt="image" border="0"></a><br /><
+<a href="https://ibb.co/mNpRw1s"><img src="https://i.ibb.co/PDkrn3p/image.png" alt="image" border="0"></a><br />
+
