@@ -30,6 +30,4 @@ Untuk melakukan instalasi sistem diharapkan telah menginstal github dan juga tel
 ## Screenshoot Interface
 
 #### Halaman User
-![Screenshot_2019-09-24 Laravel](../Downloads/Screenshot_2019-09-24 Laravel.png)
-![](..\AppData\Roaming\Caret Beta\Introduction\.pastes\2019-09-24-23-44-01.png)
-![](..\AppData\Roaming\Caret Beta\Introduction\.pastes\2019-09-24-23-45-47.png)
+
