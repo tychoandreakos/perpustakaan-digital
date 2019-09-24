@@ -1,11 +1,11 @@
 # Perpustakaan STMIK AMIK BANDUNG
 
-#### Latar Belakang
+## Latar Belakang
 **Perpustakaan STMIK “AMIKBANDUNG”**, sebenarnya telah menerapkan teknologi informasi untuk menunjang berbagai kepeluan bisnis didalam perpustakaan. Sistem yang ada justru dirancang tidak dipersiapkan untuk konsep _digital library_, tetapi justru sistem mengadopsi konsep management data. 
 
 Untuk mengadopsi konsep dari Digital Library tersebut maka sistem harus dapat menyimpan sebuah data _PDF (Portable Document Format)_ lalu menampilkan data tersebut kedalam browser sehingga pengguna dapat membaca isi dari koleksi _PDF (Portable Document Format_) tersebut secara digital atau online.
 
-#### Tools Yang Digunakan
+## Tools Yang Digunakan
 1. Laravel 5.9+
 2. VueJs 2+
 3. VSCode
@@ -14,10 +14,10 @@ Untuk mengadopsi konsep dari Digital Library tersebut maka sistem harus dapat me
 6. SASS
 7. Github
 
-#### Usulan Sistem Yang Dirancang
+## Usulan Sistem Yang Dirancang
 Sistem ini memiliki kemampuan yang powerfull dalam menampilkan data - data buku, data buku akan ditampilkan secara cepat karena memanfaatkan teknologi **DOM**. Sistem dirancang dalam 2 versi, versi pertama untuk **ADMIN** dan versi kedua untuk **USER** / **Anggota**. Tiap - tiap aktor memiliki tampilan dan fungsinya masing - masing. **Admin** dapat mengelola data buku dan transaksi peminjaman sedang **Anggota** dapat melihat dan membaca buku perpustakaan secara _digital_.
 
-#### Instalasi Sistem
+## Instalasi Sistem
 Untuk melakukan instalasi sistem diharapkan telah menginstal github dan juga telah mengintall composer. Github diperlukan untuk mendownload _repository_ sistem ini sedangkan composer diperlukan untuk mendownload _framework **Laravel**_.
 
 1. Buka cmd dengan menekan tombol **WIN+R** lalu inputkan **cmd** dan tekan enter, untuk linux tekan tombol **CTRL+ALT+T** untuk membuka **Terminal**.
