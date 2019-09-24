@@ -17,6 +17,7 @@
                                 <tr>
                                     <th scope="col">Kode Eksemplar</th>
                                     <th scope="col">ID Anggota</th>
+                                    <th scope="col">Nama Anggota</th>
                                     <th scope="col">Judul</th>
                                     <th scope="col">Tanggal Pinjam</th>
                                     <th scope="col">Tanggal Kembali</th>
@@ -30,6 +31,7 @@
                                     <td>
                                         {{ item.pinjam_transaksi.user_id }}
                                     </td>
+                                    <td>{{ item.pinjam_transaksi.user.name | capitalize }}</td>
                                     <td class="text-left">
                                         {{ item.buku.judul | capitalize }}
                                     </td>
@@ -58,7 +60,7 @@
 </template>
 
 <script>
- import * as moment from 'moment'
+    import * as moment from 'moment'
     export default {
         props: ['fetch', 'index'],
         data() {
@@ -67,7 +69,7 @@
             }
         },
 
-         filters: {
+        filters: {
             dateFormat(val) {
                 moment.locale('id')
                 return moment(val).format('MMMM Do YYYY');

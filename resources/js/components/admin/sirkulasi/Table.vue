@@ -167,7 +167,7 @@
                                 </v-tab>
 
                                 <v-tab title="Pinjaman Saat Ini">
-                                    <template v-if="pinjam.length > 0">
+                                    <template v-if="ini.length > 0">
                                         <div class="table-responsive">
                                             <div>
                                                 <table class="table align-items-center">
@@ -186,13 +186,13 @@
                                                             <th scope="col">
                                                                 Tanggal Pinjam
                                                             </th>
-                                                            <th scope="col">Tanggal Kembali</th>
+                                                            <th scope="col">Tanggal Harus Kembali</th>
                                                             <th scope="col">Status Terlambat</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="list">
 
-                                                        <tr v-for="item in pinjam" :key="item.id">
+                                                        <tr v-for="item in ini" :key="item.id">
                                                             <template v-if="item.status_pinjam == 1">
                                                                 <th scope="row" class="name">
                                                                     <form @submit.prevent="back2(item.id)"
@@ -232,7 +232,7 @@
                                                                 <td>
                                                                     {{ item.tanggal_habis_pinjam }}
                                                                 </td>
-                                                                <td v-if="item.status_denda">
+                                                                <td v-if="check(item.tanggal_habis_pinjam) > 0">
                                                                     <span
                                                                         class="badge badge-danger">{{ item.tanggal_habis_pinjam | convert }}</span>
                                                                 </td>
@@ -307,8 +307,10 @@
                                                             <td>
                                                                 {{ item.bibliobigrafi.buku.judul }}
                                                             </td>
-                                                            <td class="text-danger">
-                                                                {{ denda3(item.tanggal_habis_pinjam, form.anggota_transaksi.tipe_anggota.denda) }}
+                                                            <td>
+                                                                <span class="badge badge-danger">
+                                                                    {{ denda3(item.tanggal_habis_pinjam, form.anggota_transaksi.tipe_anggota.denda) }}}</span>
+
                                                             </td>
                                                             <td>
                                                                 {{ item.tgl_pinjam | dateFormat }}
@@ -444,7 +446,7 @@
             SpinnerComponent: Spinner,
             DendaComponent: Denda,
         },
-        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back', 'terlambat', 'stores2'],
+        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back', 'terlambat', 'stores2', 'saat'],
         data() {
             return {
                 loading: false,
@@ -456,6 +458,7 @@
                 date2: '',
                 pinjam: {},
                 denda: {},
+                ini: '',
                 total: '',
                 stores: this.stores2,
                 user: ''
@@ -521,6 +524,12 @@
                 return axios.get(this.fetch)
                     .then(res => this.options = res.data.data)
                     .catch(err => console.log(err));
+            },
+
+            check(val) {
+                var a = moment();
+                var b = val;
+                return a.diff(b)
             },
 
             getResults() {
@@ -666,11 +675,20 @@
                     .catch(err => console.log(err));
             },
 
-
-
             go() {
                 this.loading = true;
                 this.geDenda();
+
+                // pinjaman saat ini
+                axios.get(this.saat, {
+                        params: {
+                            id: this.form.id
+                        }
+                    })
+                    .then(res => this.ini = res.data.data)
+                    .catch(err => console.log(err))
+
+                // pinjaman
                 axios.get('/pustakawan/pinjaman', {
                         params: {
                             id: this.form.id
@@ -692,6 +710,7 @@
             this.getEksemplar();
         },
     }
+
 </script>
 
 <style scoped>
@@ -709,4 +728,5 @@
     .buku:hover {
         color: #233dd2;
     }
+
 </style>

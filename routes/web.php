@@ -190,9 +190,10 @@ Route::get('sirkulasi-pola', 'SirkulasiController@pola')->name('sirkulasi.pola')
 Route::post('sirkulasi-pola', 'SirkulasiController@pola')->name('sirkulasi.pola2');
 Route::post('anggota-approve/{id}', 'AnggotaController@verifikasi');
 
-
+// pinjam
 Route::post('pinjam', 'PinjamController@store')->name('pinjam.store');
 Route::get('pinjaman', 'PinjamController@pinjaman')->name('pinjam.pinjaman');
+Route::get('saat-ini', 'PinjamController@saat_ini')->name('saat.ini');
 Route::post('perpanjang', 'PinjamController@perpanjang')->name('pinjam.perpanjang');
 Route::get('kembali', 'PinjamController@kembali')->name('sirkulasi.kembali');
 Route::post('kembali2', 'PinjamController@kembali')->name('sirkulasi.kembali2');

@@ -40,6 +40,17 @@ class PinjamController extends Controller
         }
     }
 
+    public function saat_ini(Request $request)
+    {
+        return PinjamTransaksi::with(['bibliobigrafi' => function($q){
+            $q->select("id", 'buku_id', 'pola_eksemplar', 'klasifikasi_id');
+        }, 'bibliobigrafi.buku' => function($q){
+            $q->select('id', 'judul');
+        }, 'bibliobigrafi.klasifikasi' => function($q){
+            $q->select('id', 'tipe_klasifikasi');
+        }])->where('user_id', $request->id)->where('status_pinjam', 1)->orderBy('tanggal_habis_pinjam', 'ASC')->paginate(10);
+    }
+
     public function pinjaman(Request $request)
     {
         return PinjamTransaksi::with(['bibliobigrafi' => function($q){
@@ -150,7 +161,7 @@ class PinjamController extends Controller
             $q->select('id', 'judul');
         }, 'pinjam_transaksi' => function($q){
             $q->orderBy('tanggal_habis_pinjam', 'DESC');
-        }])->where('status_pinjam', 1)->orderBy('updated_at')->paginate(5);
+        }, 'pinjam_transaksi.user'])->where('status_pinjam', 1)->orderBy('updated_at')->paginate(5);
     }
 
     public function getAllMonth() {
