@@ -16,7 +16,7 @@ class PinjamController extends Controller
     public function store(Request $request)
     {
         $total = PinjamTransaksi::where([['user_id', $request->user_id], ['status_pinjam', 1]])->count();
-        if($total != $request->jumlah_pinjaman){
+        if($total <= $request->jumlah_pinjaman){
             foreach ($request->bibliobigrafi as $bilio) {
             $requestData = $request->all();
             $requestData['tgl_pinjam'] = Carbon::now();
@@ -24,8 +24,15 @@ class PinjamController extends Controller
             
             $bilio = Bibliobigrafi::find($bilio);
             $requestData['buku_id'] = $bilio->buku_id;
+            
+            $total = PinjamTransaksi::where([['user_id', $request->user_id], ['status_pinjam', 1]])->count();
+            if($total >= $request->jumlah_pinjaman){
+                return response()->json([
+                    'condition' => false,
+                    'message' => 'Anggota yang bersangkutan sudah melebihi batas pinjam buku']);
+            }
+            
             PinjamTransaksi::create($requestData);
-    
             $bilio->status_pinjam = 1;
             $bilio->update();
             }
@@ -117,7 +124,7 @@ class PinjamController extends Controller
 
         if($transaksi->tanggal_habis_pinjam <= Carbon::now()) {
             return response()->json([
-                'msg' => false,
+                'condition' => false,
                 'message' => 'Peminjaman tidak dapat diproses, karena buku yang dipinjam terlambat dikembalikan']);
         }
         
@@ -130,7 +137,7 @@ class PinjamController extends Controller
         $bilio->save();
 
         return response()->json([
-            'msg' => true,
+            'condition' => true,
             'message' => 'pengembalian buku berhasil']);
     }
 

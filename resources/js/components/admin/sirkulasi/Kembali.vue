@@ -89,7 +89,8 @@
                         }
                     })
                     .then(res => {
-                        if (res.msg) {
+                        console.log(res.data.condition)
+                        if (res.data.condition) {
                             this.$swal({
                                 position: 'top-end',
                                 type: 'success',
