@@ -247,8 +247,8 @@
                                                     </tbody>
                                                 </table>
 
-                                                 <div class="mx-auto mt-3">
-                                                    <pagination :align="center" :limit="4" :data="ini2"
+                                                <div class="mx-auto mt-3">
+                                                    <pagination :limit="4" :data="ini2"
                                                         @pagination-change-page="getIni"></pagination>
                                                 </div>
                                             </div>
@@ -284,21 +284,13 @@
 
                                                         <tr v-for="item in denda" :key="item.id">
                                                             <td>
-                                                                <button style="display: inline" type="button"
-                                                                    class="btn btn-sm btn-white" data-toggle="tooltip"
-                                                                    data-placement="top"
-                                                                    :title="'Kirim email ke '+form.email">
-                                                                    Kirim Email
-                                                                </button>
+                                                                <button-component :send="send" :item="item">
+                                                                </button-component>
                                                             </td>
                                                             <td class="text-center">
-                                                                <button @click="showDenda" style="display: inline"
-                                                                    type="button" class="btn btn-sm btn-success"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="Bayar Disini">
-                                                                    RP. {{ total }}
-                                                                </button>
-
+                                                                <bayar-component :index="index3"
+                                                                    :val="item.tanggal_habis_pinjam" :dend="form.anggota_transaksi.tipe_anggota.denda"
+                                                                    :item2="item" :stores="stores"></bayar-component>
                                                             </td>
                                                             <td>
                                                                 {{ form.id }}
@@ -324,12 +316,12 @@
                                                                 {{ item.tanggal_habis_pinjam | dateFormat }}
                                                             </td>
 
-                                                            <modal height="auto" name="eksemplar">
+                                                            <!-- <modal height="auto" name="eksemplar">
                                                                 <denda-component :user="user" @closeDenda="hideDenda"
                                                                     @updateDenda="getResults" :denda="item"
                                                                     :total="total" :store="stores">
                                                                 </denda-component>
-                                                            </modal>
+                                                            </modal> -->
                                                         </tr>
 
 
@@ -410,7 +402,7 @@
                                                 </table>
 
                                                 <div class="mx-auto mt-3">
-                                                    <pagination :align="center" :limit="4" :data="data4"
+                                                    <pagination :limit="4" :data="data4"
                                                         @pagination-change-page="getPinjam"></pagination>
                                                 </div>
                                             </div>
@@ -439,7 +431,9 @@
     import Spinner from '../tools/Spanner';
     import * as moment from 'moment'
     var momentRange = require('moment-range');
-    import Denda from './Denda';
+    // import Denda from './Denda';
+    import Button from '../keterlambatan/Button';
+    import Bayar from '../keterlambatan/Bayar';
 
     momentRange.extendMoment(moment);
     import {
@@ -454,9 +448,11 @@
             VueTabs,
             VTab,
             SpinnerComponent: Spinner,
-            DendaComponent: Denda,
+            BayarComponent: Bayar,
+            ButtonComponent: Button,
+
         },
-        props: ['fetch', 'index', 'eksemplar', 'store', 'perpanjangs', 'back', 'terlambat', 'stores2', 'saat'],
+        props: ['fetch', 'index', 'eksemplar', 'index3', 'store', 'perpanjangs', 'back', 'terlambat', 'stores2', 'saat', 'send'],
         data() {
             return {
                 loading: false,

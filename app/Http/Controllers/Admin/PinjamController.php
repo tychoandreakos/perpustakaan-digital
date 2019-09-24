@@ -84,7 +84,7 @@ class PinjamController extends Controller
             $q->select('id', 'judul');
         }, 'bibliobigrafi.klasifikasi' => function($q){
             $q->select('id', 'tipe_klasifikasi');
-        }])->where('status_pinjam', 1)->where([['user_id', $id], ['tanggal_habis_pinjam', '<', Carbon::now()]])->orderBy('tanggal_habis_pinjam', 'ASC')->paginate(10);
+        }, 'user.anggota'])->where('status_pinjam', 1)->where([['user_id', $id], ['tanggal_habis_pinjam', '<', Carbon::now()]])->orderBy('tanggal_habis_pinjam', 'ASC')->paginate(10);
     }
 
     public function perpanjang(Request $request)
