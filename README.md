@@ -37,6 +37,3 @@ Untuk melakukan instalasi sistem diharapkan telah menginstal github dan juga tel
 
 #### Halaman Admin
 <a href="https://ibb.co/xJjnNzC"><img src="https://i.ibb.co/yWyzrgf/image.png" alt="image" border="0"></a><br/>
-
-
-<a href="https://ibb.co/VqPbhFf"><img src="https://i.ibb.co/W2Y7drm/image.png" alt="image" border="0"></a><br />
