@@ -246,6 +246,11 @@
 
                                                     </tbody>
                                                 </table>
+
+                                                 <div class="mx-auto mt-3">
+                                                    <pagination :align="center" :limit="4" :data="ini2"
+                                                        @pagination-change-page="getIni"></pagination>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -258,7 +263,7 @@
                                 </v-tab>
 
                                 <v-tab title="Denda">
-                                    <template v-if="typeof(denda) !== 'undefined'">
+                                    <template v-if="denda.length > 0">
                                         <div class="table-responsive">
                                             <div>
                                                 <table class="table align-items-center">
@@ -403,6 +408,11 @@
 
                                                     </tbody>
                                                 </table>
+
+                                                <div class="mx-auto mt-3">
+                                                    <pagination :align="center" :limit="4" :data="data4"
+                                                        @pagination-change-page="getPinjam"></pagination>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -457,7 +467,9 @@
                 option: [],
                 date2: '',
                 pinjam: {},
+                data4: {},
                 denda: {},
+                ini2: {},
                 ini: '',
                 total: '',
                 stores: this.stores2,
@@ -675,31 +687,47 @@
                     .catch(err => console.log(err));
             },
 
-            go() {
-                this.loading = true;
-                this.geDenda();
-
-                // pinjaman saat ini
-                axios.get(this.saat, {
+            getIni(page = 1) {
+                axios.get(this.saat + '?page=' + page, {
                         params: {
                             id: this.form.id
                         }
                     })
-                    .then(res => this.ini = res.data.data)
+                    .then(res => {
+                        this.ini = res.data.data
+                        this.ini2 = res.data
+                    })
                     .catch(err => console.log(err))
+            },
 
-                // pinjaman
-                axios.get('/pustakawan/pinjaman', {
+            getPinjam(page = 1) {
+                axios.get('/pustakawan/pinjaman' + '?page=' + page, {
                         params: {
                             id: this.form.id
                         }
                     })
-                    .then(res => this.pinjam = res.data.data)
+                    .then(res => {
+                        this.pinjam = res.data.data
+                        this.data4 = res.data
+                    })
                     .catch(err => console.log(err))
                 setTimeout(() => {
                     this.datas = false;
                     this.loading = false
                 }, 2000);
+            },
+
+
+            go() {
+                this.loading = true;
+                this.geDenda();
+
+                // pinjaman saat ini
+                this.getIni();
+
+                // pinjaman
+                this.getPinjam();
+
 
             },
         },
@@ -727,6 +755,11 @@
 
     .buku:hover {
         color: #233dd2;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
     }
 
 </style>
