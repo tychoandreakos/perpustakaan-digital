@@ -66,7 +66,7 @@ class PinjamController extends Controller
             $q->select('id', 'judul');
         }, 'bibliobigrafi.klasifikasi' => function($q){
             $q->select('id', 'tipe_klasifikasi');
-        }])->where('user_id', $request->id)->paginate(5);
+        }])->where('user_id', $request->id)->latest()->paginate(5);
     }
 
     public function terlambat()
