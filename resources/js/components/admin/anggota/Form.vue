@@ -302,7 +302,7 @@
                 opt: [],
                 img: this.fetch.foto || 'Pilih Foto Anggota',
                 tgl: '09/05/2019',
-                jurusan: (this.users.id ? this.fetch.anggota.jurusan : ''),
+                jurusan: (this.users.id ? this.users.anggota.jurusan : ''),
 
 
                 form: {

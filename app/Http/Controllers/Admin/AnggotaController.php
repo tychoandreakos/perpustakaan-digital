@@ -146,7 +146,7 @@ class AnggotaController extends Controller
         $eksemplar = PinjamTransaksi::all()->where('status_pinjam', 1)->count();
         $approve = User::whereNull('approved_at')->get()->count();
         $anggota = Anggota::with('anggota_transaksi.tipe_anggota', 'jurusan')->where('user_id', $id)->first();
-        $users = User::with('anggota')->where('id', $id)->first();
+        $users = User::with('anggota', 'anggota.jurusan')->where('id', $id)->first();
         
         return view('admin.anggota.edit', compact('anggota', 'users', 'title', 'koleksi', 'anggota_count', 'eksemplar', 'approve'));
     }
@@ -214,7 +214,7 @@ class AnggotaController extends Controller
         $user->save();
 
         $anggota = Anggota::find($request->id);
-        $anggota->jurusan = $request->jurusan;
+        $anggota->jurusan_id = $request->jurusan_id;
         $anggota->tgl_lahir =  date('Y-m-d', strtotime($request->tgl_lahir));
         $anggota->alamat = $request->alamat;
         $anggota->jk = ($request->jk == 'pria' || $request->jk == 'Pria') ? 0 : 1;
