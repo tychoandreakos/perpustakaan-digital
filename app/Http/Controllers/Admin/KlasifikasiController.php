@@ -29,7 +29,7 @@ class KlasifikasiController extends Controller
 
     public function fetch()
     {
-        return Klasifikasi::latest()->paginate(5);
+        return Klasifikasi::orderBy('kode_klasifikasi', )->paginate(5);
     }
 
     /**
@@ -128,6 +128,7 @@ class KlasifikasiController extends Controller
      */
     public function destroy(Klasifikasi $klasifikasi)
     {
+        $klasifikasi->biblio()->delete();
         $klasifikasi->delete();
 
         return response()->json([

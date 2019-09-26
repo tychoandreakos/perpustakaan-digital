@@ -15,7 +15,6 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Aksi</th>
                                 <th scope="col">Judul Buku</th>
                                 <th scope="col">Pengarang</th>
                                 <th scope="col">Penerbit</th>
@@ -25,9 +24,9 @@
                         </thead>
                         <tbody>
                             <tr v-for="item in datas.data" :key="item.id">
-                                <th scope="row" style="width: 21%">
-                                    <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
-                                            class="ni ni-check-bold text-white"></i> Edit</a>
+                                <th scope="row">
+                                    <!-- <a :href="edit(item.id)" class="btn btn-primary btn-sm"><i
+                                            class="ni ni-check-bold text-white"></i> Edit</a> -->
                                     <button @click="deleted(item.id)" class="btn btn-danger btn-sm"><i
                                             class="ni ni-fat-remove text-white"></i> Hapus</button>
                                 </th>

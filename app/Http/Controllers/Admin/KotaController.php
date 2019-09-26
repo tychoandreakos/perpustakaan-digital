@@ -130,6 +130,7 @@ class KotaController extends Controller
      */
     public function destroy(Kota $kotum)
     {
+        $kotum->buku_transaksi()->delete();
         $kotum->delete();
 
         return response()->json([

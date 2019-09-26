@@ -151,8 +151,38 @@ class BukuController extends Controller
      * @param  \App\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Buku $buku)
+    public function destroy($id)
     {
+        $bukuTransaksi = Buku::where('id', $id)->first();
+        
+        // Storage::delete('/public' . $bukuTra);
+        
+        if($bukuTransaksi->gambar_sampul !== 'img.jpg' ) {
+            if(file_exists(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul))) {
+                unlink(public_path('storage/cover/'. $bukuTransaksi->gambar_sampul));
+                unlink(public_path('storage/resize/'. $bukuTransaksi->gambar_sampul));
+            }
+        }
+
+
+        if(!is_null($bukuTransaksi->pdf)) {
+            if(file_exists(public_path('storage/file/'. $bukuTransaksi->pdf))) {
+                unlink(public_path('storage/file/'. $bukuTransaksi->pdf));
+                }
+           
+        }
+
+        $bil = Bibliobigrafi::where('buku_id', $id)->count();
+       for ($i=0; $i < $bil; $i++) { 
+        $bilio = Bibliobigrafi::where('buku_id', $id)->first();
+        $bilio->gmd_transaksi()->delete();
+        $bilio->pola_eksemplar()->delete();
+        }
+
+        $bukuTransaksi->bibliobigrafi()->delete();
+        $bukuTransaksi->buku_transaksi()->delete();
+        $bukuTransaksi->delete();
+
         return response()->json([
             'message' => 'data berhasil dihapus']);
     }

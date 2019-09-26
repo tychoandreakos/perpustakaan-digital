@@ -9,5 +9,5 @@
         {{-- {{ $gmd }} --}}
         <!-- overview panel -->
         <div class="container-fluid mt--7">
-        <table-koleksi-component fetch="{{ route('koleksi.fetch') }}" index="{{ route('koleksi.index') }}" route="{{ route('koleksi.create') }}"></table-koleksi-component>
+        <table-kota-component fetch="{{ route('kota.fetch') }}" index="{{ route('kota.index') }}" route="{{ route('kota.create') }}"></table-kota-component>
             @endsection

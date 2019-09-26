@@ -126,6 +126,7 @@ class BahasaController extends Controller
      */
     public function destroy(Bahasa $bahasa)
     {
+        $bahasa->buku_transaksi()->delete();
         $bahasa->delete();
 
         return response()->json([
