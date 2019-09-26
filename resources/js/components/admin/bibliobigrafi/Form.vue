@@ -149,7 +149,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label" for="total">Total Eksemplar*</label>
-                                <input type="text" v-model="form.total" id="total"
+                                <input type="number" v-model="form.total" id="total"
                                     class="form-control form-control-alternative" name="total"
                                     placeholder="Total Eksemplar">
                                 <template v-if="err.total">
@@ -666,7 +666,7 @@
                     this.pola_eksemplar = {
                         kode_eksemplar: this.buku.bibliobigrafi[0].pola_eksemplar[0].kode_eksemplar
                     }
-                     return this.gmd_id = this.buku.bibliobigrafi[0].gmd_transaksi.map(s => s.gmd);
+                    return this.gmd_id = this.buku.bibliobigrafi[0].gmd_transaksi.map(s => s.gmd);
                 }
             },
 
@@ -916,6 +916,18 @@
                         .catch(err => {
                             this.err = err.response.data.errors;
                             this.loading = false;
+                            for (let [key, value] of Object.entries(this.err)) {
+                                setTimeout(() => {
+                                    Vue.$toast.open({
+                                        message: value[0],
+                                        type: 'error',
+                                        position: 'top-right',
+                                        dismissible: false,
+                                    });
+                                }, 2000 * Math.random())
+
+                                // console.log(key, );
+                            }
                         })
                 } else {
                     // update
@@ -927,20 +939,29 @@
                             }.bind(this)
                         })
                         .then(res => {
-                            this.$swal({
-                                position: 'top-end',
-                                type: 'success',
-                                title: res.data.message.toUpperCase(),
-                                showConfirmButton: false,
-                                timer: 2500
+                            if (res.data.condition) {
+                                this.$swal({
+                                    position: 'top-end',
+                                    type: 'success',
+                                    title: res.data.message.toUpperCase(),
+                                    showConfirmButton: false,
+                                    timer: 2500
 
-                            });
-                            setTimeout(() => {
-                                window.location = this.index;
-                            }, 2800);
+                                });
+                                setTimeout(() => {
+                                    window.location = this.index;
+                                }, 2800);
+                            } else {
+                                Vue.$toast.open({
+                                    message: res.data.message,
+                                    type: 'error',
+                                    position: 'top-right'
+                                });
+                                this.loading = false;
+                                this.progressBar = 0;
+                            }
                         })
                         .catch(err => {
-                            console.log(err);
                             this.loading = false;
                         })
                 }

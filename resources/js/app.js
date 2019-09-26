@@ -13,6 +13,9 @@ import 'vue-instant/dist/vue-instant.css'
 import VueInstant from 'vue-instant'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import infiniteScroll from 'vue-infinite-scroll'
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/index.css';
+
 
 window.User = User;
 window.Vue = require('vue');
@@ -30,6 +33,7 @@ Vue.use(VModal);
 Vue.use(VueInstant)
 Vue.use(CKEditor);
 Vue.use(infiniteScroll);
+Vue.use(VueToast);
 
 require ('./component');
 

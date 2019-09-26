@@ -414,6 +414,13 @@ class BibliobigrafiController extends Controller
             'gambar_sampul' => 'nullable'
             ]);
 
+            $c = Bibliobigrafi::where('buku_id', $id)->get()->count();
+            if($request->total < $c) {
+                return response()->json([
+                    'condition' => false,
+                    'message' => 'Terjadi kesalahan pada total eksemplar!']);
+            }
+
             //   buku
             $buku = Buku::find($id);
 
@@ -602,6 +609,7 @@ class BibliobigrafiController extends Controller
            
 
         return response()->json([
+            'condition' => true,
             'message' => 'data berhasil diperbaharui']);
     }
 
