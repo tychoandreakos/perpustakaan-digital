@@ -18,7 +18,7 @@ class CreateDendasTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pinjam_transaksi_id');
             $table->unsignedBigInteger('buku_id');
-            $table->sring('jumlah_bayar', 50);
+            $table->string('jumlah_bayar', 50);
             $table->string('deskripsi', 250)->nullable();
             $table->timestamps();
 
