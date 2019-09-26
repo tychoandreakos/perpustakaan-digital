@@ -73,6 +73,7 @@ class AnggotaController extends Controller
             'foto' => 'nullable',
             'jurusan' => 'nullable',
             'image' => 'nullable',
+            'tipe_anggota' => 'required',
         ]);
 
         if(!$request->image == '')

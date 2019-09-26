@@ -17,7 +17,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-                                    <h2 class="text-white mb-0">10 Anggota Paling Aktif Meminjam</h2>
+                                <h2 class="text-white mb-0">10 Anggota Paling Aktif Meminjam Pada Bulan {{ $month }}</h2>
                                 </div>
                                 <div class="col">
                                     <ul class="nav nav-pills justify-content-end">
@@ -33,7 +33,8 @@
                             <ol>
                                 @if (!$popular->isEmpty())
                                 @foreach ($popular as $item)
-                                <li class="text-white">{{ ucwords($item->name) }} ( {{ $item->id }} )</li>
+                               <li class="text-white">{{ ucwords($item->name) }} ( {{ $item->id }} ) - {{ $item->pinjam_transaksi_count }} Kali Meminjam
+                        </li>
                                 @endforeach
                                 @else
                                 <div class="h4 text-white text-center">Belum ada data!</div>

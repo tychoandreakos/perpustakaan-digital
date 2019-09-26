@@ -8,7 +8,7 @@
         }
 
     </style>
-    <h6 class="text-center mb-4 font-weight-normal">Ringkasan Statistik Anggota Perpustakaan <br> STMIK AMIKBANDUNG</h6>
+    <h6 class="text-center mb-4 font-weight-normal">Ringkasan Statistik Anggota Perpustakaan <br> STMIK AMIKBANDUNG Pada Bulan {{ $month }}</h6>
 
     <table class='table table-bordered'>
         <tbody>
@@ -29,16 +29,17 @@
                 <td class="text-center">{{ 0 }}</td>
             </tr>
             <tr>
-                <td>10 Anggota Paling Aktif Meminjam</td>
+            <td>10 Anggota Paling Aktif Meminjam</td>
                 <td>
                     <ol>
-                            @if (!$popular->isEmpty())
-                            @foreach ($popular as $item)
-                            <li>{{ ucwords($item->name) }} ( {{ $item->id }} )</li>
-                            @endforeach
-                            @else
-                            <div class="h4 text-white text-center">Belum ada data!</div>
-                            @endif
+                        @if (!$popular->isEmpty())
+                        @foreach ($popular as $item)
+                        <li>{{ ucwords($item->name) }} ( {{ $item->id }} ) - {{ $item->pinjam_transaksi_count }} Kali Meminjam
+                        </li>
+                        @endforeach
+                        @else
+                        <div class="h4 text-white text-center">Belum ada data!</div>
+                        @endif
                     </ol>
                 </td>
             </tr>

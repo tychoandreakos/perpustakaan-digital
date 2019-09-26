@@ -195,7 +195,7 @@
                                                         <tr v-for="item in ini" :key="item.id">
                                                             <template v-if="item.status_pinjam == 1">
                                                                 <th scope="row" class="name">
-                                                                    <form @submit.prevent="back2(item.id)"
+                                                                    <!-- <form @submit.prevent="back2(item.id)"
                                                                         style="display: inline">
                                                                         <button type="submit"
                                                                             class="btn btn-sm btn-success"
@@ -204,7 +204,7 @@
                                                                             title="Kembalikan Eksemplar Ini">
                                                                             <i class="ni ni-curved-next text-white"></i>
                                                                         </button>
-                                                                    </form>
+                                                                    </form> -->
                                                                     <form style="display: inline"
                                                                         @submit.prevent="perpanjang(item.id, form.anggota_transaksi.tipe_anggota.masa_pinjaman_buku)">
                                                                         <button type="submit"

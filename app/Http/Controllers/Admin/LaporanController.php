@@ -213,8 +213,9 @@ class LaporanController extends Controller
         $masuk = Buku::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
         $time = Carbon::now();
         $title = 'Ringkasan Statistik Anggota';
+        $month = Carbon::now()->format('F Y');
 
-        $pdf = PDF::loadview('admin.laporan.print.anggota', compact('buku', 'title', 'time', 'eksemplar', 'masuk' ,'eksemplar_dipinjam', 'popular'));
+        $pdf = PDF::loadview('admin.laporan.print.anggota', compact('buku', 'title', 'time', 'month', 'eksemplar', 'masuk' ,'eksemplar_dipinjam', 'popular'));
         return $pdf->stream('laporan-anggota-stmik-' . Carbon::now());
     }
     
@@ -251,7 +252,7 @@ class LaporanController extends Controller
         $eksemplar_dipinjam = User::all()->count();
         $total = User::all()->count();
         $bulan = User::whereDate('created_at', '>', Carbon::now()->subDays(30))->get()->count();
-        $popular = User::with('pinjam_transaksi', 'anggota')->withCount('pinjam_transaksi')->orderBy('pinjam_transaksi_count', 'DESC')->limit(10)->get();
+        $popular = User::with('pinjam_transaksi', 'anggota')->having('created_at', '>', Carbon::now()->subDays(30))->withCount('pinjam_transaksi')->orderBy('pinjam_transaksi_count', 'DESC')->limit(10)->get();
         $month = Carbon::now()->format('F Y');
         // $kadaluarsa = Anggota::where('tgl_expired', '>=' '')->get()->count();
 

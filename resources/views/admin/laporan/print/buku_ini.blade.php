@@ -20,7 +20,7 @@
                 <th>Pengarang</th>
                 <th>GMD</th>
                 <th>Penerbit</th>
-                <th>Deskrisi Fisik</th>
+                {{-- <th>Deskrisi Fisik</th> --}}
                 <th>Jumlah Salinan</th>
             </tr>
         </thead>
@@ -64,7 +64,7 @@
                     @endphp
                 </td>
                 <td>{{ $item->buku_transaksi[0]->penerbit->nama_penerbit }}</td>
-                <td>{{ ucwords($item->deskripsi_fisik) }}</td>
+                {{-- <td>{{ ucwords($item->deskripsi_fisik) }}</td> --}}
                 <td>{{ $salinan }}</td>
             </tr>
             @endforeach

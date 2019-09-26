@@ -962,7 +962,18 @@
                             }
                         })
                         .catch(err => {
+                            this.err = err.response.data.errors;
                             this.loading = false;
+                              for (let [key, value] of Object.entries(this.err)) {
+                                setTimeout(() => {
+                                    Vue.$toast.open({
+                                        message: value[0],
+                                        type: 'error',
+                                        position: 'top-right',
+                                        dismissible: false,
+                                    });
+                                }, 2000 * Math.random())
+                             }
                         })
                 }
             },

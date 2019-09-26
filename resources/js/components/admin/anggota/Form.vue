@@ -54,12 +54,12 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="tipe_anggota_id">Tipe Anggota</label>
+                                <label class="form-control-label" for="tipe_anggota">Tipe Anggota</label>
                                 <multiselect v-model="value" tag-placeholder="Add this as new tag"
                                     placeholder="Pilih Tipe Anggota" label="tipe_anggota" track-by="tipe_anggota"
                                     :options="options"></multiselect>
-                                <template v-if="err.tipe_anggota_id">
-                                    <span class="text-danger">{{ err.tipe_anggota_id[0] }}</span>
+                                <template v-if="err.tipe_anggota">
+                                    <span class="text-danger">{{ err.tipe_anggota[0] }}</span>
                                 </template>
                             </div>
                         </div>
@@ -204,6 +204,14 @@
                     </div>
                 </div>
 
+                <template v-if="loading">
+                    <div class="progress">
+                        <!-- PROGRESS BAR DENGAN VALUE NYA KITA DAPATKAN DARI VARIABLE progressBar -->
+                        <div class="progress-bar" role="progressbar" :style="{width: progressBar + '%'}"
+                            :aria-valuenow="progressBar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </template>
+
                 <div class="float-right">
 
                     <template v-if="loading">
@@ -303,6 +311,7 @@
                 img: this.fetch.foto || 'Pilih Foto Anggota',
                 tgl: '09/05/2019',
                 jurusan: (this.users.id ? this.users.anggota.jurusan : ''),
+                progressBar: 0,
 
 
                 form: {
@@ -405,6 +414,16 @@
                         .catch(err => {
                             this.err = err.response.data.errors;
                             this.loading = false;
+                              for (let [key, value] of Object.entries(this.err)) {
+                                setTimeout(() => {
+                                    Vue.$toast.open({
+                                        message: value[0],
+                                        type: 'error',
+                                        position: 'top-right',
+                                        dismissible: false,
+                                    });
+                                }, 2000 * Math.random())
+                             }
                         })
                 } else {
                     // update
@@ -431,6 +450,16 @@
                         .catch(err => {
                             this.err = err.response.data.errors;
                             this.loading = false;
+                             for (let [key, value] of Object.entries(this.err)) {
+                                setTimeout(() => {
+                                    Vue.$toast.open({
+                                        message: value[0],
+                                        type: 'error',
+                                        position: 'top-right',
+                                        dismissible: false,
+                                    });
+                                }, 2000 * Math.random())
+                             }
                         })
                 }
             },
