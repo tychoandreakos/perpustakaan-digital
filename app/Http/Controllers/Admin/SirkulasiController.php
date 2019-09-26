@@ -99,7 +99,7 @@ class SirkulasiController extends Controller
                 $q->select('id', 'judul');
             }, 'user.anggota_transaksi.tipe_anggota'])
             ->where('status_pinjam', 0)
-            ->whereHas('user', function($q) use ($search){
+            ->orWhereHas('user', function($q) use ($search){
                 $q->where('name', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%");
             })
             ->orWhereHas('bibliobigrafi.buku', function($q) use ($search){

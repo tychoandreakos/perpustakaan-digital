@@ -157,8 +157,8 @@ class AnggotaController extends Controller
 
             $search = $request->q;
 
-            return User::with('anggota_transaksi.tipe_anggota', 'anggota', 'anggota.jurusan')->where('name','LIKE',"%$search%")
-            ->Orwhere('id','LIKE',"%$search%")->whereHas('anggota.jurusan', function($q) use ($search){
+            return User::with('anggota_transaksi.tipe_anggota', 'anggota', 'anggota.jurusan')->where('id','LIKE',"%$search%")->orWhere('name','LIKE',"%$search%")
+            ->orWhereHas('anggota.jurusan', function($q) use ($search){
                 $q->where('nama_jurusan', 'LIKE', "%$search%");
             })->latest()->paginate(5);
         }
