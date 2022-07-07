@@ -27,7 +27,7 @@
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "bootstrap-datepicker": "^1.9.0",
         "laravel-vue-pagination": "^2.3.0",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "moment-range": "^4.0.2",
         "npm": "^6.11.3",
         "pdfvuer": "^1.4.0",
